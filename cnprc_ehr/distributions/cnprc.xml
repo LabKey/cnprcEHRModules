@@ -13,7 +13,7 @@
     </target>
 
     <target name="gather_modules">
-        <ant antfile="${basedir}/distributions/legacy.xml" target="gather_modules" />
+        <ant antfile="${basedir}/distributions/pro_plus.xml" target="gather_modules" />
         <copy todir="${dist.modules.dir}">
             <fileset dir="${staging.modules.dir}">
                 <include name="cnprc_ehr.module" />
