@@ -10,20 +10,11 @@ Ext4.onReady(function (){
             header: 'Admin',
             items: [
                 {name: 'ETL Admin', url: '<%=contextPath%>/dataintegration<%=containerPath%>/begin.view?'},
-                {name: 'Genetics Calculations', url: '<%=contextPath%>/ehr<%=containerPath%>/geneticCalculationSettings.view?'},
-                {name: 'Manage EHR Study', url: '<%=contextPath%>/study<%=containerPath%>/manageStudy.view?'},
                 {name: 'Populate Initial Data', url: '<%=contextPath%>/CNPRC_EHR<%=containerPath%>/populateData.view?'},
-                {name: 'Record Delete Settings', url: '<%=contextPath%>/ehr<%=containerPath%>/recordDeleteSettings.view?'},
-                {name: 'Run Custom SQL', url: '<%=contextPath%>/ldk<%=containerPath%>/runCustomSql.view?schemaName=study'},
-                {name: 'Set EHR Module Properties', url: '<%=contextPath%>/core<%=containerPath%>/modulePropertyAdmin.view?moduleName=EHR'},
-                {name: 'Update Dataset Properties and Indexes', url: '<%=contextPath%>/ehr<%=containerPath%>/ensureDatasetProperties.view?'},
+                {name: 'Manage EHR Study', url: '<%=contextPath%>/study<%=containerPath%>/manageStudy.view?'},
+                {name: 'Set EHR Properties', url: '<%=contextPath%>/core<%=containerPath%>/modulePropertyAdmin.view?moduleName=EHR'},
                 {name: 'Update Study QCStates', url: '<%=contextPath%>/ehr<%=containerPath%>/ensureQCStates.view?'},
-                {name: 'Verify Dataset Resources', url: '<%=contextPath%>/ehr<%=containerPath%>/verifyDatasetResources.view?'},
-                {name: 'Verify Dataset Columns', url: '<%=contextPath%>/onprc_ehr<%=containerPath%>/validateDataSetCols.view?'},
-                {name: 'Verify EHR Schema Indexes Are Compressed', url: '<%=contextPath%>/ehr<%=containerPath%>/ensureEHRSchemaIndexes.view?'},
-                {name: 'Cache Demographics On All Living Animals', url: '<%=contextPath%>/ehr<%=containerPath%>/cacheLivingAnimals.view?'},
-                {name: 'Cache Demographics On All Animals', url: '<%=contextPath%>/ehr<%=containerPath%>/cacheLivingAnimals.view?includeAll=true'},
-                {name: 'Prime/Refresh Data Entry Cache', url: '<%=contextPath%>/ehr<%=containerPath%>/primeDataEntryCache.view?'}
+                {name: 'Verify Dataset Resources', url: '<%=contextPath%>/ehr<%=containerPath%>/verifyDatasetResources.view?'}
             ]
         },{
             header: 'Logs',

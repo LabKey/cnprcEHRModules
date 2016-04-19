@@ -31,8 +31,21 @@ Ext4.onReady(function(){
         schemaName: 'ehr',
         queryName: 'reports',
         pk: 'rowid'
-    }
-    ];
+    },
+    {
+        label: 'Gender codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'gender_codes',
+        pk: 'code'
+    },
+    {
+        label: 'Species codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'species_codes',
+        pk: 'rowid'
+    }];
 
     tables.sort(function(a, b) {
         return a.label.toLowerCase() < b.label.toLowerCase() ? -1 : 1;
