@@ -1,7 +1,7 @@
 SELECT
-AN_ID AS Id,
-AN_WT_DATE AS WeightDate,
-AN_WT_KG AS Weight
+WT_AN_ID AS Id,
+WT_DATE,
+WT_WEIGHT_KG AS Weight
 -- AS source,
 -- AS remark,
 -- AS description,
@@ -12,4 +12,4 @@ AN_WT_KG AS Weight
 -- AS performedby,
 -- AS requestid,
 -- AS enddate
-FROM cnprcSrc.ZANIMAL
+FROM cnprcSrc.ZWEIGHING
