@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <etl xmlns="http://labkey.org/etl/xml">
-    <name>Birth</name>
-    <description>Birth data</description>
+    <name>Deaths</name>
+    <description>Death data</description>
     <transforms>
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
-            <source schemaName="cnprcSrc" queryName="birth" />
-            <destination schemaName="study" queryName="birth" bulkLoad="true" batchSize="500" targetOption="merge">
+            <source schemaName="cnprcSrc" queryName="deaths" />
+            <destination schemaName="study" queryName="deaths" bulkLoad="true" batchSize="500" targetOption="merge">
                 <columnTransforms>
-                    <column source="AN_BIRTH_DATE" target="date"/>
+                    <column source="AN_LOCATION_DATE" target="date"/>
                 </columnTransforms>
             </destination>
         </transform>
     </transforms>
     <!--<incrementalFilter className="ModifiedSinceFilterStrategy" timestampColumnName="timestamp">-->
-        <!--<deletedRowsSource schemaName="cnprcSrc" queryName="delete_birth" timestampColumnName="audit_date_tm" deletedSourceKeyColumnName="OBJECT_ID" targetKeyColumnName="objectid"/>-->
+        <!--<deletedRowsSource schemaName="cnprcSrc" queryName="delete_death" timestampColumnName="audit_date_tm" deletedSourceKeyColumnName="OBJECT_ID" targetKeyColumnName="objectid"/>-->
     <!--</incrementalFilter>-->
     <schedule>
         <poll interval="60m" />

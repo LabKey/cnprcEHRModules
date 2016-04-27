@@ -8,7 +8,7 @@
             <source schemaName="cnprcSrc" queryName="arrival" />
             <destination schemaName="study" queryName="arrival" bulkLoad="true" batchSize="500" targetOption="merge">
                 <columnTransforms>
-                    <column source="AcqDate" target="date"/>
+                    <column source="AN_ACQ_DATE" target="date"/>
                 </columnTransforms>
             </destination>
         </transform>

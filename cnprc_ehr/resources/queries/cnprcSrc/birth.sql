@@ -1,17 +1,17 @@
 SELECT
-AN_ID AS Id,
-AN_BIRTH_DATE AS birthDate, -- ?? just a placeholder to avoid errors. should be a Visit Date?
-AN_SEX AS gender,
-AN_SP_CODE AS species,
-AN_BIRTHPLACE_GEOG AS geographic_origin
+a.AN_ID AS Id,
+a.AN_BIRTH_DATE,
+a.AN_SEX AS gender,
+a.AN_SP_CODE AS species,
+a.AN_BIRTHPLACE_GEOG AS geographic_origin,
 -- AS room,
 -- AS cage,
 -- AS date_type,
--- CON_BIRTH_CONDITION AS birth_condition,
+c.CON_BIRTH_CONDITION AS birth_condition,
 -- AS teeth,
 -- AS conception,
 -- AS conceptualDay,
--- AS "type",
+c.CON_BR_TYPE AS "type"
 -- AS remark,
 -- AS description,
 -- AS objectid,
@@ -21,6 +21,7 @@ AN_BIRTHPLACE_GEOG AS geographic_origin
 -- AS performedby,
 -- AS requestid,
 -- AS enddate
-FROM cnprcSrc.ZANIMAL
--- , cnprcSrc.ZCONCEPTION conception
--- WHERE animal.AN_ID = conception.CON_OFFSPRING_ID
+FROM cnprcSrc.ZANIMAL a
+LEFT JOIN cnprcSrc.ZCONCEPTION c
+ON a.AN_ID = c.CON_OFFSPRING_ID
+WHERE a.AN_BIRTH_DATE IS NOT NULL

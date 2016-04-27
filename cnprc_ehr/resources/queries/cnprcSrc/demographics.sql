@@ -1,11 +1,15 @@
 SELECT
 AN_ID As Id,
-AN_ACQ_DATE as AcqDate, -- ?? just a placeholder to avoid errors. should be a Visit Date?
+AN_ACQ_DATE,
 AN_SEX As gender,
 AN_BIRTHPLACE_GEOG AS geographic_origin,
 AN_BIRTH_DATE AS birth,
--- AS death,
-AN_SP_CODE AS species
+ZANIMAL.AN_LOCATION_DATE AS death,
+AN_SP_CODE AS species,
+-- AS calculated_status, -- this should get calculated by Demographics.js in ehr module getting set by birth or arrival
+AN_SIRE_ID AS sire,
+AN_DAM_ID AS dam
+-- AS origin,
 -- AS objectid,
 -- AS parentid,
 -- AS description,
@@ -14,11 +18,9 @@ AN_SP_CODE AS species
 -- AS project,
 -- AS performedby,
 -- AS requestid,
--- AS enddate,
--- AS calculated_status,
--- AN_SIRE_SP_CODE AS sire,
--- AN_DAM_SP_CODE AS dam
--- AS origin
+-- AS enddate
+
 FROM cnprcSrc.ZANIMAL
+WHERE AN_LOCATION_PREFIX = '0000'
 -- , cnprcSrc.ZAN_PROJECT project
 -- WHERE animal.AN_ID = project.ANPROJ_AN_ID
