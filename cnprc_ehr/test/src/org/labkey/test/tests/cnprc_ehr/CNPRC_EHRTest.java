@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.labkey.test.Locator;
 import org.labkey.test.TestFileUtils;
-import org.labkey.test.categories.InDevelopment;
+import org.labkey.test.categories.CustomModules;
 import org.labkey.test.components.BodyWebPart;
 import org.labkey.test.tests.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler;
@@ -37,7 +37,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@Category({InDevelopment.class})
+@Category({CustomModules.class})
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
 
