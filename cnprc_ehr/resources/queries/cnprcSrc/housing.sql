@@ -1,0 +1,12 @@
+SELECT
+RELOC_AN_ID AS Id,
+RELOC_DATE_IN,
+RELOC_DATE_OUT AS enddate,
+RTRIM(SUBSTRING(RELOC_LOCATION, 1, 7)) AS room,
+SUBSTRING(RELOC_LOCATION, 8, 2) AS cage,
+-- AS divider,
+-- AS housingCondition,
+-- AS housingType,
+RELOC_SALE_COMMENT AS reason
+-- AS objectid
+FROM cnprcSrc.ZRELOCATION

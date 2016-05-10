@@ -1,29 +1,20 @@
 SELECT
-AN_ID AS Id,
-AN_ACQ_DATE, -- ?? just a placeholder to avoid errors. should be a Visit Date? Arrival Date?
-AN_BIRTH_DATE AS birth,
--- AN_BIRTH_DATE_EST AS estimated,
--- AS initialRoom,
--- AS initialCage,
-AN_SP_CODE AS species,
-AN_SIRE_ID AS sire,
-AN_DAM_ID AS dam,
-AN_SEX AS gender,
-AN_BIRTHPLACE_GEOG AS geographic_origin,
-AN_ACQ_TYPE AS AcquisitionType
--- AS RearingType,
--- AS orginalId,
--- AS arrivalId,
--- AS cites,
--- AS customsDate,
--- AS source,
--- AS remark,
--- AS description,
+a.AN_ID AS Id,
+a.AN_ACQ_DATE,
+a.AN_BIRTH_DATE AS birth,
+(CASE WHEN a.AN_BIRTH_DATE_EST = 'E' THEN 'TRUE' ELSE 'FALSE' END) AS estimated,
+(CASE WHEN r.RELOC_SEQ = 0 THEN SUBSTRING(r.RELOC_LOCATION, 1, 7) ELSE NULL END) AS initialRoom,
+(CASE WHEN r.RELOC_SEQ = 0 THEN SUBSTRING(r.RELOC_LOCATION, 8, 2) ELSE NULL END) AS initialCage,
+a.AN_SP_CODE AS species,
+a.AN_SIRE_ID AS sire,
+a.AN_DAM_ID AS dam,
+a.AN_SEX AS gender,
+(SELECT g.GEOG_NAME FROM cnprcSrc.ZGEOGRAPHIC g WHERE a.AN_BIRTHPLACE_GEOG = g.GEOG_CODE) AS geographic_origin,
+a.AN_ACQ_TYPE AS AcquisitionType,
+a.AN_PREV_ID AS arrivalId,
+a.AN_ACQ_SOURCE_INST AS source,
 -- AS objectid,
--- AS parentid,
--- AS taskid,
--- AS project
--- AS performedby,
--- AS requestid,
--- AS enddate
-FROM cnprcSrc.ZANIMAL
+FROM cnprcSrc.ZANIMAL a
+LEFT JOIN cnprcSrc.ZRELOCATION r
+ON a.AN_ID = r.RELOC_AN_ID
+WHERE a.AN_ACQ_TYPE = '1'

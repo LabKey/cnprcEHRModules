@@ -25,11 +25,40 @@ function importFile(config) {
 
 Ext4.onReady(function(){
 
-    var tables = [{
-        label: 'Reports',
+    var tables = [
+        {
+        label: 'Acquisition Type',
         populateFn: 'populateFromFile',
-        schemaName: 'ehr',
-        queryName: 'reports',
+        schemaName: 'ehr_lookups',
+        queryName: 'acquisitionType',
+        pk: 'rowid'
+    },
+    {
+        label: 'Birth Date Type',
+            populateFn: 'populateFromFile',
+            schemaName: 'ehr_lookups',
+            queryName: 'birth_date_type',
+            pk: 'rowid'
+    },
+    {
+        label: 'Birth Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'birth_type',
+        pk: 'rowid'
+    },
+    {
+        label: 'Calculated Status Field Values',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'calculated_status_codes',
+        pk: 'code'
+    },
+    {
+        label: 'Death Manner',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'death_manner',
         pk: 'rowid'
     },
     {
@@ -40,12 +69,34 @@ Ext4.onReady(function(){
         pk: 'code'
     },
     {
+        label: 'Georgraphic Origins',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'geographic_origins',
+        pk: 'rowid'
+    },
+    {
+        label: 'Reports',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr',
+        queryName: 'reports',
+        pk: 'rowid'
+    },
+    {
+    label: 'source',
+    populateFn: 'populateFromFile',
+    schemaName: 'ehr_lookups',
+    queryName: 'source',
+    pk: 'code'
+     },
+    {
         label: 'Species codes',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'species_codes',
         pk: 'rowid'
-    }];
+    }
+ ];
 
     tables.sort(function(a, b) {
         return a.label.toLowerCase() < b.label.toLowerCase() ? -1 : 1;
