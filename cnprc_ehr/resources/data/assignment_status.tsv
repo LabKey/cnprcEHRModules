@@ -1,0 +1,5 @@
+value	description	sort_order
+P	Assigned	0
+H	Holding	1
+S	Screening	2
+R	Rejected	3

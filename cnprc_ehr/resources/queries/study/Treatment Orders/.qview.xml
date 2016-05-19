@@ -1,0 +1,22 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+   <columns>
+       <column name="Id"/>
+       <column name="date"/>
+       <column name="enddate"/>
+       <column name="category"/>
+       <!--<column name="frequency"/>-->
+       <!--<column name="project"/>-->
+       <column name="code"/>
+       <column name="volume"/>
+       <column name="vol_units"/>
+       <column name="concentration"/>
+       <column name="conc_units"/>
+       <column name="amount"/>
+       <column name="amount_units"/>
+       <column name="route"/>
+       <column name="performedby"/>
+   </columns>
+   <sorts>
+       <sort column="date" descending="true"/>
+   </sorts>
+</customView>

@@ -15,9 +15,13 @@
         <dataset name="deaths" id="1048" category="Pathology" demographicData="true" type="Standard"/>
         <dataset name="demographics" id="1012" category="Colony Management" demographicData="true" type="Standard"/>
         <dataset name="departure" id="1013" category="Colony Management" type="Standard"/>
+        <dataset name="flags" id="5019" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="housing" id="1018" category="Colony Management" type="Standard"/>
-        <dataset name="notes" id="1068" showByDefault="false" category="ColonyManagement"/>
+        <dataset name="matings" id="5015" category="Reproductive Management" type="Standard" showByDefault="false"/>
+        <dataset name="menses" id="1060" category="ColonyManagement" showByDefault="false"/>
+        <dataset name="notes" id="1068" category="ColonyManagement" showByDefault="false"/>
         <dataset name="problem" id="1030" category="Clinical" type="Standard"/>
+        <dataset name="tb" id="1035" category="Clinical" type="Standard"/>
         <dataset name="treatment_order" id="1037" category="Clinical"/>
         <dataset name="weight" id="1045" category="Clinical" type="Standard"/>
     </datasets>

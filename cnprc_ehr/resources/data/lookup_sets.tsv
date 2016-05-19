@@ -1,5 +1,9 @@
 setname	label	keyfield	titleColumn
 AcquisitionType	Acquisition Types	Value	Description
+assignment_status	Assignment Status	value
 birth_date_type	Birth Date Type	value	Title
 birth_type	Birth Type Field Values	value
 death_manner	Death Manner	value
+drug_categories	Drug Category Field Values	value
+project_type	Center Project Types	value
+tb_site	TB Site	value

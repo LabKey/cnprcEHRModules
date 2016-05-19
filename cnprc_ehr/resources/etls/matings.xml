@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+<name>Matings</name>
+<description>Matings</description>
+<transforms>
+    <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+        <description>Copy to target</description>
+        <source schemaName="cnprcSrc" queryName="matings" />
+        <destination schemaName="study" queryName="matings" bulkLoad="true" targetOption="merge" >
+            <columnTransforms>
+                <column source="AM_MATING_DATE" target="date"/>
+            </columnTransforms>
+        </destination>
+    </transform>
+</transforms>
+    <!--<incrementalFilter className="ModifiedSinceFilterStrategy" timestampColumnName="timestamp">-->
+        <!--<deletedRowsSource schemaName="cnprcSrc" queryName="v_delete_housing" timestampColumnName="audit_date_tm" deletedSourceKeyColumnName="OBJECT_ID" targetKeyColumnName="objectid"/>-->
+    <!--</incrementalFilter>-->
+<schedule>
+    <poll interval="60m" />
+</schedule>
+</etl>
