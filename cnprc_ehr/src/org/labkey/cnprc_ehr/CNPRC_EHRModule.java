@@ -27,6 +27,7 @@ import org.labkey.api.security.permissions.AdminPermission;
 import org.labkey.api.view.ActionURL;
 import org.labkey.api.view.NavTree;
 import org.labkey.api.view.WebPartFactory;
+import org.labkey.api.view.template.ClientDependency;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -71,6 +72,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
     protected void doStartupAfterSpringConfig(ModuleContext moduleContext)
     {
         EHRService.get().registerModule(this);
+        EHRService.get().registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
