@@ -6,7 +6,7 @@
     <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
         <description>Copy to target</description>
         <source schemaName="cnprcSrc" queryName="protocol" />
-        <destination schemaName="ehr" queryName="protocol" bulkLoad="true" targetOption="append"/>
+        <destination schemaName="ehr" queryName="protocol" bulkLoad="true" targetOption="merge"/>
     </transform>
 </transforms>
 <schedule>
