@@ -6,7 +6,7 @@
     <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
         <description>Copy to target</description>
         <source schemaName="cnprcSrc" queryName="weight" />
-        <destination schemaName="study" queryName="weight" bulkLoad="true" batchSize="5000" targetOption="merge">
+        <destination schemaName="study" queryName="weight" bulkLoad="true" batchSize="5000" targetOption="truncate">
             <columnTransforms>
                 <column source="WT_DATE" target="date"/>
             </columnTransforms>
