@@ -1321,11 +1321,11 @@
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
             </column>
-            <!--<column columnName="objectid">-->
-                <!--<datatype>entityid</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>-->
-                <!--<isKeyField>true</isKeyField>-->
-            <!--</column>-->
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
             <column columnName="parentid">
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
@@ -2381,11 +2381,11 @@
             <column columnName="housingType">
                 <datatype>integer</datatype>
             </column>
-            <!--<column columnName="objectid">-->
-                <!--<datatype>entityid</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>-->
-                <!--<isKeyField>true</isKeyField>-->
-            <!--</column>-->
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
             <column columnName="remark">
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>

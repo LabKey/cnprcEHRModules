@@ -30,6 +30,7 @@ import org.labkey.test.util.Crawler;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
 import org.openqa.selenium.WebElement;
+import org.labkey.test.util.external.labModules.LabModuleHelper;
 
 import java.io.File;
 import java.util.Collections;
@@ -137,6 +138,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         repopulate("Lookup Sets");
         repopulate("All");
+        repopulate("SNOMED Codes");
     }
 
     @Test
@@ -161,6 +163,21 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
+
+    @Test
+    public void testTreatments()
+    {
+        click(Locator.linkWithText("Browse All Datasets"));
+        waitForElement(Locator.linkContainingText("Browse All"));
+        waitAndClickAndWait(LabModuleHelper.getNavPanelItem("Treatment Orders:", "Browse All"));
+        waitForElement(Locator.linkContainingText("TEST3804589"));
+        pushLocation();
+        clickAndWait(Locator.linkContainingText("TP"));
+        popLocation();
+        waitForElement(Locator.linkContainingText("CHEEK POUCH"));
+        clickAndWait(Locator.linkContainingText("CEFAZOLIN"));
+        assertTextPresent("E-721X0");
+    }
 
     @Test
     public void customActionsTest()
