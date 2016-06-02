@@ -3,10 +3,6 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="project" tableDbType="TABLE">
                 <tableUrl>/EHR/projectDetails.view?project=${project}</tableUrl>
-                <insertUrl />
-                <importUrl />
-                <updateUrl />
-                <deleteUrl />
                 <columns>
                     <column columnName="lastAssignment" wrappedColumnName="project">
                         <columnTitle>Last Assignment Date</columnTitle>

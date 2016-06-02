@@ -3,11 +3,6 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="protocol" tableDbType="TABLE">
                 <tableTitle>AUCAAC Protocols</tableTitle>
-                <tableUrl>/EHR/projectDetails.view?protocol=${protocol}</tableUrl>
-                <insertUrl />
-                <importUrl />
-                <updateUrl />
-                <deleteUrl />
                 <columns>
                     <column columnName="protocol">
                         <columnTitle>AUCAAC Protocol</columnTitle>
