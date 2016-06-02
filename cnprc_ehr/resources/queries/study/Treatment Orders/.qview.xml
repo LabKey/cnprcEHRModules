@@ -4,8 +4,8 @@
        <column name="date"/>
        <column name="enddate"/>
        <column name="category"/>
-       <!--<column name="frequency"/>-->
-       <!--<column name="project"/>-->
+       <column name="frequency"/>
+       <column name="project"/>
        <column name="code"/>
        <column name="volume"/>
        <column name="vol_units"/>

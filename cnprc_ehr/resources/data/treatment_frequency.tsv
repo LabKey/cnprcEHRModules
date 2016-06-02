@@ -1,178 +1,178 @@
-rowid	shortname	sort_order	meaning	active
-1	NEWSTOCK	40	Entering an item into the inventory system	Y
-2	CHECKOUT	10	Checking an item out of a stock location - into custody of a person 	Y
-3	CHECKIN	20	Checking an item into a stock location	Y
-4	OPENING	30	Opening a package	Y
-5	RECONCILE	50	Entering an inventory count	Y
-6	EXPIRED	70	Item has expired and is being disposed of	Y
-7	INJECTSYRINGE	60	Prefilled syringe	Y
-8	STRIP	70	Strip packaging (excludes blister package)	Y
-9	TUBE	80	Tube	Y
-10	VIAL	10	Vial	Y
-11	CAPLET	10	Caplet	Y
-12	CAPSULE	20	Capsule	Y
-13	CHEWABLETABLET	30	Chewable tablet	Y
-14	OINTMENT	40	Ointment	Y
-15	TOPICALGEL	50	Topical gel	Y
-16	TABLET	60	Tablet	Y
-17	WAFER	70	Wafer	Y
-18	ORALSOULUTION		Oral soulution	Y
-19	ORALSUSPENSION		Oral suspension	Y
-20	TOPICALSPRAY		Topical spray	Y
-21	POWDER		Powder	Y
-22	TOPICALCREAM		Topical cream	Y
-23	CW1320		Main Stockroom	Y
-24	NW1402		Conventional Hospital	Y
-25	CW1310		CW1310	Y
-26	AW6xxx		SPF Hospital	Y
-27	AAW6xxx		PDG Hospital	Y
-28	TRANSFER	80	transfer of specific inv. from alternate locations	Y
-29	Bottle(1L)		Bottle(1L)	Y
-30	Bottle(1L)		Bottle(1L)	Y
-31	serving/animal		serving per animal	Y
-32	serving		a serving	Y
-33	serving		a serving	Y
-34	mL/animal		milliliter per animal	Y
-35	mLs	80	milliliters	Y
-36	units	90	units	Y
-37	str/eye	45	strip per eye	Y
-38	bar/animal		bar per animal	Y
-39	Bar		Bar	Y
-40	Bar		Bar	Y
-41	tsp		teaspoon	Y
-42	tsp/animal		teaspoon per animal	Y
-43	tsp	65	teaspoon	Y
-44	PDR		Powder	Y
-45	IF1	20	SID for 9 days, EOD for 5 days, skip treatment on days 11 and 13	Y
-46	sndwch/animal	60	sandwich per animal	Y
-47	sndwch	110	sandwich	Y
-48	sndwch		sandwich	Y
-49	bottle(.5L)/animal		500ml bottle per animal	Y
-50	Bottle(.5L)		Bottle(.5L)	Y
-51	Bottle(.5L)		Bottle(.5L)	Y
-52	bottle(1L)/animal		1000mL bottle per animal	Y
-53	mLs	40	mLs	Y
-54	tabs	70	tabs	Y
-55	caps	10	caps	Y
-56	drops	20	drops	Y
-57	wafer	80	wafer	Y
-58	packet	50	packet	Y
-59	strip	60	strip	Y
-60	PACKG		PACKG	N
-61	gms	30	gms	Y
-62	umg/kg		umg/kg	N
-63	mg/kg	11	milligrams (1/1,000) per kilogram (1,000)	Y
-64	gm/kg		gm/kg	N
-65	IU/kg	14	International Units per kilogram (1,000)	Y
-66	KIU/kg		KIU/kg	N
-67	mcg/kg	10	micrograms (1/1,000,000) per per kilogram (1,000)	Y
-68	mEq/mL	20	mEq/mL	Y
-69	units/mL	21	units per milliliter (1/1,000)	Y
-70	QID	1	4 times per day	Y
-71	TID	2	3 times per day	Y
-72	BID	3	2 times per day	Y
-73	SID	4	1 time per day	Y
-74	EOD	5	Every other day	Y
-75	Q3D	6	Every 3 days	Y
-76	Q4D	7	Every 4 days	Y
-77	Q5D	8	Every 5 days	Y
-78	Q6D	9	Every 6 days	Y
-79	Q7D	10	Every 7 days	Y
-80	Q14	11	Every 14 days	Y
-81	Q21	12	Every 21 days	Y
-82	Q30	13	Every 30 days	Y
-83	PRN	15	As needed	Y
-84	CJD	16	Clinical judgement	Y
-85	Q1D		Once per day	N
-86	Q24		Once per day	N
-87	Q2D		Every 2 days?	N
-88	Q48		Every 48 hours	N
-89	Q14		Every 14 days	N
-90	Q90	14	Every 90 days	Y
-91	Emergency	1	Emergency	Y
-92	Antibiotic	50	Antibiotics	Y
-93	Anticoagulant	60	Anticoagulants	Y
-94	Antifungal	70	Antifungals	Y
-95	Antiparasitic	80	Antiparasitics	Y
-96	mg/mL	11	milligrams (1/1,000) per milliliter (1/1,000)	Y
-97	mcg/mL	10	micrograms (1/1,000,000) per milliliter (1/1,000)	Y
-98	mg/tablet	21	milligrams (1/1,000) per tablet	Y
-99	g/tablet	22	grams per tablet	Y
-100	IU/mL	13	International Units per milliliter (1/1,000)	Y
-101	KIU/mL		KIU/mL	N
-102	mL/kg	13	milliliters (1/1,000) per kilogram (1,000)	Y
-103	Analgesics - NSAIDS	10	Analgesics & Anti-Inflammatories	Y
-104	Anesthetics	40	Anesthetics/Tranqualizers	Y
-105	GI-Protect/Motility	110	GI Protectants/Motility Augmentation	Y
-106	IV-Additive	120	IV Fluid Additives	Y
-107	Steroids/Hormones	130	Steroids/Hormones	Y
-108	Vaccines	150	Vaccines	Y
-109	Vitamins/Supplements	160	Vitamins/Supplements	Y
-110	Miscellaneous	900	Miscellaneous	Y
-111	ID	42	Intradermal	Y
-112	IM	10	Intramuscular	Y
-113	IP	43	Intraperitoneal	Y
-114	IV	44	Intravenous	Y
-115	NG	45	Nasograstric	Y
-116	OD	20	Right Eye	Y
-117	OS	22	Left Eye	Y
-118	PO	11	Oral	Y
-119	PR	46	Rectal	Y
-120	SC	12	Subcutaneous	Y
-121	SQ	13	Subcutaneous	Y
-122	TP	40	Topical	Y
-123	US		Both Eyes	N
-124	OU	21	Both Eyes	Y
-125	mg/caplet	31	milligrams (1/1,000) per caplet	Y
-126	IA	41	Intra-Articular	Y
-127	mg/mg		milligrams of active drug in each milligram of powder	Y
-128	mgs		mgs	Y
-129	Q28	12	Every 28 days	Y
-130	mg/joint	40	milligrams (1/1,000) per joint	Y
-131	Anticonvulsants		Anticonvulsants	N
-132	mg/animal	30	milligrams (1/1,000) per animal	Y
-133	CRI	17	Continuous Rate Infusion	Y
-134	g/vial	40	grams per vial	Y
-135	Euthanasia	2	Euthanasia	Y
-136	mcg/caplet	30	micrograms (1/1,000,000) per caplet	Y
-137	mcg/tablet	20	micrograms (1/1,000,000) per tablet	Y
-138	g/L	14	grams per Liter	Y
-139	g/wafer	50	grams per wafer	Y
-140	mlsol'n/kg		mlsol'n/kg	N
-141	tbls/animal	43	tablespoon per animal	Y
-142	g/kg	12	grams per per kilogram (1,000)	Y
-143	Analgesics - Other	30	Other Analgesics	Y
-144	tab/kg	15	tablets per kilogram (1,000)	Y
-145	Analgesics - Opioids	20	Opioid Analgesia	Y
-146	g/animal	31	grams per animal	Y
-147	IU/animal	32	International Units per animal	Y
-148	g/mL	12	grams per milliliter (1/1,000)	Y
-149	wfr/animal	50	wafer per animal	N
-150	AD	30	Right Ear	Y
-151	AS	31	Left Ear	Y
-152	AU	32	Both Ears	Y
-153	mg/capsule		milligrams (1/1,000) per capsule	Y
-154	units/mL		units per milliliter (1/1,000)	Y
-155	u/dose	50	u/dose	Y
-156	mcg/dose	55	mcg/dose	Y
-157	Anesthetics - NMB	45	Neuromusclar Blockers	Y
-158	tbls	70	tablespoon	Y
-159	Supplements		Supplements	Y
-160	tab/animal	15	tablets per animal	Y
-161	str/animal	45	strip per animal (eye)	N
-162	IU	50	Internation Units	Y
-163	g	30	grams	Y
-164	mcg	10	micrograms	Y
-165	mg	20	milligrams	Y
-166	strip	60	a strip of ointment	Y
-167	tabs	40	tablets	Y
-168	tbls		tablespoons	Y
-169	m/Eq Ca/mL	60	m/Eq calcium/mL	Y
-170	Chew		Chewable	Y
-171	g/chew		grams per chewable	Y
-172	Chew	100	Chewable	Y
-173	chw/animal		chew per animal	Y
-174	AMPOULE	20	Single use ampuole	Y
-175	BLISTER	30	Blister pack	Y
-176	BOTTLE	40	Bottle	Y
-177	cap/animal		capsule/animal	Y
+shortname	sort_order	meaning	active
+NEWSTOCK	40	Entering an item into the inventory system	Y
+CHECKOUT	10	Checking an item out of a stock location - into custody of a person 	Y
+CHECKIN	20	Checking an item into a stock location	Y
+OPENING	30	Opening a package	Y
+RECONCILE	50	Entering an inventory count	Y
+EXPIRED	70	Item has expired and is being disposed of	Y
+INJECTSYRINGE	60	Prefilled syringe	Y
+STRIP	70	Strip packaging (excludes blister package)	Y
+TUBE	80	Tube	Y
+VIAL	10	Vial	Y
+CAPLET	10	Caplet	Y
+CAPSULE	20	Capsule	Y
+CHEWABLETABLET	30	Chewable tablet	Y
+OINTMENT	40	Ointment	Y
+TOPICALGEL	50	Topical gel	Y
+TABLET	60	Tablet	Y
+WAFER	70	Wafer	Y
+ORALSOULUTION		Oral soulution	Y
+ORALSUSPENSION		Oral suspension	Y
+TOPICALSPRAY		Topical spray	Y
+POWDER		Powder	Y
+TOPICALCREAM		Topical cream	Y
+CW1320		Main Stockroom	Y
+NW1402		Conventional Hospital	Y
+CW1310		CW1310	Y
+AW6xxx		SPF Hospital	Y
+AAW6xxx		PDG Hospital	Y
+TRANSFER	80	transfer of specific inv. from alternate locations	Y
+Bottle(1L)		Bottle(1L)	Y
+Bottle(1L)		Bottle(1L)	Y
+serving/animal		serving per animal	Y
+serving		a serving	Y
+serving		a serving	Y
+mL/animal		milliliter per animal	Y
+mLs	80	milliliters	Y
+units	90	units	Y
+str/eye	45	strip per eye	Y
+bar/animal		bar per animal	Y
+Bar		Bar	Y
+Bar		Bar	Y
+tsp		teaspoon	Y
+tsp/animal		teaspoon per animal	Y
+tsp	65	teaspoon	Y
+PDR		Powder	Y
+IF1	20	SID for 9 days, EOD for 5 days, skip treatment on days 11 and 13	Y
+sndwch/animal	60	sandwich per animal	Y
+sndwch	110	sandwich	Y
+sndwch		sandwich	Y
+bottle(.5L)/animal		500ml bottle per animal	Y
+Bottle(.5L)		Bottle(.5L)	Y
+Bottle(.5L)		Bottle(.5L)	Y
+bottle(1L)/animal		1000mL bottle per animal	Y
+mLs	40	mLs	Y
+tabs	70	tabs	Y
+caps	10	caps	Y
+drops	20	drops	Y
+wafer	80	wafer	Y
+packet	50	packet	Y
+strip	60	strip	Y
+PACKG		PACKG	N
+gms	30	gms	Y
+umg/kg		umg/kg	N
+mg/kg	11	milligrams (1/1,000) per kilogram (1,000)	Y
+gm/kg		gm/kg	N
+IU/kg	14	International Units per kilogram (1,000)	Y
+KIU/kg		KIU/kg	N
+mcg/kg	10	micrograms (1/1,000,000) per per kilogram (1,000)	Y
+mEq/mL	20	mEq/mL	Y
+units/mL	21	units per milliliter (1/1,000)	Y
+QID	1	4 times per day	Y
+TID	2	3 times per day	Y
+BID	3	2 times per day	Y
+SID	4	1 time per day	Y
+EOD	5	Every other day	Y
+Q3D	6	Every 3 days	Y
+Q4D	7	Every 4 days	Y
+Q5D	8	Every 5 days	Y
+Q6D	9	Every 6 days	Y
+Q7D	10	Every 7 days	Y
+Q14	11	Every 14 days	Y
+Q21	12	Every 21 days	Y
+Q30	13	Every 30 days	Y
+PRN	15	As needed	Y
+CJD	16	Clinical judgement	Y
+Q1D		Once per day	N
+Q24		Once per day	N
+Q2D		Every 2 days?	N
+Q48		Every 48 hours	N
+Q14		Every 14 days	N
+Q90	14	Every 90 days	Y
+Emergency	1	Emergency	Y
+Antibiotic	50	Antibiotics	Y
+Anticoagulant	60	Anticoagulants	Y
+Antifungal	70	Antifungals	Y
+Antiparasitic	80	Antiparasitics	Y
+mg/mL	11	milligrams (1/1,000) per milliliter (1/1,000)	Y
+mcg/mL	10	micrograms (1/1,000,000) per milliliter (1/1,000)	Y
+mg/tablet	21	milligrams (1/1,000) per tablet	Y
+g/tablet	22	grams per tablet	Y
+IU/mL	13	International Units per milliliter (1/1,000)	Y
+KIU/mL		KIU/mL	N
+mL/kg	13	milliliters (1/1,000) per kilogram (1,000)	Y
+Analgesics - NSAIDS	10	Analgesics & Anti-Inflammatories	Y
+Anesthetics	40	Anesthetics/Tranqualizers	Y
+GI-Protect/Motility	110	GI Protectants/Motility Augmentation	Y
+IV-Additive	120	IV Fluid Additives	Y
+Steroids/Hormones	130	Steroids/Hormones	Y
+Vaccines	150	Vaccines	Y
+Vitamins/Supplements	160	Vitamins/Supplements	Y
+Miscellaneous	900	Miscellaneous	Y
+ID	42	Intradermal	Y
+IM	10	Intramuscular	Y
+IP	43	Intraperitoneal	Y
+IV	44	Intravenous	Y
+NG	45	Nasograstric	Y
+OD	20	Right Eye	Y
+OS	22	Left Eye	Y
+PO	11	Oral	Y
+PR	46	Rectal	Y
+SC	12	Subcutaneous	Y
+SQ	13	Subcutaneous	Y
+TP	40	Topical	Y
+US		Both Eyes	N
+OU	21	Both Eyes	Y
+mg/caplet	31	milligrams (1/1,000) per caplet	Y
+IA	41	Intra-Articular	Y
+mg/mg		milligrams of active drug in each milligram of powder	Y
+mgs		mgs	Y
+Q28	12	Every 28 days	Y
+mg/joint	40	milligrams (1/1,000) per joint	Y
+Anticonvulsants		Anticonvulsants	N
+mg/animal	30	milligrams (1/1,000) per animal	Y
+CRI	17	Continuous Rate Infusion	Y
+g/vial	40	grams per vial	Y
+Euthanasia	2	Euthanasia	Y
+mcg/caplet	30	micrograms (1/1,000,000) per caplet	Y
+mcg/tablet	20	micrograms (1/1,000,000) per tablet	Y
+g/L	14	grams per Liter	Y
+g/wafer	50	grams per wafer	Y
+mlsol'n/kg		mlsol'n/kg	N
+tbls/animal	43	tablespoon per animal	Y
+g/kg	12	grams per per kilogram (1,000)	Y
+Analgesics - Other	30	Other Analgesics	Y
+tab/kg	15	tablets per kilogram (1,000)	Y
+Analgesics - Opioids	20	Opioid Analgesia	Y
+g/animal	31	grams per animal	Y
+IU/animal	32	International Units per animal	Y
+g/mL	12	grams per milliliter (1/1,000)	Y
+wfr/animal	50	wafer per animal	N
+AD	30	Right Ear	Y
+AS	31	Left Ear	Y
+AU	32	Both Ears	Y
+mg/capsule		milligrams (1/1,000) per capsule	Y
+units/mL		units per milliliter (1/1,000)	Y
+u/dose	50	u/dose	Y
+mcg/dose	55	mcg/dose	Y
+Anesthetics - NMB	45	Neuromusclar Blockers	Y
+tbls	70	tablespoon	Y
+Supplements		Supplements	Y
+tab/animal	15	tablets per animal	Y
+str/animal	45	strip per animal (eye)	N
+IU	50	Internation Units	Y
+g	30	grams	Y
+mcg	10	micrograms	Y
+mg	20	milligrams	Y
+strip	60	a strip of ointment	Y
+tabs	40	tablets	Y
+tbls		tablespoons	Y
+m/Eq Ca/mL	60	m/Eq calcium/mL	Y
+Chew		Chewable	Y
+g/chew		grams per chewable	Y
+Chew	100	Chewable	Y
+chw/animal		chew per animal	Y
+AMPOULE	20	Single use ampuole	Y
+BLISTER	30	Blister pack	Y
+BOTTLE	40	Bottle	Y
+cap/animal		capsule/animal	Y
