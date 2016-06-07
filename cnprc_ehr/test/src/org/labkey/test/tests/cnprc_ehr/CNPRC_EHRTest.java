@@ -19,31 +19,58 @@ package org.labkey.test.tests.cnprc_ehr;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.labkey.test.Locator;
 import org.labkey.test.TestFileUtils;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.components.BodyWebPart;
+import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
+import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler;
+import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
 import org.openqa.selenium.WebElement;
 import org.labkey.test.util.external.labModules.LabModuleHelper;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import static org.junit.Assert.assertEquals;
 
 @Category({CustomModules.class})
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
-
     private static final String PROJECT_NAME = "CNPRCTest Project";
     private static final String FOLDER_NAME = "CNPRC";
+    public static final String CNPRC_ANIMAL = "TEST3804589";
+    public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
+    {{
+        put("General", Arrays.asList(
+                "Arrivals",
+                "Deaths",
+                "Demographics",
+                /*"Snapshot",*/// TODO: Data region not visible by default, AnimalHistoryPage#refreshReport fails
+                "TB Test Results"));
+        put("Colony Management", Arrays.asList(
+                "Birth Records",
+                "Death Records",
+                "Housing - Active",
+                "Housing History",
+                "Weights"));
+        put("Assignments and Groups", Arrays.asList(
+                "Active Assignments",
+                "Assignment History"));
+    }};
 
     @BeforeClass
     public static void setupProject() throws Exception
@@ -144,25 +171,20 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testCnprcFrontPageView()
     {
-        BodyWebPart frontPage = new BodyWebPart(this, "Electronic Health Record");
+        BodyWebPart frontPage = new BodyWebPart(getDriver(), "Electronic Health Record");
         WebElement browseData = Locator.tagWithText("a", "Browse Data").findElement(frontPage);
         WebElement enterData = Locator.tagWithText("a", "Enter Data").findElement(frontPage);
         WebElement colonyOverview = Locator.tagWithText("a", "Colony Overview").findElement(frontPage);
 
-        Crawler.ControllerActionId actionId = new Crawler.ControllerActionId(browseData.getAttribute("href"));
-//        assertEquals("Wrong controller for 'Browse Data", "cnprc_ehr", actionId.getController()); //TODO: Controller is set to be 'ehr' for now, so this assert fails
-        assertEquals("Wrong action for 'Browse Data", "animalHistory", actionId.getAction());
+        ControllerActionId actionId = new ControllerActionId(browseData.getAttribute("href"));
+        assertEquals("Wrong controller-action for 'Browse Data", new ControllerActionId("ehr", "animalHistory"), actionId);
 
-        actionId = new Crawler.ControllerActionId(enterData.getAttribute("href"));
-        assertEquals("Wrong controller for 'Enter Data", "ehr", actionId.getController());
-        assertEquals("Wrong action for 'Enter Data", "enterData", actionId.getAction());
+        actionId = new ControllerActionId(enterData.getAttribute("href"));
+        assertEquals("Wrong controller-action for 'Enter Data", new ControllerActionId("ehr", "enterData"), actionId);
 
-        actionId = new Crawler.ControllerActionId(colonyOverview.getAttribute("href"));
-        assertEquals("Wrong controller for 'Colony Overview", "ehr", actionId.getController());
-        assertEquals("Wrong action for 'Colony Overview", "colonyOverview", actionId.getAction());
+        actionId = new ControllerActionId(colonyOverview.getAttribute("href"));
+        assertEquals("Wrong controller-action for 'Colony Overview", new ControllerActionId("ehr", "colonyOverview"), actionId);
     }
-
-    //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
 
     @Test
     public void testTreatments()
@@ -170,7 +192,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         click(Locator.linkWithText("Browse All Datasets"));
         waitForElement(Locator.linkContainingText("Browse All"));
         waitAndClickAndWait(LabModuleHelper.getNavPanelItem("Treatment Orders:", "Browse All"));
-        waitForElement(Locator.linkContainingText("TEST3804589"));
+        waitForElement(Locator.linkContainingText(CNPRC_ANIMAL));
         pushLocation();
         clickAndWait(Locator.linkContainingText("TP"));
         popLocation();
@@ -180,58 +202,69 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testAnimalHistoryReports() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+
+        animalHistoryPage.setSearchText(CNPRC_ANIMAL);
+        animalHistoryPage.refreshReport();
+        _helper.verifyReportTabs(animalHistoryPage, CNPRC_REPORTS);
+    }
+
+    //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
+
+    @Test @Ignore
     public void customActionsTest()
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testQuickSearch()
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testWeightValidation() throws Exception
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testSecurityDataAdmin() throws Exception
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testSecurityRequester() throws Exception
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testSecurityBasicSubmitter() throws Exception
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testSecurityFullSubmitter() throws Exception
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testSecurityFullUpdater() throws Exception
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testSecurityRequestAdmin() throws Exception
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testCustomButtons()
     {
     }
 
-    @Test
+    @Test @Ignore
     public void testCalculatedAgeColumns()
     {
     }
-
 }
