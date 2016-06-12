@@ -4,9 +4,8 @@
         <column name="date"/>
         <column name="enddate"/>
         <column name="assignmentStatus"/>
-        <column name="protocol"/>
-        <column name="project"/>
         <column name="projectCode"/>
+        <column name="protocol"/>
         <column name="projectProtocolAssignDate"/>
         <column name="projectProtocolRelDate"/>
     </columns>
