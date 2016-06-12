@@ -1,0 +1,19 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="Weight" tableDbType="TABLE" useColumnOrder="true">
+                <columns>
+                    <column columnName="Id"/>
+                    <column columnName="date">
+                        <columnTitle>Weight Date</columnTitle>
+                        <formatString>yyyy-MM-dd HH:mm</formatString>
+                    </column>
+                    <column columnName="weight"/>
+                    <column columnName="bodyConditionScore"/>
+                    <column columnName="weightTattooFlag"/>
+                    <column columnName="birthWeight"/>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

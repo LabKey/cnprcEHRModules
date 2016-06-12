@@ -34,6 +34,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Age Class',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'ageclass',
+        pk: 'rowid'
+    },
+    {
         label: 'Assignment status',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -124,6 +131,13 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'species_codes',
         pk: 'rowid'
+    },
+    {
+        label: 'TB Test Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'tb_test_type',
+        pk: 'value'
     },
     {
         label: 'TB sites',

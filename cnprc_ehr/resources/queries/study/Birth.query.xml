@@ -8,9 +8,7 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id">
-
-                    </column>
+                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Birth Date</columnTitle>
                     </column>
@@ -122,6 +120,19 @@
                     <column columnName="conceptionDateStatus">
                         <datatype>varchar</datatype>
                     </column>
+                    <column columnName="conNum"/>
+                    <column columnName="accessionDate"/>
+                    <column columnName="BRType"/>
+                    <column columnName="colonyCode"/>
+                    <column columnName="PRCode"/>
+                    <column columnName="PGComment"/>
+                    <column columnName="termDate"/>
+                    <column columnName="termDateStatus"/>
+                    <column columnName="termComment"/>
+                    <column columnName="birthPlacePrefix"/>
+                    <column columnName="pgType"/>
+                    <column columnName="femaleGeneticsVerify"/>
+                    <column columnName="maleGeneticsVerify"/>
                 </columns>
             </table>
         </tables>

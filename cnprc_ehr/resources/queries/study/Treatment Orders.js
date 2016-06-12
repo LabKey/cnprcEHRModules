@@ -16,15 +16,11 @@ function onInit(event, helper)
         scope: this,
         success: function (data)
         {
-            console.log("data.rows", data.rows);
             var rows = data.rows;
             for(var i = 0; i < rows.length; i++)
             {
-                console.log("type", typeof rows[i].rowid);
                 frequency_map[rows[i].shortname] = rows[i].rowid;
-                console.log("frequency_map[rows[i].shortname]", frequency_map[rows[i].shortname]);
             }
-            console.log("frequencyMap:", frequency_map);
         },
         failure: function (error)
         {
@@ -36,10 +32,8 @@ function onInit(event, helper)
 
 function onUpsert(helper, scriptErrors, row, oldRow)
 {
-    console.log("row.frequency.before", row.frequency);
     if(row.frequency)
     {
         row.frequency = frequency_map[row.frequency];
     }
-    console.log("row.frequency", row.frequency);
 }

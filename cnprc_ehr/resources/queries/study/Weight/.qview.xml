@@ -3,6 +3,8 @@
         <column name="Id"/>
         <column name="date"/>
         <column name="weight"/>
+        <column name="bodyConditionScore"/>
+        <column name="weightTattooFlag"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

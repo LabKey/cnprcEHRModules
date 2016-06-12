@@ -658,9 +658,6 @@
             <column columnName="conceptionDateStatus">
                 <datatype>varchar</datatype>
             </column>
-            <!--<column columnName="conceptualDay">-->
-                <!--<datatype>integer</datatype>-->
-            <!--</column>-->
             <column columnName="type">
                 <datatype>varchar</datatype>
             </column>
@@ -699,6 +696,45 @@
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+            <column columnName="conNum">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="accessionDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="BRType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="colonyCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="PRCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="PGComment">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="termDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="termDateStatus">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="termComment">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="birthPlacePrefix">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="pgType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="femaleGeneticsVerify">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="maleGeneticsVerify">
+                <datatype>varchar</datatype>
             </column>
         </columns>
         <tableTitle>Birth</tableTitle>
@@ -1293,6 +1329,72 @@
             <column columnName="meaning">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="seq">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="formularyNameFk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="formularyDosingFk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="drugCalcDataAvailable">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="weightOverride">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="weightDb">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="weightUsed">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="drugCalOverride">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="drugName">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="dosePerUnit">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="frequencyDb">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="durationDb">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="durationUsed">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="dosingNotes">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="userComment">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="nextPrintFlagUpdate">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="treatmentCreator">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="prescribingVet">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="billingItemCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="billingAmt">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="cnprcBillingId">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="rxInvalidOrNeverGiven">
+                <datatype>varchar</datatype>
+            </column>
         </columns>
         <tableTitle>Treatment Orders</tableTitle>
     </table>
@@ -1311,6 +1413,15 @@
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
             <column columnName="weight">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="bodyConditionScore">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="weightTattooFlag">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="birthWeight">
                 <datatype>double</datatype>
             </column>
             <column columnName="remark">
@@ -3120,6 +3231,9 @@
             <datatype>integer</datatype>
             <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
         </column>
+        <column columnName="test">
+            <datatype>varchar</datatype>
+        </column>
         <column columnName="testType">
             <datatype>varchar</datatype>
         </column>
@@ -3133,9 +3247,14 @@
                 <fkColumnName>value</fkColumnName>
             </fk>
         </column>
-        <column columnName="result">
+        <column columnName="twentyFourHrsResult">
             <datatype>varchar</datatype>
-            <columnTitle>Result</columnTitle>
+        </column>
+        <column columnName="fortyEightHrsResult">
+            <datatype>varchar</datatype>
+        </column>
+        <column columnName="seventyTwoHrsResult">
+            <datatype>varchar</datatype>
         </column>
         <column columnName="objectid">
             <datatype>entityid</datatype>
