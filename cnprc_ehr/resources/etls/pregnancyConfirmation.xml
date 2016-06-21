@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Pregnancy Confirmation</name>
+    <description>Pregnancy Confirmations</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="pregnancyConfirmation" />
+            <destination schemaName="study" queryName="pregnancyConfirmation" bulkLoad="true" batchSize="500" targetOption="truncate">
+                <columnTransforms>
+                    <column source="PDET_SAMPLE_DATE" target="date"/>
+                </columnTransforms>
+            </destination>
+        </transform>
+    </transforms>
+    <schedule>
+        <poll interval="60m" />
+    </schedule>
+</etl>

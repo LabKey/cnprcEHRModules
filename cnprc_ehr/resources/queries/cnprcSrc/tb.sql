@@ -10,8 +10,8 @@ WT_TB_TEST1_72 AS seventyTwoHrsResult,
 WT_AUD_TIME AS entry_date_tm,
 WT_AUD_USERID AS user_name
 FROM
-cnprcSrc.ZWEIGHING
-UNION
+cnprcSrc.ZWEIGHING WHERE WT_TB_TEST1_TYPE IS NOT NULL
+UNION ALL
 SELECT
 WT_AN_ID AS Id,
 WT_DATE,
@@ -24,5 +24,5 @@ WT_TB_TEST2_72 AS seventyTwoHrsResult,
 WT_AUD_TIME AS entry_date_tm,
 WT_AUD_USERID AS user_name
 FROM
-cnprcSrc.ZWEIGHING
-Order by WT_DATE
+cnprcSrc.ZWEIGHING WHERE WT_TB_TEST2_TYPE IS NOT NULL;
+Order by WT_DATE;

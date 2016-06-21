@@ -8,3 +8,10 @@ drug_categories	Drug Category Field Values	value
 project_type	Center Project Types	value
 tb_site	TB Site	value
 tb_test_type	TB Test Type	value
+behavior_codes	Behavior Codes	value
+breeding_group	Breeding Group	value
+social_codes	Social Codes	value
+nursing_assign_types	SNursing Assignment Types	value
+breeding_obs_codes	Breeding Observation Codes	value
+preg_det_method	Pregnancy Determination Method	value
+preg_det_result	Pregnancy Determination Result	value

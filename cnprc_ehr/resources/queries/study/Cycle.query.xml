@@ -1,0 +1,52 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="Cycle" tableDbType="TABLE" useColumnOrder="true">
+                <columns>
+                    <column columnName="Id"/>
+                    <column columnName="sire"/>
+                    <column columnName="date">
+                        <columnTitle>Cycle Start Date</columnTitle>
+                    </column>
+                    <column columnName="estGestStartDate">
+                        <columnTitle>Est. Gestation Start Date</columnTitle>
+                    </column>
+                    <column columnName="daysAndHoursString"/>
+                    <column columnName="locationOverride"/>
+                    <column columnName="weekendBreeding"/>
+                    <column columnName="specialBreeding"/>
+                    <column columnName="methodOne">
+                        <columnTitle>Observation Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>preg_det_method</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="gestDayOne"/>
+                    <column columnName="schedStatusOne"/>
+                    <column columnName="methodTwo">
+                        <columnTitle>Observation Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>preg_det_method</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="gestDayTwo"/>
+                    <column columnName="schedStatusTwo"/>
+                    <column columnName="methodThree">
+                        <columnTitle>Observation Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>preg_det_method</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="gestDayThree"/>
+                    <column columnName="schedStatusThree"/>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

@@ -48,6 +48,13 @@ Ext4.onReady(function(){
         pk: 'value'
     },
     {
+        label: 'Behavior Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'behavior_codes',
+        pk: 'rowid'
+    },
+    {
         label: 'Birth Date Type',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -59,6 +66,20 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'birth_type',
+        pk: 'rowid'
+    },
+    {
+        label: 'Breeding Group',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'breeding_group',
+        pk: 'rowid'
+    },
+    {
+        label: 'Breeding Observation Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'breeding_obs_codes',
         pk: 'rowid'
     },
     {
@@ -97,6 +118,27 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Nursing Assignment Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'nursing_assign_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'Pregnancy Determination Method',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'preg_det_method',
+        pk: 'rowid'
+    },
+    {
+        label: 'Pregnancy Determination Result',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'preg_det_result',
+        pk: 'rowid'
+    },
+    {
         label: 'Project Type',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -116,6 +158,13 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'snomed',
         doSkip: true,
+        pk: 'rowid'
+    },
+    {
+        label: 'Social Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'social_codes',
         pk: 'rowid'
     },
     {

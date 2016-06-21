@@ -1,0 +1,38 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="pregnancyConfirmation" tableDbType="TABLE" useColumnOrder="true">
+                <columns>
+                    <column columnName="Id"/>
+                    <column columnName="sire"/>
+                    <column columnName="date">
+                        <columnTitle>Sample Date</columnTitle>
+                    </column>
+                    <column columnName="method">
+                        <columnTitle>Determination Method</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>preg_det_method</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="result">
+                        <columnTitle>Determination Result</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>preg_det_result</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="scheduleStatus"/>
+                    <column columnName="cycleDay1">
+                        <columnTitle>Cycle Start Date</columnTitle>
+                    </column>
+                    <column columnName="termDate"/>
+                    <column columnName="termCode"/>
+                    <column columnName="sire"/>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

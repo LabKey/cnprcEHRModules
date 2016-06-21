@@ -6,12 +6,16 @@
         <category>Colony Management</category>
         <category>Clinical</category>
         <category>Pathology</category>
+        <category>Reproductive Management</category>
     </categories>
     <datasets>
         <dataset name="arrival" id="1001" category="Colony Management" type="Standard"/>
         <dataset name="assignment" id="1002" category="ColonyManagement"/>
         <dataset name="birth" id="1007" category="Colony Management" demographicData="true" type="Standard"/>
+        <dataset name="breeding" id="2002" category="Reproductive Management" type="Standard"/>
         <dataset name="cases" id="5012" category="Clinical" type="Standard"/>
+        <dataset name="cycle" id="2001" category="Reproductive Management" type="Standard"/>
+        <dataset name="enrichment" id="3001" category="Behavior" type="Standard"/>
         <dataset name="deaths" id="1048" category="Pathology" demographicData="true" type="Standard"/>
         <dataset name="demographics" id="1012" category="Colony Management" demographicData="true" type="Standard"/>
         <dataset name="departure" id="1013" category="Colony Management" type="Standard"/>
@@ -20,6 +24,9 @@
         <dataset name="matings" id="5015" category="Reproductive Management" type="Standard" showByDefault="false"/>
         <dataset name="menses" id="1060" category="ColonyManagement" showByDefault="false"/>
         <dataset name="notes" id="1068" category="ColonyManagement" showByDefault="false"/>
+        <dataset name="nursing" id="3002" category="Behavior" showByDefault="false"/>
+        <dataset name="pairings" id="5024" showByDefault="false" category="Colony Management" demographicData="false" type="Standard"/>
+        <dataset name="pregnancyConfirmation" id="5022" category="Reproductive Management" type="Standard"/>
         <dataset name="problem" id="1030" category="Clinical" type="Standard"/>
         <dataset name="tb" id="1035" category="Clinical" type="Standard"/>
         <dataset name="treatment_order" id="1037" category="Clinical"/>
