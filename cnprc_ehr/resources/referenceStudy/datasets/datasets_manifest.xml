@@ -11,6 +11,7 @@
     <datasets>
         <dataset name="arrival" id="1001" category="Colony Management" type="Standard"/>
         <dataset name="assignment" id="1002" category="ColonyManagement"/>
+        <dataset name="behavior" id="3003" category="Behavior" type="Standard"/>
         <dataset name="birth" id="1007" category="Colony Management" demographicData="true" type="Standard"/>
         <dataset name="breeding" id="2002" category="Reproductive Management" type="Standard"/>
         <dataset name="cases" id="5012" category="Clinical" type="Standard"/>

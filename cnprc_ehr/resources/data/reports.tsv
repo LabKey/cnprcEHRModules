@@ -32,7 +32,7 @@ clinObsBsu	Behavior	js	Observations	true		study	underDevelopment	BSU Observation
 clinremarks	Clinical	js	Clinical Remarks	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the clinical remarks entered about each animal
 behaviorRemarks	Behavior	js	Behavior Remarks	true		study	underDevelopment	Behavior Remarks		date	false	false		qcstate/publicdata	This report contains the behavior remarks entered about each animal
 drug	Behavior	js	Behavior Treatments	true		study	underDevelopment	Behavior Treatments		date	false	false		qcstate/publicdata	This report contains the behavior treatments entered about each animal
-pairings	Behavior	js	Pairing Observations	true		study	underDevelopment			date	false	false			This report contains records about pairings made using each animal
+pairings	Behavior	query	Pairing Observations	true		study	pairings			date	false	false			This report contains records about pairings made using each animal
 pairingHousingSummary	Behavior	js	Pairing With Housing	true		study	underDevelopment			date	false	false			This report contains records about pairings made using each animal
 roommateHistoryBSU	Behavior	query	Cagemate History	true		study	housingRoommates	Caged Housing Only		StartDate	false	false		qcstate/publicdata	This report displays all animals that shared a cage, including the start date, stop date and days co-housed
 pairingHistory	Behavior	js	Pairing History	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report displays all animals that shared a cage, including the start date, stop date and days co-housed
@@ -110,7 +110,7 @@ tissueDistriutions	Pathology	js	Tissue Distributions	true		study	underDevelopmen
 #treatmentSchedule	Daily Reports	query	Treatments - Master	true		study	treatmentSchedule			date	true	false	7	qcstate/publicdata	The report displays all treatments scheduled for today
 cases	Daily Reports	js	Active Clinical Cases	true		study	underDevelopment	Active Clinical Cases		date	false	false		qcstate/publicdata	This displays active clinical cases
 behaviorCases	Behavior	js	Behavior Cases	true		study	underDevelopment	Open Behavior Cases		date	false	false		qcstate/publicdata	This displays active behavior cases
-#enrichment	Behavior	query	Enrichment	true		study	Enrichment			date	false	false		qcstate/publicdata	
+enrichment	Behavior	query	Enrichment	true		study	Enrichment			date	false	false		qcstate/publicdata
 #surgicalCases	Daily Reports	query	Active Surgery Cases	true		study	Cases	Active Surgery Cases		date	false	false		qcstate/publicdata	This displays active surgery cases
 #surgeryCasesClosedToday	Surgery	js	Surgery Cases Closed Today	true		study	surgeryCasesClosedToday			date	false	false		qcstate/publicdata	This displays surgery cases closed today
 activeFlags	General	js	Active Flags	true		study	underDevelopment	Active Flags		date	false	false		qcstate/publicdata	This displays active flags for this animals
@@ -127,7 +127,13 @@ matingSuccessRates	Reproductive Management	js	Mating Success Rates	true		study	u
 menses	Reproductive Management	query	Menses	true		study	menses			date	false	false		qcstate/publicdata
 delivery	Reproductive Management	js	Deliveries	true		study	underDevelopment			date	false	false		qcstate/publicdata
 #delivery	Reproductive Management	js	Deliveries	true		study	Delivery			date	false	false		qcstate/publicdata
-pregnancy	Reproductive Management	js	Pregnancies	true		study	underDevelopment			date	false	false		qcstate/publicdata
+pregnancy	Reproductive Management	query	Pregnancies	true		study	pregnancyConfirmation			date	false	false		qcstate/publicdata	Pregnancy Determination Results
 
 #sbt	Genetics	query	MHC Genotype	TRUE		study	demographics			date	FALSE	FALSE		qcstate/publicdata	This report contains summaries of MHC genetics, derived from many different techniques
 #feeding	Colony Management	query	Feeding	true		study	Feeding				false	false		qcstate/publicdata	This report contains the amount and type of food ordered for each animal
+
+#New Reports:
+nursing	Behavior	query	Nursing	true		study	nursing				false	false		qcstate/publicdata	Foster Mother/Infant (nursing) History
+cycle	Reproductive Management	query	Cycle	true		study	cycle				false	false		qcstate/publicdata	Female Animal Cycle History
+breeding	Reproductive Management	query	Breeding	true		study	breeding				false	false		qcstate/publicdata	Breeding Observations History
+behavior	Behavior	query	Behavior	true		study	behavior				false	false		qcstate/publicdata	Assessment of infant rhesus monkeys’ temperament, emotionality, and behavioral and physiological reactivity

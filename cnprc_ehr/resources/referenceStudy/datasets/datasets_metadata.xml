@@ -52,6 +52,52 @@
         </columns>
         <tableTitle>Pregnancy Confirmation</tableTitle>
     </table>
+    <table tableName="behavior" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="dayOneActivity">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="dayOneEmotionality">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="dayTwoActivity">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="dayTwoEmotionality">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="vigilant">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="gentle">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="confident">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="nervous">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+        </columns>
+        <tableTitle>Behavior</tableTitle>
+    </table>
     <table tableName="breeding" tableDbType="TABLE">
         <columns>
             <column columnName="Id">
