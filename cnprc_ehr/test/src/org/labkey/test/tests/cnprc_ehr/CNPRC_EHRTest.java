@@ -29,12 +29,11 @@ import org.labkey.test.components.BodyWebPart;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
-import org.labkey.test.util.Crawler;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
-import org.openqa.selenium.WebElement;
 import org.labkey.test.util.external.labModules.LabModuleHelper;
+import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.util.Arrays;
@@ -42,7 +41,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import static org.junit.Assert.assertEquals;
@@ -70,6 +68,16 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         put("Assignments and Groups", Arrays.asList(
                 "Active Assignments",
                 "Assignment History"));
+        put("Behavior", Arrays.asList(
+                "Behavior",
+                "Enrichment",
+                "Nursing",
+                "Pairing Observations"));
+        put("Reproductive Management", Arrays.asList(
+                "Breeding",
+                "Cycle",
+                "Menses",
+                "Pregnancies"));
     }};
 
     @BeforeClass
