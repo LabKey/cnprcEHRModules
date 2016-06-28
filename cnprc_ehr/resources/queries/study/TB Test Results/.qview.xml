@@ -14,7 +14,7 @@
         </column>
         <column name="testType">
             <properties>
-                <property name="columnTitle" value="TB Site"/>
+                <property name="columnTitle" value="Test Type"/>
             </properties>
         </column>
         <column name="twentyFourHrsResult">
