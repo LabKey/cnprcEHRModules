@@ -6,6 +6,7 @@
                     <column columnName="Id"/>
                     <column columnName="pairId">
                         <columnTitle>Pair Id</columnTitle>
+                        <url>/ehr/participantView.view?participantId=${pairId}</url>
                     </column>
                     <column columnName="date">
                         <columnTitle>Start Date</columnTitle>
