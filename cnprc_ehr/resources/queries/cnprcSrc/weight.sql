@@ -3,8 +3,7 @@ WT_AN_ID AS Id,
 WT_DATE,
 WT_WEIGHT_KG AS Weight,
 WT_BODY_CONDITION_SCORE AS bodyConditionScore,
-WT_TATTOO_FLAG AS weightTattooFlag,
-CON_BIRTH_WT_KG AS birthWeight,
+WT_TATTOO_FLAG AS weightTattooFlag
 -- AS objectid,
 FROM cnprcSrc.ZWEIGHING w
 LEFT JOIN cnprcSrc.ZCONCEPTION c

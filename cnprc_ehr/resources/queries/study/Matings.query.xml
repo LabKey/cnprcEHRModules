@@ -4,11 +4,16 @@
             <table tableName="Breeding" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
-                    <column columnName="sire"/>
+                    <column columnName="male">
+                        <columnTitle>Sire</columnTitle>
+                        <url>/ehr/participantView.view?participantId=${male}</url>
+                    </column>
                     <column columnName="date">
                         <columnTitle>Mating Date</columnTitle>
                     </column>
-                    <column columnName="hours"/>
+                    <column columnName="hours">
+                        <columnTitle>Hours</columnTitle>
+                    </column>
                     <column columnName="matingtype">
                         <columnTitle>Special Breeding Code</columnTitle>
                         <!--<fk>-->
@@ -23,9 +28,15 @@
                     <column columnName="cycleStartDate">
                         <columnTitle>Cycle Start Date</columnTitle>
                     </column>
-                    <column columnName="locationOverride"/>
-                    <column columnName="weekendBreeding"/>
-                    <column columnName="weekendBreedingState"/>
+                    <column columnName="locationOverride">
+                        <columnTitle>Location Override</columnTitle>
+                    </column>
+                    <column columnName="weekendBreeding">
+                        <columnTitle>Weekend Breeding</columnTitle>
+                    </column>
+                    <column columnName="weekendBreedingState">
+                        <columnTitle>Weekend Breeding State</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>

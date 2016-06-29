@@ -7,13 +7,16 @@
                     <column columnName="date">
                         <columnTitle>Assign Date</columnTitle>
                     </column>
-                    <column columnName="releaseDate"/>
+                    <column columnName="releaseDate">
+                        <columnTitle>Release Date</columnTitle>
+                    </column>
                     <column columnName="socialCode">
                         <columnTitle>Assign Type</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>social_codes</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="observation">
@@ -22,6 +25,7 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>behavior_codes</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
                 </columns>

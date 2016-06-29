@@ -18,12 +18,14 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>birth_date_type</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Title</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="birth_condition">
                         <columnTitle>Birth Condition</columnTitle>
                     </column>
                     <column columnName="birth_viability">
+                        <columnTitle>Birth Viability</columnTitle>
                         <datatype>varchar</datatype>
                     </column>
                     <column columnName="room">
@@ -72,7 +74,7 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>birth_type</fkTable>
                             <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>value</fkDisplayColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="species">
@@ -119,20 +121,47 @@
                     </column>
                     <column columnName="conceptionDateStatus">
                         <datatype>varchar</datatype>
+                        <columnTitle>Conception Date Status</columnTitle>
                     </column>
-                    <column columnName="conNum"/>
-                    <column columnName="accessionDate"/>
-                    <column columnName="BRType"/>
-                    <column columnName="colonyCode"/>
-                    <column columnName="PRCode"/>
-                    <column columnName="PGComment"/>
-                    <column columnName="termDate"/>
-                    <column columnName="termDateStatus"/>
-                    <column columnName="termComment"/>
-                    <column columnName="birthPlacePrefix"/>
-                    <column columnName="pgType"/>
-                    <column columnName="femaleGeneticsVerify"/>
-                    <column columnName="maleGeneticsVerify"/>
+                    <column columnName="conNum">
+                        <columnTitle>Conception Num.</columnTitle>
+                    </column>
+                    <column columnName="accessionDate">
+                        <columnTitle>Accession Date</columnTitle>
+                    </column>
+                    <column columnName="BRType">
+                        <columnTitle>BR Type</columnTitle>
+                    </column>
+                    <column columnName="colonyCode">
+                        <columnTitle>Colony Code</columnTitle>
+                    </column>
+                    <column columnName="PRCode">
+                        <columnTitle>PR Code</columnTitle>
+                    </column>
+                    <column columnName="PGComment">
+                        <columnTitle>PG Comment</columnTitle>
+                    </column>
+                    <column columnName="termDate">
+                        <columnTitle>Term Date</columnTitle>
+                    </column>
+                    <column columnName="termDateStatus">
+                        <columnTitle>Term Sate Status</columnTitle>
+                    </column>
+                    <column columnName="termComment">
+                        <columnTitle>Term Comment</columnTitle>
+                    </column>
+                    <column columnName="birthPlacePrefix">
+                        <columnTitle>Birth Place Prefix</columnTitle>
+                    </column>
+                    <column columnName="pgType">
+                        <columnTitle>PG Type</columnTitle>
+                    </column>
+                    <column columnName="femaleGeneticsVerify">
+                        <columnTitle>Female Genetics Verify</columnTitle>
+                    </column>
+                    <column columnName="maleGeneticsVerify">
+                        <columnTitle>Male Genetics Verify</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>

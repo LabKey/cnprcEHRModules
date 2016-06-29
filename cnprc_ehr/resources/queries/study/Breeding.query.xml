@@ -4,11 +4,16 @@
             <table tableName="Breeding" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
-                    <column columnName="sire"/>
+                    <column columnName="sire">
+                        <columnTitle>Sire</columnTitle>
+                        <url>/ehr/participantView.view?participantId=${sire}</url>
+                    </column>
                     <column columnName="date">
                         <columnTitle>Breeding Date</columnTitle>
                     </column>
-                    <column columnName="hours"/>
+                    <column columnName="hours">
+                        <columnTitle>Hours</columnTitle>
+                    </column>
                     <column columnName="obsCode">
                         <columnTitle>Observation Code</columnTitle>
                         <fk>

@@ -7,13 +7,17 @@
                     <column columnName="date">
                         <columnTitle>Assign Date</columnTitle>
                     </column>
-                    <column columnName="motherId"/>
+                    <column columnName="motherId">
+                        <columnTitle>Mother</columnTitle>
+                        <url>/ehr/participantView.view?participantId=${motherId}</url>
+                    </column>
                     <column columnName="assignType">
                         <columnTitle>Assign Type</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>nursing_assign_types</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
                 </columns>

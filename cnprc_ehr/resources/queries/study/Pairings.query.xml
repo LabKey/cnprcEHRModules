@@ -4,17 +4,22 @@
             <table tableName="Cycle" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
-                    <column columnName="pairId"/>
+                    <column columnName="pairId">
+                        <columnTitle>Pair Id</columnTitle>
+                    </column>
                     <column columnName="date">
                         <columnTitle>Start Date</columnTitle>
                     </column>
-                    <column columnName="endDate"/>
+                    <column columnName="endDate">
+                        <columnTitle>End Date</columnTitle>
+                    </column>
                     <column columnName="observation">
                         <columnTitle>Behavior Code</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>behavior_codes</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="remark"/>

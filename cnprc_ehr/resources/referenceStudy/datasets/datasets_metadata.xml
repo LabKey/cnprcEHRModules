@@ -1683,9 +1683,6 @@
             <column columnName="weightTattooFlag">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="birthWeight">
-                <datatype>double</datatype>
-            </column>
             <column columnName="remark">
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>

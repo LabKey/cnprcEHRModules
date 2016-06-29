@@ -4,47 +4,72 @@
             <table tableName="Cycle" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
-                    <column columnName="sire"/>
+                    <column columnName="sire">
+                        <columnTitle>Sire</columnTitle>
+                    </column>
                     <column columnName="date">
                         <columnTitle>Cycle Start Date</columnTitle>
                     </column>
                     <column columnName="estGestStartDate">
                         <columnTitle>Est. Gestation Start Date</columnTitle>
                     </column>
-                    <column columnName="daysAndHoursString"/>
-                    <column columnName="locationOverride"/>
-                    <column columnName="weekendBreeding"/>
-                    <column columnName="specialBreeding"/>
+                    <column columnName="daysAndHoursString">
+                        <columnTitle>Days and Hours String</columnTitle>
+                    </column>
+                    <column columnName="locationOverride">
+                        <columnTitle>Location Override</columnTitle>
+                    </column>
+                    <column columnName="weekendBreeding">
+                        <columnTitle>Weekend Breeding</columnTitle>
+                    </column>
+                    <column columnName="specialBreeding">
+                        <columnTitle>Special Breeding</columnTitle>
+                    </column>
                     <column columnName="methodOne">
                         <columnTitle>Method One</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>preg_det_method</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="gestDayOne"/>
-                    <column columnName="schedStatusOne"/>
+                    <column columnName="gestDayOne">
+                        <columnTitle>Gest. Day One</columnTitle>
+                    </column>
+                    <column columnName="schedStatusOne">
+                        <columnTitle>Schedule Status One</columnTitle>
+                    </column>
                     <column columnName="methodTwo">
                         <columnTitle>Method Two</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>preg_det_method</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="gestDayTwo"/>
-                    <column columnName="schedStatusTwo"/>
+                    <column columnName="gestDayTwo">
+                        <columnTitle>Gest. Day Two</columnTitle>
+                    </column>
+                    <column columnName="schedStatusTwo">
+                        <columnTitle>Schedule Status Two</columnTitle>
+                    </column>
                     <column columnName="methodThree">
                         <columnTitle>Method Three</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>preg_det_method</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="gestDayThree"/>
-                    <column columnName="schedStatusThree"/>
+                    <column columnName="gestDayThree">
+                        <columnTitle>Gest. Day Three</columnTitle>
+                    </column>
+                    <column columnName="schedStatusThree">
+                        <columnTitle>Schedule Status Two</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>

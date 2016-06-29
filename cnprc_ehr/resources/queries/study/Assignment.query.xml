@@ -104,6 +104,12 @@
                             <fkColumnName>lsid</fkColumnName>
                         </fk>
                     </column>
+                    <column columnName="projectProtocolAssignDate">
+                        <columnTitle>Project Protocol Assign Date</columnTitle>
+                    </column>
+                    <column columnName="projectProtocolRelDate">
+                        <columnTitle>Project Protocol Rel Date</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>

@@ -8,10 +8,15 @@
                         <columnTitle>Weight Date</columnTitle>
                         <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
-                    <column columnName="weight"/>
-                    <column columnName="bodyConditionScore"/>
-                    <column columnName="weightTattooFlag"/>
-                    <column columnName="birthWeight"/>
+                    <column columnName="weight">
+                        <columnTitle>Weight (kg)</columnTitle>
+                    </column>
+                    <column columnName="bodyConditionScore">
+                        <columnTitle>Body Condition Score</columnTitle>
+                    </column>
+                    <column columnName="weightTattooFlag">
+                        <columnTitle>Tattoo Flag</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>

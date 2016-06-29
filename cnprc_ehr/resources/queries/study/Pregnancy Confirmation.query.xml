@@ -4,7 +4,6 @@
             <table tableName="pregnancyConfirmation" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
-                    <column columnName="sire"/>
                     <column columnName="date">
                         <columnTitle>Sample Date</columnTitle>
                     </column>
@@ -14,6 +13,7 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>preg_det_method</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="result">
@@ -22,15 +22,32 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>preg_det_result</fkTable>
                             <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="scheduleStatus"/>
+                    <column columnName="scheduleStatus">
+                        <columnTitle>Schedule Status</columnTitle>
+                    </column>
                     <column columnName="cycleDay1">
                         <columnTitle>Cycle Start Date</columnTitle>
                     </column>
-                    <column columnName="termDate"/>
-                    <column columnName="termCode"/>
-                    <column columnName="sire"/>
+                    <column columnName="termDate">
+                        <columnTitle>Term Date</columnTitle>
+                    </column>
+                    <column columnName="termCode">
+                        <columnTitle>Term Code</columnTitle>
+                    </column>
+                    <column columnName="sire">
+                        <columnTitle>Sire</columnTitle>
+                        <url>/ehr/participantView.view?participantId=${sire}</url>
+                    </column>
+                    <column columnName="confirmDate">
+                        <columnTitle>Confirm Date</columnTitle>
+                    </column>
+                    <column columnName="lastObscanDate">
+                        <columnTitle>Last Observation Scan Date</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
                 </columns>
             </table>
         </tables>
