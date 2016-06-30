@@ -5,7 +5,7 @@
     <transforms>
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
-            <source schemaName="cnprcSrc" queryName="cycle" />
+            <source schemaName="cnprcSrc" queryName="q_cycle"/>
             <destination schemaName="study" queryName="cycle" bulkLoad="true" batchSize="500" targetOption="truncate">
                 <columnTransforms>
                     <column source="AC_CYCLE_DAY1_DATE" target="date"/>

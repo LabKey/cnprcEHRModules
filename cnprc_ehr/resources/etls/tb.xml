@@ -5,7 +5,7 @@
 <transforms>
     <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
         <description>Copy to target</description>
-        <source schemaName="cnprcSrc" queryName="tb" />
+        <source schemaName="cnprcSrc" queryName="q_tb"/>
         <destination schemaName="study" queryName="tb" bulkLoad="true" targetOption="truncate" >
             <columnTransforms>
                 <column source="WT_DATE" target="date"/>

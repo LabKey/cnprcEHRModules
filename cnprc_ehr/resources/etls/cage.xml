@@ -5,7 +5,7 @@
 <transforms>
     <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
         <description>Copy to target</description>
-        <source schemaName="cnprcSrc" queryName="cage" />
+        <source schemaName="cnprcSrc" queryName="q_cage"/>
         <destination schemaName="ehr_lookups" queryName="cage" bulkLoad="true" targetOption="truncate"/>
     </transform>
 </transforms>
