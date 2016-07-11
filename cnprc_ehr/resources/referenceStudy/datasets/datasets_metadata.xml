@@ -1,5 +1,384 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tables xmlns="http://labkey.org/data/xml">
+    <table tableName="morphologicDiagnosis" tableDbType="TABLE">
+        <description>Contains up to one row of Morphologic Diagnosis data for each Animal/visit/objectid combination.</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <columnTitle>Id</columnTitle>
+                <description>Subject identifier</description>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <nullable>false</nullable>
+                <fk>
+                    <fkDbSchema>study</fkDbSchema>
+                    <fkTable>Animal</fkTable>
+                    <fkColumnName>Id</fkColumnName>
+                </fk>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <columnTitle>Date</columnTitle>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="seq1">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="process">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="tissue">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="distribution">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="etiology">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="morphology">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="diagnosis">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="disease">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="topographyNotes">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="morphologyNotes">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="parentId">
+                <datatype>varchar</datatype>
+                <columnTitle>Parent Id</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="Description">
+                <datatype>varchar</datatype>
+                <inputType>textarea</inputType>
+                <columnTitle>Description</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <columnTitle>Key</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="ts">
+                <datatype>timestamp</datatype>
+                <columnTitle>Last Changed</columnTitle>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <columnTitle>Taskid</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <inputType>textarea</inputType>
+                <columnTitle>Remark</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="account">
+                <datatype>varchar</datatype>
+                <columnTitle>Account</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Account</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <columnTitle>Performed By</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <columnTitle>Requestid</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <columnTitle>Enddate</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+                <isHidden>true</isHidden>
+            </column>
+        </columns>
+        <tableTitle>Morphologic Diagnosis</tableTitle>
+    </table>
+    <table tableName="organ_weights" tableDbType="TABLE">
+        <description>Organ Weights</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+            </column>
+            <column columnName="tissue">
+                <datatype>varchar</datatype>
+                <columnTitle>Organ/Tissue</columnTitle>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <inputType>textarea</inputType>
+                <columnTitle>Remark</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="Description">
+                <datatype>varchar</datatype>
+                <inputType>textarea</inputType>
+                <columnTitle>Description</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <columnTitle>Key</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="parentId">
+                <datatype>varchar</datatype>
+                <columnTitle>Parent Id</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <columnTitle>Taskid</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="account">
+                <datatype>varchar</datatype>
+                <columnTitle>Account</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Account</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <columnTitle>Performed By</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <columnTitle>Requestid</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <columnTitle>Enddate</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+                <isHidden>true</isHidden>
+            </column>
+            <!--<column columnName="weight">-->
+                <!--<datatype>double</datatype>-->
+                <!--<columnTitle>Weight</columnTitle>-->
+            <!--</column>-->
+            <column columnName="measurementValue">
+                <datatype>double</datatype>
+                <columnTitle>Value</columnTitle>
+            </column>
+            <column columnName="unit">
+                <datatype>varchar</datatype>
+                <columnTitle>Unit</columnTitle>
+            </column>
+            <column columnName="qualifier">
+                <datatype>varchar</datatype>
+                <columnTitle>Qualifier</columnTitle>
+            </column>
+        </columns>
+        <tableTitle>Organ Weights</tableTitle>
+    </table>
+    <table tableName="necropsy" tableDbType="TABLE">
+        <description>Contains up to one row of Necropsies data for each Animal/visit/objectid combination.</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <columnTitle>Id</columnTitle>
+                <description>Subject identifier</description>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <nullable>false</nullable>
+                <fk>
+                    <fkDbSchema>study</fkDbSchema>
+                    <fkTable>Animal</fkTable>
+                    <fkColumnName>Id</fkColumnName>
+                </fk>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="completeDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="printDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="approvedDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="caseno">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="reportType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="account">
+                <datatype>varchar</datatype>
+                <columnTitle>Account</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Account</propertyURI>
+            </column>
+            <column columnName="pathologist">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="assistant">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="hydrationLevel">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="bcs">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="timeofdeath">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="mannerofdeath">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="comments">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="Description">
+                <datatype>varchar</datatype>
+                <inputType>textarea</inputType>
+                <columnTitle>Description</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <columnTitle>Key</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="parentId">
+                <datatype>varchar</datatype>
+                <columnTitle>Parent Id</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <columnTitle>Requestid</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="ts">
+                <datatype>timestamp</datatype>
+                <columnTitle>Last Changed</columnTitle>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <columnTitle>Taskid</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+                <isHidden>true</isHidden>
+                <shownInInsertView>false</shownInInsertView>
+                <shownInUpdateView>false</shownInUpdateView>
+                <shownInDetailsView>false</shownInDetailsView>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <columnTitle>Enddate</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+                <isHidden>true</isHidden>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <inputType>textarea</inputType>
+                <columnTitle>Remark</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <columnTitle>Performed By</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Necropsies</tableTitle>
+    </table>
     <table tableName="pregnancyConfirmation" tableDbType="TABLE">
         <columns>
             <column columnName="Id">
@@ -457,69 +836,72 @@
         </columns>
         <tableTitle>Animal Record Flags</tableTitle>
     </table>
-    <!--<table tableName="parentage" tableDbType="TABLE">-->
-        <!--<columns>-->
-            <!--<column columnName="Id">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>-->
-                <!--<importAliases>-->
-                    <!--<importAlias>ptid</importAlias>-->
-                <!--</importAliases>-->
-            <!--</column>-->
-            <!--<column columnName="date">-->
-                <!--<datatype>timestamp</datatype>-->
-                <!--<propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>-->
-                <!--<conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>-->
-            <!--</column>-->
-            <!--<column columnName="parent">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="relationship">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="method">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="enddate">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="project">-->
-                <!--<datatype>integer</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Project</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="remark">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="objectid">-->
-                <!--<datatype>entityid</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>-->
-                <!--<isKeyField>true</isKeyField>-->
-            <!--</column>-->
-            <!--<column columnName="parentid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="taskid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="requestid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="description">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Description</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="performedby">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>-->
-            <!--</column>-->
-        <!--</columns>-->
-        <!--<tableTitle>Parentage</tableTitle>-->
-    <!--</table>-->
+    <table tableName="parentage" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="parent">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="oldParent">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="relationship">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="method">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="enddate">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+            <column columnName="project">
+                <datatype>integer</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="parentid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+            <column columnName="description">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Parentage</tableTitle>
+    </table>
     <!--<table tableName="miscTests" tableDbType="TABLE">-->
         <!--<columns>-->
             <!--<column columnName="Id">-->
@@ -1001,6 +1383,87 @@
         </columns>
         <tableTitle>Birth</tableTitle>
     </table>
+    <table tableName="virology" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="testDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="target">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="virus">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="method">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="sampleType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="purpose">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="result">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="opticalDensity">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="titration">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="lab">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="location">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="parentid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="runid">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+            <column columnName="description">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Virology</tableTitle>
+    </table>
     <!--<table tableName="encounters" tableDbType="TABLE">-->
         <!--<columns>-->
             <!--<column columnName="Id">-->
@@ -1293,128 +1756,190 @@
         <!--</columns>-->
         <!--<tableTitle>Clinical Remarks</tableTitle>-->
     <!--</table>-->
-    <!--<table tableName="drug" tableDbType="TABLE">-->
-        <!--<columns>-->
-            <!--<column columnName="Id">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>-->
-                <!--<importAliases>-->
-                    <!--<importAlias>ptid</importAlias>-->
-                <!--</importAliases>-->
-            <!--</column>-->
-            <!--<column columnName="date">-->
-                <!--<datatype>timestamp</datatype>-->
-                <!--<propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>-->
-                <!--<conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>-->
-            <!--</column>-->
-            <!--<column columnName="project">-->
-                <!--<datatype>integer</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Project</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="chargetype">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="code">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="reason">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="amount">-->
-                <!--<datatype>double</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="amount_units">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="volume">-->
-                <!--<datatype>double</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="vol_units">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="concentration">-->
-                <!--<datatype>double</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="conc_units">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="dosage">-->
-                <!--<datatype>double</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="dosage_units">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="route">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="begindate">-->
-                <!--<datatype>timestamp</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="enddate">-->
-                <!--<datatype>timestamp</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="remark">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="category">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="vetreview">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#VetReview</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="vetreviewdate">-->
-                <!--<datatype>timestamp</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#VetReviewDate</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="description">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Description</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="objectid">-->
-                <!--<datatype>entityid</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>-->
-                <!--<isKeyField>true</isKeyField>-->
-            <!--</column>-->
-            <!--<column columnName="parentid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="caseid">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="taskid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="performedby">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="requestid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="treatmentid">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="timeordered">-->
-                <!--<datatype>timestamp</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="qualifier">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="lot">-->
-                <!--<datatype>varchar</datatype>-->
-            <!--</column>-->
-            <!--<column columnName="datefinalized">-->
-                <!--<datatype>timestamp</datatype>-->
-            <!--</column>-->
-        <!--</columns>-->
-        <!--<tableTitle>Drug Administration</tableTitle>-->
-    <!--</table>-->
+    <table tableName="drug" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="project">
+                <datatype>integer</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            </column>
+            <column columnName="chargetype">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="code">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="reason">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="amount">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="amount_units">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="volume">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="vol_units">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="concentration">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="conc_units">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="dosage">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="dosage_units">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="route">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="begindate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="category">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="vetreview">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#VetReview</propertyURI>
+            </column>
+            <column columnName="vetreviewdate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#VetReviewDate</propertyURI>
+            </column>
+            <column columnName="description">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="parentid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+            </column>
+            <column columnName="caseid">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+            <column columnName="treatmentid">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="timeordered">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="qualifier">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="lot">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="datefinalized">
+                <datatype>timestamp</datatype>
+            </column>
+        </columns>
+        <tableTitle>Drug Administration</tableTitle>
+    </table>
+    <table tableName="inoculation" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="project">
+                <datatype>integer</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            </column>
+            <column columnName="agent">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="route">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="doseInfo">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="description">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="parentid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+            </column>
+            <column columnName="caseid">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Experimental Inoculation</tableTitle>
+    </table>
     <table tableName="problem" tableDbType="TABLE">
         <columns>
             <column columnName="Id">
@@ -2678,6 +3203,12 @@
             <column columnName="destination">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="reloctype">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="nextreloctype">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="remark">
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
@@ -2910,59 +3441,64 @@
         </columns>
         <tableTitle>Notes</tableTitle>
     </table>
-    <!--<table tableName="grossFindings" tableDbType="TABLE">-->
-        <!--<columns>-->
-            <!--<column columnName="Id">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>-->
-                <!--<importAliases>-->
-                    <!--<importAlias>ptid</importAlias>-->
-                <!--</importAliases>-->
-            <!--</column>-->
-            <!--<column columnName="date">-->
-                <!--<datatype>timestamp</datatype>-->
-                <!--<propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>-->
-                <!--<conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>-->
-            <!--</column>-->
-            <!--<column columnName="parentid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="description">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Description</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="objectid">-->
-                <!--<datatype>entityid</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>-->
-                <!--<isKeyField>true</isKeyField>-->
-            <!--</column>-->
-            <!--<column columnName="taskid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="remark">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="project">-->
-                <!--<datatype>integer</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#Project</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="performedby">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="requestid">-->
-                <!--<datatype>varchar</datatype>-->
-                <!--<propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>-->
-            <!--</column>-->
-            <!--<column columnName="sort_order">-->
-                <!--<datatype>integer</datatype>-->
-            <!--</column>-->
-        <!--</columns>-->
-        <!--<tableTitle>Gross Findings</tableTitle>-->
-    <!--</table>-->
+    <table tableName="grossFindings" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="reportType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="organ">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="parentid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+            </column>
+            <column columnName="description">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Description</propertyURI>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+            <column columnName="sort_order">
+                <datatype>integer</datatype>
+            </column>
+        </columns>
+        <tableTitle>Gross Findings</tableTitle>
+    </table>
     <!--<table tableName="pathologyDiagnoses" tableDbType="TABLE">-->
         <!--<columns>-->
             <!--<column columnName="Id">-->

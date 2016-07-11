@@ -1,0 +1,14 @@
+SELECT
+PR_AN_ID AS Id,
+PR_DATE,
+PR_PROJECT AS projectCode,
+POT_ORGAN AS organ,
+PR_REPORT_TYPE AS reportType,
+POT_TEXT AS description
+FROM
+cnprcSrc.ZPATH_ORGAN_TEXT ot
+LEFT JOIN
+cnprcSrc.ZPATH_REPORT pr
+ON
+ot.POT_FK = pr.PR_PK
+WHERE PR_DATE > to_date('01-01-1900', 'DD-MM-YYYY');

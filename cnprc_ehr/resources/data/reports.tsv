@@ -16,8 +16,8 @@ clinPathRuns	Lab Results	js	Lab Runs	true		study	underDevelopment			date	false	f
 
 miscTests	Lab Results	js	Misc Tests	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the misc lab results not represented in the other reports
 #antibioticSensitivity	Lab Results	js	Antibiotic Sensitivity	true		study	antibioticSensitivity			date	false	false		qcstate/publicdata	This report contains the results of tests of antibiotic resistance
-serology	Lab Results	js	Serology	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the results of serology tests
-virology	Lab Results	js	Virology	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the results of serology and isolation virology tests for pathogens such as HBV
+#serology	Lab Results	js	Serology	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the results of serology tests
+virology	Lab Results	query	Virology	true		study	virology			date	false	false		qcstate/publicdata	Animal Virology History
 clinCases	Clinical	js	Cases	true		study	underDevelopment	Active Clinical Cases		date	false	false		qcstate/publicdata	This report contains one record for each case opend for this animal, including surergies, exams, procedures, etc.
 snomedTags	Clinical	js	SNOMED Codes	true		ehr	underDevelopment			date	false	false		qcstate/publicdata	This report lists all SNOMED codes used in the animal\'s record
 #encountersWithSnomedBySet	Pathology	query	SNOMED Codes - Grouped	true		study	encountersWithSnomedBySet			date	false	false		qcstate/publicdata	This report lists all SNOMED codes used in the animal\'s record
@@ -42,7 +42,7 @@ pairingHistory	Behavior	js	Pairing History	true		study	underDevelopment			date	f
 #fullHistoryPlusObs	Clinical	query	Full History Plus Obs	true		study	StudyData	Full History Plus Obs		date	false	false		qcstate/publicdata	Similar to Full History, but also contains irregular observations
 #tasksById	Clinical	query	Tasks	true		ehr	TasksById			date	false	false		taskid/qcstate/publicdata	This report displays and forms that have been completed about each animal
 treatments	Clinical	query	Medication Orders	true		study	Treatment Orders			date	false	false		qcstate/publicdata	Contains a list of all orders for treatments
-drug	Clinical	js	Medications - All	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains records of all medications administered to each animal
+drug	Clinical	query	Vaccinations	true		study	drug			date	false	false		qcstate/publicdata	This report contains records of all vaccinations administered to each animal
 weight	Colony Management	js	Weights	true		study	weightGraph			date	false	false		qcstate/publicdata	This report contains a summary of the animal\'s weight, including a graph
 clinicalHistory	Clinical	js	Clinical History	true		study	clinicalHistory			date	false	false		qcstate/publicdata	This report contains an overview of the animal\'s clinical history
 #behaviorHistory	Behavior	js	Full History	true		study	onprcClinicalHistory			date	false	false		qcstate/publicdata	This report contains an overview of the animal\'s clinical history
@@ -62,7 +62,7 @@ roommateHistory	Colony Management	query	Cagemate History	true		study	housingRoom
 activeHousing	Colony Management	query	Housing - Active	true		study	housing	Active Housing		date	false	TRUE		qcstate/publicdata	This report shows the active housing record for each animal
 housing	Colony Management	query	Housing History	true		study	housing			date	false	TRUE		qcstate/publicdata	This report contains the housing history of each animal
 inbreeding	Genetics	js	Inbreeding Coefficients	true		study	underDevelopment				false	false		qcstate/publicdata	This report shows the inbreeding coefficient of each animal, where pedigree data is available. The inbreeding coefficient is the kinship coefficient between the individual's parents. It measures the probability that the two alleles of a gene are identical by descent in the same individual (autozygosity). It is zero if the individual is not inbred.
-parentage	Genetics	js	Parentage	true		study	underDevelopment				false	false		qcstate/publicdata	This report shows information about the parentage of each animal, drawing from genetic data and observations
+parentage	Genetics	query	Parentage	true		study	parentage				false	false		qcstate/publicdata	This report shows information about the parentage of each animal, drawing from genetic data and observations
 potentialParents	Colony Management	js	Potential Parents	true		study	underDevelopment				false	false		qcstate/publicdata	This report shows potential parents for the animal, which is based on housing at estimated time of conception
 citesReview	Colony Management	query	Cites Review	true		study	demographics	Cites Review		date	false	false		qcstate/publicdata	
 kinship	Genetics	js	Kinship	true		ehr	underDevelopment				false	false		qcstate/publicdata	This report shows the kinship coefficient between every animal in the colony. The kinship coefficient is a measure of relatedness between two individuals. It represents the probability that two genes, sampled at random from each individual are identical (e.g. the kinship coefficient between a parent and an offspring is 0.25).
@@ -81,20 +81,19 @@ generalTb	General	query	TB Test Results	true		study	tb			date	false	false			TB T
 snapshot	General	js	Snapshot	true		study	snapshot				false	false		qcstate/publicdata	This report contains a summary of the animal, including demographics, assignments and weight
 #clinSnapshot	Clinical	js	Clinical Snapshot	true		study	onprcSnapshot				false	false		qcstate/publicdata	This report contains a summary of the animal, including demographics, assignments and weight
 arrival	General	query	Arrivals	true		study	arrival			date	false	false		qcstate/publicdata	Displays arrival and departure dates
-departure	General	js	Departures	true		study	underDevelopment			date	false	false		qcstate/publicdata	Displays arrival and departure dates
+departure	General	query	Departures	true		study	departure			date	false	false		qcstate/publicdata	Displays arrival and departure dates
 #charges	General	query	Charges	true		study	Charges			date	false	false		qcstate/publicdata	This report contains a list of charges attached to the animal's record
 deaths	General	query	Deaths	true		study	Deaths			date	false	false		qcstate/publicdata	Contains a list of animal deaths
 demographics	General	query	Demographics	true		study	demographics	By Location			false	false		qcstate/publicdata	This report displays the demographics data about each animal including species, gender and birth
 #extendedAbstract	General	query	Extended Abstract	false		study	animal	Extended Abstract			false	false		qcstate/publicdata	
 #majorEvents	General	query	Major Events	true		study	majorEvents			date	false	false			This report attempts to identify major events in the history of the animal, including births and major surgeries
 notes	General	query	Notes	true		study	notes	Active Notes		date	false	false		qcstate/publicdata	This report contains non-clinical notes entered into the animal's record
-biopsies	Pathology	js	Biopsies	true		study	underDevelopment	Biopsies		date	false	false		qcstate/publicdata	Contains information about biopsies
+#biopsies	Pathology	js	Biopsies	true		study	underDevelopment	Biopsies		date	false	false		qcstate/publicdata	Contains information about biopsies
 #histology	Pathology	query	Histology	true		study	histologyPublic			date	false	false		qcstate/publicdata	Histology records and associated diagnoses
-pathologyDiagnoses	Pathology	js	SNOMED Codes	true		study	underDevelopment			date	false	false		qcstate/publicdata
-necropsies	Pathology	js	Necropsies	true		study	underDevelopment	Necropsies		date	false	false		qcstate/publicdata	Contains information about necropsies
-tissueSamples	Pathology	js	Tissue Weights	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains tissue weights obtained at necropsy
-tissueMeasurements	Pathology	js	Tissue Measurements	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains tissue measurements
-tissueDistriutions	Pathology	js	Tissue Distributions	true		study	underDevelopment			date	false	false		qcstate/publicdata
+pathologyDiagnoses	Pathology	query	Morphologic Diagnosis	true		study	morphologicDiagnosis			date	false	false		qcstate/publicdata
+necropsies	Pathology	query	Necropsies	true		study	necropsy	Necropsies		date	false	false		qcstate/publicdata	Biopsy/necropsy report
+tissueMeasurements	Pathology	query	Tissue Measurements	true		study	organ_weights			date	false	false		qcstate/publicdata	This report contains tissue measurements
+grossFindings	Pathology	query	Gross Findings	true		study	grossFindings			date	false	false		qcstate/publicdata
 
 #alopecia	Physical Exam	query	Alopecia	true		study	Alopecia			date	false	false		qcstate/publicdata	Contains alopecia scores from the colony
 #bodyCondition	Physical Exam	query	Body Condition	true		study	Body Condition			date	false	false		qcstate/publicdata	Contains body condition scores captured during physical exams
@@ -137,3 +136,4 @@ nursing	Behavior	query	Nursing	true		study	nursing				false	false		qcstate/publi
 cycle	Reproductive Management	query	Cycle	true		study	cycle				false	false		qcstate/publicdata	Female Animal Cycle History
 breeding	Reproductive Management	query	Breeding	true		study	breeding				false	false		qcstate/publicdata	Breeding Observations History
 behavior	Behavior	query	Behavior	true		study	behavior				false	false		qcstate/publicdata	Assessment of infant rhesus monkeys’ temperament, emotionality, and behavioral and physiological reactivity
+inoculation	Lab Results	query	Inoculation	true		study	inoculation			date	false	false		qcstate/publicdata	Experimental Inoculation

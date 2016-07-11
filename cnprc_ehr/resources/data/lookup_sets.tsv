@@ -15,3 +15,14 @@ nursing_assign_types	SNursing Assignment Types	value
 breeding_obs_codes	Breeding Observation Codes	value
 preg_det_method	Pregnancy Determination Method	value
 preg_det_result	Pregnancy Determination Result	value
+pathology_report_types	Pathology Report Type	value
+conception_term_date_status	Conception Term Date Status	value
+preg_type	Pregnancy Type	value
+virology_target	Virology Target	value
+virology_labs	Virology Labs	value
+virology_purpose	Virology Purpose	value
+virology_result	Virology Result	value
+virology_sample_type	Virology Sample Type	value
+virology_test_method	Virology Test Method	value
+viruses	Viruses	value
+vaccination_codes	Vaccination Codes	value

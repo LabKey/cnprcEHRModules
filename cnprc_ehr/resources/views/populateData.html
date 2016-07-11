@@ -90,6 +90,13 @@ Ext4.onReady(function(){
         pk: 'code'
     },
     {
+        label: 'Conception Term Date Status',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'conception_term_date_status',
+        pk: 'rowid'
+    },
+    {
         label: 'Death Manner',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -117,11 +124,81 @@ Ext4.onReady(function(){
         queryName: 'geographic_origins',
         pk: 'rowid'
     },
+//    {
+//        label: 'Necropsy Measurement Types',
+//        populateFn: 'populateFromFile',
+//        schemaName: 'ehr_lookups',
+//        queryName: 'necropsy_measurement_types',
+//        pk: 'rowid'
+//    },
     {
         label: 'Nursing Assignment Types',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'nursing_assign_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'Pathology Report Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'pathology_report_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'Vaccination Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'vaccination_codes',
+        pk: 'rowid'
+    },
+    {
+        label: 'Virology Labs',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'virology_labs',
+        pk: 'rowid'
+    },
+    {
+        label: 'Virology Purpose',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'virology_purpose',
+        pk: 'rowid'
+    },
+    {
+        label: 'Virology Result',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'virology_result',
+        pk: 'rowid'
+    },
+    {
+        label: 'Virology Sample Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'virology_sample_type',
+        pk: 'rowid'
+    },
+    {
+        label: 'Virology Target',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'virology_target',
+        pk: 'rowid'
+    },
+    {
+        label: 'Virology Test Method',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'virology_test_method',
+        pk: 'rowid'
+    },
+    {
+        label: 'Viruses',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'viruses',
         pk: 'rowid'
     },
     {
@@ -139,6 +216,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Pregnancy Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'preg_type',
+        pk: 'rowid'
+    },
+    {
         label: 'Project Type',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -153,11 +237,32 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Route',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'routes',
+        pk: 'route'
+    },
+    {
         label: 'SNOMED Codes',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'snomed',
         doSkip: true,
+        pk: 'rowid'
+    },
+    {
+        label: 'SNOMED Subsets',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'snomed_subsets',
+        pk: 'rowid'
+    },
+    {
+        label: 'SNOMED Subset Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'snomed_subset_codes',
         pk: 'rowid'
     },
     {
