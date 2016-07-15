@@ -46,13 +46,13 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
     @Override
     public double getVersion()
     {
-        return 16.20;
+        return 16.21;
     }
 
     @Override
     public boolean hasScripts()
     {
-        return false; //TODO: return true after .sql scripts have been added
+        return true;
     }
 
     @Override

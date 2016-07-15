@@ -202,6 +202,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Protocol Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'protocol_types',
+        pk: 'rowid'
+    },
+    {
         label: 'Pregnancy Determination Method',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -284,6 +291,13 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'species_codes',
+        pk: 'rowid'
+    },
+    {
+        label: 'SPF Status',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'spf_status',
         pk: 'rowid'
     },
     {
