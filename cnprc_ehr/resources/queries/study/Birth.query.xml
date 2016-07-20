@@ -123,45 +123,6 @@
                         <datatype>varchar</datatype>
                         <columnTitle>Conception Date Status</columnTitle>
                     </column>
-                    <column columnName="conNum">
-                        <columnTitle>Conception Num.</columnTitle>
-                    </column>
-                    <column columnName="accessionDate">
-                        <columnTitle>Accession Date</columnTitle>
-                    </column>
-                    <column columnName="BRType">
-                        <columnTitle>BR Type</columnTitle>
-                    </column>
-                    <column columnName="colonyCode">
-                        <columnTitle>Colony Code</columnTitle>
-                    </column>
-                    <column columnName="PRCode">
-                        <columnTitle>PR Code</columnTitle>
-                    </column>
-                    <column columnName="PGComment">
-                        <columnTitle>PG Comment</columnTitle>
-                    </column>
-                    <column columnName="termDate">
-                        <columnTitle>Term Date</columnTitle>
-                    </column>
-                    <column columnName="termDateStatus">
-                        <columnTitle>Term Sate Status</columnTitle>
-                    </column>
-                    <column columnName="termComment">
-                        <columnTitle>Term Comment</columnTitle>
-                    </column>
-                    <column columnName="birthPlacePrefix">
-                        <columnTitle>Birth Place Prefix</columnTitle>
-                    </column>
-                    <column columnName="pgType">
-                        <columnTitle>PG Type</columnTitle>
-                    </column>
-                    <column columnName="femaleGeneticsVerify">
-                        <columnTitle>Female Genetics Verify</columnTitle>
-                    </column>
-                    <column columnName="maleGeneticsVerify">
-                        <columnTitle>Male Genetics Verify</columnTitle>
-                    </column>
                 </columns>
             </table>
         </tables>

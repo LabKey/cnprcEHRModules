@@ -1,0 +1,27 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="Id" />
+        <column name="conNum" />
+        <column name="femaleSpecies" />
+        <column name="date" />
+        <column name="sire" />
+        <column name="maleSpecies" />
+        <column name="conception" />
+        <column name="conceptionDateStatus" />
+        <column name="offspringId" />
+        <column name="gender" />
+        <column name="offspringSpecies" />
+        <column name="birthViability" />
+        <column name="birthCondition" />
+        <column name="birthPlace" />
+        <column name="deliveryMode" />
+        <column name="termDate" />
+        <column name="termDateStatus" />
+        <column name="termComment" />
+        <column name="pgType" />
+        <column name="PGComment" />
+    </columns>
+    <sorts>
+        <sort column="date" descending="true"/>
+    </sorts>
+</customView>

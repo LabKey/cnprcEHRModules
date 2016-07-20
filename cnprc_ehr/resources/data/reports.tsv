@@ -126,7 +126,7 @@ matingSuccessRates	Reproductive Management	js	Mating Success Rates	true		study	u
 menses	Reproductive Management	query	Menses	true		study	menses			date	false	false		qcstate/publicdata
 delivery	Reproductive Management	js	Deliveries	true		study	underDevelopment			date	false	false		qcstate/publicdata
 #delivery	Reproductive Management	js	Deliveries	true		study	Delivery			date	false	false		qcstate/publicdata
-pregnancy	Reproductive Management	query	Pregnancies	true		study	pregnancyConfirmation			date	false	false		qcstate/publicdata	Pregnancy Determination Results
+pregnancy	Reproductive Management	query	Pregnancies	true		study	pregnancyConfirmation			date	false	false		qcstate/publicdata	Conception Results
 
 #sbt	Genetics	query	MHC Genotype	TRUE		study	demographics			date	FALSE	FALSE		qcstate/publicdata	This report contains summaries of MHC genetics, derived from many different techniques
 #feeding	Colony Management	query	Feeding	true		study	Feeding				false	false		qcstate/publicdata	This report contains the amount and type of food ordered for each animal
@@ -137,3 +137,4 @@ cycle	Reproductive Management	query	Cycle	true		study	cycle				false	false		qcst
 breeding	Reproductive Management	query	Breeding	true		study	breeding				false	false		qcstate/publicdata	Breeding Observations History
 behavior	Behavior	query	Behavior	true		study	behavior				false	false		qcstate/publicdata	Assessment of infant rhesus monkeys’ temperament, emotionality, and behavioral and physiological reactivity
 inoculation	Lab Results	query	Inoculation	true		study	inoculation			date	false	false		qcstate/publicdata	Experimental Inoculation
+pregnancyDeterminations	Reproductive Management	query	Pregnancy Determinations	true		study	pregnancyDeterminations			date	false	false		qcstate/publicdata	Pregnancy Determination Results
