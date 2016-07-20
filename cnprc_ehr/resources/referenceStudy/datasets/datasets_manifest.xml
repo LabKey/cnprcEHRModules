@@ -14,8 +14,10 @@
         <dataset name="behavior" id="3003" category="Behavior" type="Standard"/>
         <dataset name="birth" id="1007" category="Colony Management" demographicData="true" type="Standard"/>
         <dataset name="breeding" id="2002" category="Reproductive Management" type="Standard"/>
+        <dataset name="breedingGroupAssignments" id="2004" category="Reproductive Management" type="Standard"/>
         <dataset name="cases" id="5012" category="Clinical" type="Standard"/>
         <dataset name="cycle" id="2001" category="Reproductive Management" type="Standard"/>
+        <dataset name="semenAnalysis" id="2003" category="Reproductive Management" type="Standard"/>
         <dataset name="enrichment" id="3001" category="Behavior" type="Standard"/>
         <dataset name="deaths" id="1048" category="Pathology" demographicData="true" type="Standard"/>
         <dataset name="demographics" id="1012" category="Colony Management" demographicData="true" type="Standard"/>
@@ -23,11 +25,14 @@
         <dataset name="drug" id="1014" category="Clinical" type="Standard"/>
         <dataset name="flags" id="5019" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="morphologicDiagnosis" id="5029" category="Pathology" type="Standard" showByDefault="false"/>
+        <dataset name="geriatrics" id="1062" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="grossFindings" id="5028" category="Pathology" type="Standard" showByDefault="false"/>
         <dataset name="housing" id="1018" category="Colony Management" type="Standard"/>
         <dataset name="inoculation" id="1020" category="Clinical" type="Standard"/>
+        <dataset name="labworkResults" id="1061" category="ClinPath" type="Standard"/>
         <dataset name="matings" id="5015" category="Reproductive Management" type="Standard" showByDefault="false"/>
         <dataset name="menses" id="1060" category="ColonyManagement" showByDefault="false"/>
+        <dataset name="morningHealthObs" id="1021" category="Clinical" showByDefault="false"/>
         <dataset name="necropsy" id="1022" category="Pathology"/>
         <dataset name="notes" id="1068" category="ColonyManagement" showByDefault="false"/>
         <dataset name="nursing" id="3002" category="Behavior" showByDefault="false"/>

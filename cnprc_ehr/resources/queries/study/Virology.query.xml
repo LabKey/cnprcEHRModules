@@ -48,15 +48,6 @@
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="sampleType">
-                        <columnTitle>Sample Type</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>virology_sample_type</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
                     <column columnName="purpose">
                         <columnTitle>Purpose</columnTitle>
                         <fk>

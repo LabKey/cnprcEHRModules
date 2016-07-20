@@ -34,6 +34,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Admit Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'admit_type',
+        pk: 'rowid'
+    },
+    {
         label: 'Age Class',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -118,10 +125,31 @@ Ext4.onReady(function(){
         pk: 'code'
     },
     {
+        label: 'General Observation Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'general_obs_types',
+        pk: 'rowid'
+    },
+    {
         label: 'Georgraphic Origins',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'geographic_origins',
+        pk: 'rowid'
+    },
+    {
+        label: 'Geriatric Groups',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'geriatricGroups',
+        pk: 'rowid'
+    },
+    {
+        label: 'Geriatric Rankings',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'geriatric_ranking',
         pk: 'rowid'
     },
 //    {
@@ -143,6 +171,20 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'pathology_report_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'Rearing Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'rearing',
+        pk: 'rowid'
+    },
+    {
+        label: 'Rearing Conditions',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'bigRear',
         pk: 'rowid'
     },
     {

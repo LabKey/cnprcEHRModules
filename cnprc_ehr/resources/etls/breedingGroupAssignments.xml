@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <etl xmlns="http://labkey.org/etl/xml">
-    <name>Flags</name>
-    <description>Animal census flag and colony assignments</description>
+    <name>Breeding Group Assignments</name>
+    <description>Breeding Group Assignments</description>
     <transforms>
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
-            <source schemaName="cnprcSrc" queryName="q_flags"/>
-            <destination schemaName="study" queryName="flags" bulkLoad="true" targetOption="truncate" >
+            <source schemaName="cnprcSrc" queryName="q_breedingGroupAssignments"/>
+            <destination schemaName="study" queryName="breedingGroupAssignments" bulkLoad="true" batchSize="500" targetOption="truncate">
                 <columnTransforms>
-                    <column source="assignedDate" target="date"/>
+                    <column source="ANBG_ASSIGNMENT_DATE" target="date"/>
                 </columnTransforms>
             </destination>
         </transform>
