@@ -4,7 +4,7 @@ PR_DATE,
 PR_PROJECT AS projectCode,
 POT_ORGAN AS organ,
 PR_REPORT_TYPE AS reportType,
-POT_TEXT AS description
+POT_TEXT AS remark
 FROM
 cnprcSrc.ZPATH_ORGAN_TEXT ot
 LEFT JOIN

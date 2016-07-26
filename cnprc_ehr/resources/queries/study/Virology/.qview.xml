@@ -9,7 +9,6 @@
         <column name="sampleType"/>
         <column name="purpose"/>
         <column name="result"/>
-        <column name="opticalDensity"/>
         <column name="titration"/>
         <column name="lab"/>
         <column name="location"/>

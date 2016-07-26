@@ -92,7 +92,7 @@ notes	General	query	Notes	true		study	notes	Active Notes		date	false	false		qcst
 #histology	Pathology	query	Histology	true		study	histologyPublic			date	false	false		qcstate/publicdata	Histology records and associated diagnoses
 pathologyDiagnoses	Pathology	query	Morphologic Diagnosis	true		study	morphologicDiagnosis			date	false	false		qcstate/publicdata
 necropsies	Pathology	query	Necropsies	true		study	necropsy	Necropsies		date	false	false		qcstate/publicdata	Biopsy/necropsy report
-tissueMeasurements	Pathology	query	Tissue Measurements	true		study	organ_weights			date	false	false		qcstate/publicdata	This report contains tissue measurements
+tissueMeasurements	Pathology	query	Tissue Measurements	true		study	organ_measurements			date	false	false		qcstate/publicdata	This report contains tissue measurements
 grossFindings	Pathology	query	Gross Findings	true		study	grossFindings			date	false	false		qcstate/publicdata
 
 #alopecia	Physical Exam	query	Alopecia	true		study	Alopecia			date	false	false		qcstate/publicdata	Contains alopecia scores from the colony

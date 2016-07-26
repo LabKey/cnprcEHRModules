@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Organ Weights" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="Organ Measurements" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">
@@ -12,11 +12,6 @@
                     </column>
                     <column columnName="tissue">
                         <columnTitle>Organ Measurement Type</columnTitle>
-                        <!--<fk>-->
-                            <!--<fkDbSchema>ehr_lookups</fkDbSchema>-->
-                            <!--<fkTable>necropsy_measurement_types</fkTable>-->
-                            <!--<fkColumnName>value</fkColumnName>-->
-                        <!--</fk>-->
                     </column>
                     <column columnName="measurementValue">
                         <columnTitle>Measurement</columnTitle>

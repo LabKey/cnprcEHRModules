@@ -13,7 +13,7 @@
                     <column columnName="caseno">
                         <columnTitle>Case No.</columnTitle>
                     </column>
-                    <column columnName="completeDate">
+                    <column columnName="enddate">
                         <columnTitle>Complete Date</columnTitle>
                     </column>
                     <column columnName="printDate">
@@ -54,7 +54,7 @@
                             <fkDisplayColumnName>Title</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="comments">
+                    <column columnName="remark">
                         <columnTitle>Comments</columnTitle>
                     </column>
                     <column columnName="bcs">

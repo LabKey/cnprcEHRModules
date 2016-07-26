@@ -24,11 +24,8 @@
                             <fkColumnName>code</fkColumnName>
                         </fk>
                     </column>
-                    <column columnName="authorize">
-                        <columnTitle>Vet Authorization</columnTitle>
-                    </column>
-                    <column columnName="description">
-                        <columnTitle>Comment</columnTitle>
+                    <column columnName="remark">
+                        <columnTitle>Sale Comment</columnTitle>
                     </column>
                     <column columnName="nextRelocType">
                         <columnTitle>Current Location/Status</columnTitle>

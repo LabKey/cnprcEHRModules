@@ -4,7 +4,7 @@
         <column name="date"/>
         <column name="relocType"/>
         <column name="destination"/>
-        <column name="description"/>
+        <column name="remark"/>
         <column name="nextRelocType"/>
     </columns>
     <sorts>

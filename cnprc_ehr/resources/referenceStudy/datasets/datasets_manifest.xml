@@ -36,7 +36,7 @@
         <dataset name="necropsy" id="1022" category="Pathology"/>
         <dataset name="notes" id="1068" category="ColonyManagement" showByDefault="false"/>
         <dataset name="nursing" id="3002" category="Behavior" showByDefault="false"/>
-        <dataset name="organ_weights" id="5030" category="Pathology" type="Standard" showByDefault="false"/>
+        <dataset name="organ_measurements" id="5030" category="Pathology" type="Standard" showByDefault="false"/>
         <dataset name="pairings" id="5024" showByDefault="false" category="Colony Management" demographicData="false" type="Standard"/>
         <dataset name="parentage" id="5025" category="Colony Management" type="Standard"/>
         <dataset name="pregnancyConfirmation" id="5022" category="Reproductive Management" type="Standard"/>

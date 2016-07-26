@@ -5,7 +5,7 @@
         <column name="projectCode"/>
         <column name="organ"/>
         <column name="reportType"/>
-        <column name="description"/>
+        <column name="remark"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

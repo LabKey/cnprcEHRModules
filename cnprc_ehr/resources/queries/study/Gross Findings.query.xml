@@ -29,7 +29,7 @@
                             <fkDisplayColumnName>Project Name</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="description">
+                    <column columnName="remark">
                         <columnTitle>Organ Text</columnTitle>
                     </column>
                 </columns>
