@@ -79,7 +79,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Cycle",
                 "Menses",
                 "Pregnancies",
-                "Pregnancy Determination"));
+                "Pregnancy Determinations"));
         put("Lab Results", Arrays.asList(
                 "Inoculation",
                 "Virology"));
