@@ -24,12 +24,14 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.labkey.test.Locator;
 import org.labkey.test.TestFileUtils;
+import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.components.BodyWebPart;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
+import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
 import org.labkey.test.util.external.labModules.LabModuleHelper;
@@ -38,7 +40,6 @@ import org.openqa.selenium.WebElement;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -48,9 +49,17 @@ import static org.junit.Assert.assertEquals;
 @Category({CustomModules.class})
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
-    private static final String PROJECT_NAME = "CNPRCTest Project";
+    private static final String PROJECT_NAME = "CNPRC";
     private static final String FOLDER_NAME = "CNPRC";
+    private static final String COREFACILITIES = "Core Facilities";
+    private static final String GENETICSFOLDER = "Genetics";
     public static final String CNPRC_ANIMAL = "TEST3804589";
+    private static final String ASSAY_GENETICS = "Genetics";
+    private static final File ASSAY_GENETICS_XAR = TestFileUtils.getSampleData("cnprc/assays/Genetics.xar");
+    private static final String ASSAY_MARKERS = "Markers";
+    private static final File ASSAY_MARKERS_XAR = TestFileUtils.getSampleData("cnprc/assays/Markers.xar");
+    private static Integer _pipelineJobCount = 0;
+
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
         put("General", Arrays.asList(
@@ -106,6 +115,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         new RReportHelper(this).ensureRConfig();
         initProject("CNPRC EHR");
+//        createTestSubjects();
+//        initGenetics();
+        goToProjectHome();
+        clickFolder(GENETICSFOLDER);
+        _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
+        _assayHelper.uploadXarFileAsAssayDesign(ASSAY_MARKERS_XAR, 2);
+        clickFolder(GENETICSFOLDER);
+        clickFolder(PROJECT_NAME);
+        PortalHelper portalHelper = new PortalHelper(this);
+        portalHelper.addWebPart("EHR Datasets");
+    }
+
+    protected void initGenetics() throws Exception
+    {
+        beginAt(WebTestHelper.buildURL("ehr", getProjectName(), "doGeneticCalculations"));
+        clickButton("OK");
+        waitForPipelineJobsToComplete(++_pipelineJobCount, "EHR Kinship Calculation", false, 10 * 60000);
     }
 
     @Before
@@ -129,7 +155,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     public List<String> getAssociatedModules()
     {
-        return Collections.singletonList("cnprc_ehr");
+        return Arrays.asList("ehr", "cnprc_ehr", "cnprc_genetics");
     }
 
     @Override
@@ -152,6 +178,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public String getContainerPath()
     {
         return PROJECT_NAME;
+    }
+
+    public String getGeneticsPath() { return PROJECT_NAME + "/" + COREFACILITIES + "/" + GENETICSFOLDER; }
+
+    @Override
+    protected void createProjectAndFolders(String type)
+    {
+        _containerHelper.createProject(getProjectName(), type);
+        _containerHelper.createSubfolder(getProjectName(), getProjectName(), COREFACILITIES, "Collaboration", null);
+        _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, GENETICSFOLDER, "Laboratory Folder", new String[]{"SequenceAnalysis", "CNPRC_Genetics"});
+        clickFolder(getProjectName());
     }
 
     @Override
