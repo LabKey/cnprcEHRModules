@@ -75,4 +75,221 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="cage_observations" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="date"/>
+            <column columnName="fulldate"/>
+            <column columnName="room"/>
+            <column columnName="cage"/>
+            <column columnName="area"/>
+            <column columnName="sequence"/>
+            <column columnName="remark"/>
+            <column columnName="observation"/>
+            <column columnName="fileNum"/>
+            <column columnName="recordType"/>
+            <column columnName="recordStatus"/>
+            <column columnName="obsCode1"/>
+            <column columnName="obsCode2"/>
+            <column columnName="obsCode3"/>
+            <column columnName="obsCode4"/>
+            <column columnName="technician"/>
+            <column columnName="attendant"/>
+            <column columnName="userid"/>
+            <column columnName="taskid"/>
+            <column columnName="parentid"/>
+            <column columnName="qcstate"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="observation_types" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="obsCode"/>
+            <column columnName="snomedCode"/>
+            <column columnName="pregnancyDisplayFlag"/>
+            <column columnName="visualSignsOnlyFlag"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+
+    <table tableName="protocol" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="protocol"/>
+            <column columnName="originalProtocol"/>
+            <column columnName="ciPersonId"/>
+            <column columnName="title"/>
+            <column columnName="approved"/>
+            <column columnName="committeeResponseDate"/>
+            <column columnName="sp1Code"/>
+            <column columnName="sp1InitialAllowed"/>
+            <column columnName="sp1TotalAllowed"/>
+            <column columnName="sp2Code"/>
+            <column columnName="sp2InitialAllowed"/>
+            <column columnName="sp2TotalAllowed"/>
+            <column columnName="animalAlertThreshold"/>
+            <column columnName="aidsRelated"/>
+            <column columnName="phsRelated"/>
+            <column columnName="primateProject"/>
+            <column columnName="protocolPainCategory"/>
+            <column columnName="pairingExemption"/>
+            <column columnName="studyComment"/>
+            <column columnName="foodExemption"/>
+            <column columnName="renewProtocol"/>
+            <column columnName="protocolNumberYear"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+
+    <table tableName="protocol_amendments" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="protocolamendmentid"/>
+            <column columnName="protocol"/>
+            <column columnName="committeeResponseDate"/>
+            <column columnName="approved"/>
+            <column columnName="sp1AdditionalAllowed"/>
+            <column columnName="sp2AdditonalAllowed"/>
+            <column columnName="amendmentComments"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="formula_control" tableDbType="TABLE">
+        <columns>
+            <column columnName="formula_control_id"/>
+            <column columnName="active"/>
+            <column columnName="concentration_units"/>
+            <column columnName="dose_units"/>
+            <column columnName="dose_by_weight"/>
+            <column columnName="total_dose_units"/>
+            <column columnName="treatment_volume_units"/>
+            <column columnName="scaling_multiplier"/>
+            <column columnName="fc_comments"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="formulary_dosing" tableDbType="TABLE">
+        <columns>
+            <column columnName="formulary_dosing_id"/>
+            <column columnName="formulary_name_fk"/>
+            <column columnName="dosing_record_active"/>
+            <column columnName="formulary_data_complete"/>
+            <column columnName="drug_format_description"/>
+            <column columnName="concentration_units"/>
+            <column columnName="concentration_per_unit"/>
+            <column columnName="dose_units"/>
+            <column columnName="dose_per_unit"/>
+            <column columnName="dose_per_unit_min"/>
+            <column columnName="dose_per_unit_max"/>
+            <column columnName="route"/>
+            <column columnName="frequency"/>
+            <column columnName="days_duration"/>
+            <column columnName="treatment_volume_units"/>
+            <column columnName="dose_specific_comment"/>
+            <column columnName="weight_range_lower_limit"/>
+            <column columnName="weight_range_upper_limit"/>
+            <column columnName="billing_item_code"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="formulary_name" tableDbType="TABLE">
+        <columns>
+            <column columnName="formulary_name_id"/>
+            <column columnName="active"/>
+            <column columnName="generic_name"/>
+            <column columnName="trade_name"/>
+            <column columnName="name_qualifier"/>
+            <column columnName="category"/>
+            <column columnName="usage_comment"/>
+            <column columnName="concentration_comment"/>
+            <column columnName="dose_comment"/>
+            <column columnName="frequency_comment"/>
+            <column columnName="rx_type_c_clinical_prescrip"/>
+            <column columnName="rx_type_l_clinical_longterm"/>
+            <column columnName="rx_type_n_clinical_nonsched"/>
+            <column columnName="rx_type_s_supplement"/>
+            <column columnName="rx_type_v_vitamin"/>
+            <column columnName="rx_type_x_experimental"/>
+            <column columnName="rx_type_i_clinical_solitary"/>
+            <column columnName="wide_range_therapeutic_drug"/>
+            <column columnName="default_dose_units"/>
+            <column columnName="default_dose_per_unit_min"/>
+            <column columnName="default_dose_per_unit_max"/>
+            <column columnName="sort_order_within_category"/>
+            <column columnName="snomed_component_1"/>
+            <column columnName="snomed_component_2"/>
+            <column columnName="snomed_component_3"/>
+            <column columnName="snomed_component_4"/>
+            <column columnName="default_billing_item_code"/>
+            <column columnName="include_in_formulary_book"/>
+            <column columnName="formulary_book_comment"/>
+            <column columnName="formulary_book_routes"/>
+            <column columnName="formulary_book_frequencies"/>
+            <column columnName="rx_type_h_clin_supplements"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="project_charge" tableDbType="TABLE">
+        <columns>
+            <column columnName="payor_id"/>
+            <column columnName="pr_code"/>
+            <column columnName="charge_id"/>
+            <column columnName="fund_type"/>
+            <column columnName="file_status"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="treatment_term" tableDbType="TABLE">
+        <columns>
+            <column columnName="treatment_term_id"/>
+            <column columnName="term_type"/>
+            <column columnName="treatment_term"/>
+            <column columnName="definition"/>
+            <column columnName="snomed_component"/>
+            <column columnName="term_comment"/>
+            <column columnName="active"/>
+            <column columnName="sort_order"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>

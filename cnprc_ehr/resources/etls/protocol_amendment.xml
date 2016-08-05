@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Protocol Amendment</name>
+    <description>Protocol Amendment</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_protocol_amendment"/>
+            <destination schemaName="cnprc_ehr" queryName="protocol_amendments" bulkLoad="true" targetOption="truncate"/>
+        </transform>
+    </transforms>
+    <schedule>
+        <poll interval="60m" />
+    </schedule>
+</etl>

@@ -5,8 +5,13 @@
 <transforms>
     <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
         <description>Copy to target</description>
-        <source schemaName="cnprcSrc" queryName="q_protocol"/>
+        <source schemaName="cnprcSrc" queryName="q_protocol_ehr"/>
         <destination schemaName="ehr" queryName="protocol" bulkLoad="true" targetOption="truncate"/>
+    </transform>
+    <transform id="step2" type="org.labkey.di.pipeline.TransformTask">
+        <description>Copy to target</description>
+        <source schemaName="cnprcSrc" queryName="q_protocol_cnprc_ehr"/>
+        <destination schemaName="cnprc_ehr" queryName="protocol" bulkLoad="true" targetOption="truncate"/>
     </transform>
 </transforms>
 <schedule>

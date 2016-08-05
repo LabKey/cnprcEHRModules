@@ -1,0 +1,7 @@
+SELECT
+PRCH_PAYOR_ID AS payor_id,
+PRCH_PR_CODE AS pr_code,
+PRCH_CHARGE_ID AS charge_id,
+PRCH_FUND_TYPE AS fund_type,
+PRCH_FILE_STATUS AS file_status
+FROM cnprcSrc.ZPR_CHARGE;
