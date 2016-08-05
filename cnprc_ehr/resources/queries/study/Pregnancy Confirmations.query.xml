@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="pregnancyDetermination" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="pregnancyConfirmations" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">

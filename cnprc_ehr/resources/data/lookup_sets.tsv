@@ -32,3 +32,6 @@ rearing	Rearing Codes	value
 general_obs_types	General Observation Types	value
 geriatric_ranking	Geriatric Rankings Types	value
 admit_type	Admit Type	value
+snomed_qualifiers	SNOMED Qualifiers	value
+time_units	SNOMED Time Units	value
+flag_codes	Flag Codes	value

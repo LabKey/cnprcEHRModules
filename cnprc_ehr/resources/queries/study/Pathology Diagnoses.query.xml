@@ -1,0 +1,57 @@
+
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="pathologyDiagnoses" tableDbType="TABLE">
+                <tableUrl>/query/detailsQueryRow.view?schemaName=study&amp;query.queryName=Morphologic Diagnosis&amp;lsid=${lsid}</tableUrl>
+                <insertUrl />
+                <importUrl />
+                <updateUrl />
+                <deleteUrl />
+                <columns>
+                    <column columnName="Id"/>
+                    <column columnName="date">
+                        <formatString>yyyy-MM-dd</formatString>
+                        <columnTitle>Date</columnTitle>
+                    </column>
+                    <column columnName="infoQualifier">
+                        <columnTitle>Info Qual</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>snomed_qualifiers</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="snoFk">
+                        <columnTitle>SNOMED FK</columnTitle>
+                    </column>
+                    <column columnName="foreignSeq">
+                        <columnTitle>Foreign Seq</columnTitle>
+                    </column>
+                    <column columnName="snoSeq">
+                        <columnTitle>SNOMED Seq</columnTitle>
+                    </column>
+                    <column columnName="timeQualifier">
+                        <columnTitle>Time Qualifier</columnTitle>
+                    </column>
+                    <column columnName="syntacticLink">
+                        <columnTitle>Syntactic Link</columnTitle>
+                    </column>
+                    <column columnName="subjectType">
+                        <columnTitle>Subject Type</columnTitle>
+                    </column>
+                    <column columnName="code">
+                        <columnTitle>SNOMED Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>snomed</fkTable>
+                            <fkColumnName>code</fkColumnName>
+                            <fkDisplayColumnName>Meaning</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

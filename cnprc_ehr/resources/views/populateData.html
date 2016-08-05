@@ -118,6 +118,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Flag Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'flag_codes',
+        pk: 'rowid'
+    },
+    {
         label: 'Gender codes',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -185,6 +192,20 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'bigRear',
+        pk: 'rowid'
+    },
+    {
+        label: 'SNOMED Qualifiers',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'snomed_qualifiers',
+        pk: 'rowid'
+    },
+    {
+        label: 'SNOMED Time Units',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'time_units',
         pk: 'rowid'
     },
     {

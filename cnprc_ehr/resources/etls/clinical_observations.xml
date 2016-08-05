@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Clinical Observations</name>
+    <description>Diarrhea and Poor App Observations</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_clinical_observations"/>
+            <destination schemaName="study" queryName="clinical_observations" bulkLoad="true" batchSize="500" targetOption="truncate">
+                <columnTransforms>
+                    <column source="obsDate" target="date"/>
+                </columnTransforms>
+            </destination>
+        </transform>
+    </transforms>
+    <schedule>
+        <poll interval="60m" />
+    </schedule>
+</etl>

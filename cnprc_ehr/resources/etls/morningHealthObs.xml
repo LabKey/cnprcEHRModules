@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Morning Health</name>
+    <description>Morning Health Observations</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_morningHealthObs" />
+            <destination schemaName="study" queryName="morningHealthObs" bulkLoad="true" batchSize="500" targetOption="truncate">
+                <columnTransforms>
+                    <column source="MHO_BEGIN_DATE" target="date"/>
+                </columnTransforms>
+            </destination>
+        </transform>
+        <transform id="step2" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_morningHealthObs_Rooms" />
+            <destination schemaName="ehr" queryName="cage_observations" bulkLoad="true" batchSize="500" targetOption="truncate">
+                <columnTransforms>
+                    <column source="MHO_BEGIN_DATE" target="date"/>
+                </columnTransforms>
+            </destination>
+        </transform>
+    </transforms>
+    <schedule>
+        <poll interval="60m" />
+    </schedule>
+</etl>
