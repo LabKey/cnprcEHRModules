@@ -19,7 +19,6 @@ miscTests	Lab Results	js	Misc Tests	true		study	underDevelopment			date	false	fa
 #serology	Lab Results	js	Serology	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the results of serology tests
 virology	Lab Results	query	Virology	true		study	virology			date	false	false		qcstate/publicdata	Animal Virology History
 clinCases	Clinical	js	Cases	true		study	underDevelopment	Active Clinical Cases		date	false	false		qcstate/publicdata	This report contains one record for each case opend for this animal, including surergies, exams, procedures, etc.
-snomedTags	Clinical	js	SNOMED Codes	true		ehr	underDevelopment			date	false	false		qcstate/publicdata	This report lists all SNOMED codes used in the animal\'s record
 #encountersWithSnomedBySet	Pathology	query	SNOMED Codes - Grouped	true		study	encountersWithSnomedBySet			date	false	false		qcstate/publicdata	This report lists all SNOMED codes used in the animal\'s record
 
 #surgery	Surgery	query	Surgeries	true		study	Clinical Encounters	Surgeries		date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surgeries, exams, procedures, etc.
@@ -90,7 +89,7 @@ demographics	General	query	Demographics	true		study	demographics	By Location			f
 notes	General	query	Notes	true		study	notes	Active Notes		date	false	false		qcstate/publicdata	This report contains non-clinical notes entered into the animal's record
 #biopsies	Pathology	js	Biopsies	true		study	underDevelopment	Biopsies		date	false	false		qcstate/publicdata	Contains information about biopsies
 #histology	Pathology	query	Histology	true		study	histologyPublic			date	false	false		qcstate/publicdata	Histology records and associated diagnoses
-pathologyDiagnoses	Pathology	query	Morphologic Diagnosis	true		study	morphologicDiagnosis			date	false	false		qcstate/publicdata
+morphologicDiagnosis	Pathology	query	Morphologic Diagnosis	true		study	morphologicDiagnosis			date	false	false		qcstate/publicdata
 necropsies	Pathology	query	Necropsies	true		study	necropsy			date	false	false		qcstate/publicdata	Biopsy/necropsy report
 tissueMeasurements	Pathology	query	Tissue Measurements	true		study	organ_measurements			date	false	false		qcstate/publicdata	This report contains tissue measurements
 grossFindings	Pathology	query	Gross Findings	true		study	grossFindings			date	false	false		qcstate/publicdata
@@ -107,12 +106,11 @@ grossFindings	Pathology	query	Gross Findings	true		study	grossFindings			date	fa
 #treatmentSchedulePM	Daily Reports	query	Treatments - Afternoon	true		study	treatmentSchedule	PM Treatments		date	true	false	5	qcstate/publicdata	The report displays all treatments scheduled for today
 #treatmentScheduleNight	Daily Reports	query	Treatments - Evening	true		study	treatmentSchedule	Night Treatments		date	true	false	6	qcstate/publicdata	The report displays all treatments scheduled for today
 #treatmentSchedule	Daily Reports	query	Treatments - Master	true		study	treatmentSchedule			date	true	false	7	qcstate/publicdata	The report displays all treatments scheduled for today
-cases	Daily Reports	js	Active Clinical Cases	true		study	underDevelopment	Active Clinical Cases		date	false	false		qcstate/publicdata	This displays active clinical cases
 behaviorCases	Behavior	js	Behavior Cases	true		study	underDevelopment	Open Behavior Cases		date	false	false		qcstate/publicdata	This displays active behavior cases
 enrichment	Behavior	query	Enrichment	true		study	Enrichment			date	false	false		qcstate/publicdata
 #surgicalCases	Daily Reports	query	Active Surgery Cases	true		study	Cases	Active Surgery Cases		date	false	false		qcstate/publicdata	This displays active surgery cases
 #surgeryCasesClosedToday	Surgery	js	Surgery Cases Closed Today	true		study	surgeryCasesClosedToday			date	false	false		qcstate/publicdata	This displays surgery cases closed today
-activeFlags	General	js	Active Flags	true		study	underDevelopment	Active Flags		date	false	false		qcstate/publicdata	This displays active flags for this animals
+activeFlags	General	query	Active Flags	true		study	flags	Active Flags		date	false	false		qcstate/publicdata	Active Census and Colony flags
 #surgicalCases2	Surgery	query	Surgery Cases	true		study	Cases	Active Surgery Cases		date	false	false		qcstate/publicdata	This displays active surgery cases
 #diet	Colony Management	query	Diet	true		study	Diet	Active Diets		date	false	false		qcstate/publicdata	This displays active diets
 #problemList	Daily Reports	query	Unresolved Problem List	true		study	Problem List	Unresolved Problems		date	false	false		qcstate/publicdata	This displays the clinical problem list
@@ -131,6 +129,8 @@ pregnancy	Reproductive Management	query	Pregnancies	true		study	pregnancyConfirm
 #sbt	Genetics	query	MHC Genotype	TRUE		study	demographics			date	FALSE	FALSE		qcstate/publicdata	This report contains summaries of MHC genetics, derived from many different techniques
 #feeding	Colony Management	query	Feeding	true		study	Feeding				false	false		qcstate/publicdata	This report contains the amount and type of food ordered for each animal
 
+cases	Clinical	query	Hospital Admission and Discharge	true		study	cases			date	false	false		qcstate/publicdata	Hospital admission/discharge history
+
 #New Reports:
 nursing	Behavior	query	Nursing	true		study	nursing				false	false		qcstate/publicdata	Foster Mother/Infant (nursing) History
 cycle	Reproductive Management	query	Cycle	true		study	cycle				false	false		qcstate/publicdata	Female Animal Cycle History
@@ -138,3 +138,12 @@ breeding	Reproductive Management	query	Breeding	true		study	breeding				false	fa
 behavior	Behavior	query	Behavior	true		study	behavior				false	false		qcstate/publicdata	Assessment of infant rhesus monkeys’ temperament, emotionality, and behavioral and physiological reactivity
 inoculation	Lab Results	query	Inoculation	true		study	inoculation			date	false	false		qcstate/publicdata	Experimental Inoculation
 pregnancyDeterminations	Reproductive Management	query	Pregnancy Determinations	true		study	pregnancyDeterminations			date	false	false		qcstate/publicdata	Pregnancy Determination Results
+
+pathologyDiagnoses	Pathology	query	Pathology Diagnoses	true		study	pathologyDiagnoses			date	false	false		qcstate/publicdata	SNOMED records for animals and conceptions
+morningHealthObs	Daily Reports	query	Morning Health	true		study	morningHealthObs			date	false	false		qcstate/publicdata	Daily Morning Health Observations
+clinical_observations	Daily Reports	query	Diarrhea and Poor App	true		study	clinical_observations			date	false	false		qcstate/publicdata	Diarrhea and Poor App Observations
+breedingGroupAssignments	Reproductive Management	query	Breeding Group	true		study	breedingGroupAssignments			date	false	false		qcstate/publicdata	Animal Breeding group assignment history
+labworkResults	Behavior	query	Lab Results	true		study	labworkResults			date	false	false		qcstate/publicdata	Lab Results from Behavioral Assessment
+semenAnalysis	Reproductive Management	query	Semen Analysis	true		study	semenAnalysis			date	false	false		qcstate/publicdata	Semen Analysis via Electro Ejaculation
+geriatrics	Colony Management	query	Geriatrics	true		study	geriatrics			date	false	false		qcstate/publicdata	Geriatrics related reporting
+payor_assignments	Assignments and Groups	query	Per-diem Payor Assignment	true		study	payor_assignments			date	false	false		qcstate/publicdata	Per diem Payor Assignment History

@@ -3,7 +3,6 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="pathologyDiagnoses" tableDbType="TABLE">
-                <tableUrl>/query/detailsQueryRow.view?schemaName=study&amp;query.queryName=Morphologic Diagnosis&amp;lsid=${lsid}</tableUrl>
                 <insertUrl />
                 <importUrl />
                 <updateUrl />
