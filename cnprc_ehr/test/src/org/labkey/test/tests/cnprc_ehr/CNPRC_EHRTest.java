@@ -74,10 +74,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Death Records",
                 "Housing - Active",
                 "Housing History",
-                "Weights"));
+                "Weights",
+                "Geriatrics"));
         put("Assignments and Groups", Arrays.asList(
                 "Active Assignments",
-                "Assignment History"));
+                "Assignment History",
+                "Per-diem Payor Assignment"));
         put("Behavior", Arrays.asList(
                 "Behavior",
                 "Enrichment",
@@ -88,7 +90,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Cycle",
                 "Menses",
                 "Pregnancies",
-                "Pregnancy Determinations"));
+                "Pregnancy Determinations",
+                "Semen Analysis",
+                "Breeding Group"));
         put("Lab Results", Arrays.asList(
                 "Inoculation",
                 "Virology"));
@@ -96,11 +100,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Gross Findings",
                 "Morphologic Diagnosis",
                 "Necropsies",
-                "Tissue Measurements"));
+                "Tissue Measurements",
+                "Pathology Diagnoses"));
         put("Genetics", Arrays.asList(
                 "Parentage"));
         put("Clinical", Arrays.asList(
-                "Vaccinations"));
+                "Vaccinations",
+                "Hospital Admission and Discharge"));
+        put("Daily Reports", Arrays.asList(
+                "Diarrhea and Poor App",
+                "Morning Health"));
+
     }};
 
     @BeforeClass
