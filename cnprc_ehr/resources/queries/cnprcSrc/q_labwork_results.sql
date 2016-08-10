@@ -3,7 +3,6 @@ ANIMID AS Id,
 TEST_DAT,
 DAYS_OLD AS daysOld,
 BIGREAR AS bigRear,
--- WEIGHT AS weight,
 SPF AS spf,
 SAMP1 AS samp1,
 SAMP2 AS samp2,
@@ -20,10 +19,11 @@ CD8 AS cd8,
 HEMOGLOBIN AS hemoglobin,
 HEMATOCRIT AS hemotocrit,
 MCV AS mcv,
-PLASMA_PROTEIN AS plama_protein,
+PLASMA_PROTEIN AS plasma_protein,
 REARING AS rearing,
 SERTCODE AS sertcode,
-MAOACODE AS maoacode
---  AS objectId,
+MAOACODE AS maoacode,
+OBJECTID AS objectId,
+OBJECTID AS parentId
 FROM cnprcSrc.ZBIO_BEHAVIORAL_ASSESSMENT
 WHERE TEST_DAT IS NOT NULL AND TEST_DAT > to_date('01-01-1900', 'DD-MM-YYYY');

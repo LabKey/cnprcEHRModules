@@ -1,0 +1,8 @@
+SELECT
+ANIMID AS Id,
+OBJECTID as encounterId,
+OBJECTID as objectId,
+TEST_DAT,
+'Labwork Results' AS remark
+FROM cnprcSrc.ZBIO_BEHAVIORAL_ASSESSMENT
+WHERE TEST_DAT IS NOT NULL AND TEST_DAT > to_date('01-01-1900', 'DD-MM-YYYY');
