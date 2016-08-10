@@ -1,5 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tables xmlns="http://labkey.org/data/xml">
+    <table tableName="rd_asthma_cbc" tableDbType="TABLE">
+        <description>Respiratory Diseases - Historical Asthma CBC Data</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <columnTitle>Id</columnTitle>
+                <description>Subject identifier</description>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <nullable>false</nullable>
+                <fk>
+                    <fkDbSchema>study</fkDbSchema>
+                    <fkTable>Animal</fkTable>
+                    <fkColumnName>Id</fkColumnName>
+                </fk>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <columnTitle>Date</columnTitle>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="seq_pk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="total_wbc">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="rbc">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="hgb">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="hct">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="mcv">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="mch">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="mchc">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="platelets">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="plas_prot">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="fibrogen">
+                <datatype>varchar</datatype>
+                <scale>10</scale>
+            </column>
+            <column columnName="neut_band">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="neut_band_per">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="neut_seg">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="neut_seg_per">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="lymphocyte">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="lymphocyte_per">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="monocyte">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="monocyte_per">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="eosinophil">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="eosinophil_pe">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="basophil">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="basophil_per">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <scale>500</scale>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>RD Asthma CBC</tableTitle>
+    </table>
+    <table tableName="rd_skin_sensitization" tableDbType="TABLE">
+        <description>Respiratory Diseases - Historical Skin Sensitization Data</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <columnTitle>Id</columnTitle>
+                <description>Subject identifier</description>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <nullable>false</nullable>
+                <fk>
+                    <fkDbSchema>study</fkDbSchema>
+                    <fkTable>Animal</fkTable>
+                    <fkColumnName>Id</fkColumnName>
+                </fk>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <columnTitle>Date</columnTitle>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="skin_sen_pk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="wheal_positive_control">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_negative_control">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_dust_mite">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_cockroach">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_mold">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_trees">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_weeds">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_grasses">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_ascarid">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="wheal_offspring_comment">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <scale>255</scale>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>RD Skin Sensitization</tableTitle>
+    </table>
     <table tableName="morphologicDiagnosis" tableDbType="TABLE">
         <description>Contains up to one row of Morphologic Diagnosis data for each Animal/visit/objectid combination.</description>
         <columns>

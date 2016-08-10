@@ -7,6 +7,7 @@
         <category>Clinical</category>
         <category>Pathology</category>
         <category>Reproductive Management</category>
+        <category>Respiratory Diseases</category>
     </categories>
     <datasets>
         <dataset name="arrival" id="1001" category="Colony Management" type="Standard"/>
@@ -46,6 +47,8 @@
         <dataset name="pregnancyConfirmation" id="5022" category="Reproductive Management" type="Standard"/>
         <dataset name="pregnancyDeterminations" id="5026" category="Reproductive Management" type="Standard"/>
         <dataset name="problem" id="1030" category="Clinical" type="Standard"/>
+        <dataset name="rd_asthma_cbc" id="6000" category="Respiratory Diseases" type="Standard"/>
+        <dataset name="rd_skin_sensitization" id="6001" category="Respiratory Diseases" type="Standard"/>
         <dataset name="tb" id="1035" category="Clinical" type="Standard"/>
         <dataset name="treatment_order" id="1037" category="Clinical"/>
         <dataset name="virology" id="5023" category="ClinPath" type="Standard"/>
