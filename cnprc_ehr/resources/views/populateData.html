@@ -181,6 +181,34 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'RD Age Category',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'rd_asthma_age_category',
+        pk: 'rowid'
+    },
+    {
+        label: 'RD Project Category',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'rd_project_category',
+        pk: 'rowid'
+    },
+    {
+        label: 'RD Protocol Procedure',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'rd_protocol_procedure',
+        pk: 'rowid'
+    },
+    {
+        label: 'RD Treatment Category',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'rd_treatment_category',
+        pk: 'rowid'
+    },
+    {
         label: 'Rearing Codes',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',

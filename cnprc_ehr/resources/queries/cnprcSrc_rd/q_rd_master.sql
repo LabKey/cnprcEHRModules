@@ -1,0 +1,22 @@
+SELECT
+ML_PK AS id,
+ML_AN_ID AS an_id,
+ML_AN_SP_CODE AS species,
+ML_CNPRC_ID AS animalId,
+ML_PROJ_CODE_01 AS proj_code_1,
+ML_PROJ_CODE_02 AS proj_code_2,
+ML_TREATMENT AS treatment,
+ML_STAGGER_GROUP AS stagger_group,
+ML_AGE_CATEGORY AS age_category,
+ML_BIRTHDATE AS birthdate,
+ML_DEATH_DATE AS death_date,
+ML_NECROPSY_WT_KG AS necropsy_wt_kg,
+ML_SEX AS gender,
+ML_BIRTHPLACE AS birthplace,
+ML_DAM_ID AS dam,
+ML_DAM_GENETICS_VERIFY AS dam_genetics_verify,
+ML_SIRE_ID AS sire,
+ML_SIRE_GENETICS_VERIFY AS sire_genetics_verify,
+ML_GENETICS_COMMENT AS genetics_comment,
+ML_COMMENT AS comments
+FROM cnprcSrc_rd.MASTER_LIST;

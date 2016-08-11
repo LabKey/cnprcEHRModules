@@ -35,3 +35,5 @@ admit_type	Admit Type	value
 snomed_qualifiers	SNOMED Qualifiers	value
 time_units	SNOMED Time Units	value
 flag_codes	Flag Codes	value
+rd_asthma_age_category	RD Age Category	value
+rd_treatment_category	RD Treatment Category	value

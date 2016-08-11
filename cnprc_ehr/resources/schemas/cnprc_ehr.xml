@@ -292,4 +292,82 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="rd_lung_lobe_vol" tableDbType="TABLE">
+        <columns>
+            <column columnName="id"/>
+            <column columnName="animalId"/>
+            <column columnName="project_code"/>
+            <column columnName="rt_mid_lobe_vol"/>
+            <column columnName="rt_mid_lobe_fix"/>
+            <column columnName="rt_cra_lobe_vol"/>
+            <column columnName="rt_cra_lobe_fix"/>
+            <column columnName="lt_cra_lobe_vol"/>
+            <column columnName="lt_cra_lobe_fix"/>
+            <column columnName="llv_comments"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="rd_master" tableDbType="TABLE">
+        <columns>
+            <column columnName="id"/>
+            <column columnName="an_id"/>
+            <column columnName="species"/>
+            <column columnName="animalId"/>
+            <column columnName="proj_code_1"/>
+            <column columnName="proj_code_2"/>
+            <column columnName="treatment"/>
+            <column columnName="stagger_group"/>
+            <column columnName="age_category"/>
+            <column columnName="birthdate"/>
+            <column columnName="death_date"/>
+            <column columnName="necropsy_wt_kg"/>
+            <column columnName="gender"/>
+            <column columnName="birthplace"/>
+            <column columnName="dam"/>
+            <column columnName="dam_genetics_verify"/>
+            <column columnName="sire"/>
+            <column columnName="sire_genetics_verify"/>
+            <column columnName="genetics_comment"/>
+            <column columnName="comments"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="rd_project_category" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="projectCode"/>
+            <column columnName="timeframe"/>
+            <column columnName="comment1"/>
+            <column columnName="comment2"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="rd_protocol_procedure" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="project_code"/>
+            <column columnName="protocol_definition_type"/>
+            <column columnName="sort_order"/>
+            <column columnName="study_week"/>
+            <column columnName="pp_group"/>
+            <column columnName="pp_text"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>

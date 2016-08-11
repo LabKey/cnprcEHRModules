@@ -9,12 +9,11 @@
                     </column>
                     <column columnName="projectCode">
                         <columnTitle>Project Code</columnTitle>
-                        <!--<fk>-->
-                            <!--<fkDbSchema>ehr</fkDbSchema>-->
-                            <!--<fkTable>project</fkTable>-->
-                            <!--<fkColumnName>name</fkColumnName>-->
-                            <!--<fkDisplayColumnName>Project Name</fkDisplayColumnName>-->
-                        <!--</fk>-->
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>rd_project_category</fkTable>
+                            <fkColumnName>projectCode</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="skin_sen_pk">
                         <columnTitle>Skin Sensitization PK</columnTitle>
