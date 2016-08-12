@@ -15,7 +15,7 @@
         <transform id="step2" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc" queryName="q_morningHealthObs_Rooms" />
-            <destination schemaName="ehr" queryName="cage_observations" bulkLoad="true" batchSize="500" targetOption="truncate">
+            <destination schemaName="cnprc_ehr" queryName="cage_observations" bulkLoad="true" batchSize="500" targetOption="truncate">
                 <columnTransforms>
                     <column source="MHO_BEGIN_DATE" target="date"/>
                 </columnTransforms>

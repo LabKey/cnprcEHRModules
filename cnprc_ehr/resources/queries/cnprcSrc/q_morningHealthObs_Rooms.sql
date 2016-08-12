@@ -12,10 +12,9 @@ MHO_OBS_CODE_LIST AS observation,
 MHO_OBS_CODE_1 AS obsCode1,
 MHO_OBS_CODE_2 AS obsCode2,
 MHO_OBS_CODE_3 AS obsCode3,
-MHO_OBS_CODE_4 AS obsCode4
--- MHP_TECHNICIAN AS technician,
--- MHP_ATTENDANT AS attendant
--- AS objectId
+MHO_OBS_CODE_4 AS obsCode4,
+MHO_TECHNICIAN AS technician,
+MHO_ATTENDANT AS attendant
 FROM cnprcSrc.MH_OBS
 WHERE
 MHO_AN_ID IS NOT NULL AND

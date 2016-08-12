@@ -28,7 +28,7 @@
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>areas</fkTable>
-                            <fkColumnName>value</fkColumnName>
+                            <fkColumnName>area</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
