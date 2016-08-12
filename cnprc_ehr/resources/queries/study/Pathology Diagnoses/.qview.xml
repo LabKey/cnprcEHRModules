@@ -8,9 +8,7 @@
         <column name="foreignSeq"/>
         <column name="snoSeq"/>
         <column name="timeQualifier"/>
-        <column name="syntacticLink"/>
         <column name="subjectType"/>
-        <column name="code"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

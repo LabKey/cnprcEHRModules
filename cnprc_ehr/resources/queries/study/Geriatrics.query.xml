@@ -11,7 +11,7 @@
                         <columnTitle>Group Name</columnTitle>
                         <fk>
                             <fkDbSchema>cnprc_ehr</fkDbSchema>
-                            <fkTable>geriatric_groups</fkTable>
+                            <fkTable>geriatricGroups</fkTable>
                             <fkColumnName>name</fkColumnName>
                         </fk>
                     </column>

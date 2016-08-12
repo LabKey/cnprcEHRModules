@@ -48,6 +48,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Areas',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'areas',
+        pk: 'rowid'
+    },
+    {
         label: 'Assignment status',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',

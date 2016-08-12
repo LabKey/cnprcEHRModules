@@ -9,10 +9,9 @@
         <column name="date" />
         <column name="fullDate" />
         <column name="location" />
-        <column name="enclosure" />
         <column name="area" />
-        <column name="rawId" />
-        <column name="raw_location" />
+        <column name="enclosure" />
+        <column name="cage" />
         <column name="observation" />
         <column name="obsCode1" />
         <column name="obsCode2" />

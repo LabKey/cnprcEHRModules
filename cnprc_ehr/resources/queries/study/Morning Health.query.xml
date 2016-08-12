@@ -6,7 +6,7 @@
                     <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Begin Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
+                        <formatString>yyyy-MM-dd</formatString>
                     </column>
                     <column columnName="fulldate">
                         <columnTitle>Full Date</columnTitle>
@@ -23,31 +23,34 @@
                     <column columnName="recordStatus">
                         <columnTitle>Record Status</columnTitle>
                     </column>
-                    <column columnName="area">
-                        <columnTitle>Area</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>areas</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="location">
-                        <columnTitle>Location</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>rooms</fkTable>
-                            <fkColumnName>room</fkColumnName>
-                        </fk>
-                    </column>
                     <column columnName="rawId">
                         <columnTitle>Raw Id</columnTitle>
                     </column>
                     <column columnName="raw_location">
                         <columnTitle>Raw Location</columnTitle>
                     </column>
+                    <column columnName="location">
+                        <columnTitle>Location</columnTitle>
+                    </column>
+                    <column columnName="area">
+                        <columnTitle>Area</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>areas</fkTable>
+                            <fkColumnName>area</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                    </column>
                     <column columnName="enclosure">
                         <columnTitle>Enclosure</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>rooms</fkTable>
+                            <fkColumnName>room</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="cage">
+                        <columnTitle>Cage</columnTitle>
                     </column>
                     <column columnName="observation">
                         <columnTitle>Observation Code List</columnTitle>
