@@ -81,7 +81,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Assignment History",
                 "Per-diem Payor Assignment"));
         put("Behavior", Arrays.asList(
-                "Behavior",
+                //"Behavior",
                 "Enrichment",
                 "Nursing",
                 "Pairing Observations"));

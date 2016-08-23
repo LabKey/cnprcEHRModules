@@ -5,13 +5,7 @@
        <column name="enddate"/>
        <column name="category"/>
        <column name="frequency"/>
-       <column name="project"/>
-       <column name="code"/>
-       <column name="drugName">
-           <properties>
-               <property name="columnTitle" value="Drug"/>
-           </properties>
-       </column>
+       <column name="drugName"/>
        <column name="volume"/>
        <column name="vol_units"/>
        <column name="concentration"/>
@@ -19,21 +13,9 @@
        <column name="amount"/>
        <column name="amount_units"/>
        <column name="route"/>
-       <column name="weightOverride">
-           <properties>
-               <property name="columnTitle" value="Weight Override"/>
-           </properties>
-       </column>
-       <column name="dosingNotes">
-           <properties>
-               <property name="columnTitle" value="Dosing Notes"/>
-           </properties>
-       </column>
-       <column name="userComment">
-           <properties>
-               <property name="columnTitle" value="User Comment"/>
-           </properties>
-       </column>
+       <column name="weightOverride"/>
+       <column name="dosingNotes"/>
+       <column name="userComment"/>
    </columns>
    <sorts>
        <sort column="date" descending="true"/>

@@ -135,7 +135,7 @@ cases	Clinical	query	Hospital Admission and Discharge	true		study	cases			date	f
 nursing	Behavior	query	Nursing	true		study	nursing				false	false		qcstate/publicdata	Foster Mother/Infant (nursing) History
 cycle	Reproductive Management	query	Cycle	true		study	cycle				false	false		qcstate/publicdata	Female Animal Cycle History
 breeding	Reproductive Management	query	Breeding	true		study	breeding				false	false		qcstate/publicdata	Breeding Observations History
-behavior	Behavior	query	Behavior	true		study	behavior				false	false		qcstate/publicdata	Assessment of infant rhesus monkeys’ temperament, emotionality, and behavioral and physiological reactivity
+behavior	BBA	query	Behavior	true		study	behavior				false	false		qcstate/publicdata	Assessment of infant rhesus monkeys’ temperament, emotionality, and behavioral and physiological reactivity
 inoculation	Lab Results	query	Inoculation	true		study	inoculation			date	false	false		qcstate/publicdata	Experimental Inoculation
 pregnancyDeterminations	Reproductive Management	query	Pregnancy Determinations	true		study	pregnancyDeterminations			date	false	false		qcstate/publicdata	Pregnancy Determination Results
 
@@ -143,7 +143,7 @@ pathologyDiagnoses	Pathology	query	Pathology Diagnoses	true		study	pathologyDiag
 morningHealthObs	Daily Reports	query	Morning Health	true		study	morningHealthObs			date	false	false		qcstate/publicdata	Daily Morning Health Observations
 clinical_observations	Daily Reports	query	Diarrhea and Poor App	true		study	clinical_observations			date	false	false		qcstate/publicdata	Diarrhea and Poor App Observations
 breedingGroupAssignments	Reproductive Management	query	Breeding Group	true		study	breedingGroupAssignments			date	false	false		qcstate/publicdata	Animal Breeding group assignment history
-labworkResults	Behavior	query	Lab Results	true		study	labworkResults			date	false	false		qcstate/publicdata	Lab Results from Behavioral Assessment
+labworkResults	BBA	query	Lab Results	true		study	labworkResults			date	false	false		qcstate/publicdata	Lab Results from Behavioral Assessment
 semenAnalysis	Reproductive Management	query	Semen Analysis	true		study	semenAnalysis			date	false	false		qcstate/publicdata	Semen Analysis via Electro Ejaculation
 geriatrics	Colony Management	query	Geriatrics	true		study	geriatrics			date	false	false		qcstate/publicdata	Geriatrics related reporting
 payor_assignments	Assignments and Groups	query	Per-diem Payor Assignment	true		study	payor_assignments			date	false	false		qcstate/publicdata	Per diem Payor Assignment History
