@@ -37,3 +37,5 @@ time_units	SNOMED Time Units	value
 flag_codes	Flag Codes	value
 rd_asthma_age_category	RD Age Category	value
 rd_treatment_category	RD Treatment Category	value
+image_modality_type	Image Modality Type	value
+image_subject_type	Image Subject Type	value

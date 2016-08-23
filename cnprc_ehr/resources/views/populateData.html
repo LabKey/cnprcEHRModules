@@ -166,13 +166,34 @@ Ext4.onReady(function(){
         queryName: 'geriatric_ranking',
         pk: 'rowid'
     },
-//    {
-//        label: 'Necropsy Measurement Types',
-//        populateFn: 'populateFromFile',
-//        schemaName: 'ehr_lookups',
-//        queryName: 'necropsy_measurement_types',
-//        pk: 'rowid'
-//    },
+    {
+        label: 'Image Modality Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'image_modality_type',
+        pk: 'rowid'
+    },
+    {
+        label: 'Image Subject Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'image_subject_type',
+        pk: 'rowid'
+    },
+    {
+        label: 'Image Capture Device',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'image_capture_device',
+        pk: 'rowid'
+    },
+    {
+        label: 'Image Format',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'image_format',
+        pk: 'rowid'
+    },
     {
         label: 'Nursing Assignment Types',
         populateFn: 'populateFromFile',

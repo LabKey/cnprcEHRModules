@@ -100,8 +100,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Gross Findings",
                 "Morphologic Diagnosis",
                 "Necropsies",
-                "Tissue Measurements",
-                "Pathology Diagnoses"));
+                "Tissue Measurements"));
         put("Genetics", Arrays.asList(
                 "Parentage"));
         put("Clinical", Arrays.asList(

@@ -342,6 +342,82 @@
         </columns>
         <tableTitle>Organ Measurements</tableTitle>
     </table>
+    <table tableName="biopsy" tableDbType="TABLE">
+        <description>Contains up to one row of Biopsies data for each Animal/visit/objectid combination.</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="printDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="approvedDate">
+                <datatype>timestamp</datatype>
+            </column>
+            <column columnName="caseno">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="prmPk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="reportType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="pathologist">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="assistant">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="hydrationLevel">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="bcs">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isHidden>true</isHidden>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="parentId">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ParentId</propertyURI>
+            </column>
+            <column columnName="requestid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#RequestId</propertyURI>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <columnTitle>Performed By</columnTitle>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Biopsies</tableTitle>
+    </table>
     <table tableName="necropsy" tableDbType="TABLE">
         <description>Contains up to one row of Necropsies data for each Animal/visit/objectid combination.</description>
         <columns>
@@ -359,6 +435,9 @@
             </column>
             <column columnName="approvedDate">
                 <datatype>timestamp</datatype>
+            </column>
+            <column columnName="prmPk">
+                <datatype>integer</datatype>
             </column>
             <column columnName="caseno">
                 <datatype>varchar</datatype>
@@ -3756,7 +3835,7 @@
         </columns>
         <tableTitle>Gross Findings</tableTitle>
     </table>
-    <table tableName="pathologyDiagnoses" tableDbType="TABLE">
+    <table tableName="snomed_animals_conceptions" tableDbType="TABLE">
         <columns>
             <column columnName="Id">
                 <datatype>varchar</datatype>
@@ -3771,6 +3850,9 @@
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
             <column columnName="snoFk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="snoPk">
                 <datatype>integer</datatype>
             </column>
             <column columnName="foreignSeq">
@@ -3811,7 +3893,7 @@
                 <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
             </column>
         </columns>
-        <tableTitle>Pathology Diagnoses</tableTitle>
+        <tableTitle>SNOMED</tableTitle>
     </table>
     <!--<table tableName="histology" tableDbType="TABLE">-->
         <!--<columns>-->

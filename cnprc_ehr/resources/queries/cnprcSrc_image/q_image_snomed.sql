@@ -1,0 +1,4 @@
+SELECT
+IMAGE_ID AS Id,
+SNO_PK AS snomed_pk
+FROM cnprcSrc_image.IMAGE_SNOMED;

@@ -370,4 +370,99 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="image_capture_device" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="device_modality"/>
+            <column columnName="device_type"/>
+            <column columnName="device_name"/>
+            <column columnName="description"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="image_format" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="name"/>
+            <column columnName="extension"/>
+            <column columnName="mime_type"/>
+            <column columnName="description"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="image" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id"/>
+            <column columnName="owner_type"/>
+            <column columnName="owner_name"/>
+            <column columnName="create_unit"/>
+            <column columnName="modality"/>
+            <column columnName="device_type"/>
+            <column columnName="device_name"/>
+            <column columnName="subject_type"/>
+            <column columnName="subject_name"/>
+            <column columnName="subject_location"/>
+            <column columnName="subject_species"/>
+            <column columnName="subject_organ"/>
+            <column columnName="original_filename"/>
+            <column columnName="original_format_name"/>
+            <column columnName="original_format_extension"/>
+            <column columnName="original_width_pixels"/>
+            <column columnName="original_height_pixels"/>
+            <column columnName="original_size_bytes"/>
+            <column columnName="upload_by"/>
+            <column columnName="upload_timestamp"/>
+            <column columnName="upload_comment"/>
+            <column columnName="description"/>
+            <column columnName="public_yn"/>
+            <column columnName="image_repository"/>
+            <column columnName="stock_yn"/>
+            <column columnName="stock_approved_yn"/>
+            <column columnName="stock_approved_by"/>
+            <column columnName="stock_approved_timestamp"/>
+            <column columnName="release_approved_yn"/>
+            <column columnName="release_approved_by"/>
+            <column columnName="release_approved_timestamp"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="image_snomed" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="id"/>
+            <column columnName="snomed_pk"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="image_pathology" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="Id"/>
+            <column columnName="prm_pk"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>

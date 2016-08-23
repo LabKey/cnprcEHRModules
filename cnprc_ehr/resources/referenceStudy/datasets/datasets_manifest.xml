@@ -14,6 +14,7 @@
         <dataset name="assignment" id="1002" category="ColonyManagement"/>
         <dataset name="behavior" id="3003" category="Behavior" type="Standard"/>
         <dataset name="birth" id="1007" category="Colony Management" demographicData="true" type="Standard"/>
+        <dataset name="biopsy" id="1025" category="Pathology"/>
         <dataset name="breeding" id="2002" category="Reproductive Management" type="Standard"/>
         <dataset name="breedingGroupAssignments" id="2004" category="Reproductive Management" type="Standard"/>
         <dataset name="cases" id="5012" category="Clinical" type="Standard"/>
@@ -42,7 +43,7 @@
         <dataset name="organ_measurements" id="5030" category="Pathology" type="Standard" showByDefault="false"/>
         <dataset name="pairings" id="5024" showByDefault="false" category="Colony Management" demographicData="false" type="Standard"/>
         <dataset name="parentage" id="5025" category="Colony Management" type="Standard"/>
-        <dataset name="pathologyDiagnoses" id="5031" category="Pathology"/>
+        <dataset name="snomed_animals_conceptions" id="5031" category="Pathology"/>
         <dataset name="payor_assignments" id="1003" category="ColonyManagement"/>
         <dataset name="pregnancyConfirmation" id="5022" category="Reproductive Management" type="Standard"/>
         <dataset name="pregnancyDeterminations" id="5026" category="Reproductive Management" type="Standard"/>

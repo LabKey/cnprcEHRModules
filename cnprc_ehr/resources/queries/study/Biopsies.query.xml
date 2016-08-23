@@ -1,14 +1,14 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Necropsy" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="Biopsy" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Work Performed Date</columnTitle>
                     </column>
                     <column columnName="prmPk">
-                        <columnTitle>Necropsy Image </columnTitle>
+                        <columnTitle>Biopsy Image</columnTitle>
                         <fk>
                             <fkDbSchema>cnprc_ehr</fkDbSchema>
                             <fkTable>image_pathology</fkTable>
@@ -47,15 +47,6 @@
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>pathology_report_types</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Title</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="mannerOfDeath">
-                        <columnTitle>Death Type</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>death_manner</fkTable>
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Title</fkDisplayColumnName>
                         </fk>

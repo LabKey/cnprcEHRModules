@@ -2,7 +2,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="pathologyDiagnoses" tableDbType="TABLE">
+            <table tableName="snomed_animals_conceptions" tableDbType="TABLE">
                 <insertUrl />
                 <importUrl />
                 <updateUrl />
@@ -20,6 +20,14 @@
                             <fkTable>snomed_qualifiers</fkTable>
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="snoPk">
+                        <columnTitle>SNOMED Image Key</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>image_snomed</fkTable>
+                            <fkColumnName>snomed_pk</fkColumnName>
                         </fk>
                     </column>
                     <column columnName="snoFk">

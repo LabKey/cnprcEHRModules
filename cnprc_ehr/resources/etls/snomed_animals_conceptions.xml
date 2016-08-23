@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <etl xmlns="http://labkey.org/etl/xml">
-    <name>Pathology Diagnoses</name>
+    <name>SNOMED - Animals and Conceptions</name>
     <description>SNOMED records for Animals and Conceptions/Fetuses</description>
     <transforms>
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
-            <source schemaName="cnprcSrc" queryName="q_pathology_diagnoses"/>
-            <destination schemaName="study" queryName="pathologyDiagnoses" bulkLoad="true" batchSize="500" targetOption="truncate">
+            <source schemaName="cnprcSrc" queryName="q_snomed_animals_conceptions"/>
+            <destination schemaName="study" queryName="snomed_animals_conceptions" bulkLoad="true" batchSize="5000" targetOption="truncate">
                 <columnTransforms>
                     <column source="SNO_DATE" target="date"/>
                 </columnTransforms>

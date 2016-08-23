@@ -87,10 +87,10 @@ demographics	General	query	Demographics	true		study	demographics	By Location			f
 #extendedAbstract	General	query	Extended Abstract	false		study	animal	Extended Abstract			false	false		qcstate/publicdata	
 #majorEvents	General	query	Major Events	true		study	majorEvents			date	false	false			This report attempts to identify major events in the history of the animal, including births and major surgeries
 notes	General	query	Notes	true		study	notes	Active Notes		date	false	false		qcstate/publicdata	This report contains non-clinical notes entered into the animal's record
-#biopsies	Pathology	js	Biopsies	true		study	underDevelopment	Biopsies		date	false	false		qcstate/publicdata	Contains information about biopsies
+biopsies	Pathology	query	Biopsies	true		study	biopsy	Biopsies		date	false	false		qcstate/publicdata	Contains information about biopsies
 #histology	Pathology	query	Histology	true		study	histologyPublic			date	false	false		qcstate/publicdata	Histology records and associated diagnoses
 morphologicDiagnosis	Pathology	query	Morphologic Diagnosis	true		study	morphologicDiagnosis			date	false	false		qcstate/publicdata
-necropsies	Pathology	query	Necropsies	true		study	necropsy			date	false	false		qcstate/publicdata	Biopsy/necropsy report
+necropsies	Pathology	query	Necropsies	true		study	necropsy			date	false	false		qcstate/publicdata	Contains information about necropsies
 tissueMeasurements	Pathology	query	Tissue Measurements	true		study	organ_measurements			date	false	false		qcstate/publicdata	This report contains tissue measurements
 grossFindings	Pathology	query	Gross Findings	true		study	grossFindings			date	false	false		qcstate/publicdata
 
