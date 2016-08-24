@@ -1,4 +1,4 @@
-"id"	"conNum"	"femaleSpecies"	"date"	"sire"	"maleSpecies"	"conception"	"conceptionDateStatus"	"offspringId"	"gender"	"offspringSpecies"	"birthViability"	"birthCondition"	"birthPlace"	"deliveryMode"	"termDate"	"termDateStatus"	"termComment"	"pgType"	"PGComment"	"QCStateLabel"	"objectId"
-"TEST3804589"	"123-12345"	""	"2011-07-18 13:29:02.0"	"TEST4564246"	""	"2009-05-29 00:00:00.0"	"E"	"TEST727088"	"M"	""	""	""	""	""	""	""	""	""	""	"Completed"	"dbe961b9-b7ba-102d-8c2a-9926f351b9ae"
-"TEST4551032"	"124-12346"	""	"2011-05-23 14:39:40.0"	"TEST6390238"	""	"2009-06-21 00:00:00.0"	""	"TEST3224553"	"M"	""	""	""	""	""	""	""	""	""	""	"Completed"	"dbe961b9-y7ba-102d-8c2a-9926f351b9ae"
-"TEST5904521"	"125-12347"	""	"2011-06-20 17:56:53.0"	"TEST3997535"	""	"2008-11-28 00:00:00.0"	"E"	"TEST5158984"	"F"	""	""	""	""	""	""	""	""	""	""	"Completed"	"dbe961b9-77ba-102d-8c2a-9926f351b9ae"
+"id"	"conNum"	"femaleSpecies"	"date"	"sire"	"maleSpecies"	"conception"	"conceptionDateStatus"	"offspringId"	"gender"	"offspringSpecies"	"birthViability"	"birthPlace"	"deliveryMode"	"termDate"	"termDateStatus"	"termComment"	"pgType"	"PGComment"	"QCStateLabel"	"objectId"
+"TEST3804589"	"123-12345"	""	"2011-07-18 13:29:02.0"	"TEST4564246"	""	"2009-05-29 00:00:00.0"	"E"	"TEST727088"	"M"	""	""	""	""	""	""	""	""	""	"Completed"	"dbe961b9-b7ba-102d-8c2a-9926f351b9ae"
+"TEST4551032"	"124-12346"	""	"2011-05-23 14:39:40.0"	"TEST6390238"	""	"2009-06-21 00:00:00.0"	""	"TEST3224553"	"M"	""	""	""	""	""	""	""	""	""	"Completed"	"dbe961b9-y7ba-102d-8c2a-9926f351b9ae"
+"TEST5904521"	"125-12347"	""	"2011-06-20 17:56:53.0"	"TEST3997535"	""	"2008-11-28 00:00:00.0"	"E"	"TEST5158984"	"F"	""	""	""	""	""	""	""	""	""	"Completed"	"dbe961b9-77ba-102d-8c2a-9926f351b9ae"
