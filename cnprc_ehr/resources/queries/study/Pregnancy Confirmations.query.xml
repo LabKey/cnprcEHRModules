@@ -41,6 +41,11 @@
                     </column>
                     <column columnName="birthPlace">
                         <columnTitle>Birth Place</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>rooms</fkTable>
+                            <fkColumnName>room</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="offspringId">
                         <columnTitle>Offspring</columnTitle>
@@ -71,15 +76,6 @@
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>birth_viability</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="birthCondition">
-                        <columnTitle>Birth Condition</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>birth_condition</fkTable>
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
@@ -118,13 +114,31 @@
                         <columnTitle>Conception Number</columnTitle>
                     </column>
                     <column columnName="BRType">
-                        <columnTitle>BR Type</columnTitle>
+                        <columnTitle>Breeding Group</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>breeding_group</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
                     </column>
                     <column columnName="colonyCode">
                         <columnTitle>Colony Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>conception_colony_code</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
                     </column>
                     <column columnName="PRCode">
-                        <columnTitle>PR Code</columnTitle>
+                        <columnTitle>Project Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr</fkDbSchema>
+                            <fkTable>project</fkTable>
+                            <fkColumnName>name</fkColumnName>
+                            <fkDisplayColumnName>Project Name</fkDisplayColumnName>
+                        </fk>
                     </column>
                     <column columnName="PGComment">
                         <columnTitle>PG Comment</columnTitle>

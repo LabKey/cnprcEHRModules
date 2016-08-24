@@ -14,14 +14,6 @@
                     <column columnName="hours">
                         <columnTitle>Hours</columnTitle>
                     </column>
-                    <column columnName="matingtype">
-                        <columnTitle>Special Breeding Code</columnTitle>
-                        <!--<fk>-->
-                            <!--<fkDbSchema>ehr_lookups</fkDbSchema>-->
-                            <!--<fkTable>special_breeding_codes</fkTable>-->
-                            <!--<fkColumnName>value</fkColumnName>-->
-                        <!--</fk>-->
-                    </column>
                     <column columnName="cycleDay">
                         <columnTitle>Day of Cycle</columnTitle>
                     </column>

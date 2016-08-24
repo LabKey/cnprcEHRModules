@@ -23,9 +23,6 @@
                     <column columnName="weekendBreeding">
                         <columnTitle>Weekend Breeding</columnTitle>
                     </column>
-                    <column columnName="specialBreeding">
-                        <columnTitle>Special Breeding</columnTitle>
-                    </column>
                     <column columnName="methodOne">
                         <columnTitle>Method One</columnTitle>
                         <fk>

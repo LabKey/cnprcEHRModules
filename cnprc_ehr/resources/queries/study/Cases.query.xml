@@ -8,24 +8,13 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    AH_COMMENT AS problem,
-                    AH_DISCHARGE_DATE AS enddate,
-                    AH_ADMIT_TYPE AS category,
-                    AH_LONGTERM_HISTORY AS remark
                     <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Admit Date</columnTitle>
                         <formatString>yyyy-MM-dd</formatString>
                     </column>
-                    <column columnName="caseno">
-                        <columnTitle>Case No</columnTitle>
-                        <isHidden>true</isHidden>
-                    </column>
                     <column columnName="enddate">
                         <columnTitle>Discharge Date</columnTitle>
-                    </column>
-                    <column columnName="reviewdate">
-                        <columnTitle>Next Review Date</columnTitle>
                     </column>
                     <column columnName="category">
                         <columnTitle>Admit Type</columnTitle>
@@ -36,35 +25,12 @@
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="assignedvet">
-                        <columnTitle>Assigned Vet</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>veterinarians</fkTable>
-                            <fkColumnName>UserId</fkColumnName>
-                            <fkDisplayColumnName>DisplayName</fkDisplayColumnName>
-                        </fk>
-                    </column>
                     <column columnName="problem">
                         <columnTitle>Comment</columnTitle>
-                    </column>
-                    <column columnName="reviewfrequency">
-                        <columnTitle>Review Frequency</columnTitle>
                     </column>
                     <column columnName="remark">
                         <columnTitle>Long Term History</columnTitle>
                         <inputType>textarea</inputType>
-                    </column>
-                    <column columnName="plan">
-                        <columnTitle>P2</columnTitle>
-                        <inputType>textarea</inputType>
-                        <isHidden>true</isHidden>
-                    </column>
-                    <column columnName="performedby">
-                        <columnTitle>Opened By</columnTitle>
-                    </column>
-                    <column columnName="project">
-                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>

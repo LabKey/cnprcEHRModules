@@ -1,10 +1,12 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
         <column name="Id" />
+        <column name="femaleGeneticsVerify" />
         <column name="conNum" />
         <column name="femaleSpecies" />
         <column name="date" />
         <column name="sire" />
+        <column name="maleGeneticsVerify" />
         <column name="maleSpecies" />
         <column name="conception" />
         <column name="conceptionDateStatus" />
@@ -12,7 +14,6 @@
         <column name="gender" />
         <column name="offspringSpecies" />
         <column name="birthViability" />
-        <column name="birthCondition" />
         <column name="birthPlace" />
         <column name="deliveryMode" />
         <column name="termDate" />

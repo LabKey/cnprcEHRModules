@@ -83,6 +83,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Birth Viability',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'birth_viability',
+        pk: 'rowid'
+    },
+    {
         label: 'Breeding Group',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -108,6 +115,13 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'conception_term_date_status',
+        pk: 'rowid'
+    },
+    {
+        label: 'Conception Colony Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'conception_colony_code',
         pk: 'rowid'
     },
     {

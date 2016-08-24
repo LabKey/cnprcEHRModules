@@ -1,7 +1,7 @@
 value	description
-+
--
-X
-A
-F
-E
++	Positive
+-	Negative
+X	Breeding Occurred
+A	Artificial Insemination
+F	Male and Female Fought
+E	Embryo Transfer

@@ -21,12 +21,14 @@
                             <fkDisplayColumnName>Title</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="birth_condition">
-                        <columnTitle>Birth Condition</columnTitle>
-                    </column>
                     <column columnName="birth_viability">
                         <columnTitle>Birth Viability</columnTitle>
-                        <datatype>varchar</datatype>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>birth_viability</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
                     </column>
                     <column columnName="room">
                         <columnTitle>Birth Room</columnTitle>

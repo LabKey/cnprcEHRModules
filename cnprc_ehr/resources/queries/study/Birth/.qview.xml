@@ -8,7 +8,6 @@
         <column name="room"/>
         <column name="cage"/>
         <column name="date_type"/>
-        <column name="birth_condition"/>
         <column name="birth_viability"/>
         <column name="conception"/>
         <column name="conceptionDateStatus"/>

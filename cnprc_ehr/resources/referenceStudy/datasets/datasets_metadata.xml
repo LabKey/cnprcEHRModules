@@ -578,9 +578,6 @@
             <column columnName="birthViability">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="birthCondition">
-                <datatype>varchar</datatype>
-            </column>
             <column columnName="deathType">
                 <datatype>varchar</datatype>
             </column>
@@ -879,10 +876,6 @@
                 <scale>1</scale>
             </column>
             <column columnName="weekendBreeding">
-                <datatype>varchar</datatype>
-                <scale>1</scale>
-            </column>
-            <column columnName="specialBreeding">
                 <datatype>varchar</datatype>
                 <scale>1</scale>
             </column>
@@ -1426,10 +1419,6 @@
             <column columnName="male">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="matingtype">
-                <datatype>varchar</datatype>
-                <scale>1</scale>
-            </column>
             <column columnName="cycleStartDate">
                 <datatype>timestamp</datatype>
             </column>
@@ -1571,9 +1560,6 @@
                 <datatype>varchar</datatype>
             </column>
             <column columnName="date_type">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="birth_condition">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="birth_viability">

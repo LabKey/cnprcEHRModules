@@ -5,11 +5,6 @@ APM_START_DATE,
 APM_END_DATE AS endDate,
 APM_BEHAVIOR_CODE AS observation,
 APM_COMMENT AS remark
--- AS eventType
--- AS housingType
--- AS goal
--- AS outcome
--- AS separationReason
 -- AS objectId
 FROM
 cnprcSrc.ZAN_PAIRING p
