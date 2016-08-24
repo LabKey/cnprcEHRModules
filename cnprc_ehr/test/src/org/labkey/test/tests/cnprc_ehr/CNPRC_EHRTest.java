@@ -264,9 +264,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         pushLocation();
         clickAndWait(Locator.linkContainingText("TP"));
         popLocation();
-        waitForElement(Locator.linkContainingText("CHEEK POUCH"));
-        clickAndWait(Locator.linkContainingText("CEFAZOLIN"));
-        assertTextPresent("E-721X0");
+        waitForElement(Locator.linkContainingText("TEST3804589"));
+        assertTextPresent("PEANUTS");
     }
 
     @Test
