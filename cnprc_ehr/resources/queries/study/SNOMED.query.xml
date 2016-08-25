@@ -23,7 +23,7 @@
                         </fk>
                     </column>
                     <column columnName="snoPk">
-                        <columnTitle>SNOMED Image Key</columnTitle>
+                        <columnTitle>SNOMED Image</columnTitle>
                         <fk>
                             <fkDbSchema>cnprc_ehr</fkDbSchema>
                             <fkTable>image_snomed</fkTable>

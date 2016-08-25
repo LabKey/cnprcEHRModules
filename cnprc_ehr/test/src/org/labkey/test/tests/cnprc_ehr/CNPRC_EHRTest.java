@@ -22,6 +22,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.labkey.remoteapi.Connection;
+import org.labkey.remoteapi.query.InsertRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.TestFileUtils;
 import org.labkey.test.WebTestHelper;
@@ -60,6 +62,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File ASSAY_MARKERS_XAR = TestFileUtils.getSampleData("cnprc/assays/Markers.xar");
     private static Integer _pipelineJobCount = 0;
 
+    private static final File IMAGE_TSV = TestFileUtils.getSampleData("cnprc/image/image.tsv");
+    private static final File IMAGE_PATHOLOGY_TSV = TestFileUtils.getSampleData("cnprc/image/image_pathology.tsv");
+    private static final File IMAGE_SNOMED_TSV = TestFileUtils.getSampleData("cnprc/image/image_snomed.tsv");
+
+
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
         put("General", Arrays.asList(
@@ -81,7 +88,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Assignment History",
                 "Per-diem Payor Assignment"));
         put("Behavior", Arrays.asList(
-                //"Behavior",
                 "Enrichment",
                 "Nursing",
                 "Pairing Observations"));
@@ -100,16 +106,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Gross Findings",
                 "Morphologic Diagnosis",
                 "Necropsies",
+                "Biopsies",
                 "Tissue Measurements"));
         put("Genetics", Arrays.asList(
                 "Parentage"));
         put("Clinical", Arrays.asList(
+                "SNOMED",
                 "Vaccinations",
                 "Hospital Admission and Discharge"));
         put("Daily Reports", Arrays.asList(
                 "Diarrhea and Poor App",
                 "Morning Health"));
-
+        put("BBA", Arrays.asList(
+                "Behavior",
+                "Lab Results"));
+        put("Respiratory Diseases", Arrays.asList(
+                "RD Skin Sensitization",
+                "RD Asthma CBC"));
     }};
 
     @BeforeClass
@@ -276,6 +289,50 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.setSearchText(CNPRC_ANIMAL);
         animalHistoryPage.refreshReport();
         _helper.verifyReportTabs(animalHistoryPage, CNPRC_REPORTS);
+    }
+
+    @Test
+    public void testPathologyAndSNOMEDImageLinks() throws Exception
+    {
+        storeImageData();
+
+        //Necropsy
+        click(Locator.linkWithText("Browse All Datasets"));
+        waitForElement(Locator.linkContainingText("Browse All"));
+        pushLocation();
+        waitAndClickAndWait(LabModuleHelper.getNavPanelItem("Necropsies:", "Browse All"));
+        waitForElement(Locator.linkContainingText("TEST2950014"));
+        clickAndWait(Locator.linkContainingText("XY000001"));
+        assertTextPresent("12345");
+        popLocation();
+
+        //SNOMED
+        waitAndClickAndWait(LabModuleHelper.getNavPanelItem("SNOMED:", "Browse All"));
+        waitForElement(Locator.linkContainingText("TEST3804589"));
+        pushLocation();
+        clickAndWait(Locator.linkContainingText("XY000006"));
+        assertTextPresent("12350");
+        popLocation();
+    }
+
+    private void storeImageData() throws Exception
+    {
+        Connection connection = createDefaultConnection(true);
+
+        InsertRowsCommand command = new InsertRowsCommand("cnprc_ehr", "image");
+        List<Map<String, Object>> imageTsv = loadTsv(IMAGE_TSV);
+        command.setRows(imageTsv);
+        command.execute(connection, getProjectName());
+
+        command = new InsertRowsCommand("cnprc_ehr", "image_pathology");
+        List<Map<String, Object>> imagePathologyTsv = loadTsv(IMAGE_PATHOLOGY_TSV);
+        command.setRows(imagePathologyTsv);
+        command.execute(connection, getProjectName());
+
+        command = new InsertRowsCommand("cnprc_ehr", "image_snomed");
+        List<Map<String, Object>> imageSnomedTsv = loadTsv(IMAGE_SNOMED_TSV);
+        command.setRows(imageSnomedTsv);
+        command.execute(connection, getProjectName());
     }
 
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.

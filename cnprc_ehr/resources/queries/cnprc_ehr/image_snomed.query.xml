@@ -6,11 +6,6 @@
                     <column columnName="Id"/>
                     <column columnName="snomed_pk">
                         <columnTitle>SNOMED Key</columnTitle>
-                        <fk>
-                            <fkDbSchema>study</fkDbSchema>
-                            <fkTable>snomed_animals_conceptions</fkTable>
-                            <fkColumnName>snoPk</fkColumnName>
-                        </fk>
                     </column>
                 </columns>
             </table>
