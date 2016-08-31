@@ -6,7 +6,7 @@
                     <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Begin Date</columnTitle>
-                        <formatString>MM-dd-yy HH:mm</formatString>
+                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="fulldate">
                         <columnTitle>Full Date</columnTitle>
