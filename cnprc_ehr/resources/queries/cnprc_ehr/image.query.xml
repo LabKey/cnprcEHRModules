@@ -68,16 +68,16 @@
                     <column columnName="description">
                         <columnTitle>Description</columnTitle>
                     </column>
-                    <column columnName="public_yn">
+                    <column columnName="is_public">
                         <columnTitle>Is Public?</columnTitle>
                     </column>
                     <column columnName="image_repository">
                         <columnTitle>Image Repository</columnTitle>
                     </column>
-                    <column columnName="stock_yn">
-                        <columnTitle>In Stock?</columnTitle>
+                    <column columnName="is_stock">
+                        <columnTitle>Is Stock?</columnTitle>
                     </column>
-                    <column columnName="stock_approved_yn">
+                    <column columnName="is_stock_approved">
                         <columnTitle>Is Stock Approved?</columnTitle>
                     </column>
                     <column columnName="stock_approved_by">
@@ -86,7 +86,7 @@
                     <column columnName="stock_approved_timestamp">
                         <columnTitle>Stock Approved Date</columnTitle>
                     </column>
-                    <column columnName="release_approved_yn">
+                    <column columnName="is_release_approved">
                         <columnTitle>Is Release Approved?</columnTitle>
                     </column>
                     <column columnName="release_approved_by">

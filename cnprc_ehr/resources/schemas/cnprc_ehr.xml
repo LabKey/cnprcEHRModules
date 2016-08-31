@@ -422,13 +422,13 @@
             <column columnName="upload_timestamp"/>
             <column columnName="upload_comment"/>
             <column columnName="description"/>
-            <column columnName="public_yn"/>
+            <column columnName="is_public"/>
             <column columnName="image_repository"/>
-            <column columnName="stock_yn"/>
-            <column columnName="stock_approved_yn"/>
+            <column columnName="is_stock"/>
+            <column columnName="is_stock_approved"/>
             <column columnName="stock_approved_by"/>
             <column columnName="stock_approved_timestamp"/>
-            <column columnName="release_approved_yn"/>
+            <column columnName="is_release_approved"/>
             <column columnName="release_approved_by"/>
             <column columnName="release_approved_timestamp"/>
             <column columnName="objectid"/>
