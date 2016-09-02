@@ -28,24 +28,235 @@
             </column>
         </columns>
     </sharedConfig>
+    <table tableName="serum" tableDbType="TABLE">
+        <description>Center Serum Bank Registry</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="locationBox">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="locationSlot">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="viralPrecautionFlag">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <scale>500</scale>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Serum</tableTitle>
+    </table>
+    <table tableName="pathology_inventory" tableDbType="TABLE">
+        <description>Pathology specimen inventory</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="path_inv_pk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="inventoryType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="tissueType">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <scale>500</scale>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Pathology Inventory</tableTitle>
+    </table>
+    <table tableName="fdb_samples" tableDbType="TABLE">
+        <description>FreezerDB Samples</description>
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <nullable>false</nullable>
+            </column>
+            <column columnName="unit">
+                <datatype>varchar</datatype>
+                <scale>30</scale>
+            </column>
+            <column columnName="sample_type">
+                <datatype>varchar</datatype>
+                <scale>30</scale>
+            </column>
+            <column columnName="strain">
+                <datatype>varchar</datatype>
+                <scale>30</scale>
+            </column>
+            <column columnName="years">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="months">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="days">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="gestational_age">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="project">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="cell_type">
+                <datatype>varchar</datatype>
+                <scale>40</scale>
+            </column>
+            <column columnName="samples_group">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="age_group">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="technician">
+                <datatype>varchar</datatype>
+                <scale>30</scale>
+            </column>
+            <column columnName="storage_type">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="tank">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="cane">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="box">
+                <datatype>varchar</datatype>
+                <scale>20</scale>
+            </column>
+            <column columnName="location_start">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="location_end">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="vials">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="vials_remaining">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="concentration">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="sample_volume">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="pk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="old_pk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="taskid">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
+            </column>
+            <column columnName="remark">
+                <datatype>varchar</datatype>
+                <scale>500</scale>
+                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+            </column>
+            <column columnName="performedby">
+                <datatype>varchar</datatype>
+                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>FreezerDB Samples</tableTitle>
+    </table>
     <table tableName="rd_asthma_cbc" tableDbType="TABLE">
         <description>Respiratory Diseases - Historical Asthma CBC Data</description>
         <columns>
             <column columnName="Id">
                 <datatype>varchar</datatype>
-                <columnTitle>Id</columnTitle>
-                <description>Subject identifier</description>
                 <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
                 <nullable>false</nullable>
-                <fk>
-                    <fkDbSchema>study</fkDbSchema>
-                    <fkTable>Animal</fkTable>
-                    <fkColumnName>Id</fkColumnName>
-                </fk>
             </column>
             <column columnName="date">
                 <datatype>timestamp</datatype>
-                <columnTitle>Date</columnTitle>
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <nullable>false</nullable>
             </column>
@@ -136,19 +347,11 @@
         <columns>
             <column columnName="Id">
                 <datatype>varchar</datatype>
-                <columnTitle>Id</columnTitle>
-                <description>Subject identifier</description>
                 <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
                 <nullable>false</nullable>
-                <fk>
-                    <fkDbSchema>study</fkDbSchema>
-                    <fkTable>Animal</fkTable>
-                    <fkColumnName>Id</fkColumnName>
-                </fk>
             </column>
             <column columnName="date">
                 <datatype>timestamp</datatype>
-                <columnTitle>Date</columnTitle>
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <nullable>false</nullable>
             </column>
@@ -206,19 +409,11 @@
         <columns>
             <column columnName="Id">
                 <datatype>varchar</datatype>
-                <columnTitle>Id</columnTitle>
-                <description>Subject identifier</description>
                 <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
                 <nullable>false</nullable>
-                <fk>
-                    <fkDbSchema>study</fkDbSchema>
-                    <fkTable>Animal</fkTable>
-                    <fkColumnName>Id</fkColumnName>
-                </fk>
             </column>
             <column columnName="date">
                 <datatype>timestamp</datatype>
-                <columnTitle>Date</columnTitle>
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <nullable>false</nullable>
             </column>
@@ -723,9 +918,6 @@
             <column columnName="cl_comment">
                 <datatype>varchar</datatype>
             </column>
-            <!--<column columnName="pr_comment">-->
-                <!--<datatype>double</datatype>-->
-            <!--</column>-->
             <column columnName="rank">
                 <datatype>integer</datatype>
             </column>

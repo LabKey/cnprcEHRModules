@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Pathology Inventory</name>
+    <description>Pathology Specimen Inventory</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_pathology_inventory"/>
+            <destination schemaName="study" queryName="pathology_inventory" bulkLoad="true" targetOption="truncate">
+                <columnTransforms>
+                    <column source="PI_DATE" target="date"/>
+                </columnTransforms>
+            </destination>
+        </transform>
+    </transforms>
+    <schedule>
+        <poll interval="60m" />
+    </schedule>
+</etl>

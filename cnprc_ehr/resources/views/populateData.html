@@ -146,6 +146,40 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'FreezerDB Apporach',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'fdb_approach',
+        pk: 'rowid'
+    },{
+        label: 'FreezerDB Cell Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'fdb_cell_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'FreezerDB Group',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'fdb_group',
+        pk: 'rowid'
+    },
+    {
+        label: 'FreezerDB Sample Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'fdb_sample_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'Tissue',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'tissue',
+        pk: 'rowid'
+    },
+    {
         label: 'Gender codes',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -216,10 +250,52 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Pathology Inventory Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'pathology_inv_type',
+        pk: 'rowid'
+    },
+    {
         label: 'Pathology Report Types',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'pathology_report_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'Protocol Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'protocol_types',
+        pk: 'rowid'
+    },
+    {
+        label: 'Pregnancy Determination Method',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'preg_det_method',
+        pk: 'rowid'
+    },
+    {
+        label: 'Pregnancy Determination Result',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'preg_det_result',
+        pk: 'rowid'
+    },
+    {
+        label: 'Pregnancy Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'preg_type',
+        pk: 'rowid'
+    },
+    {
+        label: 'Project Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'project_type',
         pk: 'rowid'
     },
     {
@@ -265,6 +341,42 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Reports',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr',
+        queryName: 'reports',
+        pk: 'rowid'
+    },
+    {
+        label: 'Route',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'routes',
+        pk: 'route'
+    },
+    {
+        label: 'SNOMED Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'snomed',
+        doSkip: true,
+        pk: 'rowid'
+    },
+    {
+        label: 'SNOMED Subsets',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'snomed_subsets',
+        pk: 'rowid'
+    },
+    {
+        label: 'SNOMED Subset Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'snomed_subset_codes',
+        pk: 'rowid'
+    },
+    {
         label: 'SNOMED Qualifiers',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -276,6 +388,62 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'time_units',
+        pk: 'rowid'
+    },
+    {
+        label: 'Social Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'social_codes',
+        pk: 'rowid'
+    },
+    {
+        label: 'source',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'source',
+        pk: 'code'
+    },
+    {
+        label: 'Species codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'species_codes',
+        pk: 'rowid'
+    },
+    {
+        label: 'SPF Status',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'spf_status',
+        pk: 'rowid'
+    },
+    {
+        label: 'TB Test Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'tb_test_type',
+        pk: 'value'
+    },
+    {
+        label: 'TB sites',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'tb_site',
+        pk: 'value'
+    },
+    {
+        label: 'Tissue Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'tissue_type',
+        pk: 'rowid'
+    },
+    {
+        label: 'Treatment Frequency',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'treatment_frequency',
         pk: 'rowid'
     },
     {
@@ -332,126 +500,6 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'viruses',
-        pk: 'rowid'
-    },
-    {
-        label: 'Protocol Types',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'protocol_types',
-        pk: 'rowid'
-    },
-    {
-        label: 'Pregnancy Determination Method',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'preg_det_method',
-        pk: 'rowid'
-    },
-    {
-        label: 'Pregnancy Determination Result',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'preg_det_result',
-        pk: 'rowid'
-    },
-    {
-        label: 'Pregnancy Type',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'preg_type',
-        pk: 'rowid'
-    },
-    {
-        label: 'Project Type',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'project_type',
-        pk: 'rowid'
-    },
-    {
-        label: 'Reports',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr',
-        queryName: 'reports',
-        pk: 'rowid'
-    },
-    {
-        label: 'Route',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'routes',
-        pk: 'route'
-    },
-    {
-        label: 'SNOMED Codes',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'snomed',
-        doSkip: true,
-        pk: 'rowid'
-    },
-    {
-        label: 'SNOMED Subsets',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'snomed_subsets',
-        pk: 'rowid'
-    },
-    {
-        label: 'SNOMED Subset Codes',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'snomed_subset_codes',
-        pk: 'rowid'
-    },
-    {
-        label: 'Social Codes',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'social_codes',
-        pk: 'rowid'
-    },
-    {
-        label: 'source',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'source',
-        pk: 'code'
-    },
-    {
-        label: 'Species codes',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'species_codes',
-        pk: 'rowid'
-    },
-    {
-        label: 'SPF Status',
-        populateFn: 'populateFromFile',
-        schemaName: 'cnprc_ehr',
-        queryName: 'spf_status',
-        pk: 'rowid'
-    },
-    {
-        label: 'TB Test Types',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'tb_test_type',
-        pk: 'value'
-    },
-    {
-        label: 'TB sites',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'tb_site',
-        pk: 'value'
-    },
-    {
-        label: 'Treatment Frequency',
-        populateFn: 'populateFromFile',
-        schemaName: 'ehr_lookups',
-        queryName: 'treatment_frequency',
         pk: 'rowid'
     }
  ];

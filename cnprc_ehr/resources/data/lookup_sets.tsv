@@ -41,3 +41,10 @@ image_modality_type	Image Modality Type	value
 image_subject_type	Image Subject Type	value
 conception_colony_code	Conception Colony Codes	value
 birth_viability	Birth Viability	value
+pathology_inv_type	Pathology Inventory Type	value
+tissue_type	Tissue Type	value
+fdb_sample_types	FreezerDB Sample Types	value
+fdb_cell_types	FreezerDB Cell Types	value
+fdb_group	FreezerDB Group	value
+tissue	Tissue	value
+fdb_approach	FreezerDB Approach	value

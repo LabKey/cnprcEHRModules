@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>FreezerDB Tissue Harvest</name>
+    <description>Freezer Tissue Harvest</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc_fdb" queryName="q_fdb_tissue_harvest"/>
+            <destination schemaName="cnprc_ehr" queryName="fdb_tissue_harvest" bulkLoad="true" targetOption="truncate"/>
+        </transform>
+    </transforms>
+    <schedule>
+        <poll interval="60m" />
+    </schedule>
+</etl>

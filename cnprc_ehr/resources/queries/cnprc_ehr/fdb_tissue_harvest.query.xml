@@ -1,0 +1,60 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="fdb_tissue_harvest" tableDbType="TABLE" useColumnOrder="true">
+                <columns>
+                    th.FDTH_TISSUE AS tissue,
+                    th.FDTH_APPROACH AS approach,
+                    thp.FDTH_COLUMN01 AS column1,
+                    thp.FDTH_COLUMN02 AS column2,
+                    thp.FDTH_COLUMN03 AS column3,
+                    thp.FDTH_COLUMN04 AS column4,
+                    th.FDTH_COMMENT AS comments
+                    <column columnName="fdb_tissue_harvest_pk">
+                        <columnTitle>FreezerDB Tissue Harvest PK</columnTitle>
+                    </column>
+                    <column columnName="unit">
+                        <columnTitle>Unit</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>freezer_box_prefs</fkTable>
+                            <fkColumnName>unit</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="sample_fk">
+                        <columnTitle>Freezer DB Sample FK</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="tissue">
+                        <columnTitle>Tissue</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>tissue</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="approach">
+                        <columnTitle>Approach</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>fdb_approach</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="column1">
+                        <columnTitle>Column 1</columnTitle>
+                    </column>
+                    <column columnName="column2">
+                        <columnTitle>Column 2</columnTitle>
+                    </column>
+                    <column columnName="column3">
+                        <columnTitle>Column 3</columnTitle>
+                    </column>
+                    <column columnName="column4">
+                        <columnTitle>Column 4</columnTitle>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

@@ -465,4 +465,169 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="path_inv_frozen" tableDbType="TABLE">
+        <columns>
+            <column columnName="path_inv_frozen_pk"/>
+            <column columnName="anseq_fk"/>
+            <column columnName="shelf"/>
+            <column columnName="drawer"/>
+            <column columnName="box"/>
+            <column columnName="tissue"/>
+            <column columnName="comments"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="path_inv_fixed" tableDbType="TABLE">
+        <columns>
+            <column columnName="path_inv_fixed_pk"/>
+            <column columnName="anseq_fk"/>
+            <column columnName="cabinet"/>
+            <column columnName="bin"/>
+            <column columnName="comments"/>
+            <column columnName="check_seq_fk"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="path_inv_blocks" tableDbType="TABLE">
+        <columns>
+            <column columnName="path_inv_blocks_pk"/>
+            <column columnName="anseq_fk"/>
+            <column columnName="cabinet"/>
+            <column columnName="drawer"/>
+            <column columnName="tray"/>
+            <column columnName="tissue"/>
+            <column columnName="comments"/>
+            <column columnName="check_seq_fk"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="path_inv_checkout" tableDbType="TABLE">
+        <columns>
+            <column columnName="path_inv_checkout_pk"/>
+            <column columnName="anseq_fk"/>
+            <column columnName="media"/>
+            <column columnName="checkDate"/>
+            <column columnName="investigator"/>
+            <column columnName="comments"/>
+            <column columnName="returnDate"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="fdb_sample_checkout" tableDbType="TABLE">
+        <columns>
+            <column columnName="fdb_sample_checkout_pk"/>
+            <column columnName="unit"/>
+            <column columnName="sample_fk"/>
+            <column columnName="thawed_date"/>
+            <column columnName="vials_thawed"/>
+            <column columnName="ship_location"/>
+            <column columnName="technician"/>
+            <column columnName="comments"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="fdb_box_prefs" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="unit"/>
+            <column columnName="tank"/>
+            <column columnName="cane"/>
+            <column columnName="box"/>
+            <column columnName="max_box_row"/>
+            <column columnName="max_box_col"/>
+            <column columnName="max_box_size"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="fdb_unit_sample_type" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="unit"/>
+            <column columnName="sample_type"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="fdb_tissue_harvest" tableDbType="TABLE">
+        <columns>
+            <column columnName="fdb_tissue_harvest_pk"/>
+            <column columnName="unit"/>
+            <column columnName="sample_fk"/>
+            <column columnName="tissue"/>
+            <column columnName="approach"/>
+            <column columnName="column1"/>
+            <column columnName="column2"/>
+            <column columnName="column3"/>
+            <column columnName="column4"/>
+            <column columnName="comments"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="fdb_samples_no_id" tableDbType="TABLE">
+        <columns>
+            <column columnName="fdb_samples_pk"/>
+            <column columnName="unit"/>
+            <column columnName="sample_identifier"/>
+            <column columnName="sample_type"/>
+            <column columnName="strain"/>
+            <column columnName="years"/>
+            <column columnName="months"/>
+            <column columnName="days"/>
+            <column columnName="gestational_age"/>
+            <column columnName="project"/>
+            <column columnName="cell_type"/>
+            <column columnName="sample_group"/>
+            <column columnName="age_group"/>
+            <column columnName="collection_date"/>
+            <column columnName="technician"/>
+            <column columnName="storage_type"/>
+            <column columnName="tank"/>
+            <column columnName="cane"/>
+            <column columnName="box"/>
+            <column columnName="location_start"/>
+            <column columnName="location_end"/>
+            <column columnName="vials"/>
+            <column columnName="vials_remaining"/>
+            <column columnName="concentration"/>
+            <column columnName="sample_volume"/>
+            <column columnName="comments"/>
+            <column columnName="old_pk"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>

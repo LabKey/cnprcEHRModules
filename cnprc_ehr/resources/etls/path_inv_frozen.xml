@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Pathology Inventory Frozen</name>
+    <description>Inventory record for frozen samples</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_path_inv_frozen"/>
+            <destination schemaName="cnprc_ehr" queryName="path_inv_frozen" bulkLoad="true" targetOption="truncate"/>
+        </transform>
+    </transforms>
+    <schedule>
+        <poll interval="60m" />
+    </schedule>
+</etl>

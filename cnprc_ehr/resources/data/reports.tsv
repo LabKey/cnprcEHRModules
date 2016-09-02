@@ -149,3 +149,6 @@ geriatrics	Colony Management	query	Geriatrics	true		study	geriatrics			date	fals
 payor_assignments	Assignments and Groups	query	Per-diem Payor Assignment	true		study	payor_assignments			date	false	false		qcstate/publicdata	Per diem Payor Assignment History
 rd_skin_sensitization	Respiratory Diseases	query	RD Skin Sensitization	true		study	rd_skin_sensitization			date	false	false		qcstate/publicdata	Respiratory Diseases - Skin Sensitization
 rd_asthma_cbc	Respiratory Diseases	query	RD Asthma CBC	true		study	rd_asthma_cbc			date	false	false		qcstate/publicdata	Respiratory Diseases - Asthma
+serum	Repository	query	Serum Bank	true		study	serum			date	false	false		qcstate/publicdata	Serum Registry
+pathology_inventory	Repository	query	Pathology Inventory	true		study	pathology_inventory			date	false	false		qcstate/publicdata	Pathology Specimen Inventory
+fdb_samples	Repository	query	Freezer DB Samples	true		study	fdb_samples			date	false	false		qcstate/publicdata	Freezer sample data

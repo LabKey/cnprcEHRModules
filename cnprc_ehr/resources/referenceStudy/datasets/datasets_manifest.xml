@@ -8,6 +8,7 @@
         <category>Pathology</category>
         <category>Reproductive Management</category>
         <category>Respiratory Diseases</category>
+        <category>Repository</category>
     </categories>
     <datasets>
         <dataset name="arrival" id="1001" category="Colony Management" type="Standard"/>
@@ -28,6 +29,7 @@
         <dataset name="departure" id="1013" category="Colony Management" type="Standard"/>
         <dataset name="drug" id="1014" category="Clinical" type="Standard"/>
         <dataset name="flags" id="5019" category="Colony Management" type="Standard" showByDefault="false"/>
+        <dataset name="fdb_samples" id="7003" category="Repository" type="Standard"/>
         <dataset name="morphologicDiagnosis" id="5029" category="Pathology" type="Standard" showByDefault="false"/>
         <dataset name="geriatrics" id="1062" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="grossFindings" id="5028" category="Pathology" type="Standard" showByDefault="false"/>
@@ -45,11 +47,13 @@
         <dataset name="parentage" id="5025" category="Colony Management" type="Standard"/>
         <dataset name="snomed_animals_conceptions" id="5031" category="Pathology"/>
         <dataset name="payor_assignments" id="1003" category="ColonyManagement"/>
+        <dataset name="pathology_inventory" id="7002" category="Repository" type="Standard"/>
         <dataset name="pregnancyConfirmation" id="5022" category="Reproductive Management" type="Standard"/>
         <dataset name="pregnancyDeterminations" id="5026" category="Reproductive Management" type="Standard"/>
         <dataset name="problem" id="1030" category="Clinical" type="Standard"/>
         <dataset name="rd_asthma_cbc" id="6000" category="Respiratory Diseases" type="Standard"/>
         <dataset name="rd_skin_sensitization" id="6001" category="Respiratory Diseases" type="Standard"/>
+        <dataset name="serum" id="7001" category="Repository" type="Standard"/>
         <dataset name="tb" id="1035" category="Clinical" type="Standard"/>
         <dataset name="treatment_order" id="1037" category="Clinical"/>
         <dataset name="virology" id="5023" category="ClinPath" type="Standard"/>
