@@ -123,6 +123,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         put("Respiratory Diseases", Arrays.asList(
                 "RD Skin Sensitization",
                 "RD Asthma CBC"));
+        put("Repository", Arrays.asList(
+                "Serum Bank",
+                "Pathology Inventory",
+                "Freezer DB Samples"));
     }};
 
     @BeforeClass
