@@ -145,9 +145,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 //        initGenetics();
         goToProjectHome();
         clickFolder(GENETICSFOLDER);
-        _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
-        _assayHelper.uploadXarFileAsAssayDesign(ASSAY_MARKERS_XAR, 2);
-        clickFolder(GENETICSFOLDER);
+//        _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
+//        clickFolder(GENETICSFOLDER);
         clickFolder(PROJECT_NAME);
         PortalHelper portalHelper = new PortalHelper(this);
         portalHelper.addWebPart("EHR Datasets");
