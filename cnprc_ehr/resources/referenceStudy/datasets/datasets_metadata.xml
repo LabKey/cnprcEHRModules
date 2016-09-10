@@ -162,7 +162,7 @@
             <column columnName="gestational_age">
                 <datatype>double</datatype>
             </column>
-            <column columnName="project">
+            <column columnName="projectCode">
                 <datatype>varchar</datatype>
                 <scale>20</scale>
             </column>

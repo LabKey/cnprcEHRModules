@@ -9,7 +9,7 @@
         <column name="months"/>
         <column name="days"/>
         <column name="gestational_age"/>
-        <column name="project"/>
+        <column name="projectCode"/>
         <column name="cell_type"/>
         <column name="samples_group"/>
         <column name="age_group"/>

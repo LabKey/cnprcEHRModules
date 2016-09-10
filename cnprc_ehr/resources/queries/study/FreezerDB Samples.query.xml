@@ -12,7 +12,7 @@
                         <columnTitle>Unit</columnTitle>
                         <fk>
                             <fkDbSchema>cnprc_ehr</fkDbSchema>
-                            <fkTable>freezer_box_prefs</fkTable>
+                            <fkTable>fdb_box_prefs</fkTable>
                             <fkColumnName>unit</fkColumnName>
                         </fk>
                     </column>
@@ -20,7 +20,7 @@
                         <columnTitle>Sample Type</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>freezer_sample_types</fkTable>
+                            <fkTable>fdb_sample_types</fkTable>
                             <fkColumnName>value</fkColumnName>
                         </fk>
                     </column>
@@ -39,7 +39,7 @@
                     <column columnName="gestational_age">
                         <columnTitle>Gestational Age</columnTitle>
                     </column>
-                    <column columnName="project">
+                    <column columnName="projectCode">
                         <columnTitle>Project Code</columnTitle>
                         <fk>
                             <fkDbSchema>ehr</fkDbSchema>
@@ -52,7 +52,7 @@
                         <columnTitle>Cell Type</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>freezer_cell_types</fkTable>
+                            <fkTable>fdb_cell_types</fkTable>
                             <fkColumnName>value</fkColumnName>
                         </fk>
                     </column>
@@ -60,18 +60,18 @@
                         <columnTitle>Group</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>freezer_group</fkTable>
+                            <fkTable>fdb_group</fkTable>
                             <fkColumnName>value</fkColumnName>
                         </fk>
                     </column>
                     <column columnName="age_group">
                         <columnTitle>Age Group</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>freezer_group</fkTable>
-                            <fkColumnName>ageclass</fkColumnName>
-                            <fkDisplayColumnName>Label</fkDisplayColumnName>
-                        </fk>
+                        <!--<fk>-->
+                            <!--<fkDbSchema>ehr_lookups</fkDbSchema>-->
+                            <!--<fkTable>ageclass</fkTable>-->
+                            <!--<fkColumnName>ageclass</fkColumnName>-->
+                            <!--<fkDisplayColumnName>Label</fkDisplayColumnName>-->
+                        <!--</fk>-->
                     </column>
                     <column columnName="technician">
                         <columnTitle>Technician</columnTitle>

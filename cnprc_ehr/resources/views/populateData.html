@@ -151,7 +151,22 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'fdb_approach',
         pk: 'rowid'
-    },{
+    },
+    {
+        label: 'FreezerDB Box Prefs',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'fdb_box_prefs',
+        pk: 'rowid'
+    },
+    {
+        label: 'FreezerDB Unit Sample Type',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'fdb_unit_sample_type',
+        pk: 'rowid'
+    },
+    {
         label: 'FreezerDB Cell Types',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
