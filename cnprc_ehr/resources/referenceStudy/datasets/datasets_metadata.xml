@@ -55,19 +55,6 @@
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
             </column>
-            <column columnName="taskid">
-                <datatype>varchar</datatype>
-                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
-            </column>
-            <column columnName="remark">
-                <datatype>varchar</datatype>
-                <scale>500</scale>
-                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
-            </column>
-            <column columnName="performedby">
-                <datatype>varchar</datatype>
-                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
-            </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
@@ -104,19 +91,6 @@
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
-            </column>
-            <column columnName="taskid">
-                <datatype>varchar</datatype>
-                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
-            </column>
-            <column columnName="remark">
-                <datatype>varchar</datatype>
-                <scale>500</scale>
-                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
-            </column>
-            <column columnName="performedby">
-                <datatype>varchar</datatype>
-                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
@@ -226,19 +200,6 @@
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
-            </column>
-            <column columnName="taskid">
-                <datatype>varchar</datatype>
-                <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
-            </column>
-            <column columnName="remark">
-                <datatype>varchar</datatype>
-                <scale>500</scale>
-                <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
-            </column>
-            <column columnName="performedby">
-                <datatype>varchar</datatype>
-                <propertyURI>urn:ehr.labkey.org/#PerformedBy</propertyURI>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
