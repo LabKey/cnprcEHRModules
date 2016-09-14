@@ -513,6 +513,41 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="persons" tableDbType="TABLE">
+        <columns>
+            <column columnName="person_pk"/>
+    </columns>
+    </table>
+    <table tableName="keys" tableDbType="TABLE">
+        <columns>
+            <column columnName="key_pk"/>
+            <column columnName="number"/>
+            <column columnName="copy_number"/>
+            <column columnName="current_owner"/>
+            <column columnName="status"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="key_assignments" tableDbType="TABLE">
+        <columns>
+            <column columnName="key_assignment_pk"/>
+            <column columnName="key_fk"/>
+            <column columnName="person_fk"/>
+            <column columnName="date_issued"/>
+            <column columnName="date_returned"/>
+            <column columnName="status"/>
+            <column columnName="comments"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
     <table tableName="path_inv_checkout" tableDbType="TABLE">
         <columns>
             <column columnName="path_inv_checkout_pk"/>

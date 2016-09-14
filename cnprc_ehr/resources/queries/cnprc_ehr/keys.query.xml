@@ -1,0 +1,25 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="keys" tableDbType="TABLE" useColumnOrder="true">
+                <columns>
+                    <column columnName="key_pk">
+                        <columnTitle>Key PK</columnTitle>
+                    </column>
+                    <column columnName="number">
+                        <columnTitle>Number</columnTitle>
+                    </column>
+                    <column columnName="copy_number">
+                        <columnTitle>Copy Number</columnTitle>
+                    </column>
+                    <column columnName="current_owner">
+                        <columnTitle>Current Owner</columnTitle>
+                    </column>
+                    <column columnName="status">
+                        <columnTitle>Status</columnTitle>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>
