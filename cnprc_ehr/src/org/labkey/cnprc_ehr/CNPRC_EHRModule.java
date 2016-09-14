@@ -46,7 +46,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
     @Override
     public double getVersion()
     {
-        return 16.27;
+        return 16.28;
     }
 
     @Override
