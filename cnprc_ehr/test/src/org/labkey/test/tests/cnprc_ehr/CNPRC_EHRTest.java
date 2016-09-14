@@ -57,9 +57,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String GENETICSFOLDER = "Genetics";
     public static final String CNPRC_ANIMAL = "TEST3804589";
     private static final String ASSAY_GENETICS = "Genetics";
-    private static final File ASSAY_GENETICS_XAR = TestFileUtils.getSampleData("cnprc/assays/Genetics.xar");
-    private static final String ASSAY_MARKERS = "Markers";
-    private static final File ASSAY_MARKERS_XAR = TestFileUtils.getSampleData("cnprc/assays/Markers.xar");
+    private static final File ASSAY_GENETICS_XAR = TestFileUtils.getSampleData("cnprc/assays/CNPRC_Genetics.xar");
     private static Integer _pipelineJobCount = 0;
 
     private static final File IMAGE_TSV = TestFileUtils.getSampleData("cnprc/image/image.tsv");
@@ -145,8 +143,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 //        initGenetics();
         goToProjectHome();
         clickFolder(GENETICSFOLDER);
-//        _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
-//        clickFolder(GENETICSFOLDER);
+        _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
+        clickFolder(GENETICSFOLDER);
         clickFolder(PROJECT_NAME);
         PortalHelper portalHelper = new PortalHelper(this);
         portalHelper.addWebPart("EHR Datasets");
