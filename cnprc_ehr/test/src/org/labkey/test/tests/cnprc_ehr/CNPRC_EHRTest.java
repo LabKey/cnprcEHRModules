@@ -58,6 +58,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static final String CNPRC_ANIMAL = "TEST3804589";
     private static final String ASSAY_GENETICS = "Genetics";
     private static final File ASSAY_GENETICS_XAR = TestFileUtils.getSampleData("cnprc/assays/CNPRC_Genetics.xar");
+    public static final String GENETICS_PANEL_LABEL = "Genetics:";
     private static Integer _pipelineJobCount = 0;
 
     private static final File IMAGE_TSV = TestFileUtils.getSampleData("cnprc/image/image.tsv");
@@ -212,6 +213,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         _containerHelper.createSubfolder(getProjectName(), getProjectName(), COREFACILITIES, "Collaboration", null);
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, GENETICSFOLDER, "Laboratory Folder", new String[]{"SequenceAnalysis", "CNPRC_Genetics"});
         clickFolder(getProjectName());
+    }
+
+    @Test
+    public void testGenetics(){
+        goToProjectHome();
+        clickFolder(GENETICSFOLDER);
+        waitForElement(Locator.linkContainingText("Browse All"));
+        waitAndClickAndWait(LabModuleHelper.getNavPanelItem(GENETICS_PANEL_LABEL, "Browse All"));
+        assertTextPresent("TEST1099252", "F","TEST6390238","TEST2312318","PDA0123","2003-02-14 00:00","TEST1099252 qualifies as an offspring of TEST2312318 and TEST6390238.");
     }
 
     @Override
