@@ -513,9 +513,40 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="department" tableDbType="TABLE">
+        <columns>
+            <column columnName="department_pk"/>
+            <column columnName="name"/>
+            <column columnName="reports_to"/>
+            <column columnName="comment"/>
+            <column columnName="institution"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+    </columns>
+    </table>
+    <table tableName="key_name" tableDbType="TABLE">
+        <columns>
+            <column columnName="key_name_pk"/>
+            <column columnName="name"/>
+            <column columnName="comment"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+    </columns>
+    </table>
     <table tableName="persons" tableDbType="TABLE">
         <columns>
             <column columnName="person_pk"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
     </columns>
     </table>
     <table tableName="keys" tableDbType="TABLE">
