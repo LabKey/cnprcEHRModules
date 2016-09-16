@@ -33,6 +33,7 @@ import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
+import org.labkey.test.util.DataRegionTable;
 import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
@@ -219,9 +220,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testGenetics(){
         goToProjectHome();
         clickFolder(GENETICSFOLDER);
-        waitForElement(Locator.linkContainingText("Browse All"));
         waitAndClickAndWait(LabModuleHelper.getNavPanelItem(GENETICS_PANEL_LABEL, "Browse All"));
-        assertTextPresent("TEST1099252", "F","TEST6390238","TEST2312318","PDA0123","2003-02-14 00:00","TEST1099252 qualifies as an offspring of TEST2312318 and TEST6390238.");
+        DataRegionTable results = new DataRegionTable("Data", getDriver());
+        final List<String> rowData = results.getRowDataAsText(results.getRowIndex("1"), "Subject", "Sex", "Sire", "Dam", "Lab Case", "Date Tested", "Notes");
+        assertEquals("Bad genetics data",
+                Arrays.asList("TEST1099252", "F", "TEST6390238", "TEST2312318", "PDA0123", "2003-02-14 00:00", "TEST1099252 qualifies as an offspring of TEST2312318 and TEST6390238."),
+                rowData);
     }
 
     @Override
