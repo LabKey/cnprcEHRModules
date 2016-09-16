@@ -2,7 +2,7 @@
 
 <project default="usage">
     <dirname property="moduleDir" file="${ant.file}"/>
-    <property name="jar.dir" value="/../../cnprc_genetics" />
+    <property name="jar.dir" value="../../cnprc_genetics" />
 
     <target name="distribution">
         <antcall target="gather_modules" />
