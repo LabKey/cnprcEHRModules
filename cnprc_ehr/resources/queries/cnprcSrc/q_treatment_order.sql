@@ -1,6 +1,7 @@
 SELECT
+PRIMED_TREATMENT_PK AS treatmentPk,
 PT_AN_ID AS Id,
-PT_START_DATE as startDate,
+PT_START_DATE AS startDate,
 --PT_CNPRC_PROJECT AS project, // all NULL values
 PT_TREATMENT_VOLUME AS volume,
 PT_TREATMENT_VOLUME_UNITS AS vol_units,

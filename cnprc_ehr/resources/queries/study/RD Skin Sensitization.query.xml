@@ -50,6 +50,7 @@
                     </column>
                     <column columnName="remark">
                         <columnTitle>Comments</columnTitle>
+                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>

@@ -5,11 +5,13 @@
         <column name="code"/>
         <column name="infoQualifier"/>
         <column name="snoPk"/>
-        <column name="snoFk"/>
         <column name="foreignSeq"/>
         <column name="snoSeq"/>
         <column name="timeQualifier"/>
         <column name="subjectType"/>
+        <column name="biopsyFk"/>
+        <column name="necropsyFk"/>
+        <column name="treatmentFk"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

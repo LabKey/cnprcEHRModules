@@ -3,13 +3,6 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="fdb_tissue_harvest" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    th.FDTH_TISSUE AS tissue,
-                    th.FDTH_APPROACH AS approach,
-                    thp.FDTH_COLUMN01 AS column1,
-                    thp.FDTH_COLUMN02 AS column2,
-                    thp.FDTH_COLUMN03 AS column3,
-                    thp.FDTH_COLUMN04 AS column4,
-                    th.FDTH_COMMENT AS comments
                     <column columnName="fdb_tissue_harvest_pk">
                         <columnTitle>FreezerDB Tissue Harvest PK</columnTitle>
                     </column>

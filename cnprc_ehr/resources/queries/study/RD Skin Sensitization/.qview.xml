@@ -14,7 +14,6 @@
         <column name="wheal_grasses"/>
         <column name="wheal_ascarid"/>
         <column name="wheal_offspring_comment"/>
-        <column name="remark"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

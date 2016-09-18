@@ -1816,6 +1816,9 @@
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
+            <column columnName="treatmentPk">
+                <datatype>integer</datatype>
+            </column>
             <column columnName="weight">
                 <datatype>double</datatype>
             </column>
@@ -2406,10 +2409,16 @@
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
-            <column columnName="snoFk">
+            <column columnName="snoPk">
                 <datatype>integer</datatype>
             </column>
-            <column columnName="snoPk">
+            <column columnName="biopsyFk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="necropsyFk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="treatmentFk">
                 <datatype>integer</datatype>
             </column>
             <column columnName="foreignSeq">

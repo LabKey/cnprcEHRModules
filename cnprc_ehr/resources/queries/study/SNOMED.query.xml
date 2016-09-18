@@ -3,6 +3,7 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="snomed_animals_conceptions" tableDbType="TABLE">
+                <!--<javaCustomizer>org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer</javaCustomizer>-->
                 <insertUrl />
                 <importUrl />
                 <updateUrl />
@@ -30,8 +31,26 @@
                             <fkColumnName>snomed_pk</fkColumnName>
                         </fk>
                     </column>
-                    <column columnName="snoFk">
-                        <columnTitle>SNOMED FK</columnTitle>
+                    <column columnName="biopsyFk">
+                        <columnTitle>Biopsy</columnTitle>
+                        <url>/query/executeQuery.view?schemaName=study&amp;
+                            query.queryName=Biopsies&amp;
+                            query.prmPk~eq=${biopsyFk}
+                        </url>
+                    </column>
+                    <column columnName="necropsyFk">
+                        <columnTitle>Necropsy</columnTitle>
+                        <url>/query/executeQuery.view?schemaName=study&amp;
+                            query.queryName=Necropsies&amp;
+                            query.prmPk~eq=${necropsyFk}
+                        </url>
+                    </column>
+                    <column columnName="treatmentFk">
+                        <columnTitle>Treatment</columnTitle>
+                        <url>/query/executeQuery.view?schemaName=study&amp;
+                            query.queryName=Treatment Orders&amp;
+                            query.treatmentPk~eq=${treatmentFk}
+                        </url>
                     </column>
                     <column columnName="foreignSeq">
                         <columnTitle>Foreign Seq</columnTitle>
