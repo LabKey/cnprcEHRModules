@@ -35,14 +35,14 @@
                         <columnTitle>Biopsy</columnTitle>
                         <url>/query/executeQuery.view?schemaName=study&amp;
                             query.queryName=Biopsies&amp;
-                            query.prmPk~eq=${biopsyFk}
+                            query.prPk~eq=${biopsyFk}
                         </url>
                     </column>
                     <column columnName="necropsyFk">
                         <columnTitle>Necropsy</columnTitle>
                         <url>/query/executeQuery.view?schemaName=study&amp;
                             query.queryName=Necropsies&amp;
-                            query.prmPk~eq=${necropsyFk}
+                            query.prPk~eq=${necropsyFk}
                         </url>
                     </column>
                     <column columnName="treatmentFk">

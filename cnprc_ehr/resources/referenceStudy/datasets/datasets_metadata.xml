@@ -479,7 +479,7 @@
             <column columnName="caseno">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="prmPk">
+            <column columnName="prPk">
                 <datatype>integer</datatype>
             </column>
             <column columnName="reportType">
@@ -531,7 +531,7 @@
             <column columnName="approvedDate">
                 <datatype>timestamp</datatype>
             </column>
-            <column columnName="prmPk">
+            <column columnName="prPk">
                 <datatype>integer</datatype>
             </column>
             <column columnName="caseno">
@@ -1664,6 +1664,9 @@
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
+            <column columnName="treatmentPk">
+                <datatype>integer</datatype>
+            </column>
             <column columnName="project">
                 <datatype>integer</datatype>
                 <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
@@ -1815,9 +1818,6 @@
                 <datatype>timestamp</datatype>
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
-            </column>
-            <column columnName="treatmentPk">
-                <datatype>integer</datatype>
             </column>
             <column columnName="weight">
                 <datatype>double</datatype>
