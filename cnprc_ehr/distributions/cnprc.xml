@@ -23,6 +23,7 @@
         <copy todir="${dist.modules.dir}">
             <fileset dir="${staging.modules.dir}">
                 <include name="cnprc_ehr.module" />
+                <include name="cnprc_billing.module" />
                 <include name="cnprc_genetics.module" />
                 <include name="ehr.module" />
                 <include name="laboratory.module" />
