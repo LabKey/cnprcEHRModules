@@ -17,6 +17,11 @@
                     </column>
                     <column columnName="status">
                         <columnTitle>Status</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>keys_status</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
                     </column>
                 </columns>
             </table>

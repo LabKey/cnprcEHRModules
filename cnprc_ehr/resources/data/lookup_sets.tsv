@@ -48,3 +48,5 @@ fdb_cell_types	FreezerDB Cell Types	value
 fdb_group	FreezerDB Group	value
 tissue	Tissue	value
 fdb_approach	FreezerDB Approach	value
+key_status 	Key Status 	value
+key_assignment_status	Assignment Status	value

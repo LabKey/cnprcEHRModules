@@ -32,6 +32,11 @@
                     </column>
                     <column columnName="status">
                         <columnTitle>Status</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>key_assignment_status</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="comments">
                         <columnTitle>Comment</columnTitle>

@@ -146,7 +146,7 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
-        label: 'FreezerDB Apporach',
+        label: 'FreezerDB Approach',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
         queryName: 'fdb_approach',
@@ -270,6 +270,20 @@ Ext4.onReady(function(){
         schemaName: 'cnprc_ehr',
         queryName: 'key_name',
         pk: 'key_name_pk'
+    },
+    {
+        label: 'Key Status',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'key_status',
+        pk: 'rowid'
+    },
+    {
+        label: 'Assignment Status',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'key_assignment_status',
+        pk: 'rowid'
     },
     {
         label: 'Nursing Assignment Types',
