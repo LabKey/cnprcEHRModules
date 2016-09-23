@@ -56,6 +56,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String FOLDER_NAME = "CNPRC";
     private static final String COREFACILITIES = "Core Facilities";
     private static final String GENETICSFOLDER = "Genetics";
+    private static final String PDLFOLDER = "PDL";
     public static final String CNPRC_ANIMAL = "TEST3804589";
     private static final String ASSAY_GENETICS = "Genetics";
     private static final File ASSAY_GENETICS_XAR = TestFileUtils.getSampleData("cnprc/assays/CNPRC_Genetics.xar");
@@ -213,6 +214,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         _containerHelper.createProject(getProjectName(), type);
         _containerHelper.createSubfolder(getProjectName(), getProjectName(), COREFACILITIES, "Collaboration", null);
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, GENETICSFOLDER, "Laboratory Folder", new String[]{"SequenceAnalysis", "CNPRC_Genetics"});
+        _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, PDLFOLDER, "Laboratory Folder", new String[]{"SequenceAnalysis", "CNPRC_PDL"});
         clickFolder(getProjectName());
     }
 
