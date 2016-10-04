@@ -36,6 +36,6 @@ PT_PRESCRIBING_VETERINARIAN AS prescribingVet,
 PT_BILLING_ITEM_CODE AS billingItemCode,
 PT_BILLING_AMOUNT AS billingAmt,
 PT_CNPRC_BILLING_ID AS cnprcBillingId,
-PT_RX_INVALID_OR_NEVER_GIVEN AS rxInvalidOrNeverGiven
--- AS objectid,
+PT_RX_INVALID_OR_NEVER_GIVEN AS rxInvalidOrNeverGiven,
+OBJECTID as objectid
 FROM cnprcSrc.ZPRIMED_TREATMENT;

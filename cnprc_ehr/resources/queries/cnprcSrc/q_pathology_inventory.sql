@@ -4,5 +4,6 @@ PI_ANID AS Id,
 PI_TYPE AS inventoryType,
 PI_DATE,
 PI_PROJECT AS projectCode,
-PI_TISSUE_TYPE AS tissueType
+PI_TISSUE_TYPE AS tissueType,
+OBJECTID as objectid
 FROM cnprcSrc.ZPATH_INV;

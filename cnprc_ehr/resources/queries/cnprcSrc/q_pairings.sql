@@ -4,8 +4,8 @@ AP_PAIR_KEY AS pairId,
 APM_START_DATE,
 APM_END_DATE AS endDate,
 APM_BEHAVIOR_CODE AS observation,
-APM_COMMENT AS remark
--- AS objectId
+APM_COMMENT AS remark,
+OBJECTID as objectid
 FROM
 cnprcSrc.ZAN_PAIRING p
 LEFT JOIN

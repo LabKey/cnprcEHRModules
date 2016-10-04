@@ -1,3 +1,5 @@
+-- authored by client
+-- LK added objectid
 SELECT
 a.reloc_an_id AS Id,
 (CASE WHEN a.reloc_location_prefix = '0100' THEN 'Escaped'
@@ -14,7 +16,8 @@ a.reloc_sale_comment AS remark,
       WHEN b.reloc_location_prefix = '0102' THEN 'On Loan'
       WHEN b.reloc_location_prefix = '0103' THEN 'Tmp Escp'
       WHEN b.reloc_location_prefix = '0200' THEN 'Here'
- END) AS nextreloctype
+ END) AS nextreloctype,
+a.OBJECTID as objectid
 FROM
 cnprcSrc.zrelocation a,
 cnprcSrc.zrelocation b

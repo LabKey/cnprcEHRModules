@@ -14,7 +14,8 @@ PR_DEATH_TYPE AS mannerOfDeath,
 PR_COMMENTS AS remark,
 PR_BODY_CONDITION AS bcs,
 PR_HYDRATION AS hydrationLevel,
-PR_PATH_RESIDENT AS assistant
+PR_PATH_RESIDENT AS assistant,
+r.OBJECTID AS objectid
 FROM
 cnprcSrc.ZPATH_REPORT r
 LEFT JOIN

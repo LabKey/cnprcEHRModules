@@ -6,7 +6,7 @@
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc" queryName="q_geriatrics"/>
-            <destination schemaName="study" queryName="geriatrics" bulkLoad="true" batchSize="500" targetOption="truncate">
+            <destination schemaName="study" queryName="geriatrics" bulkLoad="true" batchSize="500" targetOption="merge">
                 <columnTransforms>
                     <column source="GA_TB_DATE" target="date"/>
                 </columnTransforms>

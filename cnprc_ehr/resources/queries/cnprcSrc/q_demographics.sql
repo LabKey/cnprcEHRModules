@@ -12,6 +12,6 @@ AN_SP_CODE AS species,
  ELSE 'Other' END) AS calculated_status,
 AN_SIRE_ID AS sire,
 AN_DAM_ID AS dam,
-AN_ACQ_SOURCE_INST AS origin
--- AS objectid
+AN_ACQ_SOURCE_INST AS origin,
+OBJECTID AS objectid
 FROM cnprcSrc.ZANIMAL

@@ -7,7 +7,7 @@ RELOC_DATE_OUT AS enddate,
 -- AS divider,
 -- AS housingCondition,
 -- AS housingType,
-RELOC_SALE_COMMENT AS reason
--- AS objectid
+RELOC_SALE_COMMENT AS reason,
+OBJECTID AS objectid
 FROM cnprcSrc.ZRELOCATION
 WHERE RELOC_LOCATION IS NOT NULL;

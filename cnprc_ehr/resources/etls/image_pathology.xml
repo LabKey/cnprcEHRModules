@@ -6,7 +6,7 @@
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc_image" queryName="q_image_pathology" />
-            <destination schemaName="cnprc_ehr" queryName="image_pathology" bulkLoad="true" batchSize="500" targetOption="truncate"/>
+            <destination schemaName="cnprc_ehr" queryName="image_pathology" bulkLoad="true" batchSize="500" targetOption="merge"/>
         </transform>
     </transforms>
     <schedule>

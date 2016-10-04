@@ -29,5 +29,6 @@ STOCK_APPROVED_BY AS stock_approved_by,
 STOCK_APPROVED_TIMESTAMP AS stock_approved_timestamp,
 (CASE WHEN RELEASE_APPROVED_YN = 'Y' THEN 1 ELSE 0 END) AS is_release_approved,
 RELEASE_APPROVED_BY AS release_approved_by,
-RELEASE_APPROVED_TIMESTAMP AS release_approved_timestamp
+RELEASE_APPROVED_TIMESTAMP AS release_approved_timestamp,
+OBJECTID AS objectid
 FROM cnprcSrc_image.IMAGE;

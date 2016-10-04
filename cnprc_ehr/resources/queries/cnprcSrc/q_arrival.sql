@@ -13,8 +13,8 @@ a.AN_SEX AS gender,
 a.AN_ACQ_TYPE AS AcquisitionType,
 a.AN_PREV_ID AS arrivalId,
 a.AN_ACQ_SOURCE_INST AS source,
--- AS objectid,
-FROM cnprcSrc.ZANIMAL a
-LEFT JOIN cnprcSrc.ZRELOCATION r
+r.OBJECTID AS objectid,
+FROM cnprcSrc.ZRELOCATION r
+LEFT JOIN  cnprcSrc.ZANIMAL a
 ON a.AN_ID = r.RELOC_AN_ID
 WHERE a.AN_ACQ_TYPE = '1' AND r.RELOC_DATE_IN = a.AN_ACQ_DATE AND r.RELOC_LOCATION_PREFIX = '0200';

@@ -13,8 +13,8 @@ a.GA_UA_DATE AS uaDate,
 a.GA_ADDED_DATE AS addedDate,
 a.GA_FO_DATE AS foDate,
 a.GA_BODY_CONDITION AS bodyCondition,
-a.GA_ABDOMINAL_SCORE AS abdominalScore
--- AS objectId
+a.GA_ABDOMINAL_SCORE AS abdominalScore,
+a.OBJECTID as objectid
 FROM cnprcSrc.ZGER_ANIMAL a
 LEFT JOIN
 cnprcSrc.ZGER_RANKING r

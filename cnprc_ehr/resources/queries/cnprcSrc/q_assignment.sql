@@ -7,13 +7,11 @@ anproj_assignment_type AS assignmentStatus,
 anproj_release_date AS enddate,
 coalesce(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol, --nvl(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol,
 pp_assignment_date AS projectProtocolAssignDate,
-pp_release_date AS projectProtocolRelDate
--- AS datefinalized,
--- AS enddatefinalized,
--- AS objectid
+pp_release_date AS projectProtocolRelDate,
+assgnmnt.OBJECTID AS objectid
 FROM
 cnprcSrc.zproject,
-cnprcSrc.zan_project
+cnprcSrc.zan_project assgnmnt
 LEFT OUTER JOIN
 (SELECT pp_project_id, pp_aucaac_number, pp_assignment_date, pp_release_date FROM cnprcSrc.zproject_protocol)
 ON (pp_project_id = anproj_pr_code

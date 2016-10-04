@@ -14,6 +14,7 @@ AC_PGDET_GEST_DAY_2 AS gestDayTwo,
 AC_PGDET_SCHED_STATUS_2 AS schedStatusTwo,
 AC_PGDET_METHOD_3	AS methodThree,
 AC_PGDET_GEST_DAY_3 AS	gestDayThree,
-AC_PGDET_SCHED_STATUS_3 AS schedStatusThree
+AC_PGDET_SCHED_STATUS_3 AS schedStatusThree,
+OBJECTID as objectid
 FROM
 cnprcSrc.ZAN_CYCLE;

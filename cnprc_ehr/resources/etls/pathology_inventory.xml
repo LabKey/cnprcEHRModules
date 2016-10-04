@@ -6,7 +6,7 @@
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc" queryName="q_pathology_inventory"/>
-            <destination schemaName="study" queryName="pathology_inventory" bulkLoad="true" targetOption="truncate">
+            <destination schemaName="study" queryName="pathology_inventory" bulkLoad="true" targetOption="merge">
                 <columnTransforms>
                     <column source="PI_DATE" target="date"/>
                 </columnTransforms>

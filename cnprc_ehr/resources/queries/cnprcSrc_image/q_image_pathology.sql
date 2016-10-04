@@ -1,4 +1,5 @@
 SELECT
 IMAGE_ID AS Id,
-PRM_PK AS prm_pk
+PRM_PK AS prm_pk,
+OBJECTID AS objectid
 FROM cnprcSrc_image.IMAGE_PATH_REPORT_MASTER;

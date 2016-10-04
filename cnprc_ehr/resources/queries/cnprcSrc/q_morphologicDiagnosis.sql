@@ -13,7 +13,8 @@ SNO_OCCUPATION_CODE AS distribution,
 PD_TEXT_TOPOGRAPHY AS topographyNotes,
 PD_TEXT_MORPHOLOGY AS morphologyNotes,
 PD_TEXT_OTHER AS remark,
-PD_COMMENT AS description
+PD_COMMENT AS description,
+d.OBJECTID as objectid
 FROM cnprcSrc.ZPATH_DIAGNOSIS d
 LEFT JOIN
 cnprcSrc.ZPATH_REPORT pr

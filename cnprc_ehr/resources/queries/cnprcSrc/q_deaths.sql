@@ -7,8 +7,8 @@ a.AN_DAM_ID AS dam,
 -- AS roomattime,
 -- AS cageattime,
 a.AN_DEATH_TYPE AS manner,
-(CASE WHEN a.AN_ID = n.an_id THEN 'TRUE' ELSE 'FALSE' END) AS notAtCenter
--- AS objectid
+(CASE WHEN a.AN_ID = n.an_id THEN 'TRUE' ELSE 'FALSE' END) AS notAtCenter,
+a.OBJECTID AS objectid
 FROM cnprcSrc.ZANIMAL a
 LEFT JOIN cnprcSrc.ZPATH_REPORT_MASTER r
 ON a.AN_ID = r.PRM_AN_ID

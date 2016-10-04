@@ -1044,6 +1044,11 @@
                 <datatype>varchar</datatype>
                 <scale>1</scale>
             </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
         </columns>
         <tableTitle>Nursing</tableTitle>
     </table>

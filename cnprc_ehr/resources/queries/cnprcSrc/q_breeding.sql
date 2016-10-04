@@ -5,5 +5,6 @@ BR_MALE_ID AS sire,
 BR_HOURS AS hours,
 BR_OBS_CODE AS obsCode,
 BR_CYCLE_DAY AS cycleDay,
-BR_CYCLE_DAY1_DATE AS cycleStartDate
+BR_CYCLE_DAY1_DATE AS cycleStartDate,
+OBJECTID as objectid
 FROM cnprcSrc.ZBREEDING

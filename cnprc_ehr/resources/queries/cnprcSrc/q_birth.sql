@@ -10,7 +10,7 @@ a.AN_BIRTH_VIABILITY AS birth_viability,
 c.CON_CON_DATE AS conception,
 c.CON_CON_DATE_STATUS AS conceptionDateStatus,
 a.AN_BIRTH_DELIVERY_MODE AS "type", --birth_type
--- AS objectid
+a.OBJECTID AS objectid
 FROM cnprcSrc.ZANIMAL a
 LEFT JOIN cnprcSrc.ZCONCEPTION c
 ON a.AN_ID = c.CON_OFFSPRING_ID

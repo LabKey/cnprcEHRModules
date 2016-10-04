@@ -5,7 +5,8 @@ PRM_PROJECT AS projectCode,
 PRM_REPORT_COMPLETE AS enddate,
 PNM_NAME AS tissue,
 PNM_VALUE AS measurementValue,
-PMT_UNIT AS unit
+PMT_UNIT AS unit,
+nm.OBJECTID as objectid
 FROM
 cnprcSrc.ZPATH_NECROPSY_MEASUREMENTS nm
 LEFT JOIN
