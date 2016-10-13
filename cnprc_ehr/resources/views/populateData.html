@@ -293,6 +293,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Organs',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'organs',
+        pk: 'rowid'
+    },
+    {
         label: 'Pathology Inventory Type',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
