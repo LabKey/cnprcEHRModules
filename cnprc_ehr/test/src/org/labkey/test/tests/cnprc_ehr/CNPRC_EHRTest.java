@@ -61,11 +61,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String ASSAY_GENETICS = "Genetics";
     private static final File ASSAY_GENETICS_XAR = TestFileUtils.getSampleData("cnprc/assays/CNPRC_Genetics.xar");
     public static final String GENETICS_PANEL_LABEL = "Genetics:";
+    private static final File LOOKUP_LIST_ARCHIVE = TestFileUtils.getSampleData("cnprc/lists/CNPRC_PDL.lists.zip");
     private static Integer _pipelineJobCount = 0;
 
     private static final File IMAGE_TSV = TestFileUtils.getSampleData("cnprc/image/image.tsv");
     private static final File IMAGE_PATHOLOGY_TSV = TestFileUtils.getSampleData("cnprc/image/image_pathology.tsv");
     private static final File IMAGE_SNOMED_TSV = TestFileUtils.getSampleData("cnprc/image/image_snomed.tsv");
+
+    private static final File PDL_ORDER_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_ORDERS.tsv");
+    private static final File PDL_SAMPLE_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SAMPLES.tsv");
+    private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
+    private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
 
 
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
@@ -214,7 +220,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         _containerHelper.createProject(getProjectName(), type);
         _containerHelper.createSubfolder(getProjectName(), getProjectName(), COREFACILITIES, "Collaboration", null);
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, GENETICSFOLDER, "Laboratory Folder", new String[]{"SequenceAnalysis", "CNPRC_Genetics"});
-        _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, PDLFOLDER, "Laboratory Folder", new String[]{"SequenceAnalysis", "CNPRC_PDL"});
+        _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, PDLFOLDER, "Collaboration", new String[]{"CNPRC_PDL"});
         clickFolder(getProjectName());
     }
 
@@ -351,6 +357,77 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<Map<String, Object>> imageSnomedTsv = loadTsv(IMAGE_SNOMED_TSV);
         command.setRows(imageSnomedTsv);
         command.execute(connection, getProjectName());
+    }
+
+    @Test
+    public void testPDLlookups() throws Exception
+    {
+        goToProjectHome();
+        clickFolder(PDLFOLDER);
+        _listHelper.importListArchive(LOOKUP_LIST_ARCHIVE);
+        storePDLData();
+
+        validateLookupFromList("Billing Contact", "Client 100", "Client full name 100");
+        validateLookupFromList("Processing Item", "Sample type 300", "Sample type comment 300");
+        validateLookupFromList("Processing Item", "Test type 600", "Test type comment 600");
+        validateLookupFromList("Report Contact", "Client 101", "Client full name 101");
+        validateLookupFromList("Sub Test Types", "Test type 600", "Panel test type 2");
+        validateLookupFromList("Sub Test Types", "Test type 601", "Test type comment 601");
+
+
+        validateLookupFromTable("orders", "Client 100", "Client full name 100");
+        validateLookupFromTable("orders", "Billing contact 100", "Billing contact 100 comment");
+        validateLookupFromTable("orders", "Report contact 100", "Report contact comment 0");
+
+        validateLookupFromTable("samples", "100", "Order comment 1");
+        validateLookupFromTable("samples", "TEST1020148", "Overview: test1020148");
+        validateLookupFromTable("samples", "Sample type 300", "Sample type comment 300");
+
+        validateLookupFromTable("tests", "200", "Sample 200 comment");
+
+        validateLookupFromTable("sub_tests", "400", "Test Comment 400");
+    }
+
+    private void validateLookupFromList(String list, String linkText, String expectedText)
+    {
+        openListView();
+        clickAndWait(Locator.linkContainingText(list));
+        clickAndWait(Locator.linkContainingText(linkText));
+        assertTextPresent(expectedText);
+    }
+
+    private void openListView()
+    {
+        beginAt(PROJECT_NAME+ "/"  + COREFACILITIES + "/" + PDLFOLDER + "/list-begin.view?");
+    }
+
+    private void validateLookupFromTable(String table, String linkText, String expectedText) throws InterruptedException
+    {
+        getTableView(table);
+        clickAndWait(Locator.linkContainingText(linkText));
+        waitForText(expectedText);
+    }
+
+    private void getTableView(String table)
+    {
+        beginAt("/query/" + PROJECT_NAME+ "/"  + COREFACILITIES + "/" + PDLFOLDER + "/executeQuery.view?query.queryName=" + table + "&schemaName=cnprc_pdl");
+    }
+
+    private void storePDLData() throws Exception
+    {
+        Connection connection = createDefaultConnection(true);
+        insertTsvData(connection, "cnprc_pdl", "samples", PDL_SAMPLE_TSV);
+        insertTsvData(connection, "cnprc_pdl", "sub_tests", PDL_SUB_TEST_TSV);
+        insertTsvData(connection, "cnprc_pdl", "tests",PDL_TEST_TSV );
+        insertTsvData(connection, "cnprc_pdl", "orders", PDL_ORDER_TSV);
+    }
+
+    private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile) throws java.io.IOException, org.labkey.remoteapi.CommandException
+    {
+        InsertRowsCommand command = new InsertRowsCommand(schemaName, queryName);
+        List<Map<String, Object>> imageTsv = loadTsv(tsvFile);
+        command.setRows(imageTsv);
+        command.execute(connection, getProjectName() + "/" + COREFACILITIES + "/" + PDLFOLDER);
     }
 
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
