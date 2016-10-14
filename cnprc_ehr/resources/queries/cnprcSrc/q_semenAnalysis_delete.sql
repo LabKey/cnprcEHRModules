@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc.AELECTRO_EJACULATION
+WHERE EEJ_AUD_CODE = 'D'

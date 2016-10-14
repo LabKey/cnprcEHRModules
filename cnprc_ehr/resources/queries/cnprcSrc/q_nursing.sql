@@ -4,7 +4,8 @@ ANURS_ASSIGN_DATE,
 ANURS_MOTHER_ID AS motherId,
 ANURS_RELEASE_DATE AS releaseDate,
 ANURS_ASSIGN_TYPE AS assignType,
-OBJECTID as objectid
+OBJECTID as objectid,
+DATE_TIME
 FROM
 cnprcSrc.ZAN_NURSING;
 

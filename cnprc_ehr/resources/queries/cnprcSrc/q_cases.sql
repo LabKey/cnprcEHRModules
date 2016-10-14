@@ -5,5 +5,6 @@ AH_COMMENT AS problem,
 AH_DISCHARGE_DATE AS enddate,
 AH_ADMIT_TYPE AS category,
 AH_LONGTERM_HISTORY AS remark,
-OBJECTID as objectid
+OBJECTID as objectid,
+DATE_TIME
 FROM cnprcSrc.ZAN_HOSPITAL;

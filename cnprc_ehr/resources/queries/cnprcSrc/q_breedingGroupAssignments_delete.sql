@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc.AAN_BREEDING_GROUP
+WHERE ANBG_AUD_CODE = 'D'

@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc.AEXP_INOCULATION
+WHERE EI_AUD_CODE = 'D'

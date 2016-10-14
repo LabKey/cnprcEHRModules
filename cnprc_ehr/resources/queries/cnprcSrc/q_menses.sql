@@ -2,5 +2,6 @@ SELECT
 M_FEMALE_ID AS Id,
 M_OBS_DATE,
 M_BLEEDING_OBS_CODE AS observationCode,
-OBJECTID as objectid
+OBJECTID as objectid,
+DATE_TIME
 FROM cnprcSrc.ZMENSES

@@ -6,5 +6,6 @@ BR_HOURS AS hours,
 BR_OBS_CODE AS obsCode,
 BR_CYCLE_DAY AS cycleDay,
 BR_CYCLE_DAY1_DATE AS cycleStartDate,
-OBJECTID as objectid
+OBJECTID as objectid,
+DATE_TIME
 FROM cnprcSrc.ZBREEDING

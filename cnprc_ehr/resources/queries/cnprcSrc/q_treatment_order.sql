@@ -37,5 +37,6 @@ PT_BILLING_ITEM_CODE AS billingItemCode,
 PT_BILLING_AMOUNT AS billingAmt,
 PT_CNPRC_BILLING_ID AS cnprcBillingId,
 PT_RX_INVALID_OR_NEVER_GIVEN AS rxInvalidOrNeverGiven,
-OBJECTID as objectid
+OBJECTID as objectid,
+DATE_TIME
 FROM cnprcSrc.ZPRIMED_TREATMENT;

@@ -1,0 +1,5 @@
+SELECT
+OBJECTID || '-' || SNO_TOPOGRAPHY_CODE  AS objectid,
+date_time
+FROM cnprcSrc.ASNOMED
+WHERE SNO_AUD_CODE = 'D'
