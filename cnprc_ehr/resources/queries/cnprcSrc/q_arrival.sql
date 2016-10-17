@@ -14,6 +14,11 @@ a.AN_ACQ_TYPE AS AcquisitionType,
 a.AN_PREV_ID AS arrivalId,
 a.AN_ACQ_SOURCE_INST AS source,
 r.OBJECTID AS objectid,
+CAST(CASE WHEN(r.DATE_TIME > a.DATE_TIME)
+  THEN
+    r.DATE_TIME
+  ELSE a.DATE_TIME
+END  AS TIMESTAMP )AS date_time
 FROM cnprcSrc.ZRELOCATION r
 LEFT JOIN  cnprcSrc.ZANIMAL a
 ON a.AN_ID = r.RELOC_AN_ID

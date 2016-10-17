@@ -5,11 +5,16 @@ PR_PROJECT AS projectCode,
 POT_ORGAN AS organ,
 PR_REPORT_TYPE AS reportType,
 POT_TEXT AS remark,
-ot.OBJECTID as objectid
+pr.OBJECTID as objectid,
+CAST(CASE WHEN(ot.DATE_TIME > pr.DATE_TIME)
+  THEN
+    ot.DATE_TIME
+  ELSE pr.DATE_TIME
+END AS TIMESTAMP) AS date_time
 FROM
-cnprcSrc.ZPATH_ORGAN_TEXT ot
-LEFT JOIN
 cnprcSrc.ZPATH_REPORT pr
+LEFT JOIN
+cnprcSrc.ZPATH_ORGAN_TEXT ot
 ON
 ot.POT_FK = pr.PR_PK
 WHERE PR_DATE > to_date('01-01-1900', 'DD-MM-YYYY');

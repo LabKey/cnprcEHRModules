@@ -10,7 +10,12 @@ a.AN_BIRTH_VIABILITY AS birth_viability,
 c.CON_CON_DATE AS conception,
 c.CON_CON_DATE_STATUS AS conceptionDateStatus,
 a.AN_BIRTH_DELIVERY_MODE AS "type", --birth_type
-a.OBJECTID AS objectid
+a.OBJECTID AS objectid,
+CAST(CASE WHEN(a.DATE_TIME > c.DATE_TIME)
+  THEN
+    a.DATE_TIME
+  ELSE c.DATE_TIME
+END AS TIMESTAMP) AS date_time
 FROM cnprcSrc.ZANIMAL a
 LEFT JOIN cnprcSrc.ZCONCEPTION c
 ON a.AN_ID = c.CON_OFFSPRING_ID
