@@ -10,6 +10,9 @@
             <columnTransforms>
                 <column source="RELOC_DATE_IN" target="date"/>
             </columnTransforms>
+            <alternateKeys>
+                <column name="objectid"/>
+            </alternateKeys>
         </destination>
     </transform>
 </transforms>

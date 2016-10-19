@@ -6,17 +6,23 @@
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc" queryName="q_breedingGroupAssignments"/>
-            <destination schemaName="study" queryName="breedingGroupAssignments" bulkLoad="true" batchSize="500" targetOption="merge">
+            <destination schemaName="study" queryName="breedingGroupAssignments" bulkLoad="true" batchSize="500"
+                         targetOption="merge">
                 <columnTransforms>
                     <column source="ANBG_ASSIGNMENT_DATE" target="date"/>
                 </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
             </destination>
         </transform>
     </transforms>
     <incrementalFilter className="ModifiedSinceFilterStrategy" timestampColumnName="date_time">
-        <deletedRowsSource schemaName="cnprcSrc" queryName="q_breedingGroupAssignments_delete" timestampColumnName="date_time" deletedSourceKeyColumnName="objectid" targetKeyColumnName="objectid"/>
+        <deletedRowsSource schemaName="cnprcSrc" queryName="q_breedingGroupAssignments_delete"
+                           timestampColumnName="date_time" deletedSourceKeyColumnName="objectid"
+                           targetKeyColumnName="objectid"/>
     </incrementalFilter>
     <schedule>
-        <poll interval="60m" />
+        <poll interval="60m"/>
     </schedule>
 </etl>

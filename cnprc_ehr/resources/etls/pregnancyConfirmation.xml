@@ -10,6 +10,9 @@
                 <columnTransforms>
                     <column source="CON_ACCESSION_DATE" target="date"/>
                 </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
             </destination>
         </transform>
     </transforms>
