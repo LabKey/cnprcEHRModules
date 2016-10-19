@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc_aud.AIMAGE_PATH_REPORT_MASTER
+WHERE IPRM_AUD_CODE = 'D';

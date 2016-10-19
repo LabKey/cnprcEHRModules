@@ -400,9 +400,7 @@
     </table>
     <table tableName="image" tableDbType="TABLE">
         <columns>
-            <column columnName="Id">
-                <isKeyField>false</isKeyField>
-            </column>
+            <column columnName="Id"/>
             <column columnName="owner_type"/>
             <column columnName="owner_name"/>
             <column columnName="create_unit"/>
@@ -433,9 +431,7 @@
             <column columnName="is_release_approved"/>
             <column columnName="release_approved_by"/>
             <column columnName="release_approved_timestamp"/>
-            <column columnName="objectid">
-                <isKeyField>true</isKeyField>
-            </column>
+            <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>
@@ -445,14 +441,10 @@
     </table>
     <table tableName="image_snomed" tableDbType="TABLE">
         <columns>
-            <column columnName="rowid">
-                <isKeyField>false</isKeyField>
-            </column>
+            <column columnName="rowid"/>
             <column columnName="id"/>
             <column columnName="snomed_pk"/>
-            <column columnName="objectid">
-                <isKeyField>true</isKeyField>
-            </column>
+            <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>
@@ -462,14 +454,10 @@
     </table>
     <table tableName="image_pathology" tableDbType="TABLE">
         <columns>
-            <column columnName="rowid">
-                <isKeyField>false</isKeyField>
-            </column>
+            <column columnName="rowid"/>
             <column columnName="Id"/>
             <column columnName="prm_pk"/>
-            <column columnName="objectid">
-                <isKeyField>true</isKeyField>
-            </column>
+            <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>
