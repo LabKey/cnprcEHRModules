@@ -390,25 +390,25 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     private void validateLookupFromList(String list, String linkText, String expectedText)
     {
-        openListView();
+        beginAtPdlListView();
         clickAndWait(Locator.linkContainingText(list));
         clickAndWait(Locator.linkContainingText(linkText));
         assertTextPresent(expectedText);
     }
 
-    private void openListView()
+    private void beginAtPdlListView()
     {
         beginAt(PROJECT_NAME+ "/"  + COREFACILITIES + "/" + PDLFOLDER + "/list-begin.view?");
     }
 
     private void validateLookupFromTable(String table, String linkText, String expectedText) throws InterruptedException
     {
-        getTableView(table);
+        beginAtPdlTableView(table);
         clickAndWait(Locator.linkContainingText(linkText));
         waitForText(expectedText);
     }
 
-    private void getTableView(String table)
+    private void beginAtPdlTableView(String table)
     {
         beginAt("/query/" + PROJECT_NAME+ "/"  + COREFACILITIES + "/" + PDLFOLDER + "/executeQuery.view?query.queryName=" + table + "&schemaName=cnprc_pdl");
     }
