@@ -6,7 +6,12 @@ PRM_REPORT_COMPLETE AS enddate,
 PNM_NAME AS tissue,
 PNM_VALUE AS measurementValue,
 PMT_UNIT AS unit,
-nm.OBJECTID as objectid
+nm.OBJECTID as objectid,
+CAST (
+  GREATEST( IFNULL (nm.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (mt.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (rm.date_time,to_date('01-01-1900', 'DD-MM-YYYY')))
+AS TIMESTAMP ) AS DATE_TIME
 FROM
 cnprcSrc.ZPATH_NECROPSY_MEASUREMENTS nm
 LEFT JOIN

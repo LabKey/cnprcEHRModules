@@ -14,7 +14,12 @@ PD_TEXT_TOPOGRAPHY AS topographyNotes,
 PD_TEXT_MORPHOLOGY AS morphologyNotes,
 PD_TEXT_OTHER AS remark,
 PD_COMMENT AS description,
-d.OBJECTID as objectid
+d.OBJECTID as objectid,
+CAST (
+  GREATEST( IFNULL (d.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (pr.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (s.date_time,to_date('01-01-1900', 'DD-MM-YYYY')))
+AS TIMESTAMP ) AS DATE_TIME
 FROM cnprcSrc.ZPATH_DIAGNOSIS d
 LEFT JOIN
 cnprcSrc.ZPATH_REPORT pr
