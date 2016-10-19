@@ -1,5 +1,7 @@
 -- authored by client
 -- LK added objectid
+-- LK removed order by as it breaks merge
+-- LK added date_time
 SELECT
 a.reloc_an_id AS Id,
 (CASE WHEN a.reloc_location_prefix = '0100' THEN 'Escaped'
@@ -17,7 +19,8 @@ a.reloc_sale_comment AS remark,
       WHEN b.reloc_location_prefix = '0103' THEN 'Tmp Escp'
       WHEN b.reloc_location_prefix = '0200' THEN 'Here'
  END) AS nextreloctype,
-a.OBJECTID as objectid
+a.OBJECTID as objectid,
+GREATEST(a.DATE_TIME,ifnull(b.DATE_TIME, to_date('01-01-1900', 'DD-MM-YYYY'))) AS DATE_TIME
 FROM
 cnprcSrc.zrelocation a,
 cnprcSrc.zrelocation b
@@ -28,5 +31,4 @@ AND exists (SELECT NULL FROM cnprcSrc.zrelocation c
             AND c.reloc_date_in =  a.reloc_date_out
            )
 AND b.reloc_an_id = a.reloc_an_id
-AND b.reloc_seq = a.reloc_seq + 1
-ORDER BY 1, 4;
+AND b.reloc_seq = a.reloc_seq + 1;

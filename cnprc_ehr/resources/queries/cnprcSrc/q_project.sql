@@ -9,7 +9,13 @@ pr.PR_TITLE AS title,
 coalesce(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol,
 (CASE WHEN pt.PRT_TYPE = '3' THEN 'TRUE' ELSE 'FALSE' END) AS research,
 pt.PRT_TYPE AS projectType,
-pp.OBJECTID as objectid
+pr.OBJECTID as objectid,
+CAST (
+  GREATEST( IFNULL (pp.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (pr.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (pt.date_time,to_date('01-01-1900', 'DD-MM-YYYY'))
+          )
+AS TIMESTAMP ) AS DATE_TIME
 FROM cnprcSrc.ZPROJECT pr
 LEFT JOIN cnprcSrc.ZPROJECT_PROTOCOL pp
 ON pr.PR_CODE = pp.PP_PROJECT_ID

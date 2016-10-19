@@ -3,7 +3,8 @@ WT_AN_ID AS Id,
 WT_DATE AS weightDate,
 OBJECTID AS encounterId,
 OBJECTID AS objectId,
-'Weight' AS remark
+'Weight' AS remark,
+DATE_TIME
 FROM cnprcSrc.ZWEIGHING
 WHERE
 WT_WEIGHT_KG IS NOT NULL
@@ -17,7 +18,8 @@ WT_AN_ID AS Id,
 WT_DATE AS weightDate,
 OBJECTID AS encounterId,
 OBJECTID AS objectId,
-'TB Weight' AS remark
+'TB Weight' AS remark,
+DATE_TIME
 FROM cnprcSrc.ZWEIGHING
 WHERE
 WT_WEIGHT_KG IS NOT NULL AND
@@ -31,7 +33,8 @@ AN_ID AS Id,
 AN_BIRTH_DATE AS weightDate,
 OBJECTID AS encounterId,
 OBJECTID AS objectId,
-'Birth Weight' AS remark
+'Birth Weight' AS remark,
+DATE_TIME
 FROM cnprcSrc.ZANIMAL
 WHERE
 AN_BIRTH_WT_KG IS NOT NULL AND
@@ -44,7 +47,8 @@ PT_AN_ID AS Id,
 PT_START_DATE AS weightDate,
 OBJECTID AS encounterId,
 OBJECTID AS objectId,
-'Treatment Weight' AS remark
+'Treatment Weight' AS remark,
+DATE_TIME
 FROM cnprcSrc.ZPRIMED_TREATMENT
 WHERE
 PT_AN_WT_USED IS NOT NULL AND
@@ -57,7 +61,8 @@ ANIMID AS Id,
 TEST_DAT AS weightDate,
 OBJECTID AS encounterId,
 OBJECTID AS objectId,
-'Behavior Assessment Weight' AS remark
+'Behavior Assessment Weight' AS remark,
+DATE_TIME
 FROM cnprcSrc.ZBIO_BEHAVIORAL_ASSESSMENT
 WHERE
 WEIGHT IS NOT NULL AND
@@ -70,7 +75,8 @@ PR_AN_ID AS Id,
 PR_DATE AS weightDate,
 OBJECTID AS encounterId,
 OBJECTID AS objectId,
-'Biopsy/Necropsy Weight' AS remark
+'Biopsy/Necropsy Weight' AS remark,
+DATE_TIME
 FROM cnprcSrc.ZPATH_REPORT
 WHERE
 PR_BODY_WEIGHT_GRAMS IS NOT NULL AND

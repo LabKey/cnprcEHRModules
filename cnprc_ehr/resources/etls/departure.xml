@@ -5,15 +5,22 @@
     <transforms>
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
-            <source schemaName="cnprcSrc" queryName="q_departure" />
+            <source schemaName="cnprcSrc" queryName="q_departure"/>
             <destination schemaName="study" queryName="departure" bulkLoad="true" batchSize="500" targetOption="merge">
                 <columnTransforms>
                     <column source="RELOC_DATE_OUT" target="date"/>
                 </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
             </destination>
         </transform>
     </transforms>
+    <incrementalFilter className="ModifiedSinceFilterStrategy" timestampColumnName="date_time">
+        <deletedRowsSource schemaName="cnprcSrc" queryName="q_departure_delete" timestampColumnName="date_time"
+                           deletedSourceKeyColumnName="objectid" targetKeyColumnName="objectid"/>
+    </incrementalFilter>
     <schedule>
-        <poll interval="60m" />
+        <poll interval="60m"/>
     </schedule>
 </etl>
