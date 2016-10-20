@@ -605,6 +605,7 @@
             <column columnName="ship_location"/>
             <column columnName="technician"/>
             <column columnName="comments"/>
+            <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>
@@ -653,6 +654,8 @@
             <column columnName="column3"/>
             <column columnName="column4"/>
             <column columnName="comments"/>
+            <column columnName="notes"/>
+            <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>

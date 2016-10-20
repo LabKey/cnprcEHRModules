@@ -8,7 +8,12 @@ thp.FDTH_COLUMN01 AS column1,
 thp.FDTH_COLUMN02 AS column2,
 thp.FDTH_COLUMN03 AS column3,
 thp.FDTH_COLUMN04 AS column4,
-th.FDTH_COMMENT AS comments
+th.FDTH_COLUMN10 AS notes,
+th.FDTH_COMMENT AS comments,
+th.OBJECTID AS objectid,
+CAST (
+  GREATEST(th.date_time, IFNULL (thp.date_time, to_date('01-01-1900', 'DD-MM-YYYY')))
+AS TIMESTAMP) AS DATE_TIME
 FROM
 cnprcSrc_fdb.ZFREEZERDB_TISSUE_HARVEST th
 LEFT JOIN

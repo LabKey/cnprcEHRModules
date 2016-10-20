@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc_aud.AFREEZERDB_TISSUE_HARVEST
+WHERE FDTH_AUD_CODE = 'D';

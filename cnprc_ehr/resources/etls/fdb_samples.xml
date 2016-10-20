@@ -6,18 +6,16 @@
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc_fdb" queryName="q_fdb_samples"/>
-            <destination schemaName="study" queryName="fdb_samples" bulkLoad="true" targetOption="truncate">
+            <destination schemaName="study" queryName="fdb_samples" bulkLoad="true" targetOption="merge">
                 <columnTransforms>
                     <column source="FDS_COLLECTION_DATE" target="date"/>
                 </columnTransforms>
             </destination>
         </transform>
-        <transform id="step2" type="org.labkey.di.pipeline.TransformTask">
-            <description>Copy to target</description>
-            <source schemaName="cnprcSrc_fdb" queryName="q_fdb_samples_no_id"/>
-            <destination schemaName="cnprc_ehr" queryName="fdb_samples_no_id" bulkLoad="true" targetOption="truncate"/>
-        </transform>
     </transforms>
+    <incrementalFilter className="ModifiedSinceFilterStrategy" timestampColumnName="date_time">
+        <deletedRowsSource schemaName="cnprcSrc_aud" queryName="q_fdb_samples_delete" timestampColumnName="date_time" deletedSourceKeyColumnName="objectid" targetKeyColumnName="objectid"/>
+    </incrementalFilter>
     <schedule>
         <poll interval="60m" />
     </schedule>

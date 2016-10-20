@@ -46,6 +46,8 @@
                     <column columnName="column4">
                         <columnTitle>Column 4</columnTitle>
                     </column>
+                    <column columnName="notes"/>
+                    <column columnName="comments"/>
                 </columns>
             </table>
         </tables>

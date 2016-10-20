@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc_aud.AFREEZERDB_SAMPLE_CHECKOUT
+WHERE FDSC_AUD_CODE = 'D';
