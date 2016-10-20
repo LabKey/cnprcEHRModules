@@ -1,5 +1,5 @@
 SELECT
 OBJECTID as objectid,
 DATE_TIME
-FROM cnprcAud.APROJECT
+FROM cnprcSrc_aud.APROJECT
 WHERE PR_AUD_CODE = 'D'

@@ -1,5 +1,5 @@
 select
 objectid,
 date_time
-FROM cnprcAud.ABIO_BEHAVIORAL_ASSESSMENT
+FROM cnprcSrc_aud.ABIO_BEHAVIORAL_ASSESSMENT
 WHERE BBA_AUD_CODE = 'D'
