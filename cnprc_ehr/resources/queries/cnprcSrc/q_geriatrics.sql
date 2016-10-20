@@ -16,8 +16,8 @@ a.GA_BODY_CONDITION AS bodyCondition,
 a.GA_ABDOMINAL_SCORE AS abdominalScore,
 a.OBJECTID as objectid,
 CAST (
-  GREATEST(a.date_time, IFNULL (r.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
-                        IFNULL (g.date_time,to_date('01-01-1900', 'DD-MM-YYYY')))
+  GREATEST(a.date_time, IFNULL (r.GR_AUD_TIME,to_date('01-01-1900', 'DD-MM-YYYY')),
+                        IFNULL (g.GG_AUD_TIME,to_date('01-01-1900', 'DD-MM-YYYY')))
 AS TIMESTAMP ) AS DATE_TIME
 FROM cnprcSrc.ZGER_ANIMAL a
 LEFT JOIN
