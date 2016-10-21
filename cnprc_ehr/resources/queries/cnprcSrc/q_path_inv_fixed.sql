@@ -4,5 +4,7 @@ PFI_ANSEQ_FK AS anseq_fk,
 PF_CABINET AS cabinet,
 PF_BIN AS bin,
 PF_COMMENT AS comments,
-PFI_CHECK_SEQ_FK AS check_seq_fk
+PFI_CHECK_SEQ_FK AS check_seq_fk,
+OBJECTID AS objectid,
+DATE_TIME
 FROM cnprcSrc.ZPATH_FIXED;

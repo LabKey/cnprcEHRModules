@@ -474,6 +474,7 @@
             <column columnName="box"/>
             <column columnName="tissue"/>
             <column columnName="comments"/>
+            <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>
@@ -489,6 +490,7 @@
             <column columnName="bin"/>
             <column columnName="comments"/>
             <column columnName="check_seq_fk"/>
+            <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>
@@ -505,6 +507,7 @@
             <column columnName="tray"/>
             <column columnName="tissue"/>
             <column columnName="comments"/>
+            <column columnName="objectid"/>
             <column columnName="check_seq_fk"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
@@ -587,6 +590,7 @@
             <column columnName="checkDate"/>
             <column columnName="investigator"/>
             <column columnName="comments"/>
+            <column columnName="objectid"/>
             <column columnName="returnDate"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>

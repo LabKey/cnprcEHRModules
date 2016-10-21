@@ -5,5 +5,7 @@ PF_SHELF AS shelf,
 PF_DRAWER AS drawer,
 PF_BOX AS box,
 upper(PF_TISSUE) AS tissue,
-PF_COMMENT AS comments
+PF_COMMENT AS comments,
+OBJECTID AS objectid,
+DATE_TIME
 FROM cnprcSrc.ZPATH_FROZEN;

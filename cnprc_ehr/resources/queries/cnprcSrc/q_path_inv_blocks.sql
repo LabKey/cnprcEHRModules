@@ -6,5 +6,7 @@ PB_DRAWER AS drawer,
 PB_TRAY AS tray,
 PB_TISSUE AS tissue,
 PB_COMMENT AS comments,
-PB_CHECK_SEQ_FK AS check_seq_fk
+PB_CHECK_SEQ_FK AS check_seq_fk,
+OBJECTID AS objectid,
+DATE_TIME
 FROM cnprcSrc.ZPATH_BLOCKS;
