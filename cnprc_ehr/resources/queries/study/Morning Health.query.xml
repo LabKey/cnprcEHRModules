@@ -12,7 +12,12 @@
                         <columnTitle>Full Date</columnTitle>
                     </column>
                     <column columnName="fileNum">
-                        <columnTitle>Begin Date</columnTitle>
+                        <columnTitle>File Num</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>mh_file</fkTable>
+                            <fkColumnName>fileNo</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="sequence">
                         <columnTitle>Record Seq</columnTitle>

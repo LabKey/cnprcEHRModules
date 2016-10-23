@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc_aud.AAN_PROTOCOL_EXCEPTIONS
+WHERE APE_AUD_CODE = 'D';

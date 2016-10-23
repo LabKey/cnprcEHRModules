@@ -1,0 +1,5 @@
+SELECT
+objectid,
+date_time
+FROM cnprcSrc_aud.APROTOCOL_AMENDMENT
+WHERE PRTA_AUD_CODE = 'D';

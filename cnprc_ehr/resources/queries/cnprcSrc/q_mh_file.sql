@@ -1,0 +1,17 @@
+SELECT
+MHF_FILE_NO AS fileNo,
+MHF_FILE_NAME AS fileName,
+MHF_POST_TIMESTAMP AS postTimestamp,
+MHF_POST_USER AS postUser,
+MHF_READER_BEGIN_TIMESTAMP AS readerBeginTimestamp,
+MHF_READER_NUMBER AS readerNumber,
+MHF_READER_ATTENDANT AS readerAttendant,
+MHF_READER_HEADER_1 AS readerHeader_1,
+MHF_READER_HEADER_2 AS readerHeader_2,
+MHF_HEADER_RECS AS headerRecs,
+MHF_DATA_RECS AS dataRecs,
+MHF_TRAILER_RECS AS trailerRecs,
+MHF_READER_VALIDATION AS readerValidation,
+OBJECTID AS objectid,
+DATE_TIME
+FROM cnprcSrc.ZMH_FILE;

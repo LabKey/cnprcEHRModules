@@ -1,0 +1,10 @@
+SELECT
+MH_PK AS mh_pk,
+MH_DATE AS mhDate,
+MH_DATA AS mhData,
+MH_COMPUTER_NAME AS computerName,
+MH_IP_ADDRESS AS ipAddress,
+MH_LOGIN AS login,
+OBJECTID AS objectid,
+DATE_TIME
+FROM cnprcSrc.MH_DUMP;
