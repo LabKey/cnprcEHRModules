@@ -1672,9 +1672,8 @@
             <column columnName="treatmentPk">
                 <datatype>integer</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="code">
                 <datatype>varchar</datatype>
