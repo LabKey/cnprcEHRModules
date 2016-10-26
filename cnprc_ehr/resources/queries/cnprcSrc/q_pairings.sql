@@ -5,7 +5,7 @@ APM_START_DATE,
 APM_END_DATE AS endDate,
 APM_BEHAVIOR_CODE AS observation,
 APM_COMMENT AS remark,
-OBJECTID as objectid,
+p.OBJECTID as objectid,
 CAST(CASE WHEN(p.DATE_TIME > pm.DATE_TIME)
   THEN
     p.DATE_TIME
