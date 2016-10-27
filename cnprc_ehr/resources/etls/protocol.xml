@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <etl xmlns="http://labkey.org/etl/xml">
-<name>Protocol</name>
-<description>Protocol Lookup</description>
+<name>Protocol - Current and Historical (ehr)</name>
+<description>Protocols - Current and Historical</description>
 <transforms>
     <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
         <description>Copy to target</description>
         <source schemaName="cnprcSrc" queryName="q_protocol_ehr"/>
-        <destination schemaName="ehr" queryName="protocol" bulkLoad="true" targetOption="truncate"/>
-    </transform>
-    <transform id="step2" type="org.labkey.di.pipeline.TransformTask">
-        <description>Copy to target</description>
-        <source schemaName="cnprcSrc" queryName="q_protocol_cnprc_ehr"/>
-        <destination schemaName="cnprc_ehr" queryName="protocol" bulkLoad="true" targetOption="truncate"/>
+        <destination schemaName="ehr" queryName="protocol" bulkLoad="true" targetOption="merge"/>
     </transform>
 </transforms>
+    <incrementalFilter className="ModifiedSinceFilterStrategy" timestampColumnName="date_time">
+        <deletedRowsSource schemaName="cnprcSrc_aud" queryName="q_protocol_ehr_delete" timestampColumnName="date_time" deletedSourceKeyColumnName="objectid" targetKeyColumnName="objectid"/>
+    </incrementalFilter>
 <schedule>
     <poll interval="60m" />
 </schedule>
