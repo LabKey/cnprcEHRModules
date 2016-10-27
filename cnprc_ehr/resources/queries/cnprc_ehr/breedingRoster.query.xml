@@ -3,7 +3,7 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="breedingRoster" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id">
+                    <column columnName="id">
                         <url>/ehr/participantView.view?participantId=${Id}</url>
                     </column>
                     <column columnName="book"/>
