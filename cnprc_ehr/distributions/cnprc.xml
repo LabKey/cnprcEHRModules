@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <project default="usage">
-    <dirname property="moduleDir" file="${ant.file}"/>
-    <property name="jar.dir" value="../../cnprc_genetics" />
-
     <target name="distribution">
         <antcall target="gather_modules" />
-        <fileset dir="${jar.dir}" id="extra.files">
+        <fileset dir="${basedir}/../build/artifacts/cnprc" id="extra.files">
             <include name="*.jar"/>
         </fileset>
         <ant antfile="${basedir}/build.xml" target="package_redistributables">
