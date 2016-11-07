@@ -1305,6 +1305,9 @@
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
+            <column columnName="seqPk">
+                <datatype>integer</datatype>
+            </column>
             <column columnName="testDate">
                 <datatype>timestamp</datatype>
             </column>
