@@ -3,10 +3,8 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="clinical_observations" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Observation Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="category">
                         <columnTitle>Category</columnTitle>

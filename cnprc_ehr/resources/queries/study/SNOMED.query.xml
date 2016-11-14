@@ -9,11 +9,6 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id"/>
-                    <column columnName="date">
-                        <formatString>yyyy-MM-dd</formatString>
-                        <columnTitle>Date</columnTitle>
-                    </column>
                     <column columnName="infoQualifier">
                         <columnTitle>Info Qual</columnTitle>
                         <fk>

@@ -8,10 +8,8 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Admit Date</columnTitle>
-                        <formatString>yyyy-MM-dd</formatString>
                     </column>
                     <column columnName="enddate">
                         <columnTitle>Discharge Date</columnTitle>

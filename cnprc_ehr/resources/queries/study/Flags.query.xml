@@ -3,7 +3,6 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="flags" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Assign Date</columnTitle>
                     </column>

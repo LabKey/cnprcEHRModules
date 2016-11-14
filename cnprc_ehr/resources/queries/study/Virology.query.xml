@@ -3,14 +3,11 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="virology" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Sample Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="testDate">
                         <columnTitle>Test Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="target">
                         <columnTitle>Target</columnTitle>

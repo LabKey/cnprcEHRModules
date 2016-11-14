@@ -3,7 +3,6 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="freezerdb_samples" tableDbType="TABLE">
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Collection Date</columnTitle>
                     </column>

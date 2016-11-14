@@ -4,7 +4,6 @@
             <table tableName="image" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
 
-                    <column columnName="Id"/>
                     <column columnName="owner_type">
                         <columnTitle>Owner Type</columnTitle>
                     </column>

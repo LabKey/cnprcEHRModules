@@ -3,7 +3,6 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="image_pathology" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="prm_pk">
                         <columnTitle>Necropsy/Biopsy Key</columnTitle>
                     </column>

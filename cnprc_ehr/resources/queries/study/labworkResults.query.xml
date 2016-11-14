@@ -8,10 +8,8 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Test Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="project">
                         <nullable>true</nullable>

@@ -8,12 +8,8 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id">
-
-                    </column>
                     <column columnName="date">
                         <columnTitle>Arrival Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="source">
                         <columnTitle>Source</columnTitle>

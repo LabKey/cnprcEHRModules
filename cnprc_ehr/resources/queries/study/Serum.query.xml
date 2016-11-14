@@ -7,7 +7,6 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Sample Date</columnTitle>
                     </column>

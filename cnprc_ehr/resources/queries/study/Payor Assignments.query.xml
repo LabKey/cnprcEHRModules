@@ -3,14 +3,11 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="payor_assignments" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Assignment Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="enddate">
                         <columnTitle>Release Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="payor_id">
                         <columnTitle>Payor Id</columnTitle>

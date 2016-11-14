@@ -8,10 +8,8 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Date Out</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="relocType">
                         <columnTitle>Relocation Type</columnTitle>

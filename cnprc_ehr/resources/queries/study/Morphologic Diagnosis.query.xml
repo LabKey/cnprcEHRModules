@@ -9,9 +9,7 @@
             <updateUrl />
             <deleteUrl />
             <columns>
-                <column columnName="Id"/>
                 <column columnName="date">
-                    <formatString>yyyy-MM-dd</formatString>
                     <columnTitle>Report Date</columnTitle>
                 </column>
                 <column columnName="projectCode">

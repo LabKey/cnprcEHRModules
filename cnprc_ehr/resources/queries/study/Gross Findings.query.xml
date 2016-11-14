@@ -3,10 +3,8 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="Gross Findings" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Report Date</columnTitle>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                     </column>
                     <column columnName="organ">
                         <columnTitle>Organ/Tissue</columnTitle>

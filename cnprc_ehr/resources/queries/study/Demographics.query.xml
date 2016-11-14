@@ -8,7 +8,6 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id"/>
                     <column columnName="date">
                         <isHidden>true</isHidden>
                     </column>
@@ -42,7 +41,6 @@
                         </fk>
                     </column>
                     <column columnName="birth">
-                        <formatString>yyyy-MM-dd</formatString>
                         <!--<shownInInsertView>false</shownInInsertView>-->
                         <columnTitle>Birth</columnTitle>
                         <url>/query/executeQuery.view?
@@ -52,7 +50,6 @@
                         </url>
                     </column>
                     <column columnName="death">
-                        <formatString>yyyy-MM-dd</formatString>
                         <!--<shownInInsertView>false</shownInInsertView>-->
                         <columnTitle>Death</columnTitle>
                         <url>/query/executeQuery.view?
@@ -138,13 +135,11 @@
                     <column columnName="arrivedate">
                         <isHidden>true</isHidden>
                         <shownInInsertView>false</shownInInsertView>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                         <columnTitle>Arrival Date</columnTitle>
                     </column>
                     <column columnName="departdate">
                         <isHidden>true</isHidden>
                         <shownInInsertView>false</shownInInsertView>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                         <columnTitle>Departure Date</columnTitle>
                     </column>
                     <column columnName="room">
@@ -193,7 +188,6 @@
                     <column columnName="wdate">
                         <shownInInsertView>false</shownInInsertView>
                         <isHidden>true</isHidden>
-                        <formatString>yyyy-MM-dd HH:mm</formatString>
                         <columnTitle>Weight Date</columnTitle>
                         <url>/query/executeQuery.view?schemaName=study&amp;
                             query.queryName=Weight&amp;
@@ -204,7 +198,6 @@
                     <column columnName="tbdate">
                         <shownInInsertView>false</shownInInsertView>
                         <isHidden>true</isHidden>
-                        <formatString>yyyy-MM-dd</formatString>
                         <columnTitle>Last TB Date</columnTitle>
                         <url>/query/executeQuery.view?schemaName=study&amp;
                             query.queryName=TB Tests&amp;
