@@ -8,6 +8,7 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="date">
                         <isHidden>true</isHidden>
                     </column>
@@ -42,6 +43,7 @@
                     </column>
                     <column columnName="birth">
                         <!--<shownInInsertView>false</shownInInsertView>-->
+                        <formatString>Date</formatString>
                         <columnTitle>Birth</columnTitle>
                         <url>/query/executeQuery.view?
                             schemaName=study&amp;
@@ -51,6 +53,7 @@
                     </column>
                     <column columnName="death">
                         <!--<shownInInsertView>false</shownInInsertView>-->
+                        <formatString>Date</formatString>
                         <columnTitle>Death</columnTitle>
                         <url>/query/executeQuery.view?
                             schemaName=study&amp;
@@ -133,11 +136,13 @@
 
                     <!--NOTE: being deprecated-->
                     <column columnName="arrivedate">
+                        <formatString>Date</formatString>
                         <isHidden>true</isHidden>
                         <shownInInsertView>false</shownInInsertView>
                         <columnTitle>Arrival Date</columnTitle>
                     </column>
                     <column columnName="departdate">
+                        <formatString>Date</formatString>
                         <isHidden>true</isHidden>
                         <shownInInsertView>false</shownInInsertView>
                         <columnTitle>Departure Date</columnTitle>
@@ -186,6 +191,7 @@
                     </column>
                     <!--NOTE: being deprecated-->
                     <column columnName="wdate">
+                        <formatString>Date</formatString>
                         <shownInInsertView>false</shownInInsertView>
                         <isHidden>true</isHidden>
                         <columnTitle>Weight Date</columnTitle>
@@ -196,6 +202,7 @@
                         </url>
                     </column>
                     <column columnName="tbdate">
+                        <formatString>Date</formatString>
                         <shownInInsertView>false</shownInInsertView>
                         <isHidden>true</isHidden>
                         <columnTitle>Last TB Date</columnTitle>

@@ -3,6 +3,7 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="Weight" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Weight Date</columnTitle>
                     </column>

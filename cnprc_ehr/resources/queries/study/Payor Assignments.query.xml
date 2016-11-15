@@ -3,6 +3,7 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="payor_assignments" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Assignment Date</columnTitle>
                     </column>

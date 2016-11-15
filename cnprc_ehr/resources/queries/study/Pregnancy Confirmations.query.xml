@@ -3,6 +3,7 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="pregnancyConfirmations" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Accession Date</columnTitle>
                     </column>

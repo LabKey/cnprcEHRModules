@@ -5,6 +5,7 @@
                 <tableUrl />
                 <tableTitle>Experimental Inoculation</tableTitle>
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Inoculation Date</columnTitle>
                     </column>

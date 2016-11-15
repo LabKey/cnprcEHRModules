@@ -1,4 +1,3 @@
-
 <query xmlns="http://labkey.org/data/xml/query">
 <metadata>
     <tables xmlns="http://labkey.org/data/xml">
@@ -9,8 +8,10 @@
             <updateUrl />
             <deleteUrl />
             <columns>
+                <column columnName="Id"/>
                 <column columnName="date">
                     <columnTitle>Report Date</columnTitle>
+                    <formatString>Date</formatString>
                 </column>
                 <column columnName="projectCode">
                     <columnTitle>Project Code</columnTitle>

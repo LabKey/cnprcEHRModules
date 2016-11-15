@@ -8,6 +8,8 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
+                    <column columnName="Id"/>
+                    <column columnName="treatmentPk"/>
                     <column columnName="date">
                         <columnTitle>Begin Date</columnTitle>
                     </column>

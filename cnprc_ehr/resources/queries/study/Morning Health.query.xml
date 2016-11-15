@@ -3,8 +3,10 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="MorningHealth" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Begin Date</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                     <column columnName="fulldate">
                         <columnTitle>Full Date</columnTitle>

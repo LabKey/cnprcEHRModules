@@ -3,6 +3,7 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="parentage" tableDbType="TABLE">
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="parent">
                         <columnTitle>Parent</columnTitle>
                         <fk>

@@ -3,6 +3,7 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="matings" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
+                    <column columnName="Id"/>
                     <column columnName="male">
                         <columnTitle>Sire</columnTitle>
                         <url>/ehr/participantView.view?participantId=${male}</url>

@@ -3,6 +3,8 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="tb" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
+                    <column columnName="Id"/>
+                    <column columnName="date"/>
                     <column columnName="project">
                         <columnTitle>Project</columnTitle>
                         <isHidden>true</isHidden>
