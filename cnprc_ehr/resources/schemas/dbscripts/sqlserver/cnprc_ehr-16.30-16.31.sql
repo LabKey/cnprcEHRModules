@@ -1,0 +1,1 @@
+drop table cnprc_ehr.project_charge;

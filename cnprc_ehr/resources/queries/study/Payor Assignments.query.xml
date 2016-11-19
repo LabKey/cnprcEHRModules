@@ -13,7 +13,8 @@
                     <column columnName="payor_id">
                         <columnTitle>Payor Id</columnTitle>
                         <fk>
-                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkFolderPath>/CNPRC/Core Facilities/Billing</fkFolderPath>
+                            <fkDbSchema>cnprc_billing</fkDbSchema>
                             <fkTable>project_charge</fkTable>
                             <fkColumnName>payor_id</fkColumnName>
                         </fk>
