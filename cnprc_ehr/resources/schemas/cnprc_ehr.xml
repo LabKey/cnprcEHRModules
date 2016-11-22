@@ -730,4 +730,26 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="center_unit" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="center_unit_seqpk"/>
+            <column columnName="center_unit_code"/>
+            <column columnName="center_unit_title"/>
+            <column columnName="center_unit_department"/>
+            <column columnName="center_unit_comment"/>
+            <column columnName="center_unit_active"/>
+            <column columnName="center_unit_key"/>
+            <column columnName="center_unit_record_class"/>
+            <column columnName="general_reports_sort_order"/>
+            <column columnName="grant_reports_sort_order"/>
+            <column columnName="financial_rpts_routed_to_cp_fk"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>
