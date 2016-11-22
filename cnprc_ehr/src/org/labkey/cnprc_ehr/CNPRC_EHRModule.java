@@ -74,6 +74,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         EHRService.get().registerModule(this);
         EHRService.get().registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
 
+        EHRService.get().registerOptionalClinicalHistoryResources(this);
+
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
             @Override
