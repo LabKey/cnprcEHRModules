@@ -13,7 +13,4 @@
             </destination>
         </transform>
     </transforms>
-    <schedule>
-        <poll interval="60m" />
-    </schedule>
 </etl>

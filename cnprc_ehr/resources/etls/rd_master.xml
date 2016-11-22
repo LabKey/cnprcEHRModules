@@ -9,7 +9,4 @@
             <destination schemaName="cnprc_ehr" queryName="rd_master" bulkLoad="true" targetOption="truncate"/>
         </transform>
     </transforms>
-    <schedule>
-        <poll interval="60m" />
-    </schedule>
 </etl>
