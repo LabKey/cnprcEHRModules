@@ -313,8 +313,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
 
-        animalHistoryPage.setSearchText(CNPRC_ANIMAL);
-        animalHistoryPage.refreshReport();
+        animalHistoryPage.searchSingleAnimal(CNPRC_ANIMAL);
         _helper.verifyReportTabs(animalHistoryPage, CNPRC_REPORTS);
     }
 
