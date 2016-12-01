@@ -25,6 +25,7 @@ import org.junit.experimental.categories.Category;
 import org.labkey.remoteapi.Connection;
 import org.labkey.remoteapi.query.InsertRowsCommand;
 import org.labkey.test.Locator;
+import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.TestFileUtils;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
@@ -59,6 +60,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String GENETICSFOLDER = "Genetics";
     private static final String PDLFOLDER = "PDL";
     private static final String BILLINGFOLDER = "Billing";
+    private static final String COMPLIANCE_AND_TRAINING_FOLDER = "Compliance And Training";
+
     public static final String CNPRC_ANIMAL = "TEST3804589";
     private static final String ASSAY_GENETICS = "Genetics";
     private static final File ASSAY_GENETICS_XAR = TestFileUtils.getSampleData("cnprc/assays/CNPRC_Genetics.xar");
@@ -159,6 +162,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickFolder(PROJECT_NAME);
         PortalHelper portalHelper = new PortalHelper(this);
         portalHelper.addWebPart("EHR Datasets");
+
+        clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
+        setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
     }
 
     protected void initGenetics() throws Exception
@@ -216,6 +222,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     public String getGeneticsPath() { return PROJECT_NAME + "/" + COREFACILITIES + "/" + GENETICSFOLDER; }
 
+    public String getComplianceAndTrainingPath() { return PROJECT_NAME + "/" + COREFACILITIES + "/" + COMPLIANCE_AND_TRAINING_FOLDER; }
+
+
     @Override
     protected void createProjectAndFolders(String type)
     {
@@ -224,6 +233,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, GENETICSFOLDER, "Laboratory Folder", new String[]{"SequenceAnalysis", "CNPRC_Genetics"});
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, PDLFOLDER, "Collaboration", new String[]{"CNPRC_PDL"});
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, BILLINGFOLDER, "Custom", new String[]{"CNPRC_Billing"});
+        _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, COMPLIANCE_AND_TRAINING_FOLDER, "Compliance and Training", new String[]{"CNPRC_ComplianceAndTraining"});
         clickFolder(getProjectName());
     }
 
