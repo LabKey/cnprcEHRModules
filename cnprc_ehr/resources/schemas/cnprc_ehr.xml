@@ -528,16 +528,6 @@
             <column columnName="Container"/>
     </columns>
     </table>
-    <table tableName="persons" tableDbType="TABLE">
-        <columns>
-            <column columnName="person_pk"/>
-            <column columnName="Created"/>
-            <column columnName="CreatedBy"/>
-            <column columnName="Modified"/>
-            <column columnName="ModifiedBy"/>
-            <column columnName="Container"/>
-    </columns>
-    </table>
     <table tableName="keys" tableDbType="TABLE">
         <columns>
             <column columnName="key_pk"/>
