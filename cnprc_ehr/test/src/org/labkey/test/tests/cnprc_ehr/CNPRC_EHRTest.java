@@ -43,6 +43,7 @@ import org.labkey.test.util.external.labModules.LabModuleHelper;
 import org.openqa.selenium.WebElement;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -55,6 +56,7 @@ import static org.junit.Assert.assertEquals;
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
     private static final String PROJECT_NAME = "CNPRC";
+    protected final String ANIMAL_HISTORY_URL = "/ehr/" + PROJECT_NAME + "/animalHistory.view?";
     private static final String FOLDER_NAME = "CNPRC";
     private static final String COREFACILITIES = "Core Facilities";
     private static final String GENETICSFOLDER = "Genetics";
@@ -400,6 +402,54 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         validateLookupFromTable("sub_tests", "400", "Test Comment 400");
     }
 
+    @Test
+    public void testClinicalHistoryPanelOptions(){
+        List<String> expectedLabels = new ArrayList<String>(
+                Arrays.asList(
+                        "Assignments",
+                        "Clinical",
+                        "Housing Transfers",
+                        "LabworkResults",
+                        "Vitals",
+                        "Blood Draws",
+                        "Deliveries",
+                        "Labwork",
+                        "Pregnancy Confirmations",
+                        "Weights"
+                ));
+//        compareExpectedClinicalHistoryTypes(expectedLabels);
+    }
+
+    @Test
+    public void testClinicalHistoryPanelOptions(){
+        beginAtAnimalHistoryTab();
+        openClinicalHistoryForAnimal("TEST1020148");
+        List<String> expectedLabels = new ArrayList<String>(
+                Arrays.asList(
+                        "Alert",
+                        "Arrival/Departure",
+                        "Biochemistry",
+                        "Blood Draws",
+                        "Deaths",
+                        "Hematology",
+                        "Labwork",
+                        "Misc Tests",
+                        "Pregnancy Confirmations",
+                        "Weights",
+                        "Antibiotic Sensitivity",
+                        "Assignments",
+                        "Births",
+                        "Clinical",
+                        "Deliveries",
+                        "Housing Transfers",
+                        "Microbiology",
+                        "Parasitology",
+                        "Serology",
+                        "iStat"
+                ));
+        checkClinicalHistoryType(expectedLabels);
+    }
+
     private void validateLookupFromList(String list, String linkText, String expectedText)
     {
         beginAtPdlListView();
@@ -497,5 +547,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test @Ignore
     public void testCalculatedAgeColumns()
     {
+    }
+
+    @Override
+    protected String getAnimalHistoryPath()
+    {
+        return ANIMAL_HISTORY_URL;
     }
 }
