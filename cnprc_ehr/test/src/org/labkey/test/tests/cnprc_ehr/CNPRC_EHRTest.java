@@ -200,12 +200,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         return Arrays.asList("ehr", "cnprc_ehr", "cnprc_genetics");
     }
 
-    @Override
-    protected void goToEHRFolder()
-    {
-        clickProject(getProjectName());
-    }
-
     @Nullable
     @Override
     protected String getProjectName()
