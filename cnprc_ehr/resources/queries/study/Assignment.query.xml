@@ -54,40 +54,8 @@
                         <isHidden>true</isHidden>
                     </column>
                     <column columnName="parentid"/>
-                    <column columnName="assignCondition">
-                        <columnTitle>Condition At Assignment</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>animal_condition</fkTable>
-                            <fkColumnName>code</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="projectedReleaseCondition">
-                        <columnTitle>Projected Release Condition</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>animal_condition</fkTable>
-                            <fkColumnName>code</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="releaseCondition">
-                        <columnTitle>Condition At Release</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>animal_condition</fkTable>
-                            <fkColumnName>code</fkColumnName>
-                        </fk>
-                    </column>
                     <column columnName="performedby">
                         <isHidden>true</isHidden>
-                    </column>
-                    <column columnName="releaseType">
-                        <columnTitle>Release Type</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>assignmentReleaseType</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                        </fk>
                     </column>
                     <column columnName="enddatefinalized">
                         <columnTitle>Date Assignment End Entered</columnTitle>
