@@ -8,6 +8,11 @@
         <source schemaName="cnprcSrc" queryName="q_rooms"/>
         <destination schemaName="ehr_lookups" queryName="rooms" bulkLoad="true" targetOption="truncate"/>
     </transform>
+    <transform id="step2" type="org.labkey.di.pipeline.TransformTask">
+        <description>Copy to target</description>
+        <source schemaName="cnprcSrc" queryName="q_room_enclosure"/>
+        <destination schemaName="cnprc_ehr" queryName="room_enclosure" bulkLoad="true" targetOption="truncate"/>
+    </transform>
 </transforms>
 <schedule>
     <poll interval="60m" />

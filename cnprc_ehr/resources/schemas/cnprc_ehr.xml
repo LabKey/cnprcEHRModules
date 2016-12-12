@@ -742,4 +742,42 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="cage_location_history" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="location"/>
+            <column columnName="location_history_pk"/>
+            <column columnName="cage_size"/>
+            <column columnName="rate_class"/>
+            <column columnName="from_date"/>
+            <column columnName="to_date"/>
+            <column columnName="file_status"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="room_enclosure" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="room"/>
+            <column columnName="file_status"/>
+            <column columnName="management_type"/>
+            <column columnName="supervisor"/>
+            <column columnName="weight_sheet_frequency"/>
+            <column columnName="food_id"/>
+            <column columnName="supplemental_diet"/>
+            <column columnName="remark"/>
+            <column columnName="isMhRoom"/>
+            <column columnName="mh_group"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>
