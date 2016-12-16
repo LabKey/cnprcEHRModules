@@ -89,6 +89,10 @@ Q2D		Every 2 days?	N
 Q48		Every 48 hours	N
 Q14		Every 14 days	N
 Q90	14	Every 90 days	Y
+Q14D
+Q21D
+Q28D
+Q30D
 Emergency	1	Emergency	Y
 Antibiotic	50	Antibiotics	Y
 Anticoagulant	60	Anticoagulants	Y
