@@ -26,9 +26,9 @@
                     <column columnName="species">
                         <columnTitle>Species code (3 char)</columnTitle>
                         <fk>
-                            <fkDbSchema>snprc_ehr</fkDbSchema>
-                            <fkTable>species</fkTable>
-                            <fkColumnName>species_code</fkColumnName>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>species_codes</fkTable>
+                            <fkColumnName>code</fkColumnName>
                             <fkDisplayColumnName useRawValue="true"/>
                         </fk>
                     </column>
@@ -60,16 +60,6 @@
                             query.queryName=Deaths&amp;
                             query.Id~eq=${Id}
                         </url>
-                    </column>
-                    <column columnName="status">
-                        <shownInInsertView>false</shownInInsertView>
-                        <isHidden>true</isHidden>
-                        <columnTitle>Status</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>status_codes</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                        </fk>
                     </column>
                     <column columnName="calculated_status">
                         <shownInInsertView>false</shownInInsertView>
