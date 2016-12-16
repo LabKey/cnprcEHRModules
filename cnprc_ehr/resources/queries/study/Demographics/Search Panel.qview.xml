@@ -1,0 +1,58 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView" hidden="true">
+    <columns>
+        <column name="species">
+            <properties>
+                <property name="columnTitle" value="Species code (3 char)"/>
+            </properties>
+        </column>
+        <column name="gender"/>
+        <column name="calculated_status">
+            <properties>
+                <property name="columnTitle" value="Status"/>
+            </properties>
+        </column>
+        <column name="Id/age/AgeInYearsRounded"/>
+        <column name="Id/MostRecentWeight/MostRecentWeight"/>
+        <column name="Id/curLocation/area">
+            <properties>
+                <property name="columnTitle" value="Area"/>
+            </properties>
+        </column>
+        <column name="Id/curLocation/room">
+            <properties>
+                <property name="columnTitle" value="Room"/>
+            </properties>
+        </column>
+        <column name="Id/curLocation/cage">
+            <properties>
+                <property name="columnTitle" value="Cage"/>
+            </properties>
+        </column>
+        <column name="Id/AssignmentCurrent/projectCode">
+            <properties>
+            <property name="columnTitle" value="Current Projects"/>
+            </properties>
+        </column>
+        <column name="Id/AssignmentPast/projectCode">
+            <properties>
+                <property name="columnTitle" value="Past Projects"/>
+            </properties>
+        </column>
+        <column name="Id/PayorAssignment/payor_id/payor_id"/>
+        <column name="Id/attributes/flag">
+            <properties>
+                <property name="columnTitle" value="Census Flags"/>
+            </properties>
+        </column>
+        <column name="Id/BreedingGroup/groupCode/value">
+            <properties>
+                <property name="columnTitle" value="Breeding Group"/>
+            </properties>
+        </column>
+        <column name="Id/tb/date">
+            <properties>
+            <property name="columnTitle" value="TB Date"/>
+            </properties>
+        </column>
+    </columns>
+</customView>

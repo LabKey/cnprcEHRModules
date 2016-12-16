@@ -28,6 +28,7 @@ import org.labkey.api.view.ActionURL;
 import org.labkey.api.view.NavTree;
 import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
+import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -75,6 +76,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         EHRService.get().registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
 
         EHRService.get().registerOptionalClinicalHistoryResources(this);
+
+        EHRService.get().registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
