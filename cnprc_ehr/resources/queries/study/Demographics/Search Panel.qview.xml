@@ -49,6 +49,11 @@
                 <property name="columnTitle" value="Breeding Group"/>
             </properties>
         </column>
+        <column name="Id/PregnancyConfirmation/conNum">
+            <properties>
+                <property name="columnTitle" value="Pregnancy Confirmation #"/>
+            </properties>
+        </column>
         <column name="Id/tb/date">
             <properties>
             <property name="columnTitle" value="TB Date"/>

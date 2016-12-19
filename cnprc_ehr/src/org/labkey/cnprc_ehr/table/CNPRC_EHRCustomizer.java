@@ -76,11 +76,19 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn(" BreedingGroup") == null)
+        if (ds.getColumn("BreedingGroup") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "BreedingGroup", "breedingGroupAssignments", "Id", "Id");
             col.setLabel("Breeding Group");
             col.setDescription("Breeding Group");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("PregnancyConfirmation") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "PregnancyConfirmation", "pregnancyConfirmation", "Id", "Id");
+            col.setLabel("Pregnancy Confirmation");
+            col.setDescription("Pregnancy Confirmation");
             ds.addColumn(col);
         }
 
