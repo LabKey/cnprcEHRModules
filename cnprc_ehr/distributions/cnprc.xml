@@ -25,6 +25,7 @@
                 <include name="cnprc_pdl.module" />
                 <include name="cnprc_complianceAndTraining.module" />
                 <include name="ehr.module" />
+                <include name="ehr_compliancedb.module" />
                 <include name="laboratory.module" />
                 <include name="LDK.module" />
             </fileset>
