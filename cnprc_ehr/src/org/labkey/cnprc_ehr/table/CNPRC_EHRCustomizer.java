@@ -92,6 +92,22 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("Serum") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "Serum", "serum", "Id", "Id");
+            col.setLabel("Serum");
+            col.setDescription("Serum");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("WeightEncounter") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "WeightEncounter", "WeightEncounter", "Id", "Id");
+            col.setLabel("Weight Encounter");
+            col.setDescription("Weight Encounter");
+            ds.addColumn(col);
+        }
+
     }
 
     private ColumnInfo getWrappedCol(UserSchema us, AbstractTableInfo ds, String name, String queryName, String colName, String targetCol)
