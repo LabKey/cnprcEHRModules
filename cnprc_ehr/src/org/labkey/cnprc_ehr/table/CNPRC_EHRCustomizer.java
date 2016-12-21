@@ -35,20 +35,20 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             return;
         }
 
-        if (ds.getColumn("flags") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "attributes", "flags", "Id", "Id");
-            col.setLabel("Attributes");
-            col.setDescription("Animal Attributes");
-            col.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=ehr_lookups&queryName=flag_codes&query.Id~eq=${Id}", ds.getContainerContext()));
-            ds.addColumn(col);
-        }
 
         if (ds.getColumn("AssignmentCurrent") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "AssignmentCurrent", "AssignmentCurrent", "Id", "Id");
             col.setLabel("Current Assignments");
             col.setDescription("Current Project Assignments");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("Arrival") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "Arrival", "arrival", "Id", "Id");
+            col.setLabel("Arrival");
+            col.setDescription("Arrival");
             ds.addColumn(col);
         }
 
@@ -60,11 +60,36 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn("TB") == null)
+        if (ds.getColumn("BreedingGroup") == null)
         {
-            ColumnInfo col = getWrappedCol(us, ds, "TB", "tb", "Id", "Id");
-            col.setLabel("TB Test Results");
-            col.setDescription("TB Test Results");
+            ColumnInfo col = getWrappedCol(us, ds, "BreedingGroup", "breedingGroupAssignments", "Id", "Id");
+            col.setLabel("Breeding Group");
+            col.setDescription("Breeding Group");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("Cases") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "Cases", "Cases", "Id", "Id");
+            col.setLabel("Cases");
+            col.setDescription("Cases");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("flags") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "attributes", "flags", "Id", "Id");
+            col.setLabel("Attributes");
+            col.setDescription("Animal Attributes");
+            col.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=ehr_lookups&queryName=flag_codes&query.Id~eq=${Id}", ds.getContainerContext()));
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("Labwork Results") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "LabworkResults", "labworkResults", "Id", "Id");
+            col.setLabel("Labwork Results");
+            col.setDescription("Labwork Results");
             ds.addColumn(col);
         }
 
@@ -73,14 +98,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ColumnInfo col = getWrappedCol(us, ds, "PayorAssignment", "payor_assignmentS", "Id", "Id");
             col.setLabel("Payor Assignment");
             col.setDescription("Payor Assignment");
-            ds.addColumn(col);
-        }
-
-        if (ds.getColumn("BreedingGroup") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "BreedingGroup", "breedingGroupAssignments", "Id", "Id");
-            col.setLabel("Breeding Group");
-            col.setDescription("Breeding Group");
             ds.addColumn(col);
         }
 
@@ -97,6 +114,22 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ColumnInfo col = getWrappedCol(us, ds, "Serum", "serum", "Id", "Id");
             col.setLabel("Serum");
             col.setDescription("Serum");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("Snomed Animals Conceptions") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "SnomedAnimalsConceptions", "snomed_animals_conceptions", "Id", "Id");
+            col.setLabel("SnomedAnimalsConceptions");
+            col.setDescription("SnomedAnimalsConceptions");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("TB") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "TB", "tb", "Id", "Id");
+            col.setLabel("TB Test Results");
+            col.setDescription("TB Test Results");
             ds.addColumn(col);
         }
 

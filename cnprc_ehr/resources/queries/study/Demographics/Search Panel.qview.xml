@@ -54,6 +54,11 @@
                 <property name="columnTitle" value="Pregnancy Confirmation #"/>
             </properties>
         </column>
+        <column name="Id/SnomedAnimalsConceptions/code/code">
+            <properties>
+                <property name="columnTitle" value="SNOMED"/>
+            </properties>
+        </column>
         <column name="Id/tb/date">
             <properties>
             <property name="columnTitle" value="TB Date"/>
