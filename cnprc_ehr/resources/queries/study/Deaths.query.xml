@@ -4,9 +4,14 @@
             <table tableName="Cycle" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
-                    <column columnName="date"/>
-                    <column columnName="cause"/>
+                    <column columnName="date">
+                        <columnTitle>Death Date</columnTitle>
+                    </column>
+                    <column columnName="cause">
+                        <columnTitle>Cause</columnTitle>
+                    </column>
                     <column columnName="necropsy">
+                        <columnTitle>Necropsy</columnTitle>
                         <url>/query/executeQuery.view?schemaName=study&amp;
                             query.queryName=necropsy&amp;
                             query.id~eq=${id}
@@ -18,10 +23,6 @@
                             <fkDisplayColumnName>reportType</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="objectid"/>
-                    <column columnName="enddate"/>
-                    <column columnName="roomattime"/>
-                    <column columnName="cageattime"/>
                     <column columnName="manner">
                         <columnTitle>Death Manner</columnTitle>
                             <fk>
@@ -31,8 +32,12 @@
                                 <fkDisplayColumnName>Title</fkDisplayColumnName>
                             </fk>
                     </column>
-                    <column columnName="dam"/>
-                    <column columnName="notAtCenter"/>
+                    <column columnName="dam">
+                        <columnTitle>Dam</columnTitle>
+                    </column>
+                    <column columnName="notAtCenter">
+                        <columnTitle>Not at Center</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>
