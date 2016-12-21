@@ -539,6 +539,9 @@
             <column columnName="prPk">
                 <datatype>integer</datatype>
             </column>
+            <column columnName="prmFk">
+                <datatype>integer</datatype>
+            </column>
             <column columnName="caseno">
                 <datatype>varchar</datatype>
             </column>
