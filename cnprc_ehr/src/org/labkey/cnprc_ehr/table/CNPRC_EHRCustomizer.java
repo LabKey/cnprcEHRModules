@@ -60,6 +60,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+
         if (ds.getColumn("BreedingGroup") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "BreedingGroup", "breedingGroupAssignments", "Id", "Id");
@@ -73,6 +74,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ColumnInfo col = getWrappedCol(us, ds, "Cases", "Cases", "Id", "Id");
             col.setLabel("Cases");
             col.setDescription("Cases");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("DeathNecropsy") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DeathNecropsy", "Deaths", "Id", "Id");
+            col.setLabel("Death");
+            col.setDescription("Death");
             ds.addColumn(col);
         }
 
@@ -98,6 +107,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ColumnInfo col = getWrappedCol(us, ds, "PayorAssignment", "payor_assignmentS", "Id", "Id");
             col.setLabel("Payor Assignment");
             col.setDescription("Payor Assignment");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("Pairings") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "Pairings", "Pairings", "Id", "Id");
+            col.setLabel("Pairings");
+            col.setDescription("Pairings");
             ds.addColumn(col);
         }
 
