@@ -94,7 +94,15 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn("Labwork Results") == null)
+        if (ds.getColumn("HybridReportFlags") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "HybridReportFlags", "HybridReportFlags", "Id", "Id");
+            col.setLabel("HybridReportFlags");
+            col.setDescription("Supports presenting flags in Hybrid Report");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("LabworkResults") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "LabworkResults", "labworkResults", "Id", "Id");
             col.setLabel("Labwork Results");
