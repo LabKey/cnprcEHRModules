@@ -77,14 +77,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn("DeathNecropsy") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "DeathNecropsy", "Deaths", "Id", "Id");
-            col.setLabel("Death");
-            col.setDescription("Death");
-            ds.addColumn(col);
-        }
-
         if (ds.getColumn("flags") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "attributes", "flags", "Id", "Id");
