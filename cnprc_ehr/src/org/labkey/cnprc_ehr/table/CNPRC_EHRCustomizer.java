@@ -126,6 +126,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("Gestation") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "Gestation", "Gestation", "Id", "Id");
+            col.setLabel("Gestation");
+            col.setDescription("Gestation");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("Serum") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "Serum", "serum", "Id", "Id");

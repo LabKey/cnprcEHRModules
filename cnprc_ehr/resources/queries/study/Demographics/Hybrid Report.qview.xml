@@ -1,0 +1,49 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="Id"/>
+        <column name="gender"/>
+        <column name="Id/age/yearsAndMonths">
+            <properties>
+                <property name="columnTitle" value="Age today Y:M"/>
+            </properties>
+        </column>
+        <column name="Id/curLocation">
+            <properties>
+                <property name="columnTitle" value="Location"/>
+            </properties>
+        </column>
+        <column name="Id/MostRecentWeight/MostRecentWeight">
+            <properties>
+                <property name="columnTitle" value="Current Weight (kg)"/>
+            </properties>
+        </column>
+        <column name="Id/PregnancyConfirmation/colonyCode"/>
+        <column name="Id/LabworkResults/spf"/>
+        <column name="Id/AssignmentCurrent/projectCode"/>
+        <column name="Id/PayorAssignment/payor_id"/>
+        <column name="Id/HybridReportFlags/HGL2"/>
+        <column name="Id/HybridReportFlags/HJS2"/>
+        <column name="Id/HybridReportFlags/HLH2"/>
+        <column name="Id/HybridReportFlags/HODK"/>
+        <column name="Id/HybridReportFlags/HOGL"/>
+        <column name="Id/HybridReportFlags/HOJV"/>
+        <column name="Id/HybridReportFlags/HOLG"/>
+        <column name="Id/HybridReportFlags/HOJS"/>
+        <column name="Id/HybridReportFlags/HOLH"/>
+        <column name="Id/HybridReportFlags/HOMS"/>
+        <column name="Id/HybridReportFlags/HOPM"/>
+        <column name="Id/HybridReportFlags/HOSG"/>
+        <column name="Id/HybridReportFlags/HOVB"/>
+        <column name="Id/HybridReportFlags/HOWA"/>
+        <column name="Id/HybridReportFlags/HOVL"/>
+        <column name="Id/HybridReportFlags/HOYK"/>
+        <column name="Id/HybridReportFlags/HYK2"/>
+    </columns>
+    <filters>
+        <filter column="calculated_status" operator="eq" value="Alive"/>
+        <filter column="Id/attributes/flag/value" operator="in" value="CH14;CH12;CH18;CH34;CH38;CH58;CH78;CHI1)"/>
+    </filters>
+    <sorts>
+        <sort column="Id" descending="false"/>
+    </sorts>
+</customView>
