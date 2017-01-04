@@ -56,7 +56,7 @@
         </column>
         <column name="Id/PregnancyConfirmation/conNum">
             <properties>
-                <property name="columnTitle" value="Pregnancy Confirmation #"/>
+                <property name="columnTitle" value="Pregnancy Conception Num"/>
             </properties>
         </column>
         <column name="Id/PregnancyConfirmation/colonyCode">
@@ -72,6 +72,11 @@
         <column name="Id/tb/date">
             <properties>
             <property name="columnTitle" value="TB Date"/>
+            </properties>
+        </column>
+        <column name="Id/labworkResults/spf">
+            <properties>
+                <property name="columnTitle" value="SPF Status"/>
             </properties>
         </column>
     </columns>
