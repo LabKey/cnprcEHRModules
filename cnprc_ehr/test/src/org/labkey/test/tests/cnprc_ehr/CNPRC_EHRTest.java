@@ -31,6 +31,7 @@ import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
 import org.labkey.test.components.BodyWebPart;
+import org.labkey.test.components.ext4.widgets.SearchPanel;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
@@ -426,6 +427,49 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         checkClinicalHistoryType(expectedLabels);
     }
 
+    @Test
+    public void testAnimalSearch() throws Exception
+    {
+        SearchPanel searchPanel;
+        DataRegionTable searchResults;
+
+        beginAt("/project/" + getContainerPath() + "/begin.view");
+        waitAndClickAndWait(Locator.linkWithText("Animal Search"));
+        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel.selectValues("Gender", " All");
+        assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
+        searchResults = searchPanel.submit();
+        assertEquals("Wrong number of rows for searching all genders", 36, searchResults.getDataRowCount());
+
+        goBack();
+        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel.selectValues("Species code (3 char)", "CMO");
+        assertEquals("Select 'CMO' species didn't set input correctly", "CMO", getFormElement(Locator.input("species")));
+        searchPanel.selectValues("Species code (3 char)", "PCY");
+        assertEquals("Adding 'CTJ' to species filter didn't set input correctly", "CMO;PCY", getFormElement(Locator.input("species")));
+        searchResults = searchPanel.submit();
+        assertEquals("Wrong number of rows: Species = CMO or PCY", 33, searchResults.getDataRowCount());
+
+        goBack();
+        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel.selectValues("Pairing Status", "Continuous pair with grate");
+        assertEquals("Select 'Continuous pair with grate' pairing status didn't set input correctly",
+                "Continuous pair with grate", getFormElement(Locator.input("Id/Pairings/observation")));
+        searchPanel.selectValues("Pairing Status", "Intermittent pair");
+        assertEquals("Select 'Intermittent pair' pairing status didn't set input correctly",
+                "Continuous pair with grate;Intermittent pair", getFormElement(Locator.input("Id/Pairings/observation")));
+        searchResults = searchPanel.submit();
+        assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
+                3, searchResults.getDataRowCount());
+
+        goBack();
+        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel.setFilter("Age (Years, Rounded)", null, "7");
+        searchResults = searchPanel.submit();
+        assertElementPresent(Locator.linkWithText("TEST1112911"));
+        assertEquals("Wrong number of rows: 'Age In Years' contains '7'", 13, searchResults.getDataRowCount());
+
+    }
     private void validateLookupFromList(String list, String linkText, String expectedText)
     {
         beginAtPdlListView();
