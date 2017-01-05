@@ -12,11 +12,7 @@
             </properties>
         </column>
         <column name="species"/>
-        <column name="gender">
-            <!--<properties>-->
-            <!--<property name="columnTitle" value="Gender"/>-->
-            <!--</properties>-->
-        </column>
+        <column name="gender"/>
         <column name="calculated_status">
             <properties>
                 <property name="columnTitle" value="Status"/>

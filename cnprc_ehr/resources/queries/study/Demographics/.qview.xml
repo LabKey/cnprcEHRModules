@@ -12,11 +12,6 @@
                 <property name="columnTitle" value="Status"/>
             </properties>
         </column>
-        <column name="activeAssignments/Availability">
-            <properties>
-                <property name="columnTitle" value="Avail"/>
-            </properties>
-        </column>
         <column name="dam"/>
         <column name="sire"/>
         <column name="birth"/>
