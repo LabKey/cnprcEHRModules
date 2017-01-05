@@ -99,21 +99,19 @@
                     </column>
                     <column columnName="dam">
                         <columnTitle>Dam</columnTitle>
-                        <!--<fk>-->
-                            <!--<fkDbSchema>study</fkDbSchema>-->
-                            <!--<fkTable>animal</fkTable>-->
-                            <!--<fkColumnName>id</fkColumnName>-->
-                        <!--</fk>-->
-                        <url>/ehr/participantView.view?participantId=${dam}</url>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="sire">
                         <columnTitle>Sire</columnTitle>
-                        <!--<fk>-->
-                            <!--<fkDbSchema>study</fkDbSchema>-->
-                            <!--<fkTable>animal</fkTable>-->
-                            <!--<fkColumnName>id</fkColumnName>-->
-                        <!--</fk>-->
-                        <url>/ehr/participantView.view?participantId=${sire}</url>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="origin">
                         <columnTitle>Origin</columnTitle>
