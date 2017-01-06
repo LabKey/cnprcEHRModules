@@ -7,7 +7,7 @@
             </properties>
         </column>
         <column name="gender"/>
-        <column name="Id/AssignmentCurrent/projectCode"/>
+        <column name="Id/AssignmentCurrent/primaryProject"/>
         <column name="Id/age/yearsAndMonths">
             <properties>
                 <property name="columnTitle" value="Age today Y M"/>
@@ -15,7 +15,11 @@
         </column>
         <column name="Id/cases/date"/>
         <column name="Id/cases/problem"/>
-        <column name="Id/cases/remark"/>
+        <column name="Id/cases/remark">
+            <properties>
+                <property name="columnTitle" value="History"/>
+            </properties>
+        </column>
     </columns>
     <filters>
         <filter column="Id/cases/category" operator="eq" value="L"/>
