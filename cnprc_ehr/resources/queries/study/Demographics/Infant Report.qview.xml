@@ -1,12 +1,13 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
         <column name="Id"/>
-        <column name="Id/curLocation">
+        <column name="Id/curLocation/Location">
             <properties>
                 <property name="columnTitle" value="Location"/>
             </properties>
         </column>
-        <column name="Id/AssignmentCurrent/projectCode"/>
+        <column name="Id/AssignmentCurrent/primaryProject"/>
+        <column name="Id/AssignmentCurrent/secondaryProjects"/>
         <column name="gender"/>
         <column name="Id/age/yearsAndMonths">
             <properties>

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 SELECT flags.Id,
-group_concat(flags.flag) as Values,
-group_concat(flags.flag.title) as Titles
+group_concat(flags.flag, ', ') as Values,
+group_concat(flags.flag.title, ', ') as Titles
 FROM study.flags flags
 where flags.isActive = true
 group by flags.Id
