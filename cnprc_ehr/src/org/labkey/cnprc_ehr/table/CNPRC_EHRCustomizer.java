@@ -77,12 +77,11 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn("flags") == null)
+        if (ds.getColumn("activeFlagList") == null)
         {
-            ColumnInfo col = getWrappedCol(us, ds, "attributes", "flags", "Id", "Id");
-            col.setLabel("Attributes");
-            col.setDescription("Animal Attributes");
-            col.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=ehr_lookups&queryName=flag_codes&query.Id~eq=${Id}", ds.getContainerContext()));
+            ColumnInfo col = getWrappedCol(us, ds, "activeFlagList", "demographicsActiveFlags", "Id", "Id");
+            col.setLabel("Active Flags");
+            col.setDescription("This provides a columm summarizing all active flags per animal");
             ds.addColumn(col);
         }
 

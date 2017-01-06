@@ -41,7 +41,7 @@
     </columns>
     <filters>
         <filter column="calculated_status" operator="eq" value="Alive"/>
-        <filter column="Id/attributes/flag/value" operator="in" value="CH14;CH12;CH18;CH34;CH38;CH58;CH78;CHI1)"/>
+        <filter column="Id/activeFlagList/values" operator="containsoneof" value="CH14;CH12;CH18;CH34;CH38;CH58;CH78;CHI1"/>
     </filters>
     <sorts>
         <sort column="Id" descending="false"/>

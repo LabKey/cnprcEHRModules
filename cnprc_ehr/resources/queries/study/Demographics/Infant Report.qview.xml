@@ -18,12 +18,23 @@
                 <property name="columnTitle" value="Current Weight (kg)"/>
             </properties>
         </column>
-        <column name="Id/attributes/flag"/>
+        <column name="Id/activeFlagList/values"/>
         <column name="dam"/>
+        <column name="dam/activeFlagList/values">
+            <properties>
+                <property name="columnTitle" value="Dam Active Flags"/>
+            </properties>
+        </column>
         <column name="sire"/>
+        <column name="sire/activeFlagList/values">
+            <properties>
+                <property name="columnTitle" value="Sire Active Flags"/>
+            </properties>
+        </column>
     </columns>
     <filters>
         <filter column="Id/age/ageInDays" operator="lt" value="366"/>
+        <filter column="calculated_status" operator="eq" value="Alive"/>
     </filters>
     <sorts>
         <sort column="Id" descending="false"/>
