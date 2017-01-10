@@ -23,13 +23,13 @@
         <column name="dam"/>
         <column name="dam/activeFlagList/values">
             <properties>
-                <property name="columnTitle" value="Dam Active Flags"/>
+                <property name="columnTitle" value="Dam Census Flags"/>
             </properties>
         </column>
         <column name="sire"/>
         <column name="sire/activeFlagList/values">
             <properties>
-                <property name="columnTitle" value="Sire Active Flags"/>
+                <property name="columnTitle" value="Sire Census Flags"/>
             </properties>
         </column>
     </columns>

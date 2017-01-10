@@ -16,14 +16,17 @@
 
 package org.labkey.test.tests.cnprc_ehr;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.labkey.remoteapi.CommandException;
 import org.labkey.remoteapi.Connection;
 import org.labkey.remoteapi.query.InsertRowsCommand;
+import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.TestFileUtils;
@@ -37,6 +40,7 @@ import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
+import org.labkey.test.util.Maps;
 import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
@@ -44,9 +48,13 @@ import org.labkey.test.util.external.labModules.LabModuleHelper;
 import org.openqa.selenium.WebElement;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -428,14 +436,42 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testInfantReport() throws IOException, CommandException
+    {
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        gregorianCalendar.setTime(new Date());
+        gregorianCalendar.add(Calendar.DAY_OF_YEAR, -100);
+        setParticipantBirthDate("TEST2008446", gregorianCalendar.getTime());
+        setParticipantBirthDate("TEST1441142", gregorianCalendar.getTime());//Will not be included because not Alive
+        SearchPanel searchPanel = getSearchPanel();
+
+        searchPanel.setView("Infant Report");
+        DataRegionTable searchResults = searchPanel.submit();
+        assertElementPresent(Locator.linkWithText("TEST2008446"));
+        assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
+    }
+
+    private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
+    {
+        Connection connection = createDefaultConnection(true);
+        List<Map<String, Object>> weightRows = Arrays.asList(
+                Maps.of("id", id,
+                        "birth", DATE_FORMAT.format(birthdate)
+                )
+        );
+
+        UpdateRowsCommand command = new UpdateRowsCommand("study", "demographics");
+        command.setRows(weightRows);
+        command.execute(connection, getProjectName());
+    }
+
+    @Test
     public void testAnimalSearch() throws Exception
     {
         SearchPanel searchPanel;
         DataRegionTable searchResults;
 
-        beginAt("/project/" + getContainerPath() + "/begin.view");
-        waitAndClickAndWait(Locator.linkWithText("Animal Search"));
-        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel = getSearchPanel();
         searchPanel.selectValues("Gender", " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
@@ -470,6 +506,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong number of rows: 'Age In Years' contains '7'", 13, searchResults.getDataRowCount());
 
     }
+
+    @NotNull
+    private SearchPanel getSearchPanel()
+    {
+        SearchPanel searchPanel;
+        beginAt("/project/" + getContainerPath() + "/begin.view");
+        waitAndClickAndWait(Locator.linkWithText("Animal Search"));
+        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        return searchPanel;
+    }
+
     private void validateLookupFromList(String list, String linkText, String expectedText)
     {
         beginAtPdlListView();
