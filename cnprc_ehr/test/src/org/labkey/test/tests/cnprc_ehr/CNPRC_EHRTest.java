@@ -54,7 +54,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -438,11 +437,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testInfantReport() throws IOException, CommandException
     {
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.setTime(new Date());
-        gregorianCalendar.add(Calendar.DAY_OF_YEAR, -100);
-        setParticipantBirthDate("TEST2008446", gregorianCalendar.getTime());
-        setParticipantBirthDate("TEST1441142", gregorianCalendar.getTime());//Will not be included because not Alive
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_YEAR, -100);
+        setParticipantBirthDate("TEST2008446", calendar.getTime());
+        setParticipantBirthDate("TEST1441142", calendar.getTime());//Will not be included because not Alive
         SearchPanel searchPanel = getSearchPanel();
 
         searchPanel.setView("Infant Report");
