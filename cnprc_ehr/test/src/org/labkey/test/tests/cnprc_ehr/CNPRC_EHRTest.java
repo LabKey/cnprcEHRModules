@@ -451,6 +451,21 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
     }
 
+    @Test
+    public void testLTOPReport() throws IOException, CommandException
+    {
+        SearchPanel searchPanel = getSearchPanel();
+
+        searchPanel.setView("LTOP Report");
+        DataRegionTable searchResults = searchPanel.submit();
+
+        assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
+        assertElementPresent(Locator.linkWithText("TEST6390238"));
+        assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,3));
+        assertEquals("Wrong value for Comment: ", "DERMATITIS AX &CHEST", searchResults.getDataAsText(0,6));
+        assertEquals("Wrong value for History: ", "TEST HISTORY REMARK", searchResults.getDataAsText(0,7));
+    }
+
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
