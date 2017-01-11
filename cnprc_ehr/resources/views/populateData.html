@@ -146,6 +146,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Colony Codes',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'colony_codes',
+        pk: 'rowid'
+    },
+    {
         label: 'FreezerDB Approach',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',

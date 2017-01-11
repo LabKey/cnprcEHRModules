@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 SELECT
-OBJECTID,
+ANCOL_AN_ID AS Id,
+ANCOL_ASSIGNMENT_DATE,
+ANCOL_RELEASE_DATE AS enddate,
+ANCOL_COLONY_CODE AS colonyCode,
+OBJECTID as objectid,
 DATE_TIME
-FROM cnprcSrc.AAN_CENSUS_FLAG_HISTORY WHERE ANCENS_AUD_CODE = 'D';
+FROM cnprcSrc.ZAN_COLONY WHERE ANCOL_ASSIGNMENT_DATE IS NOT NULL;
