@@ -8,7 +8,7 @@
             <source schemaName="cnprcSrc" queryName="q_snomed_animals_conceptions"/>
             <destination schemaName="study" queryName="snomed_animals_conceptions" bulkLoad="true" batchSize="5000" targetOption="merge">
                 <columnTransforms>
-                    <column source="SNO_DATE" target="date"/>
+                    <column source="sno_date" target="date"/>
                 </columnTransforms>
             </destination>
         </transform>
