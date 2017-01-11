@@ -2349,6 +2349,9 @@
             <column columnName="cage">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="reloc_seq">
+                <datatype>integer</datatype>
+            </column>
             <column columnName="divider">
                 <datatype>integer</datatype>
             </column>

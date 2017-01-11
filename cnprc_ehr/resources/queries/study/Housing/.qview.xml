@@ -6,6 +6,7 @@
         <column name="room"/>
         <column name="cage"/>
         <column name="reason"/>
+        <column name="reloc_seq"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>
