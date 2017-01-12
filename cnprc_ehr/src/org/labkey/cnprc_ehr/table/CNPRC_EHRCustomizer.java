@@ -85,11 +85,27 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("flagList") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "flagList", "demographicsFlags", "Id", "Id");
+            col.setLabel("Flags");
+            col.setDescription("This provides a columm summarizing all flags per animal");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("HybridReportFlags") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "HybridReportFlags", "HybridReportFlags", "Id", "Id");
             col.setLabel("HybridReportFlags");
             col.setDescription("Supports presenting flags in Hybrid Report");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("HomeLocation") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "HomeLocation", "Home Location", "Id", "Id");
+            col.setLabel("Home Location");
+            col.setDescription("Home Location");
             ds.addColumn(col);
         }
 
