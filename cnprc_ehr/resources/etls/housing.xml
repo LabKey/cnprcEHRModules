@@ -6,7 +6,7 @@
     <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
         <description>Copy to target</description>
         <source schemaName="cnprcSrc" queryName="q_housing"/>
-        <destination schemaName="study" queryName="housing" bulkLoad="true" targetOption="merge" >
+        <destination schemaName="study" queryName="housing" bulkLoad="true" targetOption="merge" batchSize="5000">
             <columnTransforms>
                 <column source="RELOC_DATE_IN" target="date"/>
             </columnTransforms>
