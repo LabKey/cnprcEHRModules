@@ -23,7 +23,7 @@ anproj_release_date AS enddate,
 coalesce(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol, --nvl(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol,
 pp_assignment_date AS projectProtocolAssignDate,
 pp_release_date AS projectProtocolRelDate,
-assgnmnt.OBJECTID AS objectid,
+coalesce(pp_aucaac_number, pr_aucaac_protocol_number) ||'-'|| assgnmnt.OBJECTID AS objectid,
 CAST(CASE WHEN(zproj.DATE_TIME > assgnmnt.DATE_TIME)
   THEN
     zproj.DATE_TIME
