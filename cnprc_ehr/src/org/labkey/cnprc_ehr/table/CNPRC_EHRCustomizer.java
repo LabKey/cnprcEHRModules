@@ -5,7 +5,6 @@ import org.labkey.api.data.ColumnInfo;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.data.WrappedColumn;
 import org.labkey.api.ldk.table.AbstractTableCustomizer;
-import org.labkey.api.query.DetailsURL;
 import org.labkey.api.query.QueryForeignKey;
 import org.labkey.api.query.UserSchema;
 
@@ -135,7 +134,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
 
         if (ds.getColumn("PregnancyConfirmation") == null)
         {
-            ColumnInfo col = getWrappedCol(us, ds, "PregnancyConfirmation", "pregnancyConfirmation", "Id", "Id");
+            ColumnInfo col = getWrappedCol(us, ds, "PregnancyConfirmation", "pregnancyConfirmations", "Id", "Id");
             col.setLabel("Pregnancy Confirmation");
             col.setDescription("Pregnancy Confirmation");
             ds.addColumn(col);

@@ -31,7 +31,7 @@ CON_INVALID_PG_FLAG AS pgFlag,
 CON_NO AS conNum,
 CON_CON_DATE as conception,
 CON_CON_DATE_STATUS AS conceptionDateStatus,
-CON_ACCESSION_DATE,
+CON_ACCESSION_DATE AS con_accession_date,
 CON_BR_TYPE AS BRType,
 CON_COLONY_CODE AS colonyCode,
 CON_PR_CODE AS PRCode,
@@ -45,8 +45,4 @@ CON_FEMALE_GENETICS_VERIFY AS femaleGeneticsVerify,
 CON_MALE_GENETICS_VERIFY AS maleGeneticsVerify,
 OBJECTID as objectid,
 DATE_TIME
-FROM cnprcSrc.ZCONCEPTION
-WHERE
-CON_INVALID_PG_FLAG IS NULL AND
-CON_ACCESSION_DATE > to_date('01-01-1900', 'DD-MM-YYYY') AND -- "check CON_INVALID_PG_FLAG for NULL to exclude them" as per high-level data mapping spreadsheet
-CON_FEMALE_ID IS NOT NULL;
+FROM cnprcSrc.ZCONCEPTION;

@@ -87,6 +87,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_SAMPLE_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SAMPLES.tsv");
     private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
+    private static final File CNPRC_EHR_CONCEPTIONS_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CONCEPTIONS.tsv");
 
 
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
@@ -322,9 +323,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertTextPresent("PEANUTS");
     }
 
+    private void storeConceptionData() throws Exception
+    {
+        Connection connection = createDefaultConnection(true);
+        insertTsvData(connection, "cnprc_ehr", "conceptions", CNPRC_EHR_CONCEPTIONS_TSV, null);
+    }
+
     @Test
     public void testAnimalHistoryReports() throws Exception
     {
+        //storeConceptionData(); // TODO
+
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
 
         animalHistoryPage.searchSingleAnimal(CNPRC_ANIMAL);
@@ -574,18 +583,20 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private void storePDLData() throws Exception
     {
         Connection connection = createDefaultConnection(true);
-        insertTsvData(connection, "cnprc_pdl", "samples", PDL_SAMPLE_TSV);
-        insertTsvData(connection, "cnprc_pdl", "sub_tests", PDL_SUB_TEST_TSV);
-        insertTsvData(connection, "cnprc_pdl", "tests",PDL_TEST_TSV );
-        insertTsvData(connection, "cnprc_pdl", "orders", PDL_ORDER_TSV);
+        String folder = "/" + COREFACILITIES + "/" + PDLFOLDER;
+        insertTsvData(connection, "cnprc_pdl", "samples", PDL_SAMPLE_TSV, folder);
+        insertTsvData(connection, "cnprc_pdl", "sub_tests", PDL_SUB_TEST_TSV, folder);
+        insertTsvData(connection, "cnprc_pdl", "tests",PDL_TEST_TSV, folder);
+        insertTsvData(connection, "cnprc_pdl", "orders", PDL_ORDER_TSV, folder);
     }
 
-    private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile) throws java.io.IOException, org.labkey.remoteapi.CommandException
+    private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile, @Nullable String folder)
+            throws java.io.IOException, org.labkey.remoteapi.CommandException
     {
         InsertRowsCommand command = new InsertRowsCommand(schemaName, queryName);
-        List<Map<String, Object>> imageTsv = loadTsv(tsvFile);
-        command.setRows(imageTsv);
-        command.execute(connection, getProjectName() + "/" + COREFACILITIES + "/" + PDLFOLDER);
+        List<Map<String, Object>> tsv = loadTsv(tsvFile);
+        command.setRows(tsv);
+        command.execute(connection, getProjectName() + folder);
     }
 
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.

@@ -124,7 +124,7 @@ matingSuccessRates	Reproductive Management	js	Mating Success Rates	true		study	u
 menses	Reproductive Management	query	Menses	true		study	menses			date	false	false		qcstate/publicdata
 delivery	Reproductive Management	js	Deliveries	true		study	underDevelopment			date	false	false		qcstate/publicdata
 #delivery	Reproductive Management	js	Deliveries	true		study	Delivery			date	false	false		qcstate/publicdata
-pregnancy	Reproductive Management	query	Pregnancies	true		study	pregnancyConfirmation			date	false	false		qcstate/publicdata	Conception Results
+pregnancy	Reproductive Management	query	Pregnancies	true		study	pregnancyConfirmations			date	false	false		qcstate/publicdata	Conception Results
 
 #sbt	Genetics	query	MHC Genotype	TRUE		study	demographics			date	FALSE	FALSE		qcstate/publicdata	This report contains summaries of MHC genetics, derived from many different techniques
 #feeding	Colony Management	query	Feeding	true		study	Feeding				false	false		qcstate/publicdata	This report contains the amount and type of food ordered for each animal

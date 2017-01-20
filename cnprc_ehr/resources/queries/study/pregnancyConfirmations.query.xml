@@ -3,8 +3,15 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="pregnancyConfirmations" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
-                    <column columnName="date">
+                    <column columnName="Id">
+                        <columnTitle>Female Id</columnTitle>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>Id</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="con_accession_date">
                         <columnTitle>Accession Date</columnTitle>
                     </column>
                     <column columnName="femaleSpecies">
@@ -171,10 +178,6 @@
                     </column>
                     <column columnName="maleGeneticsVerify">
                         <columnTitle>Male Genetics Verify</columnTitle>
-                    </column>
-                    <column columnName="taskid">
-                        <datatype>varchar</datatype>
-                        <propertyURI>urn:ehr.labkey.org/#TaskId</propertyURI>
                     </column>
                 </columns>
             </table>
