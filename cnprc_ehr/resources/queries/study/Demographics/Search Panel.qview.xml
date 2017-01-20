@@ -44,7 +44,7 @@
             </properties>
         </column>
         <column name="Id/PayorAssignment/payor_id/payor_id"/>
-        <column name="Id/attributes/flag">
+        <column name="Id/flagList/Values">
             <properties>
                 <property name="columnTitle" value="Census Flags"/>
             </properties>
