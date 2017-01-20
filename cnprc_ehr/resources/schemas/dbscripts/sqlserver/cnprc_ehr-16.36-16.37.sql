@@ -1,0 +1,1 @@
+ALTER TABLE cnprc_ehr.cage_location_history ADD cage_size_number INT;

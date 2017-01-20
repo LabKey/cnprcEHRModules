@@ -748,6 +748,7 @@
             <column columnName="location"/>
             <column columnName="location_history_pk"/>
             <column columnName="cage_size"/>
+            <column columnName="cage_size_number"/>
             <column columnName="rate_class"/>
             <column columnName="from_date"/>
             <column columnName="to_date"/>
