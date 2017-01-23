@@ -4,8 +4,6 @@ max(y.primaryProject) AS primaryProject,
 max(y.secondaryProjects) AS secondaryProjects,
 y.date,
 y.project,
-y.projectCode,
-y.assignmentStatus,
 y.enddate,
 y.protocol,
 y.projectProtocolAssignDate,
@@ -17,12 +15,11 @@ x.Id,
 (CASE WHEN x.assignmentStatus='S' then Group_concat(x.projectCode, ', ') ELSE NULL END) AS secondaryProjects,
 x.date,
 x.project,
-x.projectCode,
-x.assignmentStatus,
 x.enddate,
 x.protocol,
 x.projectProtocolAssignDate,
 x.projectProtocolRelDate
 FROM assignment x where x.enddate is null
-group by x.Id, x.assignmentStatus) y
-group by y.Id
+group by x.Id, x.assignmentStatus, x.date, x.project,
+x.enddate, x.protocol, x.projectProtocolAssignDate, x.projectProtocolRelDate) y
+group by y.Id, y.date, y.project, y.enddate, y.protocol, y.projectProtocolAssignDate, y.projectProtocolRelDate
