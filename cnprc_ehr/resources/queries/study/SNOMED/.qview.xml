@@ -4,7 +4,7 @@
         <column name="date"/>
         <column name="code"/>
         <column name="infoQualifier"/>
-        <column name="snoPk"/>
+        <column name="snoPk/Id"/>
         <column name="foreignSeq"/>
         <column name="snoSeq"/>
         <column name="timeQualifier"/>
