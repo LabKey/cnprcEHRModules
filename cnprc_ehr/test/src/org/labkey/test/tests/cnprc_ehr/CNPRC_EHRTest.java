@@ -455,6 +455,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         searchPanel.setView("Infant Report");
         DataRegionTable searchResults = searchPanel.submit();
+
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "Id/curLocation/Location",
+                "Id/AssignmentCurrent/primaryProject",
+                "Id/AssignmentCurrent/secondaryProjects",
+                "gender",
+                "Id/age/yearsAndMonths",
+                "Id/MostRecentWeight/MostRecentWeight",
+                "Id/activeFlagList/values",
+                "dam",
+                "dam/activeFlagList/values",
+                "sire",
+                "sire/activeFlagList/values"
+        );
+        confirmGridViewColumns(searchResults, expectedColumns);
+
         assertElementPresent(Locator.linkWithText("TEST2008446"));
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
     }
@@ -466,6 +483,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         searchPanel.setView("LTOP Report");
         DataRegionTable searchResults = searchPanel.submit();
+
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "Id/curLocation/location",
+                "gender",
+                "Id/AssignmentCurrent/primaryProject",
+                "Id/age/yearsAndMonths",
+                "Id/cases/date",
+                "Id/cases/problem",
+                "Id/cases/remark");
+        confirmGridViewColumns(searchResults, expectedColumns);
 
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST6390238"));
@@ -481,12 +509,50 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         searchPanel.setView("Hybrid Report");
         DataRegionTable searchResults = searchPanel.submit();
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "gender",
+                "Id/age/yearsAndMonths",
+                "Id/curLocation",
+                "Id/MostRecentWeight/MostRecentWeight",
+                "Id/PregnancyConfirmation/colonyCode",
+                "Id/LabworkResults/spf",
+                "Id/AssignmentCurrent/primaryProject",
+                "Id/PayorAssignment/payor_id",
+                "Id/AssignmentCurrent/secondaryProjects",
+                "Id/flagList/values",
+                "Id/HybridReportFlags/HGL2",
+                "Id/HybridReportFlags/HJS2",
+                "Id/HybridReportFlags/HLH2",
+                "Id/HybridReportFlags/HODK",
+                "Id/HybridReportFlags/HOGL",
+                "Id/HybridReportFlags/HOJV",
+                "Id/HybridReportFlags/HOLG",
+                "Id/HybridReportFlags/HOJS",
+                "Id/HybridReportFlags/HOLH",
+                "Id/HybridReportFlags/HOMS",
+                "Id/HybridReportFlags/HOPM",
+                "Id/HybridReportFlags/HOSG",
+                "Id/HybridReportFlags/HOVB",
+                "Id/HybridReportFlags/HOWA",
+                "Id/HybridReportFlags/HOVL",
+                "Id/HybridReportFlags/HOYK",
+                "Id/HybridReportFlags/HYK2"
+        );
 
+        confirmGridViewColumns(searchResults, expectedColumns);
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,10));
         assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,11));
         assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,7));
+    }
+
+    private void confirmGridViewColumns(DataRegionTable searchResults, List<String> expectedColumnsArray)
+    {
+        List<String>  expectedColumns = new ArrayList<>(expectedColumnsArray);
+        assertEquals("Wrong column count", expectedColumnsArray.size(),searchResults.getColumnCount());
+        assertEquals("Wrong columns",expectedColumns, searchResults.getColumnNames());
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
