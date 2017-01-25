@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 SELECT
-AB_AN_ID AS id,
+AB_AN_ID AS animalId,
 AB_BOOK AS book,
 AB_MALE_ENEMY_1 AS maleEnemy1,
 AB_MALE_ENEMY_2 AS maleEnemy2,

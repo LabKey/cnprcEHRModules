@@ -46,7 +46,8 @@
     </table>
     <table tableName="breedingRoster" tableDbType="TABLE">
         <columns>
-            <column columnName="id"/>
+            <column columnName="rowid"/>
+            <column columnName="animalId"/>
             <column columnName="book"/>
             <column columnName="maleEnemy1"/>
             <column columnName="maleEnemy2"/>

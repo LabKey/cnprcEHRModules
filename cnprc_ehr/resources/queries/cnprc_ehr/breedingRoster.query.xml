@@ -3,8 +3,8 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="breedingRoster" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="id">
-                        <url>/ehr/participantView.view?participantId=${Id}</url>
+                    <column columnName="animalId">
+                        <url>/ehr/participantView.view?participantId=${animalId}</url>
                     </column>
                     <column columnName="book"/>
                     <column columnName="maleEnemy1">
