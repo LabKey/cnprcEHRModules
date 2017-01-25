@@ -1,10 +1,14 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
         <column name="Id"/>
-        <column name="gender"/>
+        <column name="gender">
+            <properties>
+                <property name="columnTitle" value="Sex"/>
+            </properties>
+        </column>
         <column name="Id/age/yearsAndMonths">
             <properties>
-                <property name="columnTitle" value="Age today Y:M"/>
+                <property name="columnTitle" value="Age today"/>
             </properties>
         </column>
         <column name="Id/curLocation">
@@ -18,7 +22,11 @@
             </properties>
         </column>
         <column name="Id/PregnancyConfirmation/colonyCode"/>
-        <column name="Id/LabworkResults/spf"/>
+        <column name="Id/LabworkResults/spf">
+            <properties>
+                <property name="columnTitle" value="SPF"/>
+            </properties>
+        </column>
         <column name="Id/AssignmentCurrent/primaryProject"/>
         <column name="Id/PayorAssignment/payor_id"/>
         <column name="Id/AssignmentCurrent/secondaryProjects"/>
@@ -48,6 +56,7 @@
     <filters>
         <filter column="calculated_status" operator="eq" value="Alive"/>
         <filter column="Id/activeFlagList/values" operator="containsoneof" value="CH14;CH12;CH18;CH34;CH38;CH58;CH78;CHI1"/>
+        <filter column="Id/PayorAssignment/enddate" operator="isblank"/>
     </filters>
     <sorts>
         <sort column="Id" descending="false"/>
