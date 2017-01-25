@@ -27,9 +27,9 @@
                 <property name="columnTitle" value="SPF"/>
             </properties>
         </column>
-        <column name="Id/AssignmentCurrent/primaryProject"/>
+        <column name="Id/DemographicsActiveAssignment/primaryProject"/>
         <column name="Id/PayorAssignment/payor_id"/>
-        <column name="Id/AssignmentCurrent/secondaryProjects"/>
+        <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
         <column name="Id/flagList/values">
             <properties>
                 <property name="columnTitle" value="Flags"/>

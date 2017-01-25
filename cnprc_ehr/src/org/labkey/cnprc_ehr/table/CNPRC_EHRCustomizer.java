@@ -34,15 +34,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             return;
         }
 
-
-        if (ds.getColumn("AssignmentCurrent") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "AssignmentCurrent", "AssignmentCurrent", "Id", "Id");
-            col.setLabel("Current Assignments");
-            col.setDescription("Current Project Assignments");
-            ds.addColumn(col);
-        }
-
         if (ds.getColumn("Arrival") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "Arrival", "arrival", "Id", "Id");
@@ -80,7 +71,23 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         {
             ColumnInfo col = getWrappedCol(us, ds, "activeFlagList", "demographicsActiveFlags", "Id", "Id");
             col.setLabel("Active Flags");
-            col.setDescription("This provides a columm summarizing all active flags per animal");
+            col.setDescription("This provides a column summarizing all active flags per animal");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("cageViolation") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "cageViolation", "CageViolations", "Id", "Id");
+            col.setLabel("Cage Violations");
+            col.setDescription("Cage violations");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("DemographicsActiveAssignment") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActiveAssignment", "DemographicsActiveAssignment", "Id", "Id");
+            col.setLabel("Demographics Current Assignments");
+            col.setDescription("Returns one record per participant with Primary and list of Secondary projects");
             ds.addColumn(col);
         }
 
