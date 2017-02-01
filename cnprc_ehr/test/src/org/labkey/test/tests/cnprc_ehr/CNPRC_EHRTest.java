@@ -352,7 +352,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitAndClickAndWait(LabModuleHelper.getNavPanelItem("Necropsies:", "Browse All"));
         waitForElement(Locator.linkContainingText("TEST2950014"));
         clickAndWait(Locator.linkContainingText("XY000001"));
-        assertTextPresent("12345");
+        assertTextPresent("TEST2950014");
         popLocation();
 
         //SNOMED
@@ -360,7 +360,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.linkContainingText("TEST3804589"));
         pushLocation();
         clickAndWait(Locator.linkContainingText("XY000006"));
-        assertTextPresent("12350");
+        assertTextPresent("KIDNEY");
         popLocation();
     }
 
