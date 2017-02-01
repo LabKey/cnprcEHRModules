@@ -1101,6 +1101,9 @@
             <column columnName="male">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="hours">
+                <datatype>double</datatype>
+            </column>
             <column columnName="cycleStartDate">
                 <datatype>timestamp</datatype>
             </column>
