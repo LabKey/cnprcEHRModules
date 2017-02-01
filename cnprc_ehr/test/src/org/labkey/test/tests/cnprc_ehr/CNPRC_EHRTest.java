@@ -34,6 +34,7 @@ import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
 import org.labkey.test.components.BodyWebPart;
+import org.labkey.test.components.ehr.panel.AnimalSearchPanel;
 import org.labkey.test.components.ext4.widgets.SearchPanel;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
@@ -582,7 +583,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong number of rows for searching all genders", 36, searchResults.getDataRowCount());
 
         goBack();
-        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel = new AnimalSearchPanel(getDriver());
         searchPanel.selectValues("Species code (3 char)", "CMO");
         assertEquals("Select 'CMO' species didn't set input correctly", "CMO", getFormElement(Locator.input("species")));
         searchPanel.selectValues("Species code (3 char)", "PCY");
@@ -591,7 +592,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong number of rows: Species = CMO or PCY", 33, searchResults.getDataRowCount());
 
         goBack();
-        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel = new AnimalSearchPanel(getDriver());
         searchPanel.selectValues("Pairing Status", "Continuous pair with grate");
         assertEquals("Select 'Continuous pair with grate' pairing status didn't set input correctly",
                 "Continuous pair with grate", getFormElement(Locator.input("Id/Pairings/observation")));
@@ -603,7 +604,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 3, searchResults.getDataRowCount());
 
         goBack();
-        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel = new AnimalSearchPanel(getDriver());
         searchPanel.setFilter("Age (Years, Rounded)", null, "7");
         searchResults = searchPanel.submit();
         assertElementPresent(Locator.linkWithText("TEST1112911"));
@@ -617,7 +618,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         SearchPanel searchPanel;
         beginAt("/project/" + getContainerPath() + "/begin.view");
         waitAndClickAndWait(Locator.linkWithText("Animal Search"));
-        searchPanel = new SearchPanel("Search Criteria", getDriver());
+        searchPanel = new AnimalSearchPanel(getDriver());
         return searchPanel;
     }
 
