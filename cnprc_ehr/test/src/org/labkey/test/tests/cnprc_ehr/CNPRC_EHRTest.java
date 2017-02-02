@@ -471,7 +471,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "sire",
                 "sire/activeFlagList/values"
         );
-        confirmGridViewColumns(searchResults, expectedColumns);
+        assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST2008446"));
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
@@ -494,7 +494,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/cases/date",
                 "Id/cases/problem",
                 "Id/cases/remark");
-        confirmGridViewColumns(searchResults, expectedColumns);
+        assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST6390238"));
@@ -541,19 +541,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/HybridReportFlags/HYK2"
         );
 
-        confirmGridViewColumns(searchResults, expectedColumns);
+        assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,10));
         assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,11));
         assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,7));
-    }
-
-    private void confirmGridViewColumns(DataRegionTable searchResults, List<String> expectedColumnsArray)
-    {
-        List<String>  expectedColumns = new ArrayList<>(expectedColumnsArray);
-        assertEquals("Wrong column count", expectedColumnsArray.size(),searchResults.getColumnCount());
-        assertEquals("Wrong columns",expectedColumns, searchResults.getColumnNames());
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
