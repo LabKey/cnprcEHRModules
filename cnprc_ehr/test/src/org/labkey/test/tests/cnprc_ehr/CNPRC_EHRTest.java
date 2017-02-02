@@ -522,6 +522,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/PayorAssignment/payor_id",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
                 "Id/flagList/values",
+                "Id/Gestation/Gestation",
                 "Id/HybridReportFlags/HGL2",
                 "Id/HybridReportFlags/HJS2",
                 "Id/HybridReportFlags/HLH2",
