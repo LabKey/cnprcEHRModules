@@ -59,7 +59,7 @@
                 <property name="columnTitle" value="Pregnancy Conception Num"/>
             </properties>
         </column>
-        <column name="Id/PregnancyConfirmation/colonyCode">
+        <column name="Id/DemographicsActiveColony/colonyCode">
             <properties>
                 <property name="columnTitle" value="Colony Code"/>
             </properties>

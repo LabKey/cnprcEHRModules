@@ -1,7 +1,7 @@
-SELECT pregnancyConfirmation.Id,
+SELECT pregnancyConfirmations.Id,
 concat(
-cast(age(pregnancyConfirmation.conception,curdate()) AS VARCHAR),
-pregnancyConfirmation.conceptionDateStatus
+  cast(age(pregnancyConfirmations.conception,curdate()) AS VARCHAR),
+  pregnancyConfirmations.conceptionDateStatus
 ) Gestation
-FROM pregnancyConfirmation
-where pregnancyConfirmation.termDate is null
+FROM pregnancyConfirmations
+where pregnancyConfirmations.termDate is null

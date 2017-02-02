@@ -1,5 +1,5 @@
 SELECT
-ZH_LOCATION_ID AS location,
+TRIM(SUBSTRING(ZH_LOCATION_ID, 1, 7)) || '-' || TRIM(SUBSTRING(ZH_LOCATION_ID, 8, 2))AS  location,
 ZH_PK AS location_history_pk,
 ZH_CAGE_SIZE AS cage_size,
 CASE
@@ -22,4 +22,4 @@ DATE_TIME
 FROM
 cnprcSrc.ZLOCATION_HISTORY
 WHERE
-ZH_TO_DATE > to_date('01-01-1900', 'DD-MM-YYYY') AND ZH_FROM_DATE > to_date('01-01-1900', 'DD-MM-YYYY');
+(ZH_TO_DATE is null or ZH_TO_DATE > to_date('01-01-1900', 'DD-MM-YYYY') AND ZH_FROM_DATE > to_date('01-01-1900', 'DD-MM-YYYY'));

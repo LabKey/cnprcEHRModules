@@ -83,6 +83,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsActiveColony") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActiveColony", "DemographicsActiveColony", "Id", "Id");
+            col.setLabel("Demographics Current Colony");
+            col.setDescription("Returns one record per participant with the colony assignment having no Release Date");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("DemographicsActiveAssignment") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "DemographicsActiveAssignment", "DemographicsActiveAssignment", "Id", "Id");

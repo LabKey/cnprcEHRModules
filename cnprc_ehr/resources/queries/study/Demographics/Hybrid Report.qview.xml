@@ -21,7 +21,7 @@
                 <property name="columnTitle" value="Current Weight (kg)"/>
             </properties>
         </column>
-        <column name="Id/PregnancyConfirmation/colonyCode"/>
+        <column name="Id/DemographicsActiveColony/colonyCode"/>
         <column name="Id/LabworkResults/spf">
             <properties>
                 <property name="columnTitle" value="SPF"/>
@@ -35,6 +35,7 @@
                 <property name="columnTitle" value="Flags"/>
             </properties>
         </column>
+        <column name="Id/Gestation/Gestation"/>
         <column name="Id/HybridReportFlags/HGL2"/>
         <column name="Id/HybridReportFlags/HJS2"/>
         <column name="Id/HybridReportFlags/HLH2"/>
