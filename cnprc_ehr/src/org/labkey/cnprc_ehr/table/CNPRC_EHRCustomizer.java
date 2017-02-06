@@ -99,6 +99,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsActivePayor") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActivePayor", "DemographicsActivePayor", "Id", "Id");
+            col.setLabel("Current Payor");
+            col.setDescription("Returns one record per participant with currently assigned payor");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("flagList") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "flagList", "demographicsFlags", "Id", "Id");
@@ -128,14 +136,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ColumnInfo col = getWrappedCol(us, ds, "LabworkResults", "labworkResults", "Id", "Id");
             col.setLabel("Labwork Results");
             col.setDescription("Labwork Results");
-            ds.addColumn(col);
-        }
-
-        if (ds.getColumn("PayorAssignment") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "PayorAssignment", "payor_assignmentS", "Id", "Id");
-            col.setLabel("Payor Assignment");
-            col.setDescription("Payor Assignment");
             ds.addColumn(col);
         }
 

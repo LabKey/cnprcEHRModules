@@ -28,7 +28,7 @@
             </properties>
         </column>
         <column name="Id/DemographicsActiveAssignment/primaryProject"/>
-        <column name="Id/PayorAssignment/payor_id"/>
+        <column name="Id/DemographicsActivePayor/payor_id"/>
         <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
         <column name="Id/flagList/values">
             <properties>
@@ -57,7 +57,6 @@
     <filters>
         <filter column="calculated_status" operator="eq" value="Alive"/>
         <filter column="Id/activeFlagList/values" operator="containsoneof" value="CH14;CH12;CH18;CH34;CH38;CH58;CH78;CHI1"/>
-        <filter column="Id/PayorAssignment/enddate" operator="isblank"/>
     </filters>
     <sorts>
         <sort column="Id" descending="false"/>
