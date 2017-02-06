@@ -107,6 +107,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsActivePregnancy") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActivePregnancy", "DemographicsActivePregnancy", "Id", "Id");
+            col.setLabel("Current Pregnancy");
+            col.setDescription("Returns one record per currently pregnant participant");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("flagList") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "flagList", "demographicsFlags", "Id", "Id");
