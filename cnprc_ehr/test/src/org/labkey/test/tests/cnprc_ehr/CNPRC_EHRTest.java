@@ -18,6 +18,7 @@ package org.labkey.test.tests.cnprc_ehr;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -41,6 +42,7 @@ import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
+import org.labkey.test.util.LogMethod;
 import org.labkey.test.util.Maps;
 import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
@@ -54,6 +56,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -478,6 +481,43 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testCageViolationReport() throws Exception
+    {
+        createTestCageLocationHistory();
+        SearchPanel searchPanel = getSearchPanel();
+
+        searchPanel.setView("Cage Violation Report");
+        DataRegionTable searchResults = searchPanel.submit();
+
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "Id/curLocation/Location",
+                "gender",
+                "Id/MostRecentWeight/MostRecentWeight",
+                "Id/cageViolation/cage_size",
+                "Id/DemographicsActiveAssignment/primaryProject",
+                "Id/cageViolation/behavior_code",
+                "Id/activeFlagList/values"
+        );
+        assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
+
+        assertElementPresent(Locator.linkWithText("TEST4564246"));
+        assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
+    }
+
+    @LogMethod
+    protected void createTestCageLocationHistory() throws Exception
+    {
+        log("creating cage location history");
+        String[] fields = new String[]{"location","location_history_pk","cage_size","rate_class","from_date"};
+        Object[][] data = new Object[][]{
+                {"6824778-4953547", 1,"4T",1, TIME_FORMAT.parse("2016-01-01 09:30")}
+        };
+        JSONObject insertCommand = getApiHelper().prepareInsertCommand("cnprc_ehr", "cage_location_history", "rowid", fields, data);
+        getApiHelper().doSaveRows(getCurrentUser(), Collections.singletonList(insertCommand), getExtraContext(), true);
+    }
+
+    @Test
     public void testLTOPReport() throws IOException, CommandException
     {
         SearchPanel searchPanel = getSearchPanel();
@@ -516,10 +556,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/age/yearsAndMonths",
                 "Id/curLocation",
                 "Id/MostRecentWeight/MostRecentWeight",
-                "Id/PregnancyConfirmation/colonyCode",
+                "Id/DemographicsActiveColony/colonyCode",
                 "Id/LabworkResults/spf",
                 "Id/DemographicsActiveAssignment/primaryProject",
-                "Id/PayorAssignment/payor_id",
+                "Id/DemographicsActivePayor/payor_id",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
                 "Id/flagList/values",
                 "Id/Gestation/Gestation",
@@ -546,7 +586,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,10));
-        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,11));
+        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,12));
         assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,7));
     }
 
@@ -595,7 +635,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Continuous pair with grate;Intermittent pair", getFormElement(Locator.input("Id/Pairings/observation")));
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
-                3, searchResults.getDataRowCount());
+                4, searchResults.getDataRowCount());
 
         goBack();
         searchPanel = new AnimalSearchPanel(getDriver());
