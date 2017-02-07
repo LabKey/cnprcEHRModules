@@ -59,6 +59,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("BreedingRoster") == null)
+        {
+            ColumnInfo col = getWrappedCol(getUserSchema(ds, "cnprc_ehr"), ds, "BreedingRoster", "breedingRoster", "Id", "animalId");
+            col.setLabel("Breeding Roster");
+            col.setDescription("Breeding Roster");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("Cases") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "Cases", "Cases", "Id", "Id");
