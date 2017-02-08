@@ -123,6 +123,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsBirthPlace") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsBirthPlace", "DemographicsBirthPlace", "Id", "Id");
+            col.setLabel("Birth Place");
+            col.setDescription("Returns the participant's Arrival source or Birth Room and Cage");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("flagList") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "flagList", "demographicsFlags", "Id", "Id");
