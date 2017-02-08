@@ -11,7 +11,7 @@
                 <property name="columnTitle" value="Age today"/>
             </properties>
         </column>
-        <column name="Id/curLocation">
+        <column name="Id/curLocation/location">
             <properties>
                 <property name="columnTitle" value="Location"/>
             </properties>
