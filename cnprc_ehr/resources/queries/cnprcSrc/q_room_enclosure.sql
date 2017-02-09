@@ -1,6 +1,7 @@
 SELECT
 ENCL_ENCLOSURE_ID AS room,
 ENCL_FILE_STATUS AS file_status,
+ENCL_INDOOR_OUTDOOR_FLAG AS indoorOutdoorFlag,
 ENCL_MANAGEMENT_TYPE AS management_type,
 ENCL_SUPERVISOR AS supervisor,
 ENCL_WEIGHT_SHEET_FREQUENCY AS weight_sheet_frequency,

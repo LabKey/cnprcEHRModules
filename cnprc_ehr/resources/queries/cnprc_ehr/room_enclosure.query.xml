@@ -11,6 +11,7 @@
                         </fk>
                     </column>
                     <column columnName="file_status"/>
+                    <column columnName="indoorOutdoorFlag"/>
                     <column columnName="management_type"/>
                     <column columnName="supervisor"/>
                     <column columnName="weight_sheet_frequency"/>
