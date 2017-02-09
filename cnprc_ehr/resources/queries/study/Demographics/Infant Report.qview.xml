@@ -8,11 +8,7 @@
         </column>
         <column name="Id/DemographicsActiveAssignment/primaryProject"/>
         <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
-        <column name="gender">
-            <properties>
-                <property name="columnTitle" value="Sex"/>
-            </properties>
-        </column>
+        <column name="gender"/>
         <column name="Id/age/yearsAndMonths">
             <properties>
                 <property name="columnTitle" value="Age today"/>
