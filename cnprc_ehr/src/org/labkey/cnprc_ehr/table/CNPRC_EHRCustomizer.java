@@ -131,6 +131,22 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsMostRecentSerum") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsMostRecentSerum", "DemographicsMostRecentSerum", "Id", "Id");
+            col.setLabel("Current Serum");
+            col.setDescription("Returns the participant's most recent serum sample date and the days since it was taken");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("DemographicsMostRecentTetanus") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsMostRecentTetanus", "DemographicsMostRecentTetanus", "Id", "Id");
+            col.setLabel("Current Tetanus");
+            col.setDescription("Returns the participant's most recent Tetanus date and the days since it was taken");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("flagList") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "flagList", "demographicsFlags", "Id", "Id");
@@ -162,6 +178,15 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             col.setDescription("Labwork Results");
             ds.addColumn(col);
         }
+
+        if (ds.getColumn("NcRoundup") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "NcRoundup", "NcRoundup", "Id", "Id");
+            col.setLabel("Nc Roundup");
+            col.setDescription("Nc Roundup");
+            ds.addColumn(col);
+        }
+
 
         if (ds.getColumn("Pairings") == null)
         {
