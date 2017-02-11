@@ -532,7 +532,7 @@
     <table tableName="keys" tableDbType="TABLE">
         <columns>
             <column columnName="key_pk"/>
-            <column columnName="number"/>
+            <column columnName="key_number"/>
             <column columnName="copy_number"/>
             <column columnName="current_owner"/>
             <column columnName="status"/>

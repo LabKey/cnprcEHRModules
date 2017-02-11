@@ -6,14 +6,21 @@
                     <column columnName="key_pk">
                         <columnTitle>Key PK</columnTitle>
                     </column>
-                    <column columnName="number">
-                        <columnTitle>Number</columnTitle>
+                    <column columnName="key_number">
+                        <columnTitle>Key Number</columnTitle>
                     </column>
                     <column columnName="copy_number">
                         <columnTitle>Copy Number</columnTitle>
                     </column>
                     <column columnName="current_owner">
                         <columnTitle>Current Owner</columnTitle>
+                        <fk>
+                            <fkFolderPath>/CNPRC/Core Facilities/Compliance And Training</fkFolderPath>
+                            <fkDbSchema>ehr_compliancedb</fkDbSchema>
+                            <fkTable>employees</fkTable>
+                            <fkColumnName>EmployeeId</fkColumnName>
+                            <fkDisplayColumnName>LastName</fkDisplayColumnName>
+                        </fk>
                     </column>
                     <column columnName="status">
                         <columnTitle>Status</columnTitle>
