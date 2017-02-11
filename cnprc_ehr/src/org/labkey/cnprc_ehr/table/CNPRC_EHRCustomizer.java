@@ -131,6 +131,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsHolds") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsHolds", "DemographicsHolds", "Id", "Id");
+            col.setLabel("Holds");
+            col.setDescription("Returns the participant's active flags having HOLD in the title");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("DemographicsMostRecentSerum") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "DemographicsMostRecentSerum", "DemographicsMostRecentSerum", "Id", "Id");

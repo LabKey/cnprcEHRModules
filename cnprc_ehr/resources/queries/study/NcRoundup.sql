@@ -21,7 +21,7 @@ case when d.Id.curLocation.location != d.Id.homeLocation.location then d.Id.curL
 case --Serum
 when
 	(d.Id.age.ageInDays > 180 and id.DemographicsMostRecentSerum.id is null)
-then '1'
+then 'X'
 when ((d.Id.age.ageInDays between 180 and 730)
 	and (
         (
@@ -30,12 +30,12 @@ when ((d.Id.age.ageInDays between 180 and 730)
            (select count(*) from study.serum s where s.Id = d.Id group by s.Id) < 3
         )
        ))
-then '2'
+then 'X'
 when ((d.Id.age.ageInDays > 730)
       and
       	id.DemographicsMostRecentSerum.DaysSinceSample > 730
       )
-then '3'
+then 'X'
 end as Serum,
 
 case --Tetanus

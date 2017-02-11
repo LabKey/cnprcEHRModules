@@ -24,7 +24,7 @@
         <column name="Id/DemographicsActiveAssignment/primaryProject"/>
         <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
         <column name="Id/NcRoundup/VAS"/>
-<!--TODO HOLDS-->
+        <column name="Id/DemographicsHolds/holdFlags"/>
         <column name="Id/flagList/values">
             <properties>
                 <property name="columnTitle" value="Flags"/>
