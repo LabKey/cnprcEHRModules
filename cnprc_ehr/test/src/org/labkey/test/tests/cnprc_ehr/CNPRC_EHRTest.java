@@ -589,6 +589,42 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,12));
         assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,7));
     }
+    @Test
+    public void testNcRoundupReport() throws IOException, CommandException
+    {
+        SearchPanel searchPanel = getSearchPanel();
+
+        searchPanel.setView("NC Roundup Report");
+        DataRegionTable searchResults = searchPanel.submit();
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "Id/curLocation/Location",
+                "Id/NcRoundup/hoLocation",
+                "Id/age/yearsAndMonths",
+                "Id/MostRecentWeight/MostRecentWeight",
+                "Id/DemographicsActiveAssignment/primaryProject",
+                "Id/DemographicsActiveAssignment/secondaryProjects",
+                "Id/NcRoundup/VAS",
+                "Id/DemographicsHolds/holdFlags",
+                "Id/flagList/values",
+                "Id/NcRoundup/Geriatric",
+                "Id/NcRoundup/Depo",
+                "Id/NcRoundup/Tetanus",
+                "Id/NcRoundup/Measles",
+                "Id/NcRoundup/SerumBank",
+                "Id/NcRoundup/Dam"        );
+
+        assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
+
+        assertElementPresent(Locator.linkWithText("TEST1112911"));
+        assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,5));
+        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,8));
+        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,9));
+        assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(0,12));
+        assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(0,13));
+        assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(0,14));
+
+    }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
     {
