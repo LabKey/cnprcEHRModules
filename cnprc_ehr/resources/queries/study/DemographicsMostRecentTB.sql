@@ -7,7 +7,7 @@ SELECT
 
 mostRecentTB.id,
 mostRecentTB.MostRecentTBDate,
-timestampdiff('SQL_TSI_DAY', mostRecentTB.MostRecentTBDate, now()) AS DaysSinceTetanus,
+timestampdiff('SQL_TSI_DAY', mostRecentTB.MostRecentTBDate, now()) AS DaysSinceTB,
 
 
 FROM (
