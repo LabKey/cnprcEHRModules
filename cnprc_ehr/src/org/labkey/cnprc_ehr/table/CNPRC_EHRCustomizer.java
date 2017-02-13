@@ -244,6 +244,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("necropsyPerformed") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "NecropsyPerformed", "necropsyPerformed", "Id", "Id");
+            col.setLabel("Necropsy Performed?");
+            col.setDescription("Necropsy Performed - Yes or No");
+            ds.addColumn(col);
+        }
+
     }
 
     private ColumnInfo getWrappedCol(UserSchema us, AbstractTableInfo ds, String name, String queryName, String colName, String targetCol)
