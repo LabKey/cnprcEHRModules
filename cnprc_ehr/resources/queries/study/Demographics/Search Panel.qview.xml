@@ -54,7 +54,7 @@
                 <property name="columnTitle" value="Breeding Group"/>
             </properties>
         </column>
-        <column name="Id/PregnancyConfirmation/conNum">
+        <column name="Id/DemographicsActivePregnancy/conNum">
             <properties>
                 <property name="columnTitle" value="Pregnancy Conception Num"/>
             </properties>
