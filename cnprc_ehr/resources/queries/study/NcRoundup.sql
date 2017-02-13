@@ -36,7 +36,7 @@ when ((d.Id.age.ageInDays > 730)
       	id.DemographicsMostRecentSerum.DaysSinceSample > 730
       )
 then 'X'
-end as Serum,
+end as SerumBank,
 
 case --Tetanus
 when (d.Id.age.ageInDays > 180 and (id.DemographicsMostRecentTetanus.id is null))then 'X'
