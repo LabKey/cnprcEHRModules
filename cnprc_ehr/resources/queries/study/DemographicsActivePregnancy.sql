@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT *
+SELECT *,
+timestampdiff('SQL_TSI_DAY', conception, now()) AS daysPregnant
 FROM pregnancyConfirmations
 WHERE termDate IS NULL

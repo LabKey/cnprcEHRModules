@@ -147,6 +147,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsMostRecentTB") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsMostRecentTB", "DemographicsMostRecentTB", "Id", "Id");
+            col.setLabel("Current TB");
+            col.setDescription("Returns the participant's most recent TB date and the days since it was taken");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("DemographicsMostRecentTetanus") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "DemographicsMostRecentTetanus", "DemographicsMostRecentTetanus", "Id", "Id");
@@ -228,11 +236,11 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn("TB") == null)
+        if (ds.getColumn("TB Report") == null)
         {
-            ColumnInfo col = getWrappedCol(us, ds, "TB", "tb", "Id", "Id");
-            col.setLabel("TB Test Results");
-            col.setDescription("TB Test Results");
+            ColumnInfo col = getWrappedCol(us, ds, "TB Report", "TB Report", "Id", "Id");
+            col.setLabel("TB Report");
+            col.setDescription("TB Report");
             ds.addColumn(col);
         }
 
