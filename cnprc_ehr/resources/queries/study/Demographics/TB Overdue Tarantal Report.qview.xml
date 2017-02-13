@@ -1,0 +1,21 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="Id"/>
+        <column name="Id/curLocation/Location">
+            <properties>
+                <property name="columnTitle" value="Location"/>
+            </properties>
+        </column>
+        <column name="Id/DemographicsActiveAssignment/primaryProject"/>
+        <column name="Id/DemographicsActivePregnancy/conNum"/>
+        <column name="Id/DemographicsActivePregnancy/daysPregnant"/>
+        <column name="Id/MostRecentWeight/MostRecentWeightDate"/>
+    </columns>
+    <filters>
+        <filter column="Id/TB Report/Id" operator="isnonblank"/>
+        <filter column="Id/DemographicsActiveAssignment/primaryProject/inves" operator="eq" value="TARANTAL"/>
+    </filters>
+    <sorts>
+        <sort column="Id" descending="false"/>
+    </sorts>
+</customView>
