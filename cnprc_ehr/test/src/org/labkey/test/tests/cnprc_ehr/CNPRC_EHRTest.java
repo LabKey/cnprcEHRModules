@@ -589,6 +589,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,12));
         assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,7));
     }
+
     @Test
     public void testNcRoundupReport() throws IOException, CommandException
     {
@@ -624,6 +625,33 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(0,13));
         assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(0,14));
 
+    }
+
+    @Test
+    public void testTbOverdueReport() throws IOException, CommandException
+    {
+        SearchPanel searchPanel = getSearchPanel();
+
+        searchPanel.setView("TB Overdue Report");
+        DataRegionTable searchResults = searchPanel.submit();
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "Id/curLocation/Location",
+                "Id/DemographicsActiveAssignment/primaryProject",
+                "Id/DemographicsActivePregnancy/conNum",
+                "Id/DemographicsActivePregnancy/daysPregnant",
+                "Id/TB Report/daysWeightOverdue",
+                "Id/TB Report/daysTBOverdue",
+                "Id/DemographicsActiveAssignment/primaryProject/inves",
+                "Id/MostRecentWeight/MostRecentWeightDate",
+                "Id/DemographicsMostRecentTB/MostRecentTBDate"
+        );
+
+        assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
+
+        assertElementPresent(Locator.linkWithText("TEST1112911"));
+        assertElementPresent(Locator.linkWithText("2011-09-09 09:00"));
+        assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,2));
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
