@@ -649,9 +649,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2015,Calendar.APRIL,21);
+        Date lastTB = calendar.getTime();
+        String daysOverdue = String.valueOf((int) ((new Date().getTime() - lastTB.getTime())/(1000 *60*60*24)-180));
+
+
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertElementPresent(Locator.linkWithText("2011-09-09 09:00"));
+        assertElementPresent(Locator.linkWithText("2015-04-21"));
         assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,2));
+        assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(0,6));
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
