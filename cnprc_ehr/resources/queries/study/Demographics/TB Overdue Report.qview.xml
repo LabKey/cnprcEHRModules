@@ -29,7 +29,6 @@
     </columns>
     <filters>
         <filter column="Id/TB Report/Id" operator="isnonblank"/>
-        <filter column="Id/curLocation/Location" operator="containsnoneof" value="NC;CC;HO"/>
     </filters>
     <sorts>
         <sort column="Id" descending="false"/>
