@@ -31,10 +31,10 @@
             </properties>
         </column>
         <column name="Id/NcRoundup/Geriatric"/>
-        <column name="Id/NcRoundup/Depo"/>
         <column name="Id/NcRoundup/Tetanus"/>
         <column name="Id/NcRoundup/Measles"/>
         <column name="Id/NcRoundup/SerumBank"/>
+        <column name="Id/NcRoundup/VGL"/>
         <column name="Id/NcRoundup/Dam"/>
 
     </columns>

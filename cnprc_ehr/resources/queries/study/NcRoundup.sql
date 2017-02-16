@@ -16,7 +16,6 @@
 SELECT d.Id,
 (SELECT GROUP_CONCAT(flag) from study.flags f where f.Id = d.Id and SUBSTRING (f.flag,1,3)='VAS') AS VAS,
 case when d.Id.age.ageInDays > 6940 then 'X' end as Geriatric,
-case when d.gender.code = 'F' and d.Id.age.ageInDays > 1096 then 'X' end as Depo,
 case when d.Id.curLocation.location != d.Id.homeLocation.location then d.Id.curLocation.location end as "hoLocation",
 case --Serum
 when
