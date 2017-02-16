@@ -662,6 +662,18 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(0,6));
     }
 
+    @Test
+    public void testSerumBankReport() throws IOException, CommandException
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Repository");
+        animalHistoryPage.clickReportTab("Serum Bank");
+
+        assertElementPresent(Locator.linkWithText("TEST9118022"));
+        assertElementPresent(Locator.tagContainingText("nobr", "2015-09-30 00:00"));
+    }
+
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);

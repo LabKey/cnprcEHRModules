@@ -12,13 +12,13 @@
                         <columnTitle>Sample Date</columnTitle>
                     </column>
                     <column columnName="locationBox">
-                        <columnTitle>Box</columnTitle>
+                        <columnTitle>Box Number</columnTitle>
                     </column>
                     <column columnName="locationSlot">
-                        <columnTitle>Slot</columnTitle>
+                        <columnTitle>Slot Number</columnTitle>
                     </column>
                     <column columnName="viralPrecautionFlag">
-                        <columnTitle>Viral Precaution Flag</columnTitle>
+                        <columnTitle>Viral Precaution Indicator</columnTitle>
                     </column>
                 </columns>
             </table>
