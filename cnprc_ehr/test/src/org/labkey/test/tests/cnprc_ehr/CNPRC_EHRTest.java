@@ -609,10 +609,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsHolds/holdFlags",
                 "Id/flagList/values",
                 "Id/NcRoundup/Geriatric",
-                "Id/NcRoundup/Depo",
                 "Id/NcRoundup/Tetanus",
                 "Id/NcRoundup/Measles",
                 "Id/NcRoundup/SerumBank",
+                "Id/NcRoundup/VGL",
                 "Id/NcRoundup/Dam"        );
 
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
