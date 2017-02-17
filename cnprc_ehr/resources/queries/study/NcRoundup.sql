@@ -62,9 +62,8 @@ when (d.Id.age.ageInDays > 180
       )
 THEN 'X' END AS Measles,
 
-case
-when( NOT EXISTS(Select * from study.flags f where f.Id = d.Id and flag not like '%AN%' and flag not like '%AP%'))
-then 'X' end as VGL,
+case when( EXISTS(Select * from study.flags f where f.Id = d.Id and (flag like '%AN%' or flag  like '%AP%')))
+then '' else 'X' end as VGL,
 
 case -- Dam
 when d.Id.age.ageInDays < 365
