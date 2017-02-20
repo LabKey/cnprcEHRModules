@@ -1,0 +1,48 @@
+<script type="text/javascript">
+
+    Ext4.onReady(function (){
+        var project = LABKEY.ActionURL.getParameter('project') || LABKEY.ActionURL.getParameter('key');
+        if (!project){
+            alert('Must Provide Project Number');
+            return;
+        }
+
+        var webpart = <%=webpartContext%>;
+        var domSpec = [{
+            tag: 'div',
+            style: 'padding-bottom: 10px;',
+            id: 'projectDetails_' + webpart.wrapperDivId
+        },{
+            tag: 'div',
+            style: 'padding-bottom: 10px;',
+            id: 'projectAssignments_' + webpart.wrapperDivId
+        },{
+            tag: 'div',
+            style: 'padding-bottom: 10px;',
+            id: 'projectTotalAssignments_' + webpart.wrapperDivId
+        }]
+
+        var el = Ext4.get(webpart.wrapperDivId);
+        Ext4.DomHelper.append(el, domSpec);
+
+        new LABKEY.QueryWebPart({
+            title: 'All Assignments',
+            schemaName: 'study',
+            queryName: 'assignment',
+            viewName: 'All Assignments',
+            allowChooseQuery: false,
+            allowChooseView: true,
+            showInsertNewButton: false,
+            showDeleteButton: false,
+            showDetailsColumn: true,
+            showUpdateColumn: false,
+            showRecordSelectors: true,
+            buttonBarPosition: 'top',
+            filters: [LABKEY.Filter.create('projectCode/project', project, LABKEY.Filter.Types.EQUAL)],
+            sort: '-Date',
+            scope: this,
+            failure: EHR.Utils.onError
+        }).render('projectAssignments_' + webpart.wrapperDivId);
+    });
+
+</script>

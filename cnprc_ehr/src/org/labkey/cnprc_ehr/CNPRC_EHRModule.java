@@ -79,6 +79,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
 
         EHRService.get().registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
         EHRService.get().registerActionOverride("animalSearch", this, "views/animalSearch.html");
+        EHRService.get().registerActionOverride("projectDetails", this, "views/projectDetails.html");
 
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()

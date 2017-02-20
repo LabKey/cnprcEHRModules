@@ -36,6 +36,14 @@
                             <fkDisplayColumnName>Project Name</fkDisplayColumnName>
                         </fk>
                     </column>
+                    <column columnName="primaryProject">
+                        <fk>
+                            <fkDbSchema>ehr</fkDbSchema>
+                            <fkTable>project</fkTable>
+                            <fkColumnName>displayName</fkColumnName>
+                            <fkDisplayColumnName>Project Name</fkDisplayColumnName>
+                        </fk>
+                    </column>
                     <column columnName="date">
                         <formatString>Date</formatString>
                         <columnTitle>Assign Date</columnTitle>
