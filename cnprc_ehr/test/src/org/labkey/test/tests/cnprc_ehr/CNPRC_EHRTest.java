@@ -694,7 +694,35 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         SearchPanel searchPanel;
         DataRegionTable searchResults;
 
+
         searchPanel = getSearchPanel();
+        String [] expectedLabels = new String[]{
+                "Species code (3 char):"
+                ,"Gender:"
+                ,"Status:"
+                ,"Pairing Status:"
+                ,"Age (Years, Rounded):"
+                ,"Age (Years, Rounded):"
+                ,"Current Weight (kg):"
+                ,"Current Weight (kg):"
+                ,"Area:"
+                ,"Room:"
+                ,"Cage:"
+                ,"Current Project:"
+                ,"Past Projects:"
+                ,"Past Projects:"
+                ,"Payor Id:"
+                ,"Census Flags:"
+                ,"Census Flags:"
+                ,"Breeding Group:"
+                ,"Pregnancy Conception Num:"
+                ,"Colony Code:"
+                ,"SNOMED:"
+                ,"SPF Status:"
+                ,"View:"
+        };
+
+        assertTextPresent(expectedLabels);
         searchPanel.selectValues("Gender", " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
