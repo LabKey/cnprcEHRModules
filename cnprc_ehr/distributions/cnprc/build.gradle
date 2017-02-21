@@ -1,0 +1,31 @@
+import org.labkey.gradle.plugin.Distribution
+import org.labkey.gradle.task.ModuleDistribution
+import org.labkey.gradle.util.BuildUtils
+import org.labkey.gradle.util.GroupNames
+
+apply plugin: 'org.labkey.distribution'
+
+Distribution.inheritDependencies(project, ":server:distributions:pro_plus")
+
+BuildUtils.addModuleDistributionDependencies(project, [":server:customModules:cnprc_ehr",
+                                                       ":externalModules:cnprcEHRModules:cnprc_billing",
+                                                       ":externalModules:cnprcEHRModules:cnprc_genetics",
+                                                       ":externalModules:cnprcEHRModules:cnprc_pdl",
+                                                       ":externalModules:cnprcEHRModules:cnprc_complianceAndTraining",
+                                                       ":server:customModules:ehr",
+                                                       ":server:customModules:EHR_ComplianceDB",
+                                                       ":externalModules:labModules:laboratory",
+                                                       ":externalModules:labModules:LDK"])
+
+// TODO extra files
+
+project.task(
+        "distribution",
+        group: GroupNames.DISTRIBUTION,
+        type: ModuleDistribution,
+        {ModuleDistribution dist ->
+            dist.subDirName='cnprc'
+            dist.includeZipArchive=true
+            dist.extraFileIdentifier='-cnprc'
+        }
+)
