@@ -298,8 +298,8 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
                     SQLFragment timeAtLocationSql = new SQLFragment("(" +
                             sqlDialect.concatenate(
                                     "CONVERT(VARCHAR, FLOOR(" + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + " / 365.25))", "' : '",
-                                    "CONVERT(VARCHAR, FLOOR(" + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + "/ 30.4375))", "' : '",
-                                    "CONVERT(VARCHAR, " + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + ")")
+                                    "CONVERT(VARCHAR, FLOOR(" + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + "/ 30.4375) % 12)", "' : '",
+                                    "CONVERT(VARCHAR, " + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + " % 32)")
                             + ")");
                     ExprColumn timeAtLocationCol = new ExprColumn(ti, "timeAtLocation", timeAtLocationSql, JdbcType.VARCHAR, realTable.getColumn("enddate"), realTable.getColumn("date"));
                     timeAtLocationCol.setLabel("Time at Location");
