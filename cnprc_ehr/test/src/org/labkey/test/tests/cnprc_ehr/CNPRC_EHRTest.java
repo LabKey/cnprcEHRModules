@@ -674,6 +674,19 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.tagContainingText("nobr", "2015-09-30 00:00"));
     }
 
+    @Test
+    public void testRelocationHistoryReport() throws IOException, CommandException
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Colony Management");
+        animalHistoryPage.clickReportTab("Relocation History");
+
+        assertElementPresent(Locator.tagContainingText("td", "8450722-3399592"));
+        assertElementPresent(Locator.tagContainingText("nobr", "2003-01-27 11:00"));
+        assertElementPresent(Locator.tagContainingText("td", "1 : 15 : 479"));
+    }
+
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
