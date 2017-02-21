@@ -1,20 +1,17 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
-    <sorts>
-        <sort column="id" descending="false"/>
-    </sorts>
     <columns>
         <column name="Id/birth/species">
             <properties>
                 <property name="columnTitle" value="Species"/>
             </properties>
         </column>
-        <column name="id">
+        <column name="Id">
             <properties>
                 <property name="columnTitle" value="Animal ID"/>
             </properties>
         </column>
-        <column name="id/demographics/gender"/>
-        <column name="id/demographics/calculated_status">
+        <column name="Id/demographics/gender"/>
+        <column name="Id/demographics/calculated_status">
             <properties>
                 <property name="columnTitle" value="Status"/>
             </properties>
@@ -104,6 +101,8 @@
                 <property name="columnTitle" value="Preg Estimate"/>
             </properties>
         </column>
-        <column name="isActive" />
     </columns>
+    <sorts>
+        <sort column="date" descending="false"/>
+    </sorts>
 </customView>
