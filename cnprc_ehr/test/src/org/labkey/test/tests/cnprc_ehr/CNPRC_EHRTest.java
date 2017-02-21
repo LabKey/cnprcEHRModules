@@ -717,7 +717,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"Age (Years, Rounded):"
                 ,"Age (Years, Rounded):"
                 ,"Current Weight (kg):"
-                ,"Current Weight (kg):"
                 ,"Area:"
                 ,"Room:"
                 ,"Cage:"
