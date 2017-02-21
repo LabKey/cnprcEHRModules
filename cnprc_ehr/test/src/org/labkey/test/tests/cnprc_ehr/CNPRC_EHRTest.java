@@ -107,7 +107,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Birth Records",
                 "Death Records",
                 "Housing - Active",
-                "Housing History",
+                "Relocation History",
                 "Weights",
                 "Geriatrics"));
         put("Assignments and Groups", Arrays.asList(

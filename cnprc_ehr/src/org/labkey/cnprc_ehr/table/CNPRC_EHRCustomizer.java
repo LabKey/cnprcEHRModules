@@ -2,11 +2,21 @@ package org.labkey.cnprc_ehr.table;
 
 import org.labkey.api.data.AbstractTableInfo;
 import org.labkey.api.data.ColumnInfo;
+import org.labkey.api.data.JdbcType;
+import org.labkey.api.data.SQLFragment;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.data.WrappedColumn;
+import org.labkey.api.data.dialect.SqlDialect;
+import org.labkey.api.exp.api.StorageProvisioner;
+import org.labkey.api.exp.property.Domain;
 import org.labkey.api.ldk.table.AbstractTableCustomizer;
+import org.labkey.api.query.ExprColumn;
+import org.labkey.api.query.FilteredTable;
 import org.labkey.api.query.QueryForeignKey;
 import org.labkey.api.query.UserSchema;
+import org.labkey.api.study.DatasetTable;
+
+import java.util.Calendar;
 
 
 public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
@@ -22,6 +32,11 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         if (matches(ti, "study", "Animal"))
         {
             customizeAnimalTable(ti);
+        }
+
+        else if (matches(ti, "study", "Housing"))
+        {
+            customizeHousingTable(ti);
         }
     }
 
@@ -268,6 +283,67 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+    }
+
+    private void customizeHousingTable(AbstractTableInfo ti)
+    {
+        if (ti.getColumn("timeAtLocation") == null)
+        {
+            TableInfo realTable = getRealTable(ti);
+            if(realTable != null)
+            {
+                SqlDialect sqlDialect = ti.getSqlDialect();
+                if (sqlDialect.isSqlServer() && realTable.getColumn("date") != null && realTable.getColumn("enddate") != null)
+                {
+                    SQLFragment timeAtLocationSql = new SQLFragment("(" +
+                            sqlDialect.concatenate(
+                                    "CONVERT(VARCHAR, FLOOR(" + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + " / 365.25))", "' : '",
+                                    "CONVERT(VARCHAR, FLOOR(" + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + "/ 30.4375))", "' : '",
+                                    "CONVERT(VARCHAR, " + sqlDialect.getDateDiff(Calendar.DATE, "housing.enddate", "housing.date") + ")")
+                            + ")");
+                    ExprColumn timeAtLocationCol = new ExprColumn(ti, "timeAtLocation", timeAtLocationSql, JdbcType.VARCHAR, realTable.getColumn("enddate"), realTable.getColumn("date"));
+                    timeAtLocationCol.setLabel("Time at Location");
+                    ti.addColumn(timeAtLocationCol);
+                }
+            }
+        }
+
+        if (ti.getColumn("location") == null)
+        {
+            TableInfo realTable = getRealTable(ti);
+            if(realTable != null)
+            {
+                SqlDialect sqlDialect = ti.getSqlDialect();
+                if (sqlDialect.isSqlServer() && realTable.getColumn("room") != null && realTable.getColumn("cage") != null)
+                {
+                    SQLFragment locationSql = new SQLFragment(sqlDialect.concatenate("housing.room", "'-'", "housing.cage"));
+                    ExprColumn locationCol = new ExprColumn(ti, "location", locationSql, JdbcType.VARCHAR, realTable.getColumn("room"), realTable.getColumn("cage"));
+                    locationCol.setLabel("Location");
+                    ti.addColumn(locationCol);
+                }
+            }
+        }
+    }
+
+    private TableInfo getRealTable(TableInfo targetTable)
+    {
+        TableInfo realTable = null;
+        if (targetTable instanceof FilteredTable)
+        {
+            if (targetTable instanceof DatasetTable)
+            {
+                Domain domain = targetTable.getDomain();
+                if (domain != null)
+                {
+                    realTable = StorageProvisioner.createTableInfo(domain);
+                }
+            }
+            else if (targetTable.getSchema() != null)
+            {
+                realTable = targetTable.getSchema().getTable(targetTable.getName());
+            }
+        }
+        return realTable;
     }
 
     private ColumnInfo getWrappedCol(UserSchema us, AbstractTableInfo ds, String name, String queryName, String colName, String targetCol)
