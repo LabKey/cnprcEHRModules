@@ -27,6 +27,7 @@ import org.junit.experimental.categories.Category;
 import org.labkey.remoteapi.CommandException;
 import org.labkey.remoteapi.Connection;
 import org.labkey.remoteapi.query.InsertRowsCommand;
+import org.labkey.remoteapi.query.SaveRowsResponse;
 import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
@@ -58,6 +59,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -587,7 +589,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,10));
         assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,12));
-        assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,7));
+        assertEquals("Wrong value for Primary Project: ", "795644", searchResults.getDataAsText(0,7));
     }
 
     @Test
@@ -599,7 +601,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
                 "Id",
-                "Id/curLocation/Location",
+                "Id/HomeLocation/Room",
                 "Id/NcRoundup/hoLocation",
                 "Id/age/yearsAndMonths",
                 "Id/MostRecentWeight/MostRecentWeight",
@@ -618,7 +620,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST1112911"));
-        assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,5));
+        assertEquals("Wrong value for Primary Project: ", "795644", searchResults.getDataAsText(0,5));
         assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,8));
         assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,9));
         assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(0,12));
@@ -655,11 +657,35 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         String daysOverdue = String.valueOf((int) ((new Date().getTime() - lastTB.getTime())/(1000 *60*60*24)-180));
 
 
+        assertElementPresent(Locator.linkWithText("TEST1684145"));
+
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertElementPresent(Locator.linkWithText("2011-09-09 09:00"));
         assertElementPresent(Locator.linkWithText("2015-04-21"));
-        assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,2));
+        assertEquals("Wrong value for Primary Project: ", "795644", searchResults.getDataAsText(0,2));
         assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(0,6));
+
+        InsertRowsCommand insertCmdTB = new InsertRowsCommand("study", "tb");
+        Map<String,Object> rowMapTB = new HashMap<>();
+        rowMapTB.put("id", "TEST1684145");
+        rowMapTB.put("date", new Date());
+        insertCmdTB.addRow(rowMapTB);
+        SaveRowsResponse respTB =  insertCmdTB.execute(createDefaultConnection(false), getContainerPath());
+
+        InsertRowsCommand insertCmdWeight = new InsertRowsCommand("study", "weight");
+        Map<String,Object> rowMapWeight = new HashMap<>();
+        rowMapWeight.put("id", "TEST1684145");
+        rowMapWeight.put("date", new Date());
+        rowMapWeight.put("weight", "2.9");
+        insertCmdWeight.addRow(rowMapWeight);
+        SaveRowsResponse respWeight =  insertCmdWeight.execute(createDefaultConnection(false), getContainerPath());
+
+        searchPanel = getSearchPanel();
+
+        searchPanel.setView("TB Overdue Report");
+        searchPanel.submit();
+        assertElementNotPresent(Locator.linkWithText("TEST1684145"));
+
     }
 
     @Test
@@ -699,6 +725,49 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         UpdateRowsCommand command = new UpdateRowsCommand("study", "demographics");
         command.setRows(weightRows);
         command.execute(connection, getProjectName());
+    }
+
+    @Test
+    public void testAnimalSearchProjectView() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Assignments and Groups");
+        animalHistoryPage.clickReportTab("Active Assignments");
+        click(Locator.linkContainingText("795644"));
+
+        switchToWindow(1);
+
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        List<String> expectedColumns = Arrays.asList(
+                "Id/birth/species"
+                ,"Id"
+                ,"Id/demographics/gender"
+                ,"Id/demographics/calculated_status"
+                ,"Id/age/yearsAndMonthsAndDays"
+                ,"Id/MostRecentWeight/MostRecentWeight"
+                ,"Id/curLocation/location"
+                ,"Id/curLocation/date"
+                ,"date"
+                ,"projectCode"
+                ,"assignmentStatus"
+                ,"enddate"
+                ,"Id/DemographicsActiveAssignment/primaryProject"
+                ,"Id/DemographicsActiveAssignment/secondaryProjects"
+                ,"Id/DemographicsActivePayor/payor_id"
+                ,"Id/flagList/values"
+                ,"Id/DemographicsActiveColony/colonyCode"
+                ,"Id/DemographicsActiveBreedingGroup/groupCode/value"
+                ,"Id/DemographicsActivePregnancy/conNum"
+                ,"Id/DemographicsActivePregnancy/daysPregnant"
+                ,"Id/DemographicsActivePregnancy/conceptionDateStatus"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        assertEquals("Wrong value for ID: ", "TEST1112911", results.getDataAsText(0,1));
+        assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(0,8));
+        assertEquals("Wrong value for Searched Project: ", "795644", results.getDataAsText(0,9));
+
     }
 
     @Test
@@ -760,13 +829,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
                 4, searchResults.getDataRowCount());
-
-        goBack();
-        searchPanel = new AnimalSearchPanel(getDriver());
-        searchPanel.setFilter("Age (Years, Rounded)", null, "7");
-        searchResults = searchPanel.submit();
-        assertElementPresent(Locator.linkWithText("TEST1112911"));
-        assertEquals("Wrong number of rows: 'Age In Years' contains '7'", 13, searchResults.getDataRowCount());
 
     }
 

@@ -11,15 +11,7 @@
         var domSpec = [{
             tag: 'div',
             style: 'padding-bottom: 10px;',
-            id: 'projectDetails_' + webpart.wrapperDivId
-        },{
-            tag: 'div',
-            style: 'padding-bottom: 10px;',
             id: 'projectAssignments_' + webpart.wrapperDivId
-        },{
-            tag: 'div',
-            style: 'padding-bottom: 10px;',
-            id: 'projectTotalAssignments_' + webpart.wrapperDivId
         }]
 
         var el = Ext4.get(webpart.wrapperDivId);
@@ -30,6 +22,7 @@
             schemaName: 'study',
             queryName: 'assignment',
             viewName: 'All Assignments',
+            dataRegionName: 'query',
             allowChooseQuery: false,
             allowChooseView: true,
             showInsertNewButton: false,
