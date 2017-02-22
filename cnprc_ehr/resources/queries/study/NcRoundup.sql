@@ -58,7 +58,7 @@ when (d.Id.age.ageInDays > 180
       and
       NOT EXISTS (SELECT * from study.drug dr WHERE dr.Id = d.Id AND SUBSTRING (code,1,1) IN ('M','K'))
       and Id.DemographicsActivePregnancy.Id is null
-	  and Id.activeFlagList.values not like '%NOVA%'
+	  and (Id.activeFlagList.values is null or Id.activeFlagList.values not like '%NOVA%')
       )
 THEN 'X' END AS Measles,
 
