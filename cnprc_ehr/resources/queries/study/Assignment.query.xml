@@ -33,7 +33,6 @@
                             <fkDbSchema>ehr</fkDbSchema>
                             <fkTable>project</fkTable>
                             <fkColumnName>name</fkColumnName>
-                            <fkDisplayColumnName>Project Name</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="date">
