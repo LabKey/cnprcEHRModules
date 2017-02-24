@@ -18,7 +18,7 @@
         </column>
         <column name="Id/age/yearsAndMonthsAndDays">
             <properties>
-                <property name="columnTitle" value="Age"/>
+                <property name="columnTitle" value="Age (yy:mm:dd)"/>
             </properties>
         </column>
         <column name="Id/MostRecentWeight/MostRecentWeight">
@@ -81,7 +81,7 @@
                 <property name="columnTitle" value="Colony Code"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActiveBreedingGroup/groupCode/value">
+        <column name="Id/DemographicsActiveBreedingGroup/groupCode">
             <properties>
                 <property name="columnTitle" value="Breeding Code"/>
             </properties>
