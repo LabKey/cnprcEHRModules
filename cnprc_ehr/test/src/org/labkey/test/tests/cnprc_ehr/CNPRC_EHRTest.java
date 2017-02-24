@@ -771,6 +771,47 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testAnimalSearchPayorView() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Assignments and Groups");
+        animalHistoryPage.clickReportTab("Per-diem Payor Assignment");
+        click(Locator.linkContainingText("AB123/YZ12"));
+
+        switchToWindow(1);
+
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        List<String> expectedColumns = Arrays.asList(
+                "Id/birth/species",
+                "Id",
+                "Id/demographics/gender",
+                "Id/demographics/calculated_status",
+                "Id/age/yearsAndMonthsAndDays",
+                "Id/MostRecentWeight/MostRecentWeight",
+                "Id/curLocation/location",
+                "Id/curLocation/date",
+                "Id/DemographicsActiveAssignment/primaryProject",
+                "Id/DemographicsActiveAssignment/secondaryProjects",
+                "date",
+                "payor_id",
+                "Id/DemographicsActivePayor/payor_id",
+                "Id/flagList/values",
+                "Id/DemographicsActivePregnancy/conNum",
+                "Id/DemographicsActivePregnancy/daysPregnant",
+                "Id/DemographicsActiveColony/colonyCode",
+                "Id/DemographicsActiveBreedingGroup/groupCode/value"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0,1));
+        assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
+        assertEquals("Wrong value for Status: ", "Alive", results.getDataAsText(0,3));
+
+        assertElementPresent(Locator.linkWithText("1101324"));
+    }
+
+    @Test
     public void testAnimalSearch() throws Exception
     {
         SearchPanel searchPanel;
