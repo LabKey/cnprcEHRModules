@@ -757,7 +757,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"Id/DemographicsActivePayor/payor_id"
                 ,"Id/flagList/values"
                 ,"Id/DemographicsActiveColony/colonyCode"
-                ,"Id/DemographicsActiveBreedingGroup/groupCode/value"
+                ,"Id/DemographicsActiveBreedingGroup/groupCode"
                 ,"Id/DemographicsActivePregnancy/conNum"
                 ,"Id/DemographicsActivePregnancy/daysPregnant"
                 ,"Id/DemographicsActivePregnancy/conceptionDateStatus"
