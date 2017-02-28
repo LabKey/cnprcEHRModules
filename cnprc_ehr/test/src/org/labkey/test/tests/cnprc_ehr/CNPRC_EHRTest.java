@@ -696,6 +696,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickCategoryTab("Repository");
         animalHistoryPage.clickReportTab("Serum Bank");
 
+        DataRegionTable historyTable = animalHistoryPage.getActiveReportDataRegion();
+
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "date",
+                "locationBox",
+                "locationSlot",
+                "viralPrecautionFlag"
+        );
+        assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
+
         assertElementPresent(Locator.linkWithText("TEST9118022"));
         assertElementPresent(Locator.tagContainingText("nobr", "2015-09-30 00:00"));
     }
