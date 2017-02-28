@@ -34,5 +34,14 @@ project.task(
             dist.subDirName='cnprc'
             dist.includeZipArchive=true
             dist.extraFileIdentifier='-cnprc'
+            dist.doLast
+                    {
+                        project.copy
+                                { CopySpec copy ->
+                                    copy.from { project.configurations.distributionExtras }
+                                    copy.into project.file("${project.dist.dir}/cnprc")
+                                    copy.rename('cnprc_genetics(.*)-transform.jar', 'GeneticsTransform$1.jar')
+                                }
+                    }
         }
 )
