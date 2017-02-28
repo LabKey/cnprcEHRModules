@@ -17,7 +17,14 @@ BuildUtils.addModuleDistributionDependencies(project, [":server:customModules:cn
                                                        ":externalModules:labModules:laboratory",
                                                        ":externalModules:labModules:LDK"])
 
-// TODO extra files
+
+configurations
+        {
+            distributionExtras { transitive = false }
+        }
+
+BuildUtils.addLabKeyDependency(project: project, config: "distributionExtras", depProjectPath: ":externalModules:cnprcEHRModules:cnprc_genetics", depProjectConfig: "transformCompile", transitive: false)
+
 
 project.task(
         "distribution",
