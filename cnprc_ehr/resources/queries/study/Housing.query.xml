@@ -11,20 +11,14 @@
                     <column columnName="Id">
                     </column>
                     <column columnName="date">
-                        <columnTitle>Date In</columnTitle>
-                    </column>
-                    <column columnName="location">
-                        <columnTitle>Location</columnTitle>
+                        <columnTitle>In Date</columnTitle>
                     </column>
                     <column columnName="enddate">
                         <nullable>true</nullable>
                         <isHidden>false</isHidden>
                         <shownInInsertView>true</shownInInsertView>
                         <shownInDetailsView>true</shownInDetailsView>
-                        <columnTitle>Date Out</columnTitle>
-                    </column>
-                    <column columnName="timeAtLocation">
-                        <columnTitle>Time At Location</columnTitle>
+                        <columnTitle>Out Date</columnTitle>
                     </column>
                     <column columnName="room">
                         <nullable>false</nullable>

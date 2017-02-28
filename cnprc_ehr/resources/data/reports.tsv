@@ -59,7 +59,7 @@ birth2	Reproductive Management	query	Birth Records	true		study	birth				false	fa
 death	Colony Management	query	Death Records	true		study	deaths				false	false		qcstate/publicdata	Death records
 roommateHistory	Colony Management	query	Cagemate History	true		study	housingRoommates			StartDate	false	false		qcstate/publicdata	This report displays all animals that shared a cage, including the start date, stop date and days co-housed
 activeHousing	Colony Management	query	Housing - Active	true		study	housing	Active Housing		date	false	TRUE		qcstate/publicdata	This report shows the active housing record for each animal
-housing	Colony Management	query	Relocation History	true		study	housing			date	false	TRUE		qcstate/publicdata	This report contains the relocation history of each animal
+housing	Colony Management	query	Housing History	true		study	housing			date	false	TRUE		qcstate/publicdata	This report contains the housing history of each animal
 inbreeding	Genetics	js	Inbreeding Coefficients	true		study	underDevelopment				false	false		qcstate/publicdata	This report shows the inbreeding coefficient of each animal, where pedigree data is available. The inbreeding coefficient is the kinship coefficient between the individual's parents. It measures the probability that the two alleles of a gene are identical by descent in the same individual (autozygosity). It is zero if the individual is not inbred.
 parentage	Genetics	query	Parentage	true		study	parentage				false	false		qcstate/publicdata	This report shows information about the parentage of each animal, drawing from genetic data and observations
 potentialParents	Colony Management	js	Potential Parents	true		study	underDevelopment				false	false		qcstate/publicdata	This report shows potential parents for the animal, which is based on housing at estimated time of conception
@@ -152,3 +152,4 @@ rd_asthma_cbc	Respiratory Diseases	query	RD Asthma CBC	true		study	rd_asthma_cbc
 serum	Repository	query	Serum Bank	true		study	serum			date	false	false		qcstate/publicdata	Serum Registry
 pathology_inventory	Repository	query	Pathology Inventory	true		study	pathology_inventory			date	false	false		qcstate/publicdata	Pathology Specimen Inventory
 fdb_samples	Repository	query	Freezer DB Samples	true		study	fdb_samples			date	false	false		qcstate/publicdata	Freezer sample data
+relocationHistory	Colony Management	query	Relocation History	true		study	relocationHistory			date	false	TRUE		qcstate/publicdata	This report contains the relocation history of each animal

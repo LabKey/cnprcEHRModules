@@ -2,11 +2,9 @@
     <columns>
         <column name="Id"/>
         <column name="date"/>
+        <column name="location"/>
         <column name="enddate"/>
-        <column name="room"/>
-        <column name="cage"/>
-        <column name="reason"/>
-        <column name="reloc_seq"/>
+        <column name="timeAtLocation"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

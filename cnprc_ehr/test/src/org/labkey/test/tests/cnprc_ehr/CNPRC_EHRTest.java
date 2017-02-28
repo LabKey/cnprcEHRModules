@@ -708,9 +708,22 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickCategoryTab("Colony Management");
         animalHistoryPage.clickReportTab("Relocation History");
 
+        DataRegionTable historyTable = animalHistoryPage.getActiveReportDataRegion();
+
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "date",
+                "location",
+                "enddate",
+                "timeAtLocation"
+                );
+        assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
+
+        assertElementPresent(Locator.linkWithText("TEST4564246"));
         assertElementPresent(Locator.tagContainingText("td", "8450722-3399592"));
+        assertElementPresent(Locator.tagContainingText("td", "1129356"));
         assertElementPresent(Locator.tagContainingText("nobr", "2003-01-27 11:00"));
-        assertElementPresent(Locator.tagContainingText("td", "1 : 3 : 31"));
+        assertElementPresent(Locator.tagContainingText("td", "01:03:22"));
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
