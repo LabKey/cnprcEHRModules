@@ -824,7 +824,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsActivePregnancy/conNum",
                 "Id/DemographicsActivePregnancy/daysPregnant",
                 "Id/DemographicsActiveColony/colonyCode",
-                "Id/DemographicsActiveBreedingGroup/groupCode/value"
+                "Id/DemographicsActiveBreedingGroup/groupCode"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
