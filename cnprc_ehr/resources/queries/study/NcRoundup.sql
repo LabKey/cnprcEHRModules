@@ -19,16 +19,17 @@ case when d.Id.age.ageInDays > 6940 then 'X' end as Geriatric,
 case when d.Id.curLocation.location != d.Id.homeLocation.location then d.Id.curLocation.location end as "hoLocation",
 case --Serum
 when
-	(d.Id.age.ageInDays > 180 and id.DemographicsMostRecentSerum.id is null)
-then 'X'
-when ((d.Id.age.ageInDays between 180 and 730)
+	(
+	d.Id.age.ageInDays > 180
 	and (
-        (
+	    id.DemographicsMostRecentSerum.id is null
+	    or
+	    (
            id.DemographicsMostRecentSerum.DaysSinceSample > 180
            and
            (select count(*) from study.serum s where s.Id = d.Id group by s.Id) < 3
-        )
        ))
+  )
 then 'X'
 when ((d.Id.age.ageInDays > 730)
       and
