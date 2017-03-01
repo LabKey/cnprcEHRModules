@@ -6,6 +6,15 @@
                     <column columnName="date">
                         <formatString>Date</formatString>
                     </column>
+                    <column columnName="location">
+                        <url>/EHR/cageDetails.view?room=${room}&amp;cage=${cage}</url>
+                        <fk>
+                            <fkDisplayColumnName useRawValue="true"/>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>cage</fkTable>
+                            <fkColumnName>location</fkColumnName>
+                        </fk>
+                    </column>
                 </columns>
             </table>
         </tables>
