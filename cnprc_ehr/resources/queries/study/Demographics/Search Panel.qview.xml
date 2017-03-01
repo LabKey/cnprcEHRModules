@@ -69,7 +69,7 @@
                 <property name="columnTitle" value="SNOMED"/>
             </properties>
         </column>
-        <column name="Id/tb/date">
+        <column name="Id/DemographicsMostRecentTB/MostRecentTBDate">
             <properties>
             <property name="columnTitle" value="TB Date"/>
             </properties>

@@ -864,6 +864,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"Pregnancy Conception Num:"
                 ,"Colony Code:"
                 ,"SNOMED:"
+                ,"TB Date:"
                 ,"SPF Status:"
                 ,"View:"
         };
