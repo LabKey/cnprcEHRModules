@@ -290,10 +290,10 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
                 @Override
                 public DisplayColumn createRenderer(ColumnInfo colInfo)
                 {
-                    return new DurationColumn(colInfo, "date", "endDate");
+                    return new DurationColumn(colInfo, "date", "endDate", "yy:MM:dd");
                 }
             });
-            timeAtLocationCol.setLabel("Time at Location (yy/MM/dd)");
+            timeAtLocationCol.setLabel("Time at Location (yy:MM:dd)");
 
             ti.addColumn(timeAtLocationCol);
         }
