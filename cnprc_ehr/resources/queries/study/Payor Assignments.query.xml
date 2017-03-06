@@ -13,7 +13,7 @@
                     </column>
                     <column columnName="payor_id">
                         <columnTitle>Payor Id</columnTitle>
-                        <url>/query/executeQuery.view?schemaName=study&amp;query.queryName=payor_assignments&amp;query.viewName=Payor%20Assignments&amp;query.payor_id~eq=${payor_id}</url>
+                        <url>/query/executeQuery.view?schemaName=study&amp;query.queryName=payor_assignments&amp;query.viewName=Animals%20By%20Payor&amp;query.payor_id~eq=${payor_id}</url>
                         <fk>
                             <fkDisplayColumnName useRawValue="true"/>
                             <fkFolderPath>/CNPRC/Core Facilities/Billing</fkFolderPath>

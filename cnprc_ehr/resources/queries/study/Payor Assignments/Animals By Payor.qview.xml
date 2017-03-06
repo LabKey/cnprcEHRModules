@@ -47,6 +47,11 @@
                 <property name="columnTitle" value="Payor Assignment Date"/>
             </properties>
         </column>
+        <column name="enddate">
+            <properties>
+                <property name="columnTitle" value="Payor Release Date"/>
+            </properties>
+        </column>
         <column name="payor_id">
             <properties>
                 <property name="columnTitle" value="Searched Payor"/>
