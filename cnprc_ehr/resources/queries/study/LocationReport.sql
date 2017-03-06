@@ -1,0 +1,28 @@
+SELECT animal.Id,
+clh.location,
+housing.cage,
+clh.cage_size,
+clh.rate_class,
+animal.demographics.species,
+animal.demographics.gender,
+animal.age,
+animal.demographics.birth,
+animal.mostRecentWeight.MostRecentWeight,
+housing.date,
+animal.demographicsActivePayor,
+animal.demographicsActiveColony,
+animal.demographicsActiveBreedingGroup,
+animal.demographicsActiveAssignment.primaryProject,
+animal.demographicsActiveAssignment.secondaryProjects,
+animal.flagList,
+animal.demographicsActivePregnancy.conNum,
+animal.demographicsActivePregnancy.daysPregnant,
+animal.demographicsActivePregnancy.conceptionDateStatus,
+room_enclosure.supervisor,
+housing.room
+
+FROM study.animal
+INNER JOIN cnprc_ehr.cage_location_history clh ON clh.location = animal.curLocation.Location
+INNER JOIN study.housing ON animal.Id = housing.Id
+INNER JOIN cnprc_ehr.room_enclosure ON housing.room = room_enclosure.room
+WHERE clh.to_date IS NULL

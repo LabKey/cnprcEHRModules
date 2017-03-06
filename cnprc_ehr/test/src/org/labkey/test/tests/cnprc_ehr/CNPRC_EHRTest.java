@@ -94,7 +94,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
     private static final File CNPRC_EHR_CONCEPTIONS_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CONCEPTIONS.tsv");
-
+    private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
+    private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
 
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
@@ -335,10 +336,19 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertTsvData(connection, "cnprc_ehr", "conceptions", CNPRC_EHR_CONCEPTIONS_TSV, null);
     }
 
+    private void storeCageAndRoomData() throws Exception
+    {
+        Connection connection = createDefaultConnection(true);
+        String folder = "/";
+        insertTsvData(connection, "cnprc_ehr", "cage_location_history", CNPRC_EHR_CAGE_LOCATION_HISTORY, folder);
+        insertTsvData(connection, "cnprc_ehr", "room_enclosure", CNPRC_EHR_ROOM_ENCLOSURE, folder);
+    }
+
     @Test
     public void testAnimalHistoryReports() throws Exception
     {
         //storeConceptionData(); // TODO
+        storeCageAndRoomData();
 
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
 
@@ -731,8 +741,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST4564246"));
-        assertElementPresent(Locator.tagContainingText("td", "8450722-3399592"));
-        assertElementPresent(Locator.tagContainingText("td", "1129356"));
+        assertElementPresent(Locator.linkWithText("8450722-3399592"));
+        assertElementPresent(Locator.linkWithText("1129356"));
         assertElementPresent(Locator.tagContainingText("nobr", "2003-01-27 11:00"));
         assertElementPresent(Locator.tagContainingText("td", "01:03:22"));
     }

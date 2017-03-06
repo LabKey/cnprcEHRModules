@@ -1,0 +1,4 @@
+rowid	room	file_status	management_type	supervisor	weight_sheet_frequency	food_id	supplemental_diet	remark	isMhRoom	mh_group	Created	CreatedBy	Modified	ModifiedBy	Container	indoorOutdoorFlag
+900	4953547	IN	W	John Smith	M	9650	N	Test Text 900	1		2016-10-11 00:00:00.000	edy	2016-10-11 00:00:00.000	edy		I
+901	1129356	AC		Jane Jones	W	9674	Y	Test Text 901	0		2016-10-11 00:00:00.000	edy	2016-10-11 00:00:00.000	edy		O
+902	6824778	IN		Jack Brown	N	9684	N	Test Text 902	0		2016-10-11 00:00:00.000	edy	2016-10-11 00:00:00.000	edy		I

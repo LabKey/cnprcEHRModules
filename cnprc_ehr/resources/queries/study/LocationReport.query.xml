@@ -1,0 +1,84 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="LocationReport" tableDbType="NOT_IN_DB" useColumnOrder="true">
+                <columns>
+                    <column columnName="Id">
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>Id</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="location">
+                        <url>/cnprc_ehr/cageDetails.view?room=${room}&amp;cage=${cage}</url>
+                        <fk>
+                            <fkDisplayColumnName useRawValue="true"/>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>cage</fkTable>
+                            <fkColumnName>location</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="cage">
+                        <url>/cnprc_ehr/cageDetails.view?room=${room}&amp;cage=${cage}</url>
+                    </column>
+                    <column columnName="cage_size">
+                        <columnTitle>Cage Size</columnTitle>
+                    </column>
+                    <column columnName="rate_class">
+                        <columnTitle>Rate Class</columnTitle>
+                    </column>
+                    <column columnName="species"/>
+                    <column columnName="gender"/>
+                    <column columnName="age"/>
+                    <column columnName="birth">
+                        <columnTitle>Birth Date</columnTitle>
+                    </column>
+                    <column columnName="mostRecentWeight">
+                        <columnTitle>Most Recent Weight</columnTitle>
+                    </column>
+                    <column columnName="date">
+                        <columnTitle>Location Date</columnTitle>
+                    </column>
+                    <column columnName="demographicsActivePayor">
+                        <columnTitle>Payor ID</columnTitle>
+                    </column>
+                    <column columnName="demographicsActiveColony">
+                        <columnTitle>Colony Code</columnTitle>
+                    </column>
+                    <column columnName="demographicsActiveBreedingGroup">
+                        <columnTitle>Breeding Code</columnTitle>
+                    </column>
+                    <column columnName="primaryProject">
+                        <columnTitle>Primary Project</columnTitle>
+                    </column>
+                    <column columnName="secondaryProjects">
+                        <columnTitle>Secondary Project(s)</columnTitle>
+                    </column>
+                    <column columnName="flagList">
+                        <columnTitle>Census Flag List</columnTitle>
+                    </column>
+                    <column columnName="conNum">
+                        <columnTitle>Pregnancy</columnTitle>
+                        <url>/query/executeQuery.view?schemaName=study&amp;
+                            query.queryName=DemographicsActivePregnancy&amp;
+                            query.id~eq=${Id}
+                        </url>
+                    </column>
+                    <column columnName="daysPregnant">
+                        <columnTitle>Gest Days</columnTitle>
+                    </column>
+                    <column columnName="conceptionDateStatus">
+                        <columnTitle>Est (indicator)</columnTitle>
+                    </column>
+                    <column columnName="supervisor">
+                        <columnTitle>Encl Supervisor</columnTitle>
+                    </column>
+                    <column columnName="room">
+                        <isHidden>true</isHidden>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

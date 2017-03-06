@@ -13,13 +13,24 @@
                     <column columnName="date">
                         <columnTitle>Date In</columnTitle>
                     </column>
-                    <column columnName="location"/>
+                    <column columnName="location">
+                        <url>/cnprc_ehr/cageDetails.view?
+                            room=${room}&amp;
+                            cage=${cage}
+                        </url>
+                    </column>
                     <column columnName="enddate">
                         <nullable>true</nullable>
                         <isHidden>false</isHidden>
                         <shownInInsertView>true</shownInInsertView>
                         <shownInDetailsView>true</shownInDetailsView>
                         <columnTitle>Date Out</columnTitle>
+                    </column>
+                    <column columnName="room">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="cage">
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="timeAtLocation"/>
                 </columns>
