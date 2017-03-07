@@ -28,47 +28,49 @@
                     <column columnName="rate_class">
                         <columnTitle>Rate Class</columnTitle>
                     </column>
-                    <column columnName="species"/>
-                    <column columnName="gender"/>
-                    <column columnName="age"/>
-                    <column columnName="birth">
+                    <column columnName="Id/demographics/species"/>
+                    <column columnName="Id/demographics/gender"/>
+                    <column columnName="Id/age/yearsAndMonthsAndDays">
+                        <columnTitle>Age</columnTitle>
+                    </column>
+                    <column columnName="Id/demographics/birth">
                         <columnTitle>Birth Date</columnTitle>
                     </column>
-                    <column columnName="mostRecentWeight">
+                    <column columnName="Id/mostRecentWeight/MostRecentWeight">
                         <columnTitle>Most Recent Weight</columnTitle>
                     </column>
                     <column columnName="date">
                         <columnTitle>Location Date</columnTitle>
                     </column>
-                    <column columnName="demographicsActivePayor">
+                    <column columnName="Id/demographicsActivePayor/payor_id">
                         <columnTitle>Payor ID</columnTitle>
                     </column>
-                    <column columnName="demographicsActiveColony">
+                    <column columnName="Id/demographicsActiveColony/colonyCode">
                         <columnTitle>Colony Code</columnTitle>
                     </column>
-                    <column columnName="demographicsActiveBreedingGroup">
+                    <column columnName="Id/demographicsActiveBreedingGroup/groupCode">
                         <columnTitle>Breeding Code</columnTitle>
                     </column>
-                    <column columnName="primaryProject">
+                    <column columnName="Id/demographicsActiveAssignment/primaryProject">
                         <columnTitle>Primary Project</columnTitle>
                     </column>
-                    <column columnName="secondaryProjects">
+                    <column columnName="Id/demographicsActiveAssignment/secondaryProjects">
                         <columnTitle>Secondary Project(s)</columnTitle>
                     </column>
-                    <column columnName="flagList">
+                    <column columnName="Id/flagList/values">
                         <columnTitle>Census Flag List</columnTitle>
                     </column>
-                    <column columnName="conNum">
+                    <column columnName="Id/demographicsActivePregnancy/conNum">
                         <columnTitle>Pregnancy</columnTitle>
                         <url>/query/executeQuery.view?schemaName=study&amp;
                             query.queryName=DemographicsActivePregnancy&amp;
                             query.id~eq=${Id}
                         </url>
                     </column>
-                    <column columnName="daysPregnant">
+                    <column columnName="Id/demographicsActivePregnancy/daysPregnant">
                         <columnTitle>Gest Days</columnTitle>
                     </column>
-                    <column columnName="conceptionDateStatus">
+                    <column columnName="Id/demographicsActivePregnancy/conceptionDateStatus">
                         <columnTitle>Est (indicator)</columnTitle>
                     </column>
                     <column columnName="supervisor">

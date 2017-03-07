@@ -174,6 +174,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 //        createTestSubjects();
 //        initGenetics();
         goToProjectHome();
+        storeCageAndRoomData();
         clickFolder(GENETICSFOLDER);
         _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
         clickFolder(GENETICSFOLDER);
@@ -336,7 +337,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertTsvData(connection, "cnprc_ehr", "conceptions", CNPRC_EHR_CONCEPTIONS_TSV, null);
     }
 
-    private void storeCageAndRoomData() throws Exception
+    private void storeCageAndRoomData() throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
         String folder = "/";
@@ -348,7 +349,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testAnimalHistoryReports() throws Exception
     {
         //storeConceptionData(); // TODO
-        storeCageAndRoomData();
 
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
 
@@ -495,7 +495,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testCageViolationReport() throws Exception
     {
-        createTestCageLocationHistory();
         SearchPanel searchPanel = getSearchPanel();
 
         searchPanel.setView("Cage Violation Report");
@@ -515,18 +514,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertElementPresent(Locator.linkWithText("TEST4564246"));
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
-    }
-
-    @LogMethod
-    protected void createTestCageLocationHistory() throws Exception
-    {
-        log("creating cage location history");
-        String[] fields = new String[]{"location","location_history_pk","cage_size","rate_class","from_date"};
-        Object[][] data = new Object[][]{
-                {"6824778-4953547", 1,"4T",1, TIME_FORMAT.parse("2016-01-01 09:30")}
-        };
-        JSONObject insertCommand = getApiHelper().prepareInsertCommand("cnprc_ehr", "cage_location_history", "rowid", fields, data);
-        getApiHelper().doSaveRows(getCurrentUser(), Collections.singletonList(insertCommand), getExtraContext(), true);
     }
 
     @Test
@@ -747,6 +734,51 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.tagContainingText("td", "01:03:22"));
     }
 
+    @Test
+    public void testLocationReport() throws IOException, CommandException
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Colony Management");
+        animalHistoryPage.clickReportTab("Relocation History");
+        waitForElement(Locator.linkContainingText("Relocation History"));
+
+        animalHistoryPage.click(Locator.linkContainingText("6824778-4953547"));
+        switchToWindow(1);
+
+        DataRegionTable locationRegion = DataRegionTable.findDataRegionWithinWebpart(this, "Location");
+
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "location",
+                "cage",
+                "cage_size",
+                "rate_class",
+                "date",
+                "supervisor",
+                "species",
+                "gender",
+                "yearsAndMonthsAndDays",
+                "birth",
+                "MostRecentWeight",
+                "payor_id",
+                "colonyCode",
+                "groupCode",
+                "primaryProject",
+                "secondaryProjects",
+                "values",
+                "conNum",
+                "daysPregnant",
+                "conceptionDateStatus"
+        );
+        assertEquals("Wrong columns", expectedColumns, locationRegion.getColumnNames());
+
+        assertElementPresent(Locator.linkWithText("TEST4564246"));
+        assertElementPresent(Locator.linkWithText("6824778-4953547"));
+        assertElementPresent(Locator.linkWithText("4953547"));
+        assertElementPresent(Locator.tagContainingText("td", "Jack Brown"));
+    }
+
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
@@ -850,7 +882,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel;
         DataRegionTable searchResults;
-
 
         searchPanel = getSearchPanel();
         String [] expectedLabels = new String[]{
