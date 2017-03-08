@@ -11,7 +11,7 @@
                         </fk>
                     </column>
                     <column columnName="location">
-                        <url>/cnprc_ehr/cageDetails.view?room=${room}&amp;cage=${cage}</url>
+                        <url>/cnprc_ehr/cageDetails.view?location=${location}</url>
                         <fk>
                             <fkDisplayColumnName useRawValue="true"/>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
@@ -31,7 +31,7 @@
                     <column columnName="Id/demographics/species"/>
                     <column columnName="Id/demographics/gender"/>
                     <column columnName="Id/age/yearsAndMonthsAndDays">
-                        <columnTitle>Age</columnTitle>
+                        <columnTitle>Age (yy:MM:dd)</columnTitle>
                     </column>
                     <column columnName="Id/demographics/birth">
                         <columnTitle>Birth Date</columnTitle>

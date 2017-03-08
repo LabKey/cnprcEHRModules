@@ -22,7 +22,9 @@ room_enclosure.supervisor,
 housing.room
 
 FROM study.animal
-INNER JOIN cnprc_ehr.cage_location_history clh ON clh.location = animal.curLocation.Location
+INNER JOIN cnprc_ehr.cage_location_history clh ON clh.location = animal.curLocation.location
 INNER JOIN study.housing ON animal.Id = housing.Id
 INNER JOIN cnprc_ehr.room_enclosure ON housing.room = room_enclosure.room
 WHERE clh.to_date IS NULL
+AND housing.endDate IS NULL
+
