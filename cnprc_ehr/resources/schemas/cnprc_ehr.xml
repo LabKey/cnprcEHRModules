@@ -734,7 +734,7 @@
             <column columnName="center_unit_record_class"/>
             <column columnName="general_reports_sort_order"/>
             <column columnName="grant_reports_sort_order"/>
-            <column columnName="financial_rpts_routed_to_cp_fk"/>
+            <column columnName="fin_rpts_routed_to_cp_fk"/>
             <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
