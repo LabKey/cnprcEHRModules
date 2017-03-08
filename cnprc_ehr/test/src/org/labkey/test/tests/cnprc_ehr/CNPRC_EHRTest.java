@@ -860,6 +860,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsActiveAssignment/primaryProject",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
                 "date",
+                "enddate",
                 "payor_id",
                 "Id/DemographicsActivePayor/payor_id",
                 "Id/flagList/values",
