@@ -503,7 +503,7 @@
                 <datatype>double</datatype>
             </column>
             <column columnName="bcs">
-                <datatype>varchar</datatype>
+                <datatype>double</datatype>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
@@ -561,7 +561,7 @@
                 <datatype>double</datatype>
             </column>
             <column columnName="bcs">
-                <datatype>varchar</datatype>
+                <datatype>double</datatype>
             </column>
             <column columnName="mannerofdeath">
                 <datatype>varchar</datatype>
@@ -2364,10 +2364,10 @@
                 <datatype>integer</datatype>
             </column>
             <column columnName="foreignSeq">
-                <datatype>float</datatype>
+                <datatype>integer</datatype>
             </column>
             <column columnName="snoSeq">
-                <datatype>float</datatype>
+                <datatype>integer</datatype>
             </column>
             <column columnName="code">
                 <datatype>varchar</datatype>
