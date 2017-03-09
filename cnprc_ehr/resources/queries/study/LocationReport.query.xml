@@ -11,54 +11,10 @@
                         </fk>
                     </column>
                     <column columnName="location">
-                        <url>/cnprc_ehr/cageDetails.view?location=${location}</url>
-                        <fk>
-                            <fkDisplayColumnName useRawValue="true"/>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>cage</fkTable>
-                            <fkColumnName>location</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="cage">
-                        <url>/cnprc_ehr/cageDetails.view?room=${room}&amp;cage=${cage}</url>
-                    </column>
-                    <column columnName="cage_size">
-                        <columnTitle>Cage Size</columnTitle>
-                    </column>
-                    <column columnName="rate_class">
-                        <columnTitle>Rate Class</columnTitle>
-                    </column>
-                    <column columnName="Id/demographics/species"/>
-                    <column columnName="Id/demographics/gender"/>
-                    <column columnName="Id/age/yearsAndMonthsAndDays">
-                        <columnTitle>Age (yy:MM:dd)</columnTitle>
-                    </column>
-                    <column columnName="Id/demographics/birth">
-                        <columnTitle>Birth Date</columnTitle>
-                    </column>
-                    <column columnName="Id/mostRecentWeight/MostRecentWeight">
-                        <columnTitle>Most Recent Weight</columnTitle>
-                    </column>
-                    <column columnName="date">
-                        <columnTitle>Location Date</columnTitle>
-                    </column>
-                    <column columnName="Id/demographicsActivePayor/payor_id">
-                        <columnTitle>Payor ID</columnTitle>
-                    </column>
-                    <column columnName="Id/demographicsActiveColony/colonyCode">
-                        <columnTitle>Colony Code</columnTitle>
-                    </column>
-                    <column columnName="Id/demographicsActiveBreedingGroup/groupCode">
-                        <columnTitle>Breeding Code</columnTitle>
-                    </column>
-                    <column columnName="Id/demographicsActiveAssignment/primaryProject">
-                        <columnTitle>Primary Project</columnTitle>
-                    </column>
-                    <column columnName="Id/demographicsActiveAssignment/secondaryProjects">
-                        <columnTitle>Secondary Project(s)</columnTitle>
-                    </column>
-                    <column columnName="Id/flagList/values">
-                        <columnTitle>Census Flag List</columnTitle>
+                        <url>/query/executeQuery.view?schemaName=study&amp;
+                        query.queryName=LocationReport&amp;
+                        query.location~eq=${location}
+                        </url>
                     </column>
                     <column columnName="Id/demographicsActivePregnancy/conNum">
                         <columnTitle>Pregnancy</columnTitle>
@@ -66,15 +22,6 @@
                             query.queryName=DemographicsActivePregnancy&amp;
                             query.id~eq=${Id}
                         </url>
-                    </column>
-                    <column columnName="Id/demographicsActivePregnancy/daysPregnant">
-                        <columnTitle>Gest Days</columnTitle>
-                    </column>
-                    <column columnName="Id/demographicsActivePregnancy/conceptionDateStatus">
-                        <columnTitle>Est (indicator)</columnTitle>
-                    </column>
-                    <column columnName="supervisor">
-                        <columnTitle>Encl Supervisor</columnTitle>
                     </column>
                     <column columnName="room">
                         <isHidden>true</isHidden>

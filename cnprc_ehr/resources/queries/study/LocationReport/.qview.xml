@@ -1,0 +1,92 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="Id"/>
+        <column name="location"/>
+        <column name="cage"/>
+        <column name="cage_size">
+            <properties>
+                <property name="columnTitle" value="Cage Size"/>
+            </properties>
+        </column>
+        <column name="rate_class">
+            <properties>
+                <property name="columnTitle" value="Rate Class"/>
+            </properties>
+        </column>
+        <column name="species"/>
+        <column name="gender"/>
+        <column name="yearsAndMonthsAndDays">
+            <properties>
+                <property name="columnTitle" value="Age (yy:MM:dd)"/>
+            </properties>
+        </column>
+        <column name="birth">
+            <properties>
+                <property name="columnTitle" value="Birth Date"/>
+            </properties>
+        </column>
+        <column name="MostRecentWeight">
+            <properties>
+                <property name="columnTitle" value="Most Recent Weight"/>
+            </properties>
+        </column>
+        <column name="date">
+            <properties>
+                <property name="columnTitle" value="Location Date"/>
+            </properties>
+        </column>
+        <column name="payor_id">
+            <properties>
+                <property name="columnTitle" value="Payor ID"/>
+            </properties>
+        </column>
+        <column name="colonyCode">
+            <properties>
+                <property name="columnTitle" value="Colony Code"/>
+            </properties>
+        </column>
+        <column name="groupCode">
+            <properties>
+                <property name="columnTitle" value="Group Code"/>
+            </properties>
+        </column>
+        <column name="primaryProject">
+            <properties>
+                <property name="columnTitle" value="Primary Project"/>
+            </properties>
+        </column>
+        <column name="secondaryProjects">
+            <properties>
+                <property name="columnTitle" value="Secondary Project(s)"/>
+            </properties>
+        </column>
+        <column name="values">
+            <properties>
+                <property name="columnTitle" value="Census Flag List"/>
+            </properties>
+        </column>
+        <column name="conNum">
+            <properties>
+                <property name="columnTitle" value="Pregnancy"/>
+            </properties>
+        </column>
+        <column name="daysPregnant">
+            <properties>
+                <property name="columnTitle" value="Gest Days"/>
+            </properties>
+        </column>
+        <column name="conceptionDateStatus">
+            <properties>
+                <property name="columnTitle" value="Est (indicator)"/>
+            </properties>
+        </column>
+        <column name="supervisor">
+            <properties>
+                <property name="columnTitle" value="Encl Supervisor"/>
+            </properties>
+        </column>
+    </columns>
+    <sorts>
+        <sort column="date" descending="true"/>
+    </sorts>
+</customView>

@@ -14,7 +14,10 @@
                         <columnTitle>Date In</columnTitle>
                     </column>
                     <column columnName="location">
-                        <url>/cnprc_ehr/cageDetails.view?location=${location}</url>
+                        <url>/query/executeQuery.view?schemaName=study&amp;
+                        query.queryName=LocationReport&amp;
+                        query.location~eq=${location}
+                        </url>
                     </column>
                     <column columnName="enddate">
                         <nullable>true</nullable>

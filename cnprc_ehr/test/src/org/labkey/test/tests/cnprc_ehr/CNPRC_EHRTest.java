@@ -746,7 +746,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.click(Locator.linkContainingText("6824778-4953547"));
         switchToWindow(1);
 
-        DataRegionTable locationRegion = DataRegionTable.findDataRegionWithinWebpart(this, "Location");
+        DataRegionTable locationRegion = new DataRegionTable("query", this.getDriver());
 
         List<String> expectedColumns = Arrays.asList(
                 "Id",
@@ -754,13 +754,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "cage",
                 "cage_size",
                 "rate_class",
-                "date",
-                "supervisor",
                 "species",
                 "gender",
                 "yearsAndMonthsAndDays",
                 "birth",
                 "MostRecentWeight",
+                "date",
                 "payor_id",
                 "colonyCode",
                 "groupCode",
@@ -769,7 +768,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "values",
                 "conNum",
                 "daysPregnant",
-                "conceptionDateStatus"
+                "conceptionDateStatus",
+                "supervisor"
         );
         assertEquals("Wrong columns", expectedColumns, locationRegion.getColumnNames());
 
