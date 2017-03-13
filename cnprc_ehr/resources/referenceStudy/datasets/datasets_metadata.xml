@@ -2073,9 +2073,6 @@
             <column columnName="enddatefinalized">
                 <datatype>timestamp</datatype>
             </column>
-            <column columnName="unitCode">
-                <datatype>varchar</datatype>
-            </column>
         </columns>
         <tableTitle>Assignment</tableTitle>
     </table>

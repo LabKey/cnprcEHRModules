@@ -28,7 +28,7 @@
         <column name="projectCode/inves"/>
         <column name="projectCode/title" />
         <column name="protocol"/>
-        <column name="unitCode"/>
+        <column name="projectCode/unitCode"/>
         <column name="timeOnProject"/>
     </columns>
     <sorts>

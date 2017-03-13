@@ -32,6 +32,7 @@ import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.TestFileUtils;
+import org.labkey.test.TestTimeoutException;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
@@ -115,7 +116,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Geriatrics"));
         put("Assignments and Groups", Arrays.asList(
                 "Active Assignments",
-                "Assignment History",
+                "Project Assignment History",
                 "Per-diem Payor Assignment"));
         put("Behavior", Arrays.asList(
                 "Enrichment",
@@ -165,6 +166,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         CNPRC_EHRTest init = (CNPRC_EHRTest)getCurrentTest();
 
         init.doSetup();
+    }
+
+    @Override
+    public void doCleanup(boolean afterTest) throws TestTimeoutException
+    {
+        super.doCleanup(afterTest);
     }
 
     private void doSetup() throws Exception
