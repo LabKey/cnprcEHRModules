@@ -18,7 +18,6 @@ package org.labkey.test.tests.cnprc_ehr;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -32,7 +31,6 @@ import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.TestFileUtils;
-import org.labkey.test.TestTimeoutException;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
@@ -44,7 +42,6 @@ import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
-import org.labkey.test.util.LogMethod;
 import org.labkey.test.util.Maps;
 import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
@@ -58,7 +55,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +67,7 @@ import static org.junit.Assert.assertEquals;
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
     private static final String PROJECT_NAME = "CNPRC";
+    protected static final String UNIT_CODE = "uc101";
     protected final String ANIMAL_HISTORY_URL = "/ehr/" + PROJECT_NAME + "/animalHistory.view?";
     private static final String FOLDER_NAME = "CNPRC";
     private static final String COREFACILITIES = "Core Facilities";
@@ -169,9 +166,21 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Override
-    public void doCleanup(boolean afterTest) throws TestTimeoutException
+    protected void populateHardTableRecords() throws Exception
     {
-        super.doCleanup(afterTest);
+        super.populateHardTableRecords();
+
+        Connection connection = createDefaultConnection(true);
+        List<Map<String, Object>> project = Arrays.asList(
+                Maps.of("project", PROTOCOL_PROJECT_ID,
+                        "inves", INVES_ID,
+                        "unitCode", UNIT_CODE
+                )
+        );
+
+        UpdateRowsCommand command = new UpdateRowsCommand("ehr", "project");
+        command.setRows(project);
+        command.execute(connection, getProjectName());
     }
 
     private void doSetup() throws Exception
