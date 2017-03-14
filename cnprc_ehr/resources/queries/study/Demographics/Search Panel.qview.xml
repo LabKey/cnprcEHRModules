@@ -16,7 +16,7 @@
                 <property name="columnTitle" value="Pairing Status"/>
             </properties>
         </column>
-        <column name="Id/age/AgeInYearsRounded"/>
+        <column name="Id/age/ageInYears"/>
         <column name="Id/MostRecentWeight/MostRecentWeight"/>
         <column name="Id/curLocation/area">
             <properties>
