@@ -165,24 +165,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         init.doSetup();
     }
 
-    @Override
-    protected void populateHardTableRecords() throws Exception
-    {
-        super.populateHardTableRecords();
-
-        Connection connection = createDefaultConnection(true);
-        List<Map<String, Object>> project = Arrays.asList(
-                Maps.of("project", PROTOCOL_PROJECT_ID,
-                        "inves", INVES_ID,
-                        "unitCode", UNIT_CODE
-                )
-        );
-
-        UpdateRowsCommand command = new UpdateRowsCommand("ehr", "project");
-        command.setRows(project);
-        command.execute(connection, getProjectName());
-    }
-
     private void doSetup() throws Exception
     {
         new RReportHelper(this).ensureRConfig();
@@ -200,6 +182,24 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
+    }
+
+    @Override
+    protected void populateHardTableRecords() throws Exception
+    {
+        super.populateHardTableRecords();
+
+        Connection connection = createDefaultConnection(true);
+        List<Map<String, Object>> project = Arrays.asList(
+                Maps.of("project", PROTOCOL_PROJECT_ID,
+                        "inves", INVES_ID,
+                        "unitCode", UNIT_CODE
+                )
+        );
+
+        UpdateRowsCommand command = new UpdateRowsCommand("ehr", "project");
+        command.setRows(project);
+        command.execute(connection, getProjectName());
     }
 
     protected void initGenetics() throws Exception
@@ -810,7 +810,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalSearchProjectView() throws Exception
+    public void testAnimalHistoryProjectView() throws Exception
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -850,6 +850,45 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(0,8));
         assertEquals("Wrong value for Searched Project: ", "795644", results.getDataAsText(0,9));
 
+    }
+    @Test
+    public void testAnimalHistoryProjectAssignmentHistoryView() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Assignments and Groups");
+        animalHistoryPage.clickReportTab("Project Assignment History");
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                "Id"
+                ,"date"
+                ,"enddate"
+                ,"projectCode"
+                ,"assignmentStatus"
+                ,"projectCode/inves"
+                ,"projectCode/title"
+                ,"protocol"
+                ,"projectCode/unitCode"
+                ,"timeOnProject"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        List<String> expected = Arrays.asList(
+                "TEST1112911"
+                ,"2005-05-20"
+                ," "
+                ,"795644"
+                ,"P"
+                ,"investigator101"
+                ," "
+                ,"protocol101"
+                ,"uc101"
+                ,"11:09:25");
+
+        List<String> rowDataAsText = results.getRowDataAsText(2);
+        assertEquals("Wrong value for ID: ", expected, rowDataAsText);
+        assertEquals("Wrong row count: ", 13, results.getDataRowCount());
     }
 
     @Test
