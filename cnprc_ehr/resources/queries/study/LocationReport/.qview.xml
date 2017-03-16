@@ -85,6 +85,11 @@
                 <property name="columnTitle" value="Encl Supervisor"/>
             </properties>
         </column>
+        <column name="pairingIndicator">
+            <properties>
+                <property name="columnTitle" value="Pairing (indicator)"/>
+            </properties>
+        </column>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>
