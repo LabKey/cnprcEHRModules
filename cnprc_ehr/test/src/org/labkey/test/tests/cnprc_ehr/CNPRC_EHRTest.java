@@ -875,20 +875,25 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        List<String> expected = Arrays.asList(
+        String[] expected = {
                 "TEST1112911"
-                ,"2005-05-20"
-                ," "
-                ,"795644"
-                ,"P"
-                ,"investigator101"
-                ," "
-                ,"protocol101"
-                ,"uc101"
-                ,"11:09:25");
+                , "2005-05-20"
+                , " "
+                , "795644"
+                , "P"
+                , "investigator101"
+                , " "
+                , "protocol101"
+                , "uc101"
+        };
 
-        List<String> rowDataAsText = results.getRowDataAsText(2);
-        assertEquals("Wrong value for ID: ", expected, rowDataAsText);
+        List<String> resultsRowDataAsText = results.getRowDataAsText(2);
+        String[] rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
+        for (int i = 0; i < expected.length; i++)
+        {
+            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
+        }
+
         assertEquals("Wrong row count: ", 13, results.getDataRowCount());
     }
 
@@ -946,8 +951,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"Gender:"
                 ,"Status:"
                 ,"Pairing Status:"
-                ,"Age (Years, Rounded):"
-                ,"Age (Years, Rounded):"
+                ,"Age (Years):"
+                ,"Age (Years):"
                 ,"Current Weight (kg):"
                 ,"Area:"
                 ,"Room:"
