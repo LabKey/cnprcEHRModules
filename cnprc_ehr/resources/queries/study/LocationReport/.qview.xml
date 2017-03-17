@@ -1,6 +1,11 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
         <column name="Id"/>
+        <column name="pairingIndicator">
+            <properties>
+                <property name="columnTitle" value="Pairing (indicator)"/>
+            </properties>
+        </column>
         <column name="location"/>
         <column name="cage"/>
         <column name="cage_size">
@@ -47,7 +52,7 @@
         </column>
         <column name="groupCode">
             <properties>
-                <property name="columnTitle" value="Group Code"/>
+                <property name="columnTitle" value="Breeding Code"/>
             </properties>
         </column>
         <column name="primaryProject">
@@ -83,11 +88,6 @@
         <column name="supervisor">
             <properties>
                 <property name="columnTitle" value="Encl Supervisor"/>
-            </properties>
-        </column>
-        <column name="pairingIndicator">
-            <properties>
-                <property name="columnTitle" value="Pairing (indicator)"/>
             </properties>
         </column>
     </columns>

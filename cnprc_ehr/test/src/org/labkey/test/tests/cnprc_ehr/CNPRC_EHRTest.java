@@ -766,6 +766,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         List<String> expectedColumns = Arrays.asList(
                 "Id",
+                "pairingIndicator",
                 "location",
                 "cage",
                 "cage_size",

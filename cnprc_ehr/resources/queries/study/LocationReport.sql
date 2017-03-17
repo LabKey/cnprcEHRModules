@@ -21,23 +21,23 @@ animal.demographicsActivePregnancy.conceptionDateStatus,
 room_enclosure.supervisor,
 housing.room,
 (SELECT
-      CASE
-          WHEN (pair2.Id IS NULL) AND (pair1.observation <> 'AW') THEN 'DD'
-          WHEN (SELECT COUNT(*) FROM study.pairings pair3
-                WHERE pair3.Id = animal.Id
-                AND pair3.endDate IS NULL)
-                > 1
-            THEN '**'
-          -- CAST is for natural sort
-          WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) < CAST(pair2.Id.curLocation.cage AS INTEGER)
-            THEN '//'
-          WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) > CAST(pair2.Id.curLocation.cage AS INTEGER)
-            THEN '\\'
-          WHEN pair1.Id < pair2.Id
-            THEN '//'
-          WHEN pair1.Id > pair2.Id
-            THEN '\\'
-      END AS PairedSymbol
+  CASE
+      WHEN (pair2.Id IS NULL) AND (pair1.observation <> 'AW') THEN 'DD'
+      WHEN (SELECT COUNT(*) FROM study.pairings pair3
+            WHERE pair3.Id = animal.Id
+            AND pair3.endDate IS NULL)
+            > 1
+          THEN '**'
+      -- CAST is for natural sort
+      WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) < CAST(pair2.Id.curLocation.cage AS INTEGER)
+          THEN '//'
+      WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) > CAST(pair2.Id.curLocation.cage AS INTEGER)
+          THEN '\\'
+      WHEN pair1.Id < pair2.Id
+          THEN '//'
+      WHEN pair1.Id > pair2.Id
+          THEN '\\'
+  END AS PairedSymbol
   FROM study.pairings pair1
   LEFT OUTER JOIN study.pairings pair2 ON pair2.pairId = pair1.pairId
                                        AND pair2.Id <> animal.Id
