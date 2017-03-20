@@ -92,8 +92,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
     private static final File CNPRC_EHR_CONCEPTIONS_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CONCEPTIONS.tsv");
-    private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
-    private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
 
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
@@ -172,7 +170,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 //        createTestSubjects();
 //        initGenetics();
         goToProjectHome();
-        storeCageAndRoomData();
         clickFolder(GENETICSFOLDER);
         _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
         clickFolder(GENETICSFOLDER);
@@ -351,14 +348,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         Connection connection = createDefaultConnection(true);
         insertTsvData(connection, "cnprc_ehr", "conceptions", CNPRC_EHR_CONCEPTIONS_TSV, null);
-    }
-
-    private void storeCageAndRoomData() throws IOException, CommandException
-    {
-        Connection connection = createDefaultConnection(true);
-        String folder = "/";
-        insertTsvData(connection, "cnprc_ehr", "cage_location_history", CNPRC_EHR_CAGE_LOCATION_HISTORY, folder);
-        insertTsvData(connection, "cnprc_ehr", "room_enclosure", CNPRC_EHR_ROOM_ENCLOSURE, folder);
     }
 
     @Test
@@ -759,7 +748,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Relocation History");
         waitForElement(Locator.linkContainingText("Relocation History"));
 
-        animalHistoryPage.click(Locator.linkContainingText("6824778-4953547"));
+        animalHistoryPage.click(Locator.linkContainingText("3168659-1"));
         switchToWindow(1);
 
         DataRegionTable locationRegion = new DataRegionTable("query", this.getDriver());
@@ -774,7 +763,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "species",
                 "gender",
                 "yearsAndMonthsAndDays",
-                "birth",
                 "MostRecentWeight",
                 "date",
                 "payor_id",
@@ -790,10 +778,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns", expectedColumns, locationRegion.getColumnNames());
 
-        assertElementPresent(Locator.linkWithText("TEST4564246"));
-        assertElementPresent(Locator.linkWithText("6824778-4953547"));
-        assertElementPresent(Locator.linkWithText("4953547"));
-        assertElementPresent(Locator.tagContainingText("td", "Jack Brown"));
+        assertElementPresent(Locator.linkWithText("TEST1112911"));
+        assertElementPresent(Locator.tagContainingText("td", "//"));
+        assertElementPresent(Locator.linkWithText("3168659-1"));
+        assertElementPresent(Locator.tagContainingText("nobr", "2004-02-19 14:00"));
+        assertElementPresent(Locator.tagContainingText("td", "Jerry Jones"));
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
@@ -997,7 +986,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Continuous pair with grate;Intermittent pair", getFormElement(Locator.input("Id/Pairings/observation")));
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
-                4, searchResults.getDataRowCount());
+                6, searchResults.getDataRowCount());
 
     }
 

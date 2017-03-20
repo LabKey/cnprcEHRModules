@@ -3,7 +3,7 @@ clh.location,
 housing.cage,
 clh.cage_size,
 clh.rate_class,
-animal.demographics.species,
+COALESCE(animal.demographics.species, 'VACANT') AS species,
 animal.demographics.gender,
 animal.age.yearsAndMonthsAndDays,
 animal.demographics.birth,
@@ -46,10 +46,10 @@ housing.room,
   AND animal.curLocation.location IS NOT NULL
   LIMIT 1) AS pairingIndicator
 
-FROM study.animal
-INNER JOIN cnprc_ehr.cage_location_history clh ON clh.location = animal.curLocation.location
-INNER JOIN study.housing ON animal.Id = housing.Id
-INNER JOIN cnprc_ehr.room_enclosure ON housing.room = room_enclosure.room
+FROM cnprc_ehr.cage_location_history clh
+LEFT OUTER JOIN study.animal ON clh.location = animal.curLocation.location
+LEFT OUTER JOIN study.housing ON animal.Id = housing.Id  -- not required
+LEFT OUTER JOIN cnprc_ehr.room_enclosure ON housing.room = room_enclosure.room  -- required
 WHERE clh.to_date IS NULL
 AND housing.endDate IS NULL
 

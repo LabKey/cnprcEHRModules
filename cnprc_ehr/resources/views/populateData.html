@@ -104,6 +104,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Cage Location History',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'cage_location_history',
+        pk: 'rowid'
+    },
+    {
         label: 'Calculated Status Field Values',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
@@ -402,6 +409,13 @@ Ext4.onReady(function(){
         populateFn: 'populateFromFile',
         schemaName: 'ehr',
         queryName: 'reports',
+        pk: 'rowid'
+    },
+    {
+        label: 'Room Enclosure',
+        populateFn: 'populateFromFile',
+        schemaName: 'cnprc_ehr',
+        queryName: 'room_enclosure',
         pk: 'rowid'
     },
     {

@@ -18,10 +18,10 @@
                     </column>
                     <column columnName="Id/demographicsActivePregnancy/conNum">
                         <columnTitle>Pregnancy</columnTitle>
-                        <url>/query/executeQuery.view?schemaName=study&amp;
+                        <!--<url>/query/executeQuery.view?schemaName=study&amp;
                             query.queryName=DemographicsActivePregnancy&amp;
                             query.id~eq=${Id}
-                        </url>
+                        </url>-->
                     </column>
                     <column columnName="room">
                         <isHidden>true</isHidden>

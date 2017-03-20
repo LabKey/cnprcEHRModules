@@ -25,14 +25,9 @@
                 <property name="columnTitle" value="Age (yy:MM:dd)"/>
             </properties>
         </column>
-        <column name="birth">
-            <properties>
-                <property name="columnTitle" value="Birth Date"/>
-            </properties>
-        </column>
         <column name="MostRecentWeight">
             <properties>
-                <property name="columnTitle" value="Most Recent Weight"/>
+                <property name="columnTitle" value="Weight (kg)"/>
             </properties>
         </column>
         <column name="date">
