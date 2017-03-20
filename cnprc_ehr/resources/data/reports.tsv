@@ -1,5 +1,4 @@
 reportname	category	reporttype	reporttitle	visible	containerpath	schemaname	queryname	viewname	report	datefieldname	todayonly	queryhaslocation	sort_order	QCStateLabelFieldName	description
-generalWTB	General	query	Weight, TB, BCS	true		study	WeightsTbAndBodyCondition			date	false	false			Weight, TB, BCS
 activeAssignments	Assignments and Groups	query	Active Assignments	true		study	Assignment	Active Assignments		date	false	false		qcstate/publicdata	This report shows the active assignments for each animal
 projectAssignmentHistory	Assignments and Groups	query	Project Assignment History	true		study	Assignment	Project Assignment History		date	false	false		qcstate/publicdata	This report shows all assignments records for the animals
 activeGroups	Assignments and Groups	js	Active Groups	true		study	underDevelopment	Active Members		date	false	false		qcstate/publicdata	This report shows the active assignments for each animal
@@ -87,6 +86,7 @@ demographics	General	query	Demographics	true		study	demographics	By Location			f
 #extendedAbstract	General	query	Extended Abstract	false		study	animal	Extended Abstract			false	false		qcstate/publicdata	
 #majorEvents	General	query	Major Events	true		study	majorEvents			date	false	false			This report attempts to identify major events in the history of the animal, including births and major surgeries
 notes	General	query	Notes	true		study	notes	Active Notes		date	false	false		qcstate/publicdata	This report contains non-clinical notes entered into the animal's record
+generalWTB	General	query	Weight, TB, BCS	true		study	WeightsTbAndBodyCondition			date	false	false			Weight, TB, BCS
 biopsies	Pathology	query	Biopsies	true		study	biopsy	Biopsies		date	false	false		qcstate/publicdata	Contains information about biopsies
 #histology	Pathology	query	Histology	true		study	histologyPublic			date	false	false		qcstate/publicdata	Histology records and associated diagnoses
 morphologicDiagnosis	Pathology	query	Morphologic Diagnosis	true		study	morphologicDiagnosis			date	false	false		qcstate/publicdata

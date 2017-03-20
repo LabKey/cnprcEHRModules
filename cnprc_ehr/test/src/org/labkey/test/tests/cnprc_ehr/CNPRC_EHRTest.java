@@ -102,8 +102,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Deaths",
                 "Demographics",
                 /*"Snapshot",*/// TODO: Data region not visible by default, AnimalHistoryPage#refreshReport fails
-                "TB Test Results",
-                "Departures"));
+                "Departures",
+                "Weight, TB, BCS"));
         put("Colony Management", Arrays.asList(
                 "Birth Records",
                 "Death Records",
