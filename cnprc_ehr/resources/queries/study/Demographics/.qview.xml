@@ -37,7 +37,11 @@
         <column name="Id/DemographicsActiveAssignment/primaryProject"/>
         <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
         <column name="Id/DemographicsActivePayor/payor_id"/>
-        <column name="Id/DemographicsActivePairing/observation"/>
+        <column name="Id/DemographicsActivePairing/observation/value">
+            <properties>
+                <property name="columnTitle" value="Behavior Code"/>
+            </properties>
+        </column>
         <column name="Id/flagList/values">
             <properties>
                 <property name="columnTitle" value="Flags"/>
