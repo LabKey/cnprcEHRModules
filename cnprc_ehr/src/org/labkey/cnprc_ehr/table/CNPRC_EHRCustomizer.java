@@ -123,6 +123,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsActivePairing") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActivePairing", "DemographicsActivePairing", "Id", "Id");
+            col.setLabel("Active Pairing");
+            col.setDescription("Returns the participant's active Pairing");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("DemographicsActivePayor") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "DemographicsActivePayor", "DemographicsActivePayor", "Id", "Id");
@@ -152,6 +160,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ColumnInfo col = getWrappedCol(us, ds, "DemographicsHolds", "DemographicsHolds", "Id", "Id");
             col.setLabel("Holds");
             col.setDescription("Returns the participant's active flags having HOLD in the title");
+            ds.addColumn(col);
+        }
+
+        if (ds.getColumn("DemographicsMostRecentBodyConditionScore") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsMostRecentBodyConditionScore", "DemographicsMostRecentBodyConditionScore", "Id", "Id");
+            col.setLabel("Most Recent BCS");
+            col.setDescription("Returns the participant's most recent body condition score");
             ds.addColumn(col);
         }
 

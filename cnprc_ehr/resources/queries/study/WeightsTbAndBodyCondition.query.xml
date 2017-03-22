@@ -28,11 +28,8 @@
                             <fkDisplayColumnName>conNum</fkDisplayColumnName>
                         </fk>
                     </column>
-
-                    <column columnName="dayPregnant"/>
-
+                    <column columnName="daysPregnant"/>
                 </columns>
-                <sort></sort>
             </table>
         </tables>
     </metadata>

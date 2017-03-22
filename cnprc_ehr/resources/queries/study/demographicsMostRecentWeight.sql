@@ -10,7 +10,6 @@
 
         w.id,
         w.MostRecentWeightDate,
-        w.BodyConditionScore,
         timestampdiff('SQL_TSI_DAY', w.MostRecentWeightDate, now()) AS DaysSinceWeight,
 
         null as weightField,
@@ -25,7 +24,6 @@
         SELECT
         w.Id AS Id,
         max(w.date) AS MostRecentWeightDate,
-        max(w.bodyConditionScore) AS BodyConditionScore
         FROM study.weight w
         WHERE w.qcstate.publicdata = true and w.weight is not null
         GROUP BY w.id

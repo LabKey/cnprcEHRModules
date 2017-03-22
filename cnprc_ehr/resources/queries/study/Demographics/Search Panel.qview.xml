@@ -11,7 +11,7 @@
                 <property name="columnTitle" value="Status"/>
             </properties>
         </column>
-        <column name="Id/Pairings/observation">
+        <column name="Id/DemographicsActivePairing/observation">
             <properties>
                 <property name="columnTitle" value="Pairing Status"/>
             </properties>
