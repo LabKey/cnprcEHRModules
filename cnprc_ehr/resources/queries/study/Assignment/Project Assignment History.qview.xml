@@ -25,7 +25,7 @@
                 <property name="columnTitle" value="Type"/>
             </properties>
         </column>
-        <column name="projectCode/inves"/>
+        <column name="projectCode/pi_name"/>
         <column name="projectCode/title" />
         <column name="protocol"/>
         <column name="projectCode/unitCode"/>
