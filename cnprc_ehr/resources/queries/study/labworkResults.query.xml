@@ -30,6 +30,12 @@
                     </column>
                     <column columnName="spf">
                         <columnTitle>Specific Pathogen Free</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>spf_status</fkTable>
+                            <fkColumnName>name</fkColumnName>
+                            <fkDisplayColumnName>id</fkDisplayColumnName>
+                        </fk>
                     </column>
                     <column columnName="samp1">
                         <columnTitle>Samp 1</columnTitle>

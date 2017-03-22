@@ -31,6 +31,7 @@ AN_SP_CODE AS species,
 AN_SIRE_ID AS sire,
 AN_DAM_ID AS dam,
 AN_ACQ_SOURCE_INST AS origin,
+AN_SPF_STATUS AS spf,
 OBJECTID AS objectid,
 DATE_TIME
 FROM cnprcSrc.ZANIMAL

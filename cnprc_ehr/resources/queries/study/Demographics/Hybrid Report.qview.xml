@@ -18,7 +18,7 @@
             </properties>
         </column>
         <column name="Id/DemographicsActiveColony/colonyCode"/>
-        <column name="Id/LabworkResults/spf">
+        <column name="spf">
             <properties>
                 <property name="columnTitle" value="SPF"/>
             </properties>

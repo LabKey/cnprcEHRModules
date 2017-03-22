@@ -2178,6 +2178,9 @@
             <column columnName="origin">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="spf">
+                <datatype>varchar</datatype>
+            </column>
         </columns>
         <tableTitle>Demographics</tableTitle>
     </table>

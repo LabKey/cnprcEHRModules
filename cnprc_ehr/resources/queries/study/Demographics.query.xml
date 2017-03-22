@@ -222,6 +222,15 @@
                           <!--<fkColumnName>objectid</fkColumnName>-->
                         <!--</fk>-->
                     </column>
+                    <column columnName="spf">
+                        <columnTitle>SPF</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>spf_status</fkTable>
+                            <fkColumnName>Id</fkColumnName>
+                            <fkDisplayColumnName useRawValue="true">Id</fkDisplayColumnName>
+                        </fk>
+                    </column>
                 </columns>
             </table>
         </tables>
