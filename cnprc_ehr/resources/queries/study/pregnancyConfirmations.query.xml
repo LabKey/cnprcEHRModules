@@ -140,10 +140,10 @@
                     <column columnName="PRCode">
                         <columnTitle>Project Code</columnTitle>
                         <fk>
-                            <fkDbSchema>ehr</fkDbSchema>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
                             <fkTable>project</fkTable>
-                            <fkColumnName>name</fkColumnName>
-                            <fkDisplayColumnName>Project Name</fkDisplayColumnName>
+                            <fkColumnName>projectCode</fkColumnName>
+                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="PGComment">

@@ -18,6 +18,11 @@
                     </column>
                     <column columnName="project">
                         <isHidden>true</isHidden>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>project</fkTable>
+                            <fkColumnName>project_tracking_id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="protocol">
                         <columnTitle>Protocol</columnTitle>
@@ -31,9 +36,10 @@
                     <column columnName="projectCode">
                         <columnTitle>Project Code</columnTitle>
                         <fk>
-                            <fkDbSchema>ehr</fkDbSchema>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
                             <fkTable>project</fkTable>
-                            <fkColumnName>name</fkColumnName>
+                            <fkColumnName>projectCode</fkColumnName>
+                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="date">

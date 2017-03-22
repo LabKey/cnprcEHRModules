@@ -823,4 +823,54 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="project" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowid"/>
+            <column columnName="project_tracking_id"/>
+            <column columnName="pp_id"/>
+            <column columnName="an_requested_per_year"/>
+            <column columnName="an_used_assigned"/>
+            <column columnName="protocol"/>
+            <column columnName="unitCode"/>
+            <column columnName="date_protocol_sub_aucaac"/>
+            <column columnName="direct_amt_received"/>
+            <column columnName="direct_amt_requested_1"/>
+            <column columnName="direct_amt_requested_2"/>
+            <column columnName="funding_agency_1"/>
+            <column columnName="funding_agency_2"/>
+            <column columnName="grant_contract_id"/>
+            <column columnName="oi_department"/>
+            <column columnName="oi_name"/>
+            <column columnName="pi_department"/>
+            <column columnName="pi_name"/>
+            <column columnName="attributes"/>
+            <column columnName="startdate"/>
+            <column columnName="projectCode"/>
+            <column columnName="comments"/>
+            <column columnName="enddate"/>
+            <column columnName="tb_exempt_flag"/>
+            <column columnName="title"/>
+            <column columnName="tracking_status"/>
+            <column columnName="proposed_end_date"/>
+            <column columnName="proposed_start_date"/>
+            <column columnName="protocol_end_date"/>
+            <column columnName="protocol_response_date"/>
+            <column columnName="sp_requested"/>
+            <column columnName="total_animals"/>
+            <column columnName="visual_signs_auto_rpt_flag"/>
+            <column columnName="is_prpt_recognized"/>
+            <column columnName="pi_affiliation"/>
+            <column columnName="oi_affiliation"/>
+            <column columnName="is_tissue_avail"/>
+            <column columnName="pi_person_fk"/>
+            <column columnName="research"/>
+            <column columnName="projectType"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>

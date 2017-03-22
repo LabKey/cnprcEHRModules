@@ -9,10 +9,10 @@
                     </column>
                     <column columnName="primaryProject">
                         <fk>
-                            <fkDbSchema>ehr</fkDbSchema>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
                             <fkTable>project</fkTable>
-                            <fkColumnName>displayName</fkColumnName>
-                            <fkDisplayColumnName>Project Name</fkDisplayColumnName>
+                            <fkColumnName>projectCode</fkColumnName>
+                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="primaryProjectDate">
