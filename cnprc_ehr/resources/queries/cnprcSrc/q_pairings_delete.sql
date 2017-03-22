@@ -14,7 +14,21 @@
  * limitations under the License.
  */
 SELECT
-OBJECTID as objectid,
-DATE_TIME
-FROM cnprcSrc_aud.AAN_PAIRING
+aud_p.OBJECTID ||'--'|| pm.OBJECTID as objectid,
+aud_p.DATE_TIME
+FROM cnprcSrc_aud.AAN_PAIRING aud_p
+LEFT JOIN
+cnprcSrc.ZAN_PAIRING_MASTER pm
+ON aud_p.AP_AN_ID = pm.APM_PAIR_KEY --in the etl query q_pairings, the join is on pair key (AP_PAIR_KEY = APM_PAIR_KEY); however, when the record gets deleted, in the audit table AP_AN_ID is the pair key.
 WHERE AP_AUD_CODE = 'D'
+
+UNION ALL
+
+SELECT
+p.OBJECTID ||'--'|| aud_pm.OBJECTID as objectid,
+aud_pm.DATE_TIME
+FROM cnprcSrc.AAN_PAIRING_MASTER aud_pm
+LEFT JOIN
+cnprcSrc.ZAN_PAIRING p
+ON p.AP_PAIR_KEY = aud_pm.APM_PAIR_KEY
+WHERE APM_AUD_CODE = 'D'

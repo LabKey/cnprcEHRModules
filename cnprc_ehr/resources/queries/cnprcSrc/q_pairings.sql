@@ -20,7 +20,7 @@ APM_START_DATE,
 APM_END_DATE AS endDate,
 APM_BEHAVIOR_CODE AS observation,
 APM_COMMENT AS remark,
-p.OBJECTID as objectid,
+p.OBJECTID ||'--'|| pm.OBJECTID as objectid,
 CAST(CASE WHEN(p.DATE_TIME > pm.DATE_TIME)
   THEN
     p.DATE_TIME
@@ -30,8 +30,4 @@ FROM
 cnprcSrc.ZAN_PAIRING p
 LEFT JOIN
 cnprcSrc.ZAN_PAIRING_MASTER pm
-ON p.AP_PAIR_KEY = pm.APM_PAIR_KEY
-WHERE
-(APM_START_DATE  is null or APM_START_DATE > to_date('01-01-1900', 'DD-MM-YYYY'))
-AND
-(APM_END_DATE is null or APM_END_DATE > to_date('01-01-1900', 'DD-MM-YYYY'));
+ON p.AP_PAIR_KEY = pm.APM_PAIR_KEY;
