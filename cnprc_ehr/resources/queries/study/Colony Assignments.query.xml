@@ -16,7 +16,7 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>colony_codes</fkTable>
                             <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Title</fkDisplayColumnName>
+                            <!--<fkDisplayColumnName>Title</fkDisplayColumnName>-->
                         </fk>
                     </column>
                 </columns>
