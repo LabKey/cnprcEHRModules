@@ -74,7 +74,7 @@
             <property name="columnTitle" value="TB Date"/>
             </properties>
         </column>
-        <column name="Id/labworkResults/spf">
+        <column name="spf">
             <properties>
                 <property name="columnTitle" value="SPF Status"/>
             </properties>
