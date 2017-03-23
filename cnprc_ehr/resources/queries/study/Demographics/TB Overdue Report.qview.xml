@@ -15,11 +15,6 @@
                 <property name="columnTitle" value="Days TB Overdue"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActiveAssignment/primaryProject/inves">
-            <properties>
-                <property name="columnTitle" value="PI"/>
-            </properties>
-        </column>
         <column name="Id/MostRecentWeight/MostRecentWeightDate">
             <properties>
                 <property name="columnTitle" value="Last Weight"/>
