@@ -14,7 +14,25 @@
  * limitations under the License.
  */
 SELECT
-OBJECTID as objectid,
-DATE_TIME
-FROM cnprcSrc_aud.APATH_DIAGNOSIS
+aud_d.OBJECTID ||'--'|| pr.OBJECTID AS objectid,
+aud_d.DATE_TIME
+FROM cnprcSrc_aud.APATH_DIAGNOSIS aud_d --delete in ZPATH_DIAGNOSIS removes one record in study.morphologicDiagnosis
+LEFT JOIN
+cnprcSrc.ZPATH_REPORT pr
+ON aud_d.PD_FK = pr.PR_PK
 WHERE PD_AUD_CODE = 'D'
+
+UNION ALL
+
+SELECT
+d.OBJECTID ||'--'|| pr_aud.OBJECTID AS objectid,
+pr_aud.DATE_TIME
+FROM cnprcSrc_aud.APATH_REPORT pr_aud --delete in ZPATH_REPORT removes all records in study.morphologicDiagnosis where d.PD_FK = pr_aud.PR_PK
+LEFT JOIN
+cnprcSrc.ZPATH_DIAGNOSIS d
+ON d.PD_FK = pr_aud.PR_PK
+WHERE PR_AUD_CODE = 'D';
+
+-- note: in q_morphologicDiagonsis.sql, we are also joining to ZSNOMED, but not handling the delete in ZSNOMED here, since deletes in ZSNOMED
+-- shouldn't delete the data LK for this particular dataset, but merely just show the snomed columns to be null.
+-- So, deletes in ZSNOMED table gets handled as updates.
