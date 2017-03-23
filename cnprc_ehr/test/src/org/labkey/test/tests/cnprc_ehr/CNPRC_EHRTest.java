@@ -197,7 +197,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 )
         );
 
-        UpdateRowsCommand command = new UpdateRowsCommand("ehr", "project");
+        UpdateRowsCommand command = new UpdateRowsCommand("cnprc_ehr", "project");
         command.setRows(project);
         command.execute(connection, getProjectName());
     }
