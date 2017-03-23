@@ -32,23 +32,6 @@
             </properties>
         </column>
         <column name="Id/Gestation/Gestation"/>
-        <column name="Id/HybridReportFlags/HGL2"/>
-        <column name="Id/HybridReportFlags/HJS2"/>
-        <column name="Id/HybridReportFlags/HLH2"/>
-        <column name="Id/HybridReportFlags/HODK"/>
-        <column name="Id/HybridReportFlags/HOGL"/>
-        <column name="Id/HybridReportFlags/HOJV"/>
-        <column name="Id/HybridReportFlags/HOLG"/>
-        <column name="Id/HybridReportFlags/HOJS"/>
-        <column name="Id/HybridReportFlags/HOLH"/>
-        <column name="Id/HybridReportFlags/HOMS"/>
-        <column name="Id/HybridReportFlags/HOPM"/>
-        <column name="Id/HybridReportFlags/HOSG"/>
-        <column name="Id/HybridReportFlags/HOVB"/>
-        <column name="Id/HybridReportFlags/HOWA"/>
-        <column name="Id/HybridReportFlags/HOVL"/>
-        <column name="Id/HybridReportFlags/HOYK"/>
-        <column name="Id/HybridReportFlags/HYK2"/>
     </columns>
     <filters>
         <filter column="calculated_status" operator="eq" value="Alive"/>
