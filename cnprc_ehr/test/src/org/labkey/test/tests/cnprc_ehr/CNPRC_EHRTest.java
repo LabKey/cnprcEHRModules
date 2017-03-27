@@ -564,29 +564,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/curLocation/location",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/DemographicsActiveColony/colonyCode",
-                "Id/LabworkResults/spf",
+                "spf",
                 "Id/DemographicsActiveAssignment/primaryProject",
                 "Id/DemographicsActivePayor/payor_id",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
                 "Id/flagList/values",
-                "Id/Gestation/Gestation",
-                "Id/HybridReportFlags/HGL2",
-                "Id/HybridReportFlags/HJS2",
-                "Id/HybridReportFlags/HLH2",
-                "Id/HybridReportFlags/HODK",
-                "Id/HybridReportFlags/HOGL",
-                "Id/HybridReportFlags/HOJV",
-                "Id/HybridReportFlags/HOLG",
-                "Id/HybridReportFlags/HOJS",
-                "Id/HybridReportFlags/HOLH",
-                "Id/HybridReportFlags/HOMS",
-                "Id/HybridReportFlags/HOPM",
-                "Id/HybridReportFlags/HOSG",
-                "Id/HybridReportFlags/HOVB",
-                "Id/HybridReportFlags/HOWA",
-                "Id/HybridReportFlags/HOVL",
-                "Id/HybridReportFlags/HOYK",
-                "Id/HybridReportFlags/HYK2"
+                "Id/Gestation/Gestation"
         );
 
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
@@ -649,7 +632,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsActivePregnancy/daysPregnant",
                 "Id/TB Report/daysWeightOverdue",
                 "Id/TB Report/daysTBOverdue",
-                "Id/DemographicsActiveAssignment/primaryProject/inves",
                 "Id/MostRecentWeight/MostRecentWeightDate",
                 "Id/DemographicsMostRecentTB/MostRecentTBDate"
         );
@@ -870,7 +852,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"enddate"
                 ,"projectCode"
                 ,"assignmentStatus"
-                ,"projectCode/inves"
+                ,"projectCode/pi_name"
                 ,"projectCode/title"
                 ,"protocol"
                 ,"projectCode/unitCode"
