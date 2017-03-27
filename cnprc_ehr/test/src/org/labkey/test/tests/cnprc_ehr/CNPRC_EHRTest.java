@@ -95,7 +95,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
 
-
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
         put("General", Arrays.asList(
@@ -162,7 +161,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static void setupProject() throws Exception
     {
         CNPRC_EHRTest init = (CNPRC_EHRTest)getCurrentTest();
-
         init.doSetup();
     }
 
@@ -170,8 +168,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         new RReportHelper(this).ensureRConfig();
         initProject("CNPRC EHR");
-//        createTestSubjects();
-//        initGenetics();
         goToProjectHome();
         clickFolder(GENETICSFOLDER);
         _assayHelper.uploadXarFileAsAssayDesign(ASSAY_GENETICS_XAR, 1);
@@ -614,7 +610,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(0,12));
         assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(0,13));
         assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(0,14));
-
     }
 
     @Test
@@ -672,7 +667,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel.setView("TB Overdue Report");
         searchPanel.submit();
         assertElementNotPresent(Locator.linkWithText("TEST1684145"));
-
     }
 
     @Test
@@ -778,7 +772,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         String folder = "/";
         insertTsvData(connection, "cnprc_ehr", "cage_location_history", CNPRC_EHR_CAGE_LOCATION_HISTORY, folder);
         insertTsvData(connection, "cnprc_ehr", "room_enclosure", CNPRC_EHR_ROOM_ENCLOSURE, folder);
-
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
@@ -835,8 +828,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for ID: ", "TEST1112911", results.getDataAsText(0,1));
         assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(0,8));
         assertEquals("Wrong value for Searched Project: ", "795644", results.getDataAsText(0,9));
-
     }
+
     @Test
     public void testAnimalHistoryProjectAssignmentHistoryView() throws Exception
     {
@@ -983,7 +976,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
                 6, searchResults.getDataRowCount());
-
     }
 
     @NotNull
