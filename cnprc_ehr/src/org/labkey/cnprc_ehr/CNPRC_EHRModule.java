@@ -73,18 +73,19 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
  	@Override
     protected void doStartupAfterSpringConfig(ModuleContext moduleContext)
     {
-        EHRService.get().registerModule(this);
-        EHRService.get().registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
+        EHRService ehrService = EHRService.get();
 
-        EHRService.get().registerOptionalClinicalHistoryResources(this);
+        ehrService.registerModule(this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
 
-        EHRService.get().registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
-        EHRService.get().registerActionOverride("animalSearch", this, "views/animalSearch.html");
-        EHRService.get().registerActionOverride("projectDetails", this, "views/projectDetails.html");
+        ehrService.registerOptionalClinicalHistoryResources(this);
 
-        EHRService.get().registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
+        ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
 
-
+        ehrService.registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
+        ehrService.registerActionOverride("animalSearch", this, "views/animalSearch.html");
+        ehrService.registerActionOverride("projectDetails", this, "views/projectDetails.html");
+        ehrService.registerActionOverride("housingQueries", this, "views/enclosureSearch.html");
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {

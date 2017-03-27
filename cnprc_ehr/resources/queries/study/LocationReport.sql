@@ -1,3 +1,4 @@
+PARAMETERS(onDate TIMESTAMP)
 SELECT animal.Id,
 clh.location,
 housing.cage,
@@ -44,7 +45,8 @@ housing.room,
   WHERE pair1.Id = animal.Id
   AND pair1.endDate IS NULL
   AND animal.curLocation.location IS NOT NULL
-  LIMIT 1) AS pairingIndicator
+  LIMIT 1) AS pairingIndicator,
+SUBSTRING(housing.room, 1, 2) AS area
 
 FROM cnprc_ehr.cage_location_history clh
 LEFT OUTER JOIN study.animal ON clh.location = animal.curLocation.location

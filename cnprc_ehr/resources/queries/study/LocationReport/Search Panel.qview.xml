@@ -1,0 +1,10 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView" hidden="true">
+    <columns>
+        <column name="area"/>
+        <column name="room"/>
+        <column name="cage"/>
+        <column name="cage_size"/>
+        <column name="supervisor"/>
+        <column name="daysPregnant"/>
+    </columns>
+</customView>
