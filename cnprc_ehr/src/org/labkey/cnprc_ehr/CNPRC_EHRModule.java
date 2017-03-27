@@ -22,6 +22,7 @@ import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ldk.ExtendedSimpleModule;
 import org.labkey.api.module.AdminLinkManager;
 import org.labkey.api.module.ModuleContext;
+import org.labkey.api.query.DetailsURL;
 import org.labkey.api.security.User;
 import org.labkey.api.security.permissions.AdminPermission;
 import org.labkey.api.view.ActionURL;
@@ -80,6 +81,9 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         EHRService.get().registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
         EHRService.get().registerActionOverride("animalSearch", this, "views/animalSearch.html");
         EHRService.get().registerActionOverride("projectDetails", this, "views/projectDetails.html");
+
+        EHRService.get().registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
+
 
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
