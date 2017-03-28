@@ -10,6 +10,9 @@
                 <columnTransforms>
                     <column source="FDS_COLLECTION_DATE" target="date"/>
                 </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
             </destination>
         </transform>
     </transforms>

@@ -10,6 +10,9 @@
                 <columnTransforms>
                     <column source="TEST_DAT" target="date"/>
                 </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
             </destination>
         </transform>
         <transform id="step2" type="org.labkey.di.pipeline.TransformTask">
@@ -19,6 +22,9 @@
                 <columnTransforms>
                     <column source="TEST_DAT" target="date"/>
                 </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
             </destination>
         </transform>
     </transforms>
