@@ -33,7 +33,10 @@ d.OBJECTID ||'--'|| pr.OBJECTID AS objectid,
 CAST (
   GREATEST( IFNULL (d.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
             IFNULL (pr.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
-            IFNULL (s.date_time,to_date('01-01-1900', 'DD-MM-YYYY')))
+            IFNULL (s.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL ((SELECT max(aud_sno.DATE_TIME) FROM cnprcSrc.ASNOMED aud_sno WHERE aud_sno.SNO_AUD_CODE = 'D'),
+                    to_date('01-01-1900', 'DD-MM-YYYY')) --note: running this query with d.PD_SNOMED_FK = aud_sno.SNO_PK check was affecting the performance significantly; hence, resorted to getting max(date) from the audit table. This will check for all records for updates during ETL when data from ZSNOMED is deleted, however, this is faster than running the query with the SNO_PK check.
+          )
 AS TIMESTAMP ) AS DATE_TIME
 FROM cnprcSrc.ZPATH_DIAGNOSIS d
 LEFT JOIN
