@@ -84,9 +84,6 @@
                     <column columnName="projectProtocolRelDate">
                         <columnTitle>Project Protocol Rel Date</columnTitle>
                     </column>
-                    <column columnName="unitCode">
-                        <columnTitle>Unit Code</columnTitle>
-                    </column>
                 </columns>
             </table>
         </tables>

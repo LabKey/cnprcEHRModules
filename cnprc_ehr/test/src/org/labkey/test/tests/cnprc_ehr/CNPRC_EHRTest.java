@@ -43,6 +43,7 @@ import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
 import org.labkey.test.util.Maps;
+import org.labkey.test.util.PasswordUtil;
 import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
@@ -68,6 +69,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 {
     private static final String PROJECT_NAME = "CNPRC";
     protected static final String UNIT_CODE = "uc101";
+    private static final Integer PROJECT_ROW_ID = 123;
+    private static final String PROTOCOL_10_CHAR = "Prot10Char" ;
+    private static final String PROJECT_CODE_5_CHAR_1 = "Pc5C1" ;
+    private static final String PROJECT_CODE_5_CHAR_2 = "Pc5C2" ;
+    private static final String PROJECT_INVESTIGATOR_NAME_1 = "PI_NAME_1" ;
+    private static final String PROJECT_INVESTIGATOR_NAME_2 = "PI_NAME_2" ;
     protected final String ANIMAL_HISTORY_URL = "/ehr/" + PROJECT_NAME + "/animalHistory.view?";
     private static final String FOLDER_NAME = "CNPRC";
     private static final String COREFACILITIES = "Core Facilities";
@@ -183,19 +190,69 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     protected void populateHardTableRecords() throws Exception
     {
-        super.populateHardTableRecords();
+        log("Inserting initial records into EHR hard tables");
 
-        Connection connection = createDefaultConnection(true);
-        List<Map<String, Object>> project = Arrays.asList(
-                Maps.of("project", PROTOCOL_PROJECT_ID,
-                        "inves", INVES_ID,
-                        "unitCode", UNIT_CODE
-                )
-        );
+        //verify delete first
+        deleteHardTableRecords();
 
-        UpdateRowsCommand command = new UpdateRowsCommand("cnprc_ehr", "project");
-        command.setRows(project);
-        command.execute(connection, getProjectName());
+        Connection cn = new Connection(getBaseURL(), PasswordUtil.getUsername(), PasswordUtil.getPassword());
+
+        //first ehr.protocol
+        InsertRowsCommand insertCmd = new InsertRowsCommand("ehr", "protocol");
+        Map<String,Object> rowMap = new HashMap<>();
+        rowMap.put("protocol", PROTOCOL_ID);
+        rowMap.put("inves", INVES_ID);
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("protocol", PROTOCOL_10_CHAR);
+        rowMap.put("inves", DUMMY_INVES);
+        insertCmd.addRow(rowMap);
+        SaveRowsResponse saveResp = insertCmd.execute(cn, getContainerPath());
+
+        //then ehr.project
+        insertCmd = new InsertRowsCommand("cnprc_ehr", "project");
+        rowMap = new HashMap<>();
+        rowMap.put("projectCode", PROJECT_CODE_5_CHAR_1);
+        rowMap.put("protocol", PROTOCOL_10_CHAR);
+        rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_1);
+        rowMap.put("unitCode", UNIT_CODE);
+
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("projectCode", PROJECT_CODE_5_CHAR_2);
+        rowMap.put("protocol", PROTOCOL_10_CHAR);
+        rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_2);
+        rowMap.put("research", true);
+        insertCmd.addRow(rowMap);
+        saveResp = insertCmd.execute(cn, getContainerPath());
+
+        insertCmd = new InsertRowsCommand("cnprc_ehr", "center_unit");
+        rowMap = new HashMap<>();
+        rowMap.put("unitCode", UNIT_CODE);
+
+        insertCmd.addRow(rowMap);
+
+        saveResp = insertCmd.execute(cn, getContainerPath());
+
+        //then ehr_lookups.rooms
+        insertCmd = new InsertRowsCommand("ehr_lookups", "rooms");
+        rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_ID);
+        //these fields are required in ONPRC_EHR test.  these will not be valid lookups, but that's not important for the test
+        rowMap.put("housingType", 1);
+        rowMap.put("housingCondition", 1);
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_ID2);
+        rowMap.put("housingType", 1);
+        rowMap.put("housingCondition", 1);
+        insertCmd.addRow(rowMap);
+
+        saveResp = insertCmd.execute(cn, getContainerPath());
+
     }
 
     protected void initGenetics() throws Exception
@@ -541,7 +598,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST6390238"));
-        assertEquals("Wrong value for Primary Project: ", "1101324", searchResults.getDataAsText(0,3));
+        assertEquals("Wrong value for Primary Project: ", "Pc5C1", searchResults.getDataAsText(0,3));
         assertEquals("Wrong value for Comment: ", "DERMATITIS AX &CHEST", searchResults.getDataAsText(0,6));
         assertEquals("Wrong value for History: ", "TEST HISTORY REMARK", searchResults.getDataAsText(0,7));
     }
@@ -572,8 +629,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,10));
-        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,12));
-        assertEquals("Wrong value for Primary Project: ", "795644", searchResults.getDataAsText(0,7));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0,7));
     }
 
     @Test
@@ -604,7 +660,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST1112911"));
-        assertEquals("Wrong value for Primary Project: ", "795644", searchResults.getDataAsText(0,5));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0,5));
         assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,8));
         assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,9));
         assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(0,12));
@@ -644,7 +700,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertElementPresent(Locator.linkWithText("2011-09-09 09:00"));
         assertElementPresent(Locator.linkWithText("2015-04-21"));
-        assertEquals("Wrong value for Primary Project: ", "795644", searchResults.getDataAsText(0,2));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0,2));
         assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(0,6));
 
         InsertRowsCommand insertCmdTB = new InsertRowsCommand("study", "tb");
@@ -795,7 +851,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Assignments and Groups");
         animalHistoryPage.clickReportTab("Active Assignments");
-        click(Locator.linkContainingText("795644"));
+        click(Locator.linkContainingText(PROJECT_CODE_5_CHAR_1));
 
         switchToWindow(1);
 
@@ -827,7 +883,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong value for ID: ", "TEST1112911", results.getDataAsText(0,1));
         assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(0,8));
-        assertEquals("Wrong value for Searched Project: ", "795644", results.getDataAsText(0,9));
+        assertEquals("Wrong value for Searched Project: ", PROJECT_CODE_5_CHAR_1, results.getDataAsText(0,9));
     }
 
     @Test
@@ -857,12 +913,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "TEST1112911"
                 , "2005-05-20"
                 , " "
-                , "795644"
+                , PROJECT_CODE_5_CHAR_1
                 , "P"
-                , "investigator101"
+                , PROJECT_INVESTIGATOR_NAME_1
                 , " "
                 , "protocol101"
-                , "uc101"
+                , UNIT_CODE
         };
 
         List<String> resultsRowDataAsText = results.getRowDataAsText(2);
@@ -914,7 +970,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
         assertEquals("Wrong value for Status: ", "Alive", results.getDataAsText(0,3));
 
-        assertElementPresent(Locator.linkWithText("1101324"));
+        assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
     }
 
     @Test
@@ -954,7 +1010,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel.selectValues("Gender", " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
-        assertEquals("Wrong number of rows for searching all genders", 36, searchResults.getDataRowCount());
+        assertEquals("Wrong number of rows for searching all genders", 39, searchResults.getDataRowCount());
 
         goBack();
         searchPanel = new AnimalSearchPanel(getDriver());
@@ -969,13 +1025,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel = new AnimalSearchPanel(getDriver());
         searchPanel.selectValues("Pairing Status", "Continuous pair with grate");
         assertEquals("Select 'Continuous pair with grate' pairing status didn't set input correctly",
-                "Continuous pair with grate", getFormElement(Locator.input("Id/Pairings/observation")));
+                "Continuous pair with grate", getFormElement(Locator.input("Id/DemographicsActivePairing/observation")));
         searchPanel.selectValues("Pairing Status", "Intermittent pair");
         assertEquals("Select 'Intermittent pair' pairing status didn't set input correctly",
-                "Continuous pair with grate;Intermittent pair", getFormElement(Locator.input("Id/Pairings/observation")));
+                "Continuous pair with grate;Intermittent pair", getFormElement(Locator.input("Id/DemographicsActivePairing/observation")));
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
-                6, searchResults.getDataRowCount());
+                3, searchResults.getDataRowCount());
     }
 
     @NotNull
