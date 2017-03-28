@@ -10,6 +10,9 @@
             <columnTransforms>
                 <column source="MHO_BEGIN_DATE" target="date"/>
             </columnTransforms>
+            <alternateKeys>
+                <column name="objectid"/>
+            </alternateKeys>
         </destination>
     </transform>
 </transforms>
