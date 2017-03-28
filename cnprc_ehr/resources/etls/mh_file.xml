@@ -3,10 +3,10 @@
     <name>Morning Health File</name>
     <description>Morning Health File Info - Historical </description>
     <transforms>
-        <transforcnm id="step1" type="org.labkey.di.pipeline.TransformTask">
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc" queryName="q_mh_file"/>
             <destination schemaName="cnprc_ehr" queryName="mh_file" bulkLoad="true" targetOption="truncate"/>
-        </transforcnm>
+        </transform>
     </transforms>
 </etl>
