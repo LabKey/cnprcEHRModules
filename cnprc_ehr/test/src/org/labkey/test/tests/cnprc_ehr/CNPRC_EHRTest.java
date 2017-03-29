@@ -949,7 +949,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        String[] expected = {
+        List<String> expected = Arrays.asList(
                 "TEST1112911"
                 , "2005-05-20"
                 , " "
@@ -959,15 +959,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , " "
                 , "protocol101"
                 , UNIT_CODE
-        };
+        );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(2);
-        String[] rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
-        for (int i = 0; i < expected.length; i++)
-        {
-            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
-        }
-
+        List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 2);
+        assertEquals("Wrong data for row 3.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 13, results.getDataRowCount());
     }
 
