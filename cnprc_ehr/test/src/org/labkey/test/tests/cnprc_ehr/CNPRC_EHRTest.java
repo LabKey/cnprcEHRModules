@@ -704,26 +704,38 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0,2));
         assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(0,6));
 
-        InsertRowsCommand insertCmdTB = new InsertRowsCommand("study", "tb");
-        Map<String,Object> rowMapTB = new HashMap<>();
-        rowMapTB.put("id", "TEST1684145");
-        rowMapTB.put("date", new Date());
-        insertCmdTB.addRow(rowMapTB);
-        SaveRowsResponse respTB =  insertCmdTB.execute(createDefaultConnection(false), getContainerPath());
-
-        InsertRowsCommand insertCmdWeight = new InsertRowsCommand("study", "weight");
-        Map<String,Object> rowMapWeight = new HashMap<>();
-        rowMapWeight.put("id", "TEST1684145");
-        rowMapWeight.put("date", new Date());
-        rowMapWeight.put("weight", "2.9");
-        insertCmdWeight.addRow(rowMapWeight);
-        SaveRowsResponse respWeight =  insertCmdWeight.execute(createDefaultConnection(false), getContainerPath());
-
+        insertWeightAndTBfor("TEST1684145");
         searchPanel = getSearchPanel();
 
         searchPanel.setView("TB Overdue Report");
         searchPanel.submit();
         assertElementNotPresent(Locator.linkWithText("TEST1684145"));
+    }
+
+    private void insertWeightAndTBfor(String id) throws IOException, CommandException
+    {
+        InsertRowsCommand insertCmdTB = new InsertRowsCommand("study", "tb");
+        Map<String,Object> rowMapTB = new HashMap<>();
+        rowMapTB.put("id", id);
+        rowMapTB.put("date", new Date());
+        rowMapTB.put("test"               ,"Test1");
+        rowMapTB.put("testType"           ,"type");
+        rowMapTB.put("site"               ,"site");
+        rowMapTB.put("twentyFourHrsResult","24");
+        rowMapTB.put("fortyEightHrsResult","48");
+        rowMapTB.put("seventyTwoHrsResult","72");
+        insertCmdTB.addRow(rowMapTB);
+        SaveRowsResponse respTB =  insertCmdTB.execute(createDefaultConnection(false), getContainerPath());
+
+        InsertRowsCommand insertCmdWeight = new InsertRowsCommand("study", "weight");
+        Map<String,Object> rowMapWeight = new HashMap<>();
+        rowMapWeight.put("id", id);
+        rowMapWeight.put("date", new Date());
+        rowMapWeight.put("weight", "2.9");
+        rowMapWeight.put("weightTattooFlag", "X");
+        rowMapWeight.put("bodyConditionScore", "3");
+        insertCmdWeight.addRow(rowMapWeight);
+        SaveRowsResponse respWeight =  insertCmdWeight.execute(createDefaultConnection(false), getContainerPath());
     }
 
     @Test
@@ -964,6 +976,41 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 2);
         assertEquals("Wrong data for row 3.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 13, results.getDataRowCount());
+    }
+
+    @Test
+    public void testWeightTBandBCSView() throws Exception
+    {
+        insertWeightAndTBfor("TEST4564246");
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("General");
+        animalHistoryPage.clickReportTab("Weight, TB, BCS");
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                "id"
+                ,"date"
+                ,"weight"
+                ,"TB"
+                ,"test1"
+                ,"test2"
+                ,"weightTattooFlag"
+                ,"bodyConditionScore"
+                ,"roomAtTime"
+                ,"cageAtTime"
+                ,"conception"
+                ,"daysPregnant"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+        assertEquals("Wrong value for ID: ", "TEST4564246", results.getDataAsText(0,0));
+        assertEquals("Wrong value for Weight: ", "2.9", results.getDataAsText(0,2));
+        assertEquals("Wrong value for TB: ", "TB", results.getDataAsText(0,3));
+        assertEquals("Wrong value for Test1: ", "typesite244872", results.getDataAsText(0,4));
+        assertEquals("Wrong value for Tattoo: ", "X", results.getDataAsText(0,6));
+        assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0,7));
+        assertEquals("Wrong value for Room: ", "6824778", results.getDataAsText(0,8));
+        assertEquals("Wrong value for Cage: ", "4953547", results.getDataAsText(0,9));
     }
 
     @Test
