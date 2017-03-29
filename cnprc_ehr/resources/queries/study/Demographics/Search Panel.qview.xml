@@ -45,7 +45,7 @@
         </column>
         <column name="Id/DemographicsActivePayor/payor_id/charge_id">
             <properties>
-                <property name="columnTitle" value="Payor ID"/>
+                <property name="columnTitle" value="Payor Id"/>
             </properties>
         </column>
         <column name="Id/flagList/Values">

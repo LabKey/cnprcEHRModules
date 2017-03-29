@@ -185,6 +185,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
+        storeCageAndRoomData();
     }
 
     @Override
@@ -230,7 +231,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         insertCmd = new InsertRowsCommand("cnprc_ehr", "center_unit");
         rowMap = new HashMap<>();
-        rowMap.put("unitCode", UNIT_CODE);
+        rowMap.put("center_unit_code", UNIT_CODE);
 
         insertCmd.addRow(rowMap);
 
@@ -775,10 +776,49 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testVacantCageReport() throws IOException, CommandException
+    {
+        log("Quick Search - Advanced Housing Search - Vacant Cages Report");
+        hoverMenu("Quick Search");
+        waitForElement(Locator.linkWithText("Advanced Housing Search"), WAIT_FOR_JAVASCRIPT);
+        clickAndWait(new Locator.LinkLocator("Advanced Housing Search"));
+        clickAndWait(new Locator.LinkLocator("Vacant Cage Summary"));
+
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+
+
+        List<String> expectedColumns = Arrays.asList(
+                "enclosure",
+                "cage_size",
+                "Animals",
+                "cageOccupancy",
+                "cages",
+                "emptyCages"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        String[] expected = {
+                "AB5001"
+                , "4"
+                , "1"
+                , "1"
+                , "2"
+                , "4"
+        };
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0);
+        String[] rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
+        for (int i = 0; i < expected.length; i++)
+        {
+            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
+        }
+
+        assertEquals("Wrong row count: ", 1, results.getDataRowCount());
+
+    }
+
+    @Test
     public void testLocationReport() throws IOException, CommandException
     {
-        storeCageAndRoomData();
-
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Colony Management");
