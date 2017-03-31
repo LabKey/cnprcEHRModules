@@ -794,7 +794,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         hoverMenu("Quick Search");
         waitForElement(Locator.linkWithText("Advanced Housing Search"), WAIT_FOR_JAVASCRIPT);
         clickAndWait(new Locator.LinkLocator("Advanced Housing Search"));
-        clickAndWait(new Locator.LinkLocator("Vacant Cage Summary"));
+        waitAndClickAndWait(new Locator.LinkLocator("Vacant Cage Summary"));
 
         DataRegionTable results = new DataRegionTable("query", getDriver());
 
@@ -973,7 +973,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , UNIT_CODE
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 2);
+        List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data for row 3.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 13, results.getDataRowCount());
     }
@@ -1062,7 +1062,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable searchResults;
 
         searchPanel = getSearchPanel();
-        String [] expectedLabels = new String[]{
+        List<String> expectedLabels = Arrays.asList(
                 "Species code (3 char):"
                 ,"Gender:"
                 ,"Status:"
@@ -1086,9 +1086,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"TB Date:"
                 ,"SPF Status:"
                 ,"View:"
-        };
+        );
 
-        assertTextPresent(expectedLabels);
+        assertEquals("Wrong search criteria.", expectedLabels, searchPanel.getAllSearchCriteria());
         searchPanel.selectValues("Gender", " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
