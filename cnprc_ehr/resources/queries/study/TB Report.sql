@@ -16,7 +16,8 @@
 SELECT d.Id,
 id.MostRecentWeight.MostRecentWeightDate,
 timestampdiff('SQL_TSI_DAY', id.MostRecentWeight.MostRecentWeightDate, now()) as daysSinceWeight,
-timestampdiff('SQL_TSI_DAY', id.MostRecentWeight.MostRecentWeightDate, now()) - 60 as daysWeightOverdue,
+case when (timestampdiff('SQL_TSI_DAY', id.MostRecentWeight.MostRecentWeightDate, now()) > 60)
+then (timestampdiff('SQL_TSI_DAY', id.MostRecentWeight.MostRecentWeightDate, now()) - 60) end as daysWeightOverdue,
 id.DemographicsMostRecentTB.MostRecentTBDate as dateOfLastTB,
 case when (timestampdiff('SQL_TSI_DAY', id.DemographicsMostRecentTB.MostRecentTBDate, now()) > 180)
 then (timestampdiff('SQL_TSI_DAY', id.DemographicsMostRecentTB.MostRecentTBDate, now()) - 180) end as daysTBOverdue
@@ -26,4 +27,4 @@ where
 d.calculated_status = 'Alive' and
 (timestampdiff('SQL_TSI_DAY', id.MostRecentWeight.MostRecentWeightDate, now()) > 60
 or
-timestampdiff('SQL_TSI_DAY', id.DemographicsMostRecentTB.MostRecentTBDate, now()) > 60)
+timestampdiff('SQL_TSI_DAY', id.DemographicsMostRecentTB.MostRecentTBDate, now()) > 180)
