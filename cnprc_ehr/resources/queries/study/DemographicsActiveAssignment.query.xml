@@ -7,14 +7,7 @@
                     <column columnName="Id">
                         <isHidden>true</isHidden>
                     </column>
-                    <column columnName="primaryProject">
-                        <fk>
-                            <fkDbSchema>cnprc_ehr</fkDbSchema>
-                            <fkTable>project</fkTable>
-                            <fkColumnName>projectCode</fkColumnName>
-                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
-                        </fk>
-                    </column>
+                    <column columnName="primaryProject"/>
                     <column columnName="primaryProjectDate">
                         <formatString>Date</formatString>
                     </column>
