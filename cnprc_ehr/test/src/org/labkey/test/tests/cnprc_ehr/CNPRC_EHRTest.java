@@ -715,16 +715,28 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private void insertWeightAndTBfor(String id) throws IOException, CommandException
     {
         InsertRowsCommand insertCmdTB = new InsertRowsCommand("study", "tb");
-        Map<String,Object> rowMapTB = new HashMap<>();
-        rowMapTB.put("id", id);
-        rowMapTB.put("date", new Date());
-        rowMapTB.put("test"               ,"Test1");
-        rowMapTB.put("testType"           ,"type");
-        rowMapTB.put("site"               ,"site");
-        rowMapTB.put("twentyFourHrsResult","24");
-        rowMapTB.put("fortyEightHrsResult","48");
-        rowMapTB.put("seventyTwoHrsResult","72");
-        insertCmdTB.addRow(rowMapTB);
+        Map<String,Object> rowMapTB_1 = new HashMap<>();
+        rowMapTB_1.put("id", id);
+        rowMapTB_1.put("date", new Date());
+        rowMapTB_1.put("test"               ,"Test1");
+        rowMapTB_1.put("testType"           ,"type");
+        rowMapTB_1.put("site"               ,"site");
+        rowMapTB_1.put("twentyFourHrsResult","24");
+        rowMapTB_1.put("fortyEightHrsResult","48");
+        rowMapTB_1.put("seventyTwoHrsResult","72");
+        insertCmdTB.addRow(rowMapTB_1);
+
+        Map<String,Object> rowMapTB_2 = new HashMap<>();
+        rowMapTB_2.put("id", id);
+        rowMapTB_2.put("date", new Date());
+        rowMapTB_2.put("test"               ,"Test2");
+        rowMapTB_2.put("testType"           ,"type2");
+        rowMapTB_2.put("site"               ,"site2");
+        rowMapTB_2.put("twentyFourHrsResult","24");
+        rowMapTB_2.put("fortyEightHrsResult","48");
+        rowMapTB_2.put("seventyTwoHrsResult","72");
+        insertCmdTB.addRow(rowMapTB_2);
+
         SaveRowsResponse respTB =  insertCmdTB.execute(createDefaultConnection(false), getContainerPath());
 
         InsertRowsCommand insertCmdWeight = new InsertRowsCommand("study", "weight");
@@ -1007,6 +1019,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Weight: ", "2.9", results.getDataAsText(0,2));
         assertEquals("Wrong value for TB: ", "TB", results.getDataAsText(0,3));
         assertEquals("Wrong value for Test1: ", "typesite244872", results.getDataAsText(0,4));
+        assertEquals("Wrong value for Test2: ", "type2site2244872", results.getDataAsText(0,5));
         assertEquals("Wrong value for Tattoo: ", "X", results.getDataAsText(0,6));
         assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0,7));
         assertEquals("Wrong value for Room: ", "6824778", results.getDataAsText(0,8));
