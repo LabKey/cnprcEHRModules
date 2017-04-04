@@ -2,6 +2,7 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="LocationReport" tableDbType="NOT_IN_DB" useColumnOrder="true">
+                <javaCustomizer>org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer</javaCustomizer>
                 <columns>
                     <column columnName="Id">
                         <fk>
@@ -10,11 +11,11 @@
                             <fkColumnName>Id</fkColumnName>
                         </fk>
                     </column>
-                    <column columnName="location">
-                        <url>/query/executeQuery.view?schemaName=study&amp;
-                        query.queryName=LocationReport&amp;
-                        query.location~eq=${location}
-                        </url>
+                    <column columnName="birth">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="deathOrOnDate">
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="Id/demographicsActivePregnancy/conNum">
                         <columnTitle>Pregnancy</columnTitle>

@@ -13,12 +13,6 @@
                     <column columnName="date">
                         <columnTitle>Date In</columnTitle>
                     </column>
-                    <column columnName="location">
-                        <url>/query/executeQuery.view?schemaName=study&amp;
-                        query.queryName=LocationReport&amp;
-                        query.location~eq=${location}
-                        </url>
-                    </column>
                     <column columnName="enddate">
                         <nullable>true</nullable>
                         <isHidden>false</isHidden>
@@ -32,7 +26,6 @@
                     <column columnName="cage">
                         <isHidden>true</isHidden>
                     </column>
-                    <column columnName="timeAtLocation"/>
                 </columns>
             </table>
         </tables>

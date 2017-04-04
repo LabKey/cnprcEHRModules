@@ -8,8 +8,12 @@ import org.labkey.api.data.TableInfo;
 import org.labkey.api.data.WrappedColumn;
 import org.labkey.api.ehr.table.DurationColumn;
 import org.labkey.api.ldk.table.AbstractTableCustomizer;
+import org.labkey.api.query.DetailsURL;
 import org.labkey.api.query.QueryForeignKey;
 import org.labkey.api.query.UserSchema;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
@@ -22,6 +26,8 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
 
     public void doTableSpecificCustomizations(AbstractTableInfo ti)
     {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
         if (matches(ti, "study", "Animal"))
         {
             customizeAnimalTable(ti);
@@ -29,7 +35,12 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
 
         else if (matches(ti, "study", "RelocationHistory"))
         {
-            customizeRelocationHistoryQuery(ti);
+            customizeRelocationHistoryQuery(ti, dateTimeFormatter);
+        }
+
+        else if (matches(ti, "study", "LocationReport"))
+        {
+            customizeLocationReportQuery(ti, dateTimeFormatter);
         }
     }
 
@@ -294,7 +305,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
 
     }
 
-    private void customizeRelocationHistoryQuery(AbstractTableInfo ti)
+    private void customizeRelocationHistoryQuery(AbstractTableInfo ti, DateTimeFormatter dateTimeFormatter)
     {
         String colName = "timeAtLocation";
 
@@ -309,10 +320,53 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
                     return new DurationColumn(colInfo, "date", "endDate", "yy:MM:dd");
                 }
             });
-            timeAtLocationCol.setLabel("Time at Location (yy:MM:dd)");
 
             ti.addColumn(timeAtLocationCol);
         }
+
+        ColumnInfo onDateColumnInfo = ti.getColumn("location");
+        String onDateParamName = "onDate";
+
+        if (onDateColumnInfo != null)
+        {
+            onDateColumnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+                    "&query.queryName=LocationReport" +
+                    "&query.location~eq=${location}" +
+                    "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+        }
+    }
+
+    private void customizeLocationReportQuery(AbstractTableInfo ti, DateTimeFormatter dateTimeFormatter)
+    {
+        ColumnInfo onDateColumnInfo = ti.getColumn("location");
+        String onDateParamName = "onDate";
+
+        if (onDateColumnInfo != null)
+        {
+            onDateColumnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+                    "&query.queryName=LocationReport" +
+                    "&query.location~eq=${location}" +
+                    "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+        }
+
+        final String colName2 = "birth";
+        String colLabel = "age";
+        if (ti.getColumn(colLabel) == null)
+        {
+            WrappedColumn ageCol = new WrappedColumn(ti.getColumn(colName2), colLabel);
+            ageCol.setDisplayColumnFactory(new DisplayColumnFactory()
+            {
+                @Override
+                public DisplayColumn createRenderer(ColumnInfo colInfo)
+                {
+                    return new DurationColumn(colInfo, colName2, "deathOrOnDate", "yy:MM:dd");
+                }
+            });
+
+            ti.addColumn(ageCol);
+        }
+
+
     }
 
     private ColumnInfo getWrappedCol(UserSchema us, AbstractTableInfo ds, String name, String queryName, String colName, String targetCol)

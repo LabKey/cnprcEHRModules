@@ -19,8 +19,12 @@
             </properties>
         </column>
         <column name="species"/>
-        <column name="gender"/>
-        <column name="yearsAndMonthsAndDays">
+        <column name="gender">
+            <properties>
+                <property name="columnTitle" value="Sex"/>
+            </properties>
+        </column>
+        <column name="age">
             <properties>
                 <property name="columnTitle" value="Age (yy:MM:dd)"/>
             </properties>

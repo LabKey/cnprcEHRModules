@@ -6,8 +6,11 @@ clh.cage_size,
 clh.rate_class,
 COALESCE(animal.demographics.species, 'VACANT') AS species,
 animal.demographics.gender,
-animal.age.yearsAndMonthsAndDays,
 animal.demographics.birth,
+CASE
+    WHEN (animal.demographics.death IS NULL) OR (onDate < animal.demographics.death) THEN onDate
+    ELSE animal.demographics.death
+END AS deathOrOnDate,
 animal.mostRecentWeight.MostRecentWeight,
 housing.date,
 animal.demographicsActivePayor.payor_id,

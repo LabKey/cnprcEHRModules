@@ -786,7 +786,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expectedColumns = Arrays.asList(
                 "Id",
                 "date",
-                "location",
+                "Location",
                 "enddate",
                 "timeAtLocation"
                 );
@@ -863,7 +863,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "rate_class",
                 "species",
                 "gender",
-                "yearsAndMonthsAndDays",
+                "age",
                 "MostRecentWeight",
                 "date",
                 "payor_id",
