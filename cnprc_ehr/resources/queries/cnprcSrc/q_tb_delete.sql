@@ -13,8 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 SELECT
-objectid,
-date_time
-FROM cnprcSrc.AWEIGHING
-WHERE WT_AUD_CODE = 'D'
+(OBJECTID ||'-'|| WT_TB_TEST1_SITE ||'-'|| 'Test1') AS objectid,
+DATE_TIME
+FROM
+cnprcSrc.AWEIGHING WHERE DATE_TIME IS NOT NULL AND WT_AUD_CODE='D'
+
+UNION ALL
+
+SELECT
+(OBJECTID ||'-'|| WT_TB_TEST2_SITE ||'-'|| 'Test2') AS objectid,
+DATE_TIME
+FROM
+cnprcSrc.AWEIGHING WHERE DATE_TIME IS NOT NULL AND WT_AUD_CODE='D';
