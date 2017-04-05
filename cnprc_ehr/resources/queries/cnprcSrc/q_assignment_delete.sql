@@ -14,7 +14,31 @@
  * limitations under the License.
  */
 SELECT
-objectid,
-date_time
-FROM cnprcSrc.AAN_PROJECT
-WHERE ANPROJ_AUD_CODE = 'D'
+(aud_aproj.objectid ||'--'|| assgnmnt.objectid) AS objectid,
+aud_aproj.date_time
+FROM
+cnprcSrc_aud.aproject aud_aproj --deleting one record from ds.zproject will delete all the records/animal assignments assigned to the (deleted) project/pr_code
+INNER JOIN
+cnprcSrc.zan_project assgnmnt
+ON assgnmnt.anproj_pr_code = aud_aproj.pr_code
+WHERE aud_aproj.date_time is not null AND aud_aproj.pr_aud_code ='D'
+
+UNION
+
+SELECT
+(CASE WHEN pp.pp_aucaac_number IS NOT NULL THEN (pp.objectid ||'--'|| aud_assgnmnt.objectid) ELSE (zproj.objectid ||'--'|| aud_assgnmnt.objectid) END) AS objectid,
+aud_assgnmnt.date_time
+FROM
+cnprcSrc.aan_project aud_assgnmnt --deleting from ds.zan_project table will delete just one assignment/one row
+INNER JOIN
+cnprcSrc.zproject zproj
+ON zproj.pr_code = aud_assgnmnt.anproj_pr_code
+LEFT OUTER JOIN
+cnprcSrc.zproject_protocol pp
+ON pp.pp_project_id = aud_assgnmnt.anproj_pr_code
+WHERE aud_assgnmnt.date_time is not null and anproj_aud_code = 'D';
+
+-- note 1: Delete from ds.zproject_protocol is not handled. Deletes from this table are rare, and when
+-- deletes do happen, they will be accounted for when ETL gets truncated every morning.
+-- note 2: There are two ETL xml files for this ETL - one that will run incrementally, and one that will truncate
+-- and run every morning.

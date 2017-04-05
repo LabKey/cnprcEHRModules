@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Assignments - Daily Truncate</name>
+    <description>Assignments</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_assignment"/>
+            <destination schemaName="study" queryName="assignment" bulkLoad="true" batchSize="5000" targetOption="truncate">
+                <columnTransforms>
+                    <column source="anproj_assignment_date" target="date"/>
+                </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
+            </destination>
+        </transform>
+    </transforms>
+    <schedule>
+        <!-- run at 1 am everyday -->
+        <cron expression="0 0 1 * * ? *"/> <!--seconds, minutes, hours, day-of-month, month, day-of-week, year(optional) -->
+    </schedule>
+</etl>
+
+<!--Note: This ETL is in addition to the Incremental ETL (that runs every hour) so that all the data for assignments are accounted for once a day.
+Rationale behind this is we are expecting target LK table (study.assignment) to be misaligned with Oracle source tables occasionally/rarely
+depending on what data gets deleted on the Oracle source side.
+This was discussed with Josh Eckels.
+-->

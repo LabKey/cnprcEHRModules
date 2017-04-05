@@ -23,19 +23,20 @@ anproj_release_date AS enddate,
 coalesce(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol, --nvl(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol,
 pp_assignment_date AS projectProtocolAssignDate,
 pp_release_date AS projectProtocolRelDate,
-coalesce(pp_aucaac_number, pr_aucaac_protocol_number) ||'-'|| assgnmnt.OBJECTID AS objectid,
-CAST(CASE WHEN(zproj.DATE_TIME > assgnmnt.DATE_TIME)
-  THEN
-    zproj.DATE_TIME
-  ELSE assgnmnt.DATE_TIME
-END AS TIMESTAMP) AS date_time
+(CASE WHEN pp.pp_aucaac_number IS NOT NULL THEN (pp.objectid ||'--'|| assgnmnt.objectid)
+      ELSE (zproj.objectid ||'--'|| assgnmnt.objectid) END) AS objectid,
+CAST (
+  GREATEST( IFNULL (zproj.date_time, to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (assgnmnt.date_time, to_date('01-01-1900', 'DD-MM-YYYY')),
+            IFNULL (pp.date_time, to_date('01-01-1900', 'DD-MM-YYYY'))
+            )
+AS TIMESTAMP ) AS date_time
 FROM
 cnprcSrc.zproject zproj,
 cnprcSrc.zan_project assgnmnt
 LEFT OUTER JOIN
-(SELECT pp_project_id, pp_aucaac_number, pp_assignment_date, pp_release_date FROM cnprcSrc.zproject_protocol)
+(SELECT pp_project_id, pp_aucaac_number, pp_assignment_date, pp_release_date, objectid, date_time FROM cnprcSrc.zproject_protocol) pp
 ON (pp_project_id = anproj_pr_code
 AND anproj_assignment_date < pp_release_date
-AND anproj_release_date >= pp_assignment_date)
+AND (coalesce(anproj_release_date, now()) >= pp_assignment_date))
 WHERE anproj_pr_code = pr_code;
-
