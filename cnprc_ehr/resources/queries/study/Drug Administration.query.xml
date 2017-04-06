@@ -2,7 +2,6 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="drug" tableDbType="TABLE" useColumnOrder="true">
-                <tableUrl>/ehr/drugDetails.view?lsid=${lsid}</tableUrl>
                 <insertUrl />
                 <importUrl />
                 <updateUrl />
@@ -11,12 +10,12 @@
                     <column columnName="Id"/>
                     <column columnName="date"/>
                     <column columnName="code">
-                        <columnTitle>Code</columnTitle>
+                        <columnTitle>Vaccine</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>vaccination_codes</fkTable>
                             <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                            <fkDisplayColumnName useRawValue="true">Description</fkDisplayColumnName>
                         </fk>
                     </column>
                 </columns>
