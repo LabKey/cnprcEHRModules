@@ -190,6 +190,24 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Override
+    protected void deleteHardTableRecords() throws CommandException, IOException
+    {
+        super.deleteHardTableRecords();
+
+        Map<String,Object> rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_AB5001);
+        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AB5001 + "-4");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AB5001 + "-14");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+    }
+
+    @Override
     protected void populateHardTableRecords() throws Exception
     {
         log("Inserting initial records into EHR hard tables");
