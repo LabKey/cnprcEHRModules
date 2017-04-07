@@ -148,7 +148,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Parentage"));
         put("Clinical", Arrays.asList(
                 "SNOMED",
-                "Vaccinations",
+                "Immunizations",
                 "Hospital Admission and Discharge"));
         put("Daily Reports", Arrays.asList(
                 "Diarrhea and Poor App",
@@ -763,6 +763,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMapTB_1.put("twentyFourHrsResult","24");
         rowMapTB_1.put("fortyEightHrsResult","48");
         rowMapTB_1.put("seventyTwoHrsResult","72");
+        rowMapTB_1.put("QCStateLabel","In Progress");
+
         insertCmdTB.addRow(rowMapTB_1);
 
         Map<String,Object> rowMapTB_2 = new HashMap<>();
@@ -774,9 +776,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMapTB_2.put("twentyFourHrsResult","24");
         rowMapTB_2.put("fortyEightHrsResult","48");
         rowMapTB_2.put("seventyTwoHrsResult","72");
+        rowMapTB_2.put("QCStateLabel","In Progress");
         insertCmdTB.addRow(rowMapTB_2);
 
-        SaveRowsResponse respTB =  insertCmdTB.execute(createDefaultConnection(false), getContainerPath());
+        SaveRowsResponse respTB =  insertCmdTB.execute(createDefaultConnection(true), getProjectName());
 
         InsertRowsCommand insertCmdWeight = new InsertRowsCommand("study", "weight");
         Map<String,Object> rowMapWeight = new HashMap<>();
@@ -1041,8 +1044,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                 "Details"
-                ,"Id"
+                 "Id"
                 ,"date"
                 ,"code"
         );
