@@ -34,7 +34,7 @@ drug	Behavior	js	Behavior Treatments	true		study	underDevelopment	Behavior Treat
 pairings	Behavior	query	Pairing Observations	true		study	pairings			date	false	false			This report contains records about pairings made using each animal
 pairingHousingSummary	Behavior	js	Pairing With Housing	true		study	underDevelopment			date	false	false			This report contains records about pairings made using each animal
 roommateHistoryBSU	Behavior	query	Cagemate History	true		study	housingRoommates	Caged Housing Only		StartDate	false	false		qcstate/publicdata	This report displays all animals that shared a cage, including the start date, stop date and days co-housed
-pairingHistory	Behavior	js	Pairing History	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report displays all animals that shared a cage, including the start date, stop date and days co-housed
+pairingHistory	Behavior	js	Pairing History	true		study	pairingHistory			date	false	false		qcstate/publicdata	This report displays all animals that shared a cage, including the start date, stop date and days co-housed
 
 #caseSummary	Clinical	query	Cases Over 2 Years	true		study	clinicalCaseSummary			date	false	false		qcstate/publicdata	This reports summarizes clinical cases opened in the past 2 years.
 #fullHistory	Clinical	query	Full History	true		study	StudyData	Full History		date	false	false		qcstate/publicdata	Contains all clinical data on the animal

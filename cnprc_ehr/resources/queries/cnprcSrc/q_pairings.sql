@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 SELECT
-AP_AN_ID AS Id,
-AP_PAIR_KEY AS pairId,
+p1.AP_AN_ID AS Id,
+p2.AP_AN_ID AS pairedWithId,
+p1.AP_PAIR_KEY AS pairId,
 APM_START_DATE,
 APM_END_DATE AS endDate,
 APM_BEHAVIOR_CODE AS observation,
 APM_COMMENT AS remark,
-p.OBJECTID ||'--'|| pm.OBJECTID as objectid,
-CAST(CASE WHEN(p.DATE_TIME > pm.DATE_TIME)
+p1.OBJECTID ||'--'|| pm.OBJECTID as objectid,
+CAST(CASE WHEN(p1.DATE_TIME > pm.DATE_TIME)
   THEN
-    p.DATE_TIME
+    p1.DATE_TIME
   ELSE pm.DATE_TIME
 END AS TIMESTAMP) AS date_time
 FROM
-cnprcSrc.ZAN_PAIRING p
+cnprcSrc.ZAN_PAIRING p1
 LEFT JOIN
-cnprcSrc.ZAN_PAIRING_MASTER pm
-ON p.AP_PAIR_KEY = pm.APM_PAIR_KEY;
+cnprcSrc.ZAN_PAIRING_MASTER pm ON p1.AP_PAIR_KEY = pm.APM_PAIR_KEY
+LEFT JOIN
+cnprcSrc.ZAN_PAIRING p2 ON p2.AP_PAIR_KEY = p1.AP_PAIR_KEY AND p2.ap_an_id <> p1.ap_an_id;

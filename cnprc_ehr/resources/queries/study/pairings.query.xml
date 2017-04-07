@@ -2,12 +2,13 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="pairings" tableDbType="TABLE" useColumnOrder="true">
+                <javaCustomizer>org.labkey.cnprc_ehr.table.CNPRC_PairingCustomizer</javaCustomizer>
                 <columns>
                     <column columnName="Id"/>
-                    <column columnName="pairId">
-                        <columnTitle>Pair Id</columnTitle>
+                    <column columnName="pairedWithId">
                         <url>/ehr/participantView.view?participantId=${pairId}</url>
                     </column>
+                    <column columnName="pairId"/>
                     <column columnName="date">
                         <columnTitle>Start Date</columnTitle>
                     </column>
@@ -20,10 +21,10 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>behavior_codes</fkTable>
                             <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="remark"/>
+                    <column columnName="timePaired"/>
                 </columns>
             </table>
         </tables>

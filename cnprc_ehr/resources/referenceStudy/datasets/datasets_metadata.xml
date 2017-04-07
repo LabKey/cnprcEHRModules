@@ -2407,6 +2407,9 @@
                     <importAlias>ptid</importAlias>
                 </importAliases>
             </column>
+            <column columnName="pairedWithId">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="date">
                 <datatype>timestamp</datatype>
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
