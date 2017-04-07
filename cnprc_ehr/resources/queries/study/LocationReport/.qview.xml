@@ -54,6 +54,11 @@
                 <property name="columnTitle" value="Breeding Code"/>
             </properties>
         </column>
+        <column name="book">
+            <properties>
+                <property name="columnTitle" value="Breeding Book"/>
+            </properties>
+        </column>
         <column name="primaryProject">
             <properties>
                 <property name="columnTitle" value="Primary Project"/>
@@ -72,6 +77,11 @@
         <column name="conNum">
             <properties>
                 <property name="columnTitle" value="Pregnancy"/>
+            </properties>
+        </column>
+        <column name="pgComment">
+            <properties>
+                <property name="columnTitle" value="Comment"/>
             </properties>
         </column>
         <column name="daysPregnant">
