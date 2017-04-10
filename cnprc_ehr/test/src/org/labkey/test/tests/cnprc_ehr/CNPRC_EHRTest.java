@@ -1040,8 +1040,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Clinical");
-        animalHistoryPage.clickReportTab("Immunizations");
-
+        String reportTab = "Immunizations";
+        animalHistoryPage.clickReportTab(reportTab);
+        waitForElement(Locator.linkContainingText(reportTab));
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
                  "Id"
@@ -1056,14 +1057,54 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , "T"
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(1, expectedColumns.size());
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size());
         assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 4, results.getDataRowCount());
-        click(Locator.linkContainingText("T"));
+        click(Locator.linkContainingText("X"));
 
         switchToWindow(1);
         assertTextPresent("Record Details");
-        assertTextPresent("Tetanus");
+        assertTextPresent("Experimental");
+    }
+
+    @Test
+    public void testAnimalHistoryPairingHistoryView() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Behavior");
+        String reportTab = "Pairing History";
+        animalHistoryPage.clickReportTab(reportTab);
+        waitForElement(Locator.linkContainingText(reportTab));
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                 "Id"
+                ,"pairedWithId"
+                ,"date"
+                ,"endDate"
+                ,"observation"
+                ,"remark"
+                ,"timePaired"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        List<String> expected = Arrays.asList(
+                "TEST1112911"
+                ,"TEST1684145"
+                ,"2011-07-19 11:29"
+                ," "
+                ,"IP"
+        );
+
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, 5);
+        assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
+        assertEquals("Wrong row count: ", 12, results.getDataRowCount());
+        click(Locator.linkContainingText("IP"));
+
+        switchToWindow(1);
+        waitForText("Record Details");
+        assertTextPresent("Intermittent pair");
     }
 
     @Test
