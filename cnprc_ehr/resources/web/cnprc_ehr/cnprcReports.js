@@ -24,11 +24,7 @@ EHR.reports.immunizations = function(panel, tab, viewName) {
             viewName: viewName,
             title: title,
             filters: filterArray.nonRemovable,
-            removeableFilters: filterArray.removable,
-            parameters: {
-                StartDate: date,
-                NumDays: 1
-            }
+            removeableFilters: filterArray.removable
         })
     });
 
@@ -74,15 +70,11 @@ EHR.reports.immunizations = function(panel, tab, viewName) {
         style: 'margin-bottom:20px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
-            queryName: 'pairings',
+            queryName: 'pairingHistory',
             viewName: viewName,
             title: 'Pairing' + title,
             filters: filterArray.nonRemovable,
-            removeableFilters: filterArray.removable,
-            parameters: {
-                StartDate: date,
-                NumDays: 1
-            }
+            removeableFilters: filterArray.removable
         })
     });
 
