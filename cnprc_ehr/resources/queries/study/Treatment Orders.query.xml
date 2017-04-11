@@ -44,10 +44,10 @@
                     <column columnName="frequency">
                         <columnTitle>Frequency</columnTitle>
                         <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>treatment_frequency</fkTable>
-                            <fkColumnName>rowid</fkColumnName>
-                            <fkDisplayColumnName>shortname</fkDisplayColumnName>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>treatment_term</fkTable>
+                            <fkColumnName>treatment_term</fkColumnName>
+                            <fkDisplayColumnName>definition</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="route">

@@ -1642,7 +1642,8 @@
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
             </column>
             <column columnName="frequency">
-                <datatype>integer</datatype>
+                <datatype>varchar</datatype>
+                <scale>4</scale>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
