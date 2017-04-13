@@ -6,7 +6,7 @@
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="pairedWithId">
-                        <url>/ehr/participantView.view?participantId=${pairId}</url>
+                        <url>/ehr/participantView.view?participantId=${pairedWithId}</url>
                     </column>
                     <column columnName="pairId"/>
                     <column columnName="date">
