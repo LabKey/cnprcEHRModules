@@ -87,12 +87,6 @@
                 </column>
                 <column columnName="seq1">
                     <columnTitle>Seq</columnTitle>
-                    <!--<url>/query/executeQuery.view?schemaName=study&amp;-->
-                        <!--query.queryName=Morphologic%20Diagnosis&amp;-->
-                        <!--query.id~eq=${id}&amp;-->
-                        <!--query.date~eq=${date}&amp;-->
-                        <!--query.seq1~eq=${seq1}&amp;-->
-                    <!--</url>-->
                 </column>
                 <column columnName="topographyNotes">
                     <columnTitle>Topography Notes</columnTitle>
@@ -100,10 +94,10 @@
                 <column columnName="morphologyNotes">
                     <columnTitle>Morphology Notes</columnTitle>
                 </column>
-                <column columnName="description">
+                <column columnName="remark">
                     <columnTitle>Other Comments</columnTitle>
                 </column>
-                <column columnName="remark">
+                <column columnName="comments">
                     <columnTitle>Comments</columnTitle>
                 </column>
             </columns>

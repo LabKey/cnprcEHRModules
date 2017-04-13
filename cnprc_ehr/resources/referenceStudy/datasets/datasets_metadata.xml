@@ -416,6 +416,9 @@
             <column columnName="morphologyNotes">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="comments">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>

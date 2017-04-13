@@ -13,8 +13,8 @@
         <column name="distribution"/>
         <column name="topographyNotes"/>
         <column name="morphologyNotes"/>
+        <column name="comments"/>
         <column name="remark"/>
-        <column name="description"/>
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

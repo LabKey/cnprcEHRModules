@@ -28,7 +28,7 @@ SNO_OCCUPATION_CODE AS distribution,
 PD_TEXT_TOPOGRAPHY AS topographyNotes,
 PD_TEXT_MORPHOLOGY AS morphologyNotes,
 PD_TEXT_OTHER AS remark,
-PD_COMMENT AS description,
+PD_COMMENT AS comments,
 d.OBJECTID ||'--'|| pr.OBJECTID AS objectid,
 CAST (
   GREATEST( IFNULL (d.date_time,to_date('01-01-1900', 'DD-MM-YYYY')),
