@@ -2,8 +2,6 @@ package org.labkey.cnprc_ehr.table;
 
 import org.labkey.api.data.AbstractTableInfo;
 import org.labkey.api.data.ColumnInfo;
-import org.labkey.api.data.DisplayColumn;
-import org.labkey.api.data.DisplayColumnFactory;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.data.WrappedColumn;
 import org.labkey.api.ehr.table.DurationColumn;
@@ -312,14 +310,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         if (ti.getColumn(colName) == null)
         {
             WrappedColumn timeAtLocationCol = new WrappedColumn(ti.getColumn("date"), colName);
-            timeAtLocationCol.setDisplayColumnFactory(new DisplayColumnFactory()
-            {
-                @Override
-                public DisplayColumn createRenderer(ColumnInfo colInfo)
-                {
-                    return new DurationColumn(colInfo, "date", "endDate", "yy:MM:dd");
-                }
-            });
+            timeAtLocationCol.setDisplayColumnFactory(colInfo -> new DurationColumn(colInfo, "date", "endDate", "yy:MM:dd"));
 
             ti.addColumn(timeAtLocationCol);
         }
@@ -354,14 +345,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         if (ti.getColumn(colLabel) == null)
         {
             WrappedColumn ageCol = new WrappedColumn(ti.getColumn(colName2), colLabel);
-            ageCol.setDisplayColumnFactory(new DisplayColumnFactory()
-            {
-                @Override
-                public DisplayColumn createRenderer(ColumnInfo colInfo)
-                {
-                    return new DurationColumn(colInfo, colName2, "deathOrOnDate", "yy:MM:dd");
-                }
-            });
+            ageCol.setDisplayColumnFactory(colInfo -> new DurationColumn(colInfo, colName2, "deathOrOnDate", "yy:MM:dd"));
 
             ti.addColumn(ageCol);
         }
