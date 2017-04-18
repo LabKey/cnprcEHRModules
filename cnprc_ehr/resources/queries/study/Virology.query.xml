@@ -1,30 +1,33 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="virology" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="virology" tableDbType="NOT_IN_DB" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
-                    <column columnName="date">
+                    <column columnName="Id">
+                        <url>/ehr/participantView.view?participantId=${Id}</url>
+                        <columnTitle>Animal ID</columnTitle>
+                    </column>
+                    <column columnName="sampleDate">
                         <columnTitle>Sample Date</columnTitle>
                     </column>
-                    <column columnName="testDate">
+                    <column columnName="testDoneDate">
                         <columnTitle>Test Date</columnTitle>
                         <formatString>DateTime</formatString>
                     </column>
-                    <column columnName="target">
-                        <columnTitle>Target</columnTitle>
+                    <column columnName="virus">
+                        <columnTitle>Virus Code</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>virology_target</fkTable>
+                            <fkTable>test_type_virus_mapping</fkTable>
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="virus">
-                        <columnTitle>Virus</columnTitle>
+                    <column columnName="target">
+                        <columnTitle>Target Code</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>viruses</fkTable>
+                            <fkTable>test_type_target_mapping</fkTable>
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
@@ -33,7 +36,16 @@
                         <columnTitle>Test Method</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>virology_test_method</fkTable>
+                            <fkTable>test_type_method_mapping</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="results">
+                        <columnTitle>Result</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>virology_result_blend</fkTable>
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
@@ -46,50 +58,6 @@
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
-                    </column>
-                    <column columnName="purpose">
-                        <columnTitle>Purpose</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>virology_purpose</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="result">
-                        <columnTitle>Result</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>virology_result</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="opticalDensity">
-                        <columnTitle>Optical Density</columnTitle>
-                    </column>
-                    <column columnName="titration">
-                        <columnTitle>Titration</columnTitle>
-                    </column>
-                    <column columnName="lab">
-                        <columnTitle>Lab</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>virology_labs</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Title</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="location">
-                        <columnTitle>Location</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>rooms</fkTable>
-                            <fkColumnName>room</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="remark">
-                        <columnTitle>Comment</columnTitle>
                     </column>
                 </columns>
             </table>

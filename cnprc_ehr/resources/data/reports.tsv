@@ -17,7 +17,7 @@ clinPathRuns	Lab Results	js	Lab Runs	true		study	underDevelopment			date	false	f
 miscTests	Lab Results	js	Misc Tests	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the misc lab results not represented in the other reports
 #antibioticSensitivity	Lab Results	js	Antibiotic Sensitivity	true		study	antibioticSensitivity			date	false	false		qcstate/publicdata	This report contains the results of tests of antibiotic resistance
 #serology	Lab Results	js	Serology	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the results of serology tests
-virology	Lab Results	query	Virology	true		study	virology			date	false	false		qcstate/publicdata	Animal Virology History
+virology	Lab Results	js	Virology	true		study	virology			date	false	false		qcstate/publicdata	Animal Virology History
 clinCases	Clinical	js	Cases	true		study	underDevelopment	Active Clinical Cases		date	false	false		qcstate/publicdata	This report contains one record for each case opend for this animal, including surergies, exams, procedures, etc.
 #encountersWithSnomedBySet	Pathology	query	SNOMED Codes - Grouped	true		study	encountersWithSnomedBySet			date	false	false		qcstate/publicdata	This report lists all SNOMED codes used in the animal\'s record
 

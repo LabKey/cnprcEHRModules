@@ -52,3 +52,7 @@ key_status 	Key Status 	value
 key_assignment_status	Assignment Status	value
 organs	Organs	value
 colony_codes	Colony Codes	value
+test_type_method_mapping	Test Type Method Mapping	value
+test_type_target_mapping	Test Type Target Mapping	value
+test_type_virus_mapping	Test Type Virus Mapping	value
+virology_result_blend	Virology Result Blend	value

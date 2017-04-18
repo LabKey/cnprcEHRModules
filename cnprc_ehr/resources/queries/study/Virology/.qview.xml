@@ -1,20 +1,5 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
-    <columns>
-        <column name="Id"/>
-        <column name="date"/>
-        <column name="testDate"/>
-        <column name="target"/>
-        <column name="virus"/>
-        <column name="method"/>
-        <column name="sampleType"/>
-        <column name="purpose"/>
-        <column name="result"/>
-        <column name="titration"/>
-        <column name="lab"/>
-        <column name="location"/>
-        <column name="remark"/>
-    </columns>
     <sorts>
-        <sort column="date" descending="true"/>
+        <sort column="sampleDate" descending="true"/>
     </sorts>
 </customView>
