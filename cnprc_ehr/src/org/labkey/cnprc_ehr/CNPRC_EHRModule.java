@@ -23,6 +23,7 @@ import org.labkey.api.ldk.ExtendedSimpleModule;
 import org.labkey.api.module.AdminLinkManager;
 import org.labkey.api.module.ModuleContext;
 import org.labkey.api.query.DetailsURL;
+import org.labkey.api.resource.Resource;
 import org.labkey.api.security.User;
 import org.labkey.api.security.permissions.AdminPermission;
 import org.labkey.api.view.ActionURL;
@@ -76,6 +77,11 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         EHRService ehrService = EHRService.get();
 
         ehrService.registerModule(this);
+
+        Resource r = getModuleResource("/scripts/cnprc_triggers.js");
+        assert r != null;
+        EHRService.get().registerTriggerScript(this, r);
+
         ehrService.registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
         EHRService.get().registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcReports.js"), this);
 
