@@ -18,32 +18,27 @@
 -- LK removed order by as it breaks merge
 -- LK added date_time
 SELECT
-b.reloc_an_id AS Id,
-(CASE WHEN a.reloc_location_prefix = '0100' THEN 'Escaped'
-      WHEN a.reloc_location_prefix = '0101' THEN 'Shipped'
-      WHEN a.reloc_location_prefix = '0102' THEN 'On Loan'
-      WHEN a.reloc_location_prefix = '0103' THEN 'Tmp Escp'
+departs.reloc_an_id AS Id,
+(CASE WHEN departs.reloc_location_prefix = '0100' THEN 'Escaped'
+      WHEN departs.reloc_location_prefix = '0101' THEN 'Shipped'
+      WHEN departs.reloc_location_prefix = '0102' THEN 'On Loan'
+      WHEN departs.reloc_location_prefix = '0103' THEN 'Tmp Escp'
  END) AS reloctype,
-b.reloc_location AS destination,
-b.reloc_date_in,  -- this is the last date we have since animal has left the center
-b.reloc_sale_comment AS remark,
-(CASE WHEN b.reloc_location_prefix = '0000' THEN 'Dead'
-      WHEN b.reloc_location_prefix = '0100' THEN 'Escaped'
-      WHEN b.reloc_location_prefix = '0101' THEN 'Shipped'
-      WHEN b.reloc_location_prefix = '0102' THEN 'On Loan'
-      WHEN b.reloc_location_prefix = '0103' THEN 'Tmp Escp'
-      WHEN b.reloc_location_prefix = '0200' THEN 'Here'
+departs.reloc_location AS destination,
+departs.reloc_date_in, -- Date the animal left the center, some return
+departs.reloc_sale_comment AS remark,
+departs.reloc_date_out,
+(CASE WHEN returns.reloc_location_prefix = '0000' THEN 'Dead'
+      WHEN returns.reloc_location_prefix = '0100' THEN 'Escaped'
+      WHEN returns.reloc_location_prefix = '0101' THEN 'Shipped'
+      WHEN returns.reloc_location_prefix = '0102' THEN 'On Loan'
+      WHEN returns.reloc_location_prefix = '0103' THEN 'Tmp Escp'
+      WHEN returns.reloc_location_prefix = '0200' THEN 'Here'
  END) AS nextreloctype,
-b.OBJECTID as objectid,
-GREATEST(a.DATE_TIME,ifnull(b.DATE_TIME, to_date('01-01-1900', 'DD-MM-YYYY'))) AS DATE_TIME
+COALESCE(returns.OBJECTID, departs.OBJECTID) AS objectid, -- I used the objectid from returns since it seemed you are using it in preference for date_time
+GREATEST(departs.DATE_TIME, COALESCE(returns.DATE_TIME, to_date('01-01-1900', 'DD-MM-YYYY'))) AS DATE_TIME
 FROM
-cnprcSrc.zrelocation a,
-cnprcSrc.zrelocation b
-WHERE a.reloc_location_prefix IN ('0000', '0100', '0101', '0102', '0103', '0200')
-AND exists (SELECT NULL FROM cnprcSrc.zrelocation c
-            WHERE c.reloc_an_id = a.reloc_an_id
-            AND c.reloc_location_prefix IN ('0100', '0101', '0102', '0103')
-            AND c.reloc_date_in =  a.reloc_date_out
-           )
-AND b.reloc_an_id = a.reloc_an_id
-AND b.reloc_seq = a.reloc_seq + 1;
+  cnprcSrc.ZRELOCATION departs
+     LEFT OUTER JOIN cnprcSrc.ZRELOCATION returns
+          ON (returns.reloc_an_id = departs.reloc_an_id AND returns.reloc_seq = departs.reloc_seq + 1)
+WHERE departs.reloc_location_prefix IN ('0100', '0101', '0102', '0103')
