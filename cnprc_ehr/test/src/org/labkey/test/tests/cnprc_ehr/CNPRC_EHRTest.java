@@ -753,7 +753,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     private void insertWeightAndTBfor(String id) throws IOException, CommandException
     {
-        InsertRowsCommand insertCmdTB = new InsertRowsCommand("study", "tb");
+        InsertRowsCommand insertCmdTB1 = new InsertRowsCommand("study", "tb");
         Map<String,Object> rowMapTB_1 = new HashMap<>();
         rowMapTB_1.put("id", id);
         rowMapTB_1.put("date", new Date());
@@ -765,21 +765,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMapTB_1.put("seventyTwoHrsResult","72");
         rowMapTB_1.put("QCStateLabel","In Progress");
 
-        insertCmdTB.addRow(rowMapTB_1);
+        insertCmdTB1.addRow(rowMapTB_1);
+        SaveRowsResponse respTB =  insertCmdTB1.execute(createDefaultConnection(true), getProjectName());
 
+        InsertRowsCommand insertCmdTB2 = new InsertRowsCommand("study", "tb");
         Map<String,Object> rowMapTB_2 = new HashMap<>();
-        rowMapTB_2.put("id", id);
-        rowMapTB_2.put("date", new Date());
-        rowMapTB_2.put("test"               ,"Test2");
-        rowMapTB_2.put("testType"           ,"type2");
-        rowMapTB_2.put("site"               ,"site2");
-        rowMapTB_2.put("twentyFourHrsResult","24");
-        rowMapTB_2.put("fortyEightHrsResult","48");
-        rowMapTB_2.put("seventyTwoHrsResult","72");
+        rowMapTB_2.put("id"                 , id        );
+        rowMapTB_2.put("date"               , new Date());
+        rowMapTB_2.put("test"               ,"Test2"    );
+        rowMapTB_2.put("testType"           ,"type2"    );
+        rowMapTB_2.put("site"               ,"site2"    );
+        rowMapTB_2.put("twentyFourHrsResult","24"       );
+        rowMapTB_2.put("fortyEightHrsResult","48"       );
+        rowMapTB_2.put("seventyTwoHrsResult","72"       );
         rowMapTB_2.put("QCStateLabel","In Progress");
-        insertCmdTB.addRow(rowMapTB_2);
+        insertCmdTB2.addRow(rowMapTB_2);
 
-        SaveRowsResponse respTB =  insertCmdTB.execute(createDefaultConnection(true), getProjectName());
+        SaveRowsResponse respTB2 =  insertCmdTB2.execute(createDefaultConnection(true), getProjectName());
 
         InsertRowsCommand insertCmdWeight = new InsertRowsCommand("study", "weight");
         Map<String,Object> rowMapWeight = new HashMap<>();
@@ -1063,8 +1065,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         click(Locator.linkContainingText("X"));
 
         switchToWindow(1);
-        assertTextPresent("Record Details");
-        assertTextPresent("Experimental");
+        assertTextPresent("Record Details","Experimental");
     }
 
     @Test
@@ -1100,8 +1101,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, 5);
         assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 12, results.getDataRowCount());
-        click(Locator.linkContainingText("IP"));
 
+        assertElementPresent(Locator.linkContainingText("TEST1684145"));
+        assertTextPresent("Key:", "Pairing Codes", "Deferment Status Codes");
+
+        click(Locator.linkContainingText("IP"));
         switchToWindow(1);
         waitForText("Record Details");
         assertTextPresent("Intermittent pair");

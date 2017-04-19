@@ -81,7 +81,7 @@ EHR.reports.pairingHistory = function (panel, tab, viewName) {
             style: 'padding-bottom: 5px;'
         }, {
             html: '<table>' +
-                '<tr><td colspan="2"><b>Pairing Codes</b></td>                    <td colspan="2"><b>Deferment Status Code</td></tr>' +
+                '<tr><td colspan="2"><b>Pairing Codes</b></td>                    <td colspan="2"><b>Deferment Status Codes</td></tr>' +
                 '<tr><td><b>CG</b></td><td>Continuous pair with grate</td>        <td><b>XS</b></td><td>Experimental deferral, single</td></tr>' +
                 '<tr><td><b>CP</b></td><td>Continuous pair</td>                   <td><b>XD</b></td><td>Experimental deferral, no group mate</td></tr>' +
                 '<tr><td><b>IG</b></td><td>Intermittent pair with grate</td>      <td><b>XG</b></td><td>Experimental deferral with grate</td></tr>' +
