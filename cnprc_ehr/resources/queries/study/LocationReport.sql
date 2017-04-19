@@ -49,7 +49,7 @@ breed_roster.book,  -- potentially incorrect for non-current dates
     SELECT
     assign.Id,
     (CASE WHEN assign.assignmentStatus='P' THEN MAX(assign.projectCode) END) AS primaryProject,
-    FROM assignment assign
+    FROM study.assignment assign
     WHERE onDate > assign.date
     AND onDate < COALESCE(assign.endDate, now())
     GROUP BY assign.Id, assign.assignmentStatus) latestProjects
@@ -62,7 +62,7 @@ breed_roster.book,  -- potentially incorrect for non-current dates
     SELECT
     assign.Id,
     (CASE WHEN assign.assignmentStatus='S' THEN Group_concat(assign.projectCode, ', ') ELSE NULL END) AS secondaryProjects
-    FROM assignment assign
+    FROM study.assignment assign
     WHERE onDate > assign.date
     AND onDate < COALESCE(assign.endDate, now())
     GROUP BY assign.Id, assign.assignmentStatus) latestProjects
@@ -73,6 +73,7 @@ breed_roster.book,  -- potentially incorrect for non-current dates
     group_concat(flags.flag, ', ') as flagValues
     FROM study.flags flags
     WHERE flags.Id = animal.Id
+    AND onDate BETWEEN flags.date AND COALESCE(flags.endDate, now())
     GROUP BY flags.Id
 ) values,
 preg_confirm.Id AS conNum,
@@ -147,8 +148,6 @@ LEFT OUTER JOIN study.breedingGroupAssignments bga ON bga.Id = animal.Id
 LEFT OUTER JOIN cnprc_ehr.breedingRoster breed_roster ON breed_roster.animalId = animal.Id
 LEFT OUTER JOIN study.pregnancyConfirmations preg_confirm ON preg_confirm.Id = animal.Id
     AND onDate BETWEEN preg_confirm.conception AND COALESCE(preg_confirm.termDate, now())
-LEFT OUTER JOIN study.flags flags ON flags.Id = animal.Id
-    AND onDate BETWEEN flags.date AND COALESCE(flags.enddate, now())
 WHERE onDate BETWEEN allIdsAndLocations.date AND COALESCE(allIdsAndLocations.endDate, now())
 
 UNION ALL

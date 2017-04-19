@@ -16,6 +16,7 @@
 
 package org.labkey.test.tests.cnprc_ehr;
 
+import org.apache.http.client.utils.URIBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Before;
@@ -23,6 +24,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.labkey.api.util.URLHelper;
+import org.labkey.api.view.ActionURL;
 import org.labkey.remoteapi.CommandException;
 import org.labkey.remoteapi.Connection;
 import org.labkey.remoteapi.query.InsertRowsCommand;
@@ -52,6 +55,7 @@ import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -83,6 +87,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String BILLINGFOLDER = "Billing";
     private static final String COMPLIANCE_AND_TRAINING_FOLDER = "Compliance And Training";
     protected static final String ROOM_AB5001 = "AB5001";
+    protected static final String ROOM_AC5003 = "AC5003";
+    protected static final String ROOM_AD5003 = "AD5003";
 
     public static final String CNPRC_ANIMAL = "TEST3804589";
     private static final String ASSAY_GENETICS = "Genetics";
@@ -102,6 +108,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File CNPRC_EHR_CONCEPTIONS_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CONCEPTIONS.tsv");
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
+    private static final File CNPRC_EHR_BREEDING_ROSTER = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_BREEDING_ROSTER.tsv");
 
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
@@ -187,6 +194,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
         storeCageAndRoomData();
+        storeBreedingData();
+        storeConceptionData();
     }
 
     @Override
@@ -204,6 +213,30 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_AB5001 + "-14");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_AC5003);
+        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AC5003 + "-89");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AC5003 + "-43");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_AD5003);
+        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5003 + "-22");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5003 + "-23");
         deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
     }
 
@@ -276,6 +309,18 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("housingCondition", 1);
         insertCmd.addRow(rowMap);
 
+        rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_AC5003);
+        rowMap.put("housingType", 1);
+        rowMap.put("housingCondition", 1);
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_AD5003);
+        rowMap.put("housingType", 1);
+        rowMap.put("housingCondition", 1);
+        insertCmd.addRow(rowMap);
+
         saveResp  = insertCmd.execute(cn, getContainerPath());
 
         //then ehr_lookups.cage
@@ -291,6 +336,31 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("room", ROOM_AB5001);
         rowMap.put("cage", "14");
         insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AC5003 + "-89");
+        rowMap.put("room", ROOM_AC5003);
+        rowMap.put("cage", "89");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AC5003 + "-43");
+        rowMap.put("room", ROOM_AC5003);
+        rowMap.put("cage", "43");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5003 + "-22");
+        rowMap.put("room", ROOM_AD5003);
+        rowMap.put("cage", "22");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5003 + "-23");
+        rowMap.put("room", ROOM_AD5003);
+        rowMap.put("cage", "23");
+        insertCmd.addRow(rowMap);
+
         saveResp = insertCmd.execute(cn, getContainerPath());
 
     }
@@ -440,17 +510,16 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertTextPresent("PEANUTS");
     }
 
-    private void storeConceptionData() throws Exception
+    private void storeConceptionData() throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
-        insertTsvData(connection, "cnprc_ehr", "conceptions", CNPRC_EHR_CONCEPTIONS_TSV, null);
+        String folder = "/";
+        insertTsvData(connection, "cnprc_ehr", "conceptions", CNPRC_EHR_CONCEPTIONS_TSV, folder);
     }
 
     @Test
     public void testAnimalHistoryReports() throws Exception
     {
-        //storeConceptionData(); // TODO
-
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
 
         animalHistoryPage.searchSingleAnimal(CNPRC_ANIMAL);
@@ -700,12 +769,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST1112911"));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0,5));
-        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(0,8));
-        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,9));
-        assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(0,12));
-        assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(0,13));
-        assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(0,14));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(2,5));
+        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(2,8));
+        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(2,9));
+        assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(2,12));
+        assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(2,13));
+        assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(2,14));
     }
 
     @Test
@@ -740,8 +809,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertElementPresent(Locator.linkWithText("2011-09-09 09:00"));
         assertElementPresent(Locator.linkWithText("2015-04-21"));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0,2));
-        assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(0,6));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(2,2));
+        assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(2,6));
 
         insertWeightAndTBfor("TEST1684145");
         searchPanel = getSearchPanel();
@@ -932,12 +1001,85 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.tagContainingText("td", "Jerry Jones"));
     }
 
+    @Test
+    public void testEnclosureSearch() throws IOException, CommandException, URISyntaxException
+    {
+        click(Locator.linkWithText("Housing Queries"));
+        waitForElement(Locator.tagContainingText("div", "On Date"));
+        SearchPanel searchPanel = new SearchPanel("Enclosure Search", getDriver());
+        searchPanel.submit();
+        waitForElement(Locator.tagContainingText("div", "Encl Supervisor"));
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+
+        // Test from housing data
+        assertEquals("Wrong value for ID: ", "44444", results.getDataAsText(3,0));
+        assertEquals("Wrong value for Location: ", "AC5003-89", results.getDataAsText(3,2));
+        assertEquals("Wrong value for Cage Size: ", "4", results.getDataAsText(3,4));
+        assertEquals("Wrong value for Species code: ", "MMU", results.getDataAsText(3,6));
+        assertEquals("Wrong value for Weight: ", "5.5", results.getDataAsText(3,9));
+        assertEquals("Wrong value for Payor ID: ", " ", results.getDataAsText(3,11));
+        assertEquals("Wrong value for Colony Code: ", "L", results.getDataAsText(3,12));
+        assertEquals("Wrong value for Breeding Code: ", " ", results.getDataAsText(3,13));
+        assertEquals("Wrong value for Breeding Book: ", "BO", results.getDataAsText(3,14));
+        assertEquals("Wrong value for Primary Project: ", " ", results.getDataAsText(3,15));
+        assertEquals("Wrong value for Secondary Project(s): ", " ", results.getDataAsText(3,16));
+        assertEquals("Wrong value for Census Flag List: ", " ", results.getDataAsText(3,17));
+        assertEquals("Wrong value for Comment: ", "Not Completed", results.getDataAsText(3,19));
+        assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", results.getDataAsText(3,22));
+
+        // Now that test historical data changes
+        URLHelper currentURL = new URLHelper(getDriver().getCurrentUrl());
+        currentURL.deleteParameter("query.param.onDate");
+        currentURL.addParameter("query.param.onDate", "2015-04-04 00:00:00");
+        beginAt(currentURL.toString());
+        waitForElement(Locator.tagContainingText("div", "Encl Supervisor"));
+        results = new DataRegionTable("query", getDriver());
+
+        assertEquals("Wrong value for ID: ", "44444", results.getDataAsText(2,0));
+        assertEquals("Wrong value for Location: ", "AC5003-89", results.getDataAsText(2,2));
+        assertEquals("Wrong value for Cage Size: ", "6", results.getDataAsText(2,4));
+        assertEquals("Wrong value for Species code: ", "MMU", results.getDataAsText(2,6));
+        assertEquals("Wrong value for Weight: ", "4.4", results.getDataAsText(2,9));
+        assertEquals("Wrong value for Payor ID: ", "AB125/YZ17", results.getDataAsText(2,11));
+        assertEquals("Wrong value for Colony Code: ", "O", results.getDataAsText(2,12));
+        assertEquals("Wrong value for Breeding Code: ", "M", results.getDataAsText(2,13));
+        assertEquals("Wrong value for Breeding Book: ", "BO", results.getDataAsText(2,14));
+        assertEquals("Wrong value for Primary Project: ", "Pc5C0", results.getDataAsText(2,15));
+        assertEquals("Wrong value for Secondary Project(s): ", "Pc5C1, Pc5C2", results.getDataAsText(2,16));
+        assertEquals("Wrong value for Census Flag List: ", "CHA, CHU", results.getDataAsText(2,17));
+        assertEquals("Wrong value for Comment: ", "Completed", results.getDataAsText(2,19));
+        assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", results.getDataAsText(2,22));
+
+        // Test from departure data too
+        assertEquals("Wrong value for ID: ", "44446", results.getDataAsText(1,0));
+        assertEquals("Wrong value for Location: ", "3105069X4", results.getDataAsText(1,2));
+        assertEquals("Wrong value for Cage Size: ", " ", results.getDataAsText(1,4));
+        assertEquals("Wrong value for Species code: ", "MMU", results.getDataAsText(1,6));
+        assertEquals("Wrong value for Weight: ", "6.6", results.getDataAsText(1,9));
+        assertEquals("Wrong value for Payor ID: ", "AB126/YZ18", results.getDataAsText(1,11));
+        assertEquals("Wrong value for Colony Code: ", " ", results.getDataAsText(1,12));
+        assertEquals("Wrong value for Breeding Code: ", "T", results.getDataAsText(1,13));
+        assertEquals("Wrong value for Breeding Book: ", "C2", results.getDataAsText(1,14));
+        assertEquals("Wrong value for Primary Project: ", "Pc5C2", results.getDataAsText(1,15));
+        assertEquals("Wrong value for Secondary Project(s): ", " ", results.getDataAsText(1,16));
+        assertEquals("Wrong value for Census Flag List: ", "CHU", results.getDataAsText(1,17));
+        assertEquals("Wrong value for Comment: ", "Completed", results.getDataAsText(1,19));
+        assertEquals("Wrong value for Encl Supervisor: ", " ", results.getDataAsText(1,22));
+    }
+
     private void storeCageAndRoomData() throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
         String folder = "/";
         insertTsvData(connection, "cnprc_ehr", "cage_location_history", CNPRC_EHR_CAGE_LOCATION_HISTORY, folder);
         insertTsvData(connection, "cnprc_ehr", "room_enclosure", CNPRC_EHR_ROOM_ENCLOSURE, folder);
+    }
+
+    private void storeBreedingData() throws IOException, CommandException
+    {
+        Connection connection = createDefaultConnection(true);
+        String folder = "/";
+        insertTsvData(connection, "cnprc_ehr", "breedingRoster", CNPRC_EHR_BREEDING_ROSTER, folder);
     }
 
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
@@ -1031,9 +1173,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , UNIT_CODE
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 1);
-        assertEquals("Wrong data for row 3.", expected, resultsRowDataAsText);
-        assertEquals("Wrong row count: ", 13, results.getDataRowCount());
+        List<String> resultsRowDataAsText = results.getRowDataAsText(6).subList(0, expectedColumns.size() - 1);
+        assertEquals("Wrong data for row 7.", expected, resultsRowDataAsText);
+        assertEquals("Wrong row count: ", 17, results.getDataRowCount());
     }
 
     @Test
@@ -1226,7 +1368,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel.selectValues("Gender", " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
-        assertEquals("Wrong number of rows for searching all genders", 39, searchResults.getDataRowCount());
+        assertEquals("Wrong number of rows for searching all genders", 41, searchResults.getDataRowCount());
 
         goBack();
         searchPanel = new AnimalSearchPanel(getDriver());
