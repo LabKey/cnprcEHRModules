@@ -33,7 +33,7 @@
                 <property name="columnTitle" value="Cage"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActiveAssignment/primaryProject">
+        <column name="Id/DemographicsActiveAssignment/activeProjects">
             <properties>
             <property name="columnTitle" value="Current Project"/>
             </properties>

@@ -13,17 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-select
-y.Id,
-max(y.primaryProject) AS primaryProject,
-max(y.primaryProjectDate) AS primaryProjectDate,
-max(y.secondaryProjects) AS secondaryProjects
-from(
-select
-x.Id,
-(CASE WHEN x.assignmentStatus='P' then max(x.projectCode) END) AS primaryProject,
-(CASE WHEN x.assignmentStatus='P' then max(x.date) END) AS primaryProjectDate,
-(CASE WHEN x.assignmentStatus='S' then Group_concat(x.projectCode, ', ') ELSE NULL END) AS secondaryProjects
-FROM assignment x where x.enddate is null
-group by x.Id, x.assignmentStatus) y
-group by y.Id
+SELECT
+  y.Id,
+  max(y.primaryProject)                 AS primaryProject,
+  max(y.primaryProjectDate)             AS primaryProjectDate,
+  max(y.secondaryProjects)              AS secondaryProjects,
+  (SELECT group_concat(projectCode, ', ')
+   FROM assignment
+   WHERE id = y.id AND enddate IS NULL) AS activeProjects
+FROM (
+       SELECT
+         x.Id,
+         (CASE WHEN x.assignmentStatus = 'P'
+           THEN max(x.projectCode) END) AS primaryProject,
+         (CASE WHEN x.assignmentStatus = 'P'
+           THEN max(x.date) END)        AS primaryProjectDate,
+         (CASE WHEN x.assignmentStatus = 'S'
+           THEN Group_concat(x.projectCode, ', ')
+          ELSE NULL END)                AS secondaryProjects
+       FROM assignment x
+       WHERE x.enddate IS NULL
+       GROUP BY x.Id, x.assignmentStatus) y
+GROUP BY y.Id
