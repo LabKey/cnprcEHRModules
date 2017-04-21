@@ -43,7 +43,7 @@
                 <property name="columnTitle" value="Past Projects"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActivePayor/payor_id/charge_id">
+        <column name="Id/DemographicsActivePayor/payor_id">
             <properties>
                 <property name="columnTitle" value="Payor Id"/>
             </properties>

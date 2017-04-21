@@ -10,10 +10,9 @@
                 <property name="columnTitle" value="Animal ID"/>
             </properties>
         </column>
-        <column name="Id/demographics/gender"/>
-        <column name="Id/demographics/calculated_status">
+        <column name="Id/demographics/gender">
             <properties>
-                <property name="columnTitle" value="Status"/>
+                <property name="columnTitle" value="Sex"/>
             </properties>
         </column>
         <column name="Id/age/yearsAndMonthsAndDays">
@@ -31,11 +30,6 @@
                 <property name="columnTitle" value="Location"/>
             </properties>
         </column>
-        <column name="Id/curLocation/date">
-            <properties>
-                <property name="columnTitle" value="Location Date"/>
-            </properties>
-        </column>
         <column name="date">
             <properties>
                 <property name="columnTitle" value="Proj Assn Date"/>
@@ -49,11 +43,6 @@
         <column name="assignmentStatus">
             <properties>
                 <property name="columnTitle" value="Project Assn Type"/>
-            </properties>
-        </column>
-        <column name="endDate">
-            <properties>
-                <property name="columnTitle" value="Project Release Date"/>
             </properties>
         </column>
         <column name="Id/DemographicsActiveAssignment/primaryProject">
@@ -102,6 +91,9 @@
             </properties>
         </column>
     </columns>
+    <filters>
+        <filter column="Id/demographics/calculated_status" operator="eq" value="Alive"/>
+    </filters>
     <sorts>
         <sort column="date" descending="false"/>
     </sorts>
