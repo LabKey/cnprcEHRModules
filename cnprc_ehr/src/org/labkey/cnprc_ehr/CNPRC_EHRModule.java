@@ -80,10 +80,11 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
 
         Resource r = getModuleResource("/scripts/cnprc_triggers.js");
         assert r != null;
-        EHRService.get().registerTriggerScript(this, r);
+        ehrService.registerTriggerScript(this, r);
 
         ehrService.registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
-        EHRService.get().registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcReports.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcReports.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/Utils.js"), this);
 
         ehrService.registerOptionalClinicalHistoryResources(this);
 

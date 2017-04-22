@@ -16,38 +16,32 @@ EHR.reports.immunizations = function (panel, tab, viewName) {
 
     tab.add({
         xtype: 'ldk-querypanel',
-        style: 'margin-bottom:20px;',
+        style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
             queryName: 'drug',
             viewName: viewName,
-            title: title,
+            title: 'Immunizations' + title,
             filters: filterArray.nonRemovable,
             removeableFilters: filterArray.removable
         })
     });
 
     tab.add({
-        xtype: 'panel',
-        bodyStyle: 'padding: 10px;',
-        border: false,
-        defaults: {
-            border: false
-        },
+        xtype: 'ldk-webpartpanel',
+        title: 'Legend',
         items: [{
-            html: '<b>Key:</b>',
-            style: 'padding-bottom: 5px;'
-        }, {
-            html: '<table>' +
-                '<tr><td>DT:</td><td>Diphtheria + Tetanus</td></tr>' +
-                '<tr><td>ET:</td><td>Equine tetanus</td></tr>' +
-                '<tr><td>K :</td><td>Canine distemper</td></tr>' +
-                '<tr><td>M :</td><td>Rubeola vaccine</td></tr>' +
-                '<tr><td>MX:</td><td>Measles experimental</td></tr>' +
-                '<tr><td>T :</td><td>Tetanus</td></tr>' +
-                '<tr><td>~N:</td><td>Natural infections</td></tr>' +
-                '<tr><td>~X:</td><td>Experimental</td></tr>' +
-                '</table>'
+            border: false,
+            html: '<table class="ehr-legend">' +
+            CNPRC.Utils.legendEntry('DT', 'Diphtheria + Tetanus', true, true) +
+            CNPRC.Utils.legendEntry('ET', 'Equine tetanus', true, true) +
+            CNPRC.Utils.legendEntry('K', 'Canine distemper', true, true) +
+            CNPRC.Utils.legendEntry('M', 'Rubeola vaccine', true, true) +
+            CNPRC.Utils.legendEntry('MX', 'Measles experimental', true, true) +
+            CNPRC.Utils.legendEntry('T', 'Tetanus', true, true) +
+            CNPRC.Utils.legendEntry('~N', 'Natural infections', true, true) +
+            CNPRC.Utils.legendEntry('~X', 'Experimental', true, true) +
+            '</table>'
         }]
     });
 };
@@ -58,7 +52,7 @@ EHR.reports.pairingHistory = function (panel, tab, viewName) {
 
     tab.add({
         xtype: 'ldk-querypanel',
-        style: 'margin-bottom:20px;',
+        style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
             queryName: 'pairingHistory',
@@ -70,38 +64,32 @@ EHR.reports.pairingHistory = function (panel, tab, viewName) {
     });
 
     tab.add({
-        xtype: 'panel',
-        bodyStyle: 'padding: 10px;',
-        border: false,
-        defaults: {
-            border: false
-        },
+        xtype: 'ldk-webpartpanel',
+        title: 'Legend',
         items: [{
-            html: '<b>Key:</b>',
-            style: 'padding-bottom: 5px;'
-        }, {
-            html: '<table>' +
-                '<tr><td colspan="2"><b>Pairing Codes</b></td>                    <td colspan="2"><b>Deferment Status Codes</td></tr>' +
-                '<tr><td><b>CG</b></td><td>Continuous pair with grate</td>        <td><b>XS</b></td><td>Experimental deferral, single</td></tr>' +
-                '<tr><td><b>CP</b></td><td>Continuous pair</td>                   <td><b>XD</b></td><td>Experimental deferral, no group mate</td></tr>' +
-                '<tr><td><b>IG</b></td><td>Intermittent pair with grate</td>      <td><b>XG</b></td><td>Experimental deferral with grate</td></tr>' +
-                '<tr><td><b>IP</b></td><td>Intermittent pair</td>                 <td><b>PS</b></td><td>Permanent deferral, social incompatibility</td></tr>' +
-                '<tr><td><b>U</b></td><td>Unsuccessful</td>                       <td><b>AW</b></td><td>Single, awaiting pairing</td></tr>' +
-                '<tr><td><b>SP</b></td><td>Socialization play, play groups</td>   <td><b>CF</b></td><td>Compatible, then fought (Retired code)</td></tr>' +
-                '<tr><td><b>F</b></td><td>Fought (Retired code)</td><td></td><td></td></tr>' +
-                '<tr><td><b>C</b></td><td>Compatible (Retired code)</td><td></td><td></td></tr>' +
-                '</table>'
+            border: false,
+            html: '<table class="ehr-legend">' +
+            CNPRC.Utils.legendTitle('Pairing Codes', true, false) +                           CNPRC.Utils.legendTitle('Deferment Status Codes', false, true) +
+            CNPRC.Utils.legendEntry('CG', 'Continuous pair with grate', true, false) +        CNPRC.Utils.legendEntry('XS', 'Experimental deferral, single', false, true) +
+            CNPRC.Utils.legendEntry('CP', 'Continuous pair', true, false) +                   CNPRC.Utils.legendEntry('XD', 'Experimental deferral, no group mate', false, true) +
+            CNPRC.Utils.legendEntry('IG', 'Intermittent pair with grate', true, false) +      CNPRC.Utils.legendEntry('XG', 'Experimental deferral with grate', false, true) +
+            CNPRC.Utils.legendEntry('IP', 'Intermittent pair', true, false) +                 CNPRC.Utils.legendEntry('PS', 'Permanent deferral, social incompatibility', false, true) +
+            CNPRC.Utils.legendEntry('U', 'Unsuccessful', true, false) +                       CNPRC.Utils.legendEntry('AW', 'Single, awaiting pairing', false, true) +
+            CNPRC.Utils.legendEntry('SP', 'Socialization play, play groups', true, false) +   CNPRC.Utils.legendEntry('CF', 'Compatible, then fought (Retired code)', false, true) +
+            CNPRC.Utils.legendEntry('F', 'Fought (Retired code)', true, false) +              CNPRC.Utils.legendEntry('', '', false, true) +
+            CNPRC.Utils.legendEntry('C', 'Compatible (Retired code)', true, false) +          CNPRC.Utils.legendEntry('', '', false, true) +
+            '</table>'
         }]
     });
 };
 
-EHR.reports.virology = function (panel, tab, viewName){
+EHR.reports.virology = function (panel, tab, viewName) {
     var filterArray = panel.getFilterArray(tab);
     var title = panel.getTitleSuffix();
 
     tab.add({
         xtype: 'ldk-querypanel',
-        style: 'margin-bottom:20px;',
+        style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
             queryName: 'virology',
@@ -113,43 +101,34 @@ EHR.reports.virology = function (panel, tab, viewName){
     });
 
     tab.add({
-        xtype: 'panel',
-        bodyStyle: 'padding: 10px;',
-        border: false,
-        defaults: {
-            border: false
-        },
+        xtype: 'ldk-webpartpanel',
+        title: 'Legend',
         items: [{
-            html: '<b>Key:</b>',
-            style: 'padding-bottom: 5px;'
-        },{
-            html: '<table>' +
-             '<tr><td colspan="2"><b>Virus</b></td>                                                    <td colspan="2"><b>Result</td></tr>' +
-             '<tr><td><b>CMV</b></td><td>Cytomegalovirus</td>                                          <td><b>+</b></td><td>Positive</td></tr>' +
-             '<tr><td><b>HERB</b></td><td>Herpes B virus</td>                                          <td><b>-</b></td><td>Negative</td></tr>' +
-             '<tr><td><b>SRV</b></td><td>Simian Retrovirus, no specific serotype</td>                  <td><b>?</b></td><td>Indeterminate</td></tr>' +
-             '<tr><td><b>SRVx</b></td><td>Simian Retrovirus serotype, where x denotes serotypes</td>   <td><b></b></td><td></td></tr>' +
-             '<tr><td><b>SIV</b></td><td>Simian Immunodeficiency Virus, no specific origin</td>        <td colspan="2"><b>Sample Type</b></td><td></td></tr>' +
-             '<tr><td><b>SIVMAC</b></td><td>SIV, macaque origin</td>                                   <td><b>PBL</b></td><td>Peripheral blood lymphocytes</td></tr>' +
-             '<tr><td><b>SIVSMM</b></td><td>SIV, sooty mangabey origin</td>                            <td><b>SAL</b></td><td>Saliva</td></tr>' +
-             '<tr><td><b>SIVAGM</b></td><td>SIV, African green monkey origin</td>                      <td><b>SER</b></td><td>Serum</td></tr>' +
-             '<tr><td><b>STLV1</b></td><td>Simian T-cell leukemia virus, serotype 1</td>               <td><b>CSF</b></td><td>Cerebrospinal fluid</td></tr>' +
-             '<tr><td><b>HIV</b></td><td>Human Immunodeficiency Virus, serotype 1</td>                 <td><b>EYE</b></td><td>Tissuefluid collected from either eye</td></tr>' +
-             '<tr><td><b>HIV2</b></td><td>Human Immunodeficiency Virus, serotype 2</td>                <td><b>GEN</b></td><td>Tissuefluid collected from genitalia</td></tr>' +
-             '<tr><td><b>FOAMY</b></td><td>Simian Foamy Virus (SFV)</td>                               <td><b>OTH</b></td><td>Other</td></tr>' +
-             '<tr><td><b>RRV</b></td><td>Rhesus Rhadinovirus</td>                                      <td></td><td></td></tr>'  +
-             '<tr><td>&nbsp;</td><td></td>                                                            <td><b></b></td><td></td></tr>'  +
-             '<tr><td colspan="2"><b>Target</b></td>                                                   <td colspan="2"><b>Test Method</b></td></tr>'  +
-             '<tr><td><b>AB</b></td><td>Antibody</td>                                                  <td><b>EL</b></td><td>ELISA</td></tr>'  +
-             '<tr><td><b>AG</b></td><td>Antigen</td>                                                   <td><b>IF</b></td><td>Immunoflourescent assay</td></tr>'  +
-             '<tr><td><b>NA</b></td><td>Nucleic acid for PCR</td>                                      <td><b>MI</b></td><td>Multiplex microbead Immunoassay</td></tr>'  +
-             '<tr><td><b>VI</b></td><td>Virus Isolation</td>                                           <td><b>PC</b></td><td>PCR</td></tr>'  +
-             '<tr><td><b></b></td><td></td>                                                            <td><b>RJ</b></td><td>Raji cell assay</td></tr>'  +
-             '<tr><td><b></b></td><td></td>                                                            <td><b>VC</b></td><td>Virus culture</td></tr>'  +
-             '<tr><td><b></b></td><td></td>                                                            <td><b>WB</b></td><td>Western Blot</td></tr>'  +
-             '<tr><td><b></b></td><td></td>                                                            <td><b></b></td><td></td></tr>' +
-                    '</table>'
+            border: false,
+            html: '<table class="ehr-legend">' +
+            CNPRC.Utils.legendTitle('Virus', true, false) +                                               CNPRC.Utils.legendTitle('Result', false, true) +
+            CNPRC.Utils.legendEntry('CMV', 'Cytomegalovirus', true, false) +                              CNPRC.Utils.legendEntry('+', 'Positive', false, true) +
+            CNPRC.Utils.legendEntry('HERB', 'Herpes B virus', true, false) +                              CNPRC.Utils.legendEntry('-', 'Negative', false, true) +
+            CNPRC.Utils.legendEntry('SRV', 'Simian Retrovirus, no specific serotype', true, false) +      CNPRC.Utils.legendEntry('?', 'Indeterminate', false, true) +
+            CNPRC.Utils.legendEntry('SRVx', 'Simian Retrovirus serotype, where x denotes serotypes', true, false) + CNPRC.Utils.legendEntry('', '', false, true) +
+            CNPRC.Utils.legendEntry('SIV', 'Simian Immunodeficiency Virus, no specific origin', true, false) + CNPRC.Utils.legendTitle('Sample Type', false, true) +
+            CNPRC.Utils.legendEntry('SIVMAC', 'SIV, macaque origin', true, false) +                       CNPRC.Utils.legendEntry('PBL', 'Peripheral blood lymphocytes', false, true) +
+            CNPRC.Utils.legendEntry('SIVSMM', 'SIV, sooty mangabey origin', true, false) +                CNPRC.Utils.legendEntry('SAL', 'Saliva', false, true) +
+            CNPRC.Utils.legendEntry('SIVAGM', 'SIV, African green monkey origin', true, false) +          CNPRC.Utils.legendEntry('SER', 'Serum', false, true) +
+            CNPRC.Utils.legendEntry('STLV1', 'Simian T-cell leukemia virus, serotype 1', true, false) +   CNPRC.Utils.legendEntry('CSF', 'Cerebrospinal fluid', false, true) +
+            CNPRC.Utils.legendEntry('HIV', 'Human Immunodeficiency Virus, serotype 1', true, false) +     CNPRC.Utils.legendEntry('EYE', 'Tissuefluid collected from either eye', false, true) +
+            CNPRC.Utils.legendEntry('HIV2', 'Human Immunodeficiency Virus, serotype 2', true, false) +    CNPRC.Utils.legendEntry('GEN', 'Tissuefluid collected from genitalia', false, true) +
+            CNPRC.Utils.legendEntry('FOAMY', 'Simian Foamy Virus (SFV)', true, false) +                   CNPRC.Utils.legendEntry('OTH', 'Other', false, true) +
+            CNPRC.Utils.legendEntry('RRV', 'Rhesus Rhadinovirus', true, false) +                          CNPRC.Utils.legendEntry('', '', false, true) +
+            CNPRC.Utils.legendEntry('', '', true, false) +                                                CNPRC.Utils.legendTitle('Test Method', false, true) +
+            CNPRC.Utils.legendTitle('Target', true, false) +                                              CNPRC.Utils.legendEntry('EL', 'ELISA', false, true) +
+            CNPRC.Utils.legendEntry('AB', 'Antibody', true, false) +                                      CNPRC.Utils.legendEntry('IF', 'Immunoflourescent assay', false, true) +
+            CNPRC.Utils.legendEntry('AG', 'Antigen', true, false) +                                       CNPRC.Utils.legendEntry('MI', 'Multiplex microbead Immunoassay', false, true) +
+            CNPRC.Utils.legendEntry('NA', 'Nucleic acid for PCR', true, false) +                          CNPRC.Utils.legendEntry('PC', 'PCR', false, true) +
+            CNPRC.Utils.legendEntry('VI', 'Virus Isolation', true, false) +                               CNPRC.Utils.legendEntry('RJ', 'Raji cell assay', false, true) +
+            CNPRC.Utils.legendEntry('', '', true, false) +                                                CNPRC.Utils.legendEntry('VC', 'Virus culture', false, true) +
+            CNPRC.Utils.legendEntry('', '', true, false) +                                                CNPRC.Utils.legendEntry('WB', 'Western Blot', false, true) +
+            '</table>'
         }]
     });
-
-}
+};
