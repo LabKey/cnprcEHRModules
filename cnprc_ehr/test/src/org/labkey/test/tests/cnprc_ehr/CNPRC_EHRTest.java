@@ -16,7 +16,6 @@
 
 package org.labkey.test.tests.cnprc_ehr;
 
-import org.apache.http.client.utils.URIBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Before;
@@ -25,7 +24,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.labkey.api.util.URLHelper;
-import org.labkey.api.view.ActionURL;
 import org.labkey.remoteapi.CommandException;
 import org.labkey.remoteapi.Connection;
 import org.labkey.remoteapi.query.InsertRowsCommand;
@@ -1245,7 +1243,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong row count: ", 12, results.getDataRowCount());
 
         assertElementPresent(Locator.linkContainingText("TEST1684145"));
-        assertTextPresent("Key:", "Pairing Codes", "Deferment Status Codes");
+        assertTextPresent("Legend", "Pairing Codes", "Deferment Status Codes");
 
         click(Locator.linkContainingText("IP"));
         switchToWindow(1);
