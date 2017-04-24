@@ -76,7 +76,7 @@ breed_roster.book,  -- potentially incorrect for non-current dates
     AND onDate BETWEEN flags.date AND COALESCE(flags.endDate, now())
     GROUP BY flags.Id
 ) values,
-preg_confirm.Id AS conNum,
+preg_confirm.conNum,
 timestampdiff('SQL_TSI_DAY', preg_confirm.conception, onDate) AS daysPregnant,
 preg_confirm.conceptionDateStatus,
 preg_confirm.pgComment,
