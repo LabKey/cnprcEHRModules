@@ -11,7 +11,11 @@
                     <column columnName="primaryProjectDate">
                         <formatString>Date</formatString>
                     </column>
-                    <column columnName="secondaryProjects"/>
+                    <column columnName="secondaryProjects">
+                        <displayColumnFactory>
+                            <className>org.labkey.cnprc_ehr.table.SecondaryProjectsDisplayColumnFactory</className>
+                        </displayColumnFactory>
+                    </column>
                 </columns>
             </table>
         </tables>
