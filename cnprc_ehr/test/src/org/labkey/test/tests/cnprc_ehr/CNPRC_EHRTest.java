@@ -1085,15 +1085,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/birth/species"
                 ,"Id"
                 ,"Id/demographics/gender"
-                ,"Id/demographics/calculated_status"
                 ,"Id/age/yearsAndMonthsAndDays"
                 ,"Id/MostRecentWeight/MostRecentWeight"
                 ,"Id/curLocation/location"
-                ,"Id/curLocation/date"
                 ,"date"
                 ,"projectCode"
                 ,"assignmentStatus"
-                ,"enddate"
                 ,"Id/DemographicsActiveAssignment/primaryProject"
                 ,"Id/DemographicsActiveAssignment/secondaryProjects"
                 ,"Id/DemographicsActivePayor/payor_id"
@@ -1106,9 +1103,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        assertEquals("Wrong value for ID: ", "TEST1112911", results.getDataAsText(0,1));
-        assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(0,8));
-        assertEquals("Wrong value for Searched Project: ", PROJECT_CODE_5_CHAR_1, results.getDataAsText(0,9));
+        int rowIndex = results.getRowIndex(1,"TEST1112911");
+        assertEquals("Wrong value for ID: ", "TEST1112911", results.getDataAsText(rowIndex,1));
+        assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(rowIndex,6));
+        assertEquals("Wrong value for Searched Project: ", PROJECT_CODE_5_CHAR_1, results.getDataAsText(rowIndex,7));
     }
 
     @Test
@@ -1177,8 +1175,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size());
         assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 4, results.getDataRowCount());
-        click(Locator.linkContainingText("X"));
+        assertTextPresent("Legend", "Equine tetanus");
 
+        click(Locator.linkContainingText("X"));
         switchToWindow(1);
         assertTextPresent("Record Details","Experimental");
     }
