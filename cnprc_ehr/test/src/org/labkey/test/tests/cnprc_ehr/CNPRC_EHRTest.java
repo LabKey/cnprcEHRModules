@@ -1010,22 +1010,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = new DataRegionTable("query", getDriver());
 
         // Test from housing data
-        assertEquals("Wrong value for ID: ", "44444", results.getDataAsText(3,0));
-        assertEquals("Wrong value for Location: ", "AC5003-89", results.getDataAsText(3,2));
-        assertEquals("Wrong value for Cage Size: ", "4", results.getDataAsText(3,4));
-        assertEquals("Wrong value for Species code: ", "MMU", results.getDataAsText(3,6));
-        assertEquals("Wrong value for Weight: ", "5.5", results.getDataAsText(3,9));
-        assertEquals("Wrong value for Payor ID: ", " ", results.getDataAsText(3,11));
-        assertEquals("Wrong value for Colony Code: ", "L", results.getDataAsText(3,12));
-        assertEquals("Wrong value for Breeding Code: ", " ", results.getDataAsText(3,13));
-        assertEquals("Wrong value for Breeding Book: ", "BO", results.getDataAsText(3,14));
-        assertEquals("Wrong value for Primary Project: ", " ", results.getDataAsText(3,15));
-        assertEquals("Wrong value for Secondary Project(s): ", " ", results.getDataAsText(3,16));
-        assertEquals("Wrong value for Census Flag List: ", " ", results.getDataAsText(3,17));
-        assertEquals("Wrong value for Comment: ", "Not Completed", results.getDataAsText(3,19));
-        assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", results.getDataAsText(3,22));
+        // Choosing this row (and these columns) because there are data from all tables populated
+        // Note that current date data is, by design, sometimes blank for these fields though
 
-        // Now that test historical data changes
+        assertEquals("Wrong Enclosure Search results from housing table using current date,",
+                Arrays.asList("44444", "AC5003-89", "4", "MMU", "5.5", " ", "L", " ", "BO", " ", " ", " ", "Not Completed", "Jane Jones"),
+                results.getRowDataAsText(3, "Id", "location", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                        "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
+
+        // Now test that historical data changes on same info
         URLHelper currentURL = new URLHelper(getDriver().getCurrentUrl());
         currentURL.deleteParameter("query.param.onDate");
         currentURL.addParameter("query.param.onDate", "2015-04-04 00:00:00");
@@ -1033,36 +1026,18 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.tagContainingText("div", "Encl Supervisor"));
         results = new DataRegionTable("query", getDriver());
 
-        assertEquals("Wrong value for ID: ", "44444", results.getDataAsText(2,0));
-        assertEquals("Wrong value for Location: ", "AC5003-89", results.getDataAsText(2,2));
-        assertEquals("Wrong value for Cage Size: ", "6", results.getDataAsText(2,4));
-        assertEquals("Wrong value for Species code: ", "MMU", results.getDataAsText(2,6));
-        assertEquals("Wrong value for Weight: ", "4.4", results.getDataAsText(2,9));
-        assertEquals("Wrong value for Payor ID: ", "AB125/YZ17", results.getDataAsText(2,11));
-        assertEquals("Wrong value for Colony Code: ", "O", results.getDataAsText(2,12));
-        assertEquals("Wrong value for Breeding Code: ", "M", results.getDataAsText(2,13));
-        assertEquals("Wrong value for Breeding Book: ", "BO", results.getDataAsText(2,14));
-        assertEquals("Wrong value for Primary Project: ", "Pc5C0", results.getDataAsText(2,15));
-        assertEquals("Wrong value for Secondary Project(s): ", "Pc5C1, Pc5C2", results.getDataAsText(2,16));
-        assertEquals("Wrong value for Census Flag List: ", "CHA, CHU", results.getDataAsText(2,17));
-        assertEquals("Wrong value for Comment: ", "Completed", results.getDataAsText(2,19));
-        assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", results.getDataAsText(2,22));
+        assertEquals("Wrong Enclosure Search results from housing table using historical date,",
+                Arrays.asList("44444", "AC5003-89", "6", "MMU", "4.4", "AB125/YZ17", "O", "M", "BO", "Pc5C0", "Pc5C1, Pc5C2", "CHA, CHU", "Completed", "Jane Jones"),
+                results.getRowDataAsText(2, "Id", "location", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                        "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
 
         // Test from departure data too
-        assertEquals("Wrong value for ID: ", "44446", results.getDataAsText(1,0));
-        assertEquals("Wrong value for Location: ", "3105069X4", results.getDataAsText(1,2));
-        assertEquals("Wrong value for Cage Size: ", " ", results.getDataAsText(1,4));
-        assertEquals("Wrong value for Species code: ", "MMU", results.getDataAsText(1,6));
-        assertEquals("Wrong value for Weight: ", "6.6", results.getDataAsText(1,9));
-        assertEquals("Wrong value for Payor ID: ", "AB126/YZ18", results.getDataAsText(1,11));
-        assertEquals("Wrong value for Colony Code: ", " ", results.getDataAsText(1,12));
-        assertEquals("Wrong value for Breeding Code: ", "T", results.getDataAsText(1,13));
-        assertEquals("Wrong value for Breeding Book: ", "C2", results.getDataAsText(1,14));
-        assertEquals("Wrong value for Primary Project: ", "Pc5C2", results.getDataAsText(1,15));
-        assertEquals("Wrong value for Secondary Project(s): ", " ", results.getDataAsText(1,16));
-        assertEquals("Wrong value for Census Flag List: ", "CHU", results.getDataAsText(1,17));
-        assertEquals("Wrong value for Comment: ", "Completed", results.getDataAsText(1,19));
-        assertEquals("Wrong value for Encl Supervisor: ", " ", results.getDataAsText(1,22));
+        // Choosing this row because it has most entries populated
+
+        assertEquals("Wrong Enclosure Search results from departure table using historical date,",
+                Arrays.asList("44446", "3105069X4", " ", "MMU", "6.6", "AB126/YZ18", " ", "T", "C2", "Pc5C2", " ", "CHU", "Completed", " "),
+                results.getRowDataAsText(1, "Id", "location", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                        "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
     }
 
     private void storeCageAndRoomData() throws IOException, CommandException
