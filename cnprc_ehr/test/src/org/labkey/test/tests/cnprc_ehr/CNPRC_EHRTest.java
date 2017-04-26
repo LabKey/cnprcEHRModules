@@ -47,6 +47,7 @@ import org.labkey.test.util.Maps;
 import org.labkey.test.util.PasswordUtil;
 import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
+import org.labkey.test.util.SchemaHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
 import org.labkey.test.util.external.labModules.LabModuleHelper;
 import org.openqa.selenium.WebElement;
@@ -77,6 +78,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String PROJECT_CODE_5_CHAR_2 = "Pc5C2" ;
     private static final String PROJECT_INVESTIGATOR_NAME_1 = "PI_NAME_1" ;
     private static final String PROJECT_INVESTIGATOR_NAME_2 = "PI_NAME_2" ;
+    public static final String SCHEMA_CNPRC_PDL = "cnprc_pdl";
     protected final String ANIMAL_HISTORY_URL = "/ehr/" + PROJECT_NAME + "/animalHistory.view?";
     private static final String FOLDER_NAME = "CNPRC";
     private static final String COREFACILITIES = "Core Facilities";
@@ -107,6 +109,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
     private static final File CNPRC_EHR_BREEDING_ROSTER = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_BREEDING_ROSTER.tsv");
+    private static final File EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE.tsv");
+    private static final File EHR_LOOKUP_TEST_VIRUS_MAPPING = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_TEST_VIRUS_MAPPING.tsv");
+    private static final File EHR_LOOKUP_TEST_TARGET_MAPPING = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_TEST_TARGET_MAPPING.tsv");
+    private static final File EHR_LOOKUP_TEST_METHOD_MAPPING = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_TEST_METHOD_MAPPING.tsv");
+    private SchemaHelper _schemaHelper = new SchemaHelper(this);
 
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
@@ -194,6 +201,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         storeCageAndRoomData();
         storeBreedingData();
         storeConceptionData();
+        createPDLLinkedSchema();
+        storePDLData();
     }
 
     @Override
@@ -574,7 +583,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         goToProjectHome();
         clickFolder(PDLFOLDER);
         _listHelper.importListArchive(LOOKUP_LIST_ARCHIVE);
-        storePDLData();
 
         validateLookupFromList("Billing Contact", "Client 100", "Client full name 100");
         validateLookupFromList("Processing Item", "Sample type 300", "Sample type comment 300");
@@ -1048,6 +1056,16 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertTsvData(connection, "cnprc_ehr", "room_enclosure", CNPRC_EHR_ROOM_ENCLOSURE, folder);
     }
 
+    private void storeTestTypeMappingData() throws IOException, CommandException
+    {
+        Connection connection = createDefaultConnection(true);
+        String folder = "/";
+        insertTsvData(connection, "ehr_lookups", "virology_sample_type", EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE, folder);
+        insertTsvData(connection, "ehr_lookups", "test_type_virus_mapping", EHR_LOOKUP_TEST_VIRUS_MAPPING, folder);
+        insertTsvData(connection, "ehr_lookups", "test_type_target_mapping", EHR_LOOKUP_TEST_TARGET_MAPPING, folder);
+        insertTsvData(connection, "ehr_lookups", "test_type_method_mapping", EHR_LOOKUP_TEST_METHOD_MAPPING, folder);
+    }
+
     private void storeBreedingData() throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
@@ -1180,6 +1198,48 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         click(Locator.linkContainingText("X"));
         switchToWindow(1);
         assertTextPresent("Record Details","Experimental");
+    }
+
+    @Test
+    public void testAnimalHistoryVirologyView() throws Exception
+    {
+        storeTestTypeMappingData();
+
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Lab Results");
+        String reportTab = "Virology";
+        animalHistoryPage.clickReportTab(reportTab);
+        waitForElement(Locator.linkContainingText(reportTab));
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                "Id"
+                ,"sampleDate"
+                ,"testDoneDate"
+                ,"virus"
+                ,"target"
+                ,"method"
+                ,"results"
+                ,"sampleType"        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        List<String> expected = Arrays.asList(
+                "TEST1020148","2016-02-02 00:00","2016-05-01 00:00","601VC","601TC","601MC","-","Sample type 300"
+        );
+
+        List<String> resultsRowDataAsText = results.getRowDataAsText(1).subList(0, expectedColumns.size());
+        assertEquals("Wrong data for row 2.", expected, resultsRowDataAsText);
+        assertEquals("Wrong row count: ", 2, results.getDataRowCount());
+        assertTextPresent("Legend", "Virus","Positive");
+
+    }
+
+    private void createPDLLinkedSchema()
+    {
+        String sourceFolder = "/" + FOLDER_NAME + "/" + COREFACILITIES + "/" + PDLFOLDER;
+        _schemaHelper.createLinkedSchema(getProjectName(), null,
+                "cnprc_pdl_linked", sourceFolder, null, SCHEMA_CNPRC_PDL,
+                null, null);
     }
 
     @Test
@@ -1403,10 +1463,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         Connection connection = createDefaultConnection(true);
         String folder = "/" + COREFACILITIES + "/" + PDLFOLDER;
-        insertTsvData(connection, "cnprc_pdl", "samples", PDL_SAMPLE_TSV, folder);
-        insertTsvData(connection, "cnprc_pdl", "sub_tests", PDL_SUB_TEST_TSV, folder);
-        insertTsvData(connection, "cnprc_pdl", "tests",PDL_TEST_TSV, folder);
-        insertTsvData(connection, "cnprc_pdl", "orders", PDL_ORDER_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_PDL, "samples", PDL_SAMPLE_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_PDL, "sub_tests", PDL_SUB_TEST_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_PDL, "tests",PDL_TEST_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_PDL, "orders", PDL_ORDER_TSV, folder);
     }
 
     private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile, @Nullable String folder)
