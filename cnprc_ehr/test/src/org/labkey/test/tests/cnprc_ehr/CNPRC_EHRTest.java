@@ -1234,6 +1234,59 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     }
 
+    @Test
+    public void testAnimalHistoryAssignmentHistoryView() throws Exception
+    {
+
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal("44446");
+        animalHistoryPage.clickCategoryTab("Assignments and Groups");
+        String reportTab = "Assignment History";
+        animalHistoryPage.clickReportTab(reportTab);
+        waitForElement(Locator.linkContainingText(reportTab));
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                "Id"
+                ,"assigned"
+                ,"payorId"
+                ,"primaryProject"
+                ,"secondaryProjects"
+                ,"colonyCode"
+                ,"groupCode"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        List<String> expected = Arrays.asList("44446","2016-10-05","AB126/YZ18","Pc5C2"," ","X","T");
+        confirmRowText(results, expected, 0);
+
+        expected = Arrays.asList("44446","2014-08-19","AB126/YZ18","Pc5C2"," "," ","T");
+        confirmRowText(results, expected, 1);
+
+        expected = Arrays.asList("44446","2013-03-16","AB126/YZ18","Pc5C2"," "," "," ");
+        confirmRowText(results, expected, 2);
+
+        assertEquals("Wrong row count: ", 3, results.getDataRowCount());
+
+        animalHistoryPage.searchSingleAnimal("44444");
+        waitForElement(Locator.linkContainingText(reportTab));
+        results = animalHistoryPage.getActiveReportDataRegion();
+
+        expected = Arrays.asList("44444","2014-02-08","AB125/YZ17","Pc5C0","Pc5C1, Pc5C2","O","M");
+        confirmRowText(results, expected, 0);
+
+        assertElementPresent(new Locator.LinkLocator("44444"));
+        assertElementPresent(new Locator.LinkLocator("AB125/YZ17"));
+
+        // TODO: 4/26/2017 Add tests for Primary and Secondary project look ups.
+
+    }
+
+    private void confirmRowText(DataRegionTable results, List<String> expected, int row)
+    {
+        List<String> resultsRowDataAsText = results.getRowDataAsText(row);
+        assertEquals("Wrong data for row " + row, expected, resultsRowDataAsText);
+    }
+
     private void createPDLLinkedSchema()
     {
         String sourceFolder = "/" + FOLDER_NAME + "/" + COREFACILITIES + "/" + PDLFOLDER;
