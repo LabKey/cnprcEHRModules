@@ -27,7 +27,6 @@ departs.reloc_an_id AS Id,
 departs.reloc_location AS destination,
 departs.reloc_date_in, -- Date the animal left the center, some return
 departs.reloc_sale_comment AS remark,
-departs.reloc_date_out,
 (CASE WHEN returns.reloc_location_prefix = '0000' THEN 'Dead'
       WHEN returns.reloc_location_prefix = '0100' THEN 'Escaped'
       WHEN returns.reloc_location_prefix = '0101' THEN 'Shipped'
