@@ -1,0 +1,34 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="Id/DemographicsHolds/holdFlags"/>
+        <column name="Id/curLocation/Location"/>
+        <column name="Id"/>
+        <column name="species"/>
+        <column name="gender"/>
+        <column name="Id/age/yearsAndMonthsAndDays"/>
+        <column name="Id/MostRecentWeight/MostRecentWeight"/>
+        <column name="Id/curLocation/Date"/>
+        <column name="Id/DemographicsActivePayor/payor_id"/>
+        <column name="Id/DemographicsActiveColony/colonyCode">
+            <properties> <!-- This should probably be done at the query.xml level -->
+                <property name="columnTitle" value="Colony Code"/>
+            </properties>
+        </column>
+        <column name="Id/DemographicsActiveBreedingGroup/groupCode"/>
+        <column name="Id/breedingRoster/book"/>
+        <column name="Id/DemographicsActiveAssignment/primaryProject"/>
+        <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
+        <column name="Id/flagList/values"/>
+        <column name="Id/DemographicsActivePregnancy/conNum"/>
+        <column name="Id/DemographicsActivePregnancy/termComment"/>
+        <column name="Id/DemographicsActivePregnancy/daysPregnant"/>
+        <column name="Id/DemographicsActivePregnancy/conceptionDateStatus"/>
+        <!--<column name="Id/DemographicsActivePairing/pairedWithId"/>-->
+    </columns>
+    <filters>
+        <filter column="Id/DemographicsActivePregnancy/daysPregnant" operator="isnonblank"/>
+    </filters>
+    <sorts>
+        <sort column="Id" descending="false"/>
+    </sorts>
+</customView>
