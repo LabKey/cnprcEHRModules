@@ -23,7 +23,6 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.labkey.api.util.URLHelper;
 import org.labkey.remoteapi.CommandException;
 import org.labkey.remoteapi.Connection;
 import org.labkey.remoteapi.query.InsertRowsCommand;
@@ -1027,10 +1026,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                         "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
 
         // Now test that historical data changes on same info
-        URLHelper currentURL = new URLHelper(getDriver().getCurrentUrl());
-        currentURL.deleteParameter("query.param.onDate");
-        currentURL.addParameter("query.param.onDate", "2015-04-04 00:00:00");
-        beginAt(currentURL.toString());
+        goBack();
+        waitForElement(Locator.tagContainingText("div", "On Date"));
+        searchPanel = new SearchPanel("Enclosure Search", getDriver());
+        searchPanel.setInput("On Date", "2015-04-04 00:00:00");
+        searchPanel.submit();
         waitForElement(Locator.tagContainingText("div", "Encl Supervisor"));
         results = new DataRegionTable("query", getDriver());
 
