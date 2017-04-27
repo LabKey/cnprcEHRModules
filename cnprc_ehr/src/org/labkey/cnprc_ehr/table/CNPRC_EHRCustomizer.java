@@ -59,20 +59,11 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn("AssignmentPast") == null)
+        if (ds.getColumn("DemographicsAssignmentsPast") == null)
         {
-            ColumnInfo col = getWrappedCol(us, ds, "AssignmentPast", "AssignmentPast", "Id", "Id");
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsAssignmentsPast", "DemographicsAssignmentsPast", "Id", "Id");
             col.setLabel("Past Assignments");
             col.setDescription("Past Project Assignments");
-            ds.addColumn(col);
-        }
-
-
-        if (ds.getColumn("BreedingGroup") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "BreedingGroup", "breedingGroupAssignments", "Id", "Id");
-            col.setLabel("Breeding Group");
-            col.setDescription("Breeding Group");
             ds.addColumn(col);
         }
 
@@ -81,14 +72,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ColumnInfo col = getWrappedCol(getUserSchema(ds, "cnprc_ehr"), ds, "BreedingRoster", "breedingRoster", "Id", "animalId");
             col.setLabel("Breeding Roster");
             col.setDescription("Breeding Roster");
-            ds.addColumn(col);
-        }
-
-        if (ds.getColumn("Cases") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "Cases", "Cases", "Id", "Id");
-            col.setLabel("Cases");
-            col.setDescription("Cases");
             ds.addColumn(col);
         }
 
@@ -245,14 +228,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         }
 
 
-        if (ds.getColumn("Pairings") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "Pairings", "Pairings", "Id", "Id");
-            col.setLabel("Pairings");
-            col.setDescription("Pairings");
-            ds.addColumn(col);
-        }
-
         if (ds.getColumn("Gestation") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "Gestation", "Gestation", "Id", "Id");
@@ -261,19 +236,11 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
-        if (ds.getColumn("Serum") == null)
+        if (ds.getColumn("DemographicsSnomed") == null)
         {
-            ColumnInfo col = getWrappedCol(us, ds, "Serum", "serum", "Id", "Id");
-            col.setLabel("Serum");
-            col.setDescription("Serum");
-            ds.addColumn(col);
-        }
-
-        if (ds.getColumn("Snomed Animals Conceptions") == null)
-        {
-            ColumnInfo col = getWrappedCol(us, ds, "SnomedAnimalsConceptions", "snomed_animals_conceptions", "Id", "Id");
-            col.setLabel("SnomedAnimalsConceptions");
-            col.setDescription("SnomedAnimalsConceptions");
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsSnomed", "DemographicsSnomed", "Id", "Id");
+            col.setLabel("SNOMED Animals Conceptions Codes");
+            col.setDescription("A concatenation of the participant's SNOMED codes");
             ds.addColumn(col);
         }
 

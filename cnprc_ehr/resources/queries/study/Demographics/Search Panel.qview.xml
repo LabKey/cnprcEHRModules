@@ -11,7 +11,7 @@
                 <property name="columnTitle" value="Status"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActivePairing/observation">
+        <column name="Id/DemographicsActivePairing/observations">
             <properties>
                 <property name="columnTitle" value="Pairing Status"/>
             </properties>
@@ -38,7 +38,7 @@
             <property name="columnTitle" value="Current Project"/>
             </properties>
         </column>
-        <column name="Id/AssignmentPast/projectCode">
+        <column name="Id/DemographicsAssignmentsPast/projectCodes">
             <properties>
                 <property name="columnTitle" value="Past Projects"/>
             </properties>
@@ -53,7 +53,7 @@
                 <property name="columnTitle" value="Census Flags"/>
             </properties>
         </column>
-        <column name="Id/BreedingGroup/groupCode/value">
+        <column name="Id/DemographicsActiveBreedingGroup/groupCode/value">
             <properties>
                 <property name="columnTitle" value="Breeding Group"/>
             </properties>
@@ -68,7 +68,7 @@
                 <property name="columnTitle" value="Colony Code"/>
             </properties>
         </column>
-        <column name="Id/SnomedAnimalsConceptions/code/code">
+        <column name="Id/DemographicsSnomed/codes">
             <properties>
                 <property name="columnTitle" value="SNOMED"/>
             </properties>

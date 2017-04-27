@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 SELECT
-  id,
-  group_concat(DISTINCT observation, ', ') AS observations
-FROM study.pairings
-WHERE enddate IS NULL
-GROUP BY id
+  a.id,
+  group_concat(DISTINCT a.projectCode, ', ') AS projectCodes
+FROM study.assignment a
+WHERE a.enddate IS NOT NULL
+GROUP BY a.Id

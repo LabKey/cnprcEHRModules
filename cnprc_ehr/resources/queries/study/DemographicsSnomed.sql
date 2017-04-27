@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT
-  id,
-  group_concat(DISTINCT observation, ', ') AS observations
-FROM study.pairings
-WHERE enddate IS NULL
-GROUP BY id
+select
+id,
+group_concat(DISTINCT code, ', ') as codes
+from study.snomed_animals_conceptions
+group by id
