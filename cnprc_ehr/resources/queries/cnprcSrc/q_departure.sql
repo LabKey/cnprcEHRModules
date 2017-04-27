@@ -34,7 +34,7 @@ departs.reloc_sale_comment AS remark,
       WHEN returns.reloc_location_prefix = '0103' THEN 'Tmp Escp'
       WHEN returns.reloc_location_prefix = '0200' THEN 'Here'
  END) AS nextreloctype,
-COALESCE(returns.OBJECTID, departs.OBJECTID) AS objectid, -- I used the objectid from returns since it seemed you are using it in preference for date_time
+departs.OBJECTID AS objectid,
 GREATEST(departs.DATE_TIME, COALESCE(returns.DATE_TIME, to_date('01-01-1900', 'DD-MM-YYYY'))) AS DATE_TIME
 FROM
   cnprcSrc.ZRELOCATION departs
