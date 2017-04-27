@@ -395,6 +395,10 @@
             <column columnName="tissue">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="reportType">
+                <datatype>varchar</datatype>
+                <scale>2</scale>
+            </column>
             <column columnName="distribution">
                 <datatype>varchar</datatype>
             </column>

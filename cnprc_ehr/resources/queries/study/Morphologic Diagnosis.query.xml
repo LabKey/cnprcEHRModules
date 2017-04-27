@@ -31,6 +31,15 @@
                         <fkDisplayColumnName>Meaning</fkDisplayColumnName>
                     </fk>
                 </column>
+                <column columnName="reportType">
+                    <columnTitle>Report Type</columnTitle>
+                    <fk>
+                        <fkDbSchema>ehr_lookups</fkDbSchema>
+                        <fkTable>snomed_qualifiers</fkTable>
+                        <fkColumnName>value</fkColumnName>
+                        <fkDisplayColumnName>description</fkDisplayColumnName>
+                    </fk>
+                </column>
                 <column columnName="morphology">
                     <columnTitle>Morphology</columnTitle>
                     <fk>
