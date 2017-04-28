@@ -8,7 +8,7 @@ exports.init = function (EHR) {
         if(helper.isETL()) {
             helper.setScriptOptions({
                 cacheAccount: false,
-                datasetsToClose: ['Assignment', 'Cases']
+                datasetsToClose: ['Assignment']
             });
         }
     });
