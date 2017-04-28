@@ -14,8 +14,40 @@
  * limitations under the License.
  */
 SELECT
-  id,
-  group_concat(DISTINCT observation, ', ') AS observations
-FROM study.pairings
+  p.id,
+  group_concat(pairedWithId, ', ') as pairedWithIds,
+  group_concat(DISTINCT observation, ', ') AS observations,
+  max(symbol.PairedSymbol ) as pairedSymbol
+  FROM study.pairings p
+    inner join
+    (SELECT
+          pair1.id,
+       CASE
+       WHEN (pair2.Id IS NULL) AND (pair1.observation <> 'AW')
+         THEN 'DD'
+       WHEN (SELECT COUNT(*)
+             FROM study.pairings pair3
+             WHERE pair3.Id = a.Id
+                   AND pair3.endDate IS NULL)
+            > 1
+         THEN '**'
+       -- CAST is for natural sort
+       WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) < CAST(pair2.Id.curLocation.cage AS INTEGER)
+         THEN '//'
+       WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) > CAST(pair2.Id.curLocation.cage AS INTEGER)
+         THEN '\\'
+       WHEN pair1.Id < pair2.Id
+         THEN '//'
+       WHEN pair1.Id > pair2.Id
+         THEN '\\'
+       END AS PairedSymbol
+     FROM study.demographics a
+       JOIN study.pairings pair1 ON pair1.Id = a.Id
+       LEFT OUTER JOIN study.pairings pair2 ON pair2.pairId = pair1.pairId
+                                               AND pair2.Id <> a.Id
+     WHERE pair1.endDate IS NULL
+
+  AND a.id.curLocation.location IS NOT NULL) symbol on symbol.id = p.id
+
 WHERE enddate IS NULL
-GROUP BY id
+GROUP BY p.id
