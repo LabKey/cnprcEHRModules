@@ -31,6 +31,7 @@ import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.TestFileUtils;
+import org.labkey.test.TestTimeoutException;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
@@ -180,7 +181,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static void setupProject() throws Exception
     {
         CNPRC_EHRTest init = (CNPRC_EHRTest)getCurrentTest();
-        init.doSetup();
+//        init.doSetup();
+    }
+
+    @Override
+    public void doCleanup(boolean afterTest) throws TestTimeoutException
+    {
+//        super.doCleanup(afterTest);
     }
 
     private void doSetup() throws Exception
@@ -780,6 +787,68 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(2,12));
         assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(2,13));
         assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(2,14));
+    }
+
+    @Test
+    public void testCurrentPregnanciesReport() throws IOException, CommandException
+    {
+        SearchPanel searchPanel = getSearchPanel();
+
+        searchPanel.setView("Current Pregnancies Report");
+        DataRegionTable searchResults = searchPanel.submit();
+        List<String> expectedColumns = Arrays.asList(
+                "Id/DemographicsHolds/holdFlags",
+                "Id/DemographicsActivePairing/PairedSymbol",
+                "Id/curLocation/Location",
+                "Id/curLocation/cageSize",
+                "Id/curLocation/rateClass",
+                "Id",
+                "species",
+                "Id/age/yearsAndMonthsAndDays",
+                "Id/MostRecentWeight/MostRecentWeight",
+                "Id/curLocation/Date",
+                "Id/DemographicsActivePayor/payor_id",
+                "Id/DemographicsActiveColony/colonyCode",
+                "Id/DemographicsActiveBreedingGroup/groupCode",
+                "Id/breedingRoster/book",
+                "Id/DemographicsActiveAssignment/primaryProject",
+                "Id/DemographicsActiveAssignment/secondaryProjects",
+                "Id/flagList/values",
+                "Id/DemographicsActivePregnancy/conNum",
+                "Id/DemographicsActivePregnancy/termComment",
+                "Id/DemographicsActivePregnancy/PGComment",
+                "Id/DemographicsActivePregnancy/daysPregnant",
+                "Id/DemographicsActivePregnancy/conceptionDateStatus",
+                "Id/curLocation/supervisor"
+        );
+
+        assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
+        assertEquals("Wrong row count",2,searchResults.getDataRowCount());
+
+        assertElementPresent(Locator.linkWithText("TSTCP"));
+        int startColumnIndex = 2;
+        int rowIndex = 1;
+        assertEquals("Wrong value for Location: ","AC5003-89" , searchResults.getDataAsText(rowIndex, startColumnIndex));
+        assertEquals("Wrong value for Cage Size: ","4" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Rate Class: ","N" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Id: ","TSTCP" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Species: ","MMU" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        ++startColumnIndex;
+        assertEquals("Wrong value for Weight: ","7.5" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Location Date: ","2014-02-19" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        ++startColumnIndex;
+        assertEquals("Wrong value for Colony Code: ","L" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Breeding Code: ","M" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Breeding Code: ","BP" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Secondary Projects: ", "1101324, Pc5C2", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Census Flag List: ", "CHU", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Pregnancy: ", "PRG-1111", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Term Comment: ", "TRM CMMNT", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for PG Comment: ", "Not Completed", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        ++startColumnIndex;
+        assertEquals("Wrong value for Encl Supervisor: ", " ", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", searchResults.getDataAsText(rowIndex,++startColumnIndex));
     }
 
     @Test
