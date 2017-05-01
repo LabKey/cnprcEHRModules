@@ -13,20 +13,19 @@
                 <property name="columnTitle" value="Age today Y M"/>
             </properties>
         </column>
-        <column name="Id/cases/date"/>
-        <column name="Id/cases/problem"/>
-        <column name="Id/cases/remark">
+        <column name="Id/DemographicsActiveLongTermCases/date"/>
+        <column name="Id/DemographicsActiveLongTermCases/problems"/>
+        <column name="Id/DemographicsActiveLongTermCases/remarks">
             <properties>
                 <property name="columnTitle" value="History"/>
             </properties>
         </column>
     </columns>
     <filters>
-        <filter column="Id/cases/category" operator="eq" value="L"/>
         <filter column="Id/curLocation/location" operator="doesnotstartwith" value="NC"/>
         <filter column="Id/curLocation/location" operator="doesnotstartwith" value="CC"/>
-        <filter column="Id/cases/endDate" operator="isblank"/>
         <filter column="calculated_status" operator="eq" value="Alive"/>
+        <filter column="Id/DemographicsActiveLongTermCases/date" operator="isnonblank"/>
     </filters>
     <sorts>
         <sort column="Id" descending="false"/>

@@ -112,6 +112,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsActiveLongTermCases") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActiveLongTermCases", "demographicsActiveLongTermCases", "Id", "Id");
+            col.setLabel("Current Long Term Outpatient Cases");
+            col.setDescription("Returns one record per participant with a long term outpatient case assignment having no Release Date");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("DemographicsActiveAssignment") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "DemographicsActiveAssignment", "DemographicsActiveAssignment", "Id", "Id");

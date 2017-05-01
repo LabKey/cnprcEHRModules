@@ -712,9 +712,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "gender",
                 "Id/DemographicsActiveAssignment/primaryProject",
                 "Id/age/yearsAndMonths",
-                "Id/cases/date",
-                "Id/cases/problem",
-                "Id/cases/remark");
+                "Id/DemographicsActiveLongTermCases/date",
+                "Id/DemographicsActiveLongTermCases/problems",
+                "Id/DemographicsActiveLongTermCases/remarks");
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
