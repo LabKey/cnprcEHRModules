@@ -488,10 +488,13 @@
             <column columnName="approvedDate">
                 <datatype>timestamp</datatype>
             </column>
-            <column columnName="caseno">
+            <column columnName="accountId">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="prPk">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="prmFk">
                 <datatype>integer</datatype>
             </column>
             <column columnName="reportType">
@@ -549,7 +552,7 @@
             <column columnName="prmFk">
                 <datatype>integer</datatype>
             </column>
-            <column columnName="caseno">
+            <column columnName="accountId">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="reportType">

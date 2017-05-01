@@ -9,7 +9,7 @@
         <column name="prPk/Id"/>
         <column name="remark"/>
         <column name="performedBy"/>
-        <column name="caseno"/>
+        <column name="accountId"/>
         <column name="enddate"/>
         <column name="printDate"/>
         <column name="approvedDate"/>
