@@ -31,7 +31,6 @@ import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.TestFileUtils;
-import org.labkey.test.TestTimeoutException;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
@@ -181,13 +180,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static void setupProject() throws Exception
     {
         CNPRC_EHRTest init = (CNPRC_EHRTest)getCurrentTest();
-//        init.doSetup();
-    }
-
-    @Override
-    public void doCleanup(boolean afterTest) throws TestTimeoutException
-    {
-//        super.doCleanup(afterTest);
+        init.doSetup();
     }
 
     private void doSetup() throws Exception
