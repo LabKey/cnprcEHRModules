@@ -13,45 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT
-WT_AN_ID AS Id,
-WT_DATE AS weightDate,
-WT_WEIGHT_KG AS Weight,
-WT_BODY_CONDITION_SCORE AS bodyConditionScore,
-WT_TATTOO_FLAG AS weightTattooFlag,
-OBJECTID AS objectid,
-OBJECTID AS parentid,
-DATE_TIME
-FROM cnprcSrc.ZWEIGHING
-WHERE WT_WEIGHT_KG IS NOT NULL
 
-UNION ALL
+/** Note: This additional ETL for weights is to avoid collision of pathology weights from ZPATH_REPORT with ZWEIGHING -
+  * we want ZWEIGHING weights to be in LK first, which is handled by Weights ETL incrementally, and ETL will run this query
+  * once daily at night (see weight_daily.xml). Also, see CNPRC Support Ticket: 30247.
+  */
 
 SELECT
-PT_AN_ID AS Id,
-PT_START_DATE AS weightDate,
-PT_AN_WT_USED AS Weight,
+PR_AN_ID AS Id,
+PR_DATE AS weightDate,
+(PR_BODY_WEIGHT_GRAMS / 1000) AS Weight,
 NULL AS bodyConditionScore,
 NULL AS weightTattooFlag,
 OBJECTID AS objectid,
 OBJECTID AS parentid,
 DATE_TIME
-FROM cnprcSrc.ZPRIMED_TREATMENT
+FROM cnprcSrc.ZPATH_REPORT preport
 WHERE
-PT_AN_WT_USED IS NOT NULL AND
-PT_AN_WT_USED <> PT_AN_WT_DB
-
-UNION ALL
-
-SELECT
-ANIMID AS Id,
-TEST_DAT AS weightDate,
-WEIGHT AS Weight,
-NULL AS bodyConditionScore,
-NULL AS weightTattooFlag,
-OBJECTID AS objectid,
-OBJECTID AS parentid,
-DATE_TIME
-FROM cnprcSrc.ZBIO_BEHAVIORAL_ASSESSMENT
-WHERE
-WEIGHT IS NOT NULL;
+PR_BODY_WEIGHT_GRAMS IS NOT NULL AND
+NOT EXISTS (SELECT NULL FROM cnprcSrc.ZWEIGHING weight WHERE weight.WT_AN_ID = preport.PR_AN_ID AND weight.WT_DATE = preport.PR_DATE)

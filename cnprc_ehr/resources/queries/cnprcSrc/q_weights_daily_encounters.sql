@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/** Created this additional weights encounters ETL query to match weight_daily.sql */
+
 SELECT
-OBJECTID as objectid,
+PR_AN_ID AS Id,
+PR_DATE AS weightDate,
+OBJECTID AS encounterId,
+OBJECTID AS objectId,
+'Biopsy/Necropsy Weight' AS remark,
 DATE_TIME
-FROM cnprcSrc.AWEIGHING
-WHERE WT_AUD_CODE = 'D'
-UNION
-SELECT
-OBJECTID as objectid,
-DATE_TIME
-FROM cnprcSrc_aud.APRIMED_TREATMENT
-WHERE AUD_CODE = 'D'
-UNION
-SELECT
-OBJECTID as objectid,
-DATE_TIME
-FROM cnprcSrc_aud.ABIO_BEHAVIORAL_ASSESSMENT
-WHERE BBA_AUD_CODE = 'D'
+FROM cnprcSrc.ZPATH_REPORT preport
+WHERE
+PR_BODY_WEIGHT_GRAMS IS NOT NULL AND
+NOT EXISTS (SELECT NULL FROM cnprcSrc.ZWEIGHING weight WHERE weight.WT_AN_ID = preport.PR_AN_ID AND weight.WT_DATE = preport.PR_DATE)
