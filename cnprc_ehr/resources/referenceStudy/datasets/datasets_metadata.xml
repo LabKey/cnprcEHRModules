@@ -2432,6 +2432,7 @@
             </column>
             <column columnName="pairid">
                 <datatype>varchar</datatype>
+                <scale>50</scale>
             </column>
             <column columnName="lowestcage">
                 <datatype>varchar</datatype>
@@ -2471,6 +2472,14 @@
             </column>
         </columns>
         <tableTitle>Pairing Observations</tableTitle>
+        <indices>
+            <index type="non-unique">
+                <column>enddate</column>
+            </index>
+            <index type="non-unique">
+                <column>pairId</column>
+            </index>
+        </indices>
     </table>
     <table tableName="tb" tableDbType="TABLE">
     <columns>

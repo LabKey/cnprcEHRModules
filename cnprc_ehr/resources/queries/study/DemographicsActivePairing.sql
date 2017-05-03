@@ -32,9 +32,9 @@ SELECT
             > 1
          THEN '**'
        -- CAST is for natural sort
-       WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) < CAST(pair2.Id.curLocation.cage AS INTEGER)
+       WHEN pair1.Id.curLocation.cageSize < pair2.Id.curLocation.cageSize
          THEN '//'
-       WHEN CAST(pair1.Id.curLocation.cage AS INTEGER) > CAST(pair2.Id.curLocation.cage AS INTEGER)
+       WHEN pair1.Id.curLocation.cageSize > pair2.Id.curLocation.cageSize
          THEN '\\'
        WHEN pair1.Id < pair2.Id
          THEN '//'
