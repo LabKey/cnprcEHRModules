@@ -1,12 +1,21 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
+        <column name="species">
+            <properties>
+                <property name="columnTitle" value="Species"/>
+            </properties>
+            </column>
         <column name="Id"/>
         <column name="pairingIndicator">
             <properties>
-                <property name="columnTitle" value="Pairing (indicator)"/>
+                <property name="columnTitle" value="Pairing"/>
             </properties>
         </column>
-        <column name="location"/>
+        <column name="room">
+            <properties>
+                <property name="columnTitle" value="Enclosure"/>
+            </properties>
+        </column>
         <column name="cage"/>
         <column name="cage_size">
             <properties>
@@ -18,7 +27,6 @@
                 <property name="columnTitle" value="Rate Class"/>
             </properties>
         </column>
-        <column name="species"/>
         <column name="gender">
             <properties>
                 <property name="columnTitle" value="Sex"/>
@@ -91,7 +99,7 @@
         </column>
         <column name="conceptionDateStatus">
             <properties>
-                <property name="columnTitle" value="Est (indicator)"/>
+                <property name="columnTitle" value="Est"/>
             </properties>
         </column>
         <column name="supervisor">

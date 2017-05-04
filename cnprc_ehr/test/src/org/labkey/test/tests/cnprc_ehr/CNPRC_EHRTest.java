@@ -1071,13 +1071,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable locationRegion = new DataRegionTable("query", this.getDriver());
 
         List<String> expectedColumns = Arrays.asList(
+                "species",
                 "Id",
                 "pairingIndicator",
-                "location",
+                "room",
                 "cage",
                 "cage_size",
                 "rate_class",
-                "species",
                 "gender",
                 "age",
                 "MostRecentWeight",
@@ -1098,8 +1098,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, locationRegion.getColumnNames());
 
         assertEquals("Wrong LocationReport results,",
-                Arrays.asList("TEST1112911", "//", "3168659-1", "2005-02-19 14:00", "Jerry Jones"),
-                locationRegion.getRowDataAsText(0, "Id", "pairingIndicator", "location", "date", "supervisor"));
+                Arrays.asList("TEST1112911", "//", "3168659", "1", "2005-02-19 14:00", "Jerry Jones"),
+                locationRegion.getRowDataAsText(0, "Id", "pairingIndicator", "room", "cage", "date", "supervisor"));
     }
 
     @Test
@@ -1117,8 +1117,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         // Note that current date data is, by design, sometimes blank for these fields though
 
         assertEquals("Wrong Enclosure Search results from housing table using current date,",
-                Arrays.asList("44444", "AC5003-89", "4", "MMU", "5.5", " ", "L", " ", "BO", " ", " ", " ", "Not Completed", "Jane Jones"),
-                results.getRowDataAsText(1, "Id", "location", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                Arrays.asList("44444", "AC5003", "89", "4", "MMU", "5.5", " ", "L", " ", "BO", " ", " ", " ", "Not Completed", "Jane Jones"),
+                results.getRowDataAsText(1, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
                         "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
 
         // Now test that historical data changes on same info
@@ -1131,8 +1131,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         results = new DataRegionTable("query", getDriver());
 
         assertEquals("Wrong Enclosure Search results from housing table using historical date,",
-                Arrays.asList("44444", "AC5003-89", "6", "MMU", "4.4", "AB125/YZ17", "O", "M", "BO", "Pc5C0", "Pc5C1, Pc5C2", "CHA, CHU", "Completed", "Jane Jones"),
-                results.getRowDataAsText(0, "Id", "location", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                Arrays.asList("44444", "AC5003", "89", "6", "MMU", "4.4", "AB125/YZ17", "O", "M", "BO", "Pc5C0", "Pc5C1, Pc5C2", "CHA, CHU", "Completed", "Jane Jones"),
+                results.getRowDataAsText(0, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
                         "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
 
         // Test from departure data too

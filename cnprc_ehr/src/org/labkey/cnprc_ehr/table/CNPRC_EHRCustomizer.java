@@ -339,6 +339,25 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
                     "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
         }
 
+        columnInfo = ti.getColumn("room");
+        if (columnInfo != null)
+        {
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+                    "&query.queryName=LocationReport" +
+                    "&query.room~eq=${room}" +
+                    "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+        }
+
+        columnInfo = ti.getColumn("cage");
+        if (columnInfo != null)
+        {
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+                    "&query.queryName=LocationReport" +
+                    "&query.room~eq=${room}" +
+                    "&query.cage~eq=${cage}" +
+                    "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+        }
+
         final String colName2 = "birth";
         String colLabel = "age";
         if (ti.getColumn(colLabel) == null)
