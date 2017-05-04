@@ -5,6 +5,11 @@
                 <property name="columnTitle" value="Species code (3 char)"/>
             </properties>
         </column>
+        <column name="Id/DemographicsActivePairing/pairedSymbol">
+            <properties>
+                <property name="columnTitle" value="Paired"/>
+            </properties>
+        </column>
         <column name="Id"/>
         <column name="Id/curLocation/location"/>
         <column name="gender">
