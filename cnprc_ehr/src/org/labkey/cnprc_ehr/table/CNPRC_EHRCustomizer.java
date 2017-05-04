@@ -295,26 +295,45 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ti.addColumn(timeAtLocationCol);
         }
 
-        ColumnInfo onDateColumnInfo = ti.getColumn("location");
+        ColumnInfo columnInfo = ti.getColumn("location");
         String onDateParamName = "onDate";
 
-        if (onDateColumnInfo != null)
+        if (columnInfo != null)
         {
-            onDateColumnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
                     "&query.queryName=LocationReport" +
                     "&query.location~eq=${location}" +
+                    "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+        }
+
+        columnInfo = ti.getColumn("room");
+        if (columnInfo != null)
+        {
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+                    "&query.queryName=LocationReport" +
+                    "&query.room~eq=${room}" +
+                    "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+        }
+
+        columnInfo = ti.getColumn("cage");
+        if (columnInfo != null)
+        {
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+                    "&query.queryName=LocationReport" +
+                    "&query.room~eq=${room}" +
+                    "&query.cage~eq=${cage}" +
                     "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
         }
     }
 
     private void customizeLocationReportQuery(AbstractTableInfo ti, DateTimeFormatter dateTimeFormatter)
     {
-        ColumnInfo onDateColumnInfo = ti.getColumn("location");
+        ColumnInfo columnInfo = ti.getColumn("location");
         String onDateParamName = "onDate";
 
-        if (onDateColumnInfo != null)
+        if (columnInfo != null)
         {
-            onDateColumnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
                     "&query.queryName=LocationReport" +
                     "&query.location~eq=${location}" +
                     "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
@@ -333,21 +352,21 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
 
     private void customizeWeightsTbAndBodyConditionQuery(AbstractTableInfo ti, DateTimeFormatter dateTimeFormatter)
     {
-        ColumnInfo onDateColumnInfo = ti.getColumn("roomAtTime");
+        ColumnInfo columnInfo = ti.getColumn("roomAtTime");
         String onDateParamName = "onDate";
 
-        if (onDateColumnInfo != null)
+        if (columnInfo != null)
         {
-            onDateColumnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
                     "&query.queryName=LocationReport" +
                     "&query.room~eq=${roomAtTime}" +
                     "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
         }
 
-        onDateColumnInfo = ti.getColumn("cageAtTime");
-        if (onDateColumnInfo != null)
+        columnInfo = ti.getColumn("cageAtTime");
+        if (columnInfo != null)
         {
-            onDateColumnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
+            columnInfo.setURL(DetailsURL.fromString("/query/executeQuery.view?schemaName=study" +
                     "&query.queryName=LocationReport" +
                     "&query.room~eq=${roomAtTime}" +
                     "&query.cage~eq=${cageAtTime}" +

@@ -21,10 +21,10 @@
                         <columnTitle>Date Out</columnTitle>
                     </column>
                     <column columnName="room">
-                        <isHidden>true</isHidden>
+                        <columnTitle>Enclosure</columnTitle>
                     </column>
                     <column columnName="cage">
-                        <isHidden>true</isHidden>
+                        <columnTitle>Cage</columnTitle>
                     </column>
                 </columns>
             </table>
