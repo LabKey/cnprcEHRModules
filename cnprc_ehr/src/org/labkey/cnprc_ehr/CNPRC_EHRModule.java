@@ -94,7 +94,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("animalSearch", this, "views/animalSearch.html");
         ehrService.registerActionOverride("projectDetails", this, "views/projectDetails.html");
         ehrService.registerActionOverride("housingQueries", this, "views/enclosureSearch.html");
-        EHRService.get().registerActionOverride("colonyOverview", this, "views/colonyOverview.html");
+        ehrService.registerActionOverride("colonyOverview", this, "views/colonyOverview.html");
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
