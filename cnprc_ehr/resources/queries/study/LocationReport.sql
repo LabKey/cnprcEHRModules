@@ -1,9 +1,11 @@
 PARAMETERS(onDate TIMESTAMP)
 -- Part 1: select cages with animals
 SELECT
-allIdsAndLocations.Id,
-allIdsAndLocations.location,
-allIdsAndLocations.cage,
+housing.Id,
+CASE WHEN housing.cage IS NULL THEN housing.room
+     ELSE (housing.room || '-' || housing.cage)
+END AS location,
+housing.cage,
 clh.cage_size,
 clh.rate_class,
 animal.demographics.species,
@@ -19,7 +21,7 @@ END AS deathOrOnDate,
  	 weightData.Id,
      CAST((
      	 SELECT
-     	 ROUND(CAST(AVG(w2.weight) AS DOUBLE), 2)
+     	 ROUND(CAST(AVG(w2.weight) AS DOUBLE), 2)  -- this part differs from apexvitals_encl_ondate, which does a straight selection
      	 FROM study.weight w2
      	 WHERE w2.Id=weightData.Id
      	 AND w2.date=weightData.MostRecentWeightDate
@@ -37,7 +39,7 @@ END AS deathOrOnDate,
     )
  WHERE Id = animal.Id
 ) MostRecentWeight,
-allIdsAndLocations.date,
+housing.date,
 pay_assign.payor_id,
 col_assign.colonyCode,
 bga.groupCode,
@@ -50,7 +52,7 @@ breed_roster.book,  -- potentially incorrect for non-current dates
     assign.Id,
     (CASE WHEN assign.assignmentStatus='P' THEN MAX(assign.projectCode) END) AS primaryProject,
     FROM study.assignment assign
-    WHERE onDate > assign.date
+    WHERE onDate >= assign.date  -- different from DemographicsActiveAssignment, trying to match apexvitals_encl_ondate better
     AND onDate < COALESCE(assign.endDate, now())
     GROUP BY assign.Id, assign.assignmentStatus) latestProjects
     WHERE Id = animal.Id
@@ -63,7 +65,7 @@ breed_roster.book,  -- potentially incorrect for non-current dates
     assign.Id,
     (CASE WHEN assign.assignmentStatus='S' THEN Group_concat(assign.projectCode, ', ') ELSE NULL END) AS secondaryProjects
     FROM study.assignment assign
-    WHERE onDate > assign.date
+    WHERE onDate >= assign.date  -- different from DemographicsActiveAssignment, trying to match apexvitals_encl_ondate better
     AND onDate < COALESCE(assign.endDate, now())
     GROUP BY assign.Id, assign.assignmentStatus) latestProjects
     WHERE Id = animal.Id
@@ -81,7 +83,7 @@ timestampdiff('SQL_TSI_DAY', preg_confirm.conception, onDate) AS daysPregnant,
 preg_confirm.conceptionDateStatus,
 preg_confirm.pgComment,
 room_enc.supervisor,  -- potentially incorrect for non-current dates
-allIdsAndLocations.room,
+housing.room,
 (SELECT
  CASE
      WHEN (pair2.Id IS NULL) AND (pair1.observation <> 'AW') THEN 'DD'
@@ -106,49 +108,26 @@ allIdsAndLocations.room,
  WHERE pair1.Id = animal.Id
  AND pair1.endDate IS NULL
  AND animal.curLocation.location IS NOT NULL
- LIMIT 1) AS pairingIndicator,    -- potentially incorrect for non-current dates, but could be made historical if required
-allIdsAndLocations.area
+ LIMIT 1) AS pairingIndicator,    -- potentially incorrect for non-current dates; possible to make historical but will require some work
+SUBSTRING(housing.room, 1, 2) AS area,
 
-FROM (SELECT
-    housing.Id,
-    housing.cage,
-    housing.date,
-    housing.endDate,
-    housing.room,
-    SUBSTRING(housing.room, 1, 2) AS area,
-    CASE WHEN housing.cage IS NULL THEN housing.room
-         ELSE (housing.room || '-' || housing.cage)
-    END AS location
- FROM study.housing
- WHERE onDate BETWEEN housing.date AND COALESCE(housing.endDate, now())
- UNION
- SELECT
-    departure.Id,
-    NULL AS cage,
-    departure.date,
-    now() AS endDate,
-    SUBSTRING(departure.destination, 1, 6) AS room,
-    SUBSTRING(departure.destination, 1, 2) AS area,
-    departure.destination AS location
- FROM study.departure
- WHERE onDate >= departure.date
- AND departure.destination IS NOT NULL
-) allIdsAndLocations
-LEFT OUTER JOIN cnprc_ehr.cage_location_history clh ON clh.location = allIdsAndLocations.location
-	  AND onDate BETWEEN clh.from_date AND COALESCE(clh.to_date, now())
-LEFT OUTER JOIN study.animal ON animal.Id = allIdsAndLocations.Id
-    AND onDate BETWEEN animal.birth.date AND COALESCE(animal.death.date, now())
-LEFT OUTER JOIN cnprc_ehr.room_enclosure room_enc ON room_enc.room = allIdsAndLocations.room
+FROM study.housing
+LEFT OUTER JOIN cnprc_ehr.cage_location_history clh ON clh.location =
+        (CASE WHEN housing.cage IS NULL THEN housing.room ELSE (housing.room || '-' || housing.cage) END)  -- this is ugly, should make this an actual housing column
+	  AND (onDate >= clh.from_date) AND (onDate < COALESCE(clh.to_date, now()))
+LEFT OUTER JOIN study.animal ON animal.Id = housing.Id
+    AND (onDate >= animal.birth.date) AND (onDate < COALESCE(animal.death.date, now()))
+LEFT OUTER JOIN cnprc_ehr.room_enclosure room_enc ON room_enc.room = housing.room
 LEFT OUTER JOIN study.payor_assignments pay_assign ON pay_assign.Id = animal.Id
-    AND onDate BETWEEN pay_assign.date AND COALESCE(pay_assign.endDate, now())
+    AND (onDate >= pay_assign.date) AND (onDate < COALESCE(pay_assign.endDate, now()))
 LEFT OUTER JOIN study.colony_assignments col_assign ON col_assign.Id = animal.Id
-    AND onDate BETWEEN col_assign.date AND COALESCE(col_assign.endDate, now())
+    AND (onDate >= col_assign.date) AND (onDate < COALESCE(col_assign.endDate, now()))
 LEFT OUTER JOIN study.breedingGroupAssignments bga ON bga.Id = animal.Id
-    AND onDate BETWEEN bga.date AND COALESCE(bga.endDate, now())
+    AND (onDate >= bga.date) AND (onDate < COALESCE(bga.endDate, now()))
 LEFT OUTER JOIN cnprc_ehr.breedingRoster breed_roster ON breed_roster.animalId = animal.Id
 LEFT OUTER JOIN study.pregnancyConfirmations preg_confirm ON preg_confirm.Id = animal.Id
-    AND onDate BETWEEN preg_confirm.conception AND COALESCE(preg_confirm.termDate, now())
-WHERE onDate BETWEEN allIdsAndLocations.date AND COALESCE(allIdsAndLocations.endDate, now())
+    AND (onDate >= preg_confirm.conception) AND (onDate < COALESCE(preg_confirm.termDate, now()))
+WHERE (onDate >= housing.date) AND (onDate < COALESCE(housing.endDate, now()))
 
 UNION ALL
 
@@ -164,9 +143,7 @@ clh.location,
 NULL as cage,
 clh.cage_size,
 clh.rate_class,
-CASE WHEN clh.file_status = 'IN' THEN 'INACTIVE'
-     ELSE 'VACANT'
-END AS species,
+'VACANT' AS species,
 NULL AS gender,
 NULL AS birth,
 NULL AS deathOrOnDate,
@@ -196,9 +173,10 @@ LEFT OUTER JOIN (
              ELSE (housing.room || '-' || housing.cage)
         END AS location
     FROM study.housing
-    WHERE onDate BETWEEN housing.date AND COALESCE(housing.endDate, now())
+    WHERE (onDate >= housing.date) AND (onDate < COALESCE(housing.endDate, now()))
 ) allLocations
 ON allLocations.location = clh.location
-WHERE onDate BETWEEN clh.from_date AND COALESCE(clh.to_date, now())
+WHERE (onDate >= clh.from_date) AND (onDate < COALESCE(clh.to_date, now()))
+AND (clh.file_status <> 'IN')
 ) emptyCages
 WHERE emptyCages.filter IS NULL
