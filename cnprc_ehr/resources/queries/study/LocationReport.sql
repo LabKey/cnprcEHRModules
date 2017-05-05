@@ -131,7 +131,7 @@ WHERE (onDate >= housing.date) AND (onDate < COALESCE(housing.endDate, now()))
 
 UNION ALL
 
--- Part 2: vacant/inactive cage selection
+-- Part 2: vacant cage selection
 -- Select all but filter column
 SELECT Id, location, cage, cage_size, rate_class, species, gender, birth, deathOrOnDate, MostRecentWeight, date, payor_id,
        colonyCode, groupCode, book, primaryProject, secondaryProjects, values, conNum, pgComment, daysPregnant, conceptionDateStatus,
