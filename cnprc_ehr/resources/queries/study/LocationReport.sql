@@ -4,7 +4,7 @@ SELECT
 housing.Id,
 CASE WHEN housing.cage IS NULL THEN housing.room
      ELSE (housing.room || '-' || housing.cage)
-END AS location,
+END AS location,  -- TODO: not used currently, probably can remove
 housing.cage,
 clh.cage_size,
 clh.rate_class,
@@ -113,7 +113,7 @@ SUBSTRING(housing.room, 1, 2) AS area,
 
 FROM study.housing
 LEFT OUTER JOIN cnprc_ehr.cage_location_history clh ON clh.location =
-        (CASE WHEN housing.cage IS NULL THEN housing.room ELSE (housing.room || '-' || housing.cage) END)  -- this is ugly, should make this an actual housing column
+        (CASE WHEN housing.cage IS NULL THEN housing.room ELSE (housing.room || '-' || housing.cage) END)  -- TODO: this is ugly, should split this column in cage_location_history
 	  AND (onDate >= clh.from_date) AND (onDate < COALESCE(clh.to_date, now()))
 LEFT OUTER JOIN study.animal ON animal.Id = housing.Id
     AND (onDate >= animal.birth.date) AND (onDate < COALESCE(animal.death.date, now()))
@@ -171,7 +171,7 @@ LEFT OUTER JOIN (
         'X' AS filter,  -- use inverse JOIN logic to get cages which should be empty
         CASE WHEN housing.cage IS NULL THEN housing.room
              ELSE (housing.room || '-' || housing.cage)
-        END AS location
+        END AS location  -- TODO: this is wasteful, should split this column in cage_location_history
     FROM study.housing
     WHERE (onDate >= housing.date) AND (onDate < COALESCE(housing.endDate, now()))
 ) allLocations
