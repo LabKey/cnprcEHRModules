@@ -133,7 +133,7 @@ Ext4.define('EHR.panel.PopulationPanel', {
                         parentNode.children[value] = {
                             total: 0,
                             children: {}
-                        }
+                        };
 
                         parentNode = parentNode.children[value];
                     }
@@ -158,8 +158,8 @@ Ext4.define('EHR.panel.PopulationPanel', {
         var rows = [];
         var repeats = 1;
         var genderFieldIndex = 1;
-        var keys = [];
-        var style =  'text-align: center;margin-right: 3px;margin-left: 3px;margin-bottom:3px;';
+        var style =  'text-align: right;margin-right: 3px;margin-left: 3px;margin-bottom:3px;';
+        var styleHeader = 'text-align: center;margin-right: 3px;margin-left: 3px;margin-bottom:3px;';
         Ext4.each(this.colFields, function(colName, idx){
             var colspan = this.getColSpan(this.colFields, idx);
 
@@ -167,15 +167,15 @@ Ext4.define('EHR.panel.PopulationPanel', {
                 rows.push({html: ''});
                 rows.push({
                     html: 'Total',
-                    style: 'border-bottom: solid 1px;text-align: center;margin-right: 3px;margin-left: 3px;margin-bottom:3px;'
+                    style: 'border-bottom: solid 1px;' + styleHeader
                 });
                 Ext4.each(this.valueMap.subHeaders, function (subHeader) {
                     rows.push({
                         html: subHeader,
-                        style: 'border-bottom: solid 1px;' + style,
+                        style: 'border-bottom: solid 1px;' + styleHeader,
                         colspan: 2
                     });
-                })
+                });
                 rows.push({html: ''});
                 rows.push({html: ''});
             }
@@ -190,13 +190,13 @@ Ext4.define('EHR.panel.PopulationPanel', {
 
             var valueArray = this.valueMap[colName];
             for (var i=0;i<repeats;i++){
-                Ext4.each(valueArray, function(header, j){
+                Ext4.each(valueArray, function(header){
                     LDK.Assert.assertNotEmpty('Population panel has a blank header value for the column: ' + colName + '.  This probably indicates bad data.', header);
                     if (!header)
                         header = 'Unknown ' + colName;
                     rows.push({
                         html: header,
-                        style: style,
+                        style: (colspan>1?styleHeader:style),
                         colspan: colspan
                     });
                 }, this);
@@ -259,7 +259,12 @@ Ext4.define('EHR.panel.PopulationPanel', {
         toAdd.push({
             layout: {
                 type: 'table',
-                columns: this.getTotalColumns()
+                columns: this.getTotalColumns(),
+                tdAttrs: {
+                    style: {
+                        width: '70px'
+                    }
+                }
             },
             defaults: {
                 border: false,
@@ -323,7 +328,7 @@ Ext4.define('EHR.panel.PopulationPanel', {
 
     generateColKeys: function(){
         var keys = [];
-        Ext4.each(this.colFields, function(colField, j){
+        Ext4.each(this.colFields, function(colField){
             var valueArray = this.valueMap[colField];
             var newKeys = [];
             if (!keys.length){
