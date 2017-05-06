@@ -24,7 +24,7 @@ WT_TB_TEST1_48 AS fortyEightHrsResult,
 WT_TB_TEST1_72 AS seventyTwoHrsResult,
 WT_AUD_TIME AS entry_date_tm,
 WT_AUD_USERID AS user_name,
-(OBJECTID ||'-'|| WT_TB_TEST1_SITE ||'-'|| 'Test1') as objectid,
+(OBJECTID ||'-'|| 'Test1') AS objectid,
 DATE_TIME
 FROM
 cnprcSrc.ZWEIGHING WHERE WT_TB_TEST1_TYPE IS NOT NULL
@@ -40,7 +40,7 @@ WT_TB_TEST2_48 AS fortyEightHrsResult,
 WT_TB_TEST2_72 AS seventyTwoHrsResult,
 WT_AUD_TIME AS entry_date_tm,
 WT_AUD_USERID AS user_name,
-(OBJECTID ||'-'|| WT_TB_TEST2_SITE ||'-'|| 'Test2') as objectid,
+(OBJECTID ||'-'|| 'Test2') AS objectid,
 DATE_TIME
 FROM
 cnprcSrc.ZWEIGHING WHERE WT_TB_TEST2_TYPE IS NOT NULL;
