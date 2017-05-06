@@ -32,3 +32,18 @@ LEFT JOIN
 cnprcSrc.ZAN_PAIRING p
 ON p.AP_PAIR_KEY = aud_pm.APM_PAIR_KEY
 WHERE APM_AUD_CODE = 'D'
+
+UNION ALL
+
+SELECT
+pairing_aud.OBJECTID ||'--'|| pm_aud.OBJECTID as objectid,
+CAST(CASE WHEN(pairing_aud.DATE_TIME > pm_aud.DATE_TIME)
+  THEN
+    pairing_aud.DATE_TIME
+  ELSE pm_aud.DATE_TIME
+END AS TIMESTAMP) AS date_time
+FROM
+cnprcSrc_aud.AAN_PAIRING pairing_aud
+LEFT JOIN
+cnprcSrc.AAN_PAIRING_MASTER pm_aud ON pairing_aud.AP_AN_ID = pm_aud.APM_PAIR_KEY
+WHERE pairing_aud.AP_AUD_CODE = 'D' AND pm_aud.APM_AUD_CODE = 'D'
