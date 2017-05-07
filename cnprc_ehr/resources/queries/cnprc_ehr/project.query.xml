@@ -8,7 +8,7 @@
                     <column columnName="protocol">
                         <columnTitle>AUCAAC Protocol</columnTitle>
                         <fk>
-                            <fkDbSchema>ehr</fkDbSchema>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
                             <fkTable>protocol</fkTable>
                             <fkColumnName>protocol</fkColumnName>
                         </fk>

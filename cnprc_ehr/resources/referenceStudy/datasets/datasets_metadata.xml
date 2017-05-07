@@ -2030,59 +2030,16 @@
                 <datatype>timestamp</datatype>
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
-            </column>
-            <column columnName="protocol">
-                <datatype>varchar</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Protocol</propertyURI>
-            </column>
-            <column columnName="assignmentStatus">
-            <datatype>varchar</datatype>
-            <columnTitle>Assignment Status</columnTitle>
-            <displayWidth>25</displayWidth>
-            <fk>
-                <fkDbSchema>ehr_lookups</fkDbSchema>
-                <fkTable>assignment_status</fkTable>
-                <fkColumnName>value</fkColumnName>
-                <fkDisplayColumnName>description</fkDisplayColumnName>
-            </fk>
-            </column>
             <column columnName="projectCode">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="projectProtocolAssignDate">
-                <datatype>timestamp</datatype>
-            </column>
-            <column columnName="projectProtocolRelDate">
-                <datatype>timestamp</datatype>
+            <column columnName="assignmentStatus">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
-            </column>
-            <column columnName="projectedRelease">
-                <datatype>timestamp</datatype>
-            </column>
-            <column columnName="assignCondition">
-                <datatype>integer</datatype>
-            </column>
-            <column columnName="releaseCondition">
-                <datatype>integer</datatype>
-            </column>
-            <column columnName="projectedReleaseCondition">
-                <datatype>integer</datatype>
-            </column>
-            <column columnName="releaseType">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="datefinalized">
-                <datatype>timestamp</datatype>
-            </column>
-            <column columnName="enddatefinalized">
-                <datatype>timestamp</datatype>
             </column>
         </columns>
         <tableTitle>Assignment</tableTitle>

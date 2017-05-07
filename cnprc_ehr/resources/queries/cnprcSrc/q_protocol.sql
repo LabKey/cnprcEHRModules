@@ -15,9 +15,13 @@
  */
 SELECT
 PRT_AUCAAC_NUMBER AS protocol,
+PRT_TITLE AS title,
+PRT_PI_PERSON_ID AS piPersonId,
+PRT_BEGIN_DATE AS protocolBeginDate,
+PRT_END_DATE AS protocolEndDate,
+PRT_TYPE AS projectType,
 PRT_ORIGINAL_AUCAAC AS originalProtocol,
 PRT_CI_PERSON_ID AS ciPersonId,
-PRT_TITLE AS title,
 (CASE WHEN PRT_APPROVED_YN = 'Y' THEN 1 ELSE 0 END) AS approved,
 PRT_COMMITTEE_RESPONSE_DATE AS committeeResponseDate,
 PRT_SP1_CODE AS sp1Code,

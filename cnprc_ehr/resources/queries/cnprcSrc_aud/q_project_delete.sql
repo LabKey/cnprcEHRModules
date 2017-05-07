@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 SELECT
-anproj_an_id AS Id,
-anproj_assignment_date,
-anproj_pr_code AS projectCode,
-anproj_assignment_type AS assignmentStatus,
-anproj_release_date AS enddate,
-objectid AS objectid,
-date_time
-FROM
-cnprcSrc.zan_project;
+OBJECTID as objectid,
+DATE_TIME
+FROM cnprcSrc_aud.APROJECT
+WHERE PR_AUD_CODE = 'D'

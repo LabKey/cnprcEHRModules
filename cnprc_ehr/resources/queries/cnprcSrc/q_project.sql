@@ -15,10 +15,9 @@
  */
 SELECT
 PR_TRACKING_ID AS project_tracking_id,
-pp.PP_ID AS pp_id,
 PR_AN_REQUESTED_PER_YEAR AS an_requested_per_year,
 PR_AN_USED_ASSIGNED AS an_used_assigned,
-coalesce(pp_aucaac_number, pr_aucaac_protocol_number) AS protocol,
+PR_AUCAAC_PROTOCOL_NUMBER AS protocol, -- this protocol does not always follow the updated convention for 12-12345.
 CENTER_UNIT_CODE AS unitCode,
 PR_DATE_PROTOCOL_SUB_AUCAAC AS date_protocol_sub_aucaac,
 PR_DIRECT_AMT_RECEIVED AS direct_amt_received,
@@ -51,17 +50,10 @@ PR_PI_AFFILIATION AS pi_affiliation,
 PR_OI_AFFILIATION AS oi_affiliation,
 (CASE WHEN PR_TISSUE_AVAIL_YN = 'Y' THEN '1' ELSE '0' END) AS is_tissue_avail,
 PR_PI_PERSON_FK AS pi_person_fk,
-(CASE WHEN pt.PRT_TYPE = '3' THEN '1' ELSE '0' END) AS research,
-pt.PRT_TYPE AS projectType,
-(CASE WHEN pp_aucaac_number IS NOT NULL
-THEN (pp_aucaac_number ||'-'|| PR_CODE ||'-'|| pp.OBJECTID)
-ELSE (pr_aucaac_protocol_number ||'-'|| PR_CODE ||'-'|| pr.OBJECTID) END) AS objectid
-FROM cnprcSrc.ZPROJECT pr
-LEFT JOIN cnprcSrc.ZPROJECT_PROTOCOL pp
-ON pr.PR_CODE = pp.PP_PROJECT_ID
-LEFT JOIN cnprcSrc.ZPROTOCOL pt
-ON pp.PP_AUCAAC_NUMBER = pt.PRT_AUCAAC_NUMBER
-WHERE pp.PP_ID IS NOT NULL AND
+OBJECTID AS objectid,
+DATE_TIME
+FROM cnprcSrc.ZPROJECT project
+WHERE
 (PR_BEGIN_DATE IS NULL OR PR_BEGIN_DATE > to_date('01-01-1900', 'DD-MM-YYYY')) AND
 (PR_PROTOCOL_END_DATE IS NULL OR PR_PROTOCOL_END_DATE > to_date('01-01-1900', 'DD-MM-YYYY')) AND
 (PR_END_DATE IS NULL OR PR_END_DATE > to_date('01-01-1900', 'DD-MM-YYYY'));

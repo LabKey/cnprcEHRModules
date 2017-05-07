@@ -22,12 +22,12 @@
                     </column>
                     <column columnName="primaryProject">
                         <columnTitle>Primary</columnTitle>
-                        <!--<fk>-->
-                        <!--<fkDbSchema>cnprc_ehr</fkDbSchema>-->
-                        <!--<fkTable>project</fkTable>-->
-                        <!--<fkColumnName>projectCode</fkColumnName>-->
-                        <!--<fkDisplayColumnName>projectCode</fkDisplayColumnName>-->
-                        <!--</fk>-->
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>project</fkTable>
+                            <fkColumnName>projectCode</fkColumnName>
+                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
+                        </fk>
                     </column>
                     <column columnName="secondaryProjects">
                         <columnTitle>Secondary</columnTitle>

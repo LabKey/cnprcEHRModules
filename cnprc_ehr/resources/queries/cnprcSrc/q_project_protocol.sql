@@ -14,24 +14,11 @@
  * limitations under the License.
  */
 SELECT
-PRT_AUCAAC_NUMBER AS protocol,
-PRT_TITLE AS title,
-PRT_PI_PERSON_ID AS investigatorId,
-PRT_BEGIN_DATE AS approve,
-PRT_END_DATE AS enddate,
-PRT_TYPE AS project_type,
+PP_ID AS pp_pk,
+PP_PROJECT_ID AS projectCode,
+PP_AUCAAC_NUMBER AS protocol_number,
+PP_ASSIGNMENT_DATE AS pp_assignment_date,
+PP_RELEASE_DATE AS pp_release_date,
 OBJECTID AS objectid,
 DATE_TIME
-FROM cnprcSrc.ZPROTOCOL
-UNION -- adding historical protocols --
-SELECT DISTINCT
-PR_AUCAAC_PROTOCOL_NUMBER AS protocol,
-PR_AUCAAC_PROTOCOL_NUMBER AS title,
-NULL AS investigatorId,
-NULL AS approve,
-NULL AS enddate,
-NULL AS project_type,
-max(OBJECTID) AS objectid,
-max(DATE_TIME) AS date_time
-FROM cnprcSrc.ZPROJECT WHERE PR_AUCAAC_PROTOCOL_NUMBER IS NOT NULL
-Group By PR_AUCAAC_PROTOCOL_NUMBER;
+FROM cnprcSrc.ZPROJECT_PROTOCOL;

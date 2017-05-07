@@ -31,7 +31,7 @@
             showUpdateColumn: false,
             showRecordSelectors: true,
             buttonBarPosition: 'top',
-            filters: [LABKEY.Filter.create('projectCode/projectCode', project, LABKEY.Filter.Types.EQUAL)],
+            filters: [LABKEY.Filter.create('projectCode', project, LABKEY.Filter.Types.EQUAL)],
             sort: '-Date',
             scope: this,
             failure: EHR.Utils.onError

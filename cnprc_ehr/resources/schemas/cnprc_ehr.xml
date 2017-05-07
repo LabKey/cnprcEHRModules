@@ -148,6 +148,10 @@
             <column columnName="foodExemption"/>
             <column columnName="renewProtocol"/>
             <column columnName="protocolNumberYear"/>
+            <column columnName="piPersonId"/>
+            <column columnName="protocolBeginDate"/>
+            <column columnName="protocolEndDate"/>
+            <column columnName="projectType"/>
             <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
@@ -827,7 +831,6 @@
         <columns>
             <column columnName="rowid"/>
             <column columnName="project_tracking_id"/>
-            <column columnName="pp_id"/>
             <column columnName="an_requested_per_year"/>
             <column columnName="an_used_assigned"/>
             <column columnName="protocol"/>
@@ -863,8 +866,21 @@
             <column columnName="oi_affiliation"/>
             <column columnName="is_tissue_avail"/>
             <column columnName="pi_person_fk"/>
-            <column columnName="research"/>
-            <column columnName="projectType"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="project_protocol" tableDbType="TABLE">
+        <columns>
+            <column columnName="pp_pk"/>
+            <column columnName="projectCode"/>
+            <column columnName="protocol_number"/>
+            <column columnName="pp_assignment_date"/>
+            <column columnName="pp_release_date"/>
             <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>

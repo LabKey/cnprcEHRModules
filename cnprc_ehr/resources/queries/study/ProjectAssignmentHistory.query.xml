@@ -1,7 +1,8 @@
- <query xmlns="http://labkey.org/data/xml/query">
+<query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Assignment" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="ProjectAssignmentHistory" tableDbType="NOT_IN_DB" useColumnOrder="true">
+                <javaCustomizer>org.labkey.cnprc_ehr.table.CNPRC_ProjectAssignmentCustomizer</javaCustomizer>
                 <tableUrl />
                 <insertUrl />
                 <importUrl />
@@ -35,8 +36,14 @@
                         <shownInDetailsView>true</shownInDetailsView>
                         <formatString>Date</formatString>
                     </column>
-                    <column columnName="assignmentStatus">
-                        <columnTitle>Assignment Status</columnTitle>
+                    <column columnName="protocol">
+                        <columnTitle>Protocol</columnTitle>
+                        <!--<fk>-->
+                            <!--<fkDbSchema>cnprc_ehr</fkDbSchema>-->
+                            <!--<fkTable>protocol</fkTable>-->
+                            <!--<fkColumnName>protocol</fkColumnName>-->
+                            <!--<fkDisplayColumnName>Protocol</fkDisplayColumnName>-->
+                        <!--</fk>-->
                     </column>
                 </columns>
             </table>

@@ -281,6 +281,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("ProjectAssignmentHistory") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "ProjectAssignmentHistory", "ProjectAssignmentHistory", "Id", "Id");
+            col.setLabel("Project Assignment History");
+            col.setDescription("Project Assignment History");
+            ds.addColumn(col);
+        }
+
     }
 
     private void customizeRelocationHistoryQuery(AbstractTableInfo ti, DateTimeFormatter dateTimeFormatter)
