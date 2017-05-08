@@ -86,8 +86,7 @@ Ext4.define('CNPRC_EHR.panel.PopulationPanel', {
             //total count
             var params = {
                 schemaName: 'study',
-                'query.queryName': 'Demographics',
-                'query.viewName': 'By Location'
+                'query.queryName': 'Demographics'
             };
             params['query.' + this.rowField + '~eq'] = rowName;
             this.appendFilterParams(params);
@@ -105,8 +104,7 @@ Ext4.define('CNPRC_EHR.panel.PopulationPanel', {
 
                 var params = {
                     schemaName: 'study',
-                    'query.queryName': 'Demographics',
-                    'query.viewName': 'By Location'
+                    'query.queryName': 'Demographics'
                 };
                 var tokens = key.split('<>');
 

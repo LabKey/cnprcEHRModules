@@ -14,6 +14,41 @@
                         colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
                     }],
                     itemId: 'population'
+                }, {
+                    title: 'SPF Colony',
+                    style: 'padding 5px;',
+                    items: [{
+                        xtype: 'ehr-populationpanel',
+                        titleText: 'SPF 0 (Conventional)',
+                        filterArray: [LABKEY.Filter.create('spf', '0', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
+                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
+                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
+                    },{
+                        xtype: 'ehr-populationpanel',
+                        titleText: 'SPF 1 (Level 1)',
+                        filterArray: [LABKEY.Filter.create('spf', '1', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
+                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
+                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
+                    },{
+                        xtype: 'ehr-populationpanel',
+                        titleText: 'SPF 2 (Level 2)',
+                        filterArray: [LABKEY.Filter.create('spf', '2', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
+                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
+                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
+                    },{
+                        xtype: 'ehr-populationpanel',
+                        titleText: 'SPF 3 (Level 2 Minus)',
+                        filterArray: [LABKEY.Filter.create('spf', '3', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
+                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
+                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
+                    },{
+                        xtype: 'ehr-populationpanel',
+                        titleText: 'SPF 4 (CMV Neg)',
+                        filterArray: [LABKEY.Filter.create('spf', '4', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
+                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
+                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
+                    }],
+                    itemId: 'spf'
                 }
                 ];
             }
