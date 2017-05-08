@@ -39,6 +39,7 @@ import org.labkey.test.components.ehr.panel.AnimalSearchPanel;
 import org.labkey.test.components.ext4.widgets.SearchPanel;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
+import org.labkey.test.pages.ehr.ColonyOverviewPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
@@ -534,6 +535,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testCnprcColonyOverview()
+    {
+        ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
+        overviewPage.clickPopulationCompositionTab();
+        waitForText("Total");
+        assertTextPresentInThisOrder("Infant","Juvenile", "Adult","Geriatric");
+        assertTextPresentInThisOrder("Total","0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs");
+        Locator.XPathLocator linkLocator = Locator.linkContainingText("22");
+        assertElementPresent(linkLocator);
+        clickAndWait(linkLocator);
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        assertEquals("Wrong row count",22,results.getDataRowCount());
+        assertTextPresent( "(species = CMO) AND (meaning <> Unknown) AND (calculated_status = Alive)");
+
+    }
+
+    @Test
     public void testTreatments()
     {
         click(Locator.linkWithText("Browse All Datasets"));
@@ -721,6 +739,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.linkWithText("TEST4564246"));
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
     }
+
 
     @Test
     public void testLTOPReport() throws IOException, CommandException
@@ -1259,8 +1278,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , UNIT_CODE
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(6).subList(0, expectedColumns.size() - 1);
-        assertEquals("Wrong data for row 7.", expected, resultsRowDataAsText);
+        List<String> resultsRowDataAsText = results.getRowDataAsText(7).subList(0, expectedColumns.size() - 1);
+        assertEquals("Wrong data for row 8.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 17, results.getDataRowCount());
     }
 
@@ -1550,7 +1569,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel.selectValues("Gender", " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
-        assertEquals("Wrong number of rows for searching all genders", 41, searchResults.getDataRowCount());
+        assertEquals("Wrong number of rows for searching all genders", 39, searchResults.getDataRowCount());
 
         goBack();
         searchPanel = new AnimalSearchPanel(getDriver());
