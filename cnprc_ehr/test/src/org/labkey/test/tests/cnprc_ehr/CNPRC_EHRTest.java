@@ -1239,23 +1239,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"enddate"
                 ,"projectCode"
                 ,"assignmentStatus"
-                ,"projectCode/pi_name"
-                ,"projectCode/title"
+                ,"pi_name"
+                ,"title"
                 ,"protocol"
-                ,"projectCode/unitCode"
+                ,"unitCode"
                 ,"timeOnProject"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST1112911"
-                , "2005-05-20"
-                , " "
+                "44444"
+                , "2008-09-20"
+                , "2016-01-01"
                 , PROJECT_CODE_5_CHAR_1
-                , "P"
+                , "S"
                 , PROJECT_INVESTIGATOR_NAME_1
                 , " "
-                , "protocol101"
+                , PROTOCOL_10_CHAR
                 , UNIT_CODE
         );
 
@@ -1510,7 +1510,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
         assertEquals("Wrong value for Status: ", "Alive", results.getDataAsText(0,3));
 
-//todo: When project/protocol relationship issues are resolved, restore this check.        assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
+        assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
     }
 
     @Test
