@@ -21,3 +21,4 @@ AND
 assignment.date < projectProtocol.pp_release_date
 AND
 (coalesce(assignment.enddate, now()) <= projectProtocol.pp_release_date)
+WHERE assignment.enddate IS NOT NULL;
