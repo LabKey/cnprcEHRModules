@@ -99,8 +99,7 @@ Ext4.define('EHR.panel.PopulationPanel', {
             rowMap: {}
         };
         this.valueMap = {
-            "Id/ageClass/label":["Infant","Juvenile","Adult","Geriatric"],
-            "subHeaders":["0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs"]
+            "Id/ageClass/label":["Infant","Juvenile","Adult","Geriatric"]
         };
 
         Ext4.each(results.rows, function(row){
@@ -157,36 +156,13 @@ Ext4.define('EHR.panel.PopulationPanel', {
         //header rows.  first add 2 for rowname/total
         var rows = [];
         var repeats = 1;
-        var genderFieldIndex = 1;
         var style =  'text-align: right;margin-right: 3px;margin-left: 3px;margin-bottom:3px;';
         var styleHeader = 'text-align: center;margin-right: 3px;margin-left: 3px;margin-bottom:3px;';
         Ext4.each(this.colFields, function(colName, idx){
             var colspan = this.getColSpan(this.colFields, idx);
 
-            function addSubHeaderRow() {
-                rows.push({html: ''});
-                rows.push({
-                    html: 'Total',
-                    style: 'border-bottom: solid 1px;' + styleHeader
-                });
-                Ext4.each(this.valueMap.subHeaders, function (subHeader) {
-                    rows.push({
-                        html: subHeader,
-                        style: 'border-bottom: solid 1px;' + styleHeader,
-                        colspan: 2
-                    });
-                });
-                rows.push({html: ''});
-                rows.push({html: ''});
-            }
-
-            if(idx == genderFieldIndex) {
-                addSubHeaderRow.call(this);
-            }
-            else {
-                rows.push({html: ''});
-                rows.push({html: ''});
-            }
+            rows.push({html: ''});
+            rows.push({html: ''});
 
             var valueArray = this.valueMap[colName];
             for (var i=0;i<repeats;i++){
@@ -200,6 +176,20 @@ Ext4.define('EHR.panel.PopulationPanel', {
                         colspan: colspan
                     });
                 }, this);
+            }
+
+            if (idx == 0) {
+                rows.push({html: ''});
+                rows.push({
+                    html: 'Total',
+                    style: 'border-bottom: solid 1px;' + styleHeader
+                });
+
+                var subHeaderStyle = 'border-bottom: solid 1px;' + (colspan>1?styleHeader:style);
+                var subHeaderRow = this.getSubHeaderRowItems(valueArray, subHeaderStyle, colspan);
+                Ext4.each(subHeaderRow, function(s) {
+                    rows.push(s);
+                });
             }
 
             repeats = valueArray ? repeats * valueArray.length : 0;
@@ -275,6 +265,21 @@ Ext4.define('EHR.panel.PopulationPanel', {
 
         target.removeAll();
         target.add(toAdd);
+    },
+
+    getSubHeaderRowItems: function(valueArray, style, colspan) {
+        var subHeaders = {Infant: "0 - 6 mos", Juvenile: "6 mos - 3.5 yrs", Adult: "3.5 - 15 yrs", Geriatric: "15+ yrs"},
+            items = [];
+
+        Ext4.each(valueArray, function(value) {
+            items.push({
+                html: subHeaders[value] || "&nbsp;",
+                style: style,
+                colspan: colspan
+            });
+        });
+
+        return items;
     },
 
     getFormattedRowNumber: function(value, url) {
