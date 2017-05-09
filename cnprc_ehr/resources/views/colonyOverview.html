@@ -3,6 +3,15 @@
     Ext4.onReady(function(){
         var webpart = <%=webpartContext%>;
         Ext4.create('EHR.panel.ColonyOverviewPanel', {
+            getSpfPanel: function (spf, title)  {
+                return {
+                        xtype: 'cnprc-ehr-populationpanel',
+                        titleText: title,
+                        filterArray: [LABKEY.Filter.create('spf', spf, LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
+                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
+                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
+                    }
+            },
             getTabs: function(){
                 return [{
                     title: 'Population Composition',
@@ -17,37 +26,11 @@
                 }, {
                     title: 'SPF Colony',
                     style: 'padding 5px;',
-                    items: [{
-                        xtype: 'cnprc-ehr-populationpanel',
-                        titleText: 'SPF 0 (Conventional)',
-                        filterArray: [LABKEY.Filter.create('spf', '0', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
-                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
-                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
-                    },{
-                        xtype: 'cnprc-ehr-populationpanel',
-                        titleText: 'SPF 1 (Level 1)',
-                        filterArray: [LABKEY.Filter.create('spf', '1', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
-                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
-                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
-                    },{
-                        xtype: 'cnprc-ehr-populationpanel',
-                        titleText: 'SPF 2 (Level 2)',
-                        filterArray: [LABKEY.Filter.create('spf', '2', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
-                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
-                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
-                    },{
-                        xtype: 'cnprc-ehr-populationpanel',
-                        titleText: 'SPF 3 (Level 2 Minus)',
-                        filterArray: [LABKEY.Filter.create('spf', '3', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
-                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
-                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
-                    },{
-                        xtype: 'cnprc-ehr-populationpanel',
-                        titleText: 'SPF 4 (CMV Neg)',
-                        filterArray: [LABKEY.Filter.create('spf', '4', LABKEY.Filter.Types.EQUALS)].concat(this.filterArray),
-                        rowField: EHR.panel.PopulationPanel.FIELDS.species,
-                        colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
-                    }],
+                    items: [this.getSpfPanel(0, 'SPF 0 (Conventional)'),
+                            this.getSpfPanel(1, 'SPF 1 (Level 1)'),
+                            this.getSpfPanel(2, 'SPF 2 (Level 2)'),
+                            this.getSpfPanel(3, 'SPF 3 (Level 2 Minus)'),
+                            this.getSpfPanel(4, 'SPF 4 (CMV Neg)')],
                     itemId: 'spf'
                 }
                 ];
