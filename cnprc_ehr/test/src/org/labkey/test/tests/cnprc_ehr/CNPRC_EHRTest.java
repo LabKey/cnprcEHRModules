@@ -580,6 +580,25 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testCnprcColonyOverview_SPF()
+    {
+        ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
+        overviewPage.clickSpfColonyTab();
+        waitForText("Total");
+        assertTextPresentInThisOrder("Infant","Juvenile", "Adult","Geriatric");
+        assertTextPresentInThisOrder("Total","0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs");
+        Locator.XPathLocator linkLocator = Locator.linkContainingText("8");
+        assertElementPresent(linkLocator);
+        clickAndWait(linkLocator);
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        assertEquals("Wrong row count",8,results.getDataRowCount());
+        assertTextPresent( "(spf = 0) AND (species = CMO) AND (meaning <> Unknown) AND (calculated_status = Alive)");
+        assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST4551032",
+                "TEST4710248","TEST5904521","TEST7151371","TEST7407382");
+
+    }
+
+    @Test
     public void testTreatments()
     {
         click(Locator.linkWithText("Browse All Datasets"));
