@@ -16,15 +16,6 @@
                             <fkColumnName>Id</fkColumnName>
                         </fk>
                     </column>
-                    <column columnName="projectCode">
-                        <columnTitle>Project Code</columnTitle>
-                        <fk>
-                            <fkDbSchema>cnprc_ehr</fkDbSchema>
-                            <fkTable>project</fkTable>
-                            <fkColumnName>projectCode</fkColumnName>
-                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
-                        </fk>
-                    </column>
                     <column columnName="date">
                         <formatString>Date</formatString>
                         <columnTitle>Assign Date</columnTitle>
@@ -36,14 +27,32 @@
                         <shownInDetailsView>true</shownInDetailsView>
                         <formatString>Date</formatString>
                     </column>
+                    <column columnName="projectCode">
+                        <columnTitle>Project Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>project</fkTable>
+                            <fkColumnName>projectCode</fkColumnName>
+                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="assignmentStatus">
+                        <columnTitle>Assignment Status</columnTitle>
+                    </column>
+                    <column columnName="pi_name">
+                        <columnTitle>PI Name</columnTitle>
+                    </column>
+                    <column columnName="title"/>
+
                     <column columnName="protocol">
                         <columnTitle>Protocol</columnTitle>
-                        <!--<fk>-->
-                            <!--<fkDbSchema>cnprc_ehr</fkDbSchema>-->
-                            <!--<fkTable>protocol</fkTable>-->
-                            <!--<fkColumnName>protocol</fkColumnName>-->
-                            <!--<fkDisplayColumnName>Protocol</fkDisplayColumnName>-->
-                        <!--</fk>-->
+                    </column>
+                    <column columnName="unitCode">
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>center_unit</fkTable>
+                            <fkColumnName>center_unit_code</fkColumnName>
+                        </fk>
                     </column>
                 </columns>
             </table>
