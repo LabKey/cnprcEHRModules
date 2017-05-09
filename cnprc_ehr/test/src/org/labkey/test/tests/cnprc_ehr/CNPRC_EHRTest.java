@@ -263,6 +263,34 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_3168659 + "-2");
         deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("protocol", PROTOCOL_ID_10_CHAR_1);
+        deleteIfNeeded("cnprc_ehr", "protocol", rowMap, "protocol");
+
+        rowMap = new HashMap<>();
+        rowMap.put("protocol", PROTOCOL_ID_10_CHAR_2);
+        deleteIfNeeded("cnprc_ehr", "protocol", rowMap, "protocol");
+
+        rowMap = new HashMap<>();
+        rowMap.put("project", PROJECT_CODE_5_CHAR_0);
+        deleteIfNeeded("cnprc_ehr", "project", rowMap, "rowid");
+
+        rowMap = new HashMap<>();
+        rowMap.put("project", PROJECT_CODE_5_CHAR_1);
+        deleteIfNeeded("cnprc_ehr", "project", rowMap, "rowid");
+
+        rowMap = new HashMap<>();
+        rowMap.put("project", PROJECT_CODE_5_CHAR_2);
+        deleteIfNeeded("cnprc_ehr", "project", rowMap, "rowid");
+
+        rowMap = new HashMap<>();
+        rowMap.put("pp_pk", 1);
+        deleteIfNeeded("cnprc_ehr", "project_protocol", rowMap, "pp_pk");
+
+        rowMap = new HashMap<>();
+        rowMap.put("pp_pk", 2);
+        deleteIfNeeded("cnprc_ehr", "project_protocol", rowMap, "pp_pk");
     }
 
     @Override
@@ -1553,15 +1581,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/birth/species",
                 "Id",
                 "Id/demographics/gender",
-                "Id/demographics/calculated_status",
                 "Id/age/yearsAndMonthsAndDays",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/curLocation/location",
-                "Id/curLocation/date",
                 "Id/DemographicsActiveAssignment/primaryProject",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
                 "date",
-                "enddate",
                 "payor_id",
                 "Id/DemographicsActivePayor/payor_id",
                 "Id/flagList/values",
@@ -1574,7 +1599,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0,1));
         assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
-        assertEquals("Wrong value for Status: ", "Alive", results.getDataAsText(0,3));
+        assertElementPresent(new Locator.LinkLocator("Pc5C1"));
 
         assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
     }
@@ -1622,10 +1647,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel = new AnimalSearchPanel(getDriver());
         searchPanel.selectValues("Species code (3 char)", "CMO");
         assertEquals("Select 'CMO' species didn't set input correctly", "CMO", getFormElement(Locator.input("species")));
-        searchPanel.selectValues("Species code (3 char)", "PCY");
+        searchPanel.selectValues("Species code (3 char)", "MMU");
         assertEquals("Adding 'CTJ' to species filter didn't set input correctly", "CMO;PCY", getFormElement(Locator.input("species")));
         searchResults = searchPanel.submit();
-        assertEquals("Wrong number of rows: Species = CMO or PCY", 33, searchResults.getDataRowCount());
+        assertEquals("Wrong number of rows: Species = CMO or PCY", 39, searchResults.getDataRowCount());
 
         goBack();
         searchPanel = new AnimalSearchPanel(getDriver());
