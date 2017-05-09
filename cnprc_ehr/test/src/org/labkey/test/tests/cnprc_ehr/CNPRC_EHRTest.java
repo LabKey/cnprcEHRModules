@@ -74,10 +74,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     protected static final String UNIT_CODE = "uc101";
     private static final Integer PROJECT_ROW_ID = 123;
     private static final String PROTOCOL_10_CHAR = "Prot10Char" ;
+    private static final String PROJECT_CODE_5_CHAR_0 = "Pc5C0" ;
     private static final String PROJECT_CODE_5_CHAR_1 = "Pc5C1" ;
     private static final String PROJECT_CODE_5_CHAR_2 = "Pc5C2" ;
+    private static final String PROTOCOL_ID_10_CHAR_1 = "Protocol01";
+    private static final String PROTOCOL_ID_10_CHAR_2 = "Protocol02";
     private static final String PROJECT_INVESTIGATOR_NAME_1 = "PI_NAME_1" ;
     private static final String PROJECT_INVESTIGATOR_NAME_2 = "PI_NAME_2" ;
+    protected static final String INVES_ID_1 = "1001";
+    protected static final String INVES_ID_2 = "1002";
     public static final String SCHEMA_CNPRC_PDL = "cnprc_pdl";
     protected final String ANIMAL_HISTORY_URL = "/ehr/" + PROJECT_NAME + "/animalHistory.view?";
     private static final String FOLDER_NAME = "CNPRC";
@@ -270,35 +275,58 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         Connection cn = new Connection(getBaseURL(), PasswordUtil.getUsername(), PasswordUtil.getPassword());
 
-        //first ehr.protocol
-        InsertRowsCommand insertCmd = new InsertRowsCommand("ehr", "protocol");
+        //first cnprc_ehr.protocol
+        InsertRowsCommand insertCmd = new InsertRowsCommand("cnprc_ehr", "protocol");
         Map<String,Object> rowMap = new HashMap<>();
-        rowMap.put("protocol", PROTOCOL_ID);
-        rowMap.put("inves", INVES_ID);
+        rowMap.put("protocol", PROTOCOL_ID_10_CHAR_1);
+        rowMap.put("piPersonId", INVES_ID_1);
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
-        rowMap.put("protocol", PROTOCOL_10_CHAR);
-        rowMap.put("inves", DUMMY_INVES);
+        rowMap.put("protocol", PROTOCOL_ID_10_CHAR_2);
+        rowMap.put("piPersonId", INVES_ID_2);
         insertCmd.addRow(rowMap);
         SaveRowsResponse saveResp = insertCmd.execute(cn, getContainerPath());
 
-        //then ehr.project
+        //then cnprc_ehr.project
         insertCmd = new InsertRowsCommand("cnprc_ehr", "project");
         rowMap = new HashMap<>();
+
+        rowMap = new HashMap<>();
+        rowMap.put("projectCode", PROJECT_CODE_5_CHAR_0);
+        rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_2);
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_1);
-        rowMap.put("protocol", PROTOCOL_10_CHAR);
         rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_1);
         rowMap.put("unitCode", UNIT_CODE);
-
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_2);
-        rowMap.put("protocol", PROTOCOL_10_CHAR);
         rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_2);
-        rowMap.put("research", true);
         insertCmd.addRow(rowMap);
+
+        saveResp = insertCmd.execute(cn, getContainerPath());
+
+        insertCmd = new InsertRowsCommand("cnprc_ehr", "project_protocol");
+        rowMap = new HashMap<>();
+        rowMap.put("pp_pk", 1);
+        rowMap.put("protocol_number", PROTOCOL_ID_10_CHAR_1);
+        rowMap.put("projectCode", PROJECT_CODE_5_CHAR_0);
+        rowMap.put("pp_assignment_date",  "2007-09-20");
+        rowMap.put("pp_release_date", "2016-12-12");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("pp_pk", 2);
+        rowMap.put("protocol_number", PROTOCOL_ID_10_CHAR_2);
+        rowMap.put("projectCode", PROJECT_CODE_5_CHAR_1);
+        rowMap.put("pp_assignment_date",  "2007-12-12");
+        rowMap.put("pp_release_date", "2016-12-12");
+        insertCmd.addRow(rowMap);
+
         saveResp = insertCmd.execute(cn, getContainerPath());
 
         insertCmd = new InsertRowsCommand("cnprc_ehr", "center_unit");
@@ -1274,13 +1302,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , "S"
                 , PROJECT_INVESTIGATOR_NAME_1
                 , " "
-                , PROTOCOL_10_CHAR
+                , PROTOCOL_ID_10_CHAR_2
                 , UNIT_CODE
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(7).subList(0, expectedColumns.size() - 1);
-        assertEquals("Wrong data for row 8.", expected, resultsRowDataAsText);
-        assertEquals("Wrong row count: ", 17, results.getDataRowCount());
+        List<String> resultsRowDataAsText = results.getRowDataAsText(1).subList(0, expectedColumns.size() - 1);
+        assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
+        assertEquals("Wrong row count: ", 3, results.getDataRowCount());
     }
 
     @Test
