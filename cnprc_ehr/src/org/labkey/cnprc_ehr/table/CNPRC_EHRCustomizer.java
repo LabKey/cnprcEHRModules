@@ -289,6 +289,13 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsActiveCases") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActiveCases", "DemographicsActiveCases", "Id", "Id");
+            col.setLabel("Active Cases");
+            col.setDescription("Active Cases");
+            ds.addColumn(col);
+        }
     }
 
     private void customizeRelocationHistoryQuery(AbstractTableInfo ti, DateTimeFormatter dateTimeFormatter)

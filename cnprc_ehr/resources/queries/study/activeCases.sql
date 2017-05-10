@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 LabKey Corporation
+ * Copyright (c) 2013-2014 LabKey Corporation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT
-  ac.Id,
-  max(ac.date) as date,
-  'L'                              AS category,
-  group_concat(ac.problem, chr(10)) AS problems,
-  group_concat(ac.remark, chr(10))  AS remarks,
-  count(*)                         AS total
-FROM study.activeCases ac
-WHERE ac.category = 'L'
-GROUP BY ac.id
+SELECT *
+FROM study.cases c
+WHERE c.enddate IS NULL

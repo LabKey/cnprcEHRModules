@@ -604,7 +604,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",22,results.getDataRowCount());
         assertTextPresent( "(species = CMO) AND (meaning <> Unknown) AND (calculated_status = Alive)");
-
     }
 
     @Test
@@ -623,7 +622,22 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertTextPresent( "(spf = 0) AND (species = CMO) AND (meaning <> Unknown) AND (calculated_status = Alive)");
         assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST4551032",
                 "TEST4710248","TEST5904521","TEST7151371","TEST7407382");
+    }
 
+    @Test
+    public void testCnprcColonyOverview_CCS()
+    {
+        ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
+        overviewPage.clickCcsColonyTab();
+        waitForText("Category");
+        assertTextPresentInThisOrder("Category","Total", "%");
+        Locator.XPathLocator linkLocator = Locator.linkContainingText("1");
+        assertElementPresent(linkLocator);
+        clickAndWait(linkLocator);
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        assertEquals("Wrong row count",1,results.getDataRowCount());
+        assertTextPresent( "(category = Diabetic)");
+        assertTextPresent("TEST2008446");
     }
 
     @Test
@@ -835,11 +849,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsActiveLongTermCases/remarks");
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
-        assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
+        assertEquals("Wrong number of rows: ", 3, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST6390238"));
-        assertEquals("Wrong value for Primary Project: ", "Pc5C1", searchResults.getDataAsText(0,3));
-        assertEquals("Wrong value for Comment: ", "DERMATITIS AX &CHEST", searchResults.getDataAsText(0,6));
-        assertEquals("Wrong value for History: ", "TEST HISTORY REMARK", searchResults.getDataAsText(0,7));
+        assertEquals("Wrong value for Primary Project: ", "Pc5C1", searchResults.getDataAsText(2,3));
+        assertEquals("Wrong value for Comment: ", "DERMATITIS AX &CHEST", searchResults.getDataAsText(2,6));
+        assertEquals("Wrong value for History: ", "TEST HISTORY REMARK", searchResults.getDataAsText(2,7));
     }
 
     @Test
