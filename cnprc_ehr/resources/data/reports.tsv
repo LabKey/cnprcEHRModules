@@ -143,6 +143,7 @@ pregnancyDeterminations	Reproductive Management	query	Pregnancy Determinations	t
 snomed_animals_conceptions	Clinical	query	SNOMED	true		study	snomed_animals_conceptions			date	false	false		qcstate/publicdata	SNOMED records for animals and conceptions
 morningHealthObs	Daily Reports	query	Morning Health	true		study	morningHealthObs			date	false	false		qcstate/publicdata	Daily Morning Health Observations
 clinical_observations	Daily Reports	query	Diarrhea	true		study	clinical_observations	diarrhea		date	false	false		qcstate/publicdata	Diarrhea Observations
+diarrheaCalendar	Daily Reports	query	Diarrhea Calendar	true		study	diarrheaCalendar			date	false	false		qcstate/publicdata	Diarrhea Observations Calendar
 breedingGroupAssignments	Reproductive Management	query	Breeding Group	true		study	breedingGroupAssignments			date	false	false		qcstate/publicdata	Animal Breeding group assignment history
 labworkResults	BBA	query	Lab Results	true		study	labworkResults			date	false	false		qcstate/publicdata	Lab Results from Behavioral Assessment
 semenAnalysis	Reproductive Management	query	Semen Analysis	true		study	semenAnalysis			date	false	false		qcstate/publicdata	Semen Analysis via Electro Ejaculation
