@@ -169,7 +169,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Immunizations",
                 "Hospital Admission and Discharge"));
         put("Daily Reports", Arrays.asList(
-                "Diarrhea and Poor App",
+                "Diarrhea",
+                "Diarrhea Calendar",
                 "Morning Health"));
         put("BBA", Arrays.asList(
                 "Behavior",
@@ -614,8 +615,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForText("Total");
         assertTextPresentInThisOrder("Infant","Juvenile", "Adult","Geriatric");
         assertTextPresentInThisOrder("Total","0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs");
-        Locator.XPathLocator linkLocator = Locator.linkContainingText("8");
-        assertElementPresent(linkLocator);
+        Locator.XPathLocator linkLocator = Locator.linkWithText("8");
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",8,results.getDataRowCount());
@@ -1662,18 +1662,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel.selectValues("Species code (3 char)", "CMO");
         assertEquals("Select 'CMO' species didn't set input correctly", "CMO", getFormElement(Locator.input("species")));
         searchPanel.selectValues("Species code (3 char)", "MMU");
-        assertEquals("Adding 'CTJ' to species filter didn't set input correctly", "CMO;PCY", getFormElement(Locator.input("species")));
+        assertEquals("Adding 'MMU' to species filter didn't set input correctly", "CMO;MMU", getFormElement(Locator.input("species")));
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Species = CMO or PCY", 39, searchResults.getDataRowCount());
 
         goBack();
         searchPanel = new AnimalSearchPanel(getDriver());
-        searchPanel.selectValues("Pairing Status", "Continuous pair with grate");
-        assertEquals("Select 'Continuous pair with grate' pairing status didn't set input correctly",
-                "Continuous pair with grate", getFormElement(Locator.input("Id/DemographicsActivePairing/observation")));
-        searchPanel.selectValues("Pairing Status", "Intermittent pair");
-        assertEquals("Select 'Intermittent pair' pairing status didn't set input correctly",
-                "Continuous pair with grate;Intermittent pair", getFormElement(Locator.input("Id/DemographicsActivePairing/observation")));
+        searchPanel.setInput("Id/DemographicsActivePairing/observations", "IP");
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
                 3, searchResults.getDataRowCount());
