@@ -19,4 +19,5 @@ SELECT
 FROM study.pairings p
 WHERE enddate IS NULL
   and p.id.demographics.species.code = 'MMU'
+  and p.id.curLocation.location IS NOT NULL
 GROUP BY p.observation

@@ -35,9 +35,9 @@ FROM
      JOIN cnprc_ehr.cage_location_history clh ON clh.location =
                                                  (CASE WHEN h.cage IS NULL
                                                    THEN h.room
-                                                  ELSE (h.room || '-' || h.cage) END)
-     JOIN cnprc_ehr.room_enclosure re ON re.room = h.room
-     LEFT JOIN study.cases c ON c.id = h.id AND c.enddate IS NULL AND c.category = 'H'
+                                                  ELSE (h.room || '-' || h.cage) END) and clh.to_date is null
+      JOIN cnprc_ehr.room_enclosure re ON re.room = h.room
+      LEFT JOIN study.cases c ON c.id = h.id AND c.enddate IS NULL AND c.category = 'H'
    WHERE h.enddate IS NULL
         and h.id.demographics.species.code = 'MMU'
 ) sub
