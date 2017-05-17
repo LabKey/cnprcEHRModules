@@ -17,6 +17,6 @@ SELECT
   p.observation AS category,
   count(*)      AS totalAnimals
 FROM study.pairings p
-
 WHERE enddate IS NULL
+  and p.id.demographics.species.code = 'MMU'
 GROUP BY p.observation

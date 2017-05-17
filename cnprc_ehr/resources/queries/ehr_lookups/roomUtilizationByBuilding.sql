@@ -25,6 +25,8 @@ SELECT
   sum(r.totalAnimals) as totalAnimals
 
 FROM ehr_lookups.roomUtilization r
+     JOIN cnprc_ehr.room_enclosure re ON re.room = r.room
+WHERE re.indoorOutdoorFlag = 'I'
 GROUP BY r.room.area
 
 ) t1
