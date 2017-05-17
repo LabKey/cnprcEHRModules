@@ -4,10 +4,9 @@
         <dependency path="ehr/panel/PopulationTrendsPanel.js"/>
         <dependency path="ehr/panel/PopulationPanel.js"/>
         <dependency path="ehr/panel/BasicAggregationPanel.js"/>
-        <dependency path="ehr/panel/HousingSummaryPanel.js"/>
+        <dependency path="cnprc_ehr/panel/HousingSummaryPanel.js"/>
         <dependency path="ehr/panel/UtilizationSummaryPanel.js"/>
         <dependency path="ehr/panel/ColonyOverviewPanel.js"/>
-
         <dependency path="cnprc_ehr/panel/PopulationPanel.js"/>
         <dependency path="cnprc_ehr/panel/ClinicalSummaryPanel.js"/>
     </dependencies>
