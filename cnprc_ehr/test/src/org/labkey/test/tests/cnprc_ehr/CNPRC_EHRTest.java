@@ -378,30 +378,35 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("room", ROOM_ID2);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
+        rowMap.put("area", "B");
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AB5001);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
+        rowMap.put("area", "B");
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AC5003);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
+        rowMap.put("area", "A");
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AD5003);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
+        rowMap.put("area", "A");
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_3168659);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
+        rowMap.put("area", "A");
         insertCmd.addRow(rowMap);
 
         saveResp  = insertCmd.execute(cn, getContainerPath());
@@ -622,6 +627,27 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertTextPresent( "(spf = 0) AND (species = CMO) AND (meaning <> Unknown) AND (calculated_status = Alive)");
         assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST4551032",
                 "TEST4710248","TEST5904521","TEST7151371","TEST7407382");
+    }
+
+    @Test
+    public void testCnprcColonyOverview_HousingSummary()
+    {
+        ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
+        overviewPage.clickHousingSummaryTab();
+        waitForText("Cage Usage:");
+        assertTextPresentInThisOrder(
+                "Cage Usage:",
+                "Area","Total Cages","Empty Cages","% Used",
+                "Housing Type Summary:",
+                "Pairing Summary:");
+        Locator.XPathLocator linkLocator = Locator.linkWithText("A:");
+        click(linkLocator);
+        switchToWindow(1);
+        waitForText("Room Utilization:");
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        assertEquals("Wrong row count",3,results.getDataRowCount());
+        List<String> expected = Arrays.asList("3168659","2","2","0","2","0","100.0","2");
+        assertEquals("Wrong row text.", expected,results.getRowDataAsText(0));
     }
 
     @Test
