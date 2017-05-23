@@ -1356,6 +1356,18 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(rowIndex,6));
         assertEquals("Wrong value for Searched Project: ", PROJECT_CODE_5_CHAR_1, results.getDataAsText(rowIndex,7));
     }
+    @Test
+    public void testAnimalHistoryDiarrheaCalendar() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Daily Reports");
+        animalHistoryPage.clickReportTab("Diarrhea Calendar");
+
+        assertTextPresentInThisOrder("Id","Year","Month","Month Number");//        List<String> expectedColumns = Arrays.asList(
+        assertTextPresentInThisOrder("January","May", "June","December");//        DataRegionTable results = new DataRegionTable("query", getDriver());
+
+    }
 
     @Test
     public void testAnimalHistoryProjectAssignmentHistoryView() throws Exception
