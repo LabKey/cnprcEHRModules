@@ -84,6 +84,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     protected static final String INVES_ID_1 = "1001";
     protected static final String INVES_ID_2 = "1002";
     public static final String SCHEMA_CNPRC_PDL = "cnprc_pdl";
+    public static final String SCHEMA_CNPRC_BILLING = "cnprc_billing";
     protected final String ANIMAL_HISTORY_URL = "/ehr/" + PROJECT_NAME + "/animalHistory.view?";
     private static final String FOLDER_NAME = "CNPRC";
     private static final String COREFACILITIES = "Core Facilities";
@@ -210,6 +211,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         storeConceptionData();
         createPDLLinkedSchema();
         storePDLData();
+        createBillingLinkedSchema();
     }
 
     @Override
@@ -1534,6 +1536,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         String sourceFolder = "/" + FOLDER_NAME + "/" + COREFACILITIES + "/" + PDLFOLDER;
         _schemaHelper.createLinkedSchema(getProjectName(), null,
                 "cnprc_pdl_linked", sourceFolder, null, SCHEMA_CNPRC_PDL,
+                null, null);
+    }
+
+    private void createBillingLinkedSchema()
+    {
+        String sourceFolder = "/" + FOLDER_NAME + "/" + COREFACILITIES + "/" + BILLINGFOLDER;
+        _schemaHelper.createLinkedSchema(getProjectName(), null,
+                "cnprc_billing_linked", sourceFolder, null, SCHEMA_CNPRC_BILLING,
                 null, null);
     }
 

@@ -36,13 +36,18 @@
                     title: 'Clinical Case Summary',
                     items: [{
                         xtype: 'cnprc-ehr-clinicalsummarypanel',
-                        style: 'padding-top: 20px'
                     }],
                     itemId: 'clinicalSummary'
                 },{
                     title: 'Housing Summary',
                     xtype: 'cnprc-ehr-housingsummarypanel',
                     itemId: 'housingSummary'
+                }, {
+                    title: 'Utilization Summary',
+                    items: [{
+                        xtype: 'cnprc-ehr-utilizationsummarypanel',
+                    }],
+                    itemId: 'utilizationSummary'
                 }];
             }
         }).render(webpart.wrapperDivId);
