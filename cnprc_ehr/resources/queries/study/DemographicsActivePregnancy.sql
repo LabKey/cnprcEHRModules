@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT *,
-timestampdiff('SQL_TSI_DAY', conception, now()) AS daysPregnant
+SELECT id,
+max(conNum) as conNum,
+max(termComment) as termComment,
+max(PGComment) as PGComment,
+max(conceptionDateStatus) as conceptionDateStatus,
+timestampdiff('SQL_TSI_DAY',  max(conception), now()) AS daysPregnant
 FROM pregnancyConfirmations
 WHERE termDate IS NULL
+GROUP BY id
