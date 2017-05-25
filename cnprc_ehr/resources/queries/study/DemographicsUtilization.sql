@@ -13,40 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT activePayor.Id,
-CASE WHEN acct.fund_type = 'V' THEN 'Pilot'
-     WHEN acct.fund_type = 'X' THEN 'PI Funded'
-     WHEN acct.fund_type = 'B' THEN 'Base Grant'
-     WHEN acct.fund_type = 'O' THEN 'Other'
-     ELSE 'Unknown'
+
+SELECT demo.Id,
+CASE WHEN animalUtilizations.fund_types_by_animal = 'V' THEN 'Pilot'
+     WHEN animalUtilizations.fund_types_by_animal = 'X' THEN 'PI Funded'
+     WHEN animalUtilizations.fund_types_by_animal = 'B' THEN 'Base Grant'
+     WHEN animalUtilizations.fund_types_by_animal = 'O' THEN 'Other'
+     ELSE 'Expired/Unknown'  -- this will happen if any dupes were found earlier, even if they're all the same fund type!
 END AS fundingCategory,
-acct.*
-FROM (
-    SELECT currentAccountOrChargeIds.accountOrChargeId
+animalUtilizations.fund_types_by_animal
+FROM Demographics demo
+LEFT JOIN
+(
+    SELECT activePayor.Id,
+           group_concat(uniqueAccountOrChargeIds.fund_types) AS fund_types_by_animal
     FROM (
-        SELECT
-            CASE WHEN acct2.fund_type IN ('O', 'X') THEN acct2.acct_id
-            WHEN acct2.fund_type IN ('B', 'V') THEN acct2.charge_id
-            ELSE '' END AS accountOrChargeId
-        FROM cnprc_billing_linked.account acct2
-        WHERE now() >= acct2.begin_date
-          AND now() < acct2.end_date
-    ) currentAccountOrChargeIds
-    GROUP BY accountOrChargeId
-    HAVING COUNT(*) = 1  -- don't allow any dupes between either column
-) validAccountOrChargeIds
-JOIN study.DemographicsActivePayor activePayor
-    ON SUBSTRING(activePayor.payor_id, 7, 10) = validAccountOrChargeIds.accountOrChargeId
-LEFT JOIN cnprc_billing_linked.account acct
-    ON
-    (
-        (acct.acct_id = validAccountOrChargeIds.accountOrChargeId
-            AND acct.fund_type IN ('O', 'X')
-        )
-        OR
-        (acct.charge_id = validAccountOrChargeIds.accountOrChargeId
-            AND acct.fund_type IN ('B', 'V')
-        )
-    )
-    AND now() >= acct.begin_date
-    AND now() < acct.end_date
+        SELECT currentAccountOrChargeIds.accountOrChargeId,
+               group_concat(currentAccountOrChargeIds.fund_type) AS fund_types
+        FROM (
+            SELECT
+                CASE WHEN acct2.fund_type IN ('O', 'X') THEN acct2.acct_id
+                WHEN acct2.fund_type IN ('B', 'V') THEN acct2.charge_id
+                END AS accountOrChargeId,
+                acct2.fund_type
+            FROM cnprc_billing_linked.account acct2
+            WHERE now() >= acct2.begin_date
+              AND now() <= acct2.end_date
+        ) currentAccountOrChargeIds
+        GROUP BY accountOrChargeId
+    ) uniqueAccountOrChargeIds
+    JOIN study.DemographicsActivePayor activePayor
+        ON (SUBSTRING(activePayor.payor_id, 7, 10) = uniqueAccountOrChargeIds.accountOrChargeId)
+    GROUP BY activePayor.Id
+) animalUtilizations
+ON animalUtilizations.Id = demo.Id
+WHERE demo.calculated_status = 'Alive'
