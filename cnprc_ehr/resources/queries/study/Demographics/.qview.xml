@@ -41,7 +41,7 @@
         </column>
         <column name="Id/DemographicsActiveAssignment/primaryProject"/>
         <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
-        <column name="Id/DemographicsActivePayor/payor_id"/>
+        <column name="Id/DemographicsActivePayor/payor_ids"/>
         <column name="Id/DemographicsActivePairing/observation/value">
             <properties>
                 <property name="columnTitle" value="Behavior Code"/>

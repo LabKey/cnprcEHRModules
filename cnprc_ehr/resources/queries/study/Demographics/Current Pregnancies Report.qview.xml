@@ -22,7 +22,7 @@
                 <property name="columnTitle" value="Location Date"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActivePayor/payor_id"/>
+        <column name="Id/DemographicsActivePayor/payor_ids"/>
         <column name="Id/DemographicsActiveColony/colonyCode">
             <properties> <!-- This should probably be done at the query.xml level -->
                 <property name="columnTitle" value="Colony Code"/>

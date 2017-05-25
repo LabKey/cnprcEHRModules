@@ -24,7 +24,7 @@
             </properties>
         </column>
         <column name="Id/DemographicsActiveAssignment/primaryProject"/>
-        <column name="Id/DemographicsActivePayor/payor_id"/>
+        <column name="Id/DemographicsActivePayor/payor_ids"/>
         <column name="Id/DemographicsActiveAssignment/secondaryProjects"/>
         <column name="Id/flagList/values">
             <properties>

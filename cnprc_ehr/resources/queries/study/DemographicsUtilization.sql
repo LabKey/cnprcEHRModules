@@ -42,8 +42,9 @@ LEFT JOIN
         ) currentAccountOrChargeIds
         GROUP BY accountOrChargeId
     ) uniqueAccountOrChargeIds
-    JOIN study.DemographicsActivePayor activePayor
+    JOIN study.payor_assignments activePayor
         ON (SUBSTRING(activePayor.payor_id, 7, 10) = uniqueAccountOrChargeIds.accountOrChargeId)
+        AND (activePayor.enddate IS NULL)
     GROUP BY activePayor.Id
 ) animalUtilizations
 ON animalUtilizations.Id = demo.Id

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT *
+SELECT payor_Assignments.Id, group_concat(payor_Assignments.payor_id) AS payor_ids
 FROM study.payor_Assignments
 WHERE enddate is NULL
+GROUP BY payor_Assignments.Id

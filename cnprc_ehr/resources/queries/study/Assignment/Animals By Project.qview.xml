@@ -55,7 +55,7 @@
                 <property name="columnTitle" value="Secondary Project(s)"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActivePayor/payor_id">
+        <column name="Id/DemographicsActivePayor/payor_ids">
             <properties>
                 <property name="columnTitle" value="Payor"/>
             </properties>

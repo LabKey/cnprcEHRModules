@@ -40,7 +40,14 @@ END AS deathOrOnDate,
  WHERE Id = animal.Id
 ) MostRecentWeight,
 housing.date,
-pay_assign.payor_id,
+-- Adapted from DemographicsActivePayor
+(SELECT group_concat(payor_Assignments.payor_id)
+    FROM study.payor_Assignments
+    WHERE payor_Assignments.Id = animal.Id
+    AND onDate >= payor_Assignments.date
+    AND onDate < COALESCE(payor_Assignments.endDate, now())
+    GROUP BY payor_Assignments.Id
+) payor_ids,
 col_assign.colonyCode,
 bga.groupCode,
 breed_roster.book,  -- potentially incorrect for non-current dates
@@ -75,7 +82,8 @@ breed_roster.book,  -- potentially incorrect for non-current dates
     group_concat(flags.flag, ', ') as flagValues
     FROM study.flags flags
     WHERE flags.Id = animal.Id
-    AND onDate BETWEEN flags.date AND COALESCE(flags.endDate, now())
+    AND onDate >= flags.date
+    AND onDate < COALESCE(flags.endDate, now())
     GROUP BY flags.Id
 ) values,
 preg_confirm.conNum,
@@ -133,7 +141,7 @@ UNION ALL
 
 -- Part 2: vacant cage selection
 -- Select all but filter column
-SELECT Id, location, cage, cage_size, rate_class, species, gender, birth, deathOrOnDate, MostRecentWeight, date, payor_id,
+SELECT Id, location, cage, cage_size, rate_class, species, gender, birth, deathOrOnDate, MostRecentWeight, date, payor_ids,
        colonyCode, groupCode, book, primaryProject, secondaryProjects, values, conNum, pgComment, daysPregnant, conceptionDateStatus,
        supervisor, room, pairingIndicator, area
 FROM
@@ -149,7 +157,7 @@ NULL AS birth,
 NULL AS deathOrOnDate,
 NULL AS MostRecentWeight,
 clh.from_date AS date,
-NULL AS payor_id,
+NULL AS payor_ids,
 NULL AS colonyCode,
 NULL AS groupCode,
 NULL AS book,

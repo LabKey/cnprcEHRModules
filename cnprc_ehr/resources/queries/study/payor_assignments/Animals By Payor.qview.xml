@@ -46,7 +46,7 @@
                 <property name="columnTitle" value="Searched Payor"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActivePayor/payor_id">
+        <column name="Id/DemographicsActivePayor/payor_ids">
             <properties>
                 <property name="columnTitle" value="Current Payor"/>
             </properties>

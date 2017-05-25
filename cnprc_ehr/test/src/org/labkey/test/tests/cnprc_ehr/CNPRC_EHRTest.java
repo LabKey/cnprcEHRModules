@@ -112,6 +112,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_SAMPLE_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SAMPLES.tsv");
     private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
+    private static final File BILLING_ACCOUNT_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_BILLING_ACCOUNTS.tsv");
     private static final File CNPRC_EHR_CONCEPTIONS_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CONCEPTIONS.tsv");
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
@@ -212,6 +213,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         createPDLLinkedSchema();
         storePDLData();
         createBillingLinkedSchema();
+        storeBillingData();
     }
 
     @Override
@@ -668,6 +670,22 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testCnprcColonyOverview_Utilization()
+    {
+        ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
+        WebElement utilizationColonyTab = overviewPage.clickUtilizationColonyTab();
+        waitForText("Category");
+        assertEquals("Wrong column headers", Arrays.asList("Category", "Total", "%")
+                , getTexts(Locator.css("tr:nth-of-type(1)> td").findElements(utilizationColonyTab)));
+        WebElement linkElement = Locator.tag("tr").withDescendant(Locator.tagWithText("div","Base Grant")).append(Locator.tagWithText("a","2")).findElement(utilizationColonyTab);
+
+        clickAndWait(linkElement);
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        assertEquals("Wrong row count",2,results.getDataRowCount());
+        assertTextPresent( "(fundingCategory = 'Base Grant')", "TEST1684145", "TEST6390238");
+    }
+
+    @Test
     public void testTreatments()
     {
         click(Locator.linkWithText("Browse All Datasets"));
@@ -899,7 +917,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsActiveColony/colonyCode",
                 "spf",
                 "Id/DemographicsActiveAssignment/primaryProject",
-                "Id/DemographicsActivePayor/payor_id",
+                "Id/DemographicsActivePayor/payor_ids",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
                 "Id/flagList/values",
                 "Id/Gestation/Gestation"
@@ -966,7 +984,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/age/yearsAndMonthsAndDays",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/curLocation/Date",
-                "Id/DemographicsActivePayor/payor_id",
+                "Id/DemographicsActivePayor/payor_ids",
                 "Id/DemographicsActiveColony/colonyCode",
                 "Id/DemographicsActiveBreedingGroup/groupCode",
                 "Id/breedingRoster/book",
@@ -1217,7 +1235,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "age",
                 "MostRecentWeight",
                 "date",
-                "payor_id",
+                "payor_ids",
                 "colonyCode",
                 "groupCode",
                 "book",
@@ -1253,7 +1271,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong Enclosure Search results from housing table using current date,",
                 Arrays.asList("44444", "AC5003", "89", "4", "MMU", "5.5", " ", "L", " ", "BO", " ", " ", " ", "Not Completed", "Jane Jones"),
-                results.getRowDataAsText(1, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                results.getRowDataAsText(1, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_ids", "colonyCode",
                         "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
 
         // Now test that historical data changes on same info
@@ -1267,7 +1285,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong Enclosure Search results from housing table using historical date,",
                 Arrays.asList("44444", "AC5003", "89", "6", "MMU", "4.4", "AB125/YZ17", "O", "M", "BO", "Pc5C0", "Pc5C1, Pc5C2", "CHA, CHU", "Completed", "Jane Jones"),
-                results.getRowDataAsText(0, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                results.getRowDataAsText(0, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_ids", "colonyCode",
                         "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
 
         // Test from departure data too
@@ -1276,7 +1294,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         /*assertEquals("Wrong Enclosure Search results from departure table using historical date,",
                 Arrays.asList("44446", "3105069X4", " ", "MMU", "6.6", "AB126/YZ18", " ", "T", "C2", "Pc5C2", " ", "CHU", "Completed", " "),
-                results.getRowDataAsText(1, "Id", "location", "cage_size", "species", "MostRecentWeight", "payor_id", "colonyCode",
+                results.getRowDataAsText(1, "Id", "location", "cage_size", "species", "MostRecentWeight", "payor_ids", "colonyCode",
                         "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));*/
     }
 
@@ -1343,7 +1361,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"assignmentStatus"
                 ,"Id/DemographicsActiveAssignment/primaryProject"
                 ,"Id/DemographicsActiveAssignment/secondaryProjects"
-                ,"Id/DemographicsActivePayor/payor_id"
+                ,"Id/DemographicsActivePayor/payor_ids"
                 ,"Id/flagList/values"
                 ,"Id/DemographicsActiveColony/colonyCode"
                 ,"Id/DemographicsActiveBreedingGroup/groupCode"
@@ -1649,7 +1667,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsActiveAssignment/secondaryProjects",
                 "date",
                 "payor_id",
-                "Id/DemographicsActivePayor/payor_id",
+                "Id/DemographicsActivePayor/payor_ids",
                 "Id/flagList/values",
                 "Id/DemographicsActivePregnancy/conNum",
                 "Id/DemographicsActivePregnancy/daysPregnant",
@@ -1764,6 +1782,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertTsvData(connection, SCHEMA_CNPRC_PDL, "sub_tests", PDL_SUB_TEST_TSV, folder);
         insertTsvData(connection, SCHEMA_CNPRC_PDL, "tests",PDL_TEST_TSV, folder);
         insertTsvData(connection, SCHEMA_CNPRC_PDL, "orders", PDL_ORDER_TSV, folder);
+    }
+
+    private void storeBillingData() throws Exception
+    {
+        Connection connection = createDefaultConnection(true);
+        String folder = "/" + COREFACILITIES + "/" + BILLINGFOLDER;
+        insertTsvData(connection, SCHEMA_CNPRC_BILLING, "account", BILLING_ACCOUNT_TSV, folder);
     }
 
     private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile, @Nullable String folder)

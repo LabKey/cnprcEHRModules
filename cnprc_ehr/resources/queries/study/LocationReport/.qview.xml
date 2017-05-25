@@ -47,7 +47,7 @@
                 <property name="columnTitle" value="Location Date"/>
             </properties>
         </column>
-        <column name="payor_id">
+        <column name="payor_ids">
             <properties>
                 <property name="columnTitle" value="Payor ID"/>
             </properties>
