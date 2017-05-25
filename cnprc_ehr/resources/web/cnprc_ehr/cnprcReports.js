@@ -132,3 +132,49 @@ EHR.reports.virology = function (panel, tab, viewName) {
         }]
     });
 };
+
+EHR.reports.conceptionHistory = function (panel, tab, viewName) {
+    var filterArray = panel.getFilterArray(tab);
+    var title = panel.getTitleSuffix();
+
+    tab.add({
+        xtype: 'ldk-querypanel',
+        style: 'margin-bottom:10px;',
+        queryConfig: panel.getQWPConfig({
+            schemaName: 'study',
+            queryName: 'pregnancyConfirmations',
+            viewName: viewName,
+            title: 'Conception History ' + title,
+            filters: filterArray.nonRemovable,
+            removeableFilters: filterArray.removable
+        })
+    });
+
+    tab.add({
+        xtype: 'ldk-webpartpanel',
+        title: 'Legend',
+        items: [{
+            border: false,
+            html: '<table class="ehr-legend">' +
+            CNPRC.Utils.legendTitle('Sex', true, false) +               CNPRC.Utils.legendTitle('Death Type', false, false) +       CNPRC.Utils.legendTitle('Result', false, true) +
+            CNPRC.Utils.legendEntry('F', 'Female', true, false) +       CNPRC.Utils.legendEntry('X', 'Experimental', false, false)+ CNPRC.Utils.legendEntry('LV', 'Live Vaginal', false, true) +
+            CNPRC.Utils.legendEntry('M', 'Male', true, false) +         CNPRC.Utils.legendEntry('K', 'Medical Cull', false, false)+ CNPRC.Utils.legendEntry('LN', 'Live Non Vaginal', false, true) +
+            CNPRC.Utils.legendEntry('U', 'Unknown', true, false) +      CNPRC.Utils.legendEntry('', '', false, false) +             CNPRC.Utils.legendEntry('LVX', 'Live Vaginal Experimental', false, true) +
+            CNPRC.Utils.legendEntry('X', 'Hermaphrodite', true, false) +CNPRC.Utils.legendEntry('', '', false, false) +             CNPRC.Utils.legendEntry('LNX', 'Live Non Vaginal Experimental', false, true) +
+            CNPRC.Utils.legendEntry('', '', true, false) +              CNPRC.Utils.legendEntry('', '', false, false) +             CNPRC.Utils.legendEntry('DV', 'Dead Vaginal', false, true) +
+            CNPRC.Utils.legendTitle('Est', true, false) +               CNPRC.Utils.legendEntry('', '', false, false) +             CNPRC.Utils.legendEntry('DN', 'Dead Non Vaginal', false, true) +
+            CNPRC.Utils.legendEntry('e', 'Estimated', true, false) +    CNPRC.Utils.legendEntry('', '', false, false) +             CNPRC.Utils.legendEntry('DVX', 'Dead Vaginal Experimental', false, true) +
+            CNPRC.Utils.legendEntry(' ', ' ', true, false) +            CNPRC.Utils.legendEntry('', '', false, false) +             CNPRC.Utils.legendEntry('DNX', 'Dead Non Vaginal Experimental', false, true) +
+
+
+
+
+
+
+
+
+
+            '</table>'
+        }]
+    });
+};
