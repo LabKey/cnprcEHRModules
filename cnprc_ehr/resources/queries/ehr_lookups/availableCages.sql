@@ -44,11 +44,13 @@ SELECT
   WHEN (c.status IS NOT NULL AND c.status = 'Unavailable')
     THEN 1
   ELSE 0
-  END          AS isMarkedUnavailable
+  END          AS isMarkedUnavailable,
+  re.indoorOutdoorFlag
 
 FROM ehr_lookups.cage c
   --find the cage located to the left
   LEFT JOIN ehr_lookups.cage lc
     ON (lc.cage_type != 'No Cage' AND c.room = lc.room AND c.cagePosition.row = lc.cagePosition.row AND
         (c.cagePosition.columnIdx - 1) = lc.cagePosition.columnIdx)
+  JOIN cnprc_ehr.room_enclosure re ON re.room = c.room
 

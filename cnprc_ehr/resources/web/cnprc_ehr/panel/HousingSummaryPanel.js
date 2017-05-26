@@ -8,5 +8,18 @@ Ext4.define('CNPRC_EHR.panel.HousingSummaryPanel', {
     alias: 'widget.cnprc-ehr-housingsummarypanel',
 
     nounSingular: 'Area',
-    nounPlural: 'Areas'
+    nounPlural: 'Areas',
+
+    getAvailableCagesUrl: function (area) {
+        var urlParams = {
+            schemaName: 'ehr_lookups',
+            'query.queryName': 'availableCages',
+            'query.isAvailable~eq': true,
+            'query.sort': 'cage'
+        };
+        urlParams['query.room/' + this.nounSingular.toLowerCase() + '~eq'] = area;
+        urlParams['query.indoorOutdoorFlag~eq'] = 'I';
+
+        return urlParams;
+    }
 });

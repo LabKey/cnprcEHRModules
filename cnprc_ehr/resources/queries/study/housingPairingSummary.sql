@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 SELECT
-  p.observation AS category,
-  count(*)      AS totalAnimals
-FROM study.pairings p
-WHERE enddate IS NULL
-  and p.id.demographics.species.code = 'MMU'
-  and p.id.curLocation.location IS NOT NULL
-GROUP BY p.observation
+  sub.observation AS category,
+  count(*)        AS totalAnimals
+FROM (
+       SELECT p.observation
+       FROM study.pairings p
+       WHERE enddate IS NULL
+             AND p.id.demographics.species.code = 'MMU'
+             AND p.id.curLocation.location IS NOT NULL
+       GROUP BY p.id, p.observation) sub
+GROUP BY sub.observation
