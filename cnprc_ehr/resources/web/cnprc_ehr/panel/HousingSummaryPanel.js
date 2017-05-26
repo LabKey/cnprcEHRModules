@@ -10,7 +10,7 @@ Ext4.define('CNPRC_EHR.panel.HousingSummaryPanel', {
     nounSingular: 'Area',
     nounPlural: 'Areas',
 
-    getAvailableCagesUrl: function (area) {
+    getAvailableCagesUrlParams: function (area) {
         var urlParams = {
             schemaName: 'ehr_lookups',
             'query.queryName': 'availableCages',
