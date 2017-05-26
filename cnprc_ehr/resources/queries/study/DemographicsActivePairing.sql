@@ -15,7 +15,7 @@
  */
 SELECT
   p.id,
-  group_concat(pairedWithId, ', ') as pairedWithIds,
+  group_concat(DISTINCT pairedWithId, ', ') as pairedWithIds,
   group_concat(DISTINCT observation, ', ') AS observations,
   max(symbol.PairedSymbol ) as pairedSymbol
   FROM study.pairings p
