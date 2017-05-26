@@ -28,7 +28,7 @@ clh.rate_class rateClass,
 room_enc.supervisor
 FROM study.housing d2
 INNER JOIN (
-select id from study.housing group by id having count(*) = 1
+select id from study.housing where enddate is null group by id having count(*) = 1
 ) ensureSingleRecord on ensureSingleRecord.id = d2.id
 LEFT JOIN cnprc_ehr.cage_location_history clh ON clh.location = (d2.room || '-' || d2.cage) AND clh.to_date IS NULL
 LEFT JOIN cnprc_ehr.room_enclosure room_enc ON room_enc.room = d2.room
