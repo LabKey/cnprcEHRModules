@@ -149,9 +149,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Pairing Observations"));
         put("Reproductive Management", Arrays.asList(
                 "Breeding",
+                "Conception History",
                 "Cycle",
                 "Menses",
-                "Pregnancies",
                 "Pregnancy Determinations",
                 "Semen Analysis",
                 "Breeding Group"));
@@ -1384,9 +1384,20 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickCategoryTab("Daily Reports");
         animalHistoryPage.clickReportTab("Diarrhea Calendar");
 
-        assertTextPresentInThisOrder("Id","Year","Month","Month Number");//        List<String> expectedColumns = Arrays.asList(
-        assertTextPresentInThisOrder("January","May", "June","December");//        DataRegionTable results = new DataRegionTable("query", getDriver());
+        assertTextPresentInThisOrder("Id","Year","Month","Month Number");
+        assertTextPresentInThisOrder("January","May", "June","December");
 
+    }
+
+    @Test
+    public void testAnimalHistoryConceptionHistory() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.clickCategoryTab("Reproductive Management");
+        animalHistoryPage.clickReportTab("Conception History");
+
+        assertTextPresentInThisOrder("Female Id","Accession Date","Female Species","Sire");
     }
 
     @Test
