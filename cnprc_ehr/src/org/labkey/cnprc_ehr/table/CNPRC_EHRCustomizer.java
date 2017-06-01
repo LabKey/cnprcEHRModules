@@ -241,6 +241,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         }
 
 
+        if (ds.getColumn("parents") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "parents", "demographicsParents", "Id", "Id");
+            col.setLabel("Parents");
+            col.setDescription("Shows the known parents of each animal");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("Gestation") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "Gestation", "Gestation", "Id", "Id");
