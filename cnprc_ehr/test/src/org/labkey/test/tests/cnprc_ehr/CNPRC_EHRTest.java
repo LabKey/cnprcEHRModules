@@ -55,6 +55,8 @@ import org.openqa.selenium.WebElement;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -296,6 +298,38 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap = new HashMap<>();
         rowMap.put("pp_pk", 2);
         deleteIfNeeded("cnprc_ehr", "project_protocol", rowMap, "pp_pk");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST3771679-1");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST3771679-2");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST3771679-3");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST4037096-1");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST4037096-2");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST4037096-3");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST7407382-1");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
+
+        rowMap = new HashMap<>();
+        rowMap.put("Description", "TEST7407382-2");
+        deleteIfNeeded("study", "weight", rowMap, "Description");
     }
 
     @Override
@@ -467,6 +501,96 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         saveResp = insertCmd.execute(cn, getContainerPath());
 
+        //then study.weight
+        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime fiftyDaysAgo = now.minusDays(50);
+        ZonedDateTime seventyFiveDaysAgo = now.minusDays(50);
+        ZonedDateTime oneHundredSeventyDaysAgo = now.minusDays(170);
+        ZonedDateTime twoHundredDaysAgo = now.minusDays(200);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        insertCmd = new InsertRowsCommand("study", "weight");
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "10.0");
+        rowMap.put("ts", dateTimeFormatter.format(now));
+        rowMap.put("date", dateTimeFormatter.format(now));
+        rowMap.put("Id", "TEST3771679");
+        rowMap.put("Description", "TEST3771679-1");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "12.0");
+        rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
+        rowMap.put("date", dateTimeFormatter.format(fiftyDaysAgo));
+        rowMap.put("Id", "TEST3771679");
+        rowMap.put("Description", "TEST3771679-2");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "13.0");
+        rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
+        rowMap.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
+        rowMap.put("Id", "TEST3771679");
+        rowMap.put("Description", "TEST3771679-3");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "10.0");
+        rowMap.put("ts", dateTimeFormatter.format(now));
+        rowMap.put("date", dateTimeFormatter.format(now));
+        rowMap.put("Id", "TEST4037096");
+        rowMap.put("Description", "TEST4037096-1");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "11.0");
+        rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
+        rowMap.put("date", dateTimeFormatter.format(fiftyDaysAgo));
+        rowMap.put("Id", "TEST4037096");
+        rowMap.put("Description", "TEST4037096-2");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "10.5");
+        rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
+        rowMap.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
+        rowMap.put("Id", "TEST4037096");
+        rowMap.put("Description", "TEST4037096-3");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "10.0");
+        rowMap.put("ts", dateTimeFormatter.format(now));
+        rowMap.put("date", dateTimeFormatter.format(now));
+        rowMap.put("Id", "TEST7407382");
+        rowMap.put("Description", "TEST7407382-1");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "15.0");
+        rowMap.put("ts", dateTimeFormatter.format(twoHundredDaysAgo));
+        rowMap.put("date", dateTimeFormatter.format(twoHundredDaysAgo));
+        rowMap.put("Id", "TEST7407382");
+        rowMap.put("Description", "TEST7407382-2");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "10.0");
+        rowMap.put("ts", dateTimeFormatter.format(oneHundredSeventyDaysAgo));
+        rowMap.put("date", dateTimeFormatter.format(oneHundredSeventyDaysAgo));
+        rowMap.put("Id", "44445");
+        rowMap.put("Description", "44445-1");
+        insertCmd.addRow(rowMap);
+
+        rowMap = new HashMap<>();
+        rowMap.put("weight", "14.0");
+        rowMap.put("ts", dateTimeFormatter.format(twoHundredDaysAgo));
+        rowMap.put("date", dateTimeFormatter.format(twoHundredDaysAgo));
+        rowMap.put("Id", "44445");
+        rowMap.put("Description", "44445-2");
+        insertCmd.addRow(rowMap);
+
+        saveResp = insertCmd.execute(cn, getContainerPath());
     }
 
     protected void initGenetics() throws Exception
@@ -1200,6 +1324,63 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         }
 
         assertEquals("Wrong row count: ", 1, results.getDataRowCount());
+
+    }
+
+    @Test
+    public void testTenPercentWeightChangeReport() throws IOException, CommandException
+    {
+        SearchPanel searchPanel = getSearchPanel();
+        clickAndWait(new Locator.LinkLocator("10% Weight Change"));
+
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "LatestWeightDate",
+                "LatestWeight",
+                "IntervalInDays",
+                "IntervalInMonths",
+                "OldWeight",
+                "PctChange"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
+        String[] expected = {
+                "TEST3771679"
+                , null
+                , "10"
+                , "50"
+                , "1"
+                , "13.0"
+                , "-30.0"
+        };
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0);
+        String[] rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
+        for (int i = 0; i < expected.length; i++)
+        {
+            if (i == 1)  // latest weight date, will keep changing
+                continue;  // so skip it
+            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
+        }
+
+        expected[0] = "TEST4037096";
+        expected[1] = null;
+        expected[2] = "10";
+        expected[3] = "50";
+        expected[4] = "1";
+        expected[5] = "11.0";
+        expected[6] = "-10.0";
+        resultsRowDataAsText = results.getRowDataAsText(1);
+        rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
+        for (int i = 0; i < expected.length; i++)
+        {
+            if (i == 1)  // latest weight date, will keep changing
+                continue;  // so skip it
+            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
+        }
+
+        assertEquals("Wrong row count: ", 2, results.getDataRowCount());
 
     }
 

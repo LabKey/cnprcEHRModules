@@ -1,0 +1,63 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="weightRelChange" tableDbType="NOT_IN_DB">
+                <tableTitle>10% Weight Drop over last 180 Days</tableTitle>
+                <description>This query shows the percent drop of each most recent weight in the last 180 if it is greater than or equal to 10 percent</description>
+                <columns>
+                    <column columnName="lsid">
+                        <isHidden>false</isHidden>
+                    </column>
+                    <column columnName="Id">
+                        <columnTitle>Animal</columnTitle>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>id</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="LatestWeightDate">
+                        <columnTitle>Latest Weight Date</columnTitle>
+                    </column>
+                    <column columnName="LatestWeight">
+                        <columnTitle>Latest Weight (kg)</columnTitle>
+                        <url>/query/executeQuery.view?schemaName=study&amp;
+                            query.queryName=weight&amp;
+                            query.date~eq=${LastestWeightDate}&amp;
+                            query.sort=-date
+                        </url>
+                    </column>
+                    <column columnName="IntervalInDays">
+                        <columnTitle>Days Since Weight</columnTitle>
+                    </column>
+                    <column columnName="IntervalInMonths">
+                        <columnTitle>Months Since Weight</columnTitle>
+                    </column>
+                    <column columnName="OldWeight">
+                        <columnTitle>Old Weight (kg)</columnTitle>
+                    </column>
+                    <column columnName="PctChange">
+                        <columnTitle>% Change Relative To Current</columnTitle>
+                        <conditionalFormats>
+                            <conditionalFormat>
+                                <filters>
+                                    <filter operator="lte" value="-20"/>
+                                </filters>
+                                <bold>true</bold>
+                                <backgroundColor>FF0000</backgroundColor>
+                            </conditionalFormat>
+                            <conditionalFormat>
+                                <filters>
+                                    <filter operator="lte" value="-10"/>
+                                </filters>
+                                <bold>true</bold>
+                                <backgroundColor>FF8888</backgroundColor>
+                            </conditionalFormat>
+                        </conditionalFormats>
+                    </column>
+                </columns>
+                <titleColumn>PctChange</titleColumn>
+            </table>
+        </tables>
+    </metadata>
+</query>
