@@ -36,3 +36,4 @@ FROM
   GROUP BY oldWeightsWithDupes.Id
 ) oldWeights
 WHERE ((oldWeights.Id.MostRecentWeight.MostRecentWeight - oldWeights.weight) * 100 / oldWeights.Id.MostRecentWeight.MostRecentWeight) <= -10.0
+AND oldWeights.Id.Demographics.calculated_status = 'Alive'
