@@ -1662,7 +1662,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Assignments and Groups");
         animalHistoryPage.clickReportTab("Per-diem Payor Assignment");
-        click(Locator.linkContainingText("AB123/YZ12"));
+        WebElement link = Locator.linkContainingText("AB123/YZ12").findElement(getDriver());
+        scrollIntoView(link, true);
+        click(link);
 
         switchToWindow(1);
 
