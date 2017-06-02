@@ -2,8 +2,9 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="weightRelChange" tableDbType="NOT_IN_DB">
-                <tableTitle>10% Weight Drop over last 180 Days</tableTitle>
-                <description>This query shows the percent drop of each most recent weight in the last 180 if it is greater than or equal to 10 percent</description>
+                <tableTitle>10%/20% Weight Drop over last 180 Days</tableTitle>
+                <description>This query shows the largest drop in weight for an animal (over the last 180 days) if it is more than 10 percent,
+                    compared to the most recent weight, with different colorings at the 10 and 20 percent thresholds</description>
                 <columns>
                     <column columnName="lsid">
                         <isHidden>false</isHidden>

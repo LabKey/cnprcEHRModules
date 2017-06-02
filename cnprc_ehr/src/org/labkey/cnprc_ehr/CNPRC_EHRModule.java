@@ -89,7 +89,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerOptionalClinicalHistoryResources(this);
 
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
-        ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10% Weight Change", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightRelChange"), "Commonly Used Queries");
+        ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10%/20% Weight Change", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightRelChange"), "Commonly Used Queries");
 
         ehrService.registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
         ehrService.registerActionOverride("animalSearch", this, "views/animalSearch.html");

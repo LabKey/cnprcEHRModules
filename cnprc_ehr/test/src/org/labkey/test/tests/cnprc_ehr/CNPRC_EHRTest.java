@@ -1377,7 +1377,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testTenPercentWeightChangeReport() throws IOException, CommandException
     {
         SearchPanel searchPanel = getSearchPanel();
-        clickAndWait(new Locator.LinkLocator("10% Weight Change"));
+        clickAndWait(new Locator.LinkLocator("10%/20% Weight Change"));
 
         DataRegionTable results = new DataRegionTable("query", getDriver());
 
