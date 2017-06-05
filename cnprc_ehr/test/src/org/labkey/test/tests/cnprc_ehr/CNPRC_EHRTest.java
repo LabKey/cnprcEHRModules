@@ -1624,7 +1624,29 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickCategoryTab("Reproductive Management");
         animalHistoryPage.clickReportTab("Conception History");
 
-        assertTextPresentInThisOrder("Female Id","Accession Date","Female Species","Sire");
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                "Id",
+                "conNum",
+                "femaleSpecies",
+                "offspringId",
+                "offspringSex",
+                "conception",
+                "BRType",
+                "offspringSpecies",
+                "sire",
+                "femaleGeneticsVerify",
+                "maleGeneticsVerify",
+                "gestationDays",
+                "conceptionDateStatus",
+                "termDate",
+                "deliveryType",
+                "offspringLocation",
+                "deathType",
+                "PGComment"
+        );
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+
     }
 
     @Test

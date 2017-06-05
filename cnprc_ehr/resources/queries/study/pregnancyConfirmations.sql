@@ -13,9 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT *
-FROM cnprc_ehr.conceptions
+SELECT conc.*,offspring.id.demographics.calculated_status,
+(case when offspring.id.demographics.calculated_status = 'Dead' then
+  ('Dead from ' || offspring.id.lastHousing.location)
+ else offspring.id.curLocation.location end) as offspringLocation,
+ birthViability || deliveryMode as deliveryType,
+ timestampdiff('SQL_TSI_DAY',  conc.conception, termDate) AS gestationDays,
+ offspring.id.demographics.gender as offspringSex
+FROM cnprc_ehr.conceptions conc
+INNER JOIN study.Demographics offspring
+  ON conc.offspringid = offspring.id
 WHERE
 pgFlag IS NULL -- "check CON_INVALID_PG_FLAG for NULL to exclude them" as per high-level data mapping spreadsheet
 AND
-Id IS NOT NULL;
+conc.Id IS NOT NULL;

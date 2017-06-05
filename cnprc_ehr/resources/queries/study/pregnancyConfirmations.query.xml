@@ -5,85 +5,44 @@
                 <columns>
                     <column columnName="Id">
                         <columnTitle>Female Id</columnTitle>
-                        <fk>
-                            <fkDbSchema>study</fkDbSchema>
-                            <fkTable>animal</fkTable>
-                            <fkColumnName>Id</fkColumnName>
-                        </fk>
                     </column>
-                    <column columnName="con_accession_date">
-                        <columnTitle>Accession Date</columnTitle>
+                    <column columnName="conception">
+                        <columnTitle>Conception Date</columnTitle>
                     </column>
-                    <column columnName="femaleSpecies">
-                        <columnTitle>Female Species</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>species</fkTable>
-                            <fkColumnName>common</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true"/>
-                        </fk>
-                    </column>
-                    <column columnName="sire">
-                        <columnTitle>Sire</columnTitle>
-                        <url>/ehr/participantView.view?participantId=${sire}</url>
-                    </column>
-                    <column columnName="maleSpecies">
-                        <columnTitle>Male Species</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>species</fkTable>
-                            <fkColumnName>common</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true"/>
-                        </fk>
-                    </column>
-                    <column columnName="deliveryMode">
-                        <columnTitle>Delivery Mode</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>birth_type</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="birthPlace">
-                        <columnTitle>Birth Place</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>rooms</fkTable>
-                            <fkColumnName>room</fkColumnName>
-                        </fk>
-                    </column>
+                    <column columnName="femaleSpecies"/>
                     <column columnName="offspringId">
                         <columnTitle>Offspring</columnTitle>
-                        <url>/ehr/participantView.view?participantId=${offspringId}</url>
                     </column>
-                    <column columnName="offspringSpecies">
-                        <columnTitle>Offspring Species</columnTitle>
+                    <column columnName="offspringSex">
+                        <columnTitle>Sex</columnTitle>
+                    </column>
+                    <column columnName="BRType">
+                        <columnTitle>Breeding Type</columnTitle>
+                    </column>
+                    <column columnName="offspringSpecies"/>
+                    <column columnName="sire">
+                        <columnTitle>Sire</columnTitle>
+                    </column>
+                    <column columnName="femaleGeneticsVerify">
+                        <columnTitle>Female Genetics Verify</columnTitle>
+                    </column>
+                    <column columnName="maleGeneticsVerify">
+                        <columnTitle>Male Genetics Verify</columnTitle>
+                    </column>
+                    <column columnName="gestationDays"/>
+                    <column columnName="conceptionDateStatus">
+                        <columnTitle>Conception Date Status</columnTitle>
+                    </column>
+                    <column columnName="termDate">
+                        <columnTitle>Term Date</columnTitle>
+                    </column>
+                    <column columnName="deliveryType"/>
+                    <column columnName="offspringLocation">
+                        <columnTitle>Offspring Last or Current Location</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>species</fkTable>
-                            <fkColumnName>common</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true"/>
-                        </fk>
-                    </column>
-                    <column columnName="gender">
-                        <columnTitle>Offspring Gender</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>gender_codes</fkTable>
-                            <fkColumnName>code</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="confirmDate">
-                        <columnTitle>Confirmation Date</columnTitle>
-                    </column>
-                    <column columnName="birthViability">
-                        <columnTitle>Birth Viability</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>birth_viability</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                            <fkTable>cage</fkTable>
+                            <fkColumnName>location</fkColumnName>
                         </fk>
                     </column>
                     <column columnName="deathType">
@@ -95,97 +54,9 @@
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="necropsyPerformed">
-                        <columnTitle>Necropsy Performed?</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>general_obs_types</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="pathologist">
-                        <columnTitle>Pathologist</columnTitle>
-                    </column>
-                    <column columnName="pgFlag">
-                        <columnTitle>PG Flag</columnTitle>
-                    </column>
-                    <column columnName="conception">
-                        <columnTitle>Conception Date</columnTitle>
-                    </column>
-                    <column columnName="conceptionDateStatus">
-                        <columnTitle>Conception Date Status</columnTitle>
-                    </column>
-                    <column columnName="conNum">
-                        <columnTitle>Conception Number</columnTitle>
-                    </column>
-                    <column columnName="BRType">
-                        <columnTitle>Breeding Group</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>breeding_group</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="colonyCode">
-                        <columnTitle>Colony Code</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>conception_colony_code</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="PRCode">
-                        <columnTitle>Project Code</columnTitle>
-                        <fk>
-                            <fkDbSchema>cnprc_ehr</fkDbSchema>
-                            <fkTable>project</fkTable>
-                            <fkColumnName>projectCode</fkColumnName>
-                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
-                        </fk>
-                    </column>
                     <column columnName="PGComment">
                         <columnTitle>PG Comment</columnTitle>
                     </column>
-                    <column columnName="termDate">
-                        <columnTitle>Term Date</columnTitle>
-                    </column>
-                    <column columnName="termCode">
-                        <columnTitle>Term Code</columnTitle>
-                    </column>
-                    <column columnName="termDateStatus">
-                        <columnTitle>Term Date Status</columnTitle>
-                    </column>
-                    <column columnName="termComment">
-                        <columnTitle>Term Comment</columnTitle>
-                    </column>
-                    <column columnName="birthPlacePrefix">
-                        <columnTitle>Birth Place Prefix</columnTitle>
-                    </column>
-                    <column columnName="pgType">
-                        <columnTitle>PG Type</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>preg_type</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="femaleGeneticsVerify">
-                        <columnTitle>Female Genetics Verify</columnTitle>
-                    </column>
-                    <column columnName="maleGeneticsVerify">
-                        <columnTitle>Male Genetics Verify</columnTitle>
-                    </column>
-                    <column columnName="rowid"> <isHidden>true</isHidden></column>
-                    <column columnName="objectid"> <isHidden>true</isHidden></column>
-                    <column columnName="created"> <isHidden>true</isHidden></column>
-                    <column columnName="createdby"> <isHidden>true</isHidden></column>
-                    <column columnName="modified"> <isHidden>true</isHidden></column>
-                    <column columnName="modifiedby"> <isHidden>true</isHidden></column>
-                    <column columnName="container"> <isHidden>true</isHidden></column>
                 </columns>
             </table>
         </tables>
