@@ -156,7 +156,7 @@ EHR.reports.conceptionHistory = function (panel, tab, viewName) {
         items: [{
             border: false,
             html: '<table class="ehr-legend">' +
-            CNPRC.Utils.legendTitle('Sex', true, false) +               CNPRC.Utils.legendTitle('Death Type', false, false) +                           CNPRC.Utils.legendTitle('Result', false, true) +
+            CNPRC.Utils.legendTitle('Sex', true, false) +               CNPRC.Utils.legendTitle('Death Type', false, false) +                           CNPRC.Utils.legendTitle('Delivery Type', false, true) +
             CNPRC.Utils.legendEntry('F', 'Female', true, false) +       CNPRC.Utils.legendEntry('X', 'Experimental', false, false)+                     CNPRC.Utils.legendEntry('LV', 'Live Vaginal', false, true) +
             CNPRC.Utils.legendEntry('M', 'Male', true, false) +         CNPRC.Utils.legendEntry('K', 'Medical Cull', false, false)+                     CNPRC.Utils.legendEntry('LN', 'Live Non Vaginal', false, true) +
             CNPRC.Utils.legendEntry('U', 'Unknown', true, false) +      CNPRC.Utils.legendEntry('A' ,'Experimental Accident', false, false) +           CNPRC.Utils.legendEntry('LVX', 'Live Vaginal Experimental', false, true) +
