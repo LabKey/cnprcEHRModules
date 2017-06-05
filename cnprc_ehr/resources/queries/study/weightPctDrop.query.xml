@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="weightRelChange" tableDbType="NOT_IN_DB">
+            <table tableName="weightPctDrop" tableDbType="NOT_IN_DB">
                 <tableTitle>10%/20% Weight Drop over last 180 Days</tableTitle>
                 <description>This query shows the largest drop in weight for an animal (over the last 180 days) if it is more than 10 percent,
                     compared to the most recent weight, with different colorings at the 10 and 20 percent thresholds</description>
