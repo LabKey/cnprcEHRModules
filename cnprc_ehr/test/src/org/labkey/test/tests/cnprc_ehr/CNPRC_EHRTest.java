@@ -1602,9 +1602,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Daily Reports");
         animalHistoryPage.clickReportTab("Diarrhea Calendar");
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                "Id","Year","MonthName","monthNum",
+                "1::category","2::category","3::category","4::category","5::category","6::category","7::category",
+                "8::category","9::category","10::category","11::category","12::category","13::category","14::category",
+                "15::category","16::category","17::category","18::category","19::category","20::category",
+                "21::category","22::category","23::category","24::category","25::category","26::category",
+                "27::category","28::category","29::category","30::category","31::category"
+        );
+        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
-        assertTextPresentInThisOrder("Id","Year","Month","Month Number");
-        assertTextPresentInThisOrder("January","May", "June","December");
+        List<String> expected = Arrays.asList(
+                "TEST6390238","2012","May","5","D"," "," "," "," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," "
+        );
+
+        List<String> resultsRowDataAsText = results.getRowDataAsText(1).subList(0, expectedColumns.size() - 1);
+        assertEquals("Wrong data", expected, resultsRowDataAsText);
 
     }
 

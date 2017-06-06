@@ -97,13 +97,19 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10%/20% Weight Drop", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightPctDrop"), "Commonly Used Queries");
 
-        ehrService.registerHistoryDataSource(new DefaultAnimalRecordFlagDataSource(this));
-        ehrService.registerHistoryDataSource(new DefaultArrivalDataSource(this));
-        ehrService.registerHistoryDataSource(new DefaultAssignmentEndDataSource(this));
-        ehrService.registerHistoryDataSource(new DefaultBirthDataSource(this));
-        ehrService.registerHistoryDataSource(new DefaultClinicalRemarksDataSource(this));
-        ehrService.registerHistoryDataSource(new DefaultDeathsDataSource(this));
-        ehrService.registerHistoryDataSource(new DefaultDepartureDataSource(this));
+        ehrService.registerOptionalClinicalHistoryResources(this);
+        /*todo: Need to decide which options to include in clinical history
+                The optional set loads fine for the automated test because the selected participant has no data.
+                Issues arise when there is data.
+                The set added individually below succeeds but eliminates many of the resources.
+         */
+//        ehrService.registerHistoryDataSource(new DefaultAnimalRecordFlagDataSource(this));
+//        ehrService.registerHistoryDataSource(new DefaultArrivalDataSource(this));
+//        ehrService.registerHistoryDataSource(new DefaultAssignmentEndDataSource(this));
+//        ehrService.registerHistoryDataSource(new DefaultBirthDataSource(this));
+//        ehrService.registerHistoryDataSource(new DefaultClinicalRemarksDataSource(this));
+//        ehrService.registerHistoryDataSource(new DefaultDeathsDataSource(this));
+//        ehrService.registerHistoryDataSource(new DefaultDepartureDataSource(this));
 
 
         ehrService.registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
