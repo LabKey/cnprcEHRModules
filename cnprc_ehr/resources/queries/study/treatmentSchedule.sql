@@ -9,7 +9,7 @@ d.id,
 d.calculated_status,
 s.*,
 s.objectid as treatmentid,
-(SELECT max(d.qcstate) as label FROM study.drug d WHERE s.objectid = d.treatmentid AND s.date = d.timeordered) as treatmentStatus
+--(SELECT max(d.qcstate) as label FROM study.drug d WHERE s.objectid = d.treatmentid AND s.date = d.timeordered) as treatmentStatus
 --(SELECT max(taskId) as taskId FROM study.drug d WHERE s.objectid = d.treatmentid AND s.date = d.timeordered) as taskId
 
 
@@ -53,7 +53,7 @@ SELECT
   END as category,
   --t1.category,
 
-  t1.frequency.meaning as frequency,
+  t1.frequency.definition as frequency,
   t1.date as startDate,
   timestampdiff('SQL_TSI_DAY', cast(t1.dateOnly as timestamp), dr.dateOnly) + 1 as daysElapsed,
   t1.enddate,
@@ -85,13 +85,14 @@ FROM ehr_lookups.dateRange dr
 
 JOIN study."Treatment Orders" t1
   --NOTE: should the enddate consider date/time?
-  ON (dr.dateOnly >= t1.dateOnly and dr.dateOnly <= t1.enddateCoalesced AND
-      --technically the first day of the treatment is day 1, not day 0
-      mod(CAST(timestampdiff('SQL_TSI_DAY', CAST(t1.dateOnly as timestamp), dr.dateOnly) as integer), t1.frequency.intervalindays) = 0
+  ON (dr.dateOnly >= t1.dateOnly and dr.dateOnly <= t1.enddateCoalesced
+--   AND
+--       --technically the first day of the treatment is day 1, not day 0
+--       mod(CAST(timestampdiff('SQL_TSI_DAY', CAST(t1.dateOnly as timestamp), dr.dateOnly) as integer), t1.frequency.intervalindays) = 0
   )
 
 LEFT JOIN ehr.treatment_times tt ON (tt.treatmentid = t1.objectid)
-LEFT JOIN ehr_lookups.treatment_frequency_times ft ON (ft.frequency = t1.frequency.meaning AND tt.rowid IS NULL)
+LEFT JOIN ehr_lookups.treatment_frequency_times ft ON (ft.frequency = t1.frequency.definition AND tt.rowid IS NULL)
 
 LEFT JOIN (
     SELECT
