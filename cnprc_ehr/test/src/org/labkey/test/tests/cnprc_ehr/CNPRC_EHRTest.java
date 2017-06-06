@@ -66,6 +66,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -301,6 +303,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         rowMap = new HashMap<>();
         rowMap.put("Description", "TEST3771679-1");
+        // "Description" isn't a pk, so this input parameter is named inaccurately; just using it as field on which to delete
         deleteIfNeeded("study", "weight", rowMap, "Description");
 
         rowMap = new HashMap<>();
@@ -1376,55 +1379,44 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testTenPercentWeightDropReport() throws IOException, CommandException
     {
-        SearchPanel searchPanel = getSearchPanel();
-        clickAndWait(new Locator.LinkLocator("10%/20% Weight Drop"));
+        SearchPanel searchPanel = getSearchPanel();  // just using this to go to the search panel
+        clickAndWait(Locator.linkWithText("10%/20% Weight Drop"));
 
         DataRegionTable results = new DataRegionTable("query", getDriver());
 
-        List<String> expectedColumns = Arrays.asList(
-                "Id",
+        List<String> expectedColumns = Stream.of("Id",
                 "LatestWeightDate",
                 "LatestWeight",
                 "IntervalInDays",
                 "IntervalInMonths",
                 "OldWeight",
-                "PctChange"
-        );
+                "PctChange").collect(Collectors.toList());
+
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        String[] expected = {
+        List<String> expected = Arrays.asList(
                 "TEST3771679"
-                , null
                 , "10"
                 , "50"
                 , "1"
                 , "13.0"
                 , "-30.0"
-        };
-        List<String> resultsRowDataAsText = results.getRowDataAsText(0);
-        String[] rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
-        for (int i = 0; i < expected.length; i++)
-        {
-            if (i == 1)  // latest weight date, will keep changing
-                continue;  // so skip it
-            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
-        }
+        );
+        expectedColumns.remove("LatestWeightDate"); // always changes each time test is run, don't look in data for this
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0, expectedColumns.toArray(new String[expectedColumns.size()]));
+        assertEquals("Wrong data for first weight drop with these columns: " + expectedColumns.toString(), resultsRowDataAsText, expected);
 
-        expected[0] = "TEST4037096";
-        expected[1] = null;
-        expected[2] = "10";
-        expected[3] = "50";
-        expected[4] = "1";
-        expected[5] = "11.0";
-        expected[6] = "-10.0";
-        resultsRowDataAsText = results.getRowDataAsText(1);
-        rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
-        for (int i = 0; i < expected.length; i++)
-        {
-            if (i == 1)  // latest weight date, will keep changing
-                continue;  // so skip it
-            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
-        }
+        expected = Arrays.asList(
+                "TEST4037096"
+                , "10"
+                , "50"
+                , "1"
+                , "11.0"
+                , "-10.0"
+        );
+
+        resultsRowDataAsText = results.getRowDataAsText(1, expectedColumns.toArray(new String[expectedColumns.size()]));
+        assertEquals("Wrong data for second weight drop with these columns: " + expectedColumns.toString(), resultsRowDataAsText, expected);
 
         assertEquals("Wrong row count: ", 2, results.getDataRowCount());
 
