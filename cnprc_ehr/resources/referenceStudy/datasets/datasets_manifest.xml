@@ -35,6 +35,7 @@
         <dataset name="geriatrics" id="1062" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="grossFindings" id="5028" category="Pathology" type="Standard" showByDefault="false"/>
         <dataset name="housing" id="1018" category="Colony Management" type="Standard"/>
+        <dataset name="inbreeding" id="5001" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="inoculation" id="1020" category="Clinical" type="Standard"/>
         <dataset name="labworkResults" id="1061" category="ClinPath" type="Standard"/>
         <dataset name="matings" id="5015" category="Reproductive Management" type="Standard" showByDefault="false"/>
