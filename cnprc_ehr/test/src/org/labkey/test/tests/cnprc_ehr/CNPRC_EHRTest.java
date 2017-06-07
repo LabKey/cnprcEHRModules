@@ -18,6 +18,7 @@ package org.labkey.test.tests.cnprc_ehr;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -43,6 +44,7 @@ import org.labkey.test.pages.ehr.ColonyOverviewPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
+import org.labkey.test.util.Ext4Helper;
 import org.labkey.test.util.Maps;
 import org.labkey.test.util.PasswordUtil;
 import org.labkey.test.util.PortalHelper;
@@ -1620,6 +1622,60 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> resultsRowDataAsText = results.getRowDataAsText(1).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
+    }
+
+    @Test
+    public void testPedigreeReports() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        String id = "test6390238";
+        animalHistoryPage.searchSingleAnimal(id);
+        waitAndClick(Ext4Helper.Locators.ext4Tab("Genetics"));
+        waitAndClick(Ext4Helper.Locators.ext4Tab("Pedigree Plot"));
+
+        waitForElement(Locator.tagContainingText("span", "Pedigree Plot - " + id), WAIT_FOR_JAVASCRIPT * 3);
+        assertTextNotPresent("Error executing command");
+        Assert.assertTrue(isTextPresent("Console output"));
+
+        waitAndClick(Ext4Helper.Locators.ext4Tab("Pedigree"));
+        waitForElement(Locator.tagContainingText("span", "Offspring - " + id), WAIT_FOR_JAVASCRIPT * 3);
+        waitForElement(Locator.tagContainingText("span", "Siblings - " + id), WAIT_FOR_JAVASCRIPT * 3);
+        assertTextPresent("Parents/Grandparents");
+
+        waitAndClick(Ext4Helper.Locators.ext4Tab("Reproductive Management"));
+        waitAndClick(Ext4Helper.Locators.ext4Tab("Offspring"));
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> expectedColumns = Arrays.asList(
+                "Id","gender","Relationship","Offspring","birth","Sex","Flags","Location","qcstate"
+        );
+        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+
+        List<String> expected = Arrays.asList(
+                "TEST6390238","Male","Offspring","TEST1099252","2009-08-03","Male",""," ","Completed?"
+        );
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0);
+        assertEquals("Wrong data", expected, resultsRowDataAsText);
+
+        waitAndClick(Ext4Helper.Locators.ext4Tab("Reproductive Management"));
+        waitAndClick(Ext4Helper.Locators.ext4Tab("Siblings"));
+
+        results = animalHistoryPage.getActiveReportDataRegion();
+        expectedColumns= Arrays.asList(
+                "Id","Relationship","Sibling","Sex","Flags","Location","SiblingDam","SiblingSire","qcstate"
+        );
+        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        assertEquals("Wrong row count",0,results.getDataRowCount());
+
+        id = "TEST1099252";
+        animalHistoryPage.searchSingleAnimal(id);
+        results = animalHistoryPage.getActiveReportDataRegion();
+        expected = Arrays.asList(
+                "TEST1099252","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238","Completed?"
+        );
+        resultsRowDataAsText = results.getRowDataAsText(0);
+        assertEquals("Wrong row count",10,results.getDataRowCount());
+        assertEquals("Wrong data", expected, resultsRowDataAsText);
     }
 
     @Test
