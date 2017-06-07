@@ -179,7 +179,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         put("Daily Reports", Arrays.asList(
                 "Diarrhea",
                 "Diarrhea Calendar",
-                "Morning Health"));
+                "Morning Health Signs"));
         put("BBA", Arrays.asList(
                 "Behavior",
                 "Lab Results"));

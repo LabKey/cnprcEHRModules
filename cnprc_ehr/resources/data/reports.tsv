@@ -141,7 +141,7 @@ inoculation	Lab Results	query	Inoculation	true		study	inoculation			date	false	f
 pregnancyDeterminations	Reproductive Management	query	Pregnancy Determinations	true		study	pregnancyDeterminations			date	false	false		qcstate/publicdata	Pregnancy Determination Results
 
 snomed_animals_conceptions	Clinical	query	SNOMED	true		study	snomed_animals_conceptions			date	false	false		qcstate/publicdata	SNOMED records for animals and conceptions
-morningHealthObs	Daily Reports	query	Morning Health	true		study	morningHealthObs			date	false	false		qcstate/publicdata	Daily Morning Health Observations
+morningHealthSigns	Daily Reports	query	Morning Health Signs	true		study	Morning Health Signs			date	false	false		qcstate/publicdata	Daily Morning Health Signs
 clinical_observations_pa	Daily Reports	query	Poor Appetite	true		study	clinical_observations	poorAppetite		date	false	false		qcstate/publicdata	Diarrhea Observations
 clinical_observations	Daily Reports	query	Diarrhea	true		study	clinical_observations	diarrhea		date	false	false		qcstate/publicdata	Diarrhea Observations
 diarrheaCalendar	Daily Reports	query	Diarrhea Calendar	true		study	diarrheaCalendar			date	false	false		qcstate/publicdata	Diarrhea Observations Calendar
