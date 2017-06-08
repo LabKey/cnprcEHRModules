@@ -38,7 +38,7 @@
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>geographic_origins</fkTable>
                             <fkColumnName>meaning</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true"/>
+                            <fkDisplayColumnName>description</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="birth">
