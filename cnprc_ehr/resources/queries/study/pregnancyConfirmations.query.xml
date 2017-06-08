@@ -31,28 +31,20 @@
                     </column>
                     <column columnName="gestationDays"/>
                     <column columnName="conceptionDateStatus">
-                        <columnTitle>Conception Date Status</columnTitle>
+                        <columnTitle>Est</columnTitle>
                     </column>
                     <column columnName="termDate">
                         <columnTitle>Term Date</columnTitle>
                     </column>
                     <column columnName="deliveryType"/>
+                    <column columnName="offspringLocationDate">
+                        <columnTitle>Location Date</columnTitle>
+                    </column>
                     <column columnName="offspringLocation">
                         <columnTitle>Offspring Last or Current Location</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>cage</fkTable>
-                            <fkColumnName>location</fkColumnName>
-                        </fk>
                     </column>
                     <column columnName="deathType">
                         <columnTitle>Death Type</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>death_manner</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
                     </column>
                     <column columnName="PGComment">
                         <columnTitle>PG Comment</columnTitle>

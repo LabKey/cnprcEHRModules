@@ -17,6 +17,7 @@ SELECT conc.*,offspring.id.demographics.calculated_status,
 (case when offspring.id.demographics.calculated_status = 'Dead' then
   ('Dead from ' || offspring.id.lastHousing.location)
  else offspring.id.curLocation.location end) as offspringLocation,
+ offspring.id.lastHousing.enddate as offspringLocationDate,
  birthViability || deliveryMode as deliveryType,
  timestampdiff('SQL_TSI_DAY',  conc.conception, COALESCE (termDate,now())) AS gestationDays,
  offspring.id.demographics.gender as offspringSex

@@ -15,6 +15,7 @@
         <column name="conceptionDateStatus"/>
         <column name="termDate"/>
         <column name="deliveryType"/>
+        <column name="offspringLocationDate"/>
         <column name="offspringLocation"/>
         <column name="deathType"/>
         <column name="PGComment"/>

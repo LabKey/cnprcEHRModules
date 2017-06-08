@@ -1703,6 +1703,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "conceptionDateStatus",
                 "termDate",
                 "deliveryType",
+                "offspringLocationDate",
                 "offspringLocation",
                 "deathType",
                 "PGComment"
