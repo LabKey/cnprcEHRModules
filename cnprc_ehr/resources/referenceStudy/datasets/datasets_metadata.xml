@@ -2423,31 +2423,7 @@
                 <datatype>varchar</datatype>
                 <scale>50</scale>
             </column>
-            <column columnName="lowestcage">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="room">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="cage">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="eventType">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="housingType">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="goal">
-                <datatype>varchar</datatype>
-            </column>
             <column columnName="observation">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="outcome">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="separationreason">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="project">
