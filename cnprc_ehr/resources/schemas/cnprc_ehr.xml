@@ -169,7 +169,7 @@
             <column columnName="committeeResponseDate"/>
             <column columnName="approved"/>
             <column columnName="sp1AdditionalAllowed"/>
-            <column columnName="sp2AdditonalAllowed"/>
+            <column columnName="sp2AdditionalAllowed"/>
             <column columnName="amendmentComments"/>
             <column columnName="objectid"/>
             <column columnName="Created"/>
