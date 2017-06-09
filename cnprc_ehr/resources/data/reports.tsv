@@ -1,6 +1,6 @@
 reportname	category	reporttype	reporttitle	visible	containerpath	schemaname	queryname	viewname	report	datefieldname	todayonly	queryhaslocation	sort_order	QCStateLabelFieldName	description
 activeAssignments	Assignments and Groups	query	Active Assignments	true		study	Assignment	Active Assignments		date	false	false		qcstate/publicdata	This report shows the active assignments for each animal
-ProjectAssignmentHistory	Assignments and Groups	query	Project Assignment History	true		study	ProjectAssignmentHistory	Project Assignment History		date	false	false		qcstate/publicdata	This report shows all assignments records for the animals
+ProjectAssignmentHistory	Assignments and Groups	query	Project Assignment History	true		study	ProjectAssignmentHistory			date	false	false		qcstate/publicdata	This report shows all assignments records for the animals
 assignmentHistoryBlend	Assignments and Groups	query	Assignment History	true		study	assignmentHistoryBlend			date	false	false		qcstate/publicdata	This report shows all assignments records for the animals
 activeGroups	Assignments and Groups	js	Active Groups	true		study	underDevelopment	Active Members		date	false	false		qcstate/publicdata	This report shows the active assignments for each animal
 groupHistory	Assignments and Groups	js	Group History	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report shows all assignments records for the animals
