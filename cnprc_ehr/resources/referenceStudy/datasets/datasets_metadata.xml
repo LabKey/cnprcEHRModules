@@ -1337,7 +1337,7 @@
                 <datatype>timestamp</datatype>
             </column>
         </columns>
-        <tableTitle>Animal Events</tableTitle>
+        <tableTitle>Clinical Encounters</tableTitle>
     </table>
     <table tableName="clinical_observations" tableDbType="TABLE">
         <columns>
