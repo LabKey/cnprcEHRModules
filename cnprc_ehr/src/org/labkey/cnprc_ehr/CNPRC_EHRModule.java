@@ -19,13 +19,10 @@ package org.labkey.cnprc_ehr;
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.data.Container;
 import org.labkey.api.ehr.EHRService;
-import org.labkey.api.ehr.history.DefaultAnimalRecordFlagDataSource;
-import org.labkey.api.ehr.history.DefaultArrivalDataSource;
-import org.labkey.api.ehr.history.DefaultAssignmentEndDataSource;
 import org.labkey.api.ehr.history.DefaultBirthDataSource;
-import org.labkey.api.ehr.history.DefaultClinicalRemarksDataSource;
 import org.labkey.api.ehr.history.DefaultDeathsDataSource;
 import org.labkey.api.ehr.history.DefaultDepartureDataSource;
+import org.labkey.api.ehr.history.DefaultTreatmentEndDataSource;
 import org.labkey.api.ldk.ExtendedSimpleModule;
 import org.labkey.api.module.AdminLinkManager;
 import org.labkey.api.module.ModuleContext;
@@ -97,20 +94,10 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10%/20% Weight Drop", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightPctDrop"), "Commonly Used Queries");
 
-        ehrService.registerOptionalClinicalHistoryResources(this);
-        /*todo: Need to decide which options to include in clinical history
-                The optional set loads fine for the automated test because the selected participant has no data.
-                Issues arise when there is data.
-                The set added individually below succeeds but eliminates many of the resources.
-         */
-//        ehrService.registerHistoryDataSource(new DefaultAnimalRecordFlagDataSource(this));
-//        ehrService.registerHistoryDataSource(new DefaultArrivalDataSource(this));
-//        ehrService.registerHistoryDataSource(new DefaultAssignmentEndDataSource(this));
-//        ehrService.registerHistoryDataSource(new DefaultBirthDataSource(this));
-//        ehrService.registerHistoryDataSource(new DefaultClinicalRemarksDataSource(this));
-//        ehrService.registerHistoryDataSource(new DefaultDeathsDataSource(this));
-//        ehrService.registerHistoryDataSource(new DefaultDepartureDataSource(this));
-
+        ehrService.registerHistoryDataSource(new DefaultBirthDataSource(this));
+        ehrService.registerHistoryDataSource(new DefaultDeathsDataSource(this));
+        ehrService.registerHistoryDataSource(new DefaultDepartureDataSource(this));
+        ehrService.registerHistoryDataSource(new DefaultTreatmentEndDataSource(this));
 
         ehrService.registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
         ehrService.registerActionOverride("animalSearch", this, "views/animalSearch.html");

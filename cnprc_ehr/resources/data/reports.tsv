@@ -76,7 +76,7 @@ pedigreePlot	Genetics	report	Pedigree Plot	true		study	pedigree		module:EHR/sche
 pregnancies	Colony Management	query	Pregnancies	true		study	Pregnancies			date	false	false		qcstate/publicdata	This report contains a list of known pregnancies, including conception dates and sire, where available
 dnaBank	Genetics	query	DNA Bank	true		DNABank	Samples				false	false		qcstate/publicdata	This report shows the inbreeding coefficient of each animal, where pedigree data is available. The inbreeding coefficient is the kinship coefficient between the individual's parents. It measures the probability that the two alleles of a gene are identical by descent in the same individual (autozygosity). It is zero if the individual is not inbred.
 
-TB	Lab Results	query	TB Test Dates	true		study	encounters	TB Tests		date	false	false		qcstate/publicdata	TB Test results
+TB	Lab Results	query	TB Test Dates	true		study	tb			date	false	false		qcstate/publicdata	TB Test results
 snapshot	General	js	Snapshot	true		study	snapshot				false	false		qcstate/publicdata	This report contains a summary of the animal, including demographics, assignments and weight
 clinSnapshot	Clinical	js	Clinical Snapshot	true		study	onprcSnapshot				false	false		qcstate/publicdata	This report contains a summary of the animal, including demographics, assignments and weight
 arrival	General	query	Arrivals	true		study	arrival			date	false	false		qcstate/publicdata	Displays arrival and departure dates
