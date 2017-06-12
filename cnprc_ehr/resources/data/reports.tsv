@@ -96,7 +96,7 @@ tissueMeasurements	Pathology	query	Tissue Measurements	true		study	organ_measure
 grossFindings	Pathology	query	Gross Findings	true		study	grossFindings			date	false	false		qcstate/publicdata
 
 alopecia	Physical Exam	query	Alopecia	true		study	Alopecia			date	false	false		qcstate/publicdata	Contains alopecia scores from the colony
-bodyCondition	Physical Exam	query	Body Condition	true		study	Body Condition			date	false	false		qcstate/publicdata	Contains body condition scores captured during physical exams
+bodyCondition	Physical Exam	query	Body Condition	true		study	weight	Body Condition		date	false	false		qcstate/publicdata	Contains body condition scores captured during physical exams
 peObservations	Physical Exam	query	PE Findings	true		study	Clinical Observations	PE Observations		date	false	false		qcstate/publicdata	This report contains the clinical observations entered about each animal
 dentalStatus	Physical Exam	query	Dental Status	true		study	Dental Status			date	false	false		qcstate/publicdata	Contains dental assessments captured during physical exams
 pe	Physical Exam	query	Exams	true		study	Clinical Encounters	PE		date	false	false		qcstate/publicdata	A list of physical exams performed
