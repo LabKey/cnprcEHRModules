@@ -23,6 +23,7 @@
         <dataset name="cycle" id="2001" category="Reproductive Management" type="Standard"/>
         <dataset name="clinpathRuns" id="1073" category="ClinPath"/>
         <dataset name="clinical_observations" id="1023" category="Clinical" showByDefault="false"/>
+        <dataset name="diet" id="5037" category="Colony Management" demographicData= "false" type="Standard"/>
         <dataset name="semenAnalysis" id="2003" category="Reproductive Management" type="Standard"/>
         <dataset name="enrichment" id="3001" category="Behavior" type="Standard"/>
         <dataset name="encounters" id="1024" category="Clinical" type="Standard"/>
@@ -31,6 +32,7 @@
         <dataset name="departure" id="1013" category="Colony Management" type="Standard"/>
         <dataset name="drug" id="1014" category="Clinical" type="Standard"/>
         <dataset name="flags" id="5019" category="Colony Management" type="Standard" showByDefault="false"/>
+        <dataset name="feeding" id="1078" category="Clinical" demographicData="true"/>
         <dataset name="colony_assignments" id="5020" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="fdb_samples" id="7003" category="Repository" type="Standard"/>
         <dataset name="morphologicDiagnosis" id="5029" category="Pathology" type="Standard" showByDefault="false"/>
