@@ -21,7 +21,6 @@ SELECT
     WHEN d.dam IS NOT NULL THEN 'Observed'
     ELSE null
   END as damType,
-
   coalesce(p1.parent, d.sire) as sire,
   CASE
     WHEN p1.parent IS NOT NULL THEN 'Genetic'
@@ -34,7 +33,6 @@ SELECT
     ELSE 0
   END as numParents
 FROM study.demographics d
-
 LEFT JOIN (
   select p1.id, max(p1.parent) as parent
   FROM study.parentage p1
