@@ -44,6 +44,7 @@
         <dataset name="labworkResults" id="1061" category="ClinPath" type="Standard"/>
         <dataset name="matings" id="5015" category="Reproductive Management" type="Standard" showByDefault="false"/>
         <dataset name="menses" id="1060" category="ColonyManagement" showByDefault="false"/>
+        <dataset name="miscTests" id="5013" category="ClinPath" type="Standard"/>
         <dataset name="morningHealthObs" id="1021" category="Clinical" showByDefault="false"/>
         <dataset name="necropsy" id="1022" category="Pathology"/>
         <dataset name="notes" id="1068" category="ColonyManagement" showByDefault="false"/>
@@ -61,6 +62,7 @@
         <dataset name="serum" id="7001" category="Repository" type="Standard"/>
         <dataset name="tb" id="1035" category="Clinical" type="Standard"/>
         <dataset name="treatment_order" id="1037" category="Clinical"/>
+        <dataset name="urinalysisResults" id="1081" category="ClinPath" type="Standard"/>
         <dataset name="virology" id="5023" category="ClinPath" type="Standard"/>
         <dataset name="weight" id="1045" category="Clinical" type="Standard"/>
     </datasets>
