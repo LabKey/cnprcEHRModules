@@ -66,5 +66,8 @@
         <dataset name="virology" id="5023" category="ClinPath" type="Standard"/>
         <dataset name="weight" id="1045" category="Clinical" type="Standard"/>
         <dataset name="histology" id="1070" category="Pathology"/>
+        <dataset name="dentalStatus" id="1064" showByDefault="false" category="Clinical"/>
+        <dataset name="alopecia" id="1063" category="Clinical"/>
+
     </datasets>
 </datasets>

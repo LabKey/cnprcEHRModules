@@ -89,10 +89,10 @@ necropsies	Pathology	query	Necropsies	true		study	necropsy			date	false	false		q
 tissueMeasurements	Pathology	query	Tissue Measurements	true		study	organ_measurements			date	false	false		qcstate/publicdata	This report contains tissue measurements
 grossFindings	Pathology	query	Gross Findings	true		study	grossFindings			date	false	false		qcstate/publicdata
 
-alopecia	Physical Exam	js	Alopecia	true		study	underDevelopment			date	false	false		qcstate/publicdata	Contains alopecia scores from the colony
+alopecia	Physical Exam	query	Alopecia	true		study	alopecia			date	false	false		qcstate/publicdata	Contains alopecia scores from the colony
 bodyCondition	Physical Exam	query	Body Condition	true		study	weight	Body Condition		date	false	false		qcstate/publicdata	Contains body condition scores captured during physical exams
 peObservations	Physical Exam	js	PE Findings	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the clinical observations entered about each animal
-dentalStatus	Physical Exam	js	Dental Status	true		study	underDevelopment			date	false	false		qcstate/publicdata	Contains dental assessments captured during physical exams
+dentalStatus	Physical Exam	query	Dental Status	true		study	dentalStatus			date	false	false		qcstate/publicdata	Contains dental assessments captured during physical exams
 pe	Physical Exam	query	Exams	true		study	Clinical Encounters	PE		date	false	false		qcstate/publicdata	A list of physical exams performed
 obsTreatment	Daily Reports	js	Obs/Treatment	true		study	underDevelopment			date	true	true	2		Displays irregular observations and treatments for today
 todaysHistory	Daily Reports	js	Today's History	true		study	underDevelopment			Date	true	false	3	qcstate/publicdata	This report contains the full history, filtered to show events that happened today only
