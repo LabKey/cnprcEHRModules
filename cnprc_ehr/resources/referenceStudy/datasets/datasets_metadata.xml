@@ -1837,51 +1837,6 @@
         </columns>
         <tableTitle>Experimental Inoculation</tableTitle>
     </table>
-    <table tableName="problem" tableDbType="TABLE">
-        <columns>
-            <column columnName="Id">
-                <datatype>varchar</datatype>
-                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
-                <importAliases>
-                    <importAlias>ptid</importAlias>
-                </importAliases>
-            </column>
-            <column columnName="date">
-                <datatype>timestamp</datatype>
-                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
-                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
-            </column>
-            <column columnName="problem_no">
-                <datatype>integer</datatype>
-            </column>
-            <column columnName="enddate">
-                <datatype>timestamp</datatype>
-                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
-            </column>
-            <column columnName="code">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="objectid">
-                <datatype>entityid</datatype>
-                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
-                <isKeyField>true</isKeyField>
-            </column>
-            <column columnName="caseid">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="category">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="subcategory">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
-            </column>
-        </columns>
-        <tableTitle>Problem List</tableTitle>
-    </table>
     <table tableName="treatment_order" tableDbType="TABLE">
         <columns>
             <column columnName="Id">
