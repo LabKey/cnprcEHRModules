@@ -65,5 +65,6 @@
         <dataset name="urinalysisResults" id="1081" category="ClinPath" type="Standard"/>
         <dataset name="virology" id="5023" category="ClinPath" type="Standard"/>
         <dataset name="weight" id="1045" category="Clinical" type="Standard"/>
+        <dataset name="histology" id="1070" category="Pathology"/>
     </datasets>
 </datasets>
