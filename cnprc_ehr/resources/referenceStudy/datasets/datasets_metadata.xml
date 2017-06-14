@@ -1453,6 +1453,10 @@
             <column columnName="datefinalized">
                 <datatype>timestamp</datatype>
             </column>
+            <column columnName="procedureid">
+                <datatype>integer</datatype>
+            </column>
+
         </columns>
         <tableTitle>Clinical Encounters</tableTitle>
     </table>

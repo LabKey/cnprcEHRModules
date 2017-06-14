@@ -20,7 +20,7 @@ encountersWithSnomedBySet	Pathology	query	SNOMED Codes - Grouped	true		study	enc
 surgery	Surgery	js	Surgeries	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surgeries, exams, procedures, etc.
 surgery	Surgery	js	Surgeries Today	true		study	underDevelopment			date	false	false		qcstate/publicdata
 procedures	Clinical	js	Procedures	true		study	underDevelopment			date	false	false		qcstate/publicdata
-procedureHistory	Surgery	js	Procedure Summary	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surgeries, exams, procedures, etc.
+procedureHistory	Surgery	query	Procedure Summary	true		study	proceduresPerYear			date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surgeries, exams, procedures, etc.
 surgeryChecklist	Surgery	js	Surgery Checklist	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report provides information intended to be reviewed prior to surgeries.
 clinObs	Clinical	query	Observations	true		study	Clinical Observations			date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surergies, exams, procedures, etc.
 clinObsBsu	Behavior	query	Observations	true		study	Clinical Observations	BSU Observations		date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surergies, exams, procedures, etc.
