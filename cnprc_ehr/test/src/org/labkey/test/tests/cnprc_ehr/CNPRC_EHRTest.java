@@ -44,7 +44,6 @@ import org.labkey.test.pages.ehr.ColonyOverviewPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
-import org.labkey.test.util.Ext4Helper;
 import org.labkey.test.util.Maps;
 import org.labkey.test.util.PasswordUtil;
 import org.labkey.test.util.PortalHelper;
@@ -131,28 +130,86 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
-        put("General", Arrays.asList(
-                "Arrivals",
-                "Deaths",
-                "Demographics",
-                /*"Snapshot",*/// TODO: Data region not visible by default, AnimalHistoryPage#refreshReport fails
-                "Departures",
-                "Weight, TB, BCS"));
-        put("Colony Management", Arrays.asList(
-                "Birth Records",
-                "Death Records",
-                "Housing - Active",
-                "Relocation History",
-                "Weights",
-                "Geriatrics"));
         put("Assignments and Groups", Arrays.asList(
                 "Active Assignments",
-                "Project Assignment History",
-                "Per-diem Payor Assignment"));
+                "Assignment History",
+                "Per-diem Payor Assignment",
+                "Project Assignment History"));
+        put("BBA", Arrays.asList(
+                "Behavior",
+                "Lab Results"));
         put("Behavior", Arrays.asList(
+                "Cagemate History",
                 "Enrichment",
+                "Full History",
                 "Nursing",
-                "Pairing Observations"));
+                "Observations",
+                "Pairing History",
+                "Pairing Observations"
+        ));
+        put("Clinical", Arrays.asList(
+                "Cases Over 2 Years",
+                "Clinical History",
+                "Clinical Remarks",
+                "Clinical Snapshot",
+                "Full History",
+                "Full History Plus Obs",
+                "Hospital Admission and Discharge",
+                "Immunizations",
+                "Medication Orders",
+                "Observations",
+                "Procedures",
+                "SNOMED",
+                "Tasks"));
+        put("Colony Management", Arrays.asList(
+                "Behavior Remarks",
+                "Birth Records",
+                "Cagemate History",
+                "Cites Review",
+                "Death Records",
+                "Diet",
+                "Feeding",
+                "Geriatrics",
+                "Housing - Active",
+                "Housing History",
+                "Menses Calendar",
+                "Potential Parents",
+                "Relocation History",
+                "Weights"));
+        put("Daily Reports", Arrays.asList(
+                "Active Surgery Cases",
+                "Clinical Medication Schedule",
+                "Diarrhea",
+                "Diarrhea Calendar",
+                "Diets",
+                "Meds/Diet - Incomplete",
+                "Morning Health Signs",
+                "Obs/Treatment",
+                "Poor Appetite",
+                "Surgical Medication Schedule",
+                "Today's History",
+                "Treatments - Afternoon",
+                "Treatments - Evening",
+                "Treatments - Master",
+                "Treatments - Morning"));
+        put("General", Arrays.asList(
+                "Active Flags",
+                "Arrivals",
+                "Charges",
+                "Deaths",
+                "Demographics",
+                "Departures",
+                "Extended Abstract",
+                "Major Events",
+                "Notes",
+                "Snapshot",
+                "Weight, TB, BCS"));
+        put("Genetics", Arrays.asList(
+                "Inbreeding Coefficients",
+                "Kinship",
+                "Parentage",
+                "Pedigree",
+                "Pedigree Plot"));
         put("Reproductive Management", Arrays.asList(
                 "Breeding",
                 "Conception History",
@@ -162,34 +219,61 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Semen Analysis",
                 "Breeding Group"));
         put("Lab Results", Arrays.asList(
-                "Inoculation",
+                "Antibiotic Sensitivity",
+                "Biochemistry",
+                "Hematology",
+                "iStat",
+                "Lab Runs",
+                "Microbiology",
+                "Misc Tests",
+                "Parasitology",
+                "TB Test Dates",
+                "Urinalysis",
                 "Virology"));
         put("Pathology", Arrays.asList(
+                "Biopsies",
+                "Clinical History - Full",
                 "Gross Findings",
+                "Histology",
                 "Morphologic Diagnosis",
                 "Necropsies",
-                "Biopsies",
+                "SNOMED Codes - Grouped",
                 "Tissue Measurements"));
-        put("Genetics", Arrays.asList(
-                "Parentage"));
-        put("Clinical", Arrays.asList(
-                "SNOMED",
-                "Immunizations",
-                "Hospital Admission and Discharge"));
-        put("Daily Reports", Arrays.asList(
-                "Diarrhea",
-                "Diarrhea Calendar",
-                "Morning Health Signs"));
-        put("BBA", Arrays.asList(
-                "Behavior",
-                "Lab Results"));
-        put("Respiratory Diseases", Arrays.asList(
-                "RD Skin Sensitization",
-                "RD Asthma CBC"));
+        put("Physical Exam", Arrays.asList(
+                "Alopecia",
+                "Body Condition",
+                "Dental Status",
+                "Exams",
+                "PE Findings"));
         put("Repository", Arrays.asList(
-                "Serum Bank",
+                "Freezer DB Samples",
                 "Pathology Inventory",
-                "Freezer DB Samples"));
+                "Serum Bank"));
+        put("Reproductive Management", Arrays.asList(
+                "Birth Records",
+                "Breeding",
+                "Breeding Group",
+                "Conception History",
+                "Cycle",
+                "Cycle Length",
+                "Mating Success Rates",
+                "Matings",
+                "Menses",
+                "Offspring",
+                "Pregnancy Determinations",
+                "Reproductive Summary",
+                "Semen Analysis",
+                "Siblings"));
+        put("Respiratory Diseases", Arrays.asList(
+                "RD Asthma CBC",
+                "RD Skin Sensitization"));
+        put("Surgery", Arrays.asList(
+                "Procedure Summary",
+                "Surgeries",
+                "Surgery Cases",
+                "Surgery Cases Closed Today",
+                "Surgery Checklist",
+                "Surgical Medication Schedule"));
     }};
 
     @BeforeClass
@@ -1652,9 +1736,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","Male","Offspring","TEST1099252","2009-08-03","Male",""," ","Completed?"
+                "TEST6390238","Male","Offspring","TEST1099252","2009-08-03","Male",""," "
         );
-        List<String> resultsRowDataAsText = results.getRowDataAsText(0);
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
         animalHistoryPage.clickCategoryTab("Reproductive Management");
@@ -1671,9 +1755,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.searchSingleAnimal(id);
         results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList(
-                "TEST1099252","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238","Completed?"
+                "TEST1099252","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238"
         );
-        resultsRowDataAsText = results.getRowDataAsText(0);
+        resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong row count",10,results.getDataRowCount());
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
