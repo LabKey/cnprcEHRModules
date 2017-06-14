@@ -1630,20 +1630,20 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         String id = "test6390238";
         animalHistoryPage.searchSingleAnimal(id);
-        waitAndClick(Ext4Helper.Locators.ext4Tab("Genetics"));
-        waitAndClick(Ext4Helper.Locators.ext4Tab("Pedigree Plot"));
+        animalHistoryPage.clickCategoryTab("Genetics");
+        animalHistoryPage.clickReportTab("Pedigree Plot");
 
         waitForElement(Locator.tagContainingText("span", "Pedigree Plot - " + id), WAIT_FOR_JAVASCRIPT * 3);
         assertTextNotPresent("Error executing command");
         Assert.assertTrue(isTextPresent("Console output"));
 
-        waitAndClick(Ext4Helper.Locators.ext4Tab("Pedigree"));
+        animalHistoryPage.clickReportTab("Pedigree");
         waitForElement(Locator.tagContainingText("span", "Offspring - " + id), WAIT_FOR_JAVASCRIPT * 3);
         waitForElement(Locator.tagContainingText("span", "Siblings - " + id), WAIT_FOR_JAVASCRIPT * 3);
         assertTextPresent("Parents/Grandparents");
 
-        waitAndClick(Ext4Helper.Locators.ext4Tab("Reproductive Management"));
-        waitAndClick(Ext4Helper.Locators.ext4Tab("Offspring"));
+        animalHistoryPage.clickCategoryTab("Reproductive Management");
+        animalHistoryPage.clickReportTab("Offspring");
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
@@ -1657,8 +1657,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> resultsRowDataAsText = results.getRowDataAsText(0);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
-        waitAndClick(Ext4Helper.Locators.ext4Tab("Reproductive Management"));
-        waitAndClick(Ext4Helper.Locators.ext4Tab("Siblings"));
+        animalHistoryPage.clickCategoryTab("Reproductive Management");
+        animalHistoryPage.clickReportTab("Siblings");
 
         results = animalHistoryPage.getActiveReportDataRegion();
         expectedColumns= Arrays.asList(
@@ -1676,6 +1676,27 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         resultsRowDataAsText = results.getRowDataAsText(0);
         assertEquals("Wrong row count",10,results.getDataRowCount());
         assertEquals("Wrong data", expected, resultsRowDataAsText);
+
+        animalHistoryPage.clickCategoryTab("Genetics");
+        animalHistoryPage.clickReportTab("Kinship");
+        results = animalHistoryPage.getActiveReportDataRegion();
+        expectedColumns= Arrays.asList(
+                "Id","Id2","coefficient"
+        );
+        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        expected = Arrays.asList(
+                "TEST1099252","TEST2227135","0.25"
+        );
+        resultsRowDataAsText = results.getRowDataAsText(0);
+        assertEquals("Wrong row count",15,results.getDataRowCount());
+        assertEquals("Wrong data", expected, resultsRowDataAsText);
+
+        animalHistoryPage.clickReportTab("Inbreeding Coefficients");
+        results = animalHistoryPage.getActiveReportDataRegion();
+        expectedColumns= Arrays.asList(
+                "Id","date","coefficient","taskid", "requestid","description","remark","history","QCState"
+        );
+        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
     }
 
     @Test
