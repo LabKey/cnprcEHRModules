@@ -33,8 +33,8 @@ study.pregnancyConfirmations pc
 ON
 pc.id = mating.id AND
 pc.sire = mating.male AND
-mating.date < pc.con_accession_date AND
-TIMESTAMPDIFF('SQL_TSI_DAY', mating.date, pc.con_accession_date) < 180
+mating.date < pc.conception AND
+TIMESTAMPDIFF('SQL_TSI_DAY', mating.date, pc.conception) < 180
 LEFT JOIN
 (SELECT * FROM study.birth) birth
 ON (birth.Id = pc.offspringId AND mating.date < birth.date AND TIMESTAMPDIFF('SQL_TSI_DAY', mating.date, birth.date) < 180)
