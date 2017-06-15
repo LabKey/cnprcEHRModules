@@ -11,7 +11,7 @@ SELECT
   timestampdiff('SQL_TSI_DAY', oldWeights.date, oldWeights.Id.MostRecentWeight.MostRecentWeightDate) AS IntervalInDays,
   age_in_months(oldWeights.date, oldWeights.Id.MostRecentWeight.MostRecentWeightDate) AS IntervalInMonths,
   oldWeights.weight AS OldWeight,
-  round(((oldWeights.Id.MostRecentWeight.MostRecentWeight - oldWeights.weight) * 100 / oldWeights.Id.MostRecentWeight.MostRecentWeight), 1) AS PctChange
+  round(((oldWeights.Id.MostRecentWeight.MostRecentWeight - oldWeights.weight) * 100 / oldWeights.weight), 1) AS PctChange
 FROM
 (SELECT oldWeightsWithDupes.Id,
   MAX(oldWeightsWithDupes.date) AS date,  -- all things being equal, pick the more recent date
@@ -35,5 +35,5 @@ FROM
   ) oldWeightsWithDupes
   GROUP BY oldWeightsWithDupes.Id
 ) oldWeights
-WHERE ((oldWeights.Id.MostRecentWeight.MostRecentWeight - oldWeights.weight) * 100 / oldWeights.Id.MostRecentWeight.MostRecentWeight) <= -10.0
+WHERE ((oldWeights.Id.MostRecentWeight.MostRecentWeight - oldWeights.weight) * 100 / oldWeights.weight) <= -10.0
 AND oldWeights.Id.Demographics.calculated_status = 'Alive'

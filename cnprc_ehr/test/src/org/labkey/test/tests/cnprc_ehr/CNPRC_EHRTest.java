@@ -620,7 +620,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         insertCmd = new InsertRowsCommand("study", "weight");
         rowMap = new HashMap<>();
-        rowMap.put("weight", "10.0");
+        rowMap.put("weight", "9.1");
         rowMap.put("ts", dateTimeFormatter.format(now));
         rowMap.put("date", dateTimeFormatter.format(now));
         rowMap.put("Id", "TEST3771679");
@@ -644,7 +644,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
-        rowMap.put("weight", "10.0");
+        rowMap.put("weight", "9.89");
         rowMap.put("ts", dateTimeFormatter.format(now));
         rowMap.put("date", dateTimeFormatter.format(now));
         rowMap.put("Id", "TEST4037096");
@@ -1482,7 +1482,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         List<String> expected = Arrays.asList(
                 "TEST3771679"
-                , "10"
+                , "9.1"
                 , "50"
                 , "1"
                 , "13.0"
@@ -1494,11 +1494,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         expected = Arrays.asList(
                 "TEST4037096"
-                , "10"
+                , "9.89"
                 , "50"
                 , "1"
                 , "11.0"
-                , "-10.0"
+                , "-10.1"
         );
 
         resultsRowDataAsText = results.getRowDataAsText(1, expectedColumns.toArray(new String[expectedColumns.size()]));
