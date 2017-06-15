@@ -108,7 +108,7 @@ activeFlags	General	query	Active Flags	true		study	flags	Active Flags		date	fals
 surgicalCases2	Surgery	query	Surgery Cases	true		study	Cases	Active Surgery Cases		date	false	false		qcstate/publicdata	This displays active surgery cases
 diet	Colony Management	js	Diet	true		study	underDevelopment			date	false	false		qcstate/publicdata	This displays active diets
 matings	Reproductive Management	query	Matings	true		study	matings			date	false	false		qcstate/publicdata	This displays the records of matings
-matingSuccessRates	Reproductive Management	js	Mating Success Rates	true		study	underDevelopment			date	false	false		qcstate/publicdata	This displays a summary of matings
+matingSuccessRates	Reproductive Management	query	Mating Success Rates	true		study	matingSuccessRates			date	false	false		qcstate/publicdata	This displays a summary of matings
 
 reproSummary	Reproductive Management	js	Reproductive Summary	true		study	underDevelopment			date	false	false		qcstate/publicdata
 menseCycleLength	Reproductive Management	js	Cycle Length	true		study	underDevelopment			date	false	false		qcstate/publicdata
