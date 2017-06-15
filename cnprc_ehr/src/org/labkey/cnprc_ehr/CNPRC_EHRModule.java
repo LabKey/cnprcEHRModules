@@ -19,6 +19,8 @@ package org.labkey.cnprc_ehr;
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.data.Container;
 import org.labkey.api.ehr.EHRService;
+import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
+import org.labkey.api.ehr.dataentry.forms.WeightFormType;
 import org.labkey.api.ehr.history.DefaultBirthDataSource;
 import org.labkey.api.ehr.history.DefaultDeathsDataSource;
 import org.labkey.api.ehr.history.DefaultDepartureDataSource;
@@ -104,6 +106,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("projectDetails", this, "views/projectDetails.html");
         ehrService.registerActionOverride("housingQueries", this, "views/enclosureSearch.html");
         ehrService.registerActionOverride("colonyOverview", this, "views/colonyOverview.html");
+        //data entry
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightFormType.class, this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
