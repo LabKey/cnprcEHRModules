@@ -18,6 +18,7 @@
 SELECT
 mating.Id,
 mating.male,
+mating.date,
 count(distinct pc.offspringId) as births,
 group_concat(distinct pc.offspringId) as offspring
 FROM
@@ -38,4 +39,4 @@ TIMESTAMPDIFF('SQL_TSI_DAY', mating.date, pc.conception) < 180
 LEFT JOIN
 (SELECT * FROM study.birth) birth
 ON (birth.Id = pc.offspringId AND mating.date < birth.date AND TIMESTAMPDIFF('SQL_TSI_DAY', mating.date, birth.date) < 180)
-GROUP BY mating.id, mating.male
+GROUP BY mating.id, mating.male, mating.date
