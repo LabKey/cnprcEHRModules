@@ -60,7 +60,7 @@
         </column>
         <column name="Id/DemographicsActivePregnancy/conNum">
             <properties>
-                <property name="columnTitle" value="Pregnancy Conception Num"/>
+                <property name="columnTitle" value="Conception Num"/>
             </properties>
         </column>
         <column name="Id/DemographicsActiveColony/colonyCode">
@@ -81,6 +81,11 @@
         <column name="spf">
             <properties>
                 <property name="columnTitle" value="SPF Status"/>
+            </properties>
+        </column>
+        <column name="Id/DemographicsMostRecentBodyConditionScore/BodyConditionScore">
+            <properties>
+                <property name="columnTitle" value="Body Condition"/>
             </properties>
         </column>
     </columns>

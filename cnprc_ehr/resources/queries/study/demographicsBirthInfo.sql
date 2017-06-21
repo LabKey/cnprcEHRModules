@@ -1,0 +1,12 @@
+/*
+ * Copyright (c) 2013-2014 LabKey Corporation
+ *
+ * Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+ */
+SELECT
+pc.offspringId AS Id,
+pc.conNum AS conceptionNumber,
+pc.BRType AS breedingType,
+pc.pgType AS pregnancyType,
+FROM study.pregnancyConfirmations pc
+WHERE pc.offspringId IS NOT NULL;

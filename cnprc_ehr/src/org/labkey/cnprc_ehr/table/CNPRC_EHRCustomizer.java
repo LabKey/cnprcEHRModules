@@ -312,6 +312,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             col.setDescription("Utilization");
             ds.addColumn(col);
         }
+
+        if (ds.getColumn("demographicsBirthInfo") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "demographicsBirthInfo", "demographicsBirthInfo", "Id", "Id");
+            col.setLabel("DemographicsBirthInfo");
+            col.setDescription("Birth-Conception Related Info");
+            ds.addColumn(col);
+        }
     }
 
     private void customizeRelocationHistoryQuery(AbstractTableInfo ti, DateTimeFormatter dateTimeFormatter)
