@@ -37,6 +37,18 @@
                             <fkColumnName>value</fkColumnName>
                         </fk>
                     </column>
+                    <column columnName="divider">
+                        <columnTitle>Divider</columnTitle>
+                        <displayColumnFactory>
+                            <className>NOWRAP</className>
+                        </displayColumnFactory>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>divider_types</fkTable>
+                            <fkColumnName>rowid</fkColumnName>
+                            <fkDisplayColumnName>divider</fkDisplayColumnName>
+                        </fk>
+                    </column>
                     <column columnName="reloc_seq">
                         <columnTitle>Reloc Seq</columnTitle>
                     </column>

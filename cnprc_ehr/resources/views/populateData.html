@@ -237,6 +237,13 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Housing Reason',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'housing_reason',
+        pk: 'rowid'
+    },
+    {
         label: 'Image Modality Type',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',

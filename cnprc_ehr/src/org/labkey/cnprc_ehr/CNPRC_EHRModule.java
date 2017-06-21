@@ -23,6 +23,10 @@ import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
 import org.labkey.api.ehr.dataentry.forms.ArrivalFormType;
 import org.labkey.api.ehr.dataentry.forms.AssignmentFormType;
 import org.labkey.api.ehr.dataentry.forms.BirthFormType;
+import org.labkey.api.ehr.dataentry.forms.DCMNotesFormType;
+import org.labkey.api.ehr.dataentry.forms.DeathFormType;
+import org.labkey.api.ehr.dataentry.forms.HousingFormType;
+import org.labkey.api.ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.api.ehr.dataentry.forms.WeightFormType;
 import org.labkey.api.ehr.history.DefaultBirthDataSource;
 import org.labkey.api.ehr.history.DefaultDeathsDataSource;
@@ -113,10 +117,10 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ArrivalFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BirthFormType.class, this));
-//        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(DeathFormType.class, this));
-//        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(HousingFormType.class, this));
-//        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
-//        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(TreatmentFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(HousingFormType.class, this));
+        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
+        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(TreatmentsFormType.class, this));
 
         ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightFormType.class, this));
 
