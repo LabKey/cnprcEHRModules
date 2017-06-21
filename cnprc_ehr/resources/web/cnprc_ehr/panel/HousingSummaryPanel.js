@@ -9,6 +9,7 @@ Ext4.define('CNPRC_EHR.panel.HousingSummaryPanel', {
 
     nounSingular: 'Area',
     nounPlural: 'Areas',
+    headerNames:  ['Type', 'Animal Count', '% of Total'],
 
     getAvailableCagesUrlParams: function (area) {
         var urlParams = {
