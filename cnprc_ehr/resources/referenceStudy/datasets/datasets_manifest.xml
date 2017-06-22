@@ -56,7 +56,6 @@
         <dataset name="payor_assignments" id="1003" category="ColonyManagement"/>
         <dataset name="pathology_inventory" id="7002" category="Repository" type="Standard"/>
         <dataset name="pregnancyDeterminations" id="5026" category="Reproductive Management" type="Standard"/>
-        <dataset name="problem" id="1030" category="Clinical" type="Standard"/>
         <dataset name="rd_asthma_cbc" id="6000" category="Respiratory Diseases" type="Standard"/>
         <dataset name="rd_skin_sensitization" id="6001" category="Respiratory Diseases" type="Standard"/>
         <dataset name="serum" id="7001" category="Repository" type="Standard"/>
@@ -68,6 +67,12 @@
         <dataset name="histology" id="1070" category="Pathology"/>
         <dataset name="dentalStatus" id="1064" showByDefault="false" category="Clinical"/>
         <dataset name="alopecia" id="1063" category="Clinical"/>
-
+        <dataset name="hematologyResults" id="1059" category="ClinPath" type="Standard"/>
+        <dataset name="iStat" id="1065" category="ClinPath" type="Standard"/>
+        <dataset name="antibioticSensitivity" id="5011" category="ClinPath" type="Standard"/>
+        <dataset name="chemistryResults" id="1056" category="ClinPath" type="Standard"/>
+        <dataset name="microbiology" id="5018" category="ClinPath" type="Standard"/>
+        <dataset name="parasitologyResults" id="1052" category="ClinPath" type="Standard"/>
+        <dataset name="clinremarks" id="1047" category="Clinical" type="Standard"/>
     </datasets>
 </datasets>
