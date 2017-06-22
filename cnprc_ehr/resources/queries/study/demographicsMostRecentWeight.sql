@@ -1,8 +1,8 @@
 /*
-        * Copyright (c) 2010-2013 LabKey Corporation
-        *
-        * Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
-        */
+ * Copyright (c) 2017 LabKey Corporation
+ *
+ * Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 --  This file must named as it in order to override the one of the same name in EHR
 
