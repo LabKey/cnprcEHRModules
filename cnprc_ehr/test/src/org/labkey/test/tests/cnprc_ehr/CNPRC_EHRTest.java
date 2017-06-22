@@ -2138,11 +2138,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"Census Flags:"
                 ,"Census Flags:"
                 ,"Breeding Group:"
-                ,"Pregnancy Conception Num:"
+                ,"Conception Num:"
                 ,"Colony Code:"
                 ,"SNOMED:"
                 ,"TB Date:"
                 ,"SPF Status:"
+                ,"Body Condition:"
                 ,"View:"
         );
 
