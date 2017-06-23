@@ -1427,8 +1427,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Quick Search - Advanced Housing Search - Vacant Cages Report");
         hoverMenu("Quick Search");
         waitForElement(Locator.linkWithText("Advanced Housing Search"), WAIT_FOR_JAVASCRIPT);
-        clickAndWait(new Locator.LinkLocator("Advanced Housing Search"));
-        waitAndClickAndWait(new Locator.LinkLocator("Vacant Cage Summary"));
+        clickAndWait(Locator.linkWithText("Advanced Housing Search"));
+        waitAndClickAndWait(Locator.linkWithText("Vacant Cage Summary"));
 
         DataRegionTable results = new DataRegionTable("query", getDriver());
 
@@ -1964,8 +1964,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         expected = Arrays.asList("44444","2014-02-08","AB125/YZ17","Pc5C0","Pc5C1, Pc5C2","O","M");
         confirmRowText(results, expected, 0);
 
-        assertElementPresent(new Locator.LinkLocator("44444"));
-        assertElementPresent(new Locator.LinkLocator("AB125/YZ17"));
+        assertElementPresent(Locator.linkWithText("44444"));
+        assertElementPresent(Locator.linkWithText("AB125/YZ17"));
 
         // TODO: 4/26/2017 Add tests for Primary and Secondary project look ups.
 
@@ -2108,7 +2108,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0,1));
         assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
-        assertElementPresent(new Locator.LinkLocator("Pc5C1"));
+        assertElementPresent(Locator.linkWithText("Pc5C1"));
 
         assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
     }
