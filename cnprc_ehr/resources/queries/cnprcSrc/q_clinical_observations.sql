@@ -16,7 +16,8 @@
 SELECT
 DI_AN_ID AS Id,
 DI_OBS_DATE AS obsDate,
-'Diarrhea' AS category,
+'Stool' AS category,
+'L' AS observation,
 DI_OBS_CODE AS code,
 OBJECTID as objectid,
 DATE_TIME
@@ -25,7 +26,8 @@ UNION ALL
 SELECT
 PA_AN_ID AS Id,
 PA_OBS_DATE AS obsDate,
-'Poor Appetite' AS category,
+'App' AS category,
+'P' AS observation,
 PA_OBS_CODE AS code,
 OBJECTID as objectid,
 DATE_TIME

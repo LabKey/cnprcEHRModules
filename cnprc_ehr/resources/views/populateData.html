@@ -586,6 +586,41 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'viruses',
         pk: 'rowid'
+    },
+    {
+        label: 'Hyd Score',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'hyd_score',
+        pk: 'rowid'
+    },
+    {
+        label: 'App Score',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'app_score',
+        pk: 'rowid'
+    },
+    {
+        label: 'Stool Score',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'stool_score',
+        pk: 'rowid'
+    },
+    {
+        label: 'Plan Category',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'plan_category',
+        pk: 'rowid'
+    },
+    {
+        label: 'Clinremarks Category',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'clinremarks_category',
+        pk: 'rowid'
     }
  ];
 

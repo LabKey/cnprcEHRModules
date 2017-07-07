@@ -57,3 +57,8 @@ test_type_target_mapping	Test Type Target Mapping	value
 test_type_virus_mapping	Test Type Virus Mapping	value
 virology_result_blend	Virology Result Blend	value
 housing_reason	Housing Reason Field Values	value
+app_score	Appetite Score	value
+hyd_score	Hyd Score	value
+stool_score	Stool Score	value
+plan_category	Categories for Plan in clinRemarks	value
+clinremarks_category	Clinremarks Category Field Values	value

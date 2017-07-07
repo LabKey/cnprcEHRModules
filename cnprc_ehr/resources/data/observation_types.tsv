@@ -1,0 +1,5 @@
+value	category	editorconfig	schemaName	queryName	valueColumn
+Other		{"xtype":"textfield"}
+App		{"xtype":"ehr-simplecombo","schemaName":"ehr_lookups","queryName":"app_score","displayField":"value","sortFields":"sort_order","valueField":"value"}
+Hyd		{"xtype":"ehr-simplecombo","schemaName":"ehr_lookups","queryName":"hyd_score","displayField":"value","sortFields":"sort_order","valueField":"value"}
+Stool		{"xtype":"ehr-simplecombo","schemaName":"ehr_lookups","queryName":"stool_score","displayField":"value","sortFields":"sort_order","valueField":"value"}

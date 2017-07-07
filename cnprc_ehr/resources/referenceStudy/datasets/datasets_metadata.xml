@@ -3398,6 +3398,9 @@
             <column columnName="o">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="planCategory">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="p">
                 <datatype>varchar</datatype>
             </column>
