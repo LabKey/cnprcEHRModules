@@ -26,8 +26,6 @@ import org.labkey.api.ehr.dataentry.forms.BirthFormType;
 import org.labkey.api.ehr.dataentry.forms.DCMNotesFormType;
 import org.labkey.api.ehr.dataentry.forms.DeathFormType;
 import org.labkey.api.ehr.dataentry.forms.HousingFormType;
-import org.labkey.api.ehr.dataentry.forms.TreatmentsFormType;
-import org.labkey.api.ehr.dataentry.forms.WeightFormType;
 import org.labkey.api.ehr.history.DefaultBirthDataSource;
 import org.labkey.api.ehr.history.DefaultDeathsDataSource;
 import org.labkey.api.ehr.history.DefaultDepartureDataSource;
@@ -43,6 +41,8 @@ import org.labkey.api.view.ActionURL;
 import org.labkey.api.view.NavTree;
 import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
+import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
 import java.util.Collection;
@@ -98,6 +98,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerClientDependency(ClientDependency.fromPath("ehr/reports.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcReports.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/Utils.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/data/sources/CNPRCDefault.js"), this);
 
 
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
@@ -120,9 +121,10 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(HousingFormType.class, this));
         EHRService.get().registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
-        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(TreatmentsFormType.class, this));
+        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(org.labkey.api.ehr.dataentry.forms.TreatmentsFormType.class, this));
 
         ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(TreatmentsFormType.class, this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {

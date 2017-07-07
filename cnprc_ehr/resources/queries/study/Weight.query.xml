@@ -16,6 +16,15 @@
                     <column columnName="weightTattooFlag">
                         <columnTitle>Tattoo Flag</columnTitle>
                     </column>
+                    <column columnName="projectCode">
+                        <columnTitle>Project Code</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>project</fkTable>
+                            <fkColumnName>projectCode</fkColumnName>
+                            <fkDisplayColumnName>projectCode</fkDisplayColumnName>
+                        </fk>
+                    </column>
                 </columns>
             </table>
         </tables>

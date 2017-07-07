@@ -1584,6 +1584,9 @@
             <column columnName="category">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="area">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="code">
                 <datatype>varchar</datatype>
             </column>
@@ -2031,6 +2034,9 @@
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
