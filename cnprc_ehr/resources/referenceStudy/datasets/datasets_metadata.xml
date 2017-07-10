@@ -1121,6 +1121,12 @@
         </columns>
         <tableTitle>Parentage</tableTitle>
     </table>
+    <!--'problem' and 'cases' dataset can be synonymous in tracking a clinical case.-->
+    <!--However, the difference is in type of problem - example: onprc uses-->
+    <!--both datasets for clinical case monitoring - when a clinical case is opened, a master problem list is also opened, however,-->
+    <!--when a case is closed, that problem may or may not be closed depending on if the problem is acute (ex. wound is healed) or-->
+    <!--chronic (obesity) and no longer requires acute clinical case monitoring but is still an ongoing issue that requires-->
+    <!--monitoring. Wnprc, on the other hand, only uses 'problem'. For cnprc, 'cases' dataset is sufficient.-->
     <table tableName="cases" tableDbType="TABLE">
         <columns>
             <column columnName="Id">
@@ -1851,6 +1857,53 @@
             </column>
         </columns>
         <tableTitle>Misc Tests</tableTitle>
+    </table>
+    <!--Not having Problem List breaks the automated test. TODO: Fix automated test-->
+    <!--See comments for cases above for more detailed explanation on cases vs. problem dataset-->
+    <table tableName="problem" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="problem_no">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="enddate">
+                <datatype>timestamp</datatype>
+                <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
+            </column>
+            <column columnName="code">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+            <column columnName="caseid">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="category">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="subcategory">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="project">
+                <datatype>integer</datatype>
+                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Problem List</tableTitle>
     </table>
     <table tableName="treatment_order" tableDbType="TABLE">
         <columns>
