@@ -2448,6 +2448,21 @@
             <column columnName="spf">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="genNum">
+                <datatype>varchar</datatype>
+                <scale>2</scale>
+            </column>
+            <column columnName="birthPlaceStatus">
+                <datatype>varchar</datatype>
+                <scale>2</scale>
+            </column>
+            <column columnName="harvestCode">
+                <datatype>varchar</datatype>
+                <scale>2</scale>
+            </column>
+            <column columnName="harvestDate">
+                <datatype>timestamp</datatype>
+            </column>
         </columns>
         <tableTitle>Demographics</tableTitle>
     </table>

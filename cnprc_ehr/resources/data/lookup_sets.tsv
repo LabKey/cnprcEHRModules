@@ -62,3 +62,5 @@ hyd_score	Hyd Score	value
 stool_score	Stool Score	value
 plan_category	Categories for Plan in clinRemarks	value
 clinremarks_category	Clinremarks Category Field Values	value
+harvest_codes	Harvest Codes	value
+birthplace_status	Birthplace Status	value
