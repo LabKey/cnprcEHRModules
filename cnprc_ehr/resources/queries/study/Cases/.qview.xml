@@ -5,6 +5,7 @@
         <column name="problem" />
         <column name="enddate" />
         <column name="category" />
+        <column name="admitType" />
         <column name="remark" />
     </columns>
     <sorts>

@@ -1126,7 +1126,7 @@
     <!--both datasets for clinical case monitoring - when a clinical case is opened, a master problem list is also opened, however,-->
     <!--when a case is closed, that problem may or may not be closed depending on if the problem is acute (ex. wound is healed) or-->
     <!--chronic (obesity) and no longer requires acute clinical case monitoring but is still an ongoing issue that requires-->
-    <!--monitoring. Wnprc, on the other hand, only uses 'problem'. For cnprc, 'cases' dataset is sufficient.-->
+    <!--monitoring. Wnprc, on the other hand, only uses 'problem'. CNPRC will utilize both cases and problem list. -->
     <table tableName="cases" tableDbType="TABLE">
         <columns>
             <column columnName="Id">
@@ -1146,6 +1146,9 @@
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
             </column>
             <column columnName="category">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="admitType">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="problem">
@@ -1858,8 +1861,7 @@
         </columns>
         <tableTitle>Misc Tests</tableTitle>
     </table>
-    <!--Not having Problem List breaks the automated test. TODO: Fix automated test-->
-    <!--See comments for cases above for more detailed explanation on cases vs. problem dataset-->
+    <!--See comments for cases above for more detailed explanation on 'cases' vs. 'problem' dataset-->
     <table tableName="problem" tableDbType="TABLE">
         <columns>
             <column columnName="Id">

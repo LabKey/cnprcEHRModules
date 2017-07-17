@@ -4,7 +4,7 @@
             <table tableName="activeCases" tableDbType="NOT_IN_DB">
                 <tableTitle>Active Cases</tableTitle>
                 <columns>
-                    <column columnName="category">
+                    <column columnName="admitType">
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>admit_type</fkTable>

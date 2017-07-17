@@ -16,7 +16,7 @@
 SELECT
   ac.Id,
   max(ac.date) as date,
-  group_concat(ac.category)         AS categories,
+  group_concat(ac.admitType)         AS admitTypes,
   group_concat(ac.problem, chr(10)) AS problems,
   group_concat(ac.remark, chr(10))  AS remarks,
   count(*)                          AS total
