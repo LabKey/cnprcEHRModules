@@ -16,10 +16,9 @@
 SELECT
   ac.Id,
   max(ac.date) as date,
-  'L'                              AS category,
   group_concat(ac.problem, chr(10)) AS problems,
   group_concat(ac.remark, chr(10))  AS remarks,
   count(*)                         AS total
 FROM study.activeCases ac
-WHERE ac.category = 'L'
+WHERE ac.admitType = 'L'
 GROUP BY ac.id
