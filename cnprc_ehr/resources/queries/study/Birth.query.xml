@@ -83,9 +83,8 @@
                         <columnTitle>Species</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>species</fkTable>
-                            <fkColumnName>common</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true"/>
+                            <fkTable>species_codes</fkTable>
+                            <fkColumnName>code</fkColumnName>
                         </fk>
                     </column>
                     <column columnName="geographic_origin">
