@@ -139,13 +139,16 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Behavior",
                 "Lab Results"));
         put("Behavior", Arrays.asList(
+                "Behavior Cases",
+                "Behavior Remarks",
+                "Behavior Treatments",
                 "Cagemate History",
                 "Enrichment",
                 "Full History",
                 "Nursing",
-                "Observations",
                 "Pairing History",
-                "Pairing Observations"
+                "Pairing Observations",
+                "Pairing With Housing"
         ));
         put("Clinical", Arrays.asList(
                 "Cases Over 2 Years",
@@ -304,6 +307,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         storePDLData();
         createBillingLinkedSchema();
         storeBillingData();
+        initGenetics();
     }
 
     @Override
@@ -828,7 +832,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         uncheckCheckbox(cb);
 
         clickButton("Start Import"); // Validate queries page
-        waitForPipelineJobsToComplete(1, "Study import", false, MAX_WAIT_SECONDS * 2500);
+        waitForPipelineJobsToComplete(++_pipelineJobCount, "Study import", false, MAX_WAIT_SECONDS * 2500);
     }
 
     @Override
@@ -1033,13 +1037,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         validateLookupFromList("Sub Test Types", "Test type 601", "Test type comment 601");
 
 
-        validateLookupFromTable("orders", "Client 100", "Client full name 100");
-        validateLookupFromTable("orders", "Billing contact 100", "Billing contact 100 comment");
-        validateLookupFromTable("orders", "Report contact 100", "Report contact comment 0");
+//TODO enable once PDL is signed off.  May require some adjustment to the Client lookup in orders.query.xml
+//      validateLookupFromTable("orders", "Client 100", "Client full name 100");
+//        validateLookupFromTable("orders", "Billing contact 100", "Billing contact 100 comment");
+//        validateLookupFromTable("orders", "Report contact 100", "Report contact comment 0");
 
         validateLookupFromTable("samples", "100", "Order comment 1");
         validateLookupFromTable("samples", "TEST1020148", "Overview: test1020148");
-        validateLookupFromTable("samples", "Sample type 300", "Sample type comment 300");
+//TODO enable once PDL is signed off.
+//        validateLookupFromTable("samples", "Sample type 300", "Sample type comment 300");
 
         validateLookupFromTable("tests", "200", "Sample 200 comment");
 
@@ -1052,26 +1058,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         openClinicalHistoryForAnimal("TEST1020148");
         List<String> expectedLabels = new ArrayList<String>(
                 Arrays.asList(
-                        "Alert",
-                        "Arrival/Departure",
-                        "Biochemistry",
-                        "Blood Draws",
-                        "Deaths",
-                        "Hematology",
                         "Labwork",
-                        "Misc Tests",
-                        "Pregnancy Confirmations",
                         "Weights",
-                        "Antibiotic Sensitivity",
+                        "Housing Transfers",
+                        "Blood Draws",
+                        "Clinical",
                         "Assignments",
                         "Births",
-                        "Clinical",
-                        "Deliveries",
-                        "Housing Transfers",
-                        "Microbiology",
-                        "Parasitology",
-                        "Serology",
-                        "iStat"
+                        "Deaths",
+                        "Arrival/Departure"
                 ));
         checkClinicalHistoryType(expectedLabels);
     }
@@ -1744,16 +1739,19 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickCategoryTab("Reproductive Management");
         animalHistoryPage.clickReportTab("Siblings");
 
-        results = animalHistoryPage.getActiveReportDataRegion();
         expectedColumns= Arrays.asList(
                 "Id","Relationship","Sibling","Sex","Flags","Location","SiblingDam","SiblingSire","qcstate"
         );
+        waitForElement(new Locator.LinkLocator("Siblings - test6390238"));
+        results = (DataRegionTable) animalHistoryPage.getActiveReportDataRegions().get(1);//Switching tabs created multiple data regions.
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        assertTextPresent("No data to show");
         assertEquals("Wrong row count",0,results.getDataRowCount());
 
         id = "TEST1099252";
         animalHistoryPage.searchSingleAnimal(id);
-        results = animalHistoryPage.getActiveReportDataRegion();
+        waitForElement(new Locator.LinkLocator("Siblings - test1099252"));
+        results = (DataRegionTable) animalHistoryPage.getActiveReportDataRegions().get(1);//Switching tabs created multiple data regions.
         expected = Arrays.asList(
                 "TEST1099252","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238"
         );
@@ -1763,7 +1761,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         animalHistoryPage.clickCategoryTab("Genetics");
         animalHistoryPage.clickReportTab("Kinship");
-        results = animalHistoryPage.getActiveReportDataRegion();
+        results = (DataRegionTable) animalHistoryPage.getActiveReportDataRegions().get(2);//Switching tabs created multiple data regions.
         expectedColumns= Arrays.asList(
                 "Id","Id2","coefficient"
         );
