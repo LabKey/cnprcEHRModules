@@ -12,8 +12,10 @@ SELECT
   max(cbr.availableCages) - count(DISTINCT h.cage) - max(cbr.markedUnavailable) as CagesEmpty,
   round(((CAST(count(DISTINCT h.cage) as double) + max(cbr.markedUnavailable)) / cast(max(cbr.availableCages) as double)) * 100, 1) as pctUsed,
   count(DISTINCT h.id) as TotalAnimals,
-
-
+  count(DISTINCT (case when h.id.demographics.species = 'MMU' then h.id else null end)) as TotalMMUAnimals,
+  count(DISTINCT (case when h.id.demographics.species = 'CMO' then h.id else null end)) as TotalCMOAnimals,
+  count(DISTINCT (case when h.id.demographics.species = 'MCY' then h.id else null end)) as TotalMCYAnimals,
+  count(DISTINCT (case when h.id.demographics.id is null or h.id.demographics.species not in ('MMU','CMO','MCY') then h.id else null end)) as TotalOtherAnimals
 FROM ehr_lookups.rooms r
 LEFT JOIN (
 	SELECT c.room, c.cage

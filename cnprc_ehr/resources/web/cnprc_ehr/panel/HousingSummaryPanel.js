@@ -10,6 +10,7 @@ Ext4.define('CNPRC_EHR.panel.HousingSummaryPanel', {
     nounSingular: 'Area',
     nounPlural: 'Areas',
     headerNames:  ['Type', 'Animal Count', '% of Total'],
+    cageUsagePanelColumnCount: 8,
 
     getAvailableCagesUrlParams: function (area) {
         var urlParams = {
@@ -22,5 +23,17 @@ Ext4.define('CNPRC_EHR.panel.HousingSummaryPanel', {
         urlParams['query.indoorOutdoorFlag~eq'] = 'I';
 
         return urlParams;
+    },
+
+    addAdditionalCells: function(cells,row){
+        cells.push(EHR.Utils.getFormattedRowNumber(row.getDisplayValue('totalMMUAnimals'),null,false));
+        cells.push(EHR.Utils.getFormattedRowNumber(row.getDisplayValue('totalCMOAnimals'),null,false));
+        cells.push(EHR.Utils.getFormattedRowNumber(row.getDisplayValue('totalMCYAnimals'),null,false));
+        cells.push(EHR.Utils.getFormattedRowNumber(row.getDisplayValue('totalOtherAnimals'),null,false));
+    },
+
+    getCageUsageHeaderNames: function () {
+        return [this.nounSingular, 'Total Cages', 'Empty Cages', 'MMU Count', 'CMO Count', 'MCY Count', 'Unknown', '% Used'];
     }
+
 });

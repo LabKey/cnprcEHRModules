@@ -904,7 +904,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForText("Cage Usage:");
         assertTextPresentInThisOrder(
                 "Cage Usage:",
-                "Area","Total Cages","Empty Cages","% Used",
+                "Area","Total Cages","Empty Cages","MMU Count","CMO Count","MCY Count","Unknown","% Used",
                 "Housing Type Summary:",
                 "Pairing Summary:");
         Locator.XPathLocator linkLocator = Locator.linkWithText("A:");
