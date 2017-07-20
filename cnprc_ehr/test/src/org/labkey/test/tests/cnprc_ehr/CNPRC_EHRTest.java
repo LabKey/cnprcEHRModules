@@ -929,7 +929,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",1,results.getDataRowCount());
-        assertTextPresent( "(category = Diabetic)", "TEST2008446");
+        assertTextPresent( "(admitType = Diabetic)", "TEST2008446");
     }
 
     @Test

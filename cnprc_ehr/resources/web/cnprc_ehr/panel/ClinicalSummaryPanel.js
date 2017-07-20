@@ -43,11 +43,11 @@ Ext4.define('CNPRC_EHR.panel.ClinicalSummaryPanel', {
             requiredVersion: 9.1,
             schemaName: 'study',
             queryName: 'activeCases',
-            columns: ['Id', 'date', 'category'].join(','),
+            columns: ['Id', 'date', 'admitType'].join(','),
             failure: LDK.Utils.getErrorCallback(),
             scope: this,
             success: function(results){
-                this.caseData = this.aggregateResults(results, 'category');
+                this.caseData = this.aggregateResults(results, 'admitType');
                 this.demographicsData = this.caseData;
                 if(this.demographicsData)
                     this.demographicsData.rowCount = this.demographicsData.total;  // somewhat ugly hack to avoid changing BasicAggregationPanel too much; NOT using Demographics data here
@@ -67,7 +67,7 @@ Ext4.define('CNPRC_EHR.panel.ClinicalSummaryPanel', {
             items: []
         };
 
-        var cases = this.appendSection('Open Cases', this.caseData, 'category/description', 'eq');
+        var cases = this.appendSection('Open Cases', this.caseData, 'admitType/description', 'eq');
         if (cases)
             cfg.items.push(cases);
 
