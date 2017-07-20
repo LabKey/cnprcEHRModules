@@ -1761,6 +1761,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         animalHistoryPage.clickCategoryTab("Genetics");
         animalHistoryPage.clickReportTab("Kinship");
+        waitForText("Kinship - test1099252");
+        waitForText("Coefficient");
         results = (DataRegionTable) animalHistoryPage.getActiveReportDataRegions().get(2);//Switching tabs created multiple data regions.
         expectedColumns= Arrays.asList(
                 "Id","Id2","coefficient"
