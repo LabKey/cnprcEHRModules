@@ -21,7 +21,6 @@ import org.labkey.api.data.Container;
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
 import org.labkey.api.ehr.dataentry.forms.ArrivalFormType;
-import org.labkey.api.ehr.dataentry.forms.AssignmentFormType;
 import org.labkey.api.ehr.dataentry.forms.BirthFormType;
 import org.labkey.api.ehr.dataentry.forms.DCMNotesFormType;
 import org.labkey.api.ehr.dataentry.forms.DeathFormType;
@@ -41,6 +40,8 @@ import org.labkey.api.view.ActionURL;
 import org.labkey.api.view.NavTree;
 import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
+import org.labkey.cnprc_ehr.dataentry.forms.AssignmentFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
@@ -120,11 +121,16 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BirthFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(HousingFormType.class, this));
-        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
-        EHRService.get().registerFormType(new DefaultDataEntryFormFactory(org.labkey.api.ehr.dataentry.forms.TreatmentsFormType.class, this));
-
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(org.labkey.api.ehr.dataentry.forms.TreatmentsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(TreatmentsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalRoundsFormType.class, this));
+
+       //demographics
+        ehrService.registerDemographicsProvider(new ActiveCasesDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ActiveAssignmentsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ActiveFlagsDemographicsProvider(this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {

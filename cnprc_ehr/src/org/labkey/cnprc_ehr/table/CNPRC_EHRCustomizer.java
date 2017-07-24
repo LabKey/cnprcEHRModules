@@ -45,20 +45,33 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         {
             customizeAnimalTable(ti);
         }
-
         else if (matches(ti, "study", "RelocationHistory"))
         {
             customizeRelocationHistoryQuery(ti, dateTimeFormatter);
         }
-
         else if (matches(ti, "study", "LocationReport"))
         {
             customizeLocationReportQuery(ti, dateTimeFormatter);
         }
-
         else if (matches(ti, "study", "WeightsTbAndBodyCondition"))
         {
             customizeWeightsTbAndBodyConditionQuery(ti, dateTimeFormatter);
+        }
+        else if (matches(ti, "study", "Clinical Observations") || matches(ti, "study", "clinical_observations"))
+        {
+            customizeClinicalObservations((AbstractTableInfo) ti);
+        }
+    }
+    private void customizeClinicalObservations(AbstractTableInfo ti)
+    {
+        ColumnInfo categoryCol = ti.getColumn("category");
+        if (categoryCol != null)
+        {
+            UserSchema us = getUserSchema(ti, "ehr");
+            if (us != null)
+            {
+                categoryCol.setFk(new QueryForeignKey(us, null, "observation_types", "value", "value", true));
+            }
         }
     }
 

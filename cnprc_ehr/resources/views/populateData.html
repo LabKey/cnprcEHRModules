@@ -635,6 +635,20 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'birthplace_status',
         pk: 'rowid'
+    },
+    {
+        label: 'Observation Types',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr',
+        queryName: 'observation_types',
+        pk: 'value'
+    },
+    {
+        label: 'Observation Areas',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'observation_areas',
+        pk: 'rowid'
     }
  ];
 

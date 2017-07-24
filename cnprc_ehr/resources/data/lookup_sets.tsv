@@ -60,7 +60,8 @@ housing_reason	Housing Reason Field Values	value
 app_score	Appetite Score	value
 hyd_score	Hyd Score	value
 stool_score	Stool Score	value
-plan_category	Categories for Plan in clinRemarks	value
+plan_category	Categories for Plan	value
 clinremarks_category	Clinremarks Category Field Values	value
 harvest_codes	Harvest Codes	value
 birthplace_status	Birthplace Status	value
+observation_areas	Observation Areas	value

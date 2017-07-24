@@ -72,15 +72,6 @@
                     <column columnName="performedby">
                         <columnTitle>Entered By</columnTitle>
                     </column>
-                    <column columnName="planCategory">
-                        <description>Pre-defined plan text for 'p' (Today) or 'p2' (Long or short term plan)</description>
-                        <columnTitle>Plan Category</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>plan_category</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                        </fk>
-                    </column>
                 </columns>
             </table>
         </tables>

@@ -982,9 +982,8 @@
                 <datatype>timestamp</datatype>
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -1078,9 +1077,8 @@
                 <datatype>timestamp</datatype>
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -1154,6 +1152,9 @@
             <column columnName="problem">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="caseid">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
@@ -1204,9 +1205,8 @@
                 <datatype>varchar</datatype>
                 <scale>1</scale>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -1237,9 +1237,8 @@
                 <datatype>timestamp</datatype>
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -1297,9 +1296,8 @@
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
@@ -1390,9 +1388,11 @@
                 <datatype>timestamp</datatype>
                 <propertyURI>urn:ehr.labkey.org/#EndDate</propertyURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="caseid">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -1438,9 +1438,8 @@
             <column columnName="tissue">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="instructions">
                 <datatype>varchar</datatype>
@@ -1541,9 +1540,8 @@
             <column columnName="chargetype">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="num_tubes">
                 <datatype>integer</datatype>
@@ -1611,6 +1609,9 @@
                 <propertyURI>urn:ehr.labkey.org/#VetReviewDate</propertyURI>
             </column>
             <column columnName="projectCode">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="caseid">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
@@ -1730,9 +1731,8 @@
             <column columnName="caseid">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -1846,9 +1846,8 @@
             <column columnName="code">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -1900,9 +1899,8 @@
             <column columnName="subcategory">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
         </columns>
         <tableTitle>Problem List</tableTitle>
@@ -2114,10 +2112,8 @@
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <nullable>true</nullable>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="daysOld">
                 <datatype>double</datatype>
@@ -2229,9 +2225,8 @@
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
@@ -2418,16 +2413,14 @@
             </column>
             <column columnName="species">
                 <datatype>varchar</datatype>
-                <!--<nullable>false</nullable>-->
                 <columnTitle>Species code (3 char)</columnTitle>
             </column>
             <column columnName="objectid">
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
@@ -2545,9 +2538,8 @@
             <column columnName="reason">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
         </columns>
         <tableTitle>Housing</tableTitle>
@@ -2569,9 +2561,8 @@
             <column columnName="coefficient">
                 <datatype>double</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="enddate">
                 <datatype>timestamp</datatype>
@@ -2616,9 +2607,8 @@
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
         </columns>
         <tableTitle>Notes</tableTitle>
@@ -2740,9 +2730,8 @@
             <column columnName="observation">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="project">
-                <datatype>integer</datatype>
-                <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+            <column columnName="projectCode">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
@@ -2772,9 +2761,8 @@
         <column columnName="date">
             <datatype>datetime</datatype>
         </column>
-        <column columnName="project">
-            <datatype>integer</datatype>
-            <propertyURI>urn:ehr.labkey.org/#Project</propertyURI>
+        <column columnName="projectCode">
+            <datatype>varchar</datatype>
         </column>
         <column columnName="test">
             <datatype>varchar</datatype>
@@ -3472,9 +3460,6 @@
                 <datatype>varchar</datatype>
             </column>
             <column columnName="o">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="planCategory">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="p">

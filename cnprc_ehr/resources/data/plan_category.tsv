@@ -1,24 +1,24 @@
-value	description
-Vis	Visual check - visual assessment is needed, wound and location entered as text
-Sts	Suture check - suture check is needed, wound and location entered as text
-Bdg	Bandage check or change
-R/C - Sample Needed	Rectal Culture, sample needed
-R/C - Results Pending	Rectal Culture, results pending
-SS - Sample Needed	Stool Sample, sample needed
-SS - Results Pending	Stool Sample, results pending
-Nova	Stat chemistry needed
-PS	Pain Score, Separate post-op monitoring sheet needs to be completed
-Email	Indicate that an email was sent or received, may be to anyone, or any group
-U/S	Ultrasound needed
-X-ray	X-ray needed
-CBC	CBC needed
-Chem	Chemistry panel needed
-Lab	Text box to indicate that one, or more, of the lab tests above were ordered, but not received
-WT	Weight check needed
-Tb	TB reading due
-Shig screen	Rectal Culture needed for outdoor to indoor housing transition
-Access to D/C	Assess animal for discharge
-Await Labs	Day or date to check for lab results
-AMC	Awaiting medical assessment for euthanasia, plus date for assessment
-Relocation	Pending relocation, date of relocation sometimes entered
-Other	Text field needed for entry of additional instructions
+value	description	sort_order
+Vis	Visual check - visual assessment is needed, wound and location entered as text	1
+Sts	Suture check - suture check is needed, wound and location entered as text	2
+Bdg	Bandage check or change	3
+R/C - Sample Needed	Rectal Culture, sample needed	4
+R/C - Results Pending	Rectal Culture, results pending	5
+SS - Sample Needed	Stool Sample, sample needed	6
+SS - Results Pending	Stool Sample, results pending	7
+Nova	Stat chemistry needed	8
+PS	Pain Score, Separate post-op monitoring sheet needs to be completed	9
+Email	Indicate that an email was sent or received, may be to anyone, or any group	10
+U/S	Ultrasound needed	11
+X-ray	X-ray needed	12
+CBC	CBC needed	13
+Chem	Chemistry panel needed	14
+Lab	Text box to indicate that one, or more, of the lab tests above were ordered, but not received	15
+WT	Weight check needed	16
+Tb	TB reading due	17
+Shig screen	Rectal Culture needed for outdoor to indoor housing transition	18
+Access to D/C	Assess animal for discharge	19
+Await Labs	Day or date to check for lab results	20
+AMC	Awaiting medical assessment for euthanasia, plus date for assessment	21
+Relocation	Pending relocation, date of relocation sometimes entered	22
+Other	Text field needed for entry of additional instructions	23
