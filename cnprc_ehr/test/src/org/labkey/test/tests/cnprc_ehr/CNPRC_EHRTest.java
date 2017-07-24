@@ -913,7 +913,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForText("Room Utilization:");
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",3,results.getDataRowCount());
-        List<String> expected = Arrays.asList("3168659","2","2","0","2","0","100.0","2");
+        List<String> expected = Arrays.asList("3168659","2","2","0","2","0","100.0","2","0","2","0","0");
         assertEquals("Wrong row text.", expected,results.getRowDataAsText(0));
     }
 
