@@ -20,7 +20,5 @@ FROM (
        SELECT p.observation
        FROM study.pairings p
        WHERE enddate IS NULL
-             AND p.id.demographics.species.code = 'MMU'
-             AND p.id.curLocation.location IS NOT NULL
-       GROUP BY p.id, p.observation) sub
+       GROUP BY p.id,p.pairedWithId, p.observation) sub
 GROUP BY sub.observation
