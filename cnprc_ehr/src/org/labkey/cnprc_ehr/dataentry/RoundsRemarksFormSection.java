@@ -27,12 +27,13 @@ public class RoundsRemarksFormSection extends SimpleFormSection
 {
     public RoundsRemarksFormSection(String label, EHRService.FORM_SECTION_LOCATION location)
     {
-        super("study", "Clinical Remarks", label, "ehr-roundsremarksgridpanel", location);
+        super("study", "Clinical Remarks", label, "cnprc_ehr-cnprc_roundsremarksgridpanel", location);
+
         addClientDependency(ClientDependency.fromPath("ehr/plugin/ClinicalObservationsCellEditing.js"));
         addClientDependency(ClientDependency.fromPath("ehr/panel/ClinicalRemarkPanel.js"));
-        addClientDependency(ClientDependency.fromPath("ehr/grid/RoundsRemarksGridPanel.js"));
         addClientDependency(ClientDependency.fromPath("ehr/grid/ObservationsRowEditorGridPanel.js"));
         addClientDependency(ClientDependency.fromPath("ehr/plugin/ClinicalRemarksRowEditor.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/plugin/CNPRC_ClinicalRemarksRowEditor.js"));
         addClientDependency(ClientDependency.fromPath("ehr/data/ClinicalObservationsClientStore.js"));
         addClientDependency(ClientDependency.fromPath("ehr/buttons/roundsButtons.js"));
 

@@ -57,9 +57,11 @@ public class ClinicalRoundsFormType extends TaskForm
             s.addConfigSource("ClinicalRounds");
             s.setTemplateMode(AbstractFormSection.TEMPLATE_MODE.NONE);
             s.addConfigSource("TreatmentOrder");
+            s.addConfigSource("ClinicalRemarks");
         }
         addClientDependency(ClientDependency.fromPath("ehr/model/sources/ClinicalDefaults.js"));
         addClientDependency(ClientDependency.fromPath("ehr/model/sources/ClinicalRounds.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/ClinicalRemarks.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/TreatmentOrder.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeField.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"));

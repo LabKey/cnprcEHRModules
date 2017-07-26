@@ -101,6 +101,10 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/Utils.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/data/sources/CNPRCDefault.js"), this);
 
+        ehrService.registerClientDependency(ClientDependency.fromPath("ldk/grid/Panel.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("ehr/grid/Panel.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("ehr/grid/RoundsRemarksGridPanel.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/grid/CNPRC_RoundsRemarksGridPanel.js"), this);
 
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10%/20% Weight Drop", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightPctDrop"), "Commonly Used Queries");
