@@ -2220,6 +2220,9 @@
             <column columnName="source">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="birthPlace">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>

@@ -28,6 +28,7 @@ a.AN_SEX AS gender,
 a.AN_ACQ_TYPE AS AcquisitionType,
 a.AN_PREV_ID AS arrivalId,
 a.AN_ACQ_SOURCE_INST AS source,
+a.AN_BIRTHPLACE AS birthPlace,
 r.OBJECTID AS objectid,
 CAST(CASE WHEN(r.DATE_TIME > a.DATE_TIME)
   THEN

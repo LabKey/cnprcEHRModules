@@ -20,6 +20,14 @@
                             <fkColumnName>code</fkColumnName>
                         </fk>
                     </column>
+                    <column columnName="birthPlace">
+                        <columnTitle>Birth Place</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>source</fkTable>
+                            <fkColumnName>code</fkColumnName>
+                        </fk>
+                    </column>
                     <column columnName="acquisitionType">
                         <columnTitle>Acquisition Type</columnTitle>
                         <fk>
