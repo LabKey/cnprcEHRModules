@@ -279,6 +279,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Surgical Medication Schedule"));
     }};
 
+    @Override
+    protected File getStudyPolicyXML()
+    {
+        return TestFileUtils.getSampleData("cnprcEHRStudyPolicy.xml");
+    }
+
     @BeforeClass
     public static void setupProject() throws Exception
     {
@@ -1778,7 +1784,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Inbreeding Coefficients");
         results = animalHistoryPage.getActiveReportDataRegion();
         expectedColumns= Arrays.asList(
-                "Id","date","coefficient","taskid", "requestid","description","remark","history","QCState"
+                "Id", "date", "coefficient", "projectCode", "taskid", "requestid", "description", "remark", "history", "QCState"
         );
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
     }
