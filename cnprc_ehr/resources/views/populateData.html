@@ -609,10 +609,31 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
-        label: 'Plan Category',
+        label: 'Plan - Today',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',
-        queryName: 'plan_category',
+        queryName: 'plan_today',
+        pk: 'rowid'
+    },
+    {
+        label: 'Plan - Short Term',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'plan_short_term',
+        pk: 'rowid'
+    },
+    {
+        label: 'Plan - Long Term',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'plan_long_term',
+        pk: 'rowid'
+    },
+    {
+        label: 'Plan - This Month',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'plan_this_month',
         pk: 'rowid'
     },
     {

@@ -13,5 +13,17 @@ Ext4.define('CNPRC_EHR.plugin.CNPRC_ClinicalRemarksRowEditor', {
             itemId: 'detailsPanel',
             className: 'ExtendedAnimalDetailsRoundsFormSection'
         }
+    },
+    getObservationPanelCfg: function(){
+        var store = this.cmp.dataEntryPanel.storeCollection.getClientStoreByName('Clinical Observations');
+        LDK.Assert.assertNotEmpty('Observations store not found', store);
+
+        return {
+            xtype: 'cnprc_ehr-cnprc_observationsroweditorgridpanel',
+            itemId: 'observationsPanel',
+            remarkStore: this.cmp.store,
+            width: 500,
+            store: store
+        };
     }
 });

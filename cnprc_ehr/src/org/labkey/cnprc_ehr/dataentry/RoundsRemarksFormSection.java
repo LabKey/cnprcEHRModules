@@ -36,6 +36,7 @@ public class RoundsRemarksFormSection extends SimpleFormSection
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/plugin/CNPRC_ClinicalRemarksRowEditor.js"));
         addClientDependency(ClientDependency.fromPath("ehr/data/ClinicalObservationsClientStore.js"));
         addClientDependency(ClientDependency.fromPath("ehr/buttons/roundsButtons.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/grid/CNPRC_ObservationsRowEditorGridPanel.js"));
 
         setTemplateMode(TEMPLATE_MODE.NONE);
     }

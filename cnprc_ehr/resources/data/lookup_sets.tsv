@@ -60,7 +60,10 @@ housing_reason	Housing Reason Field Values	value
 app_score	Appetite Score	value
 hyd_score	Hyd Score	value
 stool_score	Stool Score	value
-plan_category	Categories for Plan	value
+plan_today	Categories for today's Plan - used in Primate Med Hospital, Outpatient, & Post-Op worksheets	value
+plan_short_term	Categories for short term Plan - used in Primate Med Hospital, Outpatient & Post-Op worksheets	value
+plan_long_term	Categories for long term Plan - used in Primate Med LTOP worksheet	value
+plan_this_month	Categories for this month's Plan - used in Primate Med LTOP worksheet	value
 clinremarks_category	Clinremarks Category Field Values	value
 harvest_codes	Harvest Codes	value
 birthplace_status	Birthplace Status	value

@@ -18,7 +18,8 @@ WT	Weight check needed	16
 Tb	TB reading due	17
 Shig screen	Rectal Culture needed for outdoor to indoor housing transition	18
 Access to D/C	Assess animal for discharge	19
-Await Labs	Day or date to check for lab results	20
-AMC	Awaiting medical assessment for euthanasia, plus date for assessment	21
-Relocation	Pending relocation, date of relocation sometimes entered	22
-Other	Text field needed for entry of additional instructions	23
+Sedate	Indicates animal must be sedated	20
+Vet RecRvw	 Indicates vet need to assess animal and review record	21
+Perm	 	22
+Pull Tag	 	23
+Other	Text field needed for entry of additional instructions	24
