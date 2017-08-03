@@ -43,16 +43,18 @@ dupes.objectid,
 dupes.date_time
 FROM(
 SELECT
-wt.Id,
-wt.weightDate,
-wt.Weight,
-max(wt.objectid) AS objectid,
-max(wt.date_time) AS date_time
+weights.Id,
+weights.weightDate,
+weights.Weight,
+max((CASE WHEN weights.weightTattooFlag IS NULL AND weights.bodyConditionScore IS NULL THEN weights.objectid END)) AS objectId,
+max((CASE WHEN weights.weightTattooFlag IS NULL AND weights.bodyConditionScore IS NULL THEN weights.date_time END)) AS date_time
 FROM
 (SELECT
 WT_AN_ID AS Id,
 WT_DATE AS weightDate,
 WT_WEIGHT_KG AS Weight,
+WT_BODY_CONDITION_SCORE AS bodyConditionScore,
+WT_TATTOO_FLAG AS weightTattooFlag,
 OBJECTID AS objectid,
 DATE_TIME AS date_time
 FROM cnprcSrc.ZWEIGHING
@@ -64,6 +66,8 @@ SELECT
 AN_ID AS Id,
 AN_BIRTH_DATE AS weightDate,
 AN_BIRTH_WT_KG AS Weight,
+NULL AS bodyConditionScore,
+NULL AS weightTattooFlag,
 OBJECTID AS objectid,
 DATE_TIME AS date_time
 FROM cnprcSrc.ZANIMAL ani
@@ -77,6 +81,8 @@ SELECT DISTINCT
 PT_AN_ID AS Id,
 PT_START_DATE AS weightDate,
 PT_AN_WT_USED AS Weight,
+NULL AS bodyConditionScore,
+NULL AS weightTattooFlag,
 OBJECTID AS objectid,
 DATE_TIME AS date_time
 FROM cnprcSrc.ZPRIMED_TREATMENT trt
@@ -97,13 +103,15 @@ SELECT
 ANIMID AS Id,
 TEST_DAT AS weightDate,
 WEIGHT AS Weight,
+NULL AS bodyConditionScore,
+NULL AS weightTattooFlag,
 OBJECTID AS objectid,
 DATE_TIME AS date_time
 FROM cnprcSrc.ZBIO_BEHAVIORAL_ASSESSMENT
 WHERE
-WEIGHT IS NOT NULL) wt
+WEIGHT IS NOT NULL) weights
 GROUP BY
-wt.Id,
-wt.weightDate,
-wt.Weight
+weights.Id,
+weights.weightDate,
+weights.Weight
 HAVING count(*) > 1) dupes
