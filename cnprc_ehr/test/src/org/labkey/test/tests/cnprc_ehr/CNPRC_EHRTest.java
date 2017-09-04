@@ -31,6 +31,7 @@ import org.labkey.remoteapi.query.SaveRowsResponse;
 import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
+import org.labkey.test.SortDirection;
 import org.labkey.test.TestFileUtils;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
@@ -1701,10 +1702,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","2012","May","5","D"," "," "," "," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," "
+                "TEST6390238","2012","May","5","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," "
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(1).subList(0, expectedColumns.size() - 1);
+        results.setSort("Id", SortDirection.ASC);
+        List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
     }

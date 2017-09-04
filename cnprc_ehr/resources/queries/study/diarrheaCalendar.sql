@@ -25,7 +25,7 @@ SELECT
   'D' as category
 
 FROM study.clinical_observations i
-WHERE i.category = 'Stool'
+WHERE i.category = 'Stool' AND i.observation='L' --L = Liquid stool/diarrhea
 ) i
 GROUP BY i.id, i.year, i.monthName, i.monthNum, i.day
 PIVOT category BY day
