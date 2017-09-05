@@ -1427,7 +1427,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testVacantCageReport() throws IOException, CommandException
     {
         log("Quick Search - Advanced Housing Search - Vacant Cages Report");
-        hoverMenu("Quick Search");
+        openMenu("Quick Search");
         waitForElement(Locator.linkWithText("Advanced Housing Search"), WAIT_FOR_JAVASCRIPT);
         clickAndWait(Locator.linkWithText("Advanced Housing Search"));
         waitAndClickAndWait(Locator.linkWithText("Vacant Cage Summary"));
