@@ -460,7 +460,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         //verify delete first
         deleteHardTableRecords();
 
-        Connection cn = new Connection(getBaseURL(), PasswordUtil.getUsername(), PasswordUtil.getPassword());
+        Connection cn = new Connection(WebTestHelper.getBaseURL(), PasswordUtil.getUsername(), PasswordUtil.getPassword());
 
         //first cnprc_ehr.protocol
         InsertRowsCommand insertCmd = new InsertRowsCommand("cnprc_ehr", "protocol");
@@ -477,8 +477,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         //then cnprc_ehr.project
         insertCmd = new InsertRowsCommand("cnprc_ehr", "project");
-        rowMap = new HashMap<>();
-
         rowMap = new HashMap<>();
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_0);
         rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_2);
@@ -734,8 +732,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Description", "44446-2");
         insertCmd.addRow(rowMap);
 
-
-
         saveResp = insertCmd.execute(cn, getContainerPath());
     }
 
@@ -790,7 +786,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     public String getComplianceAndTrainingPath() { return PROJECT_NAME + "/" + COREFACILITIES + "/" + COMPLIANCE_AND_TRAINING_FOLDER; }
 
-
     @Override
     protected void createProjectAndFolders(String type)
     {
@@ -822,7 +817,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         File path = new File(TestFileUtils.getLabKeyRoot(), getModulePath() + "/resources/referenceStudy");
         setPipelineRoot(path.getPath());
 
-        beginAt(getBaseURL() + "/pipeline-status/" + getContainerPath() + "/begin.view");
+        beginAt(WebTestHelper.getBaseURL() + "/pipeline-status/" + getContainerPath() + "/begin.view");
         clickButton("Process and Import Data", defaultWaitForPage);
 
         _fileBrowserHelper.expandFileBrowserRootNode();
@@ -845,7 +840,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     protected void populateInitialData()
     {
-        beginAt(getBaseURL() + "/" + getModuleDirectory() + "/" + getContainerPath() + "/populateData.view");
+        beginAt(WebTestHelper.getBaseURL() + "/" + getModuleDirectory() + "/" + getContainerPath() + "/populateData.view");
 
         repopulate("Lookup Sets");
         repopulate("All");
@@ -1060,10 +1055,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testClinicalHistoryPanelOptions(){
+    public void testClinicalHistoryPanelOptions()
+    {
         beginAtAnimalHistoryTab();
         openClinicalHistoryForAnimal("TEST1020148");
-        List<String> expectedLabels = new ArrayList<String>(
+        List<String> expectedLabels = new ArrayList<>(
                 Arrays.asList(
                         "Labwork",
                         "Weights",
@@ -1079,7 +1075,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testInfantReport() throws IOException, CommandException
+    public void testInfantReport() throws Exception
     {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -1376,7 +1372,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testSerumBankReport() throws IOException, CommandException
+    public void testSerumBankReport() throws Exception
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -1465,7 +1461,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testTenPercentWeightDropReport() throws IOException, CommandException
+    public void testTenPercentWeightDropReport() throws Exception
     {
         SearchPanel searchPanel = getSearchPanel();  // just using this to go to the search panel
         clickAndWait(Locator.linkWithText("10%/20% Weight Drop"));
@@ -1714,7 +1710,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testPedigreeReports() throws Exception
     {
-        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        AnimalHistoryPage<?> animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         String id = "test6390238";
         animalHistoryPage.searchSingleAnimal(id);
         animalHistoryPage.clickCategoryTab("Genetics");
@@ -1751,7 +1747,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id","Relationship","Sibling","Sex","Flags","Location","SiblingDam","SiblingSire","qcstate"
         );
         waitForElement(new Locator.LinkLocator("Siblings - test6390238"));
-        results = (DataRegionTable) animalHistoryPage.getActiveReportDataRegions().get(1);//Switching tabs created multiple data regions.
+        results = animalHistoryPage.getActiveReportDataRegion();
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
         assertTextPresent("No data to show");
         assertEquals("Wrong row count",0,results.getDataRowCount());
@@ -1759,7 +1755,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         id = "TEST1099252";
         animalHistoryPage.searchSingleAnimal(id);
         waitForElement(new Locator.LinkLocator("Siblings - test1099252"));
-        results = (DataRegionTable) animalHistoryPage.getActiveReportDataRegions().get(1);//Switching tabs created multiple data regions.
+        results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList(
                 "TEST1099252","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238"
         );
@@ -1771,7 +1767,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Kinship");
         waitForText("Kinship - test1099252");
         waitForText("Coefficient");
-        results = (DataRegionTable) animalHistoryPage.getActiveReportDataRegions().get(2);//Switching tabs created multiple data regions.
+        results = animalHistoryPage.getActiveReportDataRegion();
         expectedColumns= Arrays.asList(
                 "Id","Id2","coefficient"
         );
@@ -2089,7 +2085,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Per-diem Payor Assignment");
         WebElement link = Locator.linkContainingText("AB123/YZ12").findElement(getDriver());
         scrollIntoView(link, true);
-        click(link);
+        link.click();
 
         switchToWindow(1);
 
