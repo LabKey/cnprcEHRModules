@@ -33,6 +33,7 @@ project.task(
         {ModuleDistribution dist ->
             dist.subDirName='cnprc'
             dist.includeZipArchive=true
+            dist.includeTarGZArchive=true
             dist.extraFileIdentifier='-cnprc'
             dist.doLast
                     {
