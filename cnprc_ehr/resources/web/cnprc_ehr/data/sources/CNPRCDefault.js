@@ -9,16 +9,25 @@
  * to a given query in all contexts, they should be added here
  */
 EHR.model.DataModelManager.registerMetadata('Default', {
-            allQueries: {
-                projectCode: {
-                    xtype: 'ehr-projectcodeentryfield',
-                    editorConfig: {},
-                    shownInGrid: true,
-                    useNull: true,
-                    lookup: {
-                        columns: 'projectCode'
-                    }
-                }
+    allQueries: {
+        projectCode: {
+            xtype: 'ehr-projectcodeentryfield',
+            editorConfig: {},
+            shownInGrid: true,
+            useNull: true,
+            lookup: {
+                columns: 'projectCode'
             }
         }
-);
+    },
+    byQuery: {
+        'study.clinremarks': {
+            p2: {
+                formEditorConfig: {
+                    xtype: 'cnprc_ehr-plantextarea'
+                },
+                height: 75
+            }
+        }
+    }
+});
