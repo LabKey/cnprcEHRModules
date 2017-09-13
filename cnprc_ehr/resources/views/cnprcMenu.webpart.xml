@@ -1,8 +1,7 @@
-<webpart xmlns="http://labkey.org/data/xml/webpart"
-    title="CNPRC Menu">
+<webpart xmlns="http://labkey.org/data/xml/webpart" title="CNPRC Menu">
    <view name="cnprcMenu"/>
    <locations>
-		<location name="menu"/>
+       <location name="menu"/>
        <location name="right"/>
        <location name="body"/>
    </locations>
