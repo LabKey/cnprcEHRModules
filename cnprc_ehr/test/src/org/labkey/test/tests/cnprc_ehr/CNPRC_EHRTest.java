@@ -1773,10 +1773,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
         expected = Arrays.asList(
-                "TEST1099252","TEST2227135","0.25"
+                "TEST1099252","TEST5158984","0.25"
         );
         resultsRowDataAsText = results.getRowDataAsText(0);
-        assertEquals("Wrong row count",15,results.getDataRowCount());
+        assertEquals("Wrong row count",14,results.getDataRowCount());
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
         animalHistoryPage.clickReportTab("Inbreeding Coefficients");
