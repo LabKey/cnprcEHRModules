@@ -76,6 +76,7 @@ import static org.junit.Assert.assertEquals;
 @Category({CustomModules.class, EHR.class})
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
+    {setIsBootstrapWhitelisted(true);}
     private static final String PROJECT_NAME = "CNPRC";
     protected static final String UNIT_CODE = "uc101";
     private static final Integer PROJECT_ROW_ID = 123;
@@ -878,7 +879,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",22,results.getDataRowCount());
-        assertTextPresent( "(species = CMO) AND (meaning <> Unknown) AND (calculated_status = Alive)");
+        assertTextPresent( "species = CMO", "gender.meaning <> Unknown","calculated_status = Alive");
     }
 
     @Test
@@ -893,7 +894,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",8,results.getDataRowCount());
-        assertTextPresent( "(spf = 0) AND (species = CMO) AND (meaning <> Unknown) AND (calculated_status = Alive)");
+        assertTextPresent( "spf = 0","species = CMO", "gender.meaning <> Unknown","calculated_status = Alive");
         assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST4551032",
                 "TEST4710248","TEST5904521","TEST7151371","TEST7407382");
     }
@@ -931,7 +932,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",1,results.getDataRowCount());
-        assertTextPresent( "(admitType = Diabetic)", "TEST2008446");
+        assertTextPresent( "admitType.description = Diabetic", "TEST2008446");
     }
 
     @Test
@@ -947,7 +948,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkElement);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",2,results.getDataRowCount());
-        assertTextPresent( "(fundingCategory = 'Base Grant')", "TEST1684145", "TEST6390238");
+        assertTextPresent( "Id.demographicsUtilization.fundingCategory = 'Base Grant'", "TEST1684145", "TEST6390238");
     }
 
     @Test
@@ -1523,7 +1524,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         relocationRegion.link(2, "Cage").click();
         switchToWindow(1);
 
-        waitForElement(Locator.tagContainingText("div", "Encl Supervisor"));
         DataRegionTable locationRegion = new DataRegionTable("query", this.getDriver());
 
         List<String> expectedColumns = Arrays.asList(
@@ -1565,7 +1565,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.tagContainingText("div", "On Date"));
         SearchPanel searchPanel = new SearchPanel("Enclosure Search", getDriver());
         searchPanel.submit();
-        waitForElement(Locator.tagContainingText("div", "Encl Supervisor"));
         DataRegionTable results = new DataRegionTable("query", getDriver());
 
         // Test from housing data
@@ -1583,7 +1582,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel = new SearchPanel("Enclosure Search", getDriver());
         searchPanel.setInput("On Date", "2015-04-04 00:00:00");
         searchPanel.submit();
-        waitForElement(Locator.tagContainingText("div", "Encl Supervisor"));
         results = new DataRegionTable("query", getDriver());
 
         assertEquals("Wrong Enclosure Search results from housing table using historical date,",
@@ -1701,6 +1699,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "TEST6390238","2012","May","5","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," "
         );
 
+        results.setAsync(true); // setting async governs whether setSort will wait for the menuitem to stale
         results.setSort("Id", SortDirection.ASC);
         List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
@@ -1889,7 +1888,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong row count: ", 4, results.getDataRowCount());
         assertTextPresent("Legend", "Equine tetanus");
 
-        click(Locator.linkContainingText("X"));
+        click(results.link(3, "Vaccine")); // click the 'x' link in the Vaccine column
         switchToWindow(1);
         assertTextPresent("Record Details","Experimental");
     }
