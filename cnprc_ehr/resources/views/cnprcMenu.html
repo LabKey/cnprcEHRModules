@@ -8,23 +8,25 @@
         var webpart = <%=webpartContext%>;
         var div = Ext4.get(webpart.wrapperDivId).down('.ehr-nav-menu-panel');
 
-        Ext4.create('EHR.panel.NavigationMenuPanel', {
+        var cnprcMenu = Ext4.create('EHR.panel.NavigationMenuPanel', {
             renderTo: div.id,
             items: [{
-                title: 'EHR',
-                itemId: 'ehr'
+                xtype: 'panel',
+                title: 'Reports',
+                itemId: 'reportLinks',
+                items: [{
+                    xtype: 'text',
+                    text: 'Placeholder for Report Links',
+                    itemid: 'placeholderReportLinks'
+                }]
             },{
-                itemId: 'admin',
-                title: 'Admin'
-            },{
-                itemId: 'dcm',
-                title: 'DCM'
-            },{
-                title: 'Labs',
-                itemId: 'labs'
-            },{
-                title: 'Cores & Resources',
-                itemId: 'cores'
+                title: 'Other Links',
+                itemId: 'other',
+                items: [{
+                    xtype: 'text',
+                    text: 'Placeholder for Other Links',
+                    itemid: 'placeholderOtherLinks'
+                }]
             }]
         });
     });
