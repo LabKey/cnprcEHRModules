@@ -121,6 +121,10 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("projectDetails", this, "views/projectDetails.html");
         ehrService.registerActionOverride("housingQueries", this, "views/enclosureSearch.html");
         ehrService.registerActionOverride("colonyOverview", this, "views/colonyOverview.html");
+        ehrService.registerActionOverride("begin", this, "views/begin.html");
+        ehrService.registerActionOverride("ehrAdmin", this, "views/ehrAdmin.html");
+        ehrService.registerActionOverride("populateInitialData", this, "views/populateData.html");
+        
         //data entry
         ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ArrivalFormType.class, this));
