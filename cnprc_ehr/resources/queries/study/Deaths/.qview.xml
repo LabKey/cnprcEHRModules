@@ -3,9 +3,8 @@
        <column name="Id" />
        <column name="date" />
        <column name="cause" />
-       <column name="necropsy" />
-       <column name="dam" />
        <column name="manner" />
+       <column name="Id/NecropsyPerformed/necropsyPerformed"/>
        <column name="notAtCenter" />
    </columns>
    <sorts>

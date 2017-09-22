@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Cycle" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="Deaths" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">
@@ -9,19 +9,6 @@
                     </column>
                     <column columnName="cause">
                         <columnTitle>Cause</columnTitle>
-                    </column>
-                    <column columnName="necropsy">
-                        <columnTitle>Necropsy</columnTitle>
-                        <url>/query/executeQuery.view?schemaName=study&amp;
-                            query.queryName=necropsy&amp;
-                            query.id~eq=${id}
-                        </url>
-                        <fk>
-                            <fkDbSchema>study</fkDbSchema>
-                            <fkTable>necropsy</fkTable>
-                            <fkColumnName>prmFk</fkColumnName>
-                            <fkDisplayColumnName>reportType</fkDisplayColumnName>
-                        </fk>
                     </column>
                     <column columnName="manner">
                         <columnTitle>Death Manner</columnTitle>
@@ -31,9 +18,6 @@
                                 <fkColumnName>value</fkColumnName>
                                 <fkDisplayColumnName>Title</fkDisplayColumnName>
                             </fk>
-                    </column>
-                    <column columnName="dam">
-                        <columnTitle>Dam</columnTitle>
                     </column>
                     <column columnName="notAtCenter">
                         <columnTitle>Not at Center</columnTitle>
