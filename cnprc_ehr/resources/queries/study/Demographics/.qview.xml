@@ -31,7 +31,7 @@
 
         <column name="Id/MostRecentWeight/MostRecentWeight">
             <properties>
-                <property name="columnTitle" value="Current Weight (kg)"/>
+                <property name="columnTitle" value="Weight (kg)"/>
             </properties>
         </column>
         <column name="Id/DemographicsMostRecentBodyConditionScore/bodyConditionScore">
