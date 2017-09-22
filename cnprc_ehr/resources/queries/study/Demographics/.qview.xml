@@ -2,7 +2,7 @@
     <columns>
         <column name="species">
             <properties>
-                <property name="columnTitle" value="Species code (3 char)"/>
+                <property name="columnTitle" value="Species"/>
             </properties>
         </column>
         <column name="Id/DemographicsActivePairing/pairedSymbol">

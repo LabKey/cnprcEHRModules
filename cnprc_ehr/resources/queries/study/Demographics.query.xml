@@ -24,13 +24,7 @@
                         </fk>
                     </column>
                     <column columnName="species">
-                        <columnTitle>Species code (3 char)</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>species_codes</fkTable>
-                            <fkColumnName>code</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true"/>
-                        </fk>
+                        <columnTitle>Species</columnTitle>
                     </column>
                     <column columnName="geographic_origin">
                         <columnTitle>Geographic Origin</columnTitle>
