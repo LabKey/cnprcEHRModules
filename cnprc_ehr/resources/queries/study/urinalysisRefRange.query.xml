@@ -62,6 +62,7 @@
                         <isHidden>false</isHidden>
                     </column>
                     <column columnName="gender">
+                        <columnTitle>Sex</columnTitle>
                         <isHidden>true</isHidden>
                     </column>
                     <column columnName="range">

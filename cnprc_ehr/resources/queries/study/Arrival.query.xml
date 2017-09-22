@@ -45,12 +45,7 @@
                         </fk>
                     </column>
                     <column columnName="gender">
-                        <columnTitle>Gender</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>gender_codes</fkTable>
-                            <fkColumnName>code</fkColumnName>
-                        </fk>
+                        <columnTitle>Sex</columnTitle>
                     </column>
                     <column columnName="species">
                         <columnTitle>Species</columnTitle>
