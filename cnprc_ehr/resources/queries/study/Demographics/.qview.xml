@@ -36,7 +36,7 @@
         </column>
         <column name="Id/DemographicsMostRecentBodyConditionScore/bodyConditionScore">
             <properties>
-                <property name="columnTitle" value="Most Recent BCS"/>
+                <property name="columnTitle" value="BCS"/>
             </properties>
         </column>
         <column name="Id/DemographicsActiveAssignment/primaryProject"/>
