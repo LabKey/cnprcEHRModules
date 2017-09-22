@@ -24,10 +24,10 @@
                         <columnTitle>Sire</columnTitle>
                     </column>
                     <column columnName="femaleGeneticsVerify">
-                        <columnTitle>Female Genetics Verify</columnTitle>
+                        <columnTitle>Dam Verify</columnTitle>
                     </column>
                     <column columnName="maleGeneticsVerify">
-                        <columnTitle>Male Genetics Verify</columnTitle>
+                        <columnTitle>Sire Verify</columnTitle>
                     </column>
                     <column columnName="gestationDays"/>
                     <column columnName="conceptionDateStatus">
