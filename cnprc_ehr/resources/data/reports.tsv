@@ -25,8 +25,8 @@ Incomplete - Pending Data Entry	surgeryChecklist	Surgery	js	Surgery Checklist	tr
 	clinObs	Clinical	query	Observations	true		study	Clinical Observations			date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surergies, exams, procedures, etc.
 #clinObsBsu	Behavior	query	Observations	true		study	Clinical Observations	BSU Observations		date	false	false		qcstate/publicdata	This report contains one record for each encounter with each animal, including surergies, exams, procedures, etc.
 Incomplete - Pending Data Entry	clinremarks	Clinical	query	Clinical Remarks	true		study	Clinical Remarks			date	false	false		qcstate/publicdata	This report contains the clinical remarks entered about each animal
-Incomplete - Pending Data Entry	behaviorRemarks	Behavior	query	Behavior Remarks	true		study	Clinical Remarks			date	false	false		qcstate/publicdata	This report contains the behavior remarks entered about each animal
-	drug	Behavior	query	Behavior Treatments	true		study	Drug Administration	Behavior Treatments		date	false	false		qcstate/publicdata	This report contains the behavior treatments entered about each animal
+Incomplete - Pending BehMon Data Integration	behaviorRemarks	Behavior	js	Behavior Remarks	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the behavior remarks entered about each animal
+Incomplete - Pending BehMon Data Integration	drug	Behavior	js	Behavior Treatments	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains the behavior treatments entered about each animal
 	pairings	Behavior	query	Pairing Observations	true		study	pairings			date	false	false			This report contains records about pairings made using each animal
 	pairingHousingSummary	Behavior	query	Pairing With Housing	true		study	pairingHousingSummary			date	false	false			This report contains records about pairings made using each animal
 	pairingHistory	Behavior	js	Pairing History	true		study	pairingHistory			date	false	false		qcstate/publicdata	This report displays all animals that shared a cage, including the start date, stop date and days co-housed
@@ -36,7 +36,7 @@ Incomplete - Pending Data Entry	behaviorRemarks	Behavior	query	Behavior Remarks	
 	fullHistoryPlusObs	Clinical	query	Full History Plus Obs	true		study	StudyData	Full History Plus Obs		date	false	false		qcstate/publicdata	Similar to Full History, but also contains irregular observations
 	tasksById	Clinical	query	Tasks	true		ehr	TasksById			date	false	false		taskid/qcstate/publicdata	This report displays and forms that have been completed about each animal
 	treatments	Clinical	query	Medication Orders	true		study	Treatment Orders			date	false	false		qcstate/publicdata	Contains a list of all orders for treatments
-	drug	Clinical	js	Immunizations	true		study	immunizations			date	false	false		qcstate/publicdata	This report contains records of all vaccinations administered to each animal
+	immunizations	Clinical	js	Immunizations	true		study	immunizations			date	false	false		qcstate/publicdata	This report contains records of all vaccinations administered to each animal
 	weight	Colony Management	js	Weights	true		study	weightGraph			date	false	false		qcstate/publicdata	This report contains a summary of the animal\'s weight, including a graph
 	clinicalHistory	Clinical	js	Clinical History	true		study	clinicalHistory			date	false	false		qcstate/publicdata	This report contains an overview of the animal\'s clinical history
 	behaviorHistory	Behavior	js	Full History	true		study	clinicalHistory			date	false	false		qcstate/publicdata	This report contains an overview of the animal\'s clinical history
@@ -48,7 +48,7 @@ Incomplete - Pending Data Entry	surgMedicationSchedule2	Surgery	js	Surgical Medi
 Incomplete - Pending Data Entry	surgMedicationSchedule	Daily Reports	js	Surgical Medication Schedule	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains a list of daily treatments to be administered
 Incomplete - Pending Data Entry	incompleteTreatments	Daily Reports	js	Meds/Diet - Incomplete	true		study	underDevelopment			date	false	false		qcstate/publicdata	This report contains a list of daily treatments not yet administered
 
-Incomplete - Pending Data Entry	behaviorRemarks	Colony Management	js	Behavior Remarks	true		study	underDevelopment			date	false	false		qcstate/publicdata	Contains remarks entered by Behavioral Management
+Incomplete - Pending BehMon Data Integration	behaviorRemarks	Colony Management	js	Behavior Remarks	true		study	underDevelopment			date	false	false		qcstate/publicdata	Contains remarks entered by Behavioral Management
 	birth	Colony Management	query	Birth Records	true		study	birth				false	false		qcstate/publicdata	Birth records
 	birth2	Reproductive Management	query	Birth Records	true		study	birth				false	false		qcstate/publicdata	Birth records
 	death	Colony Management	query	Death Records	true		study	deaths				false	false		qcstate/publicdata	Death records
@@ -94,12 +94,12 @@ Incomplete - Pending Data Entry	dentalStatus	Physical Exam	query	Dental Status	t
 Incomplete - Pending Data Entry	pe	Physical Exam	query	Exams	true		study	Clinical Encounters	PE		date	false	false		qcstate/publicdata	A list of physical exams performed
 	obsTreatment	Daily Reports	js	Obs/Treatment	true		study	underDevelopment			date	true	true	2		Displays irregular observations and treatments for today
 	todaysHistory	Daily Reports	query	Today's History	true		study	StudyData	Full History		Date	true	false	3	qcstate/publicdata	This report contains the full history, filtered to show events that happened today only
-	treatmentScheduleAM	Daily Reports	query	Treatments - Morning	true		study	treatmentSchedule	AM Treatments		date	true	false	4	qcstate/publicdata	The report displays all treatments scheduled for today
-	treatmentSchedulePM	Daily Reports	query	Treatments - Afternoon	true		study	treatmentSchedule	PM Treatments		date	true	false	5	qcstate/publicdata	The report displays all treatments scheduled for today
-	treatmentScheduleNight	Daily Reports	query	Treatments - Evening	true		study	treatmentSchedule	Night Treatments		date	true	false	6	qcstate/publicdata	The report displays all treatments scheduled for today
-	treatmentSchedule	Daily Reports	query	Treatments - Master	true		study	treatmentSchedule			date	true	false	7	qcstate/publicdata	The report displays all treatments scheduled for today
+Incomplete - Pending Data Entry with Time Component	treatmentScheduleAM	Daily Reports	query	Treatments - Morning	true		study	treatmentSchedule	AM Treatments		date	true	false	4	qcstate/publicdata	The report displays all treatments scheduled for today
+Incomplete - Pending Data Entry with Time Component	treatmentSchedulePM	Daily Reports	query	Treatments - Afternoon	true		study	treatmentSchedule	PM Treatments		date	true	false	5	qcstate/publicdata	The report displays all treatments scheduled for today
+Incomplete - Pending Data Entry with Time Component	treatmentScheduleNight	Daily Reports	query	Treatments - Evening	true		study	treatmentSchedule	Night Treatments		date	true	false	6	qcstate/publicdata	The report displays all treatments scheduled for today
+Incomplete - Pending Data Entry with Time Component	treatmentSchedule	Daily Reports	query	Treatments - Master	true		study	treatmentSchedule			date	true	false	7	qcstate/publicdata	The report displays all treatments scheduled for today
 Incomplete - Pending Data Entry	behaviorCases	Behavior	query	Behavior Cases	true		study	cases	Open Behavior Cases		date	false	false		qcstate/publicdata	This displays active behavior cases
-	enrichment	Behavior	query	Enrichment	true		study	Enrichment			date	false	false		qcstate/publicdata
+Incomplete - Pending BehMon Data Integration	enrichment	Behavior	query	Enrichment	true		study	Enrichment			date	false	false		qcstate/publicdata
 	surgicalCases	Daily Reports	query	Active Surgery Cases	true		study	Cases	Active Surgery Cases		date	false	false		qcstate/publicdata	This displays active surgery cases
 Incomplete - Pending Data Entry	surgeryCasesClosedToday	Surgery	js	Surgery Cases Closed Today	true		study	underDevelopment			date	false	false		qcstate/publicdata	This displays surgery cases closed today
 	activeFlags	General	query	Active Flags	true		study	flags	Active Flags		date	false	false		qcstate/publicdata	Active Census and Colony flags

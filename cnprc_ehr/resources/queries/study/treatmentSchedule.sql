@@ -59,8 +59,7 @@ SELECT
   t1.enddate,
   --t1.duration,
   t1.projectCode,
-  t1.code,
-
+  t1.drugName,
   t1.volume,
   t1.vol_units,
   t1.concentration,
