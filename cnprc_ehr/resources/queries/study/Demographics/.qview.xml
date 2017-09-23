@@ -59,11 +59,6 @@
                 <property name="columnTitle" value="Status"/>
             </properties>
         </column>
-        <column name="geographic_origin"/>
-        <column name="genNum"/>
-        <column name="birthplaceStatus"/>
-        <column name="harvestCode"/>
-        <column name="harvestDate"/>
         <column name="history"/>
     </columns>
     <sorts>

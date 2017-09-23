@@ -12,7 +12,7 @@
                     <column columnName="date">
                         <isHidden>true</isHidden>
                     </column>
-                    <column columnName="project">
+                    <column columnName="projectCode">
                         <isHidden>true</isHidden>
                     </column>
                     <column columnName="gender">
@@ -31,24 +31,12 @@
                         </fk>
                     </column>
                     <column columnName="birth">
-                        <!--<shownInInsertView>false</shownInInsertView>-->
                         <formatString>Date</formatString>
-                        <columnTitle>Birth</columnTitle>
-                        <url>/query/executeQuery.view?
-                            schemaName=study&amp;
-                            query.queryName=Birth&amp;
-                            query.Id~eq=${Id}
-                        </url>
+                        <columnTitle>Birth Date</columnTitle>
                     </column>
                     <column columnName="death">
-                        <!--<shownInInsertView>false</shownInInsertView>-->
                         <formatString>Date</formatString>
-                        <columnTitle>Death</columnTitle>
-                        <url>/query/executeQuery.view?
-                            schemaName=study&amp;
-                            query.queryName=Deaths&amp;
-                            query.Id~eq=${Id}
-                        </url>
+                        <columnTitle>Death Date</columnTitle>
                     </column>
                     <column columnName="calculated_status">
                         <shownInInsertView>false</shownInInsertView>
@@ -60,31 +48,11 @@
                         </fk>
                     </column>
                     <column columnName="remark">
-
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="QCState">
                         <columnTitle>Record Status</columnTitle>
                         <isHidden>true</isHidden>
-                    </column>
-
-                    <!--NOTE: being deprecated-->
-                    <column columnName="avail">
-                        <isHidden>true</isHidden>
-                        <columnTitle>Availability</columnTitle>
-                        <!--<fk>-->
-                        <!--<fk>-->
-                        <!--<fkDbSchema>ehr_lookups</fkDbSchema>-->
-                        <!--<fkTable>avail_codes</fkTable>-->
-                        <!--<fkColumnName>code</fkColumnName>-->
-                        <!--</fk>-->
-                    </column>
-                    <column columnName="hold">
-                        <columnTitle>Hold</columnTitle>
-                        <!--<fk>-->
-                        <!--<fkDbSchema>ehr_lookups</fkDbSchema>-->
-                        <!--<fkTable>hold_codes</fkTable>-->
-                        <!--<fkColumnName>code</fkColumnName>-->
-                        <!--</fk>-->
                     </column>
                     <column columnName="dam">
                         <columnTitle>Dam</columnTitle>
@@ -146,70 +114,9 @@
                             cage=${cage}&amp;
                         </url>
                     </column>
-                    <column columnName="cond">
-                        <isHidden>true</isHidden>
-                        <shownInInsertView>false</shownInInsertView>
-                        <displayWidth>30</displayWidth>
-                        <columnTitle>Condition</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>housing_condition_codes</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                        </fk>
-                    </column>
                     <column columnName="weight">
-                        <isHidden>true</isHidden>
                         <shownInInsertView>false</shownInInsertView>
-                        <columnTitle>Current Weight (kg)</columnTitle>
-                        <url>/query/executeQuery.view?schemaName=study&amp;
-                            query.queryName=Weight&amp;
-                            query.id~eq=${id}
-                        </url>
-                    </column>
-                    <!--NOTE: being deprecated-->
-                    <column columnName="wdate">
-                        <formatString>Date</formatString>
-                        <shownInInsertView>false</shownInInsertView>
-                        <isHidden>true</isHidden>
-                        <columnTitle>Weight Date</columnTitle>
-                        <url>/query/executeQuery.view?schemaName=study&amp;
-                            query.queryName=Weight&amp;
-                            query.id~eq=${id}&amp;
-                            query.date~eq=${wdate}
-                        </url>
-                    </column>
-                    <column columnName="tbdate">
-                        <formatString>Date</formatString>
-                        <shownInInsertView>false</shownInInsertView>
-                        <isHidden>true</isHidden>
-                        <columnTitle>Last TB Date</columnTitle>
-                        <url>/query/executeQuery.view?schemaName=study&amp;
-                            query.queryName=TB Tests&amp;
-                            query.id~eq=${id}&amp;
-                            query.sort=-Date
-                        </url>
-                    </column>
-                    <column columnName="medical">
-                        <columnTitle>Medical</columnTitle>
-                    </column>
-                    <column columnName="prepaid">
-                        <columnTitle>Replacement Prepaid By</columnTitle>
-                    </column>
-                    <column columnName="v_status">
-                        <columnTitle>Viral Status</columnTitle>
-                        <isHidden>true</isHidden>
-                        <fk>
-                          <fkDbSchema>ehr_lookups</fkDbSchema>
-                          <fkTable>viral_status</fkTable>
-                          <fkColumnName>value</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="parentid">
-                        <!--<fk>-->
-                          <!--<fkDbSchema>study</fkDbSchema>-->
-                          <!--<fkTable>studyDataParent</fkTable>-->
-                          <!--<fkColumnName>objectid</fkColumnName>-->
-                        <!--</fk>-->
+                        <columnTitle>Weight (kg)</columnTitle>
                     </column>
                     <column columnName="spf">
                         <columnTitle>SPF</columnTitle>
@@ -222,10 +129,12 @@
                     </column>
                     <column columnName="genNum">
                         <columnTitle>Generation Num</columnTitle>
+                        <isHidden>true</isHidden>
                         <description>Generation number (matriarchal) of animals born at CNPRC, acquired animals are gen 0</description>
                     </column>
                     <column columnName="birthPlaceStatus">
                         <columnTitle>Birth Place Status</columnTitle>
+                        <isHidden>true</isHidden>
                         <description>01 - Other institution, 02 - Here/Unknown, 03 - Wild, 04 - Birthplace Unknown</description>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
@@ -235,6 +144,7 @@
                         </fk>
                     </column>
                     <column columnName="harvestCode">
+                        <isHidden>true</isHidden>
                         <columnTitle>Harvest Code</columnTitle>
                         <description>Information on harvesting animals from the field cages</description>
                         <fk>
@@ -244,8 +154,24 @@
                         </fk>
                     </column>
                     <column columnName="harvestDate">
+                        <isHidden>true</isHidden>
                         <columnTitle>Harvest Date</columnTitle>
                         <description>Date the animal is harvested</description>
+                    </column>
+                    <column columnName="taskId">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="requestId">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="description">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="isNumericId">
+                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>
