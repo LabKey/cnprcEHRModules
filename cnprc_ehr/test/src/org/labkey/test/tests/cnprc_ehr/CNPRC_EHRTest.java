@@ -1734,7 +1734,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","Male","Offspring","TEST1099252","2009-08-03","Male",""," "
+                "TEST6390238","M","Offspring","TEST1099252","2009-08-03","M",""," "
         );
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
@@ -1756,7 +1756,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(new Locator.LinkLocator("Siblings - test1099252"));
         results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList(
-                "TEST1099252","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238"
+                "TEST1099252","Full Sib","TEST2227135","M",""," ","TEST2312318","TEST6390238"
         );
         resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong row count",10,results.getDataRowCount());
@@ -2110,7 +2110,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0,1));
-        assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
+        assertEquals("Wrong value for Gender: ", "F", results.getDataAsText(0,2));
         assertElementPresent(Locator.linkWithText("Pc5C1"));
 
         assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
