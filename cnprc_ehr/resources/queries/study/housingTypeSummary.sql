@@ -39,6 +39,6 @@ FROM
       JOIN cnprc_ehr.room_enclosure re ON re.room = h.room
       LEFT JOIN study.cases c ON c.id = h.id AND c.enddate IS NULL AND c.admitType = 'H'
    WHERE h.enddate IS NULL
-        and h.id.demographics.species.code = 'MMU'
+        and h.id.demographics.species = 'MMU'
 ) sub
 GROUP BY sub.isHospital, sub.rate_class, sub.indoorOutdoor
