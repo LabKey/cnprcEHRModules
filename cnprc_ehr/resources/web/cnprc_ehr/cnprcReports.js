@@ -15,7 +15,7 @@ EHR.reports.immunizations = function (panel, tab, viewName) {
     var title = panel.getTitleSuffix();
 
     tab.add({
-        xtype: 'ldk-querypanel',
+        xtype: 'ldk-querycmp',
         style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
@@ -51,7 +51,7 @@ EHR.reports.pairingHistory = function (panel, tab, viewName) {
     var title = panel.getTitleSuffix();
 
     tab.add({
-        xtype: 'ldk-querypanel',
+        xtype: 'ldk-querycmp',
         style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
@@ -88,7 +88,7 @@ EHR.reports.virology = function (panel, tab, viewName) {
     var title = panel.getTitleSuffix();
 
     tab.add({
-        xtype: 'ldk-querypanel',
+        xtype: 'ldk-querycmp',
         style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
@@ -138,7 +138,7 @@ EHR.reports.conceptionHistory = function (panel, tab, viewName) {
     var title = panel.getTitleSuffix();
 
     tab.add({
-        xtype: 'ldk-querypanel',
+        xtype: 'ldk-querycmp',
         style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
