@@ -879,7 +879,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",22,results.getDataRowCount());
-        assertTextPresent( "species = CMO", "gender.meaning <> Unknown","calculated_status = Alive");
+        assertTextPresent( "species = CMO", "gender <> U","calculated_status = Alive");
     }
 
     @Test
@@ -894,7 +894,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",8,results.getDataRowCount());
-        assertTextPresent( "spf = 0","species = CMO", "gender.meaning <> Unknown","calculated_status = Alive");
+        assertTextPresent( "spf = 0","species = CMO", "gender <> U","calculated_status = Alive");
         assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST4551032",
                 "TEST4710248","TEST5904521","TEST7151371","TEST7407382");
     }
@@ -2125,7 +2125,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel = getSearchPanel();
         List<String> expectedLabels = Arrays.asList(
                 "Species code (3 char):"
-                ,"Gender:"
+                ,"Sex:"
                 ,"Status:"
                 ,"Pairing Status:"
                 ,"Age (Years):"
