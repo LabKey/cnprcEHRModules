@@ -2035,8 +2035,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         click(Locator.linkContainingText("IP"));
         switchToWindow(1);
-        waitForText("Record Details");
-        assertTextPresent("Intermittent pair");
+        waitForText("Record Details",
+                "Description:",
+                "Intermittent pair");
     }
 
     @Test
