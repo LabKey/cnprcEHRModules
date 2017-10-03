@@ -17,11 +17,14 @@ package org.labkey.cnprc_ehr.table;
 
 import org.labkey.api.data.AbstractTableInfo;
 import org.labkey.api.data.ColumnInfo;
+import org.labkey.api.data.JdbcType;
+import org.labkey.api.data.SQLFragment;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.data.WrappedColumn;
 import org.labkey.api.ehr.table.DurationColumn;
 import org.labkey.api.ldk.table.AbstractTableCustomizer;
 import org.labkey.api.query.DetailsURL;
+import org.labkey.api.query.ExprColumn;
 import org.labkey.api.query.QueryForeignKey;
 import org.labkey.api.query.UserSchema;
 
@@ -59,9 +62,36 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         }
         else if (matches(ti, "study", "Clinical Observations") || matches(ti, "study", "clinical_observations"))
         {
-            customizeClinicalObservations((AbstractTableInfo) ti);
+            customizeClinicalObservations(ti);
+        }
+        else if (matches(ti, "ehr_lookups", "snomed"))
+        {
+            customizeSnomedLookupTable(ti);
         }
     }
+
+    private void customizeSnomedLookupTable(AbstractTableInfo ti)
+    {
+        ColumnInfo categoryCol = ti.getColumn("sortOrder");
+        if (categoryCol == null)
+        {
+            // Requested CNPRC custom sort ordering for snomed codes based on prefix
+            SQLFragment sql = new SQLFragment("CASE ");
+            sql.append(" WHEN Code IS NULL THEN CAST(NULL AS INT) \n");
+            sql.append(" WHEN Code LIKE 'P-%' THEN 1 \n");
+            sql.append(" WHEN Code LIKE 'T-%' THEN 2 \n");
+            sql.append(" WHEN Code LIKE 'M-%' THEN 3 \n");
+            sql.append(" WHEN Code LIKE 'E-%' THEN 4 \n");
+            sql.append(" WHEN Code LIKE 'F-%' THEN 5 \n");
+            sql.append(" WHEN Code LIKE 'D-%' THEN 6 \n");
+            sql.append(" WHEN Code LIKE 'J-%' THEN 7 \n");
+            sql.append(" ELSE 8 END \n");
+            categoryCol = new ExprColumn(ti, "sortOrder", sql, JdbcType.INTEGER, ti.getColumn("code"));
+            categoryCol.setHidden(true);
+            ti.addColumn(categoryCol);
+        }
+    }
+
     private void customizeClinicalObservations(AbstractTableInfo ti)
     {
         ColumnInfo categoryCol = ti.getColumn("category");
