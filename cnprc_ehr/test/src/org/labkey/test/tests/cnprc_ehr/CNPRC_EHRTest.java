@@ -2152,7 +2152,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
 
         assertEquals("Wrong search criteria.", expectedLabels, searchPanel.getAllSearchCriteria());
-        searchPanel.selectValues("Gender", " All");
+        searchPanel.selectValues("Sex", " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows for searching all genders", 39, searchResults.getDataRowCount());
