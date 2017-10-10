@@ -1,0 +1,3 @@
+SELECT
+*
+FROM study.nursing

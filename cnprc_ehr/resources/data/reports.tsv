@@ -97,7 +97,7 @@ Incomplete - Pending Data Entry	pe	Physical Exam	query	Exams	true		study	Clinica
 Incomplete - Pending Data Entry with Time Component	treatmentScheduleAM	Daily Reports	query	Treatments - Morning	true		study	treatmentSchedule	AM Treatments		date	true	false	4	qcstate/publicdata	The report displays all treatments scheduled for today
 Incomplete - Pending Data Entry with Time Component	treatmentSchedulePM	Daily Reports	query	Treatments - Afternoon	true		study	treatmentSchedule	PM Treatments		date	true	false	5	qcstate/publicdata	The report displays all treatments scheduled for today
 Incomplete - Pending Data Entry with Time Component	treatmentScheduleNight	Daily Reports	query	Treatments - Evening	true		study	treatmentSchedule	Night Treatments		date	true	false	6	qcstate/publicdata	The report displays all treatments scheduled for today
-Incomplete - Pending Data Entry with Time Component	treatmentSchedule	Daily Reports	query	Treatments - Master	true		study	treatmentSchedule			date	true	false	7	qcstate/publicdata	The report displays all treatments scheduled for today
+	treatmentSchedule	Daily Reports	query	Treatments - Master	true		study	treatmentSchedule			date	true	false	7	qcstate/publicdata	The report displays all treatments scheduled for today
 Incomplete - Pending Data Entry	behaviorCases	Behavior	query	Behavior Cases	true		study	cases	Open Behavior Cases		date	false	false		qcstate/publicdata	This displays active behavior cases
 Incomplete - Pending BehMon Data Integration	enrichment	Behavior	query	Enrichment	true		study	Enrichment			date	false	false		qcstate/publicdata
 	surgicalCases	Daily Reports	query	Active Surgery Cases	true		study	Cases	Active Surgery Cases		date	false	false		qcstate/publicdata	This displays active surgery cases
@@ -119,7 +119,8 @@ Incomplete - Pending Data Entry	feeding	Colony Management	query	Feeding	true		st
 	cases	Clinical	query	Hospital Admission and Discharge	true		study	cases			date	false	false		qcstate/publicdata	Hospital admission/discharge history
 
 #New Reports:
-	nursing	Behavior	query	Nursing	true		study	nursing				false	false		qcstate/publicdata	Foster Mother/Infant (nursing) History
+	fosteredInfant	Behavior	query	Foster Infant History	true		study	FosterInfantHistory				false	false		qcstate/publicdata	Fostered Infant History
+	fosterMother	Behavior	query	Foster Mother History	true		study	FosterMotherHistory				false	false		qcstate/publicdata	Foster Mother History
 	cycle	Reproductive Management	query	Cycle	true		study	cycle				false	false		qcstate/publicdata	Female Animal Cycle History
 	breeding	Reproductive Management	query	Breeding	true		study	breeding				false	false		qcstate/publicdata	Breeding Observations History
 	behavior	BBA	query	Behavior	true		study	behavior				false	false		qcstate/publicdata	Assessment of infant rhesus monkeys’ temperament, emotionality, and behavioral and physiological reactivity
