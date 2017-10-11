@@ -3,6 +3,7 @@ motherId as Id,
 Id as fosterInfant,
 assignType,
 date,
-releaseDate
+releaseDate,
+lsid
 FROM
 study.nursing
