@@ -7,7 +7,6 @@
         <column name="offspringSex"/>
         <column name="conception"/>
         <column name="BRType"/>
-        <column name="offspringSpecies"/>
         <column name="sire"/>
         <column name="femaleGeneticsVerify"/>
         <column name="maleGeneticsVerify"/>
@@ -18,9 +17,9 @@
         <column name="offspringLocationDate"/>
         <column name="offspringLocation"/>
         <column name="deathType"/>
-        <column name="PGComment"/>
+        <column name="termComment"/>
     </columns>
     <sorts>
-        <sort column="conception" descending="false"/>
+        <sort column="conception" descending="true"/>
     </sorts>
 </customView>

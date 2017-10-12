@@ -64,6 +64,7 @@
                     <column columnName="PGComment">
                         <columnTitle>PG Comment</columnTitle>
                     </column>
+                    <column columnName="termComment"/>
                 </columns>
             </table>
         </tables>
