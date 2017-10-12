@@ -5,6 +5,11 @@
                 <columns>
                     <column columnName="Id">
                         <columnTitle>Female Id</columnTitle>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>Id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="conception">
                         <columnTitle>Conception Date</columnTitle>
@@ -12,6 +17,11 @@
                     <column columnName="femaleSpecies"/>
                     <column columnName="offspringId">
                         <columnTitle>Offspring</columnTitle>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>Id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="offspringSex">
                         <columnTitle>Sex</columnTitle>
@@ -22,6 +32,11 @@
                     <column columnName="offspringSpecies"/>
                     <column columnName="sire">
                         <columnTitle>Sire</columnTitle>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>Id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="femaleGeneticsVerify">
                         <columnTitle>Dam Verify</columnTitle>
