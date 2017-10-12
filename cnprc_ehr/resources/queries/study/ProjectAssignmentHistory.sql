@@ -14,26 +14,45 @@
  * limitations under the License.
  */
 SELECT
-assignment.Id,
-assignment.date,
-assignment.enddate,
-assignment.projectCode,
-assignment.assignmentStatus,
-assignment.projectCode.pi_name,
-assignment.projectCode.title,
-coalesce(projectProtocol.protocol_number, project.protocol) AS protocol,
-assignment.projectCode.unitCode
+  assignment.Id,
+  assignment.date,
+  assignment.enddate,
+  assignment.projectCode,
+  assignment.assignmentStatus,
+  assignment.projectCode.pi_name,
+  assignment.projectCode.title,
+  coalesce(projectProtocol.protocol_number, project.protocol) AS protocol,
+  assignment.projectCode.unitCode
 FROM
-study.assignment assignment
-INNER JOIN --this inner join is necessary because not all projectCodes have protocols in project_protocol table
-cnprc_ehr.project project
-ON project.projectCode = assignment.projectCode
-LEFT JOIN
-cnprc_ehr.project_protocol projectProtocol
-ON
-projectProtocol.projectCode = assignment.projectCode
-AND
-assignment.date < projectProtocol.pp_release_date
-AND
-(coalesce(assignment.enddate, now()) <= projectProtocol.pp_release_date)
+  study.assignment assignment
+  INNER JOIN --this inner join is necessary because not all projectCodes have protocols in project_protocol table
+  cnprc_ehr.project project
+    ON project.projectCode = assignment.projectCode
+  LEFT JOIN
+  (SELECT
+     latest.projectCode,
+     allPPs.pp_assignment_date,
+     allPPs.pp_release_date,
+     allPPs.protocol_number
+   FROM
+     (SELECT
+        pp.projectCode,
+        max(pp_release_date) AS releaseDate
+      FROM cnprc_ehr.project_protocol pp
+      GROUP BY
+        projectCode) latest
+     LEFT JOIN
+     (SELECT *
+      FROM
+        cnprc_ehr.project_protocol) allPPs
+       ON
+         latest.projectCode = allPPs.projectCode
+         AND
+         latest.releaseDate = allPPs.pp_release_date) projectProtocol --sub-query to get current/latest protocol assigned to projectCode
+    ON
+      projectProtocol.projectCode = assignment.projectCode
+      AND
+      assignment.date < projectProtocol.pp_release_date
+      AND
+      (coalesce(assignment.enddate, now()) <= projectProtocol.pp_release_date)
 WHERE assignment.enddate IS NOT NULL;
