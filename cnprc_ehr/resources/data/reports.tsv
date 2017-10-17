@@ -13,7 +13,7 @@ Incomplete - Pending Data Entry	urinalysis	Lab Results	query	Urinalysis	true		st
 
 Incomplete - Pending Data Entry	miscTests	Lab Results	query	Misc Tests	true		study	Misc Tests			date	false	false		qcstate/publicdata	This report contains the misc lab results not represented in the other reports
 Incomplete - Pending Data Entry	antibioticSensitivity	Lab Results	query	Antibiotic Sensitivity	true		study	antibioticSensitivity			date	false	false		qcstate/publicdata	This report contains the results of tests of antibiotic resistance
-	virology	Lab Results	js	Virology	true		study	virology			date	false	false		qcstate/publicdata	Animal Virology History
+	virology	Lab Results	js	Virology	true		study	virologyReport			date	false	false		qcstate/publicdata	Animal Virology History
 	clinCases	Clinical	query	Cases	true		study	cases			date	false	false		qcstate/publicdata	This report contains one record for each case opened for this animal, including surgeries, exams, procedures, etc.
 	encountersWithSnomedBySet	Pathology	query	SNOMED Codes - Grouped	true		study	encountersWithSnomedBySet			date	false	false		qcstate/publicdata	This report lists all SNOMED codes used in the animal\'s record
 

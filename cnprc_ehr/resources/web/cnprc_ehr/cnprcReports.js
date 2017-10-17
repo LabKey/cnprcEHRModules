@@ -27,6 +27,7 @@ EHR.reports.immunizations = function (panel, tab, viewName) {
         })
     });
 
+    //legends for Immunization report
     tab.add({
         xtype: 'ldk-webpartpanel',
         title: 'Legend',
@@ -63,6 +64,7 @@ EHR.reports.pairingHistory = function (panel, tab, viewName) {
         })
     });
 
+    //legends for Pairing History report
     tab.add({
         xtype: 'ldk-webpartpanel',
         title: 'Legend',
@@ -83,7 +85,7 @@ EHR.reports.pairingHistory = function (panel, tab, viewName) {
     });
 };
 
-EHR.reports.virology = function (panel, tab, viewName) {
+EHR.reports.virologyReport = function (panel, tab, viewName) {
     var filterArray = panel.getFilterArray(tab);
     var title = panel.getTitleSuffix();
 
@@ -92,7 +94,7 @@ EHR.reports.virology = function (panel, tab, viewName) {
         style: 'margin-bottom:10px;',
         queryConfig: panel.getQWPConfig({
             schemaName: 'study',
-            queryName: 'virology',
+            queryName: 'virologyReport',
             viewName: viewName,
             title: 'Virology' + title,
             filters: filterArray.nonRemovable,
@@ -100,6 +102,7 @@ EHR.reports.virology = function (panel, tab, viewName) {
         })
     });
 
+    //legends for Virology report
     tab.add({
         xtype: 'ldk-webpartpanel',
         title: 'Legend',
@@ -150,6 +153,7 @@ EHR.reports.conceptionHistory = function (panel, tab, viewName) {
         })
     });
 
+    //legends for Conception History report
     tab.add({
         xtype: 'ldk-webpartpanel',
         title: 'Legend',
