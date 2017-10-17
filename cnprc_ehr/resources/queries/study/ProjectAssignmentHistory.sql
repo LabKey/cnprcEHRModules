@@ -29,26 +29,7 @@ FROM
   cnprc_ehr.project project
     ON project.projectCode = assignment.projectCode
   LEFT JOIN
-  (SELECT
-     latest.projectCode,
-     allPPs.pp_assignment_date,
-     allPPs.pp_release_date,
-     allPPs.protocol_number
-   FROM
-     (SELECT
-        pp.projectCode,
-        max(pp_release_date) AS releaseDate
-      FROM cnprc_ehr.project_protocol pp
-      GROUP BY
-        projectCode) latest
-     LEFT JOIN
-     (SELECT *
-      FROM
-        cnprc_ehr.project_protocol) allPPs
-       ON
-         latest.projectCode = allPPs.projectCode
-         AND
-         latest.releaseDate = allPPs.pp_release_date) projectProtocol --sub-query to get current/latest protocol assigned to projectCode
+  cnprc_ehr.project_protocol projectProtocol
     ON
       projectProtocol.projectCode = assignment.projectCode
       AND
