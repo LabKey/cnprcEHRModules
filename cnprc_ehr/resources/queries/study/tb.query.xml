@@ -5,7 +5,7 @@
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date"/>
-                    <column columnName="project">
+                    <column columnName="projectCode">
                         <columnTitle>Project</columnTitle>
                         <isHidden>true</isHidden>
                     </column>
