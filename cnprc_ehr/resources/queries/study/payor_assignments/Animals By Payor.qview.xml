@@ -36,7 +36,7 @@
                 <property name="columnTitle" value="Secondary Project(s)"/>
             </properties>
         </column>
-        <column name="date">
+        <column name="Id/DemographicsActivePayor/currentPayorDate">
             <properties>
                 <property name="columnTitle" value="Payor Assignment Date"/>
             </properties>

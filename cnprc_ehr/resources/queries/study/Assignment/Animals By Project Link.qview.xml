@@ -30,24 +30,14 @@
                 <property name="columnTitle" value="Location"/>
             </properties>
         </column>
+        <column name="Id/DemographicsActiveAssignment/primaryProject">
+            <properties>
+                <property name="columnTitle" value="Primary Project"/>
+            </properties>
+        </column>
         <column name="Id/DemographicsActiveAssignment/primaryProjectDate">
             <properties>
                 <property name="columnTitle" value="Primary Proj Assn Date"/>
-            </properties>
-        </column>
-        <column name="projectCode">
-            <properties>
-                <property name="columnTitle" value="Searched Project"/>
-            </properties>
-        </column>
-        <column name="assignmentStatus">
-            <properties>
-                <property name="columnTitle" value="Project Assn Type"/>
-            </properties>
-        </column>
-        <column name="Id/DemographicsActiveAssignment/primaryProject">
-            <properties>
-                <property name="columnTitle" value="Current Project"/>
             </properties>
         </column>
         <column name="Id/DemographicsActiveAssignment/secondaryProjects">
@@ -94,9 +84,6 @@
     <filters>
         <filter column="Id/demographics/calculated_status" operator="eq" value="Alive"/>
         <filter column="enddate" operator="isblank"/>
-        <!--<filter column="assignmentStatus" operator="eq" value="P"/>-->
+        <filter column="assignmentStatus" operator="eq" value="P"/>
     </filters>
-    <sorts>
-        <sort column="date" descending="false"/>
-    </sorts>
 </customView>
