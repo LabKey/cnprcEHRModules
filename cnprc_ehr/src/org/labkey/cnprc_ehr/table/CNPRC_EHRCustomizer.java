@@ -77,14 +77,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         {
             // Requested CNPRC custom sort ordering for snomed codes based on prefix
             SQLFragment sql = new SQLFragment("CASE ");
-            sql.append(" WHEN Code IS NULL THEN CAST(NULL AS INT) \n");
-            sql.append(" WHEN Code LIKE 'P-%' THEN 1 \n");
-            sql.append(" WHEN Code LIKE 'T-%' THEN 2 \n");
-            sql.append(" WHEN Code LIKE 'M-%' THEN 3 \n");
-            sql.append(" WHEN Code LIKE 'E-%' THEN 4 \n");
-            sql.append(" WHEN Code LIKE 'F-%' THEN 5 \n");
-            sql.append(" WHEN Code LIKE 'D-%' THEN 6 \n");
-            sql.append(" WHEN Code LIKE 'J-%' THEN 7 \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code IS NULL THEN CAST(NULL AS INT) \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code LIKE 'P-%' THEN 1 \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code LIKE 'T-%' THEN 2 \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code LIKE 'M-%' THEN 3 \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code LIKE 'E-%' THEN 4 \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code LIKE 'F-%' THEN 5 \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code LIKE 'D-%' THEN 6 \n");
+            sql.append(" WHEN ").append(ExprColumn.STR_TABLE_ALIAS).append(".Code LIKE 'J-%' THEN 7 \n");
             sql.append(" ELSE 8 END \n");
             categoryCol = new ExprColumn(ti, "sortOrder", sql, JdbcType.INTEGER, ti.getColumn("code"));
             categoryCol.setHidden(true);
