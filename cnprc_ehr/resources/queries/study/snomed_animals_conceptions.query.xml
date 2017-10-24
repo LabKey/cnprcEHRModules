@@ -65,8 +65,9 @@
                     <column columnName="subjectType">
                         <columnTitle>Subject Type</columnTitle>
                     </column>
+                    <column columnName="code/code"/>
                     <column columnName="code">
-                        <columnTitle>SNOMED Code</columnTitle>
+                        <columnTitle>SNOMED Code Meaning</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>snomed</fkTable>
