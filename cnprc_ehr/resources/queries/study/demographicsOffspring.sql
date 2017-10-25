@@ -12,6 +12,8 @@ d2.birth,
 d2.gender as Sex,
 d2.id.flagList.values as Flags,
 d2.id.curLocation.location as Location,
+d2.calculated_status,
+d2.id.lastHousing.location AS LastKnownLocation,
 d.qcstate
 FROM study.Demographics d
 INNER JOIN study.Demographics d2

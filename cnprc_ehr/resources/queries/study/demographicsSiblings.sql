@@ -28,6 +28,8 @@ SELECT
   d2.id.curLocation.location AS Location,
   d2.id.parents.dam          AS SiblingDam,
   d2.id.parents.sire         AS SiblingSire,
+  d2.calculated_status,
+  d2.id.lastHousing.location AS LastKnownLocation,
   d1.qcstate
 FROM study.Demographics d1
   JOIN study.Demographics d2
