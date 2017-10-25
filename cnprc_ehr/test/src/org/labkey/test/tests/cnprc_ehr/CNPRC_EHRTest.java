@@ -1803,7 +1803,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "offspringSex",
                 "conception",
                 "BRType",
-                "offspringSpecies",
                 "sire",
                 "femaleGeneticsVerify",
                 "maleGeneticsVerify",
@@ -1814,7 +1813,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "offspringLocationDate",
                 "offspringLocation",
                 "deathType",
-                "PGComment"
+                "termComment"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
