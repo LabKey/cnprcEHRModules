@@ -76,7 +76,6 @@ import static org.junit.Assert.assertEquals;
 @Category({CustomModules.class, EHR.class})
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
-    {setIsBootstrapWhitelisted(true);}
     private static final String PROJECT_NAME = "CNPRC";
     protected static final String UNIT_CODE = "uc101";
     private static final Integer PROJECT_ROW_ID = 123;
