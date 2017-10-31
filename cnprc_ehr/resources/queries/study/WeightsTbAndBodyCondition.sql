@@ -21,8 +21,8 @@ max(test1) as test1,
 max(test2) as test2,
 max(weightTattooFlag) as weightTattooFlag,
 max(bodyConditionScore) as bodyConditionScore,
-max(roomAtTime) as roomAtTime,
-max(cageAtTime) as cageAtTime,
+max(roomAtTime) as location,
+max(cageAtTime) as cage,
 max(conNum) as conception,
 max(daysPregnant) as daysPregnant
  from

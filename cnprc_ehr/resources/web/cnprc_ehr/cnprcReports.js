@@ -136,6 +136,72 @@ EHR.reports.virologyReport = function (panel, tab, viewName) {
     });
 };
 
+EHR.reports.weightTbBcs = function (panel, tab, viewName) {
+    var filterArray = panel.getFilterArray(tab);
+    var subjects = filterArray.subjects;
+    var columnName = 'Id';
+
+    if (filterArray.nonRemovable.length > 0)
+        columnName = filterArray.nonRemovable[0].getColumnName();
+
+    if ( Ext4.isDefined(subjects) && subjects.length < 11 ) {
+        for (var i = 0; i < subjects.length; i++) {
+            var subj = subjects[i];
+            tab.add({
+                xtype: 'ldk-webpartpanel',
+                title: 'Weight, TB and Body Condition: ' + subj,
+                items: [{
+                    xtype: 'ehr-weightsummarypanel',
+                    style: 'padding-bottom: 20px;',
+                    subjectId: subj
+                }, {
+                    xtype: 'ehr-weightgraphpanel',
+                    itemId: 'tabArea',
+                    showRawData: true,
+                    border: false,
+                    subjectId: subj
+                }]
+            });
+
+            tab.add({
+                xtype: 'ldk-querycmp',
+                style: 'margin-bottom:10px;',
+                queryConfig: panel.getQWPConfig({
+                    schemaName: 'study',
+                    queryName: 'WeightsTbAndBodyCondition',
+                    viewName: viewName,
+                    title: '',
+                    filters: [LABKEY.Filter.create(columnName, subj)],
+                    removeableFilters: filterArray.removable
+                })
+            });
+        }
+
+    }
+    else {
+        tab.add({
+            html: 'Because more than 10 subjects were selected, the condensed report is being shown.',
+            style: 'padding-bottom: 20px;',
+            border: false
+        });
+        tab.add({
+            xtype: 'ldk-querycmp',
+            style: 'margin-bottom:10px;',
+            queryConfig: panel.getQWPConfig({
+                schemaName: 'study',
+                queryName: 'WeightsTbAndBodyCondition',
+                viewName: viewName,
+                title: 'Weights, TB and Body Condition',
+                filters: filterArray.nonRemovable,
+                removeableFilters: filterArray.removable
+            })
+        });
+    }
+
+
+
+};
+
 EHR.reports.conceptionHistory = function (panel, tab, viewName) {
     var filterArray = panel.getFilterArray(tab);
     var title = panel.getTitleSuffix();

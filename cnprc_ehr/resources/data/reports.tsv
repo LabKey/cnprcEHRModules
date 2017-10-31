@@ -78,7 +78,7 @@ Incomplete - Pending Data Entry	charges	General	js	Charges	true		study	underDeve
 Incomplete - Pending Data Entry	extendedAbstract	General	js	Extended Abstract	true		study	underDevelopment				false	false		qcstate/publicdata
 Incomplete - Pending Data Entry	majorEvents	General	js	Major Events	true		study	underDevelopment			date	false	false			This report attempts to identify major events in the history of the animal, including births and major surgeries
 Incomplete - Pending Data Entry	notes	General	query	Notes	true		study	notes	Active Notes		date	false	false		qcstate/publicdata	This report contains non-clinical notes entered into the animal's record
-	generalWTB	General	query	Weight, TB, BCS	true		study	WeightsTbAndBodyCondition			date	false	false			Weight, TB, BCS
+	generalWTB	General	js	Weight, TB, BCS	true		study	weightTbBcs			date	false	false			Weight, TB, BCS
 	biopsies	Pathology	query	Biopsies	true		study	biopsy	Biopsies		date	false	false		qcstate/publicdata	Contains information about biopsies
 Incomplete - Pending Data Entry	histology	Pathology	query	Histology	true		study	histology			date	false	false		qcstate/publicdata	Histology records and associated diagnoses
 	morphologicDiagnosis	Pathology	query	Morphologic Diagnosis	true		study	morphologicDiagnosis			date	false	false		qcstate/publicdata

@@ -7,20 +7,16 @@
                     <column columnName="id">
                         <columnTitle>Animal ID</columnTitle>
                     </column>
-                    <column columnName="date"/>
                     <column columnName="weight">
                         <columnTitle>Weight (kg)</columnTitle>
+                        <formatString>0.00</formatString>
                     </column>
-                    <column columnName="TB"/>
-                    <column columnName="test1"/>
-                    <column columnName="test2"/>
                     <column columnName="weightTattooFlag">
                         <columnTitle>Tattoo</columnTitle>
                     </column>
                     <column columnName="bodyConditionScore">
                         <columnTitle>Body Condition</columnTitle>
                     </column>
-                    <column columnName="location"/>
                     <column columnName="conception">
                         <fk>
                             <fkTable>pregnancyConfirmations</fkTable>
