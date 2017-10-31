@@ -115,6 +115,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10%/20% Weight Drop", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightPctDrop"), "Commonly Used Queries");
         EHRService.get().registerReportLink(EHRService.REPORT_LINK_TYPE.moreReports, "Animals by Payor", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=payor_assignments&query.viewName=Animals By Payor Link"), "Colony Management");
         EHRService.get().registerReportLink(EHRService.REPORT_LINK_TYPE.moreReports, "Animals by Project", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=assignment&query.viewName=Animals By Project Link"), "Colony Management");
+        EHRService.get().registerReportLink(EHRService.REPORT_LINK_TYPE.moreReports, "Animals by Location", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=LocationReport"), "Colony Management");
 
         ehrService.registerHistoryDataSource(new DefaultBirthDataSource(this));
         ehrService.registerHistoryDataSource(new DefaultDeathsDataSource(this));

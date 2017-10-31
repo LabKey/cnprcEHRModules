@@ -1526,13 +1526,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable locationRegion = new DataRegionTable("query", this.getDriver());
 
         List<String> expectedColumns = Arrays.asList(
-                "species",
                 "Id",
                 "pairingIndicator",
                 "room",
                 "cage",
                 "cage_size",
                 "rate_class",
+                "species",
                 "gender",
                 "age",
                 "MostRecentWeight",
