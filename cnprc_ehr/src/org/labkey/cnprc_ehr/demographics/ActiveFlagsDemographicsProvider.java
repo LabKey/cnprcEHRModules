@@ -1,4 +1,4 @@
-package org.labkey.cnprc_ehr;
+package org.labkey.cnprc_ehr.demographics;
 
 import org.labkey.api.ehr.demographics.AbstractListDemographicsProvider;
 import org.labkey.api.module.Module;

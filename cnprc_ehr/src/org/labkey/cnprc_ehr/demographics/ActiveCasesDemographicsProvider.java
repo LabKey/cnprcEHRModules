@@ -1,4 +1,4 @@
-package org.labkey.cnprc_ehr;
+package org.labkey.cnprc_ehr.demographics;
 
 import org.labkey.api.data.CompareType;
 import org.labkey.api.data.SimpleFilter;

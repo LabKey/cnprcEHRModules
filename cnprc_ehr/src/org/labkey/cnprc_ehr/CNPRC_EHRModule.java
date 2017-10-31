@@ -46,6 +46,9 @@ import org.labkey.cnprc_ehr.dataentry.forms.ClinicalReportFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
+import org.labkey.cnprc_ehr.demographics.ActiveAssignmentsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.ActiveCasesDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.ActiveFlagsDemographicsProvider;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
 import java.util.Collection;
