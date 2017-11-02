@@ -6,6 +6,11 @@
                 <columns>
                     <column columnName="id">
                         <columnTitle>Animal ID</columnTitle>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>Id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="weight">
                         <columnTitle>Weight (kg)</columnTitle>
@@ -16,6 +21,13 @@
                     </column>
                     <column columnName="bodyConditionScore">
                         <columnTitle>Body Condition</columnTitle>
+                    </column>
+                    <column columnName="location">
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>rooms</fkTable>
+                            <fkColumnName>Room</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="conception">
                         <fk>
