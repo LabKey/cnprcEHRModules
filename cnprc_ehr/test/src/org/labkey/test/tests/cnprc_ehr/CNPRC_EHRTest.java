@@ -132,7 +132,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static final Map<String, Collection<String>> CNPRC_REPORTS = new TreeMap<String, Collection<String>>()
     {{
         put("Assignments and Groups", Arrays.asList(
-                "Active Assignments",
                 "Assignment History",
                 "Per-diem Payor Assignment",
                 "Project Assignment History"));
@@ -143,10 +142,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Behavior Cases",
                 "Behavior Remarks",
                 "Behavior Treatments",
-                "Cagemate History",
                 "Enrichment",
                 "Full History",
-                "Nursing",
+                "Foster Infant History",
+                "Foster Mother History",
                 "Pairing History",
                 "Pairing Observations",
                 "Pairing With Housing"
@@ -168,7 +167,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         put("Colony Management", Arrays.asList(
                 "Behavior Remarks",
                 "Birth Records",
-                "Cagemate History",
                 "Cites Review",
                 "Death Records",
                 "Diet",
@@ -947,7 +945,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickAndWait(linkElement);
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",2,results.getDataRowCount());
-        assertTextPresent( "Id.demographicsUtilization.fundingCategory = 'Base Grant'", "TEST1684145", "TEST6390238");
+        assertTextPresent( "fundingCategory = 'Base Grant'", "TEST1684145", "TEST6390238");
     }
 
     @Test
@@ -1092,7 +1090,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/curLocation/Location",
                 "Id/DemographicsActiveAssignment/primaryProject",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
-                "gender",
+                "gender/code",
                 "Id/age/yearsAndMonths",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/activeFlagList/values",
@@ -1118,7 +1116,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expectedColumns = Arrays.asList(
                 "Id",
                 "Id/curLocation/Location",
-                "gender",
+                "gender/code",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/cageViolation/cage_size",
                 "Id/DemographicsActiveAssignment/primaryProject",
@@ -1143,7 +1141,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expectedColumns = Arrays.asList(
                 "Id",
                 "Id/curLocation/location",
-                "gender",
+                "gender/code",
                 "Id/DemographicsActiveAssignment/primaryProject",
                 "Id/age/yearsAndMonths",
                 "Id/DemographicsActiveLongTermCases/date",
@@ -1167,7 +1165,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
                 "Id",
-                "gender",
+                "gender/code",
                 "Id/age/yearsAndMonths",
                 "Id/curLocation/location",
                 "Id/MostRecentWeight/MostRecentWeight",
@@ -1237,7 +1235,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/curLocation/cageSize",
                 "Id/curLocation/rateClass",
                 "Id",
-                "species",
+                "species/code",
                 "Id/age/yearsAndMonthsAndDays",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/curLocation/Date",
@@ -1565,6 +1563,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         SearchPanel searchPanel = new SearchPanel("Enclosure Search", getDriver());
         searchPanel.submit();
         DataRegionTable results = new DataRegionTable("query", getDriver());
+        int rowIndex = results.getRowIndex("Id", "44444");
 
         // Test from housing data
         // Choosing this row (and these columns) because there are data from all tables populated
@@ -1572,7 +1571,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong Enclosure Search results from housing table using current date,",
                 Arrays.asList("44444", "AC5003", "89", "4", "MMU", "5.5", " ", "L", " ", "BO", " ", " ", " ", "Not Completed", "Jane Jones"),
-                results.getRowDataAsText(1, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_ids", "colonyCode",
+                results.getRowDataAsText(rowIndex, "Id", "room", "cage", "cage_size", "species", "MostRecentWeight", "payor_ids", "colonyCode",
                         "groupCode", "book", "primaryProject", "secondaryProjects", "values", "pgComment", "supervisor"));
 
         // Now test that historical data changes on same info
@@ -1643,7 +1642,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Assignments and Groups");
-        animalHistoryPage.clickReportTab("Active Assignments");
+        animalHistoryPage.clickReportTab("Project Assignment History");
+        animalHistoryPage.searchSingleAnimal("TEST1112911");
         click(Locator.linkContainingText(PROJECT_CODE_5_CHAR_1));
 
         switchToWindow(1);
@@ -1656,7 +1656,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"Id/age/yearsAndMonthsAndDays"
                 ,"Id/MostRecentWeight/MostRecentWeight"
                 ,"Id/curLocation/location"
-                ,"date"
+                ,"Id/DemographicsActiveAssignment/primaryProjectDate"
                 ,"projectCode"
                 ,"assignmentStatus"
                 ,"Id/DemographicsActiveAssignment/primaryProject"
@@ -1676,6 +1676,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(rowIndex,6));
         assertEquals("Wrong value for Searched Project: ", PROJECT_CODE_5_CHAR_1, results.getDataAsText(rowIndex,7));
     }
+
     @Test
     public void testAnimalHistoryDiarrheaCalendar() throws Exception
     {
@@ -1825,8 +1826,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Assignments and Groups");
         animalHistoryPage.clickReportTab("Project Assignment History");
+        animalHistoryPage.searchSingleAnimal("44444");
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+
         List<String> expectedColumns = Arrays.asList(
                 "Id"
                 ,"date"
@@ -1851,10 +1854,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , " "
                 , PROTOCOL_ID_10_CHAR_2
                 , UNIT_CODE
+                , "07:03:11"
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(1).subList(0, expectedColumns.size() - 1);
-        assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
+        int rowIndex = results.getRowIndex("projectCode", PROJECT_CODE_5_CHAR_1);
+
+        List<String> resultsRowDataAsText = results.getRowDataAsText(rowIndex);
+        assertEquals("Wrong data for row 2.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 3, results.getDataRowCount());
     }
 
@@ -1915,12 +1921,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST1020148","2016-02-02 00:00","2016-05-01 00:00","601VC","601TC","601MC","-","Sample type 300"
+                "TEST3804589","2016-06-01 13:29","2016-06-29 00:00","CMV","AB","EL","-","SER"
         );
 
-        List<String> resultsRowDataAsText = results.getRowDataAsText(1).subList(0, expectedColumns.size());
-        assertEquals("Wrong data for row 2.", expected, resultsRowDataAsText);
-        assertEquals("Wrong row count: ", 2, results.getDataRowCount());
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size());
+        assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
+        assertEquals("Wrong row count: ", 1, results.getDataRowCount());
         assertTextPresent("Legend", "Virus","Positive");
 
     }
@@ -2091,13 +2097,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expectedColumns = Arrays.asList(
                 "Id/birth/species",
                 "Id",
-                "Id/demographics/gender",
+                "Id/demographics/gender/code",
                 "Id/age/yearsAndMonthsAndDays",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/curLocation/location",
                 "Id/DemographicsActiveAssignment/primaryProject",
                 "Id/DemographicsActiveAssignment/secondaryProjects",
-                "date",
+                "Id/DemographicsActivePayor/currentPayorDate",
                 "payor_id",
                 "Id/DemographicsActivePayor/payor_ids",
                 "Id/flagList/values",

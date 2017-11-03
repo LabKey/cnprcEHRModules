@@ -1,8 +1,12 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
         <column name="Id"/>
-        <column name="species"/>
-        <column name="gender">
+        <column name="species/code">
+            <properties>
+                <property name="columnTitle" value="Species"/>
+            </properties>
+        </column>
+        <column name="gender/code">
             <properties>
                 <property name="columnTitle" value="Sex"/>
             </properties>

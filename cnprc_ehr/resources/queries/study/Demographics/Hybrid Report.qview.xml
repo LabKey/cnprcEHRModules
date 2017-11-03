@@ -1,7 +1,11 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
         <column name="Id"/>
-        <column name="gender"/>
+        <column name="gender/code">
+            <properties>
+                <property name="columnTitle" value="Sex"/>
+            </properties>
+        </column>
         <column name="Id/age/yearsAndMonths">
             <properties>
                 <property name="columnTitle" value="Age today"/>

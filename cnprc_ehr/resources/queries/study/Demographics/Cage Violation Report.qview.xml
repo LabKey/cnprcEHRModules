@@ -6,7 +6,7 @@
                 <property name="columnTitle" value="Location"/>
             </properties>
         </column>
-        <column name="gender">
+        <column name="gender/code">
             <properties>
                 <property name="columnTitle" value="Sex"/>
             </properties>
