@@ -149,12 +149,12 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
             var subj = subjects[i];
             tab.add({
                 xtype: 'ldk-webpartpanel',
-                title: 'Weight, TB and Body Condition: ' + subj,
+                title: 'Weight Overview: ' + subj,
                 items: [{
                     xtype: 'ehr-weightsummarypanel',
                     style: 'padding-bottom: 20px;',
                     subjectId: subj
-                }, {
+                },{
                     xtype: 'ehr-weightgraphpanel',
                     itemId: 'tabArea',
                     showRawData: true,
@@ -170,7 +170,7 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
                     schemaName: 'study',
                     queryName: 'WeightsTbAndBodyCondition',
                     viewName: viewName,
-                    title: '',
+                    title: 'Weight, TB and Body Condition: ' + subj,
                     filters: [LABKEY.Filter.create(columnName, subj)],
                     removeableFilters: filterArray.removable
                 })
