@@ -145,8 +145,7 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
         columnName = filterArray.nonRemovable[0].getColumnName();
 
     if ( Ext4.isDefined(subjects) && subjects.length < 11 ) {
-        for (var i = 0; i < subjects.length; i++) {
-            var subj = subjects[i];
+        subjects.forEach(function(subj){
             tab.add({
                 xtype: 'ldk-webpartpanel',
                 title: 'Weight Overview: ' + subj,
@@ -157,7 +156,7 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
                 },{
                     xtype: 'ehr-weightgraphpanel',
                     itemId: 'tabArea',
-                    showRawData: true,
+                    showRawData: false,
                     border: false,
                     subjectId: subj
                 }]
@@ -175,7 +174,7 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
                     removeableFilters: filterArray.removable
                 })
             });
-        }
+        }, this);
 
     }
     else {
