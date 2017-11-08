@@ -21,10 +21,9 @@ AS status,
 d.id.demographics.calculated_status as status_code,
 d.id.demographics.species,
 'DOB:' || COALESCE(CAST(CAST(d.id.birth.date AS DATE) AS VARCHAR), 'NA')
-    || '|Birth Loc:' || COALESCE(d.id.DemographicsBirthPlace.birthPlace, 'NA')
+    || '|Birth Loc: ' || COALESCE(d.id.DemographicsBirthPlace.birthPlace, 'NA')
     || '|Gen:' || d.id.Demographics.genNum
     || '|Flags:' || COALESCE(d.id.activeFlagList.Values, 'None')
     as Display,
 'Demographics' as source
 FROM study.demographics d
---WHERE d.Dam IS NOT NULL OR d.Sire IS NOT NULL
