@@ -36,16 +36,16 @@ public class CNPRC_EHRController extends SpringActionController
 
     public static class ObservationCodeForm
     {
-        private int _rowId;
+        private String _obsCode;
 
-        public int getRowId()
+        public String getObsCode()
         {
-            return _rowId;
+            return _obsCode;
         }
 
-        public void setRowId(int rowId)
+        public void setObsCode(String obsCode)
         {
-            _rowId = rowId;
+            _obsCode = obsCode;
         }
     }
 
@@ -59,8 +59,8 @@ public class CNPRC_EHRController extends SpringActionController
             String encodedContainerPath = PageFlowUtil.encode(c.getPath());
             ActionURL url = new ActionURL("query" + encodedContainerPath + "%2FdetailsQueryRow.view");
             url.addParameter("schemaName", "cnprc_ehr");
-            url.addParameter("query.queryName", "observation_types");
-            url.addParameter("rowId", form.getRowId());
+            url.addParameter("query.queryName", "observation_type_snomed");
+            url.addParameter("obsCode", form.getObsCode());
             return url;
         }
     }
