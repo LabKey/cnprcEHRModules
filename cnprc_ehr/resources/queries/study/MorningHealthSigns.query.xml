@@ -12,7 +12,10 @@
                         <columnTitle>Location</columnTitle>
                     </column>
                     <column columnName="observation">
-                        <columnTitle>Observations</columnTitle>
+                        <columnTitle>Observation</columnTitle>
+                        <displayColumnFactory>
+                            <className>org.labkey.cnprc_ehr.table.MorningHealthSignsDisplayColumnFactory</className>
+                        </displayColumnFactory>
                     </column>
                 </columns>
             </table>

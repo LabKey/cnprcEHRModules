@@ -16,7 +16,13 @@
 
 package org.labkey.cnprc_ehr;
 
+import org.labkey.api.action.SimpleRedirectAction;
 import org.labkey.api.action.SpringActionController;
+import org.labkey.api.data.Container;
+import org.labkey.api.security.RequiresPermission;
+import org.labkey.api.security.permissions.ReadPermission;
+import org.labkey.api.util.PageFlowUtil;
+import org.labkey.api.view.ActionURL;
 
 public class CNPRC_EHRController extends SpringActionController
 {
@@ -26,5 +32,36 @@ public class CNPRC_EHRController extends SpringActionController
     public CNPRC_EHRController()
     {
         setActionResolver(_actionResolver);
+    }
+
+    public static class ObservationCodeForm
+    {
+        private int _rowId;
+
+        public int getRowId()
+        {
+            return _rowId;
+        }
+
+        public void setRowId(int rowId)
+        {
+            _rowId = rowId;
+        }
+    }
+
+    @RequiresPermission(ReadPermission.class)
+    public class ObservationCodeDetailAction extends SimpleRedirectAction<ObservationCodeForm>
+    {
+        @Override
+        public ActionURL getRedirectURL(ObservationCodeForm form) throws Exception
+        {
+            Container c = getViewContext().getContainer();
+            String encodedContainerPath = PageFlowUtil.encode(c.getPath());
+            ActionURL url = new ActionURL("query" + encodedContainerPath + "%2FdetailsQueryRow.view");
+            url.addParameter("schemaName", "cnprc_ehr");
+            url.addParameter("query.queryName", "observation_types");
+            url.addParameter("rowId", form.getRowId());
+            return url;
+        }
     }
 }

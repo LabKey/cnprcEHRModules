@@ -13,5 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT mho.Id, mho.date, mho.location, mho.observation
+SELECT
+  mho.Id,
+  mho.date,
+  mho.location,
+  Stuff(
+    COALESCE(',' || mho.obsCode1, '') ||
+    COALESCE(',' || mho.obsCode2, '') ||
+    COALESCE(',' || mho.obsCode3, '') ||
+    COALESCE(',' || mho.obsCode4, '') ||
+    COALESCE(',' || mho.obsCode5, '') ||
+    COALESCE(',' || mho.obsCode6, '') ||
+    COALESCE(',' || mho.obsCode7, '') ||
+    COALESCE(',' || mho.obsCode8, '') ||
+    COALESCE(',' || mho.obsCode9, '') ||
+    COALESCE(',' || mho.obsCode10, '')
+  , 1, 1, '') as observation
 FROM study.morningHealthObs mho
