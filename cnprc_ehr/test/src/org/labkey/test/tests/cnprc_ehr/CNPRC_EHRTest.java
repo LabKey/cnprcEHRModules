@@ -37,6 +37,7 @@ import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
 import org.labkey.test.components.BodyWebPart;
+import org.labkey.test.components.WebPartPanel;
 import org.labkey.test.components.ehr.panel.AnimalSearchPanel;
 import org.labkey.test.components.ext4.widgets.SearchPanel;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
@@ -2047,14 +2048,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testWeightTBandBCSView() throws Exception
     {
-        insertWeightAndTBfor("TEST4564246");
+        final String animalId = "TEST4564246";
+        insertWeightAndTBfor(animalId);
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.searchSingleAnimal(animalId);
         animalHistoryPage.clickCategoryTab("General");
         animalHistoryPage.clickReportTab("Weight, TB, BCS");
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
-        List<String> expectedColumns = Arrays.asList(
+        List<String> expectedColumnNames = Arrays.asList(
                 "id"
                 ,"date"
                 ,"weight"
@@ -2063,14 +2065,30 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 ,"test2"
                 ,"weightTattooFlag"
                 ,"bodyConditionScore"
-                ,"roomAtTime"
-                ,"cageAtTime"
+                ,"location"
+                ,"cage"
                 ,"conception"
                 ,"daysPregnant"
         );
-        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
-        assertEquals("Wrong value for ID: ", "TEST4564246", results.getDataAsText(0,0));
-        assertEquals("Wrong value for Weight: ", "2.9", results.getDataAsText(0,2));
+        List<String> expectedColumnLabels = Arrays.asList(
+                "Animal ID"
+                ,"Date"
+                ,"Weight (kg)"
+                ,"TB"
+                ,"Test1"
+                ,"Test2"
+                ,"Tattoo"
+                ,"Body Condition"
+                ,"Location"
+                ,"Cage"
+                ,"Conception"
+                ,"Days Pregnant"
+        );
+
+        assertEquals("Wrong columns", expectedColumnNames, results.getColumnNames());
+        assertEquals("Wrong column labels", expectedColumnLabels, results.getColumnLabels());
+        assertEquals("Wrong value for ID: ", animalId, results.getDataAsText(0,0));
+        assertEquals("Wrong value for Weight: ", "2.90", results.getDataAsText(0,2));
         assertEquals("Wrong value for TB: ", "TB", results.getDataAsText(0,3));
         assertEquals("Wrong value for Test1: ", "typesite244872", results.getDataAsText(0,4));
         assertEquals("Wrong value for Test2: ", "type2site2244872", results.getDataAsText(0,5));
@@ -2078,6 +2096,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0,7));
         assertEquals("Wrong value for Room: ", "6824778", results.getDataAsText(0,8));
         assertEquals("Wrong value for Cage: ", "4953547", results.getDataAsText(0,9));
+
+        List<WebPartPanel> reportPanels = WebPartPanel.WebPart(getDriver()).findAll(animalHistoryPage.getActiveReportPanel());
+        List<String> reportTitles = new ArrayList<>();
+        reportPanels.forEach(p -> reportTitles.add(p.getTitle()));
+        assertEquals("Wrong order for report segments",
+                Arrays.asList("Weight Overview: " + animalId.toLowerCase(), "Weight, TB and Body Condition: " + animalId.toLowerCase()),
+                reportTitles);
     }
 
     @Test
