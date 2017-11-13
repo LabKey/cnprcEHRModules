@@ -23,28 +23,6 @@ SELECT
   c.cagePosition.row,
   c.cagePosition.columnIdx,
   c.cage_type,
-  lc.cage      AS lowerCage,
-  lc.cage_type AS lower_cage_type,
-  lc.divider,
-  --lc.divider.countAsSeparate,
-
-  --if the divider on the left-hand cage is separating, then these cages are separate
-  --and should be counted.  if there's no left-hand cage, always include
-  CASE
-  WHEN c.cage_type = 'No Cage'
-    THEN FALSE
-  WHEN lc.divider.countAsSeparate = FALSE
-    THEN FALSE
-  --NOTE: we want this to count as a potential cage, so include these
-  --WHEN (c.status IS NOT NULL AND c.status = 'Unavailable') then false
-  ELSE TRUE
-  END          AS isAvailable,
-
-  CASE
-  WHEN (c.status IS NOT NULL AND c.status = 'Unavailable')
-    THEN 1
-  ELSE 0
-  END          AS isMarkedUnavailable,
   re.indoorOutdoorFlag
 
 FROM ehr_lookups.cage c
@@ -53,4 +31,6 @@ FROM ehr_lookups.cage c
     ON (lc.cage_type != 'No Cage' AND c.room = lc.room AND c.cagePosition.row = lc.cagePosition.row AND
         (c.cagePosition.columnIdx - 1) = lc.cagePosition.columnIdx)
   JOIN cnprc_ehr.room_enclosure re ON re.room = c.room
+  JOIN cnprc_ehr.cage_location_history clh on clh.location = c.room || '-' || c.cage and clh.to_date is null
+  WHERE (clh.file_status = 'AC' and re.file_status = 'AC')
 

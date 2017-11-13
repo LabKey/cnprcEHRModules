@@ -11,6 +11,8 @@ Ext4.define('CNPRC_EHR.panel.HousingSummaryPanel', {
     nounPlural: 'Areas',
     headerNames:  ['Type', 'Animal Count', '% of Total'],
     cageUsagePanelColumnCount: 8,
+    usageTitleHTML: '<b data-toggle="tooltip" title="This section is a report of cages and species by location. Note that there ' +
+    'can be multiple animals in a cage, so the species count and empty cage count will not necessarily equal total cage count.">Area Usage:</b><hr>',
 
     getAvailableCagesUrlParams: function (area) {
         var urlParams = {
