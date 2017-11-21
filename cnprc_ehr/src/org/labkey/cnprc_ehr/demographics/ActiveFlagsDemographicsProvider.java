@@ -14,8 +14,20 @@ public class ActiveFlagsDemographicsProvider extends AbstractListDemographicsPro
 {
     public ActiveFlagsDemographicsProvider(Module module)
     {
+        //super(module, "study", "DemographicsActiveFlagsSeparated", "activeFlags");
         super(module, "study", "flags", "activeFlags");
     }
+
+    @Override
+    public String getName()
+    {
+        return "Most Recent Census Flags";
+    }
+
+    // TODO: fill in proper field keys after DemographicsActiveFlagsSeparated is actually created
+
+    @Override
+    //protected Set<FieldKey> getFieldKeys() { return Collections.emptySet(); }
 
     protected Set<FieldKey> getFieldKeys()
     {
@@ -32,5 +44,11 @@ public class ActiveFlagsDemographicsProvider extends AbstractListDemographicsPro
         keys.add(FieldKey.fromString("remark"));
 
         return keys;
+    }
+
+    @Override
+    public boolean requiresRecalc(String schema, String query)
+    {
+        return ("study".equalsIgnoreCase(schema) && "flags".equalsIgnoreCase(query));
     }
 }

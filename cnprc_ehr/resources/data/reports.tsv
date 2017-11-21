@@ -68,7 +68,7 @@ Incomplete - Pending BehMon Data Integration	behaviorRemarks	Colony Management	j
 #dnaBank	Genetics	query	DNA Bank	true		DNABank	Samples				false	false		qcstate/publicdata	This report shows the inbreeding coefficient of each animal, where pedigree data is available. The inbreeding coefficient is the kinship coefficient between the individual's parents. It measures the probability that the two alleles of a gene are identical by descent in the same individual (autozygosity). It is zero if the individual is not inbred.
 
 	TB	Lab Results	query	TB Test Dates	true		study	tb			date	false	false		qcstate/publicdata	TB Test results
-	snapshot	General	js	Snapshot	true		study	snapshot				false	false		qcstate/publicdata	This report contains a summary of the animal, including demographics, assignments and weight
+	snapshot	General	js	Snapshot	true		study	CNPRCSnapshot				false	false		qcstate/publicdata	This report contains a summary of the animal, including demographics, assignments and weight
 	clinSnapshot	Clinical	js	Clinical Snapshot	true		study	underDevelopment				false	false		qcstate/publicdata	This report contains a summary of the animal, including demographics, assignments and weight
 	arrival	General	query	Arrivals	true		study	arrival			date	false	false		qcstate/publicdata	Displays arrival and departure dates
 	departure	General	query	Departures	true		study	departure			date	false	false		qcstate/publicdata	Displays arrival and departure dates

@@ -15,7 +15,7 @@
  */
 SELECT
 id,
-group_concat(colonyCode,',') as colonyCode
+CAST(group_concat(colonyCode,',') AS VARCHAR) AS colonyCode
 FROM study.colony_assignments
-WHERE enddate is NULL
+WHERE enddate IS NULL
 GROUP BY id

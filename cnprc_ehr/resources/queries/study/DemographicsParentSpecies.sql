@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 SELECT
-id,
-CAST(group_concat(groupCode) AS VARCHAR) AS groupCode
-FROM study.breedingGroupAssignments
-WHERE enddate IS NULL
-GROUP BY id
+  demo.Id,
+  demoDam.Id AS damId,
+  demoDam.species AS damSpecies,
+  demoSire.Id AS sireId,
+  demoSire.species AS sireSpecies
+FROM study.demographics demo
+JOIN study.demographics demoDam
+  ON demoDam.Id = demo.dam
+JOIN study.demographics demoSire
+  ON demoSire.Id = demo.sire

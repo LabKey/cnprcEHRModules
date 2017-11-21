@@ -46,9 +46,17 @@ import org.labkey.cnprc_ehr.dataentry.forms.ClinicalReportFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
-import org.labkey.cnprc_ehr.demographics.ActiveAssignmentsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.ActiveCasesDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ActiveFlagsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.BCSDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.BreedingGroupDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.CNPRCDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.ColonyDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.ConceptionsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.HousingIntervalsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.LastPayorDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.ParentsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.SerumDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.TBDemographicsProvider;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
 import java.util.Collection;
@@ -105,6 +113,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcReports.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/Utils.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/data/sources/CNPRCDefault.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/DemographicsRecord.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/SnapshotPanel.js"), this);
 
         ehrService.registerClientDependency(ClientDependency.fromPath("ldk/grid/Panel.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("ehr/grid/Panel.js"), this);
@@ -145,10 +155,18 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BulkClinicalEntryFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalReportFormType.class, this));
 
-       //demographics
-        ehrService.registerDemographicsProvider(new ActiveCasesDemographicsProvider(this));
-        ehrService.registerDemographicsProvider(new ActiveAssignmentsDemographicsProvider(this));
+        //demographics
         ehrService.registerDemographicsProvider(new ActiveFlagsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new BCSDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new BreedingGroupDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new CNPRCDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ColonyDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ConceptionsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new HousingIntervalsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new LastPayorDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ParentsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new SerumDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new TBDemographicsProvider(this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
