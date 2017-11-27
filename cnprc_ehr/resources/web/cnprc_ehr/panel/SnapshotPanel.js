@@ -284,7 +284,6 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
     },
 
     appendDeparture: function(toSet, results){
-        // TODO: fix this, these results aren't in the data from the server
         if (results.getMostRecentDeparture()) {
             toSet['departure'] = results.getMostRecentDeparture() + ' ' + results.getMostRecentDepartureDestination();
         }

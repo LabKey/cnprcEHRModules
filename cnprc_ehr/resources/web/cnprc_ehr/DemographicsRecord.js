@@ -214,11 +214,11 @@ EHR.DemographicsRecord = function(data){
         },
 
         getMostRecentDeparture: function(){
-            return data['mostRecentDeparture'];
+            return data['MostRecentDeparture'];
         },
 
         getMostRecentDepartureDestination: function(){
-            return data['mostRecentDepartureDestination'];
+            return data['MostRecentDepartureDestination'];
         },
 
         getMostRecentBCS: function(){
