@@ -9,7 +9,6 @@
                         titleText: title,
                         filterArray: [
                             LABKEY.Filter.create('calculated_status', 'Alive', LABKEY.Filter.Types.EQUAL),
-                            LABKEY.Filter.create('gender', 'Unknown', LABKEY.Filter.Types.NEQ),
                             LABKEY.Filter.create('spf', spf, LABKEY.Filter.Types.EQUALS)],
                         rowField: EHR.panel.PopulationPanel.FIELDS.species,
                         colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
@@ -22,8 +21,7 @@
                     items: [{
                         xtype: 'cnprc-ehr-populationpanel',
                         filterArray: [
-                            LABKEY.Filter.create('calculated_status', 'Alive', LABKEY.Filter.Types.EQUAL),
-                            LABKEY.Filter.create('gender', 'Unknown', LABKEY.Filter.Types.NEQ)],
+                            LABKEY.Filter.create('calculated_status', 'Alive', LABKEY.Filter.Types.EQUAL)],
                         rowField: EHR.panel.PopulationPanel.FIELDS.species,
                         colFields: [EHR.panel.PopulationPanel.FIELDS.ageclass, EHR.panel.PopulationPanel.FIELDS.gender]
                     }],
