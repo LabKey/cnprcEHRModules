@@ -16,7 +16,7 @@ Ext4.define('CNPRC_EHR.form.field.ProjectField', {
     anyMatch: true,
     editable: true,
     forceSelection: true,
-    showInactive: false,
+    showInactive: true,
     matchFieldWidth: false,
 
     onlyIncludeProjectsWithAssignments: false,
@@ -55,7 +55,7 @@ Ext4.define('CNPRC_EHR.form.field.ProjectField', {
             schemaName: 'cnprc_ehr',
             queryName: 'project',
             columns: 'projectCode,title',
-            filterArray: this.showInactive ? null : [LABKEY.Filter.create('enddate', '-0d', LABKEY.Filter.Types.DATE_GREATER_THAN_OR_EQUAL)],
+            // filterArray: this.showInactive ? null : [LABKEY.Filter.create('enddate', '-0d', LABKEY.Filter.Types.DATE_GREATER_THAN_OR_EQUAL)],
             sort: 'title',
             autoLoad: true
         };
