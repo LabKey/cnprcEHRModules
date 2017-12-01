@@ -53,8 +53,8 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
 
         keys.add(FieldKey.fromString("Id"));
         keys.add(FieldKey.fromString("birth"));
-        keys.add(FieldKey.fromString("EarliestArrival"));
-        keys.add(FieldKey.fromString("arrivalOrBirthDate"));
+        keys.add(FieldKey.fromString("earliestArrivalOrBirthDate"));
+        keys.add(FieldKey.fromString("latestArrivalOrBirthDate"));
         keys.add(FieldKey.fromString("lastHousingDate"));
         keys.add(FieldKey.fromString("acquisitionAge"));
         keys.add(FieldKey.fromString("timeAtCnprc"));
@@ -67,16 +67,13 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
     {
         super.processRow(rs, cols, map);
 
-        // NOTE: these are columns with java-generated display values.
-        // it's a slight hack, but in order to keep consistency, we poke those calculated values in here, so that
-        // the Summary page will have the formatted values
-        // for the other parallel implementation, please see CNPRC_EHRCustomizer.customizeAgeDatesQuery()
+        // similar hack to CNPRCDemographicsProvider, but we're not using the columns anywhere else, so this is the only implementation of these age calculations
         FieldKey fk = FieldKey.fromString("acquisitionAge");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("earliestArrival")));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("earliestArrivalOrBirthDate"), false));
         fk = FieldKey.fromString("timeAtCnprc");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("arrivalOrBirthDate"), (Date)map.get("lastHousingDate")));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("latestArrivalOrBirthDate"), (Date)map.get("lastHousingDate"), false));
         fk = FieldKey.fromString("ageAtDeparture");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("lastHousingDate")));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("lastHousingDate"), true));
     }
 
     @Override

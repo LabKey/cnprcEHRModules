@@ -20,7 +20,7 @@ SELECT
   MAX(payor.date) AS lastPayorDate,
   CAST(group_concat(payor.payor_id) AS VARCHAR) AS lastPayorId,
   MAX(demo.calculated_status) AS animalStatus  -- should only ever be one, MAX() is to make SQL happy
-FROM study.payor_Assignments payor
+FROM study.payor_assignments payor
   JOIN study.demographics demo
     ON demo.Id = payor.Id
 WHERE payor.enddate is NULL

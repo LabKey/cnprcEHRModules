@@ -71,10 +71,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         {
             customizeSnomedLookupTable(ti);
         }
-        else if (matches(ti, "study", "ageDates"))
-        {
-            customizeAgeDatesQuery(ti);
-        }
     }
 
     private void customizeSnomedLookupTable(AbstractTableInfo ti)
@@ -502,60 +498,6 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
                     "&query.room~eq=${roomAtTime}" +
                     "&query.cage~eq=${cageAtTime}" +
                     "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
-        }
-    }
-
-    private void customizeAgeDatesQuery(AbstractTableInfo ti)
-    {
-        String acquisitionAgeColumnName = "acquisitionAge";
-        if (ti.getColumn(acquisitionAgeColumnName) == null)
-        {
-            WrappedColumn wrap = new WrappedColumn(ti.getColumn("birth"), acquisitionAgeColumnName);
-            wrap.setDisplayColumnFactory(new DisplayColumnFactory()
-            {
-                @Override
-                public DisplayColumn createRenderer(ColumnInfo colInfo)
-                {
-                    return new DurationColumn(colInfo, "birth", "arrival", "yy:MM:dd");
-                }
-            });
-            wrap.setLabel("Acquisition Age");
-
-            ti.addColumn(wrap);
-        }
-
-        String timeAtCnprcColumnName = "timeAtCnprc";
-        if (ti.getColumn(timeAtCnprcColumnName) == null)
-        {
-            WrappedColumn wrap = new WrappedColumn(ti.getColumn("arrivalOrBirthDate"), timeAtCnprcColumnName);
-            wrap.setDisplayColumnFactory(new DisplayColumnFactory()
-            {
-                @Override
-                public DisplayColumn createRenderer(ColumnInfo colInfo)
-                {
-                    return new DurationColumn(colInfo, "arrivalOrBirthDate", "lastHousingDate", "yy:MM:dd");
-                }
-            });
-            wrap.setLabel("Time at CNPRC");
-
-            ti.addColumn(wrap);
-        }
-
-        String ageAtDepartureColumnName = "ageAtDeparture";
-        if (ti.getColumn(ageAtDepartureColumnName) == null)
-        {
-            WrappedColumn wrap = new WrappedColumn(ti.getColumn("birth"), ageAtDepartureColumnName);
-            wrap.setDisplayColumnFactory(new DisplayColumnFactory()
-            {
-                @Override
-                public DisplayColumn createRenderer(ColumnInfo colInfo)
-                {
-                    return new DurationColumn(colInfo, "birth", "lastHousingDate", "yy:MM:dd");
-                }
-            });
-            wrap.setLabel("Age at Departure");
-
-            ti.addColumn(wrap);
         }
     }
 

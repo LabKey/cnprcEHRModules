@@ -63,9 +63,6 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                         fieldLabel: 'Acquisition',
                         name: 'acquisition'
                     }, {
-                        fieldLabel: 'Previous ID',
-                        name: 'previousId'
-                    }, {
                         fieldLabel: 'Departure',
                         name: 'departure'
                     }, {
@@ -129,8 +126,10 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
             },
             items: [{
                 html: '<h4>Last Project(s)</h4>'
-            }, {
-                html: '... TODO ...'
+            },{
+                xtype: 'displayfield',
+                fieldLabel: '',
+                name: 'lastProjects'
             }]
         };
     },
@@ -143,8 +142,10 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
             },
             items: [{
                 html: '<h4>Census Flag(s)</h4>'
-            }, {
-                html: '... TODO ...'
+            },{
+                xtype: 'displayfield',
+                fieldLabel: '',
+                name: 'censusFlags'
             }]
         };
     },
@@ -157,8 +158,10 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
             },
             items: [{
                 html: '<h4>Pathology Report(s)</h4>'
-            }, {
-                html: '... TODO ...'
+            },{
+                xtype: 'displayfield',
+                fieldLabel: '',
+                name: 'pathologyReports'
             }]
         };
     },
@@ -182,6 +185,9 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         this.appendBreedingGroup(toSet, results);
         this.appendPerDiem(toSet, results);
         this.appendHousingIntervals(toSet, results);
+        this.appendLastProjects(toSet, results.getLastProjects());
+        this.appendCensusFlags(toSet, results.getCensusFlags());
+        this.appendPathologyReports(toSet, results.getPathologyReports());
     },
 
     appendDemographicsResults: function(toSet, row, id){
@@ -196,28 +202,23 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         }
 
         toSet['gender'] = row.getGender();
-        toSet['birth'] = row.getBirth();
         toSet['dam'] = row.getDam();
         toSet['sire'] = row.getSire();
-
-        //var status = row.getCalculatedStatus() || 'Unknown';
-        //toSet['calculated_status'] = '<span ' + (status != 'Alive' ? 'style="background-color:yellow"' : '') + '>' + status + '</span>';
     },
 
     appendCnprcDemographicsResults: function(toSet, row){
         toSet['generation'] = row.getGenerationNumber();
-        toSet['harvestDate'] = row.getHarvestDate();
     },
 
     appendBirthResults: function(toSet, birthResults, birth){
         if (birthResults && birthResults.length){
             var row = birthResults[0];
             var date = LDK.ConvertUtils.parseDate(row.date || birth);
-            var text = date ?  date.format(LABKEY.extDefaultDateFormat) : null;
+            var text = date ?  date.format('m/d/Y') : null;
             if (text){
                 var location = row.room;
                 if (location)
-                    text = text + ' (' + location + ')';
+                    text = text + '&nbsp&nbsp(' + location + ')';
 
                 if (text)
                     toSet['birth'] = text;
@@ -226,7 +227,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         else if (birth){
             var date = LDK.ConvertUtils.parseDate(birth);
             if (date){
-                toSet['birth'] = date.format(LABKEY.extDefaultDateFormat);
+                toSet['birth'] = date.format('m/d/Y');
             }
         }
         else {
@@ -242,24 +243,24 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         if (results.getDam()) {
             var damId;
             if (results.getDamSpecies())
-                damId = results.getDamSpecies() + ' ' + results.getDam();
+                damId = results.getDamSpecies() + '&nbsp&nbsp' + results.getDam();
             else
                 damId = results.getDam();
             var damVerified = results.getFemaleGeneticsVerify();
             if (damId && damVerified)
-                damId += ' v';
+                damId += '&nbsp&nbsp v';
             toSet['damId'] = damId;
         }
 
         if (results.getSire()) {
             var sireId;
             if (results.getSireSpecies())
-                sireId = results.getSireSpecies() + ' ' + results.getSire();
+                sireId = results.getSireSpecies() + '&nbsp&nbsp' + results.getSire();
             else
                 sireId = results.getSire();
             var sireVerified = results.getMaleGeneticsVerify();
             if (sireId && sireVerified)
-                sireId += ' v';
+                sireId += '&nbsp&nbsp v';
             toSet['sireId'] = sireId;
         }
     },
@@ -268,14 +269,12 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         if (arrivalResults && arrivalResults.length){
             var row = arrivalResults[0];
             var date = LDK.ConvertUtils.parseDate(row.date);
-            var text = date ?  date.format(LABKEY.extDefaultDateFormat) : null;
+            var text = date ?  date.format('m/d/Y') : null;
             if (text){
                 var acquisitionType = row.acquisitionType;
                 if ((acquisitionType != null) && (typeof acquisitionType != undefined)) {
-                    if (acquisitionType == 0)
-                        text += ' BORN HERE';
                     if (acquisitionType == 1)
-                        text += ' ACQUIRED';
+                        text += '&nbsp&nbspACQUIRED';
                 }
 
                 toSet['acquisition'] = text;
@@ -285,26 +284,29 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
 
     appendDeparture: function(toSet, results){
         if (results.getMostRecentDeparture()) {
-            toSet['departure'] = results.getMostRecentDeparture() + ' ' + results.getMostRecentDepartureDestination();
+            var date = LDK.ConvertUtils.parseDate(results.getMostRecentDeparture());
+            toSet['departure'] = date.format('m/d/Y') + '&nbsp&nbsp' + results.getMostRecentDepartureDestination();
         }
     },
 
     appendLocation: function(toSet, results){
         var location;
-        if (results.getCurrentLocationDate())
-            location = results.getCurrentLocationDate();
+        if (results.getCurrentLocationDate()) {
+            var date = LDK.ConvertUtils.parseDate(results.getCurrentLocationDate());
+            location = date.format('m/d/Y');
+        }
 
         var status = results.getCalculatedStatus();
         if (status && ((status == 'SHIPPED') || (status == 'DECEASED'))){
             if (location)
-                location += ' ' + status;
+                location += '&nbsp&nbsp' + status;
             else
                 location = status;
         }
         else {
             if (results.getCurrentLocation()) {
                 if (location)
-                    location += ' ' + results.getCurrentLocation();
+                    location += '&nbsp&nbsp' + results.getCurrentLocation();
                 else
                     location = results.getCurrentLocation();
             }
@@ -316,26 +318,39 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
 
     appendWeight: function(toSet, results){
         if (results.getMostRecentWeightDate()) {
-            toSet['weight'] = results.getMostRecentWeightDate() + ' ' + results.getMostRecentWeight() + ' kg';
+            var date = LDK.ConvertUtils.parseDate(results.getMostRecentWeightDate());
+            var weight = date.format('m/d/Y');
+            weight += '&nbsp&nbsp' + Number(Math.round(results.getMostRecentWeight()+'e2')+'e-2').toFixed(2) + ' kg';  // always show two decimal places
+            toSet['weight'] = weight;
         }
     },
 
     appendBCS: function(toSet, results){
         if (results.getMostRecentBCS()) {
-            toSet['bodyCondition'] = results.getMostRecentBCSDate() + ' ' + results.getMostRecentBCS();
+            var date = LDK.ConvertUtils.parseDate(results.getMostRecentBCSDate());
+            toSet['bodyCondition'] = date.format('m/d/Y') + '&nbsp&nbsp' + results.getMostRecentBCS();
         }
     },
 
     appendTBResults: function(toSet, results){
-        toSet['tbTest'] = results.getLastTBDate();
+        if (results.getLastTBDate()) {
+            var date = LDK.ConvertUtils.parseDate(results.getLastTBDate());
+            toSet['tbTest'] = date.format('m/d/Y');
+        }
     },
 
     appendSerumBank: function(toSet, results){
-        toSet['serumBank'] = results.getMostRecentSerumDate();
+        if (results.getMostRecentSerumDate()) {
+            var date = LDK.ConvertUtils.parseDate(results.getMostRecentSerumDate());
+            toSet['serumBank'] = date.format('m/d/Y');
+        }
     },
 
     appendHarvestDate: function(toSet, results){
-        toSet['harvest'] = results.getHarvestDate();
+        if (results.getHarvestDate()) {
+            var date = LDK.ConvertUtils.parseDate(results.getHarvestDate());
+            toSet['harvest'] = date.format('m/d/Y');
+        }
     },
 
     appendSPFStatus: function(toSet, results){
@@ -352,31 +367,62 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
 
     appendPerDiem: function(toSet, results){
         if (results.getLastPayorDate()) {
-            toSet['perdiem'] = results.getLastPayorDate() + ' ' + results.getLastPayorId();
+            var date = LDK.ConvertUtils.parseDate(results.getLastPayorDate());
+            toSet['perdiem'] = date.format('m/d/Y') + '&nbsp&nbsp' + results.getLastPayorId();
         }
     },
 
     appendHousingIntervals: function(toSet, results){
-        // TODO: these intervals don't always seem correct, verify them
-
         toSet['acquisitionAge'] = results.getAcquisitionAge();
         toSet['timeAtCnprc'] = results.getTimeAtCnprc();
         toSet['ageAtDeparture'] = results.getAgeAtDeparture();
     },
 
-    appendFlags: function(toSet, results){
+    appendLastProjects: function(toSet, rows){
         var values = [];
-        if (results){
-            Ext4.each(results, function(row){
-                if(row.enddate == null) {
-                    var val = row['flag/value'];
-                    var text = val;
+        if (rows){
+            Ext4.each(rows, function(row){
+                var val = '';
+                if (row['projectDate']) {
+                    var date = LDK.ConvertUtils.parseDate(row['projectDate']);
+                    val += date.format('m/d/Y');
+                }
+                if (row['projectType'])
+                    val += '&nbsp&nbsp' + row['projectType'];
+                if (row['projectId'])
+                    val += '&nbsp&nbsp<a href="cnprc_ehr-projectDetails.view?project=' + row['projectId'] + '">' + row['projectId'] + "</a>";
+                if (row['pi'])
+                    val += '&nbsp&nbsp' + row['pi'];
+                if (row['projectName'])
+                    val += '&nbsp&nbsp' + row['projectName'];
 
-                    if (text)
-                        text = '<span style="background-color:#fffd76">' + text + '</span>';
+                var text = val;
 
-                    if (text)
-                        values.push(text);
+                if (text !== '') {
+                    text = '<span>' + text + '</span>';
+                    values.push(text);
+                }
+            }, this);
+        }
+
+        toSet['lastProjects'] = values.length ? values.join('<br>') + '</div>' : null;
+    },
+
+    appendCensusFlags: function(toSet, rows){
+        var values = [];
+        if (rows){
+            Ext4.each(rows, function(row){
+                var item = '';
+                if (row['Value'])
+                    item += '<td nowrap><a href="study-dataset.view?datasetId=5019&Dataset.enddate~isblank&Dataset.flag~eq=' + row['Value'] + '">' + row['Value'] + "</a></td>";
+                if (row['Title'])
+                    item += '<td nowrap style="padding-left: 10px;">' + row['Title'] + '</td>';
+
+                var text = item;
+
+                if (text !== '') {
+                    text = '<tr>' + text + '</tr>';
+                    values.push(text);
                 }
             }, this);
 
@@ -385,6 +431,33 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
             }
         }
 
-        toSet['flags'] = values.length ? '<a onclick="EHR.Utils.showFlagPopup(\'' + this.subjectId + '\', this);">' + values.join('<br>') + '</div>' : null;
+        toSet['censusFlags'] = values.length ? '<table>' + values.join('') + '</table>' : null;
+    },
+
+    appendPathologyReports: function(toSet, rows){
+        var values = '';
+        var headerColStyle = 'nowrap style="padding-left: 10px; font-weight: bold"';
+        var colStyle = 'nowrap style="padding-left: 10px;"';
+        values += '<table><tr><td nowrap style="font-weight: bold">Report ID</td><td ' + headerColStyle + '>Date Performed</td><td ' + headerColStyle + '>Project</td><td ' + headerColStyle + '>Investigator</td><td ' + headerColStyle + '>Date Completed</td></strong></tr>';
+        if (rows){
+            Ext4.each(rows, function(row){
+                var item = '';
+                item += '<tr>';
+                item += '<td nowrap>' + row['reportId'] + '</td>';  // TODO: make this into a link like projectId above when Pathology Report Detailed View is implemented
+                var datePerformed = LDK.ConvertUtils.parseDate(row['datePerformed']);
+                item += '<td ' + colStyle +'>' + datePerformed.format('m/d/Y') + '</td>';
+                item += '<td ' + colStyle +'><a href="cnprc_ehr-projectDetails.view?project=' + row['project'] + '">' + row['project'] + '</a></td>';
+                item += '<td ' + colStyle +'>' + row['investigator'] + '</td>';
+                var dateCompleted = LDK.ConvertUtils.parseDate(row['dateCompleted']);
+                item += '<td ' + colStyle +'>' + dateCompleted.format('m/d/Y') + '</td>';
+                item += '</tr>';
+
+                values += item;
+            }, this);
+
+            values += '</table>';
+        }
+
+        toSet['pathologyReports'] = values;
     }
 });

@@ -10,27 +10,29 @@ import java.util.Set;
 /**
  * Created by Binal on 7/19/2017.
  */
-public class ActiveFlagsDemographicsProvider extends AbstractListDemographicsProvider
+public class LastProjectsDemographicsProvider extends AbstractListDemographicsProvider
 {
-    public ActiveFlagsDemographicsProvider(Module module)
+    public LastProjectsDemographicsProvider(Module module)
     {
-        super(module, "study", "activeFlagsSeparated", "activeFlagsSeparated");
+        super(module, "study", "lastAssignments", "lastProjects");
     }
 
     @Override
     public String getName()
     {
-        return "Most Recent Census Flags";
+        return "Last Project(s)";
     }
 
     @Override
     protected Set<FieldKey> getFieldKeys()
     {
         Set<FieldKey> keys = new HashSet<FieldKey>();
-        keys.add(FieldKey.fromString("lsid"));
         keys.add(FieldKey.fromString("Id"));
-        keys.add(FieldKey.fromString("Value"));
-        keys.add(FieldKey.fromString("Title"));
+        keys.add(FieldKey.fromString("projectDate"));
+        keys.add(FieldKey.fromString("projectType"));
+        keys.add(FieldKey.fromString("projectId"));
+        keys.add(FieldKey.fromString("pi"));
+        keys.add(FieldKey.fromString("projectName"));
         keys.add(FieldKey.fromString("publicdata"));
 
         return keys;
@@ -39,6 +41,6 @@ public class ActiveFlagsDemographicsProvider extends AbstractListDemographicsPro
     @Override
     public boolean requiresRecalc(String schema, String query)
     {
-        return ("study".equalsIgnoreCase(schema) && "flags".equalsIgnoreCase(query));
+        return ("study".equalsIgnoreCase(schema) && "assignment".equalsIgnoreCase(query));
     }
 }

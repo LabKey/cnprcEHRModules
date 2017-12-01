@@ -6,7 +6,7 @@
 SELECT
 demo.id,
 demo.birth,
-demo.id.MostRecentArrival.EarliestArrival,
-COALESCE(demo.id.MostRecentArrival.MostRecentArrival, demo.birth) AS arrivalOrBirthDate,
+COALESCE(demo.id.MostRecentArrival.EarliestArrival, demo.birth) AS earliestArrivalOrBirthDate,
+COALESCE(demo.id.MostRecentArrival.MostRecentArrival, demo.birth) AS latestArrivalOrBirthDate,
 demo.id.lastHousing.endDate AS lastHousingDate
 FROM study.demographics demo

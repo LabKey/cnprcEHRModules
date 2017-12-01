@@ -54,7 +54,9 @@ import org.labkey.cnprc_ehr.demographics.ColonyDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ConceptionsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.HousingIntervalsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.LastPayorDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.LastProjectsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ParentsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.PathologyReportsProvider;
 import org.labkey.cnprc_ehr.demographics.SerumDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.TBDemographicsProvider;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
@@ -164,7 +166,9 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new ConceptionsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new HousingIntervalsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new LastPayorDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new LastProjectsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ParentsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new PathologyReportsProvider(this));
         ehrService.registerDemographicsProvider(new SerumDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new TBDemographicsProvider(this));
 

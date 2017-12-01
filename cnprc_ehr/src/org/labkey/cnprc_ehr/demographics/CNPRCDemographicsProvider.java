@@ -81,7 +81,7 @@ public class CNPRCDemographicsProvider extends AbstractDemographicsProvider
         // NOTE: this is a column with a java-generated display value.
         // it's a slight hack, but in order to keep consistency, we poke that calculated value in here
         FieldKey fk = FieldKey.fromString("Id/age/yearAndDays");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("death")));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("death"), false));
         map.put("demographicsObjectId", map.get("objectid"));
     }
 }

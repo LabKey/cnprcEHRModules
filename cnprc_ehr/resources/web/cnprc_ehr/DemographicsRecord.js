@@ -266,7 +266,19 @@ EHR.DemographicsRecord = function(data){
         },
 
         getAgeAtDeparture: function() {
-            return data['ageAtDeparture']
+            return data['ageAtDeparture'];
+        },
+
+        getLastProjects: function() {
+            return data['lastProjects'];
+        },
+
+        getCensusFlags: function() {
+            return data['activeFlagsSeparated'];
+        },
+
+        getPathologyReports: function() {
+            return data['pathologyReports'];
         }
     }
 }
