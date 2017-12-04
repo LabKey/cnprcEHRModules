@@ -10,7 +10,7 @@
                 <property name="columnTitle" value="Animal Id"/>
             </properties>
         </column>
-        <column name="species"/>
+        <column name="species/code"/>
         <column name="Id/age/yearsAndMonthsAndDays">
             <properties>
                 <property name="columnTitle" value="Age (yy:mm:dd)"/>
