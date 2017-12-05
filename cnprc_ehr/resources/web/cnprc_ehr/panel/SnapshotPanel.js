@@ -243,9 +243,10 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         if (results.getDam()) {
             var damId;
             if (results.getDamSpecies())
-                damId = results.getDamSpecies() + '&nbsp&nbsp' + results.getDam();
+                damId = results.getDamSpecies() + '&nbsp&nbsp';
             else
-                damId = results.getDam();
+                damId = '';
+            damId += '<a href="ehr-participantView.view?participantId=' + results.getDam() + '">' + results.getDam() + '</a>';
             var damVerified = results.getFemaleGeneticsVerify();
             if (damId && damVerified)
                 damId += '&nbsp&nbsp v';
@@ -255,9 +256,11 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         if (results.getSire()) {
             var sireId;
             if (results.getSireSpecies())
-                sireId = results.getSireSpecies() + '&nbsp&nbsp' + results.getSire();
+                sireId = results.getSireSpecies() + '&nbsp&nbsp';
             else
-                sireId = results.getSire();
+                sireId = '';
+
+            sireId += '<a href="ehr-participantView.view?participantId=' + results.getSire() + '">' + results.getSire() + '</a>';
             var sireVerified = results.getMaleGeneticsVerify();
             if (sireId && sireVerified)
                 sireId += '&nbsp&nbsp v';
