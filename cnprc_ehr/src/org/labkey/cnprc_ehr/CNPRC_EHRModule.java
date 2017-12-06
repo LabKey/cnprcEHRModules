@@ -135,6 +135,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerHistoryDataSource(new DefaultTreatmentEndDataSource(this));
 
         ehrService.registerTableCustomizer(this, CNPRC_EHRCustomizer.class);
+        ehrService.registerActionOverride("animalHistory", this, "views/animalHistory.html");
         ehrService.registerActionOverride("animalSearch", this, "views/animalSearch.html");
         ehrService.registerActionOverride("projectDetails", this, "views/projectDetails.html");
         ehrService.registerActionOverride("housingQueries", this, "views/enclosureSearch.html");
