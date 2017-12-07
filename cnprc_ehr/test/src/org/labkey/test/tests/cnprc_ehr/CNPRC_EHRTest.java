@@ -211,8 +211,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Inbreeding Coefficients",
                 "Kinship",
                 "Parentage",
-                "Pedigree",
-                "Pedigree Plot"));
+                "Pedigree"));
         put("Lab Results", Arrays.asList(
                 "Antibiotic Sensitivity",
                 "Biochemistry",
