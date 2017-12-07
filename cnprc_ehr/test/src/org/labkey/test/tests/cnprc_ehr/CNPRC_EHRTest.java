@@ -988,12 +988,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         popLocation();
 
         //SNOMED
-        waitAndClickAndWait(LabModuleHelper.getNavPanelItem("SNOMED:", "Browse All"));
-        waitForElement(Locator.linkContainingText("TEST3804589"));
-        pushLocation();
-        clickAndWait(Locator.linkContainingText("XY000006"));
-        assertTextPresent("KIDNEY");
-        popLocation();
+        /*TODO: Per support ticket 31631. Removed image link from SNOMED but may add it back in Milestone 5 so just
+            commenting this out for now.
+         */
+//        waitAndClickAndWait(LabModuleHelper.getNavPanelItem("SNOMED:", "Browse All"));
+//        waitForElement(Locator.linkContainingText("TEST3804589"));
+//        pushLocation();
+//        clickAndWait(Locator.linkContainingText("XY000006"));
+//        assertTextPresent("KIDNEY");
+//        popLocation();
     }
 
     private void storeImageData() throws Exception
