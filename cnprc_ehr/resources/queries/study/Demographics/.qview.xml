@@ -5,9 +5,9 @@
                 <property name="columnTitle" value="Species"/>
             </properties>
         </column>
-        <column name="Id/DemographicsActivePairing/pairedSymbol">
+        <column name="Id/DemographicsActivePairingCode/observation">
             <properties>
-                <property name="columnTitle" value="Paired"/>
+                <property name="columnTitle" value="Pair Code"/>
             </properties>
         </column>
         <column name="Id"/>

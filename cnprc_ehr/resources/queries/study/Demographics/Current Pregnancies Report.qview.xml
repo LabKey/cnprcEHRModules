@@ -1,7 +1,11 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
         <column name="Id/DemographicsHolds/holdFlags"/>
-        <column name="Id/DemographicsActivePairing/PairedSymbol"/>
+        <column name="Id/DemographicsActivePairingCode/observation">
+            <properties>
+                <property name="columnTitle" value="Pair Code"/>
+            </properties>
+        </column>
         <column name="Id/curLocation/Location"/>
         <column name="Id/curLocation/cageSize"/>
         <column name="Id/curLocation/rateClass"/>

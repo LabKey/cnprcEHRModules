@@ -197,6 +197,14 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
             ds.addColumn(col);
         }
 
+        if (ds.getColumn("DemographicsActivePairingCode") == null)
+        {
+            ColumnInfo col = getWrappedCol(us, ds, "DemographicsActivePairingCode", "DemographicsActivePairingCode", "Id", "Id");
+            col.setLabel("Active Pairing Code");
+            col.setDescription("Returns the participant's active Pairing Code");
+            ds.addColumn(col);
+        }
+
         if (ds.getColumn("DemographicsActivePayor") == null)
         {
             ColumnInfo col = getWrappedCol(us, ds, "DemographicsActivePayor", "DemographicsActivePayor", "Id", "Id");
