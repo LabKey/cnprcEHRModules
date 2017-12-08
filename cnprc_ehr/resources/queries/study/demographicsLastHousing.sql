@@ -13,6 +13,7 @@ SELECT
   max(d2.room.area)                               AS area,
   max(d2.room)                                    AS room,
   max(d2.cage)                                    AS cage,
+  max(h.maxDate)                                  AS date,
   max(h.enddate)                                  AS enddate
 FROM study.housing d2
   JOIN (SELECT

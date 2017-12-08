@@ -55,7 +55,8 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
         keys.add(FieldKey.fromString("birth"));
         keys.add(FieldKey.fromString("earliestArrivalOrBirthDate"));
         keys.add(FieldKey.fromString("latestArrivalOrBirthDate"));
-        keys.add(FieldKey.fromString("lastHousingDate"));
+        keys.add(FieldKey.fromString("departureOrLastHousingDate"));
+        keys.add(FieldKey.fromString("timeAtCnprcEndDate"));
         keys.add(FieldKey.fromString("acquisitionAge"));
         keys.add(FieldKey.fromString("timeAtCnprc"));
         keys.add(FieldKey.fromString("ageAtDeparture"));
@@ -69,11 +70,11 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
 
         // similar hack to CNPRCDemographicsProvider, but we're not using the columns anywhere else, so this is the only implementation of these age calculations
         FieldKey fk = FieldKey.fromString("acquisitionAge");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("earliestArrivalOrBirthDate"), false));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("earliestArrivalOrBirthDate"), true));
         fk = FieldKey.fromString("timeAtCnprc");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("latestArrivalOrBirthDate"), (Date)map.get("lastHousingDate"), false));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("latestArrivalOrBirthDate"), (Date)map.get("timeAtCnprcEndDate"), true));
         fk = FieldKey.fromString("ageAtDeparture");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("lastHousingDate"), true));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("departureOrLastHousingDate"), true));
     }
 
     @Override

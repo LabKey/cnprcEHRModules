@@ -221,6 +221,10 @@ EHR.DemographicsRecord = function(data){
             return data['MostRecentDepartureDestination'];
         },
 
+        getLocationRows: function(){  // should only ever be one row, though
+            return data['lastHousing'];
+        },
+
         getMostRecentBCS: function(){
             return data['BodyConditionScore'];
         },

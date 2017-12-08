@@ -63,6 +63,12 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                         fieldLabel: 'Acquisition',
                         name: 'acquisition'
                     }, {
+                        fieldLabel: 'Previous ID',
+                        name: 'previousId'
+                    }, {
+                        fieldLabel: 'Death',
+                        name: 'death'
+                    }, {
                         fieldLabel: 'Departure',
                         name: 'departure'
                     }, {
@@ -72,7 +78,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                         fieldLabel: 'Time at CNPRC',
                         name: 'timeAtCnprc'
                     },{
-                        fieldLabel: 'Age at Departure',
+                        fieldLabel: 'Age at Departure/Death',
                         name: 'ageAtDeparture'
                     }]
                 }, {
@@ -172,7 +178,8 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         this.appendBirthResults(toSet, results.getBirthInfo(), results.getBirth());
         this.appendBirthConNum(toSet, results);
         this.appendParents(toSet, results);
-        this.appendAcquisition(toSet, results.getArrivalInfo());
+        this.appendArrivalResults(toSet, results.getArrivalInfo());
+        this.appendDeath(toSet, results.getDeathInfo());
         this.appendDeparture(toSet, results);
         this.appendLocation(toSet, results);
         this.appendWeight(toSet, results);
@@ -243,45 +250,82 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         if (results.getDam()) {
             var damId;
             if (results.getDamSpecies())
-                damId = results.getDamSpecies() + '&nbsp&nbsp';
+                damId = results.getDamSpecies() + '&nbsp';
             else
                 damId = '';
             damId += '<a href="ehr-participantView.view?participantId=' + results.getDam() + '">' + results.getDam() + '</a>';
             var damVerified = results.getFemaleGeneticsVerify();
             if (damId && damVerified)
-                damId += '&nbsp&nbsp v';
+                damId += '&nbsp v';
             toSet['damId'] = damId;
         }
 
         if (results.getSire()) {
             var sireId;
             if (results.getSireSpecies())
-                sireId = results.getSireSpecies() + '&nbsp&nbsp';
+                sireId = results.getSireSpecies() + '&nbsp';
             else
                 sireId = '';
 
             sireId += '<a href="ehr-participantView.view?participantId=' + results.getSire() + '">' + results.getSire() + '</a>';
             var sireVerified = results.getMaleGeneticsVerify();
             if (sireId && sireVerified)
-                sireId += '&nbsp&nbsp v';
+                sireId += '&nbsp v';
             toSet['sireId'] = sireId;
         }
     },
 
-    appendAcquisition: function(toSet, arrivalResults){
+    appendArrivalResults: function(toSet, arrivalResults){
         if (arrivalResults && arrivalResults.length){
+            var text = '';
             var row = arrivalResults[0];
-            var date = LDK.ConvertUtils.parseDate(row.date);
-            var text = date ?  date.format('m/d/Y') : null;
-            if (text){
-                var acquisitionType = row.acquisitionType;
-                if ((acquisitionType != null) && (typeof acquisitionType != undefined)) {
-                    if (acquisitionType == 1)
-                        text += '&nbsp&nbspACQUIRED';
-                }
-
-                toSet['acquisition'] = text;
+            var date = row.date;
+            if (date) {
+                date = LDK.ConvertUtils.parseDate(row.date);
+                text = date ? date.format('m/d/Y') : null;
             }
+            var source = row.source;
+            if (source) {
+                if (text !== '')
+                    text += "&nbsp" + source;
+                else
+                    text = source;
+            }
+            if (text !== '')
+                toSet['acquisition'] = text;
+
+            var previousId = row.arrivalId;
+            if (previousId)
+                toSet['previousId'] = previousId;
+        }
+    },
+
+    appendDeath: function(toSet, deathResults){
+        if (deathResults && deathResults.length){
+            var text = '';
+            var row = deathResults[0];
+            var date = row.date;
+            if (date) {
+                date = LDK.ConvertUtils.parseDate(row.date);
+                text = date ? date.format('m/d/Y') : null;
+            }
+            var manner = row.manner;
+            if (manner) {
+                if (text !== '')
+                    text += "&nbsp&nbsp" + manner;
+                else
+                    text = manner;
+            }
+            var cause = row.cause;
+            if (cause) {
+                if (text !== '')
+                    text += "&nbsp&nbsp" + cause;
+                else
+                    text = cause;
+            }
+
+            if (text !== '')
+                toSet['death'] = text;
         }
     },
 
@@ -294,26 +338,37 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
 
     appendLocation: function(toSet, results){
         var location;
-        if (results.getCurrentLocationDate()) {
-            var date = LDK.ConvertUtils.parseDate(results.getCurrentLocationDate());
-            location = date.format('m/d/Y');
-        }
 
         var status = results.getCalculatedStatus();
-        if (status && ((status == 'SHIPPED') || (status == 'DECEASED'))){
-            if (location)
-                location += '&nbsp&nbsp' + status;
-            else
-                location = status;
-        }
-        else {
-            if (results.getCurrentLocation()) {
-                if (location)
-                    location += '&nbsp&nbsp' + results.getCurrentLocation();
-                else
-                    location = results.getCurrentLocation();
+        if (status) {
+            if (status === 'Shipped')
+                location = 'SHIPPED';
+            else if (status === 'Dead') {
+                location = 'DEAD from'
             }
+        }
 
+        var lastLocationRows = results.getLocationRows();
+
+        if (lastLocationRows) {
+            var lastLocationRow = lastLocationRows[0];
+            if (lastLocationRow) {
+                if (lastLocationRow['date']) {
+                    var date = LDK.ConvertUtils.parseDate(lastLocationRow['date']);
+                    if (location)
+                        location = date.format('m/d/Y') + '&nbsp&nbsp' + location;
+                    else
+                        location = date.format('m/d/Y');
+                }
+                if (lastLocationRow['Location']) {
+                    if (status && status === 'Shipped')
+                        ; // do nothing
+                    else if (location)
+                        location += '&nbsp' + lastLocationRow['Location'];
+                    else
+                        location = lastLocationRow['Location'];
+                }
+            }
         }
         if (location)
             toSet['location'] = location;
@@ -445,17 +500,26 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         if (rows){
             Ext4.each(rows, function(row){
                 var item = '';
-                item += '<tr>';
-                item += '<td nowrap>' + row['reportId'] + '</td>';  // TODO: make this into a link like projectId above when Pathology Report Detailed View is implemented
-                var datePerformed = LDK.ConvertUtils.parseDate(row['datePerformed']);
-                item += '<td ' + colStyle +'>' + datePerformed.format('m/d/Y') + '</td>';
-                item += '<td ' + colStyle +'><a href="cnprc_ehr-projectDetails.view?project=' + row['project'] + '">' + row['project'] + '</a></td>';
-                item += '<td ' + colStyle +'>' + row['investigator'] + '</td>';
-                var dateCompleted = LDK.ConvertUtils.parseDate(row['dateCompleted']);
-                item += '<td ' + colStyle +'>' + dateCompleted.format('m/d/Y') + '</td>';
-                item += '</tr>';
 
-                values += item;
+                if (row['reportId'])
+                    item += '<td nowrap>' + row['reportId'] + '</td>';  // TODO: make this into a link like projectId above when Pathology Report Detailed View is implemented
+                if (row['datePerformed']) {
+                    var datePerformed = LDK.ConvertUtils.parseDate(row['datePerformed']);
+                    item += '<td ' + colStyle + '>' + datePerformed.format('m/d/Y') + '</td>';
+                }
+                if (row['project'])
+                    item += '<td ' + colStyle +'><a href="cnprc_ehr-projectDetails.view?project=' + row['project'] + '">' + row['project'] + '</a></td>';
+                if (row['investigator'])
+                    item += '<td ' + colStyle +'>' + row['investigator'] + '</td>';
+                if (row['dateCompleted']) {
+                    var dateCompleted = LDK.ConvertUtils.parseDate(row['dateCompleted']);
+                    item += '<td ' + colStyle + '>' + dateCompleted.format('m/d/Y') + '</td>';
+                }
+
+                if (item !== '') {
+                    item = '<tr>' + item + '</tr>';
+                    values += item;
+                }
             }, this);
 
             values += '</table>';
