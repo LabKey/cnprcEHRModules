@@ -12,6 +12,10 @@ Ext4.onReady(function(){
         success: function(results){
             results = results.housing || {};
 
+            var formatLocationSearchValue = function (value) {
+                return value.toUpperCase().replace(/\s+/g, '');
+            };
+
             var domSpec = [{
                 tag: 'div',
                 style: 'padding-bottom: 10px;',
@@ -62,7 +66,8 @@ Ext4.onReady(function(){
                     // will be generated on the fly in search panel, and also passed as query parameter into query
                     onDate: {searchOnly: true, caption: 'On Date', type: 'date',
                                 defaultValue: Ext4.Date.format(new Date(), 'Y-m-d H:i:s'),
-                                queryParameter: true, parameterName: 'onDate'}
+                                queryParameter: true, parameterName: 'onDate'},
+                    location: {formatter : formatLocationSearchValue}
                 }
             }).render('housingPanel_' + webpart.wrapperDivId);
         },

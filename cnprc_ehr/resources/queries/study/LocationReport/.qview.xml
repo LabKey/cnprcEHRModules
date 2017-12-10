@@ -6,9 +6,14 @@
                 <property name="columnTitle" value="Pairing"/>
             </properties>
         </column>
-        <column name="room">
+        <column name="location">
             <properties>
                 <property name="columnTitle" value="Location"/>
+            </properties>
+        </column>
+        <column name="room">
+            <properties>
+                <property name="columnTitle" value="Enclosure"/>
             </properties>
         </column>
         <column name="cage"/>

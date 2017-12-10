@@ -19,14 +19,15 @@
                     </column>
                     <column columnName="Id/demographicsActivePregnancy/conNum">
                         <columnTitle>Pregnancy</columnTitle>
-                        <!--<url>/query/executeQuery.view?schemaName=study&amp;
-                            query.queryName=DemographicsActivePregnancy&amp;
-                            query.id~eq=${Id}
-                        </url>-->
                     </column>
                     <column columnName="room">
-                        <isHidden>true</isHidden>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>rooms</fkTable>
+                            <fkColumnName>room</fkColumnName>
+                        </fk>
                     </column>
+                    <column columnName="location"/>
                     <column columnName="area"/>
                 </columns>
             </table>
