@@ -4,7 +4,11 @@
         <column name="conNum"/>
         <column name="femaleSpecies"/>
         <column name="offspringId"/>
-        <column name="offspringSex"/>
+        <column name="offspringSex/code">
+            <properties>
+                <property name="columnTitle" value="Sex"/>
+            </properties>
+        </column>
         <column name="conception"/>
         <column name="BRType"/>
         <column name="sire"/>
