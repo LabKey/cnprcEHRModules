@@ -22,5 +22,5 @@ union
 
 Select
 Id,
-Room ||'-'|| Cage as birthPlace
+Room ||''|| Cage as birthPlace
 from study.birth

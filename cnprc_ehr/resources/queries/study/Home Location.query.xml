@@ -2,15 +2,15 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="Home Location" tableDbType="NOT_IN_DB">
-                <tableTitle>Flags</tableTitle>
+                <tableTitle>Home Location</tableTitle>
                 <columns>
                     <column columnName="Id">
                         <isHidden>true</isHidden>
                     </column>
                     <column columnName="Location">
                         <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>cage</fkTable>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>cage_location_history</fkTable>
                             <fkColumnName>location</fkColumnName>
                         </fk>
                     </column>

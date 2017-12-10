@@ -16,7 +16,7 @@
 SELECT
   CASE WHEN c.cage IS NULL
     THEN c.room
-  ELSE (c.room || '-' || c.cage)
+  ELSE (c.room || '' || c.cage)
   END          AS location,
   c.room,
   c.cage,
@@ -31,6 +31,6 @@ FROM ehr_lookups.cage c
     ON (lc.cage_type != 'No Cage' AND c.room = lc.room AND c.cagePosition.row = lc.cagePosition.row AND
         (c.cagePosition.columnIdx - 1) = lc.cagePosition.columnIdx)
   JOIN cnprc_ehr.room_enclosure re ON re.room = c.room
-  JOIN cnprc_ehr.cage_location_history clh on clh.location = c.room || '-' || c.cage and clh.to_date is null
+  JOIN cnprc_ehr.cage_location_history clh on clh.location = c.room || '' || c.cage and clh.to_date is null
   WHERE (clh.file_status = 'AC' and re.file_status = 'AC')
 

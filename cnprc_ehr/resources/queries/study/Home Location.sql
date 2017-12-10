@@ -19,8 +19,8 @@ h1.room,
 h1.cage,
 CASE
   WHEN h1.cage is null then h1.room
-  ELSE (h1.room || '-' || h1.cage)
-END AS Location,
+  ELSE (h1.room || '' || h1.cage)
+END AS Location
 FROM study.housing h1
 WHERE h1.reloc_seq=(
    SELECT

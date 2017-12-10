@@ -9,7 +9,7 @@ SELECT
   CASE WHEN max(d2.cage) IS NULL
     THEN
       max(d2.room)
-  ELSE (max(d2.room) || '-' || MAX (d2.cage)) END AS Location,
+  ELSE (max(d2.room) || '' || MAX (d2.cage)) END AS Location,
   max(d2.room.area)                               AS area,
   max(d2.room)                                    AS room,
   max(d2.cage)                                    AS cage,
