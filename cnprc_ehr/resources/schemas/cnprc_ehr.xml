@@ -751,6 +751,8 @@
         <columns>
             <column columnName="rowid"/>
             <column columnName="location"/>
+            <column columnName="room"/>
+            <column columnName="cage"/>
             <column columnName="location_history_pk"/>
             <column columnName="cage_size"/>
             <column columnName="cage_size_number"/>

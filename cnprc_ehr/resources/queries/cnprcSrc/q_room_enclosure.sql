@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 SELECT
-ENCL_ENCLOSURE_ID AS room,
+TRIM(REPLACE(ENCL_ENCLOSURE_ID, ' ', ''))  AS room,
 ENCL_FILE_STATUS AS file_status,
 ENCL_INDOOR_OUTDOOR_FLAG AS indoorOutdoorFlag,
 ENCL_MANAGEMENT_TYPE AS management_type,

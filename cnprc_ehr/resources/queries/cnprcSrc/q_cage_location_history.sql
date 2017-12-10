@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 SELECT
-CASE WHEN LENGTH (TRIM(ZH_LOCATION_ID) )<8 THEN
-   TRIM(SUBSTRING(ZH_LOCATION_ID, 1, 7))
-ELSE
-  (TRIM(SUBSTRING(ZH_LOCATION_ID, 1, 7)) || '-' || TRIM(SUBSTRING(ZH_LOCATION_ID, 8, 2)))
-END AS  location,
+TRIM(REPLACE(ZH_LOCATION_ID, ' ', '')) AS location,
+TRIM(REPLACE(ZH_ENCLOSURE_ID, ' ', '')) AS room,
+TRIM(SUBSTRING(ZH_LOCATION_ID, 8, 2)) AS cage,
 ZH_PK AS location_history_pk,
 ZH_CAGE_SIZE AS cage_size,
 CASE

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 SELECT
-ENCL_ENCLOSURE_ID AS room,
+TRIM(REPLACE(ENCL_ENCLOSURE_ID, ' ', '')) AS room,
 ENCL_AREA_ID AS area,
 ENCL_CAGE_CAPACITY AS maxCages
 FROM cnprcSrc.ZENCLOSURE;
