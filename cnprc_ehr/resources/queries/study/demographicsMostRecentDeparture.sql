@@ -1,6 +1,6 @@
 SELECT depart1.Id,
        depart1.date AS MostRecentDeparture,
-       depart1.destination AS MostRecentDepartureDestination
+       depart1.destination.meaning AS MostRecentDepartureDestination
 FROM (SELECT depart2.Id,
              MAX(depart2.date) AS MostRecentDeparture
       FROM study.departure depart2
