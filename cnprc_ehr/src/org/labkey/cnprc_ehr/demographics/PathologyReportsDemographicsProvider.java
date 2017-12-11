@@ -10,9 +10,9 @@ import java.util.Set;
 /**
  * Created by Binal on 7/19/2017.
  */
-public class PathologyReportsProvider extends AbstractListDemographicsProvider
+public class PathologyReportsDemographicsProvider extends AbstractListDemographicsProvider
 {
-    public PathologyReportsProvider(Module module)
+    public PathologyReportsDemographicsProvider(Module module)
     {
         super(module, "study", "pathologyReports", "pathologyReports");
     }
