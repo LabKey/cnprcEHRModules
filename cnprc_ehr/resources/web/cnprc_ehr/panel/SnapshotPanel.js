@@ -473,15 +473,17 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                 var item = '';
                 if (row['Value'])
                     item += '<td nowrap><a href="study-dataset.view?datasetId=5019&Dataset.enddate~isblank&Dataset.flag~eq=' + row['Value'] + '">' + row['Value'] + "</a></td>";
+                else
+                    item += '<td></td>';
                 if (row['Title'])
                     item += '<td nowrap style="padding-left: 10px;">' + row['Title'] + '</td>';
+                else
+                    item += '<td></td>';
 
                 var text = item;
 
-                if (text !== '') {
-                    text = '<tr>' + text + '</tr>';
-                    values.push(text);
-                }
+                text = '<tr>' + text + '</tr>';
+                values.push(text);
             }, this);
 
             if (values.length) {
@@ -503,23 +505,31 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
 
                 if (row['reportId'])
                     item += '<td nowrap>' + row['reportId'] + '</td>';  // TODO: make this into a link like projectId above when Pathology Report Detailed View is implemented
+                else
+                    item += '<td></td>';
                 if (row['datePerformed']) {
                     var datePerformed = LDK.ConvertUtils.parseDate(row['datePerformed']);
                     item += '<td ' + colStyle + '>' + datePerformed.format('m/d/Y') + '</td>';
                 }
+                else
+                    item += '<td></td>';
                 if (row['project'])
                     item += '<td ' + colStyle +'><a href="cnprc_ehr-projectDetails.view?project=' + row['project'] + '">' + row['project'] + '</a></td>';
+                else
+                    item += '<td></td>';
                 if (row['investigator'])
                     item += '<td ' + colStyle +'>' + row['investigator'] + '</td>';
+                else
+                    item += '<td></td>';
                 if (row['dateCompleted']) {
                     var dateCompleted = LDK.ConvertUtils.parseDate(row['dateCompleted']);
                     item += '<td ' + colStyle + '>' + dateCompleted.format('m/d/Y') + '</td>';
                 }
+                else
+                    item += '<td></td>';
 
-                if (item !== '') {
-                    item = '<tr>' + item + '</tr>';
-                    values += item;
-                }
+                item = '<tr>' + item + '</tr>';
+                values += item;
             }, this);
 
             values += '</table>';
