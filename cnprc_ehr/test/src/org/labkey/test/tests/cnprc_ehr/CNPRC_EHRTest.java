@@ -1226,7 +1226,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
                 "Id/DemographicsHolds/holdFlags",
-                "Id/DemographicsActivePairing/PairedSymbol",
+                "Id/DemographicsActivePairingCode/observation",
                 "Id/curLocation/Location",
                 "Id/curLocation/cageSize",
                 "Id/curLocation/rateClass",
