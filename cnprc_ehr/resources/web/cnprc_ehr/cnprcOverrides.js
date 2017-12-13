@@ -1,4 +1,4 @@
-Ext4.namespace('SNPRC_EHR');
+Ext4.namespace('CNPRC_EHR');
 
 LDK.Utils.splitIds = function(subjectArray, unsorted)
 {
