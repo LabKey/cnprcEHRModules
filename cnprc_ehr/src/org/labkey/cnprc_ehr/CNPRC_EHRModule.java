@@ -118,6 +118,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/data/sources/CNPRCDefault.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/DemographicsRecord.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/SnapshotPanel.js"), this);
+        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcOverrides.js"), this);
 
         ehrService.registerClientDependency(ClientDependency.fromPath("ldk/grid/Panel.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("ehr/grid/Panel.js"), this);
