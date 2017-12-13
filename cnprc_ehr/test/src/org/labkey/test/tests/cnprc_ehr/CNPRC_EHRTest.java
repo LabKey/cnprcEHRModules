@@ -1039,7 +1039,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 //        validateLookupFromTable("orders", "Report contact 100", "Report contact comment 0");
 
         validateLookupFromTable("samples", "100", "Order comment 1");
-        validateLookupFromTable("samples", "TEST1020148", "Overview: test1020148");
+        validateLookupFromTable("samples", "TEST1020148", "Overview: TEST1020148");
 //TODO enable once PDL is signed off.
 //        validateLookupFromTable("samples", "Sample type 300", "Sample type comment 300");
 
