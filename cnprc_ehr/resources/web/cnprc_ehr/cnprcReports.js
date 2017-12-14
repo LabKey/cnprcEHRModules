@@ -76,6 +76,26 @@ EHR.reports.CNPRCSnapshot = function(panel, tab, showActionsBtn){
 
 };
 
+EHR.reports.renderWeightData = function(panel, tab, subject){
+    return {
+        xtype: 'ldk-webpartpanel',
+        title: 'Weights - ' + subject,
+        style: 'margin-bottom: 20px;',
+        border: false,
+        items: [{
+            xtype: 'cnprc_ehr-weightsummarypanel',
+            style: 'padding-bottom: 20px;',
+            subjectId: subject
+        },{
+            xtype: 'cnprc_ehr-weightgraphpanel',
+            itemId: 'tabArea',
+            showRawData: true,
+            border: false,
+            subjectId: subject
+        }]
+    }
+};
+
 EHR.reports.immunizations = function (panel, tab, viewName) {
     var filterArray = panel.getFilterArray(tab);
     var title = panel.getTitleSuffix();
@@ -216,11 +236,11 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
                 xtype: 'ldk-webpartpanel',
                 title: 'Weight Overview: ' + subj,
                 items: [{
-                    xtype: 'ehr-weightsummarypanel',
+                    xtype: 'cnprc_ehr-weightsummarypanel',
                     style: 'padding-bottom: 20px;',
                     subjectId: subj
                 },{
-                    xtype: 'ehr-weightgraphpanel',
+                    xtype: 'cnprc_ehr-weightgraphpanel',
                     itemId: 'tabArea',
                     showRawData: false,
                     border: false,
