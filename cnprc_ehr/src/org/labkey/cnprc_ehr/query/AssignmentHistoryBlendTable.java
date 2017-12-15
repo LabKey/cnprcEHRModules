@@ -37,13 +37,13 @@ public class AssignmentHistoryBlendTable extends VirtualTable
                 "  SELECT\n" +
                 "  sub2.id,\n" +
                 "  sub2.date           assigned,\n" +
-                "  max(sub2.enddate)   released,\n" +
+                "  max(sub2.enddate)   releaseDate,\n" +
                 "  sub2.payorId,\n" +
                 "  sub2.primaryProject,\n" +
                 "  sub2.secondaryProjects,\n" +
                 "  sub2.colonyCode,\n" +
                 "  sub2.groupCode,\n" +
-                "coalesce((lead(sub2.date) OVER (PARTITION BY sub2.Id ORDER BY sub2.date)), max(sub2.enddate))  as releaseDate\n" +
+                "coalesce((lead(sub2.date) OVER (PARTITION BY sub2.Id ORDER BY sub2.date)), max(sub2.enddate))  as released\n" +
                 " FROM\n" +
                 "(SELECT\n" +
                 "     sub.id,\n" +
@@ -111,7 +111,7 @@ public class AssignmentHistoryBlendTable extends VirtualTable
                 "\t GROUP BY sub.id, sub.date, sub.enddate\n" +
                 "\t ) sub2\n" +
                 "\t GROUP BY sub2.id, sub2.date, sub2.payorId, sub2.primaryProject, sub2.secondaryProjects, sub2.colonyCode, sub2.groupCode)sub3 \n" +
-                "WHERE sub3.assigned != (coalesce (sub3.releaseDate, getdate()))\n");
+                "WHERE sub3.assigned != (coalesce (sub3.released, getdate()))\n");
 
         return sql;
     }
@@ -122,12 +122,12 @@ public class AssignmentHistoryBlendTable extends VirtualTable
         assigned.setSortDirection(Sort.SortDirection.DESC);
         addColumn(assigned);
 
-        ExprColumn released = new ExprColumn(this, "released", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".released"), JdbcType.DATE);
-        released.setHidden(true);
-        addColumn(released);
-        
+        ExprColumn releaseDate = new ExprColumn(this, "releaseDate", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".releaseDate"), JdbcType.DATE);
+        releaseDate.setHidden(true);
+        addColumn(releaseDate);
+
         addColumn(new ExprColumn(this, "id", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".id"), JdbcType.VARCHAR));
-        addColumn(new ExprColumn(this, "releaseDate", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".releaseDate"), JdbcType.DATE));
+        addColumn(new ExprColumn(this, "released", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".released"), JdbcType.DATE));
         addColumn(new ExprColumn(this, "payorId", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".payorId"), JdbcType.VARCHAR));
         addColumn(new ExprColumn(this, "primaryProject", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".primaryProject"), JdbcType.VARCHAR));
         addColumn(new ExprColumn(this, "secondaryProjects", new SQLFragment(ExprColumn.STR_TABLE_ALIAS + ".secondaryProjects"), JdbcType.VARCHAR));
