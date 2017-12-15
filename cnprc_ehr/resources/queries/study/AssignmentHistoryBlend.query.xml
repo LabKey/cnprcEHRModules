@@ -1,13 +1,17 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="AssignmentHistoryBlend" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="AssignmentHistoryBlend" tableDbType="NOT_IN_DB" useColumnOrder="true">
                 <columns>
                     <column columnName="Id">
                         <columnTitle>Animal ID</columnTitle>
                     </column>
                     <column columnName="assigned">
                         <formatString>Date</formatString>
+                    </column>
+                    <column columnName="released">
+                        <formatString>Date</formatString>
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="payorId">
                         <columnTitle>Payor</columnTitle>

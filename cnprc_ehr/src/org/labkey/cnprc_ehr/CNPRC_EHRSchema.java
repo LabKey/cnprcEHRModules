@@ -25,6 +25,7 @@ public class CNPRC_EHRSchema
     private static final CNPRC_EHRSchema _instance = new CNPRC_EHRSchema();
 
     public static final String NAME = "cnprc_ehr";
+    public static final String ASSIGNMENT_HISTORY_BLEND = "AssignmentHistoryBlend";
 
     public static CNPRC_EHRSchema getInstance()
     {

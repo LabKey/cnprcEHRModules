@@ -18,6 +18,7 @@ package org.labkey.cnprc_ehr;
 
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.data.Container;
+import org.labkey.api.data.DbSchema;
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
 import org.labkey.api.ehr.dataentry.forms.ArrivalFormType;
@@ -31,8 +32,11 @@ import org.labkey.api.ehr.history.DefaultDepartureDataSource;
 import org.labkey.api.ehr.history.DefaultTreatmentEndDataSource;
 import org.labkey.api.ldk.ExtendedSimpleModule;
 import org.labkey.api.module.AdminLinkManager;
+import org.labkey.api.module.Module;
 import org.labkey.api.module.ModuleContext;
+import org.labkey.api.query.DefaultSchema;
 import org.labkey.api.query.DetailsURL;
+import org.labkey.api.query.QuerySchema;
 import org.labkey.api.resource.Resource;
 import org.labkey.api.security.User;
 import org.labkey.api.security.permissions.AdminPermission;
@@ -203,5 +207,25 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
     public Set<String> getSchemaNames()
     {
         return Collections.singleton(CNPRC_EHRSchema.NAME);
+    }
+
+    @Override
+    public void registerSchemas()
+    {
+        for (final String schemaName : getSchemaNames())
+        {
+            final DbSchema dbschema = DbSchema.get(schemaName);
+            DefaultSchema.registerProvider(schemaName, new DefaultSchema.SchemaProvider(this)
+            {
+                public QuerySchema createSchema(final DefaultSchema schema, Module module)
+                {
+                    if (schemaName.equalsIgnoreCase(CNPRC_EHRSchema.NAME)){
+                        return new CNPRC_EHRUserSchema(schema.getUser(), schema.getContainer(), dbschema);
+                    }
+
+                    return null;
+                }
+            });
+        }
     }
 }
