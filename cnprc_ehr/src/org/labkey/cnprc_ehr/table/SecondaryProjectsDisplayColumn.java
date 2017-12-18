@@ -19,6 +19,7 @@ import org.labkey.api.data.ColumnInfo;
 import org.labkey.api.data.DataColumn;
 import org.labkey.api.data.RenderContext;
 import org.labkey.api.util.PageFlowUtil;
+import org.springframework.util.StringUtils;
 
 public class SecondaryProjectsDisplayColumn extends DataColumn
 {
@@ -35,9 +36,11 @@ public class SecondaryProjectsDisplayColumn extends DataColumn
         if ( secondaryProject != null && !secondaryProject.isEmpty())
         {
             String[] projectIds = secondaryProject.split(",");
-            for (int i = 0; i < projectIds.length; i++)
+            String[] secProjectIds = StringUtils.removeDuplicateStrings(projectIds);
+
+            for (int i = 0; i < secProjectIds.length; i++)
             {
-                String projectId = PageFlowUtil.filter(projectIds[i]);
+                String projectId = PageFlowUtil.filter(secProjectIds[i]);
                 if (i > 0)
                 {
                     html.append(", ");

@@ -33,85 +33,102 @@ public class AssignmentHistoryBlendTable extends VirtualTable
         String breedinggroupassignments = datasetSchema + getDatasetTableName("breedinggroupassignments");
 
         SQLFragment sql = new SQLFragment();
-        sql.append("SELECT * FROM(\n" +
-                "  SELECT\n" +
-                "  sub2.id,\n" +
-                "  sub2.date           assigned,\n" +
-                "  max(sub2.enddate)   releaseDate,\n" +
-                "  sub2.payorId,\n" +
-                "  sub2.primaryProject,\n" +
-                "  sub2.secondaryProjects,\n" +
-                "  sub2.colonyCode,\n" +
-                "  sub2.groupCode,\n" +
-                "coalesce((lead(sub2.date) OVER (PARTITION BY sub2.Id ORDER BY sub2.date)), max(sub2.enddate))  as released\n" +
-                " FROM\n" +
-                "(SELECT\n" +
-                "     sub.id,\n" +
-                "     sub.date,\n" +
-                "     sub.enddate,\n" +
-                "     (SELECT max(payor_id)\n" +
-                "      FROM " + payor_assignments + " pyrassmnt\n" +
-                "      WHERE pyrassmnt.participantid = sub.id AND pyrassmnt.date <= sub.date AND\n" +
-                "            (pyrassmnt.enddate > sub.date OR pyrassmnt.enddate IS NULL)\n" +
-                "      GROUP BY pyrassmnt.participantid) payorId,\n" +
-                "     (SELECT max(projectCode)\n" +
-                "      FROM " + assignment + " assmnt\n" +
-                "      WHERE assmnt.participantid = sub.id AND assmnt.date <= sub.date AND (assmnt.enddate > sub.date OR assmnt.enddate IS NULL) AND\n" +
-                "            assmnt.assignmentStatus = 'P'\n" +
-                "      GROUP BY assmnt.participantid)    primaryProject,\n" +
-                "     (SELECT max(projectCode)\n" +
-                "      FROM " + assignment + " assmnt\n" +
-                "      WHERE assmnt.participantid = sub.id AND assmnt.date <= sub.date AND (assmnt.enddate > sub.date OR assmnt.enddate IS NULL) AND\n" +
-                "            assmnt.assignmentStatus = 'S'\n" +
-                "      GROUP BY assmnt.participantid)    secondaryProjects,\n" +
-                "     (SELECT max(colonyCode)\n" +
-                "      FROM " + colony_assignments + " colassmnt\n" +
-                "      WHERE colassmnt.participantid = sub.id\n" +
-                "            AND colassmnt.date <= sub.date AND\n" +
-                "            (colassmnt.enddate > sub.date OR colassmnt.enddate IS NULL)\n" +
-                "      GROUP BY colassmnt.participantid) colonyCode,\n" +
-                "     (SELECT max(groupCode)\n" +
-                "      FROM " + breedinggroupassignments + " bgassmnt\n" +
-                "      WHERE\n" +
-                "        bgassmnt.participantid = sub.id AND bgassmnt.date <= sub.date AND (bgassmnt.enddate > sub.date OR bgassmnt.enddate IS NULL)\n" +
-                "      GROUP BY bgassmnt.participantid)  groupCode\n" +
-                "   FROM\n" +
-                "     (\n" +
-                "       SELECT\n" +
-                "         participantid as id,\n" +
-                "         date,\n" +
-                "         enddate\n" +
-                "       FROM " + payor_assignments + "\n" +
-                "       UNION\n" +
-                "       SELECT\n" +
-                "         participantid as id,\n" +
-                "         date,\n" +
-                "         enddate\n" +
-                "       FROM " + assignment + "\n" +
-                "       UNION\n" +
-                "       SELECT\n" +
-                "         participantid as id,\n" +
-                "         date,\n" +
-                "         enddate\n" +
-                "       FROM " + colony_assignments + "\n" +
-                "       UNION\n" +
-                "       SELECT\n" +
-                "         participantid as id,\n" +
-                "         date,\n" +
-                "         enddate\n" +
-                "       FROM " + breedinggroupassignments + "\n" +
+        sql.append ("SELECT \n" +
+                "  id,\n" +
+                "  assigned,\n" +
+                "  coalesce(lead(assigned) OVER (PARTITION BY id ORDER BY assigned), release_date) AS released,\n" +
+                "  payorId,\n" +
+                "  primaryProject,\n" +
+                "  CONCAT (max(sec_project), ',', max(sec2_project), ',', max(sec3_project)) AS secondaryProjects,\n" +
+                "  colonyCode,\n" +
+                "  groupCode\n" +
+                "FROM (\n" +
+                "  SELECT \n" +
+                "    sub2.id, \n" +
+                "    sub2.date AS assigned, \n" +
+                "    sub2.release_date,\n" +
+                "    payor_id AS payorId, \n" +
+                "    prim_project AS primaryProject, \n" +
+                "    sec_project, \n" +
+                "    br_group_code AS groupCode, \n" +
+                "    colony_code AS colonyCode,\n" +
+                "    lag(sec_project,1) OVER (PARTITION BY id, date ORDER by sec_project) sec2_project,\n" +
+                "    lag(sec_project,2) OVER (PARTITION BY id, date ORDER by sec_project) sec3_project" +
+                "\tFROM\n" +
+                "\t(SELECT \n" +
+                "\t\tsub.id, \n" +
+                "\t\tsub.date,\n" +
+                "\t\t(CASE \n" +
+                "\t\t\tWHEN\n" +
+                "\t\t\t\tpayor.enddate > prim.enddate AND payor.enddate > brgroup.enddate AND payor.enddate > colony.enddate THEN payor.enddate\n" +
+                "\t\t\tWHEN\n" +
+                "\t\t\t\tprim.enddate > brgroup.enddate AND prim.enddate > colony.enddate THEN prim.enddate\n" +
+                "\t\t\tWHEN\n" +
+                "\t\t\t\tbrgroup.enddate > colony.enddate THEN brgroup.enddate\n" +
+                "\t\t\tELSE\n" +
+                "\t\t\t\tcolony.enddate\n" +
+                "\t\t\tEND\n" +
+                "\t\t) AS release_date,\n" +
+                "\t\tpayor.payor_id, \n" +
+                "\t\tprim.projectCode AS prim_project, \n" +
+                "\t\tsec.projectCode AS sec_project,\n" +
+                "\t\tbrgroup.groupCode AS br_group_code,\n" +
+                "\t\tcolony.colonyCode colony_code,\n" +
+                "\t\tcoalesce(sec.enddate, getdate()) AS sec_release_date\n" +
+                "\t\tFROM\n" +
+                "\t\t\t(\n" +
+                "\t\t\t\tSELECT\n" +
+                "\t\t\t\t\tparticipantid as id,\n" +
+                "\t\t\t\t\tdate,\n" +
+                "\t\t\t\t\tenddate\n" +
+                "\t\t\t\tFROM " + payor_assignments + "\n" +
+                "\t\t\t\tUNION ALL\n" +
+                "\t\t\t\tSELECT\n" +
+                "\t\t\t\t\tparticipantid as id,\n" +
+                "\t\t\t\t\tdate,\n" +
+                "\t\t\t\t\tenddate\n" +
+                "\t\t\t\tFROM " + assignment + "\n" +
+                "\t\t\t\tUNION ALL\n" +
+                "\t\t\t\tSELECT\n" +
+                "\t\t\t\t\tparticipantid as id,\n" +
+                "\t\t\t\t\tdate,\n" +
+                "\t\t\t\t\tenddate\n" +
+                "\t\t\t\tFROM " + colony_assignments + "\n" +
+                "\t\t\t\tUNION ALL\n" +
+                "\t\t\t\tSELECT\n" +
+                "\t\t\t\t\tparticipantid as id,\n" +
+                "\t\t\t\t\tdate,\n" +
+                "\t\t\t\t\tenddate\n" +
+                "\t\t\t\tFROM " + breedinggroupassignments + "\n" +
+                "\t\t\t\tUNION ALL\n" +
+                "\t\t\t\tSELECT\n" +
+                "\t\t\t\tparticipantid as id,\n" +
+                "\t\t\t\tenddate   AS date,\n" +
+                "\t\t\t\tenddate\n" +
+                "\t\t\t\tFROM " + assignment + " WHERE assignmentStatus = 'S' AND enddate IS NOT NULL\n" +
+                "\t\t\t) sub\n" +
+                "\t\t\tINNER JOIN " + payor_assignments + " payor \n" +
+                "\t\t\tON sub.id = payor.participantid AND sub.date  >= payor.date AND \n" +
+                "\t\t\tsub.date < coalesce(payor.enddate, getdate())\n" +
                 "\n" +
-                "       UNION SELECT\n" +
-                "               participantid as id,\n" +
-                "               enddate   AS date,\n" +
-                "               enddate\n" +
-                "             FROM " + assignment + "\n" +
-                "             WHERE assignmentStatus = 'S' AND enddate IS NOT NULL\n" +
-                "     ) sub\n" +
-                "\t GROUP BY sub.id, sub.date, sub.enddate\n" +
-                "\t ) sub2\n" +
-                "\t GROUP BY sub2.id, sub2.date, sub2.payorId, sub2.primaryProject, sub2.secondaryProjects, sub2.colonyCode, sub2.groupCode)sub3 \n" +
-                "WHERE sub3.assigned != (coalesce (sub3.released, getdate()))\n");
+                "\t\t\tINNER JOIN " + assignment + " prim \n" +
+                "\t\t\tON sub.id  = prim.participantid AND sub.date  >= prim.date AND \n" +
+                "\t\t\tsub.date < coalesce(prim.enddate, getdate()) AND prim.assignmentStatus = 'P'\n" +
+                "\n" +
+                "\t\t\tINNER JOIN " + breedinggroupassignments + " brgroup \n" +
+                "\t\t\tON sub.id  = brgroup.participantid AND sub.date  >= brgroup.date AND \n" +
+                "\t\t\tsub.date < coalesce(brgroup.enddate, getdate())\n" +
+                "\n" +
+                "\t\t\tINNER JOIN " + colony_assignments + " colony \n" +
+                "\t\t\tON sub.id  = colony.participantid AND sub.date  >= colony.date AND \n" +
+                "\t\t\tsub.date < coalesce(colony.enddate, getdate())\n" +
+                "\n" +
+                "\t\t\tLEFT OUTER JOIN (select * from " + assignment + " where assignmentStatus='S') sec \n" +
+                "\t\t\tON sub.id  = sec.participantid AND sub.date  >= sec.date AND sub.date < coalesce(sec.enddate, getdate())\n" +
+                "\n" +
+                "\t\t) sub2\n" +
+                "\t) sub3\n" +
+                "GROUP BY id, assigned, release_date, payorId, primaryProject, colonyCode, groupCode");
 
         return sql;
     }
