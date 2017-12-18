@@ -14,6 +14,6 @@ Ext4.define('CNPRC_EHR.panel.WeightSummaryPanel', {
 
     getRoundedNumber: function (value) {
         // always show two decimal places
-        return Number(Math.round(row[prop].value+'e2')+'e-2').toFixed(2);
+        return Number(Math.round(value+'e2')+'e-2').toFixed(2);
     }
 });
