@@ -23,7 +23,7 @@ FROM study.housing d2
           max(reloc_seq) AS reloc_seq
         FROM study.housing h
         GROUP BY id) h
-    ON ((h.reloc_seq IS NULL AND h.id = d2.id AND d2.enddate = h.maxdate) OR
+    ON ((h.reloc_seq IS NULL AND h.id = d2.id AND d2.date = h.maxdate) OR
         (h.reloc_seq IS NOT NULL AND h.id = d2.id AND h.reloc_seq = d2.reloc_seq))
 WHERE d2.qcstate.publicdata = TRUE
 GROUP BY d2.id
