@@ -82,6 +82,8 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
     {
         return (("study".equalsIgnoreCase(schema) && "demographics".equalsIgnoreCase(query)) ||
                 ("study".equalsIgnoreCase(schema) && "arrival".equalsIgnoreCase(query)) ||
-                ("study".equalsIgnoreCase(schema) && "housing".equalsIgnoreCase(query)));
+                ("study".equalsIgnoreCase(schema) && "housing".equalsIgnoreCase(query)) ||
+                ("study".equalsIgnoreCase(schema) && "deaths".equalsIgnoreCase(query)) ||
+                ("study".equalsIgnoreCase(schema) && "departure".equalsIgnoreCase(query)));
     }
 }

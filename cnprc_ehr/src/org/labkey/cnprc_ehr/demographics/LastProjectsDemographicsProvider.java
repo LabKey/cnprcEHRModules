@@ -41,6 +41,7 @@ public class LastProjectsDemographicsProvider extends AbstractListDemographicsPr
     @Override
     public boolean requiresRecalc(String schema, String query)
     {
-        return ("study".equalsIgnoreCase(schema) && "assignment".equalsIgnoreCase(query));
+        return (("study".equalsIgnoreCase(schema) && "assignment".equalsIgnoreCase(query)) ||
+                ("study".equalsIgnoreCase(schema) && "demographics".equalsIgnoreCase(query)));
     }
 }

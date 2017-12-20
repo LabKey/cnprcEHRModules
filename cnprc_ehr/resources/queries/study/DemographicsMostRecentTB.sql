@@ -7,13 +7,13 @@ SELECT
 
 mostRecentTB.id,
 mostRecentTB.MostRecentTBDate,
-timestampdiff('SQL_TSI_DAY', mostRecentTB.MostRecentTBDate, now()) AS DaysSinceTB,
+timestampdiff('SQL_TSI_DAY', mostRecentTB.MostRecentTBDate, now()) AS DaysSinceTB
 
 
 FROM (
 SELECT
   tb.Id AS Id,
-  max(tb.date) AS MostRecentTBDate,
+  max(tb.date) AS MostRecentTBDate
 FROM study.tb tb
 GROUP BY tb.id
 ) mostRecentTB

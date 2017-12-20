@@ -55,6 +55,7 @@ public class LastPayorDemographicsProvider extends AbstractDemographicsProvider
     @Override
     public boolean requiresRecalc(String schema, String query)
     {
-        return ("study".equalsIgnoreCase(schema) && "payor_assignments".equalsIgnoreCase(query));
+        return (("study".equalsIgnoreCase(schema) && "payor_assignments".equalsIgnoreCase(query)) ||
+               ("study".equalsIgnoreCase(schema) && "demographics".equalsIgnoreCase(query)));
     }
 }

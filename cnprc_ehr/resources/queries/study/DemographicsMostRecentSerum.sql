@@ -12,7 +12,7 @@ timestampdiff('SQL_TSI_DAY', mostRecentSerum.MostRecentSerumDate, now()) AS Days
 FROM (
 SELECT
   s.Id AS Id,
-  max(s.date) AS MostRecentSerumDate,
+  max(s.date) AS MostRecentSerumDate
 
 FROM study.serum s
 
