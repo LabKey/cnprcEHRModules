@@ -66,6 +66,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -797,7 +798,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = new DataRegionTable("Data", getDriver());
         final List<String> rowData = results.getRowDataAsText(results.getRowIndex("1"), "Subject", "Sex", "Sire", "Dam", "Lab Case", "Date Tested", "Notes");
         assertEquals("Bad genetics data",
-                Arrays.asList("TEST1099252", "F", "TEST6390238", "TEST2312318", "PDA0123", "2003-02-14 00:00", "TEST1099252 qualifies as an offspring of TEST2312318 and TEST6390238."),
+                Arrays.asList("TEST3", "F", "TEST6390238", "TEST2312318", "PDA0123", "2003-02-14 00:00", "TEST3 qualifies as an offspring of TEST2312318 and TEST6390238."),
                 rowData);
         results.assertPaginationText(1,100,222);
     }
@@ -885,8 +886,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = new DataRegionTable("query", getDriver());
         assertEquals("Wrong row count",8,results.getDataRowCount());
         assertTextPresent( "spf = 0","species = CMO","calculated_status = Alive");
-        assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST4551032",
-                "TEST4710248","TEST5904521","TEST7151371","TEST7407382");
+        assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST1",
+                "TEST4710248","TEST2","TEST7151371","TEST7407382");
     }
 
     @Test
@@ -1725,7 +1726,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","Male","Offspring","TEST1099252","2009-08-03","Male",""," ","Dead", " "
+                "TEST6390238","Male","Offspring","TEST3","2009-08-03","Male",""," ","Dead", " "
         );
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
@@ -1742,12 +1743,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertTextPresent("No data to show");
         assertEquals("Wrong row count",0,results.getDataRowCount());
 
-        id = "TEST1099252";
+        id = "TEST3";
         animalHistoryPage.searchSingleAnimal(id);
-        waitForElement(new Locator.LinkLocator("Siblings - test1099252"));
+        waitForElement(new Locator.LinkLocator("Siblings - test3"));
         results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList(
-                "TEST1099252","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238", "Alive", " "
+                "TEST3","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238", "Alive", " "
         );
         resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong row count",10,results.getDataRowCount());
@@ -1755,7 +1756,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         animalHistoryPage.clickCategoryTab("Genetics");
         animalHistoryPage.clickReportTab("Kinship");
-        waitForText("Kinship - test1099252");
+        waitForText("Kinship - test3");
         waitForText("Coefficient");
         results = animalHistoryPage.getActiveReportDataRegion();
         expectedColumns= Arrays.asList(
@@ -1763,7 +1764,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
         expected = Arrays.asList(
-                "TEST1099252","TEST5158984","0.25"
+                "TEST3","TEST5158984","0.25"
         );
         resultsRowDataAsText = results.getRowDataAsText(0);
         assertEquals("Wrong row count",14,results.getDataRowCount());
@@ -1855,6 +1856,63 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong row count: ", 3, results.getDataRowCount());
     }
 
+    @Test
+    public void testAnimalHistoryGeneralAndSnapshotReport() throws Exception
+    {
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.clickCategoryTab("General");
+        animalHistoryPage.clickReportTab("Snapshot");
+        animalHistoryPage.searchSingleAnimal("TEST1");
+
+        Map<String,String> expectedColumns = new HashMap<String,String>();
+        expectedColumns.put("Sex","Female");
+        expectedColumns.put("Generation","4");
+        expectedColumns.put("Birth","2000-03-28");
+        expectedColumns.put("Birth Con No","");
+        expectedColumns.put("Dam ID","8416939");
+        expectedColumns.put("Sire ID","5030167");
+        expectedColumns.put("Acquisition","2005-07-19 abl");
+        expectedColumns.put("Previous ID","PREVID");
+        expectedColumns.put("Death","");
+        expectedColumns.put("Departure","");
+        expectedColumns.put("Acquisition Age","05:03:22");
+        expectedColumns.put("Time at CNPRC","12:05:02");
+        expectedColumns.put("Age at Departure/Death","");
+        expectedColumns.put("Location","2004-02-19 58737392");
+        expectedColumns.put("Weight","2011-07-22  5.83 kg");
+        expectedColumns.put("Body Condition","2011-07-22  5.5");
+        expectedColumns.put("TB Test","2010-01-25");
+        expectedColumns.put("Serum Bank","2016-09-29");
+        expectedColumns.put("Harvest","");
+        expectedColumns.put("SPF Status","0 - Conventional");
+        expectedColumns.put("Colony","X");
+        expectedColumns.put("Breeding group","O");
+        expectedColumns.put("Perdiem","2015-05-01  AB125/YZ16");
+
+        WebElement activeReportPanel = animalHistoryPage.getActiveReportPanel();
+
+        List<String> labels = getTexts(Locator.byClass("x4-field-label-cell").findElements(activeReportPanel));
+        List<String> values = getTexts(Locator.byClass("x4-field-label-cell").followingSibling("td").findElements(activeReportPanel));
+        String label="";
+        String value="";
+        Iterator<String> ilabels = labels.iterator();
+        Iterator<String> ivalues = values.iterator();
+        Map<String,String> map = new HashMap<String,String>();
+        log("Size of lables " + labels.size());
+        log("Size of values " + values.size());
+        while (ilabels.hasNext() && ivalues.hasNext())
+        {
+            expectedColumns.containsKey(ilabels.next());
+            expectedColumns.containsValue(ivalues.next());
+        }
+
+        assertTextPresent("Last Project(s)");
+        assertTextPresent("Census Flag(s)");
+        assertTextPresent("Pathology Report(s)");
+
+
+
+    }
     @Test
     public void testAnimalHistoryImmunizationView() throws Exception
     {
