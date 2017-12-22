@@ -1862,6 +1862,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.clickCategoryTab("General");
         animalHistoryPage.clickReportTab("Snapshot");
+
+        log("Checking for acquired animal");
         animalHistoryPage.searchSingleAnimal("TEST1");
 
         Map<String,String> expectedColumns = new HashMap<String,String>();
@@ -1893,13 +1895,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         List<String> labels = getTexts(Locator.byClass("x4-field-label-cell").findElements(activeReportPanel));
         List<String> values = getTexts(Locator.byClass("x4-field-label-cell").followingSibling("td").findElements(activeReportPanel));
-        String label="";
-        String value="";
         Iterator<String> ilabels = labels.iterator();
         Iterator<String> ivalues = values.iterator();
         Map<String,String> map = new HashMap<String,String>();
-        log("Size of lables " + labels.size());
-        log("Size of values " + values.size());
         while (ilabels.hasNext() && ivalues.hasNext())
         {
             expectedColumns.containsKey(ilabels.next());
@@ -1910,7 +1908,24 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertTextPresent("Census Flag(s)");
         assertTextPresent("Pathology Report(s)");
 
+        log("Checking for dead animal");
+        animalHistoryPage.searchSingleAnimal("TEST1");
+        List<String> deadLabels = getTexts(Locator.byClass("x4-field-label-cell").findElements(activeReportPanel));
+        List<String> deadValues = getTexts(Locator.byClass("x4-field-label-cell").followingSibling("td").findElements(activeReportPanel));
+        Map<String,String> expectedColumnsForDead = new HashMap<String,String>();
+        expectedColumnsForDead.put("Death","2011-06-06  M  Trauma");
+        expectedColumnsForDead.put("Time at CNPRC","01:10:03");
+        expectedColumnsForDead.put("Age at Departure/Death","01:10:03");
+        expectedColumnsForDead.put("Location","2014-02-19  DEAD from AC500389");
 
+        Iterator<String> ideadLabels = deadLabels.iterator();
+        Iterator<String> ideadValues = deadValues.iterator();
+
+        while(ideadLabels.hasNext() && ideadValues.hasNext())
+        {
+            expectedColumnsForDead.containsValue(ideadValues.next());
+            expectedColumnsForDead.containsKey(ideadLabels.next());
+        }
 
     }
     @Test
