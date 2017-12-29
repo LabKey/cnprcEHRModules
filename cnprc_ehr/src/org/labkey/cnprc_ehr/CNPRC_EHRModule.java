@@ -150,6 +150,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("colonyOverview", this, "views/colonyOverview.html");
         ehrService.registerActionOverride("begin", this, "views/begin.html");
         ehrService.registerActionOverride("ehrAdmin", this, "views/ehrAdmin.html");
+        ehrService.registerActionOverride("enterData", this, "views/enterData.html");
         ehrService.registerActionOverride("populateInitialData", this, "views/populateData.html");
         
         //data entry

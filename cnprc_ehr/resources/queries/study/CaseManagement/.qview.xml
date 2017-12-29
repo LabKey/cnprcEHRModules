@@ -1,0 +1,20 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="Location" />
+        <column name="id" />
+        <column name="admitType" />
+        <column name="problem" />
+        <column name="date" />
+        <column name="DaysAdmitted" />
+        <column name="MHObs" />
+        <column name="ProjectCode" />
+        <column name="p" />
+        <column name="p2" />
+        <column name="remark" />
+        <column name="room" />
+        <column name="area" />
+    </columns>
+    <sorts>
+        <sort column="date" descending="true"/>
+    </sorts>
+</customView>
