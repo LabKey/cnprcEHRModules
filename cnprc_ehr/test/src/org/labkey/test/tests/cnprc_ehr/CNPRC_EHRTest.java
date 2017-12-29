@@ -100,6 +100,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String PDLFOLDER = "PDL";
     private static final String BILLINGFOLDER = "Billing";
     private static final String COMPLIANCE_AND_TRAINING_FOLDER = "Compliance And Training";
+    protected static final String CNPRC_ROOM_ID1 = "C824778";
+    protected static final String CNPRC_ROOM_ID2 = "C043365";
     protected static final String ROOM_AB5001 = "AB5001";
     protected static final String ROOM_AC5003 = "AC5003";
     protected static final String ROOM_AD5003 = "AD5003";
@@ -312,9 +314,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     protected void deleteHardTableRecords() throws CommandException, IOException
     {
-        super.deleteHardTableRecords();
-
         Map<String,Object> rowMap = new HashMap<>();
+        rowMap.put("room", CNPRC_ROOM_ID1);
+        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
+
+        rowMap = new HashMap<>();
+        rowMap.put("room", CNPRC_ROOM_ID2);
+        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
+
+        rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AB5001);
         deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
 
@@ -517,13 +525,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         //then ehr_lookups.rooms
         insertCmd = new InsertRowsCommand("ehr_lookups", "rooms");
         rowMap = new HashMap<>();
-        rowMap.put("room", ROOM_ID);
+        rowMap.put("room", CNPRC_ROOM_ID1);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
         insertCmd.addRow(rowMap);
 
         rowMap = new HashMap<>();
-        rowMap.put("room", ROOM_ID2);
+        rowMap.put("room", CNPRC_ROOM_ID2);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
         rowMap.put("area", "B");
@@ -1412,7 +1420,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
 
         assertEquals("Wrong Housing History results,",
-                Arrays.asList("TEST4564246", "2005-01-11 14:00", " ", "6824778", "4953547"),
+                Arrays.asList("TEST4564246", "2005-01-11 14:00", " ", "C824778", "4953547"),
                 historyTable.getRowDataAsText(3, "Id", "date", "enddate", "room", "cage"));
     }
 
@@ -2157,7 +2165,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Test2: ", "type2site2244872", results.getDataAsText(0,5));
         assertEquals("Wrong value for Tattoo: ", "X", results.getDataAsText(0,6));
         assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0,7));
-        assertEquals("Wrong value for Room: ", "6824778", results.getDataAsText(0,8));
+        assertEquals("Wrong value for Room: ", "C824778", results.getDataAsText(0,8));
         assertEquals("Wrong value for Cage: ", "4953547", results.getDataAsText(0,9));
 
         List<WebPartPanel> reportPanels = WebPartPanel.WebPart(getDriver()).findAll(animalHistoryPage.getActiveReportPanel());
