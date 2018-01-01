@@ -100,8 +100,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String PDLFOLDER = "PDL";
     private static final String BILLINGFOLDER = "Billing";
     private static final String COMPLIANCE_AND_TRAINING_FOLDER = "Compliance And Training";
-    protected static final String CNPRC_ROOM_ID1 = "C824778";
-    protected static final String CNPRC_ROOM_ID2 = "C043365";
     protected static final String ROOM_AB5001 = "AB5001";
     protected static final String ROOM_AC5003 = "AC5003";
     protected static final String ROOM_AD5003 = "AD5003";
@@ -315,14 +313,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     protected void deleteHardTableRecords() throws CommandException, IOException
     {
         Map<String,Object> rowMap = new HashMap<>();
-        rowMap.put("room", CNPRC_ROOM_ID1);
-        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
-
-        rowMap = new HashMap<>();
-        rowMap.put("room", CNPRC_ROOM_ID2);
-        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
-
-        rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AB5001);
         deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
 
@@ -468,12 +458,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("protocol", PROTOCOL_ID_10_CHAR_1);
         rowMap.put("piPersonId", INVES_ID_1);
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("protocol", PROTOCOL_ID_10_CHAR_2);
         rowMap.put("piPersonId", INVES_ID_2);
         insertCmd.addRow(rowMap);
-        SaveRowsResponse saveResp = insertCmd.execute(cn, getContainerPath());
+        insertCmd.execute(cn, getContainerPath());
 
         //then cnprc_ehr.project
         insertCmd = new InsertRowsCommand("cnprc_ehr", "project");
@@ -481,20 +470,18 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_0);
         rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_2);
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_1);
         rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_1);
         rowMap.put("unitCode", UNIT_CODE);
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_2);
         rowMap.put("pi_name", PROJECT_INVESTIGATOR_NAME_2);
         insertCmd.addRow(rowMap);
+        insertCmd.execute(cn, getContainerPath());
 
-        saveResp = insertCmd.execute(cn, getContainerPath());
-
+        // cnprc_ehr.project_protocol
         insertCmd = new InsertRowsCommand("cnprc_ehr", "project_protocol");
         rowMap = new HashMap<>();
         rowMap.put("pp_pk", 1);
@@ -503,7 +490,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("pp_assignment_date",  "2007-09-20");
         rowMap.put("pp_release_date", "2016-12-12");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("pp_pk", 2);
         rowMap.put("protocol_number", PROTOCOL_ID_10_CHAR_2);
@@ -511,61 +497,42 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("pp_assignment_date",  "2007-12-12");
         rowMap.put("pp_release_date", "2016-12-12");
         insertCmd.addRow(rowMap);
+        insertCmd.execute(cn, getContainerPath());
 
-        saveResp = insertCmd.execute(cn, getContainerPath());
-
+        // cnprc_ehr.center_unit
         insertCmd = new InsertRowsCommand("cnprc_ehr", "center_unit");
         rowMap = new HashMap<>();
         rowMap.put("center_unit_code", UNIT_CODE);
-
         insertCmd.addRow(rowMap);
-
-        saveResp = insertCmd.execute(cn, getContainerPath());
+        insertCmd.execute(cn, getContainerPath());
 
         //then ehr_lookups.rooms
         insertCmd = new InsertRowsCommand("ehr_lookups", "rooms");
-        rowMap = new HashMap<>();
-        rowMap.put("room", CNPRC_ROOM_ID1);
-        rowMap.put("housingType", 1);
-        rowMap.put("housingCondition", 1);
-        insertCmd.addRow(rowMap);
-
-        rowMap = new HashMap<>();
-        rowMap.put("room", CNPRC_ROOM_ID2);
-        rowMap.put("housingType", 1);
-        rowMap.put("housingCondition", 1);
-        rowMap.put("area", "B");
-        insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AB5001);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
         rowMap.put("area", "B");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AC5003);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
         rowMap.put("area", "A");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AD5003);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
         rowMap.put("area", "A");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("room", ROOM_3168659);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
         rowMap.put("area", "A");
         insertCmd.addRow(rowMap);
-
-        saveResp  = insertCmd.execute(cn, getContainerPath());
+        insertCmd.execute(cn, getContainerPath());
 
         //then ehr_lookups.cage
         insertCmd = new InsertRowsCommand("ehr_lookups", "cage");
@@ -574,50 +541,42 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("room", ROOM_AB5001);
         rowMap.put("cage", "4");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_AB5001 + "-14");
         rowMap.put("room", ROOM_AB5001);
         rowMap.put("cage", "14");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_AC5003 + "-89");
         rowMap.put("room", ROOM_AC5003);
         rowMap.put("cage", "89");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_AC5003 + "-43");
         rowMap.put("room", ROOM_AC5003);
         rowMap.put("cage", "43");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_AD5003 + "-22");
         rowMap.put("room", ROOM_AD5003);
         rowMap.put("cage", "22");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_AD5003 + "-23");
         rowMap.put("room", ROOM_AD5003);
         rowMap.put("cage", "23");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_3168659 + "-1");
         rowMap.put("room", ROOM_3168659);
         rowMap.put("cage", "1");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_3168659 + "-2");
         rowMap.put("room", ROOM_3168659);
         rowMap.put("cage", "2");
         insertCmd.addRow(rowMap);
-
-        saveResp = insertCmd.execute(cn, getContainerPath());
+        insertCmd.execute(cn, getContainerPath());
 
         //then study.weight
         ZonedDateTime now = ZonedDateTime.now();
@@ -626,7 +585,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         ZonedDateTime oneHundredSeventyDaysAgo = now.minusDays(170);
         ZonedDateTime twoHundredDaysAgo = now.minusDays(200);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
         insertCmd = new InsertRowsCommand("study", "weight");
         rowMap = new HashMap<>();
         rowMap.put("weight", "9.1");
@@ -635,7 +593,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST3771679");
         rowMap.put("Description", "TEST3771679-1");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "12.0");
         rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
@@ -643,7 +600,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST3771679");
         rowMap.put("Description", "TEST3771679-2");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "13.0");
         rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
@@ -651,7 +607,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST3771679");
         rowMap.put("Description", "TEST3771679-3");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "9.89");
         rowMap.put("ts", dateTimeFormatter.format(now));
@@ -659,7 +614,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST4037096");
         rowMap.put("Description", "TEST4037096-1");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "11.0");
         rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
@@ -667,7 +621,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST4037096");
         rowMap.put("Description", "TEST4037096-2");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "10.5");
         rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
@@ -675,7 +628,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST4037096");
         rowMap.put("Description", "TEST4037096-3");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "10.0");
         rowMap.put("ts", dateTimeFormatter.format(now));
@@ -683,7 +635,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST7407382");
         rowMap.put("Description", "TEST7407382-1");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "15.0");
         rowMap.put("ts", dateTimeFormatter.format(twoHundredDaysAgo));
@@ -691,7 +642,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "TEST7407382");
         rowMap.put("Description", "TEST7407382-2");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "10.0");
         rowMap.put("ts", dateTimeFormatter.format(now));
@@ -699,7 +649,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "44445");
         rowMap.put("Description", "44445-1");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "12.0");
         rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
@@ -707,7 +656,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "44445");
         rowMap.put("Description", "44445-2");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "13.0");
         rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
@@ -715,7 +663,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "44445");
         rowMap.put("Description", "44445-3");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "10.0");
         rowMap.put("ts", dateTimeFormatter.format(oneHundredSeventyDaysAgo));
@@ -723,7 +670,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "44446");
         rowMap.put("Description", "44446-1");
         insertCmd.addRow(rowMap);
-
         rowMap = new HashMap<>();
         rowMap.put("weight", "14.0");
         rowMap.put("ts", dateTimeFormatter.format(twoHundredDaysAgo));
@@ -731,8 +677,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("Id", "44446");
         rowMap.put("Description", "44446-2");
         insertCmd.addRow(rowMap);
-
-        saveResp = insertCmd.execute(cn, getContainerPath());
+        insertCmd.execute(cn, getContainerPath());
     }
 
     protected void initGenetics() throws Exception
@@ -1420,7 +1365,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
 
         assertEquals("Wrong Housing History results,",
-                Arrays.asList("TEST4564246", "2005-01-11 14:00", " ", "C824778", "4953547"),
+                Arrays.asList("TEST4564246", "2005-01-11 14:00", " ", "<6824778>", "4953547"),
                 historyTable.getRowDataAsText(3, "Id", "date", "enddate", "room", "cage"));
     }
 
@@ -1525,6 +1470,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expectedColumns = Arrays.asList(
                 "Id",
                 "pairingIndicator",
+                "location",
                 "room",
                 "cage",
                 "cage_size",
@@ -1710,7 +1656,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testPedigreeReports() throws Exception
     {
         AnimalHistoryPage<?> animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        String id = "test6390238";
+        String id = "TEST6390238";
         animalHistoryPage.searchSingleAnimal(id);
         animalHistoryPage.clickCategoryTab("Genetics");
         animalHistoryPage.clickReportTab("Pedigree Plot");
@@ -1734,7 +1680,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","Male","Offspring","TEST3","2009-08-03","Male",""," ","Dead", " "
+                id,"Male","Offspring","TEST3","2009-08-03","Male",""," ","Dead", " "
         );
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
@@ -1745,7 +1691,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         expectedColumns= Arrays.asList(
                 "Id","Relationship","Sibling","Sex","Flags","Location","SiblingDam","SiblingSire","calculated_status","LastKnownLocation","qcstate"
         );
-        waitForElement(new Locator.LinkLocator("Siblings - test6390238"));
+        waitForElement(new Locator.LinkLocator("Siblings - " + id));
         results = animalHistoryPage.getActiveReportDataRegion();
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
         assertTextPresent("No data to show");
@@ -1756,7 +1702,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(new Locator.LinkLocator("Siblings - test3"));
         results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList(
-                "TEST3","Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238", "Alive", " "
+                id,"Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238", "Alive", " "
         );
         resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong row count",10,results.getDataRowCount());
@@ -1800,7 +1746,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "conNum",
                 "femaleSpecies",
                 "offspringId",
-                "offspringSex",
+                "offspringSex/code",
                 "conception",
                 "BRType",
                 "sire",
@@ -2017,6 +1963,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expectedColumns = Arrays.asList(
                 "Id"
                 ,"assigned"
+                ,"released"
                 ,"payorId"
                 ,"primaryProject"
                 ,"secondaryProjects"
@@ -2025,25 +1972,24 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        List<String> expected = Arrays.asList("44446","2016-10-05","AB126/YZ18","Pc5C2"," ","X","T");
+        assertEquals("Wrong row count: ", 3, results.getDataRowCount());
+
+        List<String> expected = Arrays.asList("44446","2016-10-05"," ","AB126/YZ18","Pc5C2"," ","X","T");
         confirmRowText(results, expected, 0);
 
-        expected = Arrays.asList("44446","2014-08-19","AB126/YZ18","Pc5C2"," "," ","T");
+        expected = Arrays.asList("44446","2014-08-19"," ","AB126/YZ18","Pc5C2"," "," ","T");
         confirmRowText(results, expected, 1);
 
-        expected = Arrays.asList("44446","2013-03-16","AB126/YZ18","Pc5C2"," "," "," ");
+        expected = Arrays.asList("44446","2013-03-16"," ","AB126/YZ18","Pc5C2"," "," "," ");
         confirmRowText(results, expected, 2);
-
-        assertEquals("Wrong row count: ", 3, results.getDataRowCount());
 
         animalHistoryPage.searchSingleAnimal("44444");
         waitForElement(Locator.linkContainingText(reportTab));
         results = animalHistoryPage.getActiveReportDataRegion();
 
-        expected = Arrays.asList("44444","2014-02-08","AB125/YZ17","Pc5C0","Pc5C1, Pc5C2","O","M");
+        expected = Arrays.asList("44444","2014-02-08","2016-01-01","AB125/YZ17","Pc5C0","Pc5C1, Pc5C2","O","M");
         confirmRowText(results, expected, 0);
 
-        assertElementPresent(Locator.linkWithText("44444"));
         assertElementPresent(Locator.linkWithText("AB125/YZ17"));
 
         // TODO: 4/26/2017 Add tests for Primary and Secondary project look ups.
@@ -2165,14 +2111,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Test2: ", "type2site2244872", results.getDataAsText(0,5));
         assertEquals("Wrong value for Tattoo: ", "X", results.getDataAsText(0,6));
         assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0,7));
-        assertEquals("Wrong value for Room: ", "C824778", results.getDataAsText(0,8));
+        assertEquals("Wrong value for Room: ", "<6824778>", results.getDataAsText(0,8));
         assertEquals("Wrong value for Cage: ", "4953547", results.getDataAsText(0,9));
 
         List<WebPartPanel> reportPanels = WebPartPanel.WebPart(getDriver()).findAll(animalHistoryPage.getActiveReportPanel());
         List<String> reportTitles = new ArrayList<>();
         reportPanels.forEach(p -> reportTitles.add(p.getTitle()));
         assertEquals("Wrong order for report segments",
-                Arrays.asList("Weight Overview: " + animalId.toLowerCase(), "Weight, TB and Body Condition: " + animalId.toLowerCase()),
+                Arrays.asList("Weight Overview: " + animalId, "Weight, TB and Body Condition: " + animalId),
                 reportTitles);
     }
 
@@ -2212,8 +2158,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0,1));
         assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
-        assertElementPresent(Locator.linkWithText("Pc5C1"));
-
         assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
     }
 
