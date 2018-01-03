@@ -9,7 +9,7 @@ SELECT
   COALESCE(demo.id.MostRecentArrival.EarliestArrival, demo.birth) AS earliestArrivalOrBirthDate,
   COALESCE(demo.id.MostRecentArrival.MostRecentArrival, demo.birth) AS latestArrivalOrBirthDate,
   CASE
-  WHEN demo.calculated_status = 'Alive' THEN now()
+  WHEN demo.calculated_status = 'Alive' THEN CAST(now() AS DATE)
   WHEN demo.calculated_status = 'Dead' THEN deaths.date
   WHEN (demo.calculated_status = 'Shipped') OR (demo.calculated_status = 'Escaped') THEN demo.Id.MostRecentDeparture.MostRecentDeparture
   ELSE NULL END AS timeAtCnprcEndDate,

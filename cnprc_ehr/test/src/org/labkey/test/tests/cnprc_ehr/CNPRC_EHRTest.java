@@ -1027,7 +1027,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.DAY_OF_YEAR, -100);
+        calendar.add(Calendar.DAY_OF_YEAR, -50);
+        setParticipantDeathDate("TEST1441142", calendar.getTime());//Will not be included because not Alive
+        calendar.add(Calendar.DAY_OF_YEAR, -50);
         setParticipantBirthDate("TEST2008446", calendar.getTime());
         setParticipantBirthDate("TEST1441142", calendar.getTime());//Will not be included because not Alive
         SearchPanel searchPanel = getSearchPanel();
@@ -1571,14 +1573,28 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
-        List<Map<String, Object>> weightRows = Arrays.asList(
+        List<Map<String, Object>> demoRows = Arrays.asList(
                 Maps.of("id", id,
                         "birth", DATE_FORMAT.format(birthdate)
                 )
         );
 
         UpdateRowsCommand command = new UpdateRowsCommand("study", "demographics");
-        command.setRows(weightRows);
+        command.setRows(demoRows);
+        command.execute(connection, getProjectName());
+    }
+
+    private void setParticipantDeathDate(String id, Date deathdate) throws IOException, CommandException
+    {
+        Connection connection = createDefaultConnection(true);
+        List<Map<String, Object>> deathsRows = Arrays.asList(
+                Maps.of("id", id,
+                        "date", DATE_FORMAT.format(deathdate)
+                )
+        );
+
+        UpdateRowsCommand command = new UpdateRowsCommand("study", "deaths");
+        command.setRows(deathsRows);
         command.execute(connection, getProjectName());
     }
 
