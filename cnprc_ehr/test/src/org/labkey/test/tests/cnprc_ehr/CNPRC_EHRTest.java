@@ -751,7 +751,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = new DataRegionTable("Data", getDriver());
         final List<String> rowData = results.getRowDataAsText(results.getRowIndex("1"), "Subject", "Sex", "Sire", "Dam", "Lab Case", "Date Tested", "Notes");
         assertEquals("Bad genetics data",
-                Arrays.asList("TEST3", "F", "TEST6390238", "TEST2312318", "PDA0123", "2003-02-14 00:00", "TEST3 qualifies as an offspring of TEST2312318 and TEST6390238."),
+                Arrays.asList("TEST1099252", "F", "TEST6390238", "TEST2312318", "PDA0123", "2003-02-14 00:00", "TEST1099252 qualifies as an offspring of TEST2312318 and TEST6390238."),
                 rowData);
         results.assertPaginationText(1,100,222);
     }
@@ -1408,7 +1408,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
             assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
         }
 
-        assertEquals("Wrong row count: ", 1, results.getDataRowCount());
+        assertEquals("Wrong row count: ", 2, results.getDataRowCount());
 
     }
 
@@ -1696,7 +1696,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                id,"Male","Offspring","TEST3","2009-08-03","Male",""," ","Dead", " "
+                id,"Male","Offspring","TEST2","2002-10-13","Female","AMC, BETA, CHU","58737393","Alive", "58737393"
         );
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
@@ -1715,10 +1715,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         id = "TEST3";
         animalHistoryPage.searchSingleAnimal(id);
-        waitForElement(new Locator.LinkLocator("Siblings - test3"));
+        waitForElement(new Locator.LinkLocator("Siblings - " + id));
         results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList(
-                id,"Full Sib","TEST2227135","Male",""," ","TEST2312318","TEST6390238", "Alive", " "
+                id,"Full Sib","TEST2","Female","AMC, BETA, CHU","58737393","TEST2312318","TEST6390238", "Alive", "58737393"
         );
         resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong row count",10,results.getDataRowCount());
@@ -1726,7 +1726,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         animalHistoryPage.clickCategoryTab("Genetics");
         animalHistoryPage.clickReportTab("Kinship");
-        waitForText("Kinship - test3");
+        waitForText("Kinship - " + id);
         waitForText("Coefficient");
         results = animalHistoryPage.getActiveReportDataRegion();
         expectedColumns= Arrays.asList(
@@ -1734,10 +1734,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
         expected = Arrays.asList(
-                "TEST3","TEST5158984","0.25"
+                id,"TEST5158984","0.25"
         );
         resultsRowDataAsText = results.getRowDataAsText(0);
-        assertEquals("Wrong row count",14,results.getDataRowCount());
+        assertEquals("Wrong row count",12,results.getDataRowCount());
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
         animalHistoryPage.clickReportTab("Inbreeding Coefficients");

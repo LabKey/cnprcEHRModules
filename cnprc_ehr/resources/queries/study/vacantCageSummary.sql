@@ -26,7 +26,7 @@ from
     WHERE cage is not null
     ) c on (r.room = c.room)
   LEFT JOIN study.housing h ON (r.room=h.room AND c.cage=h.cage AND h.enddate is null)
-  join cnprc_ehr.cage_location_history clh on clh.location = c.room || '' || c.cage and clh.to_date is null
+  join cnprc_ehr.cage_location_history clh on clh.location = c.room || c.cage and clh.to_date is null
   join cnprc_ehr.room_enclosure re on re.room = r.room
   WHERE
   (clh.file_status = 'AC' and

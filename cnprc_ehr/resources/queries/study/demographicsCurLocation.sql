@@ -10,7 +10,7 @@ SELECT
   CASE
   WHEN d2.cage IS NULL
     THEN d2.room
-  ELSE (d2.room || '' || d2.cage)
+  ELSE (d2.room || d2.cage)
   END                   AS Location,
   d2.room.area,
   d2.room,
@@ -30,7 +30,7 @@ FROM study.housing d2
 INNER JOIN (
 select id from study.housing where enddate is null group by id having count(*) = 1
 ) ensureSingleRecord on ensureSingleRecord.id = d2.id
-LEFT JOIN cnprc_ehr.cage_location_history clh ON clh.location = (d2.room || '' || d2.cage) AND clh.to_date IS NULL
+LEFT JOIN cnprc_ehr.cage_location_history clh ON clh.location = (d2.room || d2.cage) AND clh.to_date IS NULL
 LEFT JOIN cnprc_ehr.room_enclosure room_enc ON room_enc.room = d2.room
 WHERE d2.enddate IS NULL
 AND d2.qcstate.publicdata = TRUE
