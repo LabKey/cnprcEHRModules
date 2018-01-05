@@ -1368,7 +1368,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong Housing History results,",
                 Arrays.asList("TEST4564246", "2005-01-11 14:00", " ", "<6824778>", "4953547"),
-                historyTable.getRowDataAsText(3, "Id", "date", "enddate", "room", "cage"));
+                historyTable.getRowDataAsText(4, "Id", "date", "enddate", "room", "cage"));
     }
 
     @Test
