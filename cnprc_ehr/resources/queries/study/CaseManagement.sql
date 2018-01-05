@@ -14,44 +14,54 @@
  * limitations under the License.
  */
 SELECT
-  cases.Id,
-  cases.date,
-  cases.Id.curLocation.location                        AS Location,
-  cases.admitType                                      AS AdmitType,
-  cases.problem                                        AS Problem,
-  cases.date                                           AS AdmitDate,
-  cases.duration                                       AS DaysAdmitted,
-  ''                                                   AS MHObs,
-  cases.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
-  cases.Id.curLocation.Area,
-  cases.Id.curLocation.Room,
+  casesAndMorningHealthObs.Id,
+  casesAndMorningHealthObs.Location,
+  casesAndMorningHealthObs.AdmitType,
+  casesAndMorningHealthObs.Problem,
+  casesAndMorningHealthObs.AdmitDate,
+  casesAndMorningHealthObs.DaysAdmitted,
+  casesAndMorningHealthObs.MHObs,
+  casesAndMorningHealthObs.ProjectCode,
+  casesAndMorningHealthObs.Area,
+  casesAndMorningHealthObs.Room,
   cr.p,
   cr.p2,
   cr.remark
 FROM
-  (SELECT
-     max(clinremarks.date) AS maxDate,
-     clinremarks.caseId
-   FROM clinremarks
-   GROUP BY caseid) sub
-  JOIN clinremarks cr ON cr.caseid = sub.caseid AND cr.date = sub.maxDate
-  RIGHT JOIN study.cases ON cr.caseid = cases.caseid
-  WHERE cases.endDate is null
-UNION ALL
-SELECT
-  mho.Id,
-  mho.date,
-  mho.location                                       AS Location,
-  'MH'                                               AS AdmitType,
-  ''                                                 AS Problem,
-  ''                                                 AS AdmitDate,
-  mho.duration                                       AS DaysAdmitted,
-  mho.observation                                    AS MHObs,
-  mho.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
-  mho.Id.curLocation.Area,
-  mho.Id.curLocation.Room,
-  ''                                                 AS p,
-  ''                                                 AS p2,
-  ''                                                 AS remark
-FROM study.morningHealthObs mho
-WHERE mho.endDate is null
+  (
+    SELECT
+      cases.Id,
+      cases.Id.curLocation.location                        AS Location,
+      cases.admitType                                      AS AdmitType,
+      cases.problem                                        AS Problem,
+      cases.date                                           AS AdmitDate,
+      cases.duration                                       AS DaysAdmitted,
+      ''                                                   AS MHObs,
+      cases.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
+      cases.Id.curLocation.Area,
+      cases.Id.curLocation.Room
+    FROM
+      study.cases
+    WHERE cases.endDate IS NULL
+    UNION ALL
+    SELECT
+      mho.Id,
+      mho.location                                       AS Location,
+      'MH'                                               AS AdmitType,
+      ''                                                 AS Problem,
+      NULL                                               AS AdmitDate,
+      mho.duration                                       AS DaysAdmitted,
+      mho.observation                                    AS MHObs,
+      mho.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
+      mho.Id.curLocation.Area,
+      mho.Id.curLocation.Room
+    FROM study.morningHealthObs mho
+    WHERE mho.endDate IS NULL) casesAndMorningHealthObs
+  LEFT JOIN (SELECT
+               max(clinremarks.date) AS maxDate,
+               clinremarks.Id
+             FROM clinremarks
+             GROUP BY id) latestClinRemark ON latestClinRemark.id = casesAndMorningHealthObs.id
+  LEFT JOIN clinremarks cr ON cr.id = latestClinRemark.id AND cr.date = latestClinRemark.maxDate
+
+
