@@ -2,7 +2,7 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="pairings" tableDbType="TABLE" useColumnOrder="true">
-                <javaCustomizer>org.labkey.cnprc_ehr.table.CNPRC_PairingCustomizer</javaCustomizer>
+                <javaCustomizer class="org.labkey.cnprc_ehr.table.CNPRC_PairingCustomizer" />
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="pairedWithId">

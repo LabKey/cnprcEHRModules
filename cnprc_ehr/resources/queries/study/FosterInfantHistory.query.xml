@@ -2,7 +2,7 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="FosterInfantHistory" tableDbType="NOT_IN_DB" useColumnOrder="true">
-                <javaCustomizer>org.labkey.cnprc_ehr.table.CNPRC_FosteringCustomizer</javaCustomizer>
+                <javaCustomizer class="org.labkey.cnprc_ehr.table.CNPRC_FosteringCustomizer" />
                 <columns>
                     <column columnName="Id">
                         <columnTitle>Foster Mother</columnTitle>

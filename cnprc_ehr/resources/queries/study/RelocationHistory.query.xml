@@ -2,7 +2,7 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="RelocationHistory" tableDbType="NOT_IN_DB" useColumnOrder="true">
-                <javaCustomizer>org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer</javaCustomizer>
+                <javaCustomizer class="org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer" />
                 <tableUrl />
                 <insertUrl />
                 <importUrl />
