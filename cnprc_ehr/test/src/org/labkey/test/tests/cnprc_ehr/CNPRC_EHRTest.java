@@ -1165,12 +1165,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST1112911"));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(2,5));
-        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(2,8));
-        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(2,9));
-        assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(2,12));
-        assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(2,13));
-        assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(2,14));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(3,5));
+        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(3,8));
+        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(3,9));
+        assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(3,13));
+        assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(3,12));
+        assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(3,14));
     }
 
     @Test
