@@ -1211,8 +1211,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertElementPresent(Locator.linkWithText("TSTCP"));
         int startColumnIndex = 2;
-        int rowIndex = 1;
-        assertEquals("Wrong value for Location: ","AC5003-89" , searchResults.getDataAsText(rowIndex, startColumnIndex));
+        int rowIndex = searchResults.getRowIndex("Id", "TSTCP");
+        assertEquals("Wrong value for Location: ","AC500389" , searchResults.getDataAsText(rowIndex, startColumnIndex));
         assertEquals("Wrong value for Cage Size: ","4" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Rate Class: ","N" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Id: ","TSTCP" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
@@ -1223,15 +1223,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         ++startColumnIndex;
         assertEquals("Wrong value for Colony Code: ","L" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Breeding Code: ","M" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Breeding Code: ","BP" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Breeding Book: ","BP" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Secondary Projects: ", "1101324, Pc5C2", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Secondary Projects: ", "Pc5C2, 1101324", searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Census Flag List: ", "CHU", searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Pregnancy: ", "PRG-1111", searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Term Comment: ", "TRM CMMNT", searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for PG Comment: ", "Not Completed", searchResults.getDataAsText(rowIndex,++startColumnIndex));
         ++startColumnIndex;
-        assertEquals("Wrong value for Encl Supervisor: ", " ", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Enst: ", " ", searchResults.getDataAsText(rowIndex,++startColumnIndex));
         assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", searchResults.getDataAsText(rowIndex,++startColumnIndex));
     }
 
@@ -1408,7 +1408,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
             assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
         }
 
-        assertEquals("Wrong row count: ", 2, results.getDataRowCount());
+        assertEquals("Wrong row count: ", 1, results.getDataRowCount());
 
     }
 
