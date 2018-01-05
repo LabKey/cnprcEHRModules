@@ -4,7 +4,7 @@
         <column name="id" />
         <column name="admitType" />
         <column name="problem" />
-        <column name="date" />
+        <column name="AdmitDate" />
         <column name="DaysAdmitted" />
         <column name="MHObs" />
         <column name="ProjectCode" />
@@ -15,6 +15,6 @@
         <column name="area" />
     </columns>
     <sorts>
-        <sort column="date" descending="true"/>
+        <sort column="AdmitDate" descending="true"/>
     </sorts>
 </customView>
