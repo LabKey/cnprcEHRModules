@@ -1267,8 +1267,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertElementPresent(Locator.linkWithText("2011-09-09 09:00"));
         assertElementPresent(Locator.linkWithText("2015-04-21"));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(2,2));
-        assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(2,6));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(3,2));
+        assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(3,6));
 
         insertWeightAndTBfor("TEST1684145");
         searchPanel = getSearchPanel();
