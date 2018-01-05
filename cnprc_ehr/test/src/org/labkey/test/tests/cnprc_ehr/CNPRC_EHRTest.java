@@ -2297,57 +2297,57 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
 
-    @Test @Ignore
+    @Override @Ignore
     public void customActionsTest()
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testQuickSearch()
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testWeightValidation() throws Exception
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testSecurityDataAdmin() throws Exception
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testSecurityRequester() throws Exception
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testSecurityBasicSubmitter() throws Exception
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testSecurityFullSubmitter() throws Exception
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testSecurityFullUpdater() throws Exception
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testSecurityRequestAdmin() throws Exception
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testCustomButtons()
     {
     }
 
-    @Test @Ignore
+    @Override @Ignore
     public void testCalculatedAgeColumns()
     {
     }
