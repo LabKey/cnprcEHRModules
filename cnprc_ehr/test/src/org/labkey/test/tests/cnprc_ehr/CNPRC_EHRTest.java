@@ -387,59 +387,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap = new HashMap<>();
         rowMap.put("pp_pk", 2);
         deleteIfNeeded("cnprc_ehr", "project_protocol", rowMap, "pp_pk");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST3771679-1");
-        // "Description" isn't a pk, so this input parameter is named inaccurately; just using it as field on which to delete
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST3771679-2");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST3771679-3");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST4037096-1");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST4037096-2");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST4037096-3");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST7407382-1");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "TEST7407382-2");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "44445-1");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "44445-2");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "44445-3");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "44446-1");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
-
-        rowMap = new HashMap<>();
-        rowMap.put("Description", "44446-2");
-        deleteIfNeeded("study", "weight", rowMap, "Description");
     }
 
     @Override
@@ -575,107 +522,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("location", ROOM_3168659 + "-2");
         rowMap.put("room", ROOM_3168659);
         rowMap.put("cage", "2");
-        insertCmd.addRow(rowMap);
-        insertCmd.execute(cn, getContainerPath());
-
-        //then study.weight
-        ZonedDateTime now = ZonedDateTime.now();
-        ZonedDateTime fiftyDaysAgo = now.minusDays(50);
-        ZonedDateTime seventyFiveDaysAgo = now.minusDays(50);
-        ZonedDateTime oneHundredSeventyDaysAgo = now.minusDays(170);
-        ZonedDateTime twoHundredDaysAgo = now.minusDays(200);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        insertCmd = new InsertRowsCommand("study", "weight");
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "9.1");
-        rowMap.put("ts", dateTimeFormatter.format(now));
-        rowMap.put("date", dateTimeFormatter.format(now));
-        rowMap.put("Id", "TEST3771679");
-        rowMap.put("Description", "TEST3771679-1");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "12.0");
-        rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(fiftyDaysAgo));
-        rowMap.put("Id", "TEST3771679");
-        rowMap.put("Description", "TEST3771679-2");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "13.0");
-        rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
-        rowMap.put("Id", "TEST3771679");
-        rowMap.put("Description", "TEST3771679-3");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "9.89");
-        rowMap.put("ts", dateTimeFormatter.format(now));
-        rowMap.put("date", dateTimeFormatter.format(now));
-        rowMap.put("Id", "TEST4037096");
-        rowMap.put("Description", "TEST4037096-1");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "11.0");
-        rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(fiftyDaysAgo));
-        rowMap.put("Id", "TEST4037096");
-        rowMap.put("Description", "TEST4037096-2");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "10.5");
-        rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
-        rowMap.put("Id", "TEST4037096");
-        rowMap.put("Description", "TEST4037096-3");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "10.0");
-        rowMap.put("ts", dateTimeFormatter.format(now));
-        rowMap.put("date", dateTimeFormatter.format(now));
-        rowMap.put("Id", "TEST7407382");
-        rowMap.put("Description", "TEST7407382-1");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "15.0");
-        rowMap.put("ts", dateTimeFormatter.format(twoHundredDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(twoHundredDaysAgo));
-        rowMap.put("Id", "TEST7407382");
-        rowMap.put("Description", "TEST7407382-2");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "10.0");
-        rowMap.put("ts", dateTimeFormatter.format(now));
-        rowMap.put("date", dateTimeFormatter.format(now));
-        rowMap.put("Id", "44445");
-        rowMap.put("Description", "44445-1");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "12.0");
-        rowMap.put("ts", dateTimeFormatter.format(fiftyDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(fiftyDaysAgo));
-        rowMap.put("Id", "44445");
-        rowMap.put("Description", "44445-2");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "13.0");
-        rowMap.put("ts", dateTimeFormatter.format(seventyFiveDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
-        rowMap.put("Id", "44445");
-        rowMap.put("Description", "44445-3");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "10.0");
-        rowMap.put("ts", dateTimeFormatter.format(oneHundredSeventyDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(oneHundredSeventyDaysAgo));
-        rowMap.put("Id", "44446");
-        rowMap.put("Description", "44446-1");
-        insertCmd.addRow(rowMap);
-        rowMap = new HashMap<>();
-        rowMap.put("weight", "14.0");
-        rowMap.put("ts", dateTimeFormatter.format(twoHundredDaysAgo));
-        rowMap.put("date", dateTimeFormatter.format(twoHundredDaysAgo));
-        rowMap.put("Id", "44446");
-        rowMap.put("Description", "44446-2");
         insertCmd.addRow(rowMap);
         insertCmd.execute(cn, getContainerPath());
     }
@@ -1413,8 +1259,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testTenPercentWeightDropReport() throws Exception
+    public void testTenPercentWeightDropReport() throws IOException, CommandException
     {
+        insertWeights();
+
         SearchPanel searchPanel = getSearchPanel();  // just using this to go to the search panel
         clickAndWait(Locator.linkWithText("10%/20% Weight Drop"));
 
@@ -1456,6 +1304,97 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong row count: ", 2, results.getDataRowCount());
 
+    }
+
+    private void insertWeights() throws IOException, CommandException
+    {
+        InsertRowsCommand insertCmd = new InsertRowsCommand("study", "weight");
+
+        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime fiftyDaysAgo = now.minusDays(50);
+        ZonedDateTime seventyFiveDaysAgo = now.minusDays(50);
+        ZonedDateTime oneHundredSeventyDaysAgo = now.minusDays(170);
+        ZonedDateTime twoHundredDaysAgo = now.minusDays(200);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Map<String,Object> rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "9.1");
+        rowMapWeights.put("date", dateTimeFormatter.format(now));
+        rowMapWeights.put("Id", "TEST3771679");
+        rowMapWeights.put("Description", "TEST3771679-1");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "12.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(fiftyDaysAgo));
+        rowMapWeights.put("Id", "TEST3771679");
+        rowMapWeights.put("Description", "TEST3771679-2");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "13.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
+        rowMapWeights.put("Id", "TEST3771679");
+        rowMapWeights.put("Description", "TEST3771679-3");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "9.89");
+        rowMapWeights.put("date", dateTimeFormatter.format(now));
+        rowMapWeights.put("Id", "TEST4037096");
+        rowMapWeights.put("Description", "TEST4037096-1");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "11.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(fiftyDaysAgo));
+        rowMapWeights.put("Id", "TEST4037096");
+        rowMapWeights.put("Description", "TEST4037096-2");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "10.5");
+        rowMapWeights.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
+        rowMapWeights.put("Id", "TEST4037096");
+        rowMapWeights.put("Description", "TEST4037096-3");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "10.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(now));
+        rowMapWeights.put("Id", "TEST7407382");
+        rowMapWeights.put("Description", "TEST7407382-1");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "15.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(twoHundredDaysAgo));
+        rowMapWeights.put("Id", "TEST7407382");
+        rowMapWeights.put("Description", "TEST7407382-2");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "10.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(now));
+        rowMapWeights.put("Id", "44445");
+        rowMapWeights.put("Description", "44445-1");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "12.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(fiftyDaysAgo));
+        rowMapWeights.put("Id", "44445");
+        rowMapWeights.put("Description", "44445-2");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "13.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(seventyFiveDaysAgo));
+        rowMapWeights.put("Id", "44445");
+        rowMapWeights.put("Description", "44445-3");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "10.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(oneHundredSeventyDaysAgo));
+        rowMapWeights.put("Id", "44446");
+        rowMapWeights.put("Description", "44446-1");
+        insertCmd.addRow(rowMapWeights);
+        rowMapWeights = new HashMap<>();
+        rowMapWeights.put("weight", "14.0");
+        rowMapWeights.put("date", dateTimeFormatter.format(twoHundredDaysAgo));
+        rowMapWeights.put("Id", "44446");
+        rowMapWeights.put("Description", "44446-2");
+        insertCmd.addRow(rowMapWeights);
+        insertCmd.execute(createDefaultConnection(false), getContainerPath());
     }
 
     @Test
