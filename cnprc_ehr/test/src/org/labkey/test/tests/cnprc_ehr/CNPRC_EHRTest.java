@@ -1927,16 +1927,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        assertEquals("Wrong row count: ", 3, results.getDataRowCount());
+        assertEquals("Wrong row count: ", 1, results.getDataRowCount());
 
         List<String> expected = Arrays.asList("44446","2016-10-05"," ","AB126/YZ18","Pc5C2"," ","X","T");
         confirmRowText(results, expected, 0);
-
-        expected = Arrays.asList("44446","2014-08-19"," ","AB126/YZ18","Pc5C2"," "," ","T");
-        confirmRowText(results, expected, 1);
-
-        expected = Arrays.asList("44446","2013-03-16"," ","AB126/YZ18","Pc5C2"," "," "," ");
-        confirmRowText(results, expected, 2);
 
         animalHistoryPage.searchSingleAnimal("44444");
         waitForElement(Locator.linkContainingText(reportTab));
