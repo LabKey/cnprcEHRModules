@@ -13,6 +13,8 @@
         <column name="remark" />
         <column name="room" />
         <column name="area" />
+        <column name="assignedVet" />
+        <column name="nextFollowUp" />
     </columns>
     <sorts>
         <sort column="AdmitDate" descending="true"/>

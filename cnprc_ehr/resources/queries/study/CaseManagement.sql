@@ -26,7 +26,9 @@ SELECT
   casesAndMorningHealthObs.Room,
   cr.p,
   cr.p2,
-  cr.remark
+  cr.remark,
+  null as AssignedVet,
+  null as NextFollowUp
 FROM
   (
     SELECT
