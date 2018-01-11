@@ -43,6 +43,7 @@ import org.labkey.test.components.ext4.widgets.SearchPanel;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.pages.ehr.ColonyOverviewPage;
+import org.labkey.test.pages.ehr.EnterDataPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
@@ -69,11 +70,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @Category({CustomModules.class, EHR.class})
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
@@ -655,6 +659,74 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         actionId = new ControllerActionId(colonyOverview.getAttribute("href"));
         assertEquals("Wrong controller-action for 'Colony Overview", new ControllerActionId("ehr", "colonyOverview"), actionId);
     }
+
+    @Test
+    public void testCnprcCaseManagement()
+    {
+        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+
+        log("Checking records for all cases");
+        enterData.clickAndWait(Locator.linkWithText("All Cases"));
+        DataRegionTable allCasesTable = new DataRegionTable("query",getDriver());
+        Set<String> ac = new HashSet<String>(allCasesTable.getColumnDataAsText("AdmitType"));
+        assertEquals("Wrong number of rows found in all cases",6,ac.size());
+
+        log("Checking records morning health");
+        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData.clickAndWait(Locator.linkWithText("Morning Health"));
+        DataRegionTable morningHealthTable = new DataRegionTable("query",getDriver());
+        Set<String> mh = new HashSet<String>(morningHealthTable.getColumnDataAsText("AdmitType"));
+        assertEquals("Wrong number of rows found in Morning Health",1,mh.size());
+        assertTrue("Wrong value in Admit Type for Morning Health",mh.contains("MH"));
+
+        log("Checking records for hospital");
+        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData.clickAndWait(Locator.linkWithText("Hospital"));
+        DataRegionTable hospitalTable = new DataRegionTable("query",getDriver());
+        Set<String> h = new HashSet<String>(hospitalTable.getColumnDataAsText("AdmitType"));
+        assertEquals("Wrong number of rows found in hospital",1,h.size());
+        assertTrue("Wrong value in Admit Type for hospital",h.contains("H"));
+
+        log("Checking records for outpatient");
+        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData.clickAndWait(Locator.linkWithText("Outpatient"));
+        DataRegionTable outPatientTable = new DataRegionTable("query",getDriver());
+        Set<String> op = new HashSet<String>(outPatientTable.getColumnDataAsText("AdmitType"));
+        assertEquals("Wrong number of rows found in outpatient",1,op.size());
+        assertTrue("Wrong value in Admit Type for outpatient",op.contains("O"));
+
+        log("Checking records for LTOP");
+        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData.clickAndWait(Locator.linkWithText("LTOP"));
+        DataRegionTable ltopTable = new DataRegionTable("query",getDriver());
+        Set<String> ltop = new HashSet<String>(ltopTable.getColumnDataAsText("AdmitType"));
+        assertEquals("Wrong number of rows found in LTOP",1,ltop.size());
+        assertTrue("Wrong value in Admit Type for LTOP",ltop.contains("L"));
+
+        log("Checking records for post operation");
+        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData.clickAndWait(Locator.linkWithText("Post-Operation"));
+        DataRegionTable ppTable = new DataRegionTable("query",getDriver());
+        Set<String> pp = new HashSet<String>(ppTable.getColumnDataAsText("AdmitType"));
+        assertEquals("Wrong number of rows found in Post operation",1,pp.size());
+        assertTrue("Wrong value in Admit Type for Post-operation",pp.contains("P"));
+
+    }
+
+    @Test
+    public void testCnprcCaseMgmPP2Remarks()
+    {
+        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+        log("Checking records for all cases");
+        enterData.clickAndWait(Locator.linkWithText("All Cases"));
+        DataRegionTable allCasesTable = new DataRegionTable("query",getDriver());
+        allCasesTable.setFilter("Id","Equals","44444");
+        allCasesTable.setFilter("AdmitType","Equals","P");
+        assertTrue("Wrong value in plan",allCasesTable.getColumnDataAsText("p").contains("Value for p-1"));
+        assertTrue("Wrong value in p2(last entered)",allCasesTable.getColumnDataAsText("p2").contains("Value for p2-1"));
+        assertTrue("Wrong value in remarks",allCasesTable.getColumnDataAsText("remark").contains("Value for remarks-1"));
+    }
+
 
     @Test
     public void testCnprcColonyOverview()
