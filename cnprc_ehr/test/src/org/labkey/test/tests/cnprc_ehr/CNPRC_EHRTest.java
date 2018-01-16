@@ -666,14 +666,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
 
         log("Checking records for all cases");
-        enterData.clickAndWait(Locator.linkWithText("All Cases"));
+        enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
         DataRegionTable allCasesTable = new DataRegionTable("query",getDriver());
         Set<String> ac = new HashSet<String>(allCasesTable.getColumnDataAsText("AdmitType"));
         assertEquals("Wrong number of rows found in all cases",6,ac.size());
 
         log("Checking records morning health");
         enterData = EnterDataPage.beginAt(this,getProjectName());
-        enterData.clickAndWait(Locator.linkWithText("Morning Health"));
+        enterData.waitAndClickAndWait(Locator.linkWithText("Morning Health"));
         DataRegionTable morningHealthTable = new DataRegionTable("query",getDriver());
         Set<String> mh = new HashSet<String>(morningHealthTable.getColumnDataAsText("AdmitType"));
         assertEquals("Wrong number of rows found in Morning Health",1,mh.size());
@@ -681,7 +681,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         log("Checking records for hospital");
         enterData = EnterDataPage.beginAt(this,getProjectName());
-        enterData.clickAndWait(Locator.linkWithText("Hospital"));
+        enterData.waitAndClickAndWait(Locator.linkWithText("Hospital"));
         DataRegionTable hospitalTable = new DataRegionTable("query",getDriver());
         Set<String> h = new HashSet<String>(hospitalTable.getColumnDataAsText("AdmitType"));
         assertEquals("Wrong number of rows found in hospital",1,h.size());
@@ -689,7 +689,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         log("Checking records for outpatient");
         enterData = EnterDataPage.beginAt(this,getProjectName());
-        enterData.clickAndWait(Locator.linkWithText("Outpatient"));
+        enterData.waitAndClickAndWait(Locator.linkWithText("Outpatient"));
         DataRegionTable outPatientTable = new DataRegionTable("query",getDriver());
         Set<String> op = new HashSet<String>(outPatientTable.getColumnDataAsText("AdmitType"));
         assertEquals("Wrong number of rows found in outpatient",1,op.size());
@@ -697,7 +697,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         log("Checking records for LTOP");
         enterData = EnterDataPage.beginAt(this,getProjectName());
-        enterData.clickAndWait(Locator.linkWithText("LTOP"));
+        enterData.waitAndClickAndWait(Locator.linkWithText("LTOP"));
         DataRegionTable ltopTable = new DataRegionTable("query",getDriver());
         Set<String> ltop = new HashSet<String>(ltopTable.getColumnDataAsText("AdmitType"));
         assertEquals("Wrong number of rows found in LTOP",1,ltop.size());
@@ -705,7 +705,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         log("Checking records for post operation");
         enterData = EnterDataPage.beginAt(this,getProjectName());
-        enterData.clickAndWait(Locator.linkWithText("Post-Operation"));
+        enterData.waitAndClickAndWait(Locator.linkWithText("Post-Operation"));
         DataRegionTable ppTable = new DataRegionTable("query",getDriver());
         Set<String> pp = new HashSet<String>(ppTable.getColumnDataAsText("AdmitType"));
         assertEquals("Wrong number of rows found in Post operation",1,pp.size());
@@ -718,7 +718,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
         log("Checking records for all cases");
-        enterData.clickAndWait(Locator.linkWithText("All Cases"));
+        enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
         DataRegionTable allCasesTable = new DataRegionTable("query",getDriver());
         allCasesTable.setFilter("Id","Equals","44444");
         allCasesTable.setFilter("AdmitType","Equals","P");
