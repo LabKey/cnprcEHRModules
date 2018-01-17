@@ -17,12 +17,17 @@
 package org.labkey.cnprc_ehr;
 
 import org.labkey.api.action.SimpleRedirectAction;
+import org.labkey.api.action.SimpleViewAction;
 import org.labkey.api.action.SpringActionController;
 import org.labkey.api.data.Container;
 import org.labkey.api.security.RequiresPermission;
 import org.labkey.api.security.permissions.ReadPermission;
 import org.labkey.api.util.PageFlowUtil;
 import org.labkey.api.view.ActionURL;
+import org.labkey.api.view.HtmlView;
+import org.labkey.api.view.NavTree;
+import org.springframework.validation.BindException;
+import org.springframework.web.servlet.ModelAndView;
 
 public class CNPRC_EHRController extends SpringActionController
 {
@@ -62,6 +67,29 @@ public class CNPRC_EHRController extends SpringActionController
             url.addParameter("query.queryName", "observation_type_snomed");
             url.addParameter("obsCode", form.getObsCode());
             return url;
+        }
+    }
+
+    @RequiresPermission(ReadPermission.class)
+    public class ConfirmObservationAction extends SimpleViewAction
+    {
+        @Override
+        public NavTree appendNavTrail(NavTree root)
+        {
+            return null;
+        }
+
+        @Override
+        public ModelAndView getView(Object o, BindException errors) throws Exception
+        {
+            String pid = getViewContext().getRequest().getParameter("id");
+            return new HtmlView("Participant Id: " + pid +
+                    "<div>Animal Details</div>" +
+                    "<div>Appetite:<select><option>Lookup</option></select> </div>" +
+                    "<div>Hydration:<select><option>Lookup</option></select> </div>" +
+                    "<div>Stool:<select><option>Lookup</option></select> </div>" +
+                    "<div>Remark:<textarea></textarea></div>");
+
         }
     }
 }

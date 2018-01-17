@@ -27,8 +27,10 @@ SELECT
   cr.p,
   cr.p2,
   cr.remark,
-  null as AssignedVet,
-  null as NextFollowUp
+  NULL AS AssignedVet,
+  NULL AS NextFollowUp,
+  casesAndMorningHealthObs.history,
+  casesAndMorningHealthObs.confirm AS confirm
 FROM
   (
     SELECT
@@ -41,7 +43,9 @@ FROM
       ''                                                   AS MHObs,
       cases.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
       cases.Id.curLocation.Area,
-      cases.Id.curLocation.Room
+      cases.Id.curLocation.Room,
+      cases.Id.Demographics.history,
+      '' AS confirm
     FROM
       study.cases
     WHERE cases.endDate IS NULL
@@ -56,7 +60,9 @@ FROM
       mho.observation                                    AS MHObs,
       mho.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
       mho.Id.curLocation.Area,
-      mho.Id.curLocation.Room
+      mho.Id.curLocation.Room,
+      mho.Id.Demographics.history,
+      'Confirm' AS confirm
     FROM study.morningHealthObs mho
     WHERE mho.endDate IS NULL) casesAndMorningHealthObs
   LEFT JOIN (SELECT

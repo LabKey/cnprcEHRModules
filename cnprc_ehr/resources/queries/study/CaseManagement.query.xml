@@ -5,17 +5,22 @@
                 <tableUrl />
                 <insertUrl/>
                 <importUrl/>
-                <updateUrl/>
+                <updateUrl>/cnprc_ehr/requestDetails.view?</updateUrl>
                 <deleteUrl/>
                 <columns>
                     <column columnName="p">
                         <columnTitle>Plan</columnTitle>
+                    </column>
+                    <column columnName="confirm">
+                        <url>/cnprc_ehr/confirmObservation.view?id=${Id}</url>
                     </column>
                     <column columnName="p2">
                         <columnTitle>P2 (last entered)</columnTitle>
                     </column>
                     <column columnName="remark">
                         <columnTitle>Remark (Last)</columnTitle>
+                    </column>
+                    <column columnName="id/history">
                     </column>
                 </columns>
             </table>

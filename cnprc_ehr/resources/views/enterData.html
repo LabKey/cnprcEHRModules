@@ -34,19 +34,19 @@
                                 },
                                 items: [
                                     {
-                                    xtype: 'ldk-linkbutton',
-                                    text: 'All Cases',
-                                    linkCls: 'labkey-text-link',
-                                    href: LABKEY.ActionURL.buildURL('query', 'executeQuery', null, {
-                                        schemaName: 'study',
-                                        'query.queryName': 'Casemanagement'
-                                    })
-                                }
-                                    , getFilteredCasesLink('Morning Health','MH')
-                                    , getFilteredCasesLink('Hospital','H')
-                                    , getFilteredCasesLink('Outpatient','O')
-                                    , getFilteredCasesLink('LTOP','L')
-                                    , getFilteredCasesLink('Post-Operation','P')
+                                        xtype: 'ldk-linkbutton',
+                                        text: 'All Cases',
+                                        linkCls: 'labkey-text-link',
+                                        href: LABKEY.ActionURL.buildURL('query', 'executeQuery', null, {
+                                            schemaName: 'study',
+                                            'query.queryName': 'Casemanagement'
+                                        })
+                                    }
+                                    , getFilteredCasesLink('Morning Health', 'MH')
+                                    , getFilteredCasesLink('Hospital', 'H')
+                                    , getFilteredCasesLink('Outpatient', 'O')
+                                    , getFilteredCasesLink('LTOP', 'L')
+                                    , getFilteredCasesLink('Post-Operation', 'P')
                                 ]
                             }]
                         }]

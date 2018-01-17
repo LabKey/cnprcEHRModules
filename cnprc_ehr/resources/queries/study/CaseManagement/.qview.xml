@@ -15,6 +15,8 @@
         <column name="area" />
         <column name="assignedVet" />
         <column name="nextFollowUp" />
+        <column name="confirm" />
+        <column name="history" />
     </columns>
     <sorts>
         <sort column="AdmitDate" descending="true"/>
