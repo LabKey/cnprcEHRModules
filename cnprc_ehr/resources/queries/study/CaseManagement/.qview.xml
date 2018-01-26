@@ -17,6 +17,7 @@
         <column name="nextFollowUp" />
         <column name="confirm" />
         <column name="history" />
+        <column name="meds" />
     </columns>
     <sorts>
         <sort column="AdmitDate" descending="true"/>

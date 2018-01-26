@@ -30,7 +30,9 @@ SELECT
   NULL AS AssignedVet,
   NULL AS NextFollowUp,
   casesAndMorningHealthObs.history,
-  casesAndMorningHealthObs.confirm AS confirm
+  casesAndMorningHealthObs.confirm AS confirm,
+  (CASE WHEN meds.medCount > 0 THEN meds.medNames ELSE NULL END) as meds
+
 FROM
   (
     SELECT
@@ -64,12 +66,16 @@ FROM
       mho.Id.Demographics.history,
       'Confirm' AS confirm
     FROM study.morningHealthObs mho
-    WHERE mho.endDate IS NULL) casesAndMorningHealthObs
+    WHERE mho.endDate IS NULL
+          AND mho.date > timestampadd('SQL_TSI_DAY', -1 , curdate())
+  ) casesAndMorningHealthObs
+
   LEFT JOIN (SELECT
                max(clinremarks.date) AS maxDate,
                clinremarks.Id
              FROM clinremarks
              GROUP BY id) latestClinRemark ON latestClinRemark.id = casesAndMorningHealthObs.id
   LEFT JOIN clinremarks cr ON cr.id = latestClinRemark.id AND cr.date = latestClinRemark.maxDate
+  LEFT JOIN (Select id, count(*)  AS medCount, group_concat(drugName) as medNames from study.treatmentOrdersActive GROUP BY id) meds on meds.id = casesAndMorningHealthObs.Id
 
 
