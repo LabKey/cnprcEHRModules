@@ -17,13 +17,13 @@ SELECT
   d.id,
   coalesce(p2.parent, d.dam) as dam,
   CASE
-    WHEN p2.parent IS NOT NULL THEN 'Genetic'
+    WHEN d.id.demographicsBirthInfo.femaleGeneticsVerify IS NOT NULL THEN 'Genetic'
     WHEN d.dam IS NOT NULL THEN 'Observed'
     ELSE null
   END as damType,
   coalesce(p1.parent, d.sire) as sire,
   CASE
-    WHEN p1.parent IS NOT NULL THEN 'Genetic'
+    WHEN d.id.demographicsBirthInfo.maleGeneticsVerify IS NOT NULL THEN 'Genetic'
     WHEN d.sire IS NOT NULL THEN 'Observed'
     ELSE null
   END as sireType,
