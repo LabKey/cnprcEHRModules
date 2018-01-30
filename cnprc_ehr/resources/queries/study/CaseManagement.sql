@@ -68,6 +68,11 @@ FROM
     FROM study.morningHealthObs mho
     WHERE mho.endDate IS NULL
           AND mho.date > timestampadd('SQL_TSI_DAY', -1 , curdate())
+          AND (
+                mho.observation LIKE '%POORAPP%' OR
+                mho.observation LIKE '%LIQDSTL%' OR
+                mho.observation LIKE '%DEHYDRT%'
+          )
   ) casesAndMorningHealthObs
 
   LEFT JOIN (SELECT

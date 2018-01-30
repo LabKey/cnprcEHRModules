@@ -328,6 +328,34 @@ Ext4.onReady(function(){
         pk: 'rowid'
     },
     {
+        label: 'Confirmation Indicators',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'confirmationIndicator',
+        pk: 'rowid'
+    },
+    {
+        label: 'Hydration Condition',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'hydrationCondition',
+        pk: 'rowid'
+    },
+    {
+        label: 'Appetite Condition',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'appetiteCondition',
+        pk: 'rowid'
+    },
+    {
+        label: 'Stool Condition',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'stoolCondition',
+        pk: 'rowid'
+    },
+    {
         label: 'Protocol Types',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',

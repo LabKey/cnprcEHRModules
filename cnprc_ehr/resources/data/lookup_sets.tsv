@@ -68,3 +68,7 @@ clinremarks_category	Clinremarks Category Field Values	value
 harvest_codes	Harvest Codes	value
 birthplace_status	Birthplace Status	value
 observation_areas	Observation Areas	value
+confirmationIndicator	Confirmation Indicator	Value	Title
+hydrationCondition	Hydration Condition	Value	Title
+appetiteCondition	Appetite Condition	Value	Title
+stoolCondition	Stool Condition	Value	Title
