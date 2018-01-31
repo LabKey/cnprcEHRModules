@@ -59,19 +59,20 @@ FROM
       ''                                                 AS Problem,
       NULL                                               AS AdmitDate,
       mho.duration                                       AS DaysAdmitted,
-      mho.observation                                    AS MHObs,
+      mhs.observation                                    AS MHObs,
       mho.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
       mho.Id.curLocation.Area,
       mho.Id.curLocation.Room,
       mho.Id.Demographics.history,
       'Confirm' AS confirm
     FROM study.morningHealthObs mho
+      JOIN study.morningHealthSigns mhs ON mhs.id = mho.id AND mhs.date = mho.date
     WHERE mho.endDate IS NULL
           AND mho.date > timestampadd('SQL_TSI_DAY', -1 , curdate())
           AND (
-                mho.observation LIKE '%POORAPP%' OR
-                mho.observation LIKE '%LIQDSTL%' OR
-                mho.observation LIKE '%DEHYDRT%'
+                mhs.observation LIKE '%POORAPP%' OR
+                mhs.observation LIKE '%LIQDSTL%' OR
+                mhs.observation LIKE '%DEHYDRT%'
           )
   ) casesAndMorningHealthObs
 
