@@ -261,6 +261,10 @@ EHR.DemographicsRecord = function(data){
             return data['lastPayorId'];
         },
 
+        getAgeToday: function(){
+            return data['ageToday'];
+        },
+
         getAcquisitionAge: function(){
             return data['acquisitionAge'];
         },

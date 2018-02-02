@@ -72,6 +72,10 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                         fieldLabel: 'Departure',
                         name: 'departure'
                     }, {
+                        fieldLabel: 'Age Today',
+                        name: 'ageToday'
+                    },
+                       {
                         fieldLabel: 'Acquisition Age',
                         name: 'acquisitionAge'
                     }, {
@@ -438,6 +442,8 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
     },
 
     appendHousingIntervals: function(toSet, results){
+        if (results.getAgeToday())
+            toSet['ageToday'] = LABKEY.Utils.encodeHtml(results.getAgeToday());
         if (results.getAcquisitionAge())
             toSet['acquisitionAge'] = LABKEY.Utils.encodeHtml(results.getAcquisitionAge());
         if (results.getTimeAtCnprc())

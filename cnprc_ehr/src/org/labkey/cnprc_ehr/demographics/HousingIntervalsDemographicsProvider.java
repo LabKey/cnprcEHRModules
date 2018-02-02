@@ -22,6 +22,7 @@ import org.labkey.api.module.Module;
 import org.labkey.api.query.FieldKey;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
         keys.add(FieldKey.fromString("latestArrivalOrBirthDate"));
         keys.add(FieldKey.fromString("departureOrLastHousingDate"));
         keys.add(FieldKey.fromString("timeAtCnprcEndDate"));
+        keys.add(FieldKey.fromString("ageToday"));
         keys.add(FieldKey.fromString("acquisitionAge"));
         keys.add(FieldKey.fromString("timeAtCnprc"));
         keys.add(FieldKey.fromString("ageAtDeparture"));
@@ -69,12 +71,24 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
         super.processRow(rs, cols, map);
 
         // similar hack to CNPRCDemographicsProvider, but we're not using the columns anywhere else, so this is the only implementation of these age calculations
-        FieldKey fk = FieldKey.fromString("acquisitionAge");
+        FieldKey fk = FieldKey.fromString("ageToday");
+        Date departureOrLastHousingDate = (Date)map.get("departureOrLastHousingDate");
+        Date todayDate = null;
+        if (departureOrLastHousingDate == null)  // animal has not departed or died
+        {
+            Calendar today = Calendar.getInstance();
+            today.clear(Calendar.HOUR); today.clear(Calendar.MINUTE); today.clear(Calendar.SECOND);  // truncate to day
+            todayDate = today.getTime();
+        }
+        // if animal has departed or died, will leave todayDate as null so Age Today will not be populated
+
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), todayDate, true));
+        fk = FieldKey.fromString("acquisitionAge");
         map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("earliestArrivalOrBirthDate"), true));
         fk = FieldKey.fromString("timeAtCnprc");
         map.put(fk.toString(), getFormattedDuration((Date)map.get("latestArrivalOrBirthDate"), (Date)map.get("timeAtCnprcEndDate"), true));
         fk = FieldKey.fromString("ageAtDeparture");
-        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), (Date)map.get("departureOrLastHousingDate"), true));
+        map.put(fk.toString(), getFormattedDuration((Date)map.get("birth"), departureOrLastHousingDate, true));
     }
 
     @Override
