@@ -9,10 +9,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
 
     getItems: function(){
         return [
-            this.getBaseItems(),
-            this.getLastProjectsItems(),
-            this.getCensusFlagsItems(),
-            this.getPathologyReportsItems()
+            this.getBaseItems()
         ];
     },
 
@@ -29,7 +26,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                 layout: 'column',
                 defaults: {
                     xtype: 'container',
-                    columnWidth: 0.5
+                    columnWidth: 0.3
                 },
                 items: [{
                     defaults: {
@@ -41,12 +38,6 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                     items: [{
                         fieldLabel: 'Sex',
                         name: 'gender'
-                    },{
-                        fieldLabel: 'Generation',
-                        name: 'generation'
-                    }, {
-                        // spacer
-                        fieldLabel: ' '
                     }, {
                         fieldLabel: 'Birth',
                         name: 'birth'
@@ -62,9 +53,6 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                     }, {
                         fieldLabel: 'Acquisition',
                         name: 'acquisition'
-                    }, {
-                        fieldLabel: 'Previous ID',
-                        name: 'previousId'
                     }, {
                         fieldLabel: 'Death',
                         name: 'death'
@@ -99,6 +87,12 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                         fieldLabel: 'Weight',
                         name: 'weight'
                     }, {
+                        fieldLabel: 'Generation',
+                        name: 'generation'
+                    }, {
+                        fieldLabel: 'Previous ID',
+                        name: 'previousId'
+                    }, {
                         fieldLabel: 'Body Condition',
                         name: 'bodyCondition'
                     }, {
@@ -123,58 +117,34 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                         fieldLabel: 'Perdiem',
                         name: 'perdiem'
                     }]
-                }]
-            }]
-        };
-    },
+                },{
+                    items: [{
+                        html: '<h5><strong>Last Project(s)</strong></h5>'
+                    },{
+                        xtype: 'displayfield',
+                        fieldLabel: '',
+                        name: 'lastProjects'
+                    }, {
+                        html: '<hr><h5><strong>Census Flag(s)</strong></h5>'
+                    },{
+                        xtype: 'displayfield',
+                        fieldLabel: '',
+                        name: 'censusFlags'
+                    },{
+                        html: '<hr><h5><strong>Pathology Report(s)</strong></h5>'
+                    },{
+                        xtype: 'displayfield',
+                        fieldLabel: '',
+                        name: 'pathologyReports'
+                    }]
+                }
 
-    getLastProjectsItems: function() {
-        return {
-            xtype: 'container',
-            defaults: {
-                xtype: 'container'
-            },
-            items: [{
-                html: '<h4>Last Project(s)</h4>'
-            },{
-                xtype: 'displayfield',
-                fieldLabel: '',
-                name: 'lastProjects'
+                ]
             }]
         };
-    },
+    }
 
-    getCensusFlagsItems: function() {
-        return {
-            xtype: 'container',
-            defaults: {
-                xtype: 'container'
-            },
-            items: [{
-                html: '<h4>Census Flag(s)</h4>'
-            },{
-                xtype: 'displayfield',
-                fieldLabel: '',
-                name: 'censusFlags'
-            }]
-        };
-    },
-
-    getPathologyReportsItems: function() {
-        return {
-            xtype: 'container',
-            defaults: {
-                xtype: 'container'
-            },
-            items: [{
-                html: '<h4>Pathology Report(s)</h4>'
-            },{
-                xtype: 'displayfield',
-                fieldLabel: '',
-                name: 'pathologyReports'
-            }]
-        };
-    },
+,
 
     appendDataResults: function(toSet, results, id) {
         this.appendDemographicsResults(toSet, results, id);
