@@ -1,31 +1,44 @@
-/*
- * Copyright (c) 2017 LabKey Corporation
- *
- * Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
- */
+-- Adapted from mensCalendar
 
-SELECT
-i.Id,
-i.year,
-i.monthName,
-i.monthNum,
-i.day,
-max(i.category) as category
+SELECT allRows.Id,
+    allRows.year,
+    allRows.monthName,
+    allRows.monthNum,
+    allRows.day,
+    GROUP_CONCAT(allRows.ind, '') AS inds
+FROM
+(
+    SELECT
+        nonblanks.Id,
+        nonblanks.year,
+        nonblanks.monthName,
+        nonblanks.monthNum,
+        nonblanks.day,
+        nonblanks.ind
+    FROM study.diarrheaCalendarNonblanks nonblanks
+        JOIN study.demographicsLastHousing lastHousing
+            ON lastHousing.Id = nonblanks.Id
+    -- not more than 24 months from last move enddate, or today if null (meaning location is current)
+    WHERE
+        CONVERT(timestampdiff('SQL_TSI_MONTH', nonblanks.date, COALESCE(lastHousing.endDate, now())), INTEGER) < 24
 
-FROM (
+    UNION ALL
 
-SELECT
-  i.Id,
-  i.date,
-  convert(year(i.date), integer) as year,
-  monthname(i.date) AS monthName,
-  convert(month(i.date), integer) AS monthNum,
-  --convert(week(i.date), integer) as Week,
-  convert(dayofmonth(i.date), integer) as day,
-  'D' as category
+    SELECT
+        blanks.Id,
+        blanks.year,
+        blanks.monthName,
+        blanks.monthNum,
+        blanks.day,
+        blanks.ind
+    FROM diarrheaCalendarBlanks blanks
+        -- now remove any dupe rows
+    LEFT JOIN study.diarrheaCalendarNonblanks nonblanks
+           ON blanks.Id = nonblanks.ID
+          AND blanks.year = nonblanks.year
+          AND blanks.monthNum = nonblanks.monthNum
+    WHERE nonblanks.Id IS NULL
+) allRows
 
-FROM study.clinical_observations i
-WHERE i.category = 'Stool' AND i.observation='L' --L = Liquid stool/diarrhea
-) i
-GROUP BY i.id, i.year, i.monthName, i.monthNum, i.day
-PIVOT category BY day
+GROUP BY allRows.Id, allRows.year, allRows.monthName, allRows.monthNum, allRows.day
+PIVOT inds BY day IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31)  -- column list makes this query a lot faster
