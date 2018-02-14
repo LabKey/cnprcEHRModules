@@ -1,5 +1,6 @@
 SELECT
     allRows.Id,
+    allRows.date,
     CONVERT(YEAR(allRows.date), INTEGER) AS year,
     MONTHNAME(allRows.date) AS monthName,
     CONVERT(MONTH(allRows.date), INTEGER) AS monthNum,

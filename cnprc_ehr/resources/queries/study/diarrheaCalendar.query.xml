@@ -20,9 +20,6 @@
                     <column columnName="MonthName">
                         <columnTitle>Month</columnTitle>
                     </column>
-                    <column columnName="date">
-                        <isHidden>true</isHidden>
-                    </column>
                 </columns>
             </table>
         </tables>
