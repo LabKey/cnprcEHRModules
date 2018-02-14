@@ -40,13 +40,6 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsCasePanel', {
                 },{
                     fieldLabel: 'Age',
                     name: 'age'
-                },{
-                    xtype: 'displayfield',
-                    fieldLabel: 'Source',
-                    name: 'source'
-                },{
-                    fieldLabel: 'Project Code(s)',
-                    name: 'assignmentsAndGroups'
                 }]
             },{
                 xtype: 'container',
@@ -55,6 +48,13 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsCasePanel', {
                     xtype: 'displayfield'
                 },
                 items: [{
+                    xtype: 'displayfield',
+                    fieldLabel: 'Source',
+                    name: 'source'
+                },{
+                    fieldLabel: 'Project Code(s)',
+                    name: 'assignmentsAndGroups'
+                },{
                     fieldLabel: 'Status',
                     name: 'calculated_status'
                 },{
@@ -72,7 +72,14 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsCasePanel', {
                 },{
                     fieldLabel: 'Days Since Admit',
                     name: 'daysSinceAdmit'
-                },{
+                }]
+            },{
+                xtype: 'container',
+                width: 350,
+                defaults: {
+                    xtype: 'displayfield'
+                },
+                items: [{
                     xtype: 'ldk-linkbutton',
                     style: 'margin-top: 10px;',
                     scope: this,

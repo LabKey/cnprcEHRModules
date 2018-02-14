@@ -133,7 +133,14 @@ Ext4.define('CNPRC_EHR.panel.AnimalDetailsCaseExtendedPanel', {
                 },{
                     fieldLabel: 'Weight',
                     name: 'weights'
-                },{
+                }]
+            },{
+                xtype: 'container',
+                width: 350,
+                defaults: {
+                    xtype: 'displayfield'
+                },
+                items: [{
                     fieldLabel: 'Admit Reason',
                     name: 'admitReason'
                 },{
@@ -142,7 +149,14 @@ Ext4.define('CNPRC_EHR.panel.AnimalDetailsCaseExtendedPanel', {
                 },{
                     fieldLabel: 'Days Since Admit',
                     name: 'daysSinceAdmit'
-                },{
+                }]
+            },{
+                xtype: 'container',
+                width: 350,
+                defaults: {
+                    xtype: 'displayfield'
+                },
+                items: [{
                     xtype: 'ldk-linkbutton',
                     style: 'margin-top: 10px;',
                     scope: this,
