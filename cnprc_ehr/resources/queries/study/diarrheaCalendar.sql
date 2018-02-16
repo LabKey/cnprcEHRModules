@@ -5,7 +5,7 @@ SELECT allRows.Id,
     allRows.monthName,
     allRows.monthNum,
     allRows.day,
-    GROUP_CONCAT(allRows.ind, '') AS inds
+    GROUP_CONCAT(allRows.ind, ', ') AS inds
 FROM
 (
     SELECT

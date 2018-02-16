@@ -330,3 +330,63 @@ EHR.reports.conceptionHistory = function (panel, tab, viewName) {
         }]
     });
 };
+
+EHR.reports.diarrheaCalendar = function (panel, tab, viewName) {
+    var filterArray = panel.getFilterArray(tab);
+    var subjects = filterArray.subjects;
+    var columnName = 'Id';
+
+    if (filterArray.nonRemovable.length > 0)
+        columnName = filterArray.nonRemovable[0].getColumnName();
+
+
+    if ( !Ext4.isDefined(subjects) || subjects.length > 10 ) {
+        tab.add({
+            html: 'Please select between 1 and 10 subjects. If more than 10 subjects are selected, only the first 10 will be shown.',
+            style: 'padding-bottom: 20px;',
+            border: false
+        });
+    }
+
+    if ( Ext4.isDefined(subjects) && subjects.length > 10 ) {
+        subjects = subjects.slice(0, 10);
+    }
+
+    if ( Ext4.isDefined(subjects) ) {
+        subjects.forEach(function(subj){
+            var individualFilters = filterArray.nonRemovable.slice();  // copy array
+            individualFilters.push(LABKEY.Filter.create('Id', subj, LABKEY.Filter.Types.EQUAL));
+
+            tab.add({
+                xtype: 'ldk-querycmp',
+                style: 'margin-bottom:10px;',
+                queryConfig: panel.getQWPConfig({
+                    schemaName: 'study',
+                    queryName: 'diarrheaCalendar',
+                    viewName: viewName,
+                    title: 'Diarrhea Calendar: ' + subj,
+                    filters: individualFilters,
+                    removeableFilters: filterArray.removable
+                })
+            });
+        }, this);
+
+        tab.add({
+            xtype: 'ldk-webpartpanel',
+            title: 'Legend',
+            items: [{
+                border: false,
+                html: '<table class="ehr-legend">' +
+                CNPRC.Utils.legendTitle('Code', true, false) +
+                CNPRC.Utils.legendEntry('D', 'Diarrhea Observation (from Morning Health Observations)', true, false) +
+                CNPRC.Utils.legendEntry('Dc', 'Diarrhea Clinical Observation (from Clinical Observations)', true, false) +
+                CNPRC.Utils.legendEntry('D*', 'Diarrhea Observation Confirmation (from Morning Health Observations confirmations) (not yet implemented)', true, false) +
+                CNPRC.Utils.legendEntry('M', 'Move - animal relocated', true, false) +
+                CNPRC.Utils.legendEntry('+', 'Weight Increase 1% or more per day since last weight', true, false) +
+                CNPRC.Utils.legendEntry('-', 'Weight Decrease 1% or more per day since last weight', true, false) +
+                CNPRC.Utils.legendEntry('~', 'Weight, with no Increase/Decrease', true, false) +
+                '</table>'
+            }]
+        });
+    }
+};
