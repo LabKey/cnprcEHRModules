@@ -36,8 +36,8 @@ FROM
           CONVERT(MONTH(w.date),
                   INTEGER)                     AS monthNum,
           CONVERT(DAYOFMONTH(w.date), INTEGER) AS day,
-          Round(((w.weight - w3.weight) * 100 / w3.weight) / timestampdiff('SQL_TSI_DAY', w3.date, w.date),
-                2)                             AS PctChangePerDay
+          CASE WHEN timestampdiff('SQL_TSI_DAY', w3.date, w.date) = 0 THEN NULL
+               ELSE Round(((w.weight - w3.weight) * 100 / w3.weight) / timestampdiff('SQL_TSI_DAY', w3.date, w.date), 2) END AS PctChangePerDay
 
         FROM study.weight w
           --Find the next most recent weight date before this one
