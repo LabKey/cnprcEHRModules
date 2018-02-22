@@ -1673,28 +1673,47 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testAnimalHistoryDiarrheaCalendar() throws Exception
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        animalHistoryPage.selectEntireDatabaseSearch();
+        animalHistoryPage.selectSingleAnimalSearch().searchFor("TEST6390238");
         animalHistoryPage.clickCategoryTab("Daily Reports");
         animalHistoryPage.clickReportTab("Diarrhea Calendar");
+
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
                 "Id","Year","MonthName","monthNum",
-                "1::category","2::category","3::category","4::category","5::category","6::category","7::category",
-                "8::category","9::category","10::category","11::category","12::category","13::category","14::category",
-                "15::category","16::category","17::category","18::category","19::category","20::category",
-                "21::category","22::category","23::category","24::category","25::category","26::category",
-                "27::category","28::category","29::category","30::category","31::category"
+                "1::inds","2::inds","3::inds","4::inds","5::inds","6::inds","7::inds",
+                "8::inds","9::inds","10::inds","11::inds","12::inds","13::inds","14::inds",
+                "15::inds","16::inds","17::inds","18::inds","19::inds","20::inds",
+                "21::inds","22::inds","23::inds","24::inds","25::inds","26::inds",
+                "27::inds","28::inds","29::inds","30::inds","31::inds"
         );
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","2012","May","5","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," ","D"," "," "
+                "TEST6390238","2016","February","2","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
         );
 
-        results.setAsync(true); // setting async governs whether setSort will wait for the menuitem to stale
-        results.setSort("Id", SortDirection.ASC);
-        List<String> resultsRowDataAsText = results.getRowDataAsText(2).subList(0, expectedColumns.size() - 1);
+        //results.setAsync(true); // setting async governs whether setSort will wait for the menuitem to stale
+       // results.setSort("Id", SortDirection.ASC);
+        List<String> resultsRowDataAsText = results.getRowDataAsText(0);//.subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
+
+        animalHistoryPage.selectSingleAnimalSearch().searchFor("TEST3224553");
+        animalHistoryPage.clickCategoryTab("Daily Reports");
+        animalHistoryPage.clickReportTab("Diarrhea Calendar");
+
+        List<String> expectedForSecondAnimal = Arrays.asList(
+                "TEST3224553","2009","June","6","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+        );
+        results = animalHistoryPage.getActiveReportDataRegion();
+        List<String> resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(0);
+        assertEquals("Wrong data for animal TEST3224553 - row 0",expectedForSecondAnimal,resultsRowDataAsTextForSecondAnimal);
+
+        List<String> expectedForSecondAnimal19 = Arrays.asList(
+                "TEST3224553","2011","January","1","","","","","","~","","","","~","","","","","","","","","D","","","","","","","","","","","","Dc"
+        );
+        resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(19);
+        assertEquals("Wrong data for animal TEST3224553 - row 19",expectedForSecondAnimal19,resultsRowDataAsTextForSecondAnimal);
+
 
     }
 
