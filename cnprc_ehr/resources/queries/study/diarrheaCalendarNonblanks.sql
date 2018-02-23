@@ -61,17 +61,24 @@ FROM
     -- Moves (non-departure)
 
     SELECT
-      housing.Id,
-      housing.enddate                               AS date,
-      CONVERT(YEAR(housing.enddate), INTEGER)       AS year,
-      MONTHNAME(housing.enddate)                    AS monthName,
-      CONVERT(MONTH(housing.enddate), INTEGER)      AS monthNum,
-      CONVERT(DAYOFMONTH(housing.enddate), INTEGER) AS day,
+      idsAndDates.Id,
+      idsAndDates.date,
+      CONVERT(YEAR(idsAndDates.date), INTEGER)       AS year,
+      MONTHNAME(idsAndDates.date)                    AS monthName,
+      CONVERT(MONTH(idsAndDates.date), INTEGER)      AS monthNum,
+      CONVERT(DAYOFMONTH(idsAndDates.date), INTEGER) AS day,
       'M'                                           AS ind
-    FROM study.housing
-    WHERE housing.enddate IS NOT NULL
+    FROM
+    (
+      -- get all unique dates
+      SELECT housing.Id, housing.date
+      FROM study.housing
+      UNION
+      SELECT housing.Id, housing.enddate AS date
+      FROM study.housing
+    ) idsAndDates
 
-    UNION ALL
+    UNION  -- only get departures which are not in housing
 
     -- Moves (departure)
 
@@ -84,6 +91,7 @@ FROM
       CONVERT(DAYOFMONTH(departure.date), INTEGER)  AS day,
       'M'                                           AS ind
     FROM study.departure
+    -- only get shipped, not other departures
     WHERE relocType = 'Shipped'
 
     UNION ALL
