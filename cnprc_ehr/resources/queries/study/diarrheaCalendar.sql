@@ -31,13 +31,20 @@ FROM
         blanks.monthNum,
         blanks.day,
         blanks.ind
-    FROM diarrheaCalendarBlanks blanks
-        -- now remove any dupe rows
+    FROM (SELECT housing.Id,
+                 MIN(housing.date) AS date
+          FROM study.housing
+          GROUP BY housing.Id) firstHousingDates,
+        diarrheaCalendarBlanks blanks
+    -- now remove any dupe rows
     LEFT JOIN study.diarrheaCalendarNonblanks nonblanks
            ON blanks.Id = nonblanks.ID
           AND blanks.year = nonblanks.year
           AND blanks.monthNum = nonblanks.monthNum
     WHERE nonblanks.Id IS NULL
+    -- also only select rows equal to or after first housing date
+      AND blanks.date >= firstHousingDates.date
+      AND blanks.Id = firstHousingDates.Id
 ) allRows
 
 GROUP BY allRows.Id, allRows.year, allRows.monthName, allRows.monthNum, allRows.day
