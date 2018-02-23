@@ -16,5 +16,5 @@ FROM
     CROSS JOIN
       (SELECT integers.value AS monthNum
        FROM ldk.integers
-       WHERE integers.value <= 24) monthNumbers
+       WHERE integers.value < 24) monthNumbers
 ) allRows
