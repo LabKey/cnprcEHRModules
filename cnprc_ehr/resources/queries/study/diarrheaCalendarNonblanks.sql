@@ -58,7 +58,7 @@ FROM
 
     UNION ALL
 
-    -- Moves
+    -- Moves (non-departure)
 
     SELECT
       housing.Id,
@@ -70,6 +70,21 @@ FROM
       'M'                                           AS ind
     FROM study.housing
     WHERE housing.enddate IS NOT NULL
+
+    UNION ALL
+
+    -- Moves (departure)
+
+    SELECT
+      departure.Id,
+      departure.date,
+      CONVERT(YEAR(departure.date), INTEGER)        AS year,
+      MONTHNAME(departure.date)                     AS monthName,
+      CONVERT(MONTH(departure.date), INTEGER)       AS monthNum,
+      CONVERT(DAYOFMONTH(departure.date), INTEGER)  AS day,
+      'M'                                           AS ind
+    FROM study.departure
+    WHERE relocType = 'Shipped'
 
     UNION ALL
 
