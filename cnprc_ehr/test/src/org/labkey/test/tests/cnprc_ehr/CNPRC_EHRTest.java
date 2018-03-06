@@ -1305,7 +1305,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong Housing History results,",
                 Arrays.asList("TEST4564246", "2005-01-11 14:00", " ", "<6824778>", "4953547"),
-                historyTable.getRowDataAsText(4, "Id", "date", "enddate", "room", "cage"));
+                historyTable.getRowDataAsText(7, "Id", "date", "enddate", "room", "cage"));
     }
 
     @Test
@@ -1689,7 +1689,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","2016","February","2","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                "TEST6390238","2012","January","1","","","Dc","","","Dc","","","Dc","","","Dc","","","","","","Dc","","","Dc","","","Dc","","","Dc","","","Dc",""
         );
 
         //results.setAsync(true); // setting async governs whether setSort will wait for the menuitem to stale
@@ -1702,19 +1702,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Diarrhea Calendar");
 
         List<String> expectedForSecondAnimal = Arrays.asList(
-                "TEST3224553","2009","June","6","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+                "TEST3224553","2010","January","1","","","","+","","","","","","","","","","","","","","","~","","","","","","","","","","","","Dc"
         );
         results = animalHistoryPage.getActiveReportDataRegion();
         List<String> resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(0);
         assertEquals("Wrong data for animal TEST3224553 - row 0",expectedForSecondAnimal,resultsRowDataAsTextForSecondAnimal);
 
-        List<String> expectedForSecondAnimal19 = Arrays.asList(
+        List<String> expectedForSecondAnimal9 = Arrays.asList(
                 "TEST3224553","2011","January","1","","","","","","~","","","","~","","","","","","","","","D","","","","","","","","","","","","Dc"
         );
-        resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(19);
-        assertEquals("Wrong data for animal TEST3224553 - row 19",expectedForSecondAnimal19,resultsRowDataAsTextForSecondAnimal);
-
-
+        resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(9);
+        assertEquals("Wrong data for animal TEST3224553 - row 9",expectedForSecondAnimal9,resultsRowDataAsTextForSecondAnimal);
     }
 
     @Test
