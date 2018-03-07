@@ -2196,7 +2196,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expectedColumns = Arrays.asList(
                 "Id/birth/species",
                 "Id",
-                "Id/demographics/gender",
+                "Id/demographics/gender/code",
                 "Id/age/yearsAndMonthsAndDays",
                 "Id/MostRecentWeight/MostRecentWeight",
                 "Id/curLocation/location",
@@ -2211,10 +2211,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/DemographicsActiveColony/colonyCode",
                 "Id/DemographicsActiveBreedingGroup/groupCode"
         );
-        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
+        assertEquals("Wrong columns:\n", expectedColumns, results.getColumnNames());
 
         assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0,1));
-        assertEquals("Wrong value for Gender: ", "Female", results.getDataAsText(0,2));
+        assertEquals("Wrong value for Gender: ", "F", results.getDataAsText(0,2));
         assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
     }
 
