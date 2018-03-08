@@ -24,6 +24,7 @@ import org.labkey.api.data.JdbcType;
 import org.labkey.api.data.SQLFragment;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.data.WrappedColumn;
+import org.labkey.api.ehr.security.EHRDataEntryPermission;
 import org.labkey.api.ehr.table.DurationColumn;
 import org.labkey.api.ldk.table.AbstractTableCustomizer;
 import org.labkey.api.query.DetailsURL;
@@ -71,6 +72,60 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         {
             customizeSnomedLookupTable(ti);
         }
+        else if (matches(ti, "ehr", "tasks") || matches(ti, "ehr", "my_tasks"))
+        {
+            customizeTasks((AbstractTableInfo) ti);
+        }
+    }
+
+    private void customizeTasks(AbstractTableInfo ti)
+    {
+        DetailsURL detailsURL = DetailsURL.fromString("/ehr/dataEntryFormDetails.view?formType=${formtype}&taskid=${taskid}");
+        ti.setDetailsURL(detailsURL);
+
+        ColumnInfo titleCol = ti.getColumn("title");
+        if (titleCol != null)
+        {
+            titleCol.setURL(detailsURL);
+        }
+
+        ColumnInfo rowIdCol = ti.getColumn("rowid");
+        if (rowIdCol != null)
+        {
+            rowIdCol.setURL(detailsURL);
+        }
+
+        ColumnInfo updateCol = ti.getColumn("updateTitle");
+        if (updateCol == null)
+        {
+            updateCol = new WrappedColumn(ti.getColumn("title"), "updateTitle");
+            ti.addColumn(updateCol);
+        }
+
+        ColumnInfo updateTaskId = ti.getColumn("updateTaskId");
+        if (updateTaskId == null)
+        {
+            updateTaskId = new WrappedColumn(ti.getColumn("rowid"), "updateTaskId");
+            ti.addColumn(updateTaskId);
+        }
+
+        if (ti.getUserSchema().getContainer().hasPermission(ti.getUserSchema().getUser(), EHRDataEntryPermission.class))
+        {
+            updateCol.setURL(DetailsURL.fromString("/ehr/dataEntryForm.view?formType=${formtype}&taskid=${taskid}"));
+            updateTaskId.setURL(DetailsURL.fromString("/ehr/dataEntryForm.view?formType=${formtype}&taskid=${taskid}"));
+        }
+        else
+        {
+            updateCol.setURL(detailsURL);
+            updateTaskId.setURL(detailsURL);
+        }
+
+        updateCol.setLabel("Title");
+        updateCol.setHidden(true);
+        updateCol.setDisplayWidth("150");
+
+        updateTaskId.setLabel("Task Id");
+        updateTaskId.setHidden(true);
     }
 
     private void customizeSnomedLookupTable(AbstractTableInfo ti)
