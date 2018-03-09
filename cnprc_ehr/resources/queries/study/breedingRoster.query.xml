@@ -3,9 +3,10 @@
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="breedingRoster" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="animalId">
-                        <url>/ehr/participantView.view?participantId=${animalId}</url>
+                    <column columnName="Id">
+                        <url>/ehr/participantView.view?participantId=${Id}</url>
                     </column>
+                    <column columnName="date"/>
                     <column columnName="book"/>
                     <column columnName="maleEnemy1">
                         <url>/ehr/participantView.view?participantId=${maleEnemy1}</url>

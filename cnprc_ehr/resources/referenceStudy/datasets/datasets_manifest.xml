@@ -19,6 +19,7 @@
         <dataset name="blood" id="1008" category="Clinical"/>
         <dataset name="breeding" id="2002" category="Reproductive Management" type="Standard"/>
         <dataset name="breedingGroupAssignments" id="2004" category="Reproductive Management" type="Standard"/>
+        <dataset name="breedingRoster" id="2006" demographicData="true" category="Reproductive Management" type="Standard"/>
         <dataset name="cases" id="5012" category="Clinical" type="Standard"/>
         <dataset name="cycle" id="2001" category="Reproductive Management" type="Standard"/>
         <dataset name="clinpathRuns" id="1073" category="ClinPath"/>

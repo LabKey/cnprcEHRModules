@@ -6,7 +6,10 @@
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
             <source schemaName="cnprcSrc" queryName="q_breedingRoster"/>
-            <destination schemaName="cnprc_ehr" queryName="breedingRoster" bulkLoad="true" batchSize="500" targetOption="merge">
+            <destination schemaName="study" queryName="breedingRoster" bulkLoad="true" batchSize="500" targetOption="merge">
+                <columnTransforms>
+                    <column source="AB_AUD_TIME" target="date"/>
+                </columnTransforms>
                 <alternateKeys>
                     <column name="objectid"/>
                 </alternateKeys>

@@ -128,7 +128,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File CNPRC_EHR_CONCEPTIONS_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CONCEPTIONS.tsv");
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
-    private static final File CNPRC_EHR_BREEDING_ROSTER = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_BREEDING_ROSTER.tsv");
     private static final File EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE.TSV");
     private static final File EHR_LOOKUP_TEST_VIRUS_MAPPING = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_TEST_VIRUS_MAPPING.TSV");
     private static final File EHR_LOOKUP_TEST_TARGET_MAPPING = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_TEST_TARGET_MAPPING.TSV");
@@ -304,7 +303,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
         storeCageAndRoomData();
-        storeBreedingData();
         storeConceptionData();
         createPDLLinkedSchema();
         storePDLData();
@@ -1593,13 +1591,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertTsvData(connection, "ehr_lookups", "test_type_method_mapping", EHR_LOOKUP_TEST_METHOD_MAPPING, folder);
     }
 
-    private void storeBreedingData() throws IOException, CommandException
-    {
-        Connection connection = createDefaultConnection(true);
-        String folder = "/";
-        insertTsvData(connection, "cnprc_ehr", "breedingRoster", CNPRC_EHR_BREEDING_ROSTER, folder);
-    }
-
     private void setParticipantBirthDate(String id, Date birthdate) throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
@@ -2281,6 +2272,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         SearchPanel searchPanel;
         beginAt("/project/" + getContainerPath() + "/begin.view");
         waitAndClickAndWait(Locator.linkWithText("Animal Search"));
+        waitForText("Alive, at Center");
         searchPanel = new AnimalSearchPanel(getDriver());
         return searchPanel;
     }

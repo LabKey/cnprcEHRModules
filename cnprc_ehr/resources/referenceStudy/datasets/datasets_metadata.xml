@@ -3487,4 +3487,43 @@
         </columns>
         <tableTitle>Clinical Remarks</tableTitle>
     </table>
+    <table tableName="breedingRoster" tableDbType="TABLE">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="book">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="maleEnemy1">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="maleEnemy2">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="maleEnemy3">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="maleEnemy4">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="maleEnemy5">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+            </column>
+        </columns>
+        <tableTitle>Breeding Roster</tableTitle>
+    </table>
 </tables>

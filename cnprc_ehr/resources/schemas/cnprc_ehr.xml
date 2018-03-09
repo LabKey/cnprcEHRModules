@@ -44,24 +44,6 @@
             <column columnName="Container"/>
         </columns>
     </table>
-    <table tableName="breedingRoster" tableDbType="TABLE">
-        <columns>
-            <column columnName="rowid"/>
-            <column columnName="animalId"/>
-            <column columnName="book"/>
-            <column columnName="maleEnemy1"/>
-            <column columnName="maleEnemy2"/>
-            <column columnName="maleEnemy3"/>
-            <column columnName="maleEnemy4"/>
-            <column columnName="maleEnemy5"/>
-            <column columnName="objectid"/>
-            <column columnName="Created"/>
-            <column columnName="CreatedBy"/>
-            <column columnName="Modified"/>
-            <column columnName="ModifiedBy"/>
-            <column columnName="Container"/>
-        </columns>
-    </table>
     <table tableName="geriatricGroups" tableDbType="TABLE">
         <columns>
             <column columnName="id"/>
