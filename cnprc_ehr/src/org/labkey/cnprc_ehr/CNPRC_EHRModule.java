@@ -46,7 +46,6 @@ import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
 import org.labkey.cnprc_ehr.dataentry.forms.AssignmentFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BreedingObservationsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.BreedingRegistrationFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalReportFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
