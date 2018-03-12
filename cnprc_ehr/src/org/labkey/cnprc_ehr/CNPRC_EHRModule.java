@@ -46,6 +46,7 @@ import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
 import org.labkey.cnprc_ehr.dataentry.forms.AssignmentFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BreedingObservationsFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.BreedingRegistrationFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalReportFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
@@ -167,7 +168,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalRoundsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BulkClinicalEntryFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalReportFormType.class, this));
-        //ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingRegistrationFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingRegistrationFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingObservationsFormType.class, this));
 
         //demographics

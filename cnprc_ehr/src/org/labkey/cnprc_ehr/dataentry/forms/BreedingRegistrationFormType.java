@@ -23,30 +23,29 @@ import org.labkey.api.ehr.dataentry.TaskFormSection;
 import org.labkey.api.ehr.dataentry.forms.AssignmentFormSection;
 import org.labkey.api.module.Module;
 import org.labkey.api.view.template.ClientDependency;
+import org.labkey.cnprc_ehr.dataentry.BreedingRegistrationFormSection;
 
 import java.util.Arrays;
 
 /**
  * Created by Binal on 7/18/2017.
  */
-public class AssignmentFormType  extends TaskForm
+public class BreedingRegistrationFormType extends TaskForm
 {
-    public static final String NAME = "assignment";
+    public static final String NAME = "breedingRegistration";
 
-    public AssignmentFormType(DataEntryFormContext ctx, Module owner)
+    public BreedingRegistrationFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, "Project Assignment", "Colony Management", Arrays.asList(
+        super(ctx, owner, NAME, "Breeding Registration", "Colony Management", Arrays.asList(
                 new TaskFormSection(),
-                new AnimalDetailsFormSection(),
-                new AssignmentFormSection()
+                new BreedingRegistrationFormSection()
         ));
 
         for (FormSection s : this.getFormSections())
         {
-            s.addConfigSource("ProjectAnimalConditions");  // FIXME: this only exists in onprc_ehr
+            s.addConfigSource("BreedingRegistration");
         }
 
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeField.js"));
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/BreedingRegistration.js"));
     }
 }
