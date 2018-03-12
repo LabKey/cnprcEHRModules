@@ -36,15 +36,21 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
 
             var allDurations = (results.rows[0].daysAndHoursString.value).match(/^\d+|\d+\b|\d+(?=\w)/g);  // get all individual sets of numbers
             var iterations = 0;
+            var validDurations = [];
+            var validDurationsString = '';
             if (allDurations)
                 iterations = Math.min(allDurations.length, 3); // look through at most 3 numbers
 
             for (var i = 0; i < iterations; i++) {
-                if (parseInt(allDurations[i]) === row.cycleDay)  // day is valid
+                validDurations[i] = Math.round((parseInt(allDurations[i]) + 1) / 2.0);
+                if (validDurations[i] === row.cycleDay)  // day is valid
                     return;
+
+                validDurationsString += validDurations[i] + ' ';
             }
 
-            EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Day is not valid, must be one of the first three numbers in: "' + results.rows[0].daysAndHoursString.value + '"', 'ERROR');
+
+            EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Day is not valid, valid durations would be: "' + validDurationsString + '"', 'ERROR');
         },
         failure: function (error)
         {
