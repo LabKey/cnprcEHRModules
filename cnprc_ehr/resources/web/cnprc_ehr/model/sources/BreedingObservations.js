@@ -14,13 +14,19 @@ EHR.model.DataModelManager.registerMetadata('BreedingObservations', {
                 allowBlank: false
             },
             date: {
-                allowBlank: false
+                allowBlank: false,
+                columnConfig: {
+                    width: 200
+                }
             },
             sire: {
                 allowBlank: false
             },
             obsCode: {
-                allowBlank: false
+                allowBlank: false,
+                columnConfig: {
+                    width: 130
+                }
             },
             cycleDay: {
                 allowBlank: false
