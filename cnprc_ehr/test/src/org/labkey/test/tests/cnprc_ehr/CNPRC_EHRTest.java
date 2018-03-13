@@ -1370,8 +1370,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expected = Arrays.asList(
                 "TEST3771679"
                 , "9.1"
-                , "50"
-                , "1"
+                , "75"
+                , "2"
                 , "13.0"
                 , "-30.0"
         );
@@ -1395,13 +1395,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     }
 
-    private void  insertWeights() throws IOException, CommandException
+    private void insertWeights() throws IOException, CommandException
     {
         InsertRowsCommand insertCmd = new InsertRowsCommand("study", "weight");
 
         ZonedDateTime now = ZonedDateTime.now();
         ZonedDateTime fiftyDaysAgo = now.minusDays(50);
-        ZonedDateTime seventyFiveDaysAgo = now.minusDays(50);
+        ZonedDateTime seventyFiveDaysAgo = now.minusDays(75);
         ZonedDateTime oneHundredSeventyDaysAgo = now.minusDays(170);
         ZonedDateTime twoHundredDaysAgo = now.minusDays(200);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
