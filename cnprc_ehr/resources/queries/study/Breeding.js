@@ -7,8 +7,20 @@ function onInsert(helper, scriptErrors, row) {
 function onUpsert(helper, scriptErrors, row, oldRow) {
     if(row.id)
         EHR.Server.Validation.verifyIsFemale(row, scriptErrors, helper);
-    else
-        EHR.Server.Utils.addError(scriptErrors, 'id', 'Animal ID must be present', 'ERROR');
+
+    if (row.sire) {
+        EHR.Server.Utils.findDemographics({
+            participant: row.sire,
+            helper: helper,
+            scope: this,
+            callback: function (data) {
+                if (data && (data.calculated_status !== 'Alive'))
+                    EHR.Server.Utils.addError(scriptErrors, 'sire', 'Status of Male ' + row.sire + ' is: ' + data.calculated_status, 'INFO');
+                if (data && data['gender/origGender'] && (data['gender/origGender'] !== 'M'))
+                    EHR.Server.Utils.addError(scriptErrors, 'sire', 'Sire ' + row.sire + ' is not male gender', 'ERROR');
+            }
+        });
+    }
 
     // rest is to verify cycle start date is ok
     if(!row.cycleStartDate)
