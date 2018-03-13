@@ -1175,6 +1175,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("TB Overdue Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
@@ -1208,6 +1209,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertWeightAndTBfor("TEST1684145");
         searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("TB Overdue Report");
         searchPanel.submit();
         assertElementNotPresent(Locator.linkWithText("TEST1684145"));
