@@ -969,6 +969,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         setParticipantBirthDate("TEST1441142", calendar.getTime());//Will not be included because not Alive
         SearchPanel searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("Infant Report");
         DataRegionTable searchResults = searchPanel.submit();
 
@@ -997,6 +998,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("Cage Violation Report");
         DataRegionTable searchResults = searchPanel.submit();
 
@@ -1022,6 +1024,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("LTOP Report");
         DataRegionTable searchResults = searchPanel.submit();
 
@@ -1048,6 +1051,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("Hybrid Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
@@ -1077,6 +1081,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("NC Roundup Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
@@ -1113,6 +1118,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
         searchPanel.setView("Current Pregnancies Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
