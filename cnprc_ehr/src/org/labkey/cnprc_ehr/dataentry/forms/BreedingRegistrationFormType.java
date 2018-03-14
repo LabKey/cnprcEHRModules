@@ -36,7 +36,7 @@ public class BreedingRegistrationFormType extends TaskForm
 
     public BreedingRegistrationFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, "Breeding Registration", "Colony Management", Arrays.asList(
+        super(ctx, owner, NAME, "Breeding Registration", "Breeding Management", Arrays.asList(
                 new TaskFormSection(),
                 new BreedingRegistrationFormSection()
         ));
