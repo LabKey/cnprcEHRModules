@@ -131,6 +131,7 @@ Incomplete - Pending Data Entry	feeding	Colony Management	query	Feeding	true		st
 	clinical_observations	Daily Reports	query	Diarrhea	true		study	clinical_observations	diarrhea		date	false	false		qcstate/publicdata	Diarrhea Observations
 	diarrheaCalendar	Daily Reports	js	Diarrhea Calendar	true		study	diarrheaCalendar			date	false	false		qcstate/publicdata	Diarrhea Observations Calendar
 	breedingGroupAssignments	Reproductive Management	query	Breeding Group	true		study	breedingGroupAssignments			date	false	false		qcstate/publicdata	Animal Breeding group assignment history
+	breedingRoster	Reproductive Management	query	Breeding Registration	true		study	breedingRoster			date	false	false		qcstate/publicdata	Animal Breeding Registration Roster
 	labworkResults	BBA	query	Lab Results	true		study	labworkResults			date	false	false		qcstate/publicdata	Lab Results from Behavioral Assessment
 	semenAnalysis	Reproductive Management	query	Semen Analysis	true		study	semenAnalysis			date	false	false		qcstate/publicdata	Semen Analysis via Electro Ejaculation
 	geriatrics	Colony Management	query	Geriatrics	true		study	geriatrics			date	false	false		qcstate/publicdata	Geriatrics related reporting
