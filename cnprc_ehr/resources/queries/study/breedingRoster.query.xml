@@ -7,20 +7,27 @@
                         <url>/ehr/participantView.view?participantId=${Id}</url>
                     </column>
                     <column columnName="date"/>
-                    <column columnName="book"/>
+                    <column columnName="book">
+                        <columnTitle>Book</columnTitle>
+                    </column>
                     <column columnName="maleEnemy1">
+                        <columnTitle>Male Enemy 1</columnTitle>
                         <url>/ehr/participantView.view?participantId=${maleEnemy1}</url>
                     </column>
                     <column columnName="maleEnemy2">
+                        <columnTitle>Male Enemy 2</columnTitle>
                         <url>/ehr/participantView.view?participantId=${maleEnemy2}</url>
                     </column>
                     <column columnName="maleEnemy3">
+                        <columnTitle>Male Enemy 3</columnTitle>
                         <url>/ehr/participantView.view?participantId=${maleEnemy3}</url>
                     </column>
                     <column columnName="maleEnemy4">
+                        <columnTitle>Male Enemy 4</columnTitle>
                         <url>/ehr/participantView.view?participantId=${maleEnemy4}</url>
                     </column>
                     <column columnName="maleEnemy5">
+                        <columnTitle>Male Enemy 5</columnTitle>
                         <url>/ehr/participantView.view?participantId=${maleEnemy5}</url>
                     </column>
                     <column columnName="objectid"/>
