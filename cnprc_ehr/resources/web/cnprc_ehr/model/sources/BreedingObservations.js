@@ -22,6 +22,9 @@ EHR.model.DataModelManager.registerMetadata('BreedingObservations', {
             sire: {
                 allowBlank: false
             },
+            hours: {
+                hidden: true
+            },
             obsCode: {
                 allowBlank: false,
                 columnConfig: {

@@ -17,11 +17,21 @@ package org.labkey.cnprc_ehr.dataentry;
 
 import org.labkey.api.ehr.dataentry.SimpleFormSection;
 
+import java.util.List;
+
 public class BreedingObservationsFormSection extends SimpleFormSection
 {
     public BreedingObservationsFormSection()
     {
         super("study", "breeding", "Breeding Observations","ehr-gridpanel");
     }
-}
 
+    @Override
+    public List<String> getTbarButtons()
+    {
+        List<String> defaultButtons = super.getTbarButtons();
+        defaultButtons.remove("COPYFROMSECTION");
+
+        return defaultButtons;
+    }
+}

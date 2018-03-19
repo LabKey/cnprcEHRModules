@@ -26,5 +26,14 @@ public class BreedingRegistrationFormSection extends SimpleFormSection
     {
         super("study", "breedingRoster", "Breeding Registration","ehr-gridpanel");
     }
+
+    @Override
+    public List<String> getTbarButtons()
+    {
+        List<String> defaultButtons = super.getTbarButtons();
+        defaultButtons.remove("COPYFROMSECTION");
+
+        return defaultButtons;
+    }
 }
 

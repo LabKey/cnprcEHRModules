@@ -32,10 +32,13 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                             scope: this,
                             callback: function (data2) {
                                 if (data2) {
+                                    console.log(JSON.stringify(data2));
                                     if (data2.calculated_status !== 'Alive')
-                                        EHR.Server.Utils.addError(scriptErrors, indexString, 'Status of ' + indexString + ' ' + data2['Id'] + ' is: ' + data2.calculated_status, 'INFO');
+                                        EHR.Server.Utils.addError(scriptErrors, indexString, 'Status of ' + indexString + ' ' + data2.Id + ' is: ' + data2.calculated_status, 'INFO');
+                                    if (data2['gender/origGender'] && data2['gender/origGender'] === 'F')
+                                        EHR.Server.Utils.addError(scriptErrors, indexString, indexString + ' ' + data2.Id + ' is female, female enemies not allowed', 'ERROR');
                                     if (mainAnimalIsMaleFlag && data2['gender/origGender'] && data2['gender/origGender'] === 'M')
-                                        EHR.Server.Utils.addError(scriptErrors, indexString, 'Animal ' + row['Id'] + ' and ' + indexString + ' ' + data2['Id'] + ' are both male, male-male enemies not allowed', 'ERROR');
+                                        EHR.Server.Utils.addError(scriptErrors, indexString, 'Animal ' + row.id + ' and ' + indexString + ' ' + data2.Id + ' are both male, male-male enemies not allowed', 'ERROR');
                                 }
                             }
                         });

@@ -26,6 +26,9 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
     if(!row.cycleStartDate)
         EHR.Server.Utils.addError(scriptErrors, 'cycleStartDate', 'Cycle Start Date must be present', 'ERROR');
 
+    if(row.cycleDay && ((row.cycleDay < 1) || (row.cycleDay > 31)))
+        EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Day must be at least 1 and not greater than 31', 'ERROR');
+
     LABKEY.Query.selectRows({
         requiredVersion: 9.1,
         schemaName: 'study',
@@ -62,7 +65,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
             }
 
 
-            EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Day is not valid, valid durations would be: "' + validDurationsString + '"', 'ERROR');
+            EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Day is not valid, valid duration(s) would be: "' + validDurationsString + '"', 'ERROR');
         },
         failure: function (error)
         {
