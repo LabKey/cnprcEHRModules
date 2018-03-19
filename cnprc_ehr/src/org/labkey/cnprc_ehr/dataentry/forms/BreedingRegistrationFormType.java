@@ -15,12 +15,11 @@
  */
 package org.labkey.cnprc_ehr.dataentry.forms;
 
-import org.labkey.api.ehr.dataentry.AnimalDetailsFormSection;
+import org.labkey.cnprc_ehr.dataentry.AnimalDetailsFormSection;
 import org.labkey.api.ehr.dataentry.DataEntryFormContext;
 import org.labkey.api.ehr.dataentry.FormSection;
 import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
-import org.labkey.api.ehr.dataentry.forms.AssignmentFormSection;
 import org.labkey.api.module.Module;
 import org.labkey.api.view.template.ClientDependency;
 import org.labkey.cnprc_ehr.dataentry.BreedingRegistrationFormSection;
@@ -38,6 +37,7 @@ public class BreedingRegistrationFormType extends TaskForm
     {
         super(ctx, owner, NAME, "Breeding Registration", "Breeding Management", Arrays.asList(
                 new TaskFormSection(),
+                new AnimalDetailsFormSection(),
                 new BreedingRegistrationFormSection()
         ));
 

@@ -21,6 +21,7 @@ import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
 import org.labkey.api.module.Module;
 import org.labkey.api.view.template.ClientDependency;
+import org.labkey.cnprc_ehr.dataentry.AnimalDetailsFormSection;
 import org.labkey.cnprc_ehr.dataentry.BreedingObservationsFormSection;
 
 import java.util.Arrays;
@@ -36,6 +37,7 @@ public class BreedingObservationsFormType extends TaskForm
     {
         super(ctx, owner, NAME, "Breeding Observations", "Breeding Management", Arrays.asList(
                 new TaskFormSection(),
+                new AnimalDetailsFormSection(),
                 new BreedingObservationsFormSection()
         ));
 

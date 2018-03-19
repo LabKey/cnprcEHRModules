@@ -32,9 +32,14 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                             scope: this,
                             callback: function (data2) {
                                 if (data2) {
-                                    console.log(JSON.stringify(data2));
-                                    if (data2.calculated_status !== 'Alive')
-                                        EHR.Server.Utils.addError(scriptErrors, indexString, 'Status of ' + indexString + ' ' + data2.Id + ' is: ' + data2.calculated_status, 'INFO');
+                                    if (data2.calculated_status !== 'Alive') {
+                                        if (data2.calculated_status === 'Unknown' || data2.calculated_status == null) {
+                                            EHR.Server.Utils.addError(scriptErrors, indexString, 'Id not found in demographics table: ' + data2.Id, 'INFO');
+                                            return;
+                                        }
+                                        else
+                                            EHR.Server.Utils.addError(scriptErrors, indexString, 'Status of ' + indexString + ' ' + data2.Id + ' is: ' + data2.calculated_status, 'INFO');
+                                    }
                                     if (data2['gender/origGender'] && data2['gender/origGender'] === 'F')
                                         EHR.Server.Utils.addError(scriptErrors, indexString, indexString + ' ' + data2.Id + ' is female, female enemies not allowed', 'ERROR');
                                     if (mainAnimalIsMaleFlag && data2['gender/origGender'] && data2['gender/origGender'] === 'M')

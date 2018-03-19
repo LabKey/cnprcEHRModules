@@ -10,9 +10,6 @@ EHR.model.DataModelManager.registerMetadata('BreedingObservations', {
     },
     byQuery: {
         'study.breeding': {
-            id: {
-                allowBlank: false
-            },
             date: {
                 allowBlank: false,
                 columnConfig: {
