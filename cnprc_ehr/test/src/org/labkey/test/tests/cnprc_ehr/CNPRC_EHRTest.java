@@ -47,12 +47,14 @@ import org.labkey.test.pages.ehr.EnterDataPage;
 import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
+import org.labkey.test.util.Ext4Helper;
 import org.labkey.test.util.Maps;
 import org.labkey.test.util.PasswordUtil;
 import org.labkey.test.util.PortalHelper;
 import org.labkey.test.util.RReportHelper;
 import org.labkey.test.util.SchemaHelper;
 import org.labkey.test.util.SqlserverOnlyTest;
+import org.labkey.test.util.ext4cmp.Ext4GridRef;
 import org.labkey.test.util.external.labModules.LabModuleHelper;
 import org.openqa.selenium.WebElement;
 
@@ -1402,6 +1404,65 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong row count: ", 2, results.getDataRowCount());
 
     }
+
+    @Test
+    public void testBreedingRegistrationDataEntry()
+    {
+        String animalId = "TEST1";
+        String book = "S8";
+        String maleEnemy1 = "TEST1112911";
+
+        log("Begin the test with entry data page - Breeding Registration");
+        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData.waitAndClickAndWait(Locator.linkWithText("Breeding Registration"));
+        WebElement titleEl = waitForElement(Locator.xpath("//input[@name='title' and not(contains(@class, 'disabled'))]"), WAIT_FOR_JAVASCRIPT);
+        waitForFormElementToEqual(titleEl, "Breeding Registration");
+
+        log("Setting the task title");
+        setFormElement(Locator.name("title"), TASK_TITLE_BRD_REG);
+        assertEquals(TASK_TITLE_BRD_REG, getFormElement(Locator.name("title")));
+
+        log("Registering the animal");
+        Ext4GridRef breedingRegistration = _helper.getExt4GridForFormSection("Breeding Registration");
+        _helper.addRecordToGrid(breedingRegistration);
+        breedingRegistration.setGridCell(1, "Id",animalId );
+        breedingRegistration.setGridCell(1, "book",book );
+        breedingRegistration.setGridCell(1, "maleEnemy1",maleEnemy1 );
+        clickButton("Save & Close");
+
+        log("Opening the pending task for completion");
+        enterData.clickMyTasksTab();
+        waitAndClick(Locator.linkContainingText(TASK_TITLE_BRD_REG));
+        switchToWindow(1);
+        waitForText("Breeding Registration");
+        clickButton("Submit Final",0);
+        _extHelper.waitForExtDialog("Finalize Form");
+        click(Ext4Helper.Locators.ext4Button("Yes"));
+
+        log("Verifying the animal from breed registration report");
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(animalId);
+        animalHistoryPage.clickCategoryTab("Reproductive Management");
+        animalHistoryPage.clickReportTab("Breeding Registration");
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+
+        assertEquals("Just one row should be displayed",results.getDataRowCount(),1);
+
+        assertEquals("Wrong value in animal ID",animalId,convertToString(results.getColumnDataAsText("Id")));
+        assertEquals("Wrong value for Book",book,convertToString(results.getColumnDataAsText("book")));
+        assertEquals("Wrong value for Male Enemy1",maleEnemy1,convertToString(results.getColumnDataAsText("maleEnemy1")));
+
+    }
+
+    private String convertToString(List<String> list)
+    {
+        String ret="";
+        for (String s : list)
+            ret += s;
+        return ret;
+    }
+
 
     private void insertWeights() throws IOException, CommandException
     {
