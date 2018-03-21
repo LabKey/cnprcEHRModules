@@ -12,6 +12,31 @@ EHR.model.DataModelManager.registerMetadata('BreedingRegistration', {
         'study.breedingRoster': {
             book: {
                 allowBlank: false
+            },
+            maleEnemy1: {
+                columnConfig: {
+                    width: 110
+                }
+            },
+            maleEnemy2: {
+                columnConfig: {
+                    width: 110
+                }
+            },
+            maleEnemy3: {
+                columnConfig: {
+                    width: 110
+                }
+            },
+            maleEnemy4: {
+                columnConfig: {
+                    width: 110
+                }
+            },
+            maleEnemy5: {
+                columnConfig: {
+                    width: 110
+                }
             }
         }
     }
