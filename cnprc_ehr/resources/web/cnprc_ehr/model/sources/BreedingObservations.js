@@ -11,30 +11,29 @@ EHR.model.DataModelManager.registerMetadata('BreedingObservations', {
     byQuery: {
         'study.breeding': {
             date: {
-                allowBlank: false,
+                nullable: false,
                 columnConfig: {
                     width: 200
                 }
             },
             sire: {
-                allowBlank: false
+                nullable: false
             },
             hours: {
                 hidden: true
             },
             obsCode: {
-                allowBlank: false,
+                nullable: false,
                 columnConfig: {
                     width: 130
                 }
             },
             cycleDay: {
-                allowBlank: false
+                nullable: false
             },
             cycleStartDate: {
-                allowBlank: false,
                 columnConfig: {
-                    width: 200
+                    width: 120
                 }
             }
         }

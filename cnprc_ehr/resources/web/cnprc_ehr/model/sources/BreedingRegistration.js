@@ -11,7 +11,7 @@ EHR.model.DataModelManager.registerMetadata('BreedingRegistration', {
     byQuery: {
         'study.breedingRoster': {
             book: {
-                allowBlank: false
+                nullable: false
             },
             maleEnemy1: {
                 columnConfig: {

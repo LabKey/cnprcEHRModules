@@ -27,6 +27,7 @@
                     </column>
                     <column columnName="cycleStartDate">
                         <columnTitle>Cycle Start Date</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                 </columns>
             </table>
