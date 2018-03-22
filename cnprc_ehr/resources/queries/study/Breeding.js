@@ -22,6 +22,13 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
         });
     }
 
+    if (row.date) {
+        var breedingDate = new Date(row.date);
+        var now = new Date();
+        if (breedingDate > now)
+            EHR.Server.Utils.addError(scriptErrors, 'date', 'Breeding date is in future', 'ERROR');
+    }
+
     // rest is to verify cycle start date is ok
     if(!row.cycleStartDate)
         EHR.Server.Utils.addError(scriptErrors, 'cycleStartDate', 'Cycle Start Date must be present', 'ERROR');
