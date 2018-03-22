@@ -12,6 +12,7 @@
                     </column>
                     <column columnName="date">
                         <columnTitle>In Date</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                     <column columnName="enddate">
                         <nullable>true</nullable>
@@ -19,6 +20,7 @@
                         <shownInInsertView>true</shownInInsertView>
                         <shownInDetailsView>true</shownInDetailsView>
                         <columnTitle>Out Date</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                     <column columnName="room">
                         <nullable>false</nullable>
