@@ -29,12 +29,14 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
             EHR.Server.Utils.addError(scriptErrors, 'date', 'Breeding date is in future', 'ERROR');
     }
 
-    // rest is to verify cycle start date is ok
-    if(!row.cycleStartDate)
-        EHR.Server.Utils.addError(scriptErrors, 'cycleStartDate', 'Cycle Start Date must be present', 'ERROR');
-
     if(row.cycleDay && ((row.cycleDay < 1) || (row.cycleDay > 31)))
         EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Day must be at least 1 and not greater than 31', 'ERROR');
+    if(row.cycleDay && row.date) {
+        var breedingDate = new Date(row.date);
+        var cycleStartDate = new Date(breedingDate.getFullYear(), breedingDate.getMonth(), breedingDate.getDate(), 0, 0, 0)  // zero out hours, minutes, and seconds
+        cycleStartDate.setDate(cycleStartDate.getDate() - (row.cycleDay - 1));  // now subtract Breeding Date by cycleDay - 1
+        row.cycleStartDate =  EHR.Server.Utils.datetimeToString(cycleStartDate);
+    }
 
     LABKEY.Query.selectRows({
         requiredVersion: 9.1,
@@ -47,12 +49,12 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
             LABKEY.Filter.create('date', row.cycleStartDate, LABKEY.Filter.Types.EQUAL)],
         success: function(results) {
             if (!results || !(results.rows) || (results.rows.length < 1)) {
-                EHR.Server.Utils.addError(scriptErrors, 'cycleStartDate', 'Cycle Start Date/Id combo not found in study.cycle dataset', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Start Date of ' + row.cycleStartDate + ' and Id combo not found in study.cycle dataset', 'ERROR');
                 return;
             }
             if (results.rows.length > 1) {
                 if (row.id && row.cycleStartDate)
-                    EHR.Server.Utils.addError(scriptErrors, 'cycleStartDate', 'Cycle Start Date/Id combo has multiple entries in study.cycle dataset', 'ERROR');
+                    EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Start Date of ' + row.cycleStartDate + ' and Id combo has multiple entries in study.cycle dataset', 'ERROR');
                 return;
             }
 

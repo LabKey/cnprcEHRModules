@@ -32,9 +32,7 @@ EHR.model.DataModelManager.registerMetadata('BreedingObservations', {
                 nullable: false
             },
             cycleStartDate: {
-                columnConfig: {
-                    width: 120
-                }
+                hidden: true
             }
         }
     }
