@@ -26,9 +26,6 @@ import org.labkey.cnprc_ehr.dataentry.BreedingObservationsFormSection;
 
 import java.util.Arrays;
 
-/**
- * Created by Binal on 7/18/2017.
- */
 public class BreedingObservationsFormType extends TaskForm
 {
     public static final String NAME = "breedingObservations";

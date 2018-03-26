@@ -19,9 +19,8 @@ public class PregnancyDeterminationsFormType extends TaskForm
     public PregnancyDeterminationsFormType(DataEntryFormContext ctx, Module owner)
     {
         super(ctx, owner, NAME, NAME, "Reproductive Management", Arrays.asList(
-
-                new AnimalDetailsFormSection(),
                 new TaskFormSection(),
+                new AnimalDetailsFormSection(),
                 new PregnancyDeterminationsFormSection()
         ));
 

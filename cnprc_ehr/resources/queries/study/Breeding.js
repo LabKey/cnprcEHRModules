@@ -32,11 +32,30 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
     if(row.cycleDay && ((row.cycleDay < 1) || (row.cycleDay > 31)))
         EHR.Server.Utils.addError(scriptErrors, 'cycleDay', 'Cycle Day must be at least 1 and not greater than 31', 'ERROR');
     if(row.cycleDay && row.date) {
-        var breedingDate = new Date(row.date);
-        var cycleStartDate = new Date(breedingDate.getFullYear(), breedingDate.getMonth(), breedingDate.getDate(), 0, 0, 0)  // zero out hours, minutes, and seconds
-        cycleStartDate.setDate(cycleStartDate.getDate() - (row.cycleDay - 1));  // now subtract Breeding Date by cycleDay - 1
-        row.cycleStartDate =  EHR.Server.Utils.datetimeToString(cycleStartDate);
+        breedingDate.setDate(breedingDate.getDate() - (row.cycleDay - 1));  // subtract Breeding Date by cycleDay - 1 to get start of cycle
+        row.cycleStartDate = EHR.Server.Utils.datetimeToString(breedingDate);
     }
+
+    // check that Breeding Registration already has been filled out for this animal/date
+    LABKEY.Query.selectRows({
+        requiredVersion: 9.1,
+        schemaName: 'study',
+        queryName: 'breedingRoster',
+        columns: ['Id'],  // not using Id, just testing existence
+        scope: this,
+        filterArray: [
+            LABKEY.Filter.create('Id', row.id, LABKEY.Filter.Types.EQUAL),
+            LABKEY.Filter.create('date', row.date, LABKEY.Filter.Types.EQUAL)],
+        success: function (results) {
+            if (!results || !(results.rows) || (results.rows.length < 1)) {
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'Id ' + row.id + ' and Breeding Date ' + row.date + ' combo not found in Breeding Registration (study.breedingRoster)', 'INFO');
+            }
+        },
+        failure: function (error) {
+            console.log('Select rows error for study.breedingRoster in Breeding.js');
+            console.log(error);
+        }
+    });
 
     LABKEY.Query.selectRows({
         requiredVersion: 9.1,
