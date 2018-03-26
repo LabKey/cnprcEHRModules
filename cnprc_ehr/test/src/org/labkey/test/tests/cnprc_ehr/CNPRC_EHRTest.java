@@ -1406,6 +1406,59 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testBreedingObservationDataEntry()
+    {
+        String animalId = "TEST2";
+        String sireID = "TEST1684145";
+        String breedingDate = "2018-03-23";
+
+        log("Begin the test with entry data page - Breeding Observations");
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
+        enterData.waitAndClickAndWait(Locator.linkWithText("Breeding Observations"));
+        WebElement titleEl = waitForElement(Locator.xpath("//input[@name='title' and not(contains(@class, 'disabled'))]"), WAIT_FOR_JAVASCRIPT);
+        waitForFormElementToEqual(titleEl, "Breeding Observations");
+
+        log("Setting the task title");
+        setFormElement(Locator.name("title"), TASK_TITLE_BRD_OBS);
+        assertEquals(TASK_TITLE_BRD_OBS, getFormElement(Locator.name("title")));
+
+        Ext4GridRef breedingObservation = _helper.getExt4GridForFormSection("Breeding Observations");
+        _helper.addRecordToGrid(breedingObservation);
+        breedingObservation.setGridCell(1, "Id", animalId);
+        breedingObservation.setGridCell(1, "sire", sireID);
+        breedingObservation.setGridCell(1, "date", breedingDate);
+        breedingObservation.setGridCell(1, "obsCode", "X");
+        breedingObservation.setGridCell(1, "cycleDay", "4");
+        sleep(500);
+        clickButton("Save & Close");
+
+        log("Opening the pending task for completion");
+        enterData.clickMyTasksTab();
+        waitAndClick(Locator.linkContainingText(TASK_TITLE_BRD_OBS));
+        switchToWindow(1);
+        waitForText("Breeding Observations");
+        clickButton("Submit Final", 0);
+        _extHelper.waitForExtDialog("Finalize Form");
+        click(Ext4Helper.Locators.ext4Button("Yes"));
+
+        log("Verifying the animal from breeding report");
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(animalId);
+        animalHistoryPage.clickCategoryTab("Reproductive Management");
+        animalHistoryPage.clickReportTab("Breeding");
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+
+        assertEquals("Just one row should be displayed", results.getDataRowCount(), 1);
+        assertEquals("Wrong value in Animal ID", animalId, convertToString(results.getColumnDataAsText("Id")));
+        assertEquals("Wrong value in Sire ID", sireID, convertToString(results.getColumnDataAsText("sire")));
+        assertEquals("Wrong value in Breeding Date", breedingDate, convertToString(results.getColumnDataAsText("date")));
+        assertEquals("Wrong value in Observation Code", "X", convertToString(results.getColumnDataAsText("obsCode")));
+        assertEquals("Wrong value in Day of Cycle", "4", convertToString(results.getColumnDataAsText("cycleDay")));
+
+    }
+
+    @Test
     public void testBreedingRegistrationDataEntry()
     {
         String animalId = "TEST1";
@@ -1428,7 +1481,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         breedingRegistration.setGridCell(1, "Id",animalId );
         breedingRegistration.setGridCell(1, "book",book );
         breedingRegistration.setGridCell(1, "maleEnemy1",maleEnemy1 );
-        clickButton("Save & Close");
+        clickButton("Save & Close",0);
 
         log("Opening the pending task for completion");
         enterData.clickMyTasksTab();
