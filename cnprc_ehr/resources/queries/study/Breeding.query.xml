@@ -10,6 +10,7 @@
                     </column>
                     <column columnName="date">
                         <columnTitle>Breeding Date</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                     <column columnName="hours">
                         <columnTitle>Hours</columnTitle>
