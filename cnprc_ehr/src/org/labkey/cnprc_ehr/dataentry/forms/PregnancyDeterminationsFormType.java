@@ -15,15 +15,14 @@ public class PregnancyDeterminationsFormType extends TaskForm
 {
 
     public static final String NAME = "Pregnancy Determinations";
-    public static final String LABEL = "Pregnancy Determinations Data Entry";
 
     public PregnancyDeterminationsFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, LABEL, "Clinical", Arrays.asList(
+        super(ctx, owner, NAME, NAME, "Reproductive Management", Arrays.asList(
 
                 new AnimalDetailsFormSection(),
-                new PregnancyDeterminationsFormSection(),
-                new TaskFormSection()
+                new TaskFormSection(),
+                new PregnancyDeterminationsFormSection()
         ));
 
         for (FormSection s : this.getFormSections())

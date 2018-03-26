@@ -50,6 +50,7 @@ import org.labkey.cnprc_ehr.dataentry.forms.BreedingRegistrationFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalReportFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.PregnancyDeterminationsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
 import org.labkey.cnprc_ehr.demographics.ActiveFlagsDemographicsProvider;
@@ -170,6 +171,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalReportFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingRegistrationFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingObservationsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(PregnancyDeterminationsFormType.class, this));
 
         //demographics
         ehrService.registerDemographicsProvider(new ActiveFlagsDemographicsProvider(this));
