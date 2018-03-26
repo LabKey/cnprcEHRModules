@@ -26,16 +26,13 @@ import org.labkey.cnprc_ehr.dataentry.BreedingRegistrationFormSection;
 
 import java.util.Arrays;
 
-/**
- * Created by Binal on 7/18/2017.
- */
 public class BreedingRegistrationFormType extends TaskForm
 {
     public static final String NAME = "breedingRegistration";
 
     public BreedingRegistrationFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, "Breeding Registration", "Breeding Management", Arrays.asList(
+        super(ctx, owner, NAME, "Breeding Registration", "Reproductive Management", Arrays.asList(
                 new TaskFormSection(),
                 new AnimalDetailsFormSection(),
                 new BreedingRegistrationFormSection()

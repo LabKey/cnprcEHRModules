@@ -11,10 +11,7 @@ EHR.model.DataModelManager.registerMetadata('BreedingObservations', {
     byQuery: {
         'study.breeding': {
             date: {
-                nullable: false,
-                columnConfig: {
-                    width: 200
-                }
+                nullable: false
             },
             sire: {
                 nullable: false

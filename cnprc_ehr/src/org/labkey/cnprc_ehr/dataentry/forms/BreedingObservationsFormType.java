@@ -35,7 +35,7 @@ public class BreedingObservationsFormType extends TaskForm
 
     public BreedingObservationsFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, "Breeding Observations", "Breeding Management", Arrays.asList(
+        super(ctx, owner, NAME, "Breeding Observations", "Reproductive Management", Arrays.asList(
                 new TaskFormSection(),
                 new AnimalDetailsFormSection(),
                 new BreedingObservationsFormSection()
