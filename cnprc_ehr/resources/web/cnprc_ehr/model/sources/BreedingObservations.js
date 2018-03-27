@@ -22,6 +22,19 @@ EHR.model.DataModelManager.registerMetadata('BreedingObservations', {
                 nullable: false,
                 columnConfig: {
                     width: 130
+                },
+                editorConfig: {
+                    anyMatch: true,
+                    listConfig: {
+                        innerTpl: '{[values.value + " : " + values.description]}',
+                        getInnerTpl: function(){
+                            return this.innerTpl;
+                        }
+                    }
+                },
+                lookup: {
+                    sort: 'value,description',
+                    columns: 'value,description'
                 }
             },
             cycleDay: {
