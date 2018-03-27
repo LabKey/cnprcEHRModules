@@ -31,7 +31,6 @@ import org.labkey.remoteapi.query.SaveRowsResponse;
 import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
 import org.labkey.test.ModulePropertyValue;
-import org.labkey.test.SortDirection;
 import org.labkey.test.TestFileUtils;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
@@ -2366,16 +2365,16 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
 
         assertEquals("Wrong search criteria.", expectedLabels, searchPanel.getAllSearchCriteria());
-        searchPanel.selectValues("Sex", " All");
+        searchPanel.selectValues("Sex", false, " All");
         assertEquals("Selecting 'All' genders didn't set input correctly", "Female;Male;Unknown", getFormElement(Locator.input("gender")));
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows for searching all genders", 39, searchResults.getDataRowCount());
 
         goBack();
         searchPanel = new AnimalSearchPanel(getDriver());
-        searchPanel.selectValues("Species code (3 char)", "CMO");
+        searchPanel.selectValues("Species code (3 char)", false, "CMO");
         assertEquals("Select 'CMO' species didn't set input correctly", "CMO", getFormElement(Locator.input("species")));
-        searchPanel.selectValues("Species code (3 char)", "MMU");
+        searchPanel.selectValues("Species code (3 char)", true, "MMU");
         assertEquals("Adding 'MMU' to species filter didn't set input correctly", "CMO;MMU", getFormElement(Locator.input("species")));
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Species = CMO or PCY", 39, searchResults.getDataRowCount());
