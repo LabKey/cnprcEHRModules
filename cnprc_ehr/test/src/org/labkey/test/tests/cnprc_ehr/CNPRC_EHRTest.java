@@ -1461,7 +1461,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testBreedingRegistrationDataEntry()
     {
-        String animalId = "TEST1";
+        String animalId = "TEST2";
         String book = "S8";
         String maleEnemy1 = "TEST1112911";
 
@@ -1481,7 +1481,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         breedingRegistration.setGridCell(1, "Id",animalId );
         breedingRegistration.setGridCell(1, "book",book );
         breedingRegistration.setGridCell(1, "maleEnemy1",maleEnemy1 );
-        clickButton("Save & Close",0);
+        clickButton("Save & Close");
 
         log("Opening the pending task for completion");
         enterData.clickMyTasksTab();
