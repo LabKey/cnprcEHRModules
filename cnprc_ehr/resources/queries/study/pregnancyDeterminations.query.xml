@@ -1,13 +1,14 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="pregnancydeterminations" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="pregnancyDeterminations" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id">
-                        <columnTitle>Female Id</columnTitle>
+                        <columnTitle>Id</columnTitle>
                     </column>
                     <column columnName="date">
                         <columnTitle>Observation Date </columnTitle>
+                        <formatString>date</formatString>
                     </column>
                     <column columnName="method">
                         <columnTitle>Method Codes</columnTitle>
@@ -20,6 +21,7 @@
                     </column>
                     <column columnName="cycleDay1">
                         <columnTitle>Cycle Day 1</columnTitle>
+                        <formatString>date</formatString>
                     </column>
                     <column columnName="result">
                         <columnTitle>Test Result</columnTitle>

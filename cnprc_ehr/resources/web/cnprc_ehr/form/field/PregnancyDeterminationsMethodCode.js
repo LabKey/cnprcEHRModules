@@ -2,9 +2,9 @@
  * This field is used to display EHR projects.  It contains a custom template for the combo list which displays both the project and protocol.
  * It also listens for participantchange events and will display only the set of allowable projects for the selected animal.
  */
-Ext4.define('CNPRC_EHR.form.field.pregnancyDeterminationsCode', {
+Ext4.define('CNPRC_EHR.form.field.PregnancyDeterminationsMethodCode', {
     extend: 'Ext.form.field.ComboBox',
-    alias: 'widget.cnprc_ehr-pregnancyDeterminationsCode',
+    alias: 'widget.cnprc_ehr-PregnancyDeterminationsMethodCode',
 
     fieldLabel: 'Method',
     caseSensitive: false,
@@ -32,7 +32,7 @@ Ext4.define('CNPRC_EHR.form.field.pregnancyDeterminationsCode', {
             type: 'labkey-store',
             containerPath: ctx ? ctx['EHRStudyContainer'] : null,
             schemaName: 'ehr_lookups',
-            queryName: 'vaccination_codes',
+            queryName: 'preg_det_method',
             columns: 'value,description',
             sort: 'value',
             autoLoad: true
