@@ -1311,7 +1311,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
 
         assertEquals("Wrong Housing History results,",
-                Arrays.asList("TEST4564246", "2005-01-11 14:00", " ", "<6824778>", "4953547"),
+                Arrays.asList("TEST4564246", "2005-01-11", " ", "<6824778>", "4953547"),
                 historyTable.getRowDataAsText(7, "Id", "date", "enddate", "room", "cage"));
     }
 
@@ -1647,7 +1647,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         assertEquals("Wrong Housing History link,",
-                Arrays.asList("TEST1112911", "2005-02-19 14:00", "3168659", "1"),
+                Arrays.asList("TEST1112911", "2005-02-19", "3168659", "1"),
                 results.getRowDataAsText(rowIndex, "Id", "date", "room", "cage"));
     }
 
