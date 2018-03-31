@@ -1448,12 +1448,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
 
-        assertEquals("Just one row should be displayed", results.getDataRowCount(), 1);
-        assertEquals("Wrong value in Animal ID", animalId, convertToString(results.getColumnDataAsText("Id")));
-        assertEquals("Wrong value in Sire ID", sireID, convertToString(results.getColumnDataAsText("sire")));
-        assertEquals("Wrong value in Breeding Date", breedingDate, convertToString(results.getColumnDataAsText("date")));
-        assertEquals("Wrong value in Observation Code", "X", convertToString(results.getColumnDataAsText("obsCode")));
-        assertEquals("Wrong value in Day of Cycle", "4", convertToString(results.getColumnDataAsText("cycleDay")));
+        assertEquals("Two rows should be displayed", results.getDataRowCount(), 2);
+        assertEquals("Wrong value in Animal ID", animalId, convertToString(results.getRowDataAsText(1, "Id")));
+        assertEquals("Wrong value in Sire ID", sireID, convertToString(results.getRowDataAsText(1,"sire")));
+        assertEquals("Wrong value in Breeding Date", breedingDate, convertToString(results.getRowDataAsText(1, "date")));
+        assertEquals("Wrong value in Observation Code", "X", convertToString(results.getRowDataAsText(1, "obsCode")));
+        assertEquals("Wrong value in Day of Cycle", "4", convertToString(results.getRowDataAsText(1, "cycleDay")));
 
     }
 
