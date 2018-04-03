@@ -9,8 +9,11 @@
                     </column>
                     <column columnName="motherId">
                         <columnTitle>Mother</columnTitle>
-                        <url>/ehr/participantView.view?participantId=${motherId}</url>
-                    </column>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>id</fkColumnName>
+                        </fk>                    </column>
                     <column columnName="assignType">
                         <columnTitle>Assign Type</columnTitle>
                         <fk>
