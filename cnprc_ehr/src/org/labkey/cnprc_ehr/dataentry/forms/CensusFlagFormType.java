@@ -19,7 +19,7 @@ public class CensusFlagFormType extends TaskForm
 
     public CensusFlagFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, LABEL, "Clinical", Arrays.asList(
+        super(ctx, owner, NAME, LABEL, "Colony Management", Arrays.asList(
 
                 new AnimalDetailsFormSection(),
                 new CensusFlagFormSection(),
@@ -29,7 +29,7 @@ public class CensusFlagFormType extends TaskForm
         {
             s.addConfigSource("Flags");
         }
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Flags.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/flags.js"));
 
     }
 }

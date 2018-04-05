@@ -20,7 +20,7 @@
                         <formatString>Date</formatString>
                     </column>
                     <column columnName="enddate">
-                        <isHidden>false</isHidden>
+                        <isHidden>true</isHidden>
                         <shownInInsertView>true</shownInInsertView>
                         <shownInDetailsView>true</shownInDetailsView>
                         <columnTitle>Removed Date</columnTitle>
