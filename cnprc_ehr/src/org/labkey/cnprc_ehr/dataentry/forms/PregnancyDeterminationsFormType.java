@@ -29,8 +29,6 @@ public class PregnancyDeterminationsFormType extends TaskForm
             s.addConfigSource("PregnancyDeterminations");
         }
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/pregnancyDeterminations.js"));
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/PregnancyDeterminationsMethodCode.js"));
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/PregnancyDeterminationsResult.js"));
-
+        addClientDependency(ClientDependency.fromPath("ehr/form/field/BooleanField.js"));
     }
 }

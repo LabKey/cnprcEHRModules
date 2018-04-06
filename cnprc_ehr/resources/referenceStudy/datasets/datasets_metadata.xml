@@ -612,8 +612,7 @@
                 <scale>1</scale>
             </column>
             <column columnName="scheduleStatus">
-                <datatype>varchar</datatype>
-                <scale>1</scale>
+                <datatype>boolean</datatype>
             </column>
             <column columnName="cycleDay1">
                 <datatype>timestamp</datatype>

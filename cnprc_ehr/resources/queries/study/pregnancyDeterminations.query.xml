@@ -33,7 +33,7 @@
                         </fk>
                     </column>
                     <column columnName="scheduleStatus">
-                        <columnTitle>Schedule Status</columnTitle>
+                        <columnTitle>Scheduled?</columnTitle>
                     </column>
                     <column columnName="taskid">
                         <isHidden>true</isHidden>

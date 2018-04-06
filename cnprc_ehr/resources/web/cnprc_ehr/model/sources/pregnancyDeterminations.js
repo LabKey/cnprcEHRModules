@@ -2,16 +2,10 @@ EHR.model.DataModelManager.registerMetadata('PregnancyDeterminations', {
     allQueries: {},
     byQuery: {
         'study.pregnancyDeterminations': {
-            scheduleStatus: {
-                columnConfig: {
-                    width: 150
-                }
-            },
             result: {
                 columnConfig: {
                     width: 150
                 },
-                xtype: 'cnprc_ehr-PregnancyDeterminationsResult',
                 editorConfig: {
                     anyMatch: true,
                     listConfig: {
@@ -30,7 +24,6 @@ EHR.model.DataModelManager.registerMetadata('PregnancyDeterminations', {
                 columnConfig: {
                     width: 150
                 },
-                xtype: 'cnprc_ehr-PregnancyDeterminationsMethodCode',
                 editorConfig: {
                     anyMatch: true,
                     listConfig: {
@@ -43,6 +36,16 @@ EHR.model.DataModelManager.registerMetadata('PregnancyDeterminations', {
                 lookup: {
                     sort: 'value,description',
                     columns: 'value,description'
+                }
+            },
+            scheduleStatus: {
+                xtype: 'ehr-booleanField',
+                columnConfig: {
+                    width: 100
+                },
+                editorConfig: {
+                    trueText: 'Yes',
+                    falseText: 'No'
                 }
             }
         }
