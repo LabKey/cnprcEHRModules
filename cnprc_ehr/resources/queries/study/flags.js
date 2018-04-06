@@ -6,8 +6,8 @@ function onInsert(helper, scriptErrors, row){
 }
 function onUpsert(helper, scriptErrors, row, oldRow) {
 
-    if (row.date == undefined) {
-        //Note: 'code' should match the column name in the dataset otherwise it won't recognize what col the error is for.
+    if (row.date === undefined) {
+        //Note: 'date' should match the column name in the dataset otherwise it won't recognize what col the error is for.
         EHR.Server.Utils.addError(scriptErrors, 'date', 'Assigned Date is a required field.', 'ERROR');
     }
 

@@ -15,7 +15,7 @@ public class CensusFlagFormType extends TaskForm
 {
 
     public static final String NAME = "Census Flag";
-    public static final String LABEL = "Census Flag Data Entry";
+    public static final String LABEL = "Census Flag";
 
     public CensusFlagFormType(DataEntryFormContext ctx, Module owner)
     {
