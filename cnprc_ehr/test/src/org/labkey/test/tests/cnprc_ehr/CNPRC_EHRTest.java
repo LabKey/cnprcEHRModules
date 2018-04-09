@@ -1507,6 +1507,62 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     }
 
+    @Test
+    public void pregnancyDeterminationDataEntry()
+    {
+        String animalId = "TEST2";
+        String methodCode = "Ultrasound";
+        String cycleDay1 ="2018-03-20";
+        String testResult ="Positive";
+        boolean scheduleStatus = false;
+
+        log("Begin the test with entry data page - Pregnancy Determinations");
+        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData.waitAndClickAndWait(Locator.linkWithText("Pregnancy Determinations"));
+        WebElement titleEl = waitForElement(Locator.xpath("//input[@name='title' and not(contains(@class, 'disabled'))]"), WAIT_FOR_JAVASCRIPT);
+        waitForFormElementToEqual(titleEl, "Pregnancy Determinations");
+
+        log("Setting the task title");
+        setFormElement(Locator.name("title"), TASK_TITLE_PRG_DET);
+        assertEquals(TASK_TITLE_PRG_DET, getFormElement(Locator.name("title")));
+
+        log("Entering data for animal:" + animalId);
+        Ext4GridRef pregnancyDeterminations = _helper.getExt4GridForFormSection("Pregnancy Determinations");
+        _helper.addRecordToGrid(pregnancyDeterminations);
+        pregnancyDeterminations.setGridCell(1, "Id",animalId );
+        pregnancyDeterminations.setGridCell(1,"method",methodCode);
+        pregnancyDeterminations.setGridCell(1,"cycleDay1",cycleDay1);
+        pregnancyDeterminations.setGridCell(1,"result",testResult);
+        pregnancyDeterminations.setGridCell(1,"scheduleStatus","No");
+        sleep(5000); // Weirdly sleep is needed for the Save & Close to be enabled , waitForElement is not working.
+        clickButton("Save & Close");
+
+        log("Opening the pending task for completion");
+        enterData.clickMyTasksTab();
+        waitAndClick(Locator.linkContainingText(TASK_TITLE_PRG_DET));
+        switchToWindow(1);
+        waitForText("Pregnancy Determinations");
+        clickButton("Submit Final",0);
+        _extHelper.waitForExtDialog("Finalize Form");
+        click(Ext4Helper.Locators.ext4Button("Yes"));
+
+        log("Verifying the animal from Pregnancy Determinations report");
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(animalId);
+        animalHistoryPage.clickCategoryTab("Reproductive Management");
+        animalHistoryPage.clickReportTab("Pregnancy Determinations");
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+
+        assertEquals("Just one row should be displayed",results.getDataRowCount(),1);
+
+        assertEquals("Wrong value in animal ID",animalId,convertToString(results.getColumnDataAsText("Id")));
+        assertEquals("Wrong value in Method codes",methodCode,convertToString(results.getColumnDataAsText("method")));
+        assertEquals("Wrong value in test result",testResult,convertToString(results.getColumnDataAsText("result")));
+        assertEquals("Wrong value in scheduled status","false",convertToString(results.getColumnDataAsText("scheduleStatus")));
+        assertEquals("Wrong value in cycle day",cycleDay1,convertToString(results.getColumnDataAsText("cycleDay1")));
+    }
+
     private String convertToString(List<String> list)
     {
         String ret="";
