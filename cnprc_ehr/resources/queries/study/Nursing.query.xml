@@ -1,11 +1,10 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Nursing" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="nursing" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
-                    <column columnName="Id"/>
-                    <column columnName="date">
-                        <columnTitle>Assign Date</columnTitle>
+                    <column columnName="Id">
+                        <columnTitle>Infant</columnTitle>
                     </column>
                     <column columnName="motherId">
                         <columnTitle>Mother</columnTitle>
@@ -13,15 +12,30 @@
                             <fkDbSchema>study</fkDbSchema>
                             <fkTable>animal</fkTable>
                             <fkColumnName>id</fkColumnName>
-                        </fk>                    </column>
+                        </fk>
+                    </column>
+                    <column columnName="date">
+                        <columnTitle>Assignment Date </columnTitle>
+                        <formatString>Date</formatString>
+                    </column>
+                    <column columnName="releaseDate">
+                        <columnTitle>Release Date</columnTitle>
+                        <formatString>Date</formatString>
+                    </column>
                     <column columnName="assignType">
-                        <columnTitle>Assign Type</columnTitle>
+                        <columnTitle>Assignment Type</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>nursing_assign_types</fkTable>
                             <fkColumnName>value</fkColumnName>
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
+                    </column>
+                    <column columnName="remark">
+                        <columnTitle>Observation</columnTitle>
+                    </column>
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>
