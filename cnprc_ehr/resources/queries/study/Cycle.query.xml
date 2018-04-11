@@ -1,21 +1,27 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Cycle" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="cycle" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
+                    <column columnName="date">
+                        <columnTitle>Cyc. Day1</columnTitle>
+                    </column>
                     <column columnName="sire">
-                        <columnTitle>Sire</columnTitle>
+                        <columnTitle>Male</columnTitle>
                         <url>/ehr/participantView.view?participantId=${sire}</url>
                     </column>
-                    <column columnName="date">
-                        <columnTitle>Cycle Start Date</columnTitle>
+                    <column columnName="methodOne">
+                        <columnTitle>Mthd</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>preg_det_method</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
                     </column>
-                    <column columnName="estGestStartDate">
-                        <columnTitle>Est. Gestation Start Date</columnTitle>
-                    </column>
-                    <column columnName="daysAndHoursString">
-                        <columnTitle>Days and Hours String</columnTitle>
+                    <column columnName="gestDayOne">
+                        <columnTitle>Day</columnTitle>
                     </column>
                     <column columnName="firstCycleDay">
                         <columnTitle>1st Cycle Day</columnTitle>
@@ -26,26 +32,23 @@
                     <column columnName="thirdCycleDay">
                         <columnTitle>3rd Cycle Day</columnTitle>
                     </column>
+                    <column columnName="schedStatusOne">
+                        <columnTitle>CN</columnTitle>
+                    </column>
                     <column columnName="locationOverride">
-                        <columnTitle>Location Override</columnTitle>
+                        <columnTitle>Reloc</columnTitle>
+                    </column>
+                    <column columnName="estGestStartDate">
+                        <columnTitle>Est. Gestation Start Date</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="daysAndHoursString">
+                        <columnTitle>Days and Hours String</columnTitle>
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="weekendBreeding">
                         <columnTitle>Weekend Breeding</columnTitle>
-                    </column>
-                    <column columnName="methodOne">
-                        <columnTitle>Method One</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>preg_det_method</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName>Description</fkDisplayColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="gestDayOne">
-                        <columnTitle>Gest. Day One</columnTitle>
-                    </column>
-                    <column columnName="schedStatusOne">
-                        <columnTitle>Schedule Status One</columnTitle>
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="methodTwo">
                         <columnTitle>Method Two</columnTitle>
@@ -81,6 +84,9 @@
                     </column>
                     <column columnName="schedStatusThree">
                         <columnTitle>Schedule Status Two</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="performedBy">
                         <isHidden>true</isHidden>
                     </column>
                 </columns>

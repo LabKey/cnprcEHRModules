@@ -20,6 +20,31 @@ EHR.model.DataModelManager.registerMetadata('Cycle', {
                     },
                     schedStatusThree: {
                         hidden: true
+                    },
+                    date: {
+                        columnConfig: {
+                            width: 110
+                        }
+                    },
+                    firstCycleDay: {
+                        columnConfig: {
+                            width: 105
+                        }
+                    },
+                    secondCycleDay: {
+                        columnConfig: {
+                            width: 105
+                        }
+                    },
+                    thirdCycleDay: {
+                        columnConfig: {
+                            width: 105
+                        }
+                    },
+                    remark: {
+                        columnConfig: {
+                            width: 300
+                        }
                     }
                 }
             }
