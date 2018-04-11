@@ -13,10 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+-- Query updated as per support ticket: https://www.labkey.org/CNPRC/Support%20Tickets/issues-details.view?issueId=33158
 SELECT
 M_FEMALE_ID AS Id,
 M_OBS_DATE,
 M_BLEEDING_OBS_CODE AS observationCode,
 OBJECTID as objectid,
 DATE_TIME
-FROM cnprcSrc.ZMENSES
+FROM cnprcSrc.ZMENSES mens
+WHERE
+NOT exists
+(
+    SELECT 'x'
+    FROM cnprcSrc.mh_obs
+    WHERE
+       mho_an_id = mens.m_female_id AND
+       mho_full_date = mens.m_obs_date AND
+       (
+          (mho_obs_code_1 IN ('NRMLMEN','HEVYMEN')) OR
+          (mho_obs_code_2 IN ('NRMLMEN','HEVYMEN')) OR
+          (mho_obs_code_3 IN ('NRMLMEN','HEVYMEN')) OR
+          (mho_obs_code_4 IN ('NRMLMEN','HEVYMEN')) OR
+          (mho_obs_code_5 IN ('NRMLMEN','HEVYMEN')) OR
+          (mho_obs_code_6 IN ('NRMLMEN','HEVYMEN')) OR
+          (mho_obs_code_7 IN ('NRMLMEN','HEVYMEN'))
+       )
+)
