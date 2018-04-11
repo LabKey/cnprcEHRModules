@@ -45,6 +45,16 @@ EHR.model.DataModelManager.registerMetadata('Cycle', {
                         columnConfig: {
                             width: 300
                         }
+                    },
+                    maleMultiUse: {
+                        xtype: 'ehr-booleanField',
+                        columnConfig: {
+                            width: 100
+                        },
+                        editorConfig: {
+                            trueText: 'Yes',
+                            falseText: 'No'
+                        }
                     }
                 }
             }

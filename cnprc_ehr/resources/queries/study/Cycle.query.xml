@@ -11,6 +11,9 @@
                         <columnTitle>Male</columnTitle>
                         <url>/ehr/participantView.view?participantId=${sire}</url>
                     </column>
+                    <column columnName="maleMultiUse">
+                        <columnTitle>Multi Use?</columnTitle>
+                    </column>
                     <column columnName="methodOne">
                         <columnTitle>Mthd</columnTitle>
                         <fk>

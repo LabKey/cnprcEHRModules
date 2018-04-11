@@ -842,6 +842,9 @@
             <column columnName="sire">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="maleMultiUse">
+                <datatype>boolean</datatype>
+            </column>
             <column columnName="daysAndHoursString">
                 <datatype>varchar</datatype>
                 <scale>60</scale>
