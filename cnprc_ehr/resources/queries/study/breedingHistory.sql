@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-/* TODO: Below is a placeholder query, re-do as per requirements in the spec. */
+/* TODO: Below is a placeholder query, re-do as per requirements in the spec for breeding history. */
 
 SELECT * FROM study.menses;
