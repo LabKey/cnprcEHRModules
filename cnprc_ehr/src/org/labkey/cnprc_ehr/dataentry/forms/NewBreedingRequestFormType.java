@@ -32,7 +32,7 @@ public class NewBreedingRequestFormType extends TaskForm
             s.addConfigSource("Cycle");
         }
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Cycle.js"));
-
+        addClientDependency(ClientDependency.fromPath("ehr/form/field/BooleanField.js"));
     }
 
     @Override
