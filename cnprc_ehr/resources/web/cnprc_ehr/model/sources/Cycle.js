@@ -55,6 +55,16 @@ EHR.model.DataModelManager.registerMetadata('Cycle', {
                             trueText: 'Yes',
                             falseText: 'No'
                         }
+                    },
+                    locationOverride: {
+                        xtype: 'ehr-booleanField',
+                        columnConfig: {
+                            width: 100
+                        },
+                        editorConfig: {
+                            trueText: 'Yes',
+                            falseText: 'No'
+                        }
                     }
                 }
             }
