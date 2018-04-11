@@ -18,25 +18,20 @@ package org.labkey.cnprc_ehr;
 
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.data.Container;
-import org.labkey.api.data.DbSchema;
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
 import org.labkey.api.ehr.dataentry.forms.ArrivalFormType;
 import org.labkey.api.ehr.dataentry.forms.BirthFormType;
 import org.labkey.api.ehr.dataentry.forms.DCMNotesFormType;
 import org.labkey.api.ehr.dataentry.forms.DeathFormType;
-import org.labkey.api.ehr.dataentry.forms.HousingFormType;
 import org.labkey.api.ehr.history.DefaultBirthDataSource;
 import org.labkey.api.ehr.history.DefaultDeathsDataSource;
 import org.labkey.api.ehr.history.DefaultDepartureDataSource;
 import org.labkey.api.ehr.history.DefaultTreatmentEndDataSource;
 import org.labkey.api.ldk.ExtendedSimpleModule;
 import org.labkey.api.module.AdminLinkManager;
-import org.labkey.api.module.Module;
 import org.labkey.api.module.ModuleContext;
-import org.labkey.api.query.DefaultSchema;
 import org.labkey.api.query.DetailsURL;
-import org.labkey.api.query.QuerySchema;
 import org.labkey.api.resource.Resource;
 import org.labkey.api.security.User;
 import org.labkey.api.security.permissions.AdminPermission;
@@ -51,12 +46,16 @@ import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.CensusFlagFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalReportFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.HousingFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.NursingFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PregnancyDeterminationsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
 import org.labkey.cnprc_ehr.demographics.ActiveFlagsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.BCSDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.BreedingGroupDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.BreedingRosterDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.CNPRCDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ColonyDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ConceptionsDemographicsProvider;
@@ -174,6 +173,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingObservationsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PregnancyDeterminationsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(CensusFlagFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(NursingFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(NewBreedingRequestFormType.class, this));
 
         //demographics
         ehrService.registerDemographicsProvider(new ActiveFlagsDemographicsProvider(this));
@@ -190,6 +191,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new PathologyReportsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new SerumDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new TBDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new BreedingRosterDemographicsProvider(this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
@@ -218,23 +220,4 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         return Collections.singleton(CNPRC_EHRSchema.NAME);
     }
 
-    @Override
-    public void registerSchemas()
-    {
-        for (final String schemaName : getSchemaNames())
-        {
-            final DbSchema dbschema = DbSchema.get(schemaName);
-            DefaultSchema.registerProvider(schemaName, new DefaultSchema.SchemaProvider(this)
-            {
-                public QuerySchema createSchema(final DefaultSchema schema, Module module)
-                {
-                    if (schemaName.equalsIgnoreCase(CNPRC_EHRSchema.NAME)){
-                        return new CNPRC_EHRUserSchema(schema.getUser(), schema.getContainer(), dbschema);
-                    }
-
-                    return null;
-                }
-            });
-        }
-    }
 }

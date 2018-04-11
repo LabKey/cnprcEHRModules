@@ -865,6 +865,15 @@
                 <datatype>varchar</datatype>
                 <scale>1</scale>
             </column>
+            <column columnName="firstCycleDay">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="secondCycleDay">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="thirdCycleDay">
+                <datatype>integer</datatype>
+            </column>
             <column columnName="methodTwo">
                 <datatype>varchar</datatype>
                 <scale>2</scale>

@@ -17,6 +17,15 @@
                     <column columnName="daysAndHoursString">
                         <columnTitle>Days and Hours String</columnTitle>
                     </column>
+                    <column columnName="firstCycleDay">
+                        <columnTitle>1st Cycle Day</columnTitle>
+                    </column>
+                    <column columnName="secondCycleDay">
+                        <columnTitle>2nd Cycle Day</columnTitle>
+                    </column>
+                    <column columnName="thirdCycleDay">
+                        <columnTitle>3rd Cycle Day</columnTitle>
+                    </column>
                     <column columnName="locationOverride">
                         <columnTitle>Location Override</columnTitle>
                     </column>
@@ -40,6 +49,7 @@
                     </column>
                     <column columnName="methodTwo">
                         <columnTitle>Method Two</columnTitle>
+                        <isHidden>true</isHidden>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>preg_det_method</fkTable>
@@ -49,12 +59,15 @@
                     </column>
                     <column columnName="gestDayTwo">
                         <columnTitle>Gest. Day Two</columnTitle>
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="schedStatusTwo">
                         <columnTitle>Schedule Status Two</columnTitle>
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="methodThree">
                         <columnTitle>Method Three</columnTitle>
+                        <isHidden>true</isHidden>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>preg_det_method</fkTable>
@@ -64,9 +77,11 @@
                     </column>
                     <column columnName="gestDayThree">
                         <columnTitle>Gest. Day Three</columnTitle>
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="schedStatusThree">
                         <columnTitle>Schedule Status Two</columnTitle>
+                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>

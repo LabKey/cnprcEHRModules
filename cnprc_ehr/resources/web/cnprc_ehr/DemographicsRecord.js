@@ -287,6 +287,10 @@ EHR.DemographicsRecord = function(data){
 
         getPathologyReports: function() {
             return data['pathologyReports'];
+        },
+
+        getBreedingRosterBook: function() {
+            return data['book'];
         }
     }
 }
