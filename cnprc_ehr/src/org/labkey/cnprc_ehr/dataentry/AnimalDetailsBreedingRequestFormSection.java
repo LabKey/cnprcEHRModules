@@ -8,6 +8,9 @@ public class AnimalDetailsBreedingRequestFormSection  extends NonStoreFormSectio
     public AnimalDetailsBreedingRequestFormSection()
     {
         super("AnimalDetails", "Animal Details", "cnprc_ehr-animalDetailsBreedingRequest");
+        addClientDependency(ClientDependency.fromPath("ehr/panel/SnapshotPanel.js"));
+        addClientDependency(ClientDependency.fromPath("ehr/panel/AnimalDetailsPanel.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/CNPRCAnimalDetailsPanel.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/AnimalDetailsBreedingRequest.js"));
     }
 }

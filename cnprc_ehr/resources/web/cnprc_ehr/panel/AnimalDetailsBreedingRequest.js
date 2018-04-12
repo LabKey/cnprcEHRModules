@@ -7,8 +7,10 @@
  */
 
 Ext4.define('cnprc_ehr.panel.AnimalDetailsBreedingRequest', {
-    extend: 'CNPRC_EHR.panel.SnapshotPanel',
+    extend: 'cnprc_ehr.panel.CNPRCAnimalDetailsPanel',
     alias: 'widget.cnprc_ehr-animalDetailsBreedingRequest',
+
+    minHeight: 150,
 
     getItems: function(){
         return [{
@@ -43,7 +45,8 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsBreedingRequest', {
                 }]
             },{
                 xtype: 'container',
-                width: 350,
+                width: 380,
+                style: 'margin-left: 20px;',
                 defaults: {
                     xtype: 'displayfield'
                 },
@@ -54,8 +57,8 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsBreedingRequest', {
                     fieldLabel: 'Book',
                     name: 'book'
                 },{
-                    fieldLabel: 'Project Code(s)',
-                    name: 'assignmentsAndGroups'
+                    fieldLabel: 'Project',
+                    name: 'lastProjects'
                 },{
                     xtype: 'ldk-linkbutton',
                     style: 'margin-top: 10px;',
@@ -100,18 +103,28 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsBreedingRequest', {
     },
 
     appendDataResults: function(toSet, results, id) {
+
         this.appendDemographicsResults(toSet, results, id);
-        this.appendCnprcDemographicsResults(toSet, results);
         this.appendBirthResults(toSet, results.getBirthInfo(), results.getBirth());
         this.appendLocation(toSet, results);
-        this.appendColony(toSet, results);
-        this.appendBreedingGroup(toSet, results);
         this.appendLastProjects(toSet, results.getLastProjects());
+        this.appendBreedingGroup(toSet, results);
+        this.appendColony(toSet, results);
         this.appendBreedingRosterBook(toSet, results);
     },
 
     appendBreedingRosterBook: function(toSet, results) {
         if (results.getBreedingRosterBook())
             toSet['book'] = LABKEY.Utils.encodeHtml(results.getBreedingRosterBook());
+    },
+
+    appendColony: function(toSet, results){
+        if (results.getColony())
+            toSet['colony'] = LABKEY.Utils.encodeHtml(results.getColony());
+    },
+
+    appendBreedingGroup: function(toSet, results){
+        if (results.getBreedingGroup())
+            toSet['breedingGroup'] = LABKEY.Utils.encodeHtml(results.getBreedingGroup());
     }
 });

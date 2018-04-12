@@ -5,9 +5,23 @@
  *
  * @param subjectId
  */
-Ext4.define('CNPRC_EHR.panel.CNPRCAnimalDetailsPanel', {
+Ext4.define('cnprc_ehr.panel.CNPRCAnimalDetailsPanel', {
     extend: 'EHR.panel.AnimalDetailsPanel',
     alias: 'widget.cnprc_ehr-cnprcanimaldetailspanel',
+
+    initComponent: function(){
+
+        this.callParent(arguments);
+
+        Ext4.apply(this, {
+            border: true,
+            bodyStyle: 'padding: 5px;',
+            minHeight: 150,
+            defaults: {
+                border: false
+            }
+        });
+    },
 
     getItems: function(){
         return [{
@@ -44,8 +58,8 @@ Ext4.define('CNPRC_EHR.panel.CNPRCAnimalDetailsPanel', {
                     fieldLabel: 'Source',
                     name: 'source'
                 },{
-                    fieldLabel: 'Project Code(s)',
-                    name: 'assignmentsAndGroups'
+                    fieldLabel: 'Project',
+                    name: 'lastProjects'
                 }]
             },{
                 xtype: 'container',
@@ -144,5 +158,134 @@ Ext4.define('CNPRC_EHR.panel.CNPRCAnimalDetailsPanel', {
                 }
             }]
         }];
+    },
+
+    appendDataResults: function(toSet, results, id) {
+        this.appendDemographicsResults(toSet, results, id);
+        this.appendBirthResults(toSet, results.getBirthInfo(), results.getBirth());
+        this.appendLocation(toSet, results);
+        this.appendLastProjects(toSet, results.getLastProjects());
+    },
+
+    appendDemographicsResults: function(toSet, row, id){
+        if (!row){
+            console.log('Id not found');
+            return;
+        }
+
+        var animalId = row.getId() || id;
+        if (!Ext4.isEmpty(animalId)){
+            toSet['animalId'] = LABKEY.Utils.encodeHtml(id);
+        }
+        if (row.getGender())
+            toSet['gender'] = LABKEY.Utils.encodeHtml(row.getGender());
+        if (row.getDam())
+            toSet['dam'] = LABKEY.Utils.encodeHtml(row.getDam());
+        if (row.getSire())
+            toSet['sire'] = LABKEY.Utils.encodeHtml(row.getSire());
+        if (row.getSpecies())
+            toSet['species'] = LABKEY.Utils.encodeHtml(row.getSpecies());
+    },
+
+    appendBirthResults: function(toSet, birthResults, birth){
+        if (birthResults && birthResults.length){
+            var row = birthResults[0];
+            var date = LDK.ConvertUtils.parseDate(row.date || birth);
+            var text = date ?  date.format(LABKEY.extDefaultDateFormat) : null;
+            if (text){
+                var location = row.room;
+                if (location)
+                    text = text + '&nbsp&nbsp(' + LABKEY.Utils.encodeHtml(location) + ')';
+
+                if (text)
+                    toSet['birth'] = text;
+            }
+        }
+        else if (birth){
+            var date = LDK.ConvertUtils.parseDate(birth);
+            if (date){
+                toSet['birth'] = date.format(LABKEY.extDefaultDateFormat);
+            }
+        }
+        else {
+            toSet['birth'] = null;
+        }
+    },
+
+    appendLocation: function(toSet, results){
+        var location;
+
+        var status = results.getCalculatedStatus();
+        if (status) {
+            if (status === 'Shipped')
+                location = 'SHIPPED';
+            else if (status === 'Dead') {
+                location = 'DEAD from'
+            }
+        }
+
+        var lastLocationRows = results.getLocationRows();
+
+        if (lastLocationRows) {
+            var lastLocationRow = lastLocationRows[0];
+            if (lastLocationRow) {
+                if (lastLocationRow['date']) {
+                    var date = LDK.ConvertUtils.parseDate(lastLocationRow['date']);
+                    if (location)
+                        location = date.format(LABKEY.extDefaultDateFormat) + '&nbsp&nbsp' + location;
+                    else
+                        location = date.format(LABKEY.extDefaultDateFormat);
+                }
+                if (lastLocationRow['Location']) {
+                    if (status && status === 'Shipped')
+                        ; // do nothing
+                    else if (location)
+                        location += '&nbsp' + LABKEY.Utils.encodeHtml(lastLocationRow['Location']);
+                    else
+                        location = LABKEY.Utils.encodeHtml(lastLocationRow['Location']);
+                }
+            }
+        }
+        if (location)
+            toSet['location'] = location;
+    },
+
+    appendWeight: function(toSet, results){
+        if (results.getMostRecentWeightDate()) {
+            var date = LDK.ConvertUtils.parseDate(results.getMostRecentWeightDate());
+            var weight = date.format(LABKEY.extDefaultDateFormat);
+            weight += '&nbsp&nbsp' + Number(Math.round(LABKEY.Utils.encodeHtml(results.getMostRecentWeight())+'e2')+'e-2').toFixed(2) + ' kg';  // always show two decimal places
+            toSet['weight'] = weight;
+        }
+    },
+
+    appendLastProjects: function(toSet, rows){
+        var values = [];
+        if (rows){
+            Ext4.each(rows, function(row){
+                var val = '';
+                if (row['projectDate']) {
+                    var date = LDK.ConvertUtils.parseDate(row['projectDate']);
+                    val += date.format(LABKEY.extDefaultDateFormat);
+                }
+                if (row['projectType'])
+                    val += '&nbsp&nbsp' + LABKEY.Utils.encodeHtml(row['projectType']);
+                if (row['projectId'])
+                    val += '&nbsp&nbsp<a href="cnprc_ehr-projectDetails.view?project=' + LABKEY.Utils.encodeHtml(row['projectId']) + '">' + LABKEY.Utils.encodeHtml(row['projectId']) + "</a>";
+                if (row['pi'])
+                    val += '&nbsp&nbsp' + LABKEY.Utils.encodeHtml(row['pi']);
+                if (row['projectName'])
+                    val += '&nbsp&nbsp' + LABKEY.Utils.encodeHtml(row['projectName']);
+
+                var text = val;
+
+                if (text !== '') {
+                    text = '<span>' + text + '</span>';
+                    values.push(text);
+                }
+            }, this);
+        }
+
+        toSet['lastProjects'] = values.length ? values.join('<br>') + '</div>' : null;
     }
 });

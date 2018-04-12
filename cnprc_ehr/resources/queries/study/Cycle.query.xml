@@ -6,6 +6,7 @@
                     <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Cyc. Day1</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                     <column columnName="sire">
                         <columnTitle>Male</columnTitle>
