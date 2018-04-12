@@ -1554,6 +1554,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
 
+        results.setFilter("method","Equals",methodCode);
         assertEquals("Just one row should be displayed",results.getDataRowCount(),1);
 
         assertEquals("Wrong value in animal ID",animalId,convertToString(results.getColumnDataAsText("Id")));
