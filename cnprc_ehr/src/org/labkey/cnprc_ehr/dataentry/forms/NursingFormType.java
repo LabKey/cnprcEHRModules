@@ -15,7 +15,7 @@ public class NursingFormType extends TaskForm
 {
 
     public static final String NAME = "Nursing/Fostering";
-    public static final String LABEL = "Nursing/Fostering  Data Entry";
+    public static final String LABEL = "Nursing/Fostering";
 
     public NursingFormType(DataEntryFormContext ctx, Module owner)
     {

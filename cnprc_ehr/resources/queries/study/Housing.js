@@ -18,10 +18,10 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                 LABKEY.Filter.create('Id', row.id, LABKEY.Filter.Types.EQUAL),
                 LABKEY.Filter.create('enddate', row.enddate, LABKEY.Filter.Types.EQUAL)],
             success: function (results) {
-                if (results) {
+                if(results && results.rows && results.rows.length >= 1) {
                     console.log('recent move date', new Date(results["rows"][0]['enddate']['value']));
                     console.log('last seq number', results["rows"][0]['reloc_seq']['value']);
-                    console.log('current move date ', new Date(row.date))
+                    console.log('current move date ', new Date(row.date));
 
                     // if(prev_date > new_date) {
                     // console.log('New move date is before previous move date!')
@@ -31,7 +31,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
 
                 }
                 else {
-                    console.log('cant find past move dates')
+                    console.log('cant find past move dates');
                 }
 
             },

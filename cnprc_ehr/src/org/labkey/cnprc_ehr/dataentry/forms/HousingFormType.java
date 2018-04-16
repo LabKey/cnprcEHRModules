@@ -15,7 +15,7 @@ public class HousingFormType extends TaskForm
 {
 
     public static final String NAME = "Housing";
-    public static final String LABEL = "Housing Data Entry";
+    public static final String LABEL = "Housing";
 
     public HousingFormType(DataEntryFormContext ctx, Module owner)
     {
