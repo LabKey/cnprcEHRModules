@@ -873,4 +873,21 @@
             <column columnName="Container"/>
         </columns>
     </table>
+    <table tableName="mh_processing" tableDbType="TABLE">
+        <columns>
+            <column columnName="rowPk"/>
+            <column columnName="source"/>
+            <column columnName="fileLineNumber"/>
+            <column columnName="status"/>
+            <column columnName="voided"/>
+            <column columnName="data"/>
+            <column columnName="errors"/>
+            <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
 </tables>

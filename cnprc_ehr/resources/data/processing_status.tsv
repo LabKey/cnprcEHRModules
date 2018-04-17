@@ -1,0 +1,4 @@
+value	description	sort_order
+U	Unvalidated	0
+V	Valid	1
+I	Invalid	2

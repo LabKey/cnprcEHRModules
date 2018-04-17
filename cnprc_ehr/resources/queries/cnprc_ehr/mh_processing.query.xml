@@ -1,0 +1,36 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="mh_processing" tableDbType="TABLE" useColumnOrder="true">
+                <columns>
+                    <column columnName="rowPk">
+                        <columnTitle>Row PK</columnTitle>
+                    </column>
+                    <column columnName="source">
+                        <columnTitle>Source</columnTitle>
+                    </column>
+                    <column columnName="fileLineNumber">
+                        <columnTitle>File Line Number</columnTitle>
+                    </column>
+                    <column columnName="status">
+                        <columnTitle>Processing Status</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>processing_status</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="voided">
+                        <columnTitle>Voided</columnTitle>
+                    </column>
+                    <column columnName="data">
+                        <columnTitle>Data</columnTitle>
+                    </column>
+                    <column columnName="errors">
+                        <columnTitle>Errors</columnTitle>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

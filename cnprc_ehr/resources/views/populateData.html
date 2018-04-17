@@ -698,7 +698,14 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'observation_areas',
         pk: 'rowid'
-    }
+    },
+    {
+        label: 'Processing Status',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'processing_status',
+        pk: 'value'
+    },
  ];
 
     tables.sort(function(a, b) {

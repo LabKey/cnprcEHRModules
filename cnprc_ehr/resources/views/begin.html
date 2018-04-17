@@ -108,7 +108,14 @@ Ext4.onReady(function(){
                 {name: 'Enter Data', url: '<%=contextPath%>/ehr' + ctx['EHRStudyContainer'] + '/enterData.view'},
 
                  //TODO:   Role needs to be created or simply permission needs to be set
-                {name: 'Bulk Import - Chemistry Results', url: LABKEY.ActionURL.buildURL('ldk', 'updateQuery', null, {schemaName: 'study', 'query.queryName': 'chemistryResults', showImport: true})}
+                {name: 'Bulk Import - Chemistry Results', url: LABKEY.ActionURL.buildURL('ldk', 'updateQuery', null, {schemaName: 'study', 'query.queryName': 'chemistryResults', showImport: true})},
+                {name: 'Edit Indoor Morning Health Data', url: LABKEY.ActionURL.buildURL('ldk', 'updateQuery', null,
+                    {schemaName: 'cnprc_ehr',
+                     'query.queryName': 'mh_processing',
+                     'query.source~eq' : 'Indoor_Morning_Health',
+                     showImport: true
+                    }
+                )}
             ]
         }]
     };
