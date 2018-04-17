@@ -1,9 +1,8 @@
 package org.labkey.cnprc_ehr.pipeline;
 
 import org.jetbrains.annotations.NotNull;
-import org.labkey.api.data.DbSchema;
+import org.labkey.api.collections.CaseInsensitiveHashMap;
 import org.labkey.api.data.DbScope;
-import org.labkey.api.data.Table;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.exp.api.ExperimentService;
 import org.labkey.api.pipeline.AbstractTaskFactory;
@@ -12,16 +11,23 @@ import org.labkey.api.pipeline.PipelineJob;
 import org.labkey.api.pipeline.PipelineJobException;
 import org.labkey.api.pipeline.RecordedActionSet;
 import org.labkey.api.pipeline.file.FileAnalysisJobSupport;
+import org.labkey.api.query.BatchValidationException;
+import org.labkey.api.query.QueryService;
+import org.labkey.api.query.QueryUpdateService;
 import org.labkey.api.util.FileType;
+import org.labkey.api.view.ActionURL;
+import org.labkey.api.view.HttpView;
+import org.labkey.api.view.ViewContext;
 import org.labkey.cnprc_ehr.CNPRC_EHRSchema;
+import org.labkey.cnprc_ehr.CNPRC_EHRUserSchema;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.LineNumberReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,11 +51,21 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
         if (!dataFile.exists())
             throw new PipelineJobException("Unable to find file: " + dataFile.getPath());
 
-        DbSchema cnprc_ehrSchema = CNPRC_EHRSchema.getInstance().getSchema();
-        TableInfo mh_processingTable = cnprc_ehrSchema.getTable("mh_processing");
+        CNPRC_EHRUserSchema cnprc_ehrUserSchema = (CNPRC_EHRUserSchema)QueryService.get().getUserSchema(job.getUser(), job.getContainer(), CNPRC_EHRSchema.NAME);
+        TableInfo mh_processingTable = cnprc_ehrUserSchema.getTable(CNPRC_EHRSchema.MH_PROCESSING);
+        QueryUpdateService mh_ProcessingQus = mh_processingTable.getUpdateService();
+        if (mh_ProcessingQus == null)
+            throw new IllegalStateException(mh_processingTable.getName() + " query update service could not be acquired");
 
         try
         {
+            if (!HttpView.hasCurrentView())
+            {
+                // trigger script gets unhappy without a view context
+                // don't really care what URL we use here, just needs something to avoid error in trigger script firing
+                ViewContext.pushMockViewContext(job.getUser(), job.getContainer(), new ActionURL("project", "begin.view", job.getContainer()));
+            }
+
             try (DbScope.Transaction transaction = ExperimentService.get().ensureTransaction();
                  LineNumberReader lnr = new LineNumberReader(new BufferedReader(new FileReader(dataFile))))
             {
@@ -58,12 +74,14 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                 if (mh_processingTable.getSqlDialect().isSqlServer())
                 {
                     String line;
+                    List<Map<String, Object>> mh_processingRows = new ArrayList<>();
+                    BatchValidationException errors = new BatchValidationException();
                     while ((line = lnr.readLine()) != null )
                     {
                         if (line.equals(""))
                             continue;  // skip blank lines
                         String rowPk = line.split("\t", 2)[0];
-                        Map<String, Object> row = new HashMap<>();
+                        Map<String, Object> row = new CaseInsensitiveHashMap<>();
 
                         row.put("rowPk", rowPk);
                         row.put("source", SOURCE_NAME);
@@ -75,8 +93,11 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                         row.put("created", new Date());
                         row.put("createdby", job.getUser().getUserId());
                         row.put("container", job.getContainer().getId());
-                        Table.insert(job.getUser(), mh_processingTable, row);
+                        mh_processingRows.add(row);
                     }
+                    mh_ProcessingQus.insertRows(job.getUser(), job.getContainer(), mh_processingRows, errors, null, null);
+                    if (errors.hasErrors())
+                        throw errors;
                 }
                 else
                 {

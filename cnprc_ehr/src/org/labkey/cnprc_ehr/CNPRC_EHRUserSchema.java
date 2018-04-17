@@ -29,7 +29,7 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
             }
         };
 
-        public abstract AssignmentHistoryBlendTable createTable(CNPRC_EHRUserSchema schema);
+        public abstract TableInfo createTable(CNPRC_EHRUserSchema schema);
     }
 
     @Override
