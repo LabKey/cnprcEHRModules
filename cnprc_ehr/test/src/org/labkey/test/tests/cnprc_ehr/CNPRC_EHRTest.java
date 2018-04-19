@@ -16,6 +16,7 @@
 
 package org.labkey.test.tests.cnprc_ehr;
 
+import com.google.common.collect.Lists;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
@@ -24,6 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.labkey.api.util.FileUtil;
 import org.labkey.remoteapi.CommandException;
 import org.labkey.remoteapi.Connection;
 import org.labkey.remoteapi.query.InsertRowsCommand;
@@ -39,6 +41,7 @@ import org.labkey.test.components.BodyWebPart;
 import org.labkey.test.components.WebPartPanel;
 import org.labkey.test.components.ehr.panel.AnimalSearchPanel;
 import org.labkey.test.components.ext4.widgets.SearchPanel;
+import org.labkey.test.components.pipeline.PipelineTriggerWizard;
 import org.labkey.test.pages.cnprc_ehr.CNPRCAnimalHistoryPage;
 import org.labkey.test.pages.ehr.AnimalHistoryPage;
 import org.labkey.test.pages.ehr.ColonyOverviewPage;
@@ -2442,6 +2445,56 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchResults = searchPanel.submit();
         assertEquals("Wrong number of rows: Pairing Status = Continuous pair with grate or Intermittent pair",
                 3, searchResults.getDataRowCount());
+    }
+
+    public static final String TRIGGER_NAME = "MorningHealthImportTestTrigger";
+    public static final String MORNING_HEALTH_DATA_NAME = "mh";
+    public static final String MORNING_HEALTH_DATA_FILENAME = MORNING_HEALTH_DATA_NAME + ".tsv";
+    public static final String FILE_PATTERN = MORNING_HEALTH_DATA_NAME + "\\.tsv";
+    public static final File MORNING_HEALTH_DATA_ORIG = TestFileUtils.getSampleData("cnprc/" + MORNING_HEALTH_DATA_FILENAME);
+    public static final File TEMP_DIR = FileUtil.getTempDirectory();
+
+    // copies first part from FileWatcherPipelineTriggerTest
+    @Test
+    public void testMorningHealthImport() throws IOException
+    {
+        beginAt("/project/" + getContainerPath() + "/begin.view");
+
+        log("Create a new trigger.");
+        clickAndWait(Locator.linkWithText("Manage EHR Study"));
+        clickAndWait(Locator.linkWithText("Manage file watchers"));
+        clickAndWait(Locator.linkWithText("Create a trigger to Import Morning Health barcode data"));
+
+        PipelineTriggerWizard wizard = new PipelineTriggerWizard(getDriver());
+        log("Verify that the task was automatically populated based on the link we clicked.");
+
+        log("Verify that the username was automatically populated.");
+        Assert.assertEquals(getCurrentUserName(), wizard.getUserName());
+
+        log("Set configuration fields.");
+        wizard.setName(TRIGGER_NAME);
+        wizard.setEnabled(true);
+
+        wizard.goToConfiguration();
+        wizard.setLocation(TEMP_DIR.getPath());
+        wizard.setFilePattern(FILE_PATTERN);
+        wizard.saveConfiguration();
+
+        File destFile = new File(TEMP_DIR, MORNING_HEALTH_DATA_FILENAME);
+
+        FileUtil.copyFile(MORNING_HEALTH_DATA_ORIG, destFile);
+        beginAt(WebTestHelper.getBaseURL() + "/pipeline-status/" + getContainerPath() + "/begin.view");
+        waitForPipelineJobsToComplete(4,
+                "referenceStudy/" + MORNING_HEALTH_DATA_NAME + " (" + TRIGGER_NAME + ")",
+                false,
+                30 * 1000);
+
+        beginAt("/project/" + getContainerPath() + "/begin.view");
+        waitAndClickAndWait(Locator.linkWithText("Edit Indoor Morning Health Data"));
+        DataRegionTable results = new DataRegionTable("query", getDriver());
+        List<String> expected = Lists.newArrayList("1", "Indoor_Morning_Health", "2", "U", "false",
+                "1 jsmith 20100327 102356 44444 QU63 LIQDSTL VOMIT TRMEYE TRMFING TRMTAIL TRMTOE THIN DEHYDRT RASH BLOAT QU6", " ");
+        assertEquals("Expected values not found for mh_processing.", expected, results.getRowDataAsText(0).subList(0, expected.size()));
     }
 
     @NotNull
