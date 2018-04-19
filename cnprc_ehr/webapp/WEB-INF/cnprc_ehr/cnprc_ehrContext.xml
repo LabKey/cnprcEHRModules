@@ -22,7 +22,7 @@
                     <property name="allowForTriggerConfiguration" value="true"/>
                     <property name="initialInputExts">
                         <list>
-                            <ref bean="tsvFileType"/>
+                            <ref bean="csvFileType"/>
                         </list>
                     </property>
                     <property name="taskProgressionSpec">
@@ -34,7 +34,7 @@
             </list>
         </property>
     </bean>
-    <bean id="tsvFileType" class="org.labkey.api.util.FileType">
-        <constructor-arg value=".tsv"/>
+    <bean id="csvFileType" class="org.labkey.api.util.FileType">
+        <constructor-arg value=".csv"/>
     </bean>
 </beans>

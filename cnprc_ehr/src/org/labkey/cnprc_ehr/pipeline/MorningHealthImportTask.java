@@ -1,5 +1,6 @@
 package org.labkey.cnprc_ehr.pipeline;
 
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.collections.CaseInsensitiveHashMap;
 import org.labkey.api.data.DbScope;
@@ -35,6 +36,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
 {
     public static final String SOURCE_NAME = "Indoor_Morning_Health";
     public static final String UNVALIDATED_STATUS = "U";
+    private static final Logger LOG = Logger.getLogger(MorningHealthImportTask.class);
 
     private MorningHealthImportTask(MorningHealthImportTask.Factory factory, PipelineJob job)
     {
@@ -45,6 +47,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
     @Override
     public RecordedActionSet run() throws PipelineJobException
     {
+        LOG.info("Starting Morning Health barcode data import");
         PipelineJob job = getJob();
         FileAnalysisJobSupport support = job.getJobSupport(FileAnalysisJobSupport.class);
         File dataFile = support.getInputFiles().get(0);
@@ -69,8 +72,6 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
             try (DbScope.Transaction transaction = ExperimentService.get().ensureTransaction();
                  LineNumberReader lnr = new LineNumberReader(new BufferedReader(new FileReader(dataFile))))
             {
-                lnr.readLine();  // first line is header, not needed
-
                 if (mh_processingTable.getSqlDialect().isSqlServer())
                 {
                     String line;
@@ -80,7 +81,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                     {
                         if (line.equals(""))
                             continue;  // skip blank lines
-                        String rowPk = line.split("\t", 2)[0];
+                        String rowPk = line.split(",", 2)[0];
                         Map<String, Object> row = new CaseInsensitiveHashMap<>();
 
                         row.put("rowPk", rowPk);
@@ -110,6 +111,8 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
         {
             job.error("Morning health barcode data import failed: ", e);
         }
+
+        LOG.info("Morning Health barcode data import completed");
 
         return new RecordedActionSet();
     }
