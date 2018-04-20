@@ -771,46 +771,6 @@
             <column columnName="Container"/>
         </columns>
     </table>
-    <table tableName="conceptions" tableDbType="TABLE">
-        <columns>
-            <column columnName="rowid"/>
-            <column columnName="Id"/>
-            <column columnName="femaleSpecies"/>
-            <column columnName="sire"/>
-            <column columnName="maleSpecies"/>
-            <column columnName="offspringId"/>
-            <column columnName="offspringSpecies"/>
-            <column columnName="birthViability"/>
-            <column columnName="deathType"/>
-            <column columnName="necropsyPerformed"/>
-            <column columnName="pathologist"/>
-            <column columnName="birthPlace"/>
-            <column columnName="gender"/>
-            <column columnName="deliveryMode"/>
-            <column columnName="pgFlag"/>
-            <column columnName="conNum"/>
-            <column columnName="conception"/>
-            <column columnName="conceptionDateStatus"/>
-            <column columnName="con_accession_date"/>
-            <column columnName="brType"/>
-            <column columnName="colonyCode"/>
-            <column columnName="prCode"/>
-            <column columnName="pgComment"/>
-            <column columnName="termDate"/>
-            <column columnName="termDateStatus"/>
-            <column columnName="termComment"/>
-            <column columnName="birthPlacePrefix"/>
-            <column columnName="pgType"/>
-            <column columnName="femaleGeneticsVerify"/>
-            <column columnName="maleGeneticsVerify"/>
-            <column columnName="objectid"/>
-            <column columnName="Created"/>
-            <column columnName="CreatedBy"/>
-            <column columnName="Modified"/>
-            <column columnName="ModifiedBy"/>
-            <column columnName="Container"/>
-        </columns>
-    </table>
     <table tableName="project" tableDbType="TABLE">
         <columns>
             <column columnName="rowid"/>

@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 SELECT
-CON_FEMALE_ID AS Id,
+(CASE WHEN CON_FEMALE_ID IS NULL THEN 'Unknown Dam' ELSE CON_FEMALE_ID END) AS Id,
+CON_ACCESSION_DATE,
 CON_FEMALE_SP AS femaleSpecies,
 CON_MALE_ID AS sire,
 CON_MALE_SP AS maleSpecies,
-CON_OFFSPRING_ID AS offspringId,
+CON_OFFSPRING_ID AS offsprepringId,
 CON_OFFSPRING_SP AS offspringSpecies,
 CON_BIRTH_VIABILITY AS birthViability,
 CON_DEATH_TYPE AS deathType,
@@ -31,7 +32,6 @@ CON_INVALID_PG_FLAG AS pgFlag,
 CON_NO AS conNum,
 CON_CON_DATE as conception,
 CON_CON_DATE_STATUS AS conceptionDateStatus,
-CON_ACCESSION_DATE AS con_accession_date,
 CON_BR_TYPE AS BRType,
 CON_COLONY_CODE AS colonyCode,
 CON_PR_CODE AS PRCode,

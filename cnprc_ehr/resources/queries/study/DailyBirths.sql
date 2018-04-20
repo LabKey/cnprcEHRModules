@@ -6,5 +6,5 @@ SELECT	conNum,
   Id as Dam_ID,
   birthViability,
   deliveryMode
-FROM cnprc_ehr.conceptions
+FROM study.pregnancyConfirmation
 WHERE termDate = curdate() - 1;

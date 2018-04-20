@@ -110,7 +110,7 @@ Incomplete - Pending Data Entry	diet	Colony Management	query	Diet	true		study	Di
 	reproSummary	Reproductive Management	js	Reproductive Summary	true		study	underDevelopment			date	false	false		qcstate/publicdata
 	menseCycleLength	Reproductive Management	query	Cycle Length	true		study	menseCycleLength			date	false	false		qcstate/publicdata
 	menses	Reproductive Management	query	Menses	true		study	menses			date	false	false		qcstate/publicdata
-	pregnancy	Reproductive Management	js	Conception History	true		study	conceptionHistory			date	false	false		qcstate/publicdata	Conception Results
+	pregnancy	Reproductive Management	js	Conception History	true		study	pregnancyConfirmation			date	false	false		qcstate/publicdata	Conception Results
 
 #sbt	Genetics	query	MHC Genotype	TRUE		study	demographics			date	FALSE	FALSE		qcstate/publicdata	This report contains summaries of MHC genetics, derived from many different techniques
 Incomplete - Pending Data Entry	feeding	Colony Management	query	Feeding	true		study	Feeding				false	false		qcstate/publicdata	This report contains the amount and type of food ordered for each animal

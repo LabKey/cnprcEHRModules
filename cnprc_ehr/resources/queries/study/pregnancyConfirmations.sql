@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT conc.*,offspring.id.demographics.calculated_status,
+SELECT pregConf.*,offspring.id.demographics.calculated_status,
 (case when offspring.id.demographics.calculated_status = 'Dead' then
   ('Dead from ' || offspring.id.lastHousing.location)
  else offspring.id.curLocation.location end) as offspringLocation,
  COALESCE (offspring.id.lastHousing.enddate, offspring.id.curLocation.date)  as offspringLocationDate,
  birthViability || deliveryMode as deliveryType,
- timestampdiff('SQL_TSI_DAY',  conc.conception, COALESCE (termDate,now())) AS gestationDays,
+ timestampdiff('SQL_TSI_DAY',  pregConf.conception, COALESCE (termDate,now())) AS gestationDays,
  offspring.id.demographics.gender as offspringSex
-FROM cnprc_ehr.conceptions conc
+FROM study.pregnancyConfirmation pregConf
 LEFT JOIN study.Demographics offspring
-  ON conc.offspringid = offspring.id
+  ON pregConf.offspringid = offspring.id
 WHERE
 pgFlag IS NULL -- "check CON_INVALID_PG_FLAG for NULL to exclude them" as per high-level data mapping spreadsheet
 AND
-conc.Id IS NOT NULL;
+pregConf.Id IS NOT NULL;

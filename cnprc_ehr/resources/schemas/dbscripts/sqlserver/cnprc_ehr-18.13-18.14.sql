@@ -1,0 +1,1 @@
+EXEC core.fn_dropifexists 'conceptions','cnprc_ehr','TABLE';

@@ -287,7 +287,7 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
 
 };
 
-EHR.reports.conceptionHistory = function (panel, tab, viewName) {
+EHR.reports.pregnancyConfirmation = function (panel, tab, viewName) {
     var filterArray = panel.getFilterArray(tab);
     var title = panel.getTitleSuffix();
 

@@ -57,6 +57,7 @@
         <dataset name="payor_assignments" id="1003" category="ColonyManagement"/>
         <dataset name="pathology_inventory" id="7002" category="Repository" type="Standard"/>
         <dataset name="pregnancyDeterminations" id="5026" category="Reproductive Management" type="Standard"/>
+        <dataset name="pregnancyConfirmation" id="5027" category="Reproductive Management" type="Standard"/>
         <dataset name="problem" id="1030" category="Clinical" type="Standard"/>
         <dataset name="rd_asthma_cbc" id="6000" category="Respiratory Diseases" type="Standard"/>
         <dataset name="rd_skin_sensitization" id="6001" category="Respiratory Diseases" type="Standard"/>

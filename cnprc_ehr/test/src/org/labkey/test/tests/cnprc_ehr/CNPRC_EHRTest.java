@@ -131,7 +131,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
     private static final File BILLING_ACCOUNT_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_BILLING_ACCOUNTS.tsv");
-    private static final File CNPRC_EHR_CONCEPTIONS_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CONCEPTIONS.tsv");
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
     private static final File EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE.TSV");
@@ -309,7 +308,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
         storeCageAndRoomData();
-        storeConceptionData();
         createPDLLinkedSchema();
         storePDLData();
         createBillingLinkedSchema();
@@ -848,13 +846,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         popLocation();
         waitForElement(Locator.linkContainingText("TEST3804589"));
         assertTextPresent("PEANUTS");
-    }
-
-    private void storeConceptionData() throws IOException, CommandException
-    {
-        Connection connection = createDefaultConnection(true);
-        String folder = "/";
-        insertTsvData(connection, "cnprc_ehr", "conceptions", CNPRC_EHR_CONCEPTIONS_TSV, folder);
     }
 
     @Test
