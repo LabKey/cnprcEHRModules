@@ -23,6 +23,7 @@ AM_CYCLE_DAY AS cycleDay,
 AM_LOCATION_OVERRIDE AS locationOverride,
 AM_WEEKEND_BREEDING AS weekendBreeding,
 AM_WEEKEND_BREEDING_STATE AS weekendBreedingState,
+AM_SPECIAL_BREEDING_CODE AS specialBreedingCode,
 OBJECTID as objectid,
 DATE_TIME
 FROM cnprcSrc.ZAN_MATING;
