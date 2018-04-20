@@ -1682,45 +1682,11 @@
             <column columnName="observation">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="obsCode1">
+            <column columnName="confirmation">
                 <datatype>varchar</datatype>
-                <scale>7</scale>
             </column>
-            <column columnName="obsCode2">
+            <column columnName="admitStatus">
                 <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode3">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode4">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode5">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode6">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode7">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode8">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode9">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
-            </column>
-            <column columnName="obsCode10">
-                <datatype>varchar</datatype>
-                <scale>7</scale>
             </column>
             <column columnName="technician">
                 <datatype>varchar</datatype>

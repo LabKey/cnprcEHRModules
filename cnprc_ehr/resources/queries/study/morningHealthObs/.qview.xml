@@ -13,18 +13,10 @@
         <column name="enclosure" />
         <column name="cage" />
         <column name="observation" />
-        <column name="obsCode1" />
-        <column name="obsCode2" />
-        <column name="obsCode3" />
-        <column name="obsCode4" />
-        <column name="obsCode5" />
-        <column name="obsCode6" />
-        <column name="obsCode7" />
-        <column name="obsCode8" />
-        <column name="obsCode9" />
-        <column name="obsCode10" />
         <column name="technician" />
         <column name="attendant" />
+        <column name="confirmation" />
+        <column name="admitStatus" />
     </columns>
     <sorts>
         <sort column="date" descending="true"/>

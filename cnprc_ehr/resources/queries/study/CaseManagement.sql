@@ -64,15 +64,16 @@ FROM
       mho.Id.curLocation.Area,
       mho.Id.curLocation.Room,
       mho.Id.Demographics.history,
-      'Confirm' AS confirm
+      mho.confirmation AS confirm
     FROM study.morningHealthObs mho
       JOIN study.morningHealthSigns mhs ON mhs.id = mho.id AND mhs.date = mho.date
-    WHERE mho.endDate IS NULL
-          AND mho.date > timestampadd('SQL_TSI_DAY', -1 , curdate())
-          AND (
-                mhs.observation LIKE '%POORAPP%' OR
-                mhs.observation LIKE '%LIQDSTL%' OR
-                mhs.observation LIKE '%DEHYDRT%'
+    WHERE
+          mho.endDate IS NULL AND
+          mho.confirmation IS NULL AND
+          (
+              mhs.observation LIKE '%POORAPP%' OR
+              mhs.observation LIKE '%LIQDSTL%' OR
+              mhs.observation LIKE '%DEHYDRT%'
           )
   ) casesAndMorningHealthObs
 

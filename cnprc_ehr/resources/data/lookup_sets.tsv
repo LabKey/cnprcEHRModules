@@ -73,3 +73,4 @@ hydrationCondition	Hydration Condition	Value	Title
 appetiteCondition	Appetite Condition	Value	Title
 stoolCondition	Stool Condition	Value	Title
 processing_status	Processing Status	value
+admit_status	Admit Status for MH Confirmation	value

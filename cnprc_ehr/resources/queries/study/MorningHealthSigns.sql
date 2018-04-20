@@ -17,16 +17,9 @@ SELECT
   mho.Id,
   mho.date,
   mho.location,
-  Stuff(
-    COALESCE(',' || mho.obsCode1, '') ||
-    COALESCE(',' || mho.obsCode2, '') ||
-    COALESCE(',' || mho.obsCode3, '') ||
-    COALESCE(',' || mho.obsCode4, '') ||
-    COALESCE(',' || mho.obsCode5, '') ||
-    COALESCE(',' || mho.obsCode6, '') ||
-    COALESCE(',' || mho.obsCode7, '') ||
-    COALESCE(',' || mho.obsCode8, '') ||
-    COALESCE(',' || mho.obsCode9, '') ||
-    COALESCE(',' || mho.obsCode10, '')
-  , 1, 1, '') as observation
+  GROUP_CONCAT (mho.observation, ',') AS observation
 FROM study.morningHealthObs mho
+GROUP BY
+  mho.Id,
+  mho.date,
+  mho.location

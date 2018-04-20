@@ -706,6 +706,13 @@ Ext4.onReady(function(){
         queryName: 'processing_status',
         pk: 'value'
     },
+    {
+        label: 'Admit Status for MH Confirmation',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'admit_status',
+        pk: 'value'
+    }
  ];
 
     tables.sort(function(a, b) {
