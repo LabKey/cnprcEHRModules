@@ -25,7 +25,7 @@ import org.labkey.api.ehr.dataentry.SimpleFormPanelSection;
 import org.labkey.api.ehr.dataentry.SimpleFormSection;
 import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
-import org.labkey.api.ehr.dataentry.forms.DrugAdministrationFormSection;
+import org.labkey.api.ehr.dataentry.DrugAdministrationFormSection;
 import org.labkey.api.ehr.dataentry.forms.TreatmentOrdersFormSection;
 import org.labkey.api.ehr.security.EHRClinicalEntryPermission;
 import org.labkey.api.module.Module;

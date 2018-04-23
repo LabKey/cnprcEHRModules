@@ -28,7 +28,7 @@ import org.labkey.api.view.template.ClientDependency;
 import org.labkey.cnprc_ehr.dataentry.AnimalDetailsRoundsFormSection;
 import org.labkey.cnprc_ehr.dataentry.ClinicalObservationsFormSection;
 import org.labkey.cnprc_ehr.dataentry.ClinicalRoundsRemarksFormSection;
-import org.labkey.api.ehr.dataentry.forms.DrugAdministrationFormSection;
+import org.labkey.api.ehr.dataentry.DrugAdministrationFormSection;
 import org.labkey.api.ehr.dataentry.forms.TreatmentOrdersFormSection;
 
 import java.util.Arrays;
