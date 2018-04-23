@@ -29,6 +29,9 @@
                     <column columnName="weekendBreedingState">
                         <columnTitle>Weekend Breeding State</columnTitle>
                     </column>
+                    <column columnName="specialBreedingCode">
+                        <columnTitle>Special Breeding Code</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>
