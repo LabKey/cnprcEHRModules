@@ -13,7 +13,6 @@ import java.util.Arrays;
 
 public class HousingFormType extends TaskForm
 {
-
     public static final String NAME = "Housing";
     public static final String LABEL = "Housing";
 
@@ -30,8 +29,5 @@ public class HousingFormType extends TaskForm
             s.addConfigSource("Housing");
         }
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Housing.js"));
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/HousingDateField.js"));
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/HousingSequence.js"));
-
     }
 }

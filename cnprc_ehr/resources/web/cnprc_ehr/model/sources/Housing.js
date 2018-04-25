@@ -1,21 +1,28 @@
 EHR.model.DataModelManager.registerMetadata('Housing', {
-            allQueries: {
+    allQueries: {
+    },
+    byQuery: {
+        'study.housing': {
+            reason: {
+                defaultValue: '',
+                allowBlank: false,
+                columnConfig: {
+                    width: 180
+                },
+                lookup: {
+                    filterArray: [LABKEY.Filter.create('date_disabled', null, LABKEY.Filter.Types.ISBLANK)]
+                }
             },
-            byQuery: {
-                'study.housing': {
-                    date: {
-                        columnConfig: {
-                            width: 250
-                        },
-                        xtype: 'cnprc_ehr-HousingDateField'
-                    },
-                    // reloc_seq:{
-                    //     columnConfig: {
-                    //         width: 250
-                    //     },
-                    //     xtype: 'cnprc_ehr-HousingSequence'
-                    // }
+            enddate: {
+                columnConfig: {
+                    width: 150
+                }
+            },
+            date: {
+                columnConfig: {
+                    width: 150
                 }
             }
         }
-);
+    }
+});

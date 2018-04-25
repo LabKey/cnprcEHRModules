@@ -6,12 +6,14 @@ function onInsert(helper, scriptErrors, row){
 }
 function onUpsert(helper, scriptErrors, row, oldRow) {
 
+    var relocSeq = 0;
+
     if (!helper.isETL()) {
 
         LABKEY.Query.selectRows({
             requiredVersion: 9.1,
             schemaName: 'study',
-            queryName: 'housing',
+            queryName: 'demographicsLastHousingAll',
             columns: ['enddate']['reloc_seq'],
             scope: this,
             filterArray: [
@@ -22,6 +24,8 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                     console.log('recent move date', new Date(results["rows"][0]['enddate']['value']));
                     console.log('last seq number', results["rows"][0]['reloc_seq']['value']);
                     console.log('current move date ', new Date(row.date));
+
+                    relocSeq = (results["rows"][0]['reloc_seq']['value']) + 1;
 
                     // if(prev_date > new_date) {
                     // console.log('New move date is before previous move date!')
@@ -39,5 +43,8 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                 console.log(error);
             }
         });
+
+        if(row.QCStateLabel == 'Completed')
+            row.reloc_seq = relocSeq;
     }
 }
