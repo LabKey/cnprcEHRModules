@@ -14,7 +14,8 @@ SELECT
   max(d2.room)                                    AS room,
   max(d2.cage)                                    AS cage,
   max(h.maxDate)                                  AS date,
-  max(h.enddate)                                  AS enddate
+  max(h.enddate)                                  AS enddate,
+  max(h.reloc_seq)                                AS reloc_seq
 FROM study.housing d2
   JOIN (SELECT
           id,

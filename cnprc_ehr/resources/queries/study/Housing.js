@@ -1,5 +1,11 @@
 require("ehr/triggers").initScript(this);
 
+function onInit(event, helper) {
+    helper.setScriptOptions({
+        errorSeveritiyForImproperHousing: 'INFO' //added this to enable 'Submit Final' button on the form.
+    });
+}
+
 function onInsert(helper, scriptErrors, row){
     //generate objectId, since its the keyfield for our dataset.
     row.objectid = row.objectid || LABKEY.Utils.generateUUID().toUpperCase();
@@ -13,7 +19,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
         LABKEY.Query.selectRows({
             requiredVersion: 9.1,
             schemaName: 'study',
-            queryName: 'demographicsLastHousingAll',
+            queryName: 'demographicsLastHousing',
             columns: ['enddate']['reloc_seq'],
             scope: this,
             filterArray: [
@@ -44,7 +50,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
             }
         });
 
-        if(row.QCStateLabel == 'Completed')
+        if(row.QCStateLabel == 'Completed' && !row.enddate)
             row.reloc_seq = relocSeq;
     }
 }
