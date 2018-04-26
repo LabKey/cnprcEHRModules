@@ -7,9 +7,12 @@ import org.labkey.api.data.TableInfo;
 import org.labkey.api.query.SimpleUserSchema;
 import org.labkey.api.security.User;
 import org.labkey.cnprc_ehr.query.AssignmentHistoryBlendTable;
+import org.labkey.cnprc_ehr.query.BreedingHistoryTable;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import static org.labkey.api.data.ContainerType.DataType.userSchema;
 
 public class CNPRC_EHRUserSchema extends SimpleUserSchema
 {
@@ -26,6 +29,15 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
             public AssignmentHistoryBlendTable createTable(CNPRC_EHRUserSchema userSchema)
             {
                 return new AssignmentHistoryBlendTable(userSchema);
+            }
+        },
+
+        BreedingHistory
+        {
+            @Override
+            public BreedingHistoryTable createTable(CNPRC_EHRUserSchema userSchema)
+            {
+                return new BreedingHistoryTable(userSchema);
             }
         };
 
@@ -61,6 +73,7 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
         Set<String> names = new LinkedHashSet<>();
         names.addAll(super.getTableNames());
         names.add(CNPRC_EHRSchema.ASSIGNMENT_HISTORY_BLEND);
+        names.add(CNPRC_EHRSchema.BREEDING_HISTORY);
         return names;
     }
 
@@ -70,6 +83,7 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
         Set<String> names = new LinkedHashSet<>();
         names.addAll(super.getTableNames());
         names.add(CNPRC_EHRSchema.ASSIGNMENT_HISTORY_BLEND);
+        names.add(CNPRC_EHRSchema.BREEDING_HISTORY);
         return names;
     }
 }
