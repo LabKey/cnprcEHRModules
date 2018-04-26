@@ -532,7 +532,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertCmd.execute(cn, getContainerPath());
     }
 
-    protected void initGenetics() throws Exception
+    protected void initGenetics()
     {
         beginAt(WebTestHelper.buildURL("ehr", getProjectName(), "doGeneticCalculations"));
         clickButton("OK");
@@ -849,7 +849,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryReports() throws Exception
+    public void testAnimalHistoryReports()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
 
@@ -905,7 +905,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testPDLlookups() throws Exception
+    public void testPDLlookups()
     {
         goToProjectHome();
         clickFolder(PDLFOLDER);
@@ -991,7 +991,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testCageViolationReport() throws Exception
+    public void testCageViolationReport()
     {
         SearchPanel searchPanel = getSearchPanel();
 
@@ -1017,7 +1017,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
 
     @Test
-    public void testLTOPReport() throws IOException, CommandException
+    public void testLTOPReport()
     {
         SearchPanel searchPanel = getSearchPanel();
 
@@ -1044,7 +1044,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testHybridReport() throws IOException, CommandException
+    public void testHybridReport()
     {
         SearchPanel searchPanel = getSearchPanel();
 
@@ -1074,7 +1074,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testNcRoundupReport() throws IOException, CommandException
+    public void testNcRoundupReport()
     {
         SearchPanel searchPanel = getSearchPanel();
 
@@ -1111,7 +1111,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testCurrentPregnanciesReport() throws IOException, CommandException
+    public void testCurrentPregnanciesReport()
     {
         SearchPanel searchPanel = getSearchPanel();
 
@@ -1262,7 +1262,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testSerumBankReport() throws Exception
+    public void testSerumBankReport()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -1285,7 +1285,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testHousingHistoryReport() throws IOException, CommandException
+    public void testHousingHistoryReport()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -1312,7 +1312,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testVacantCageReport() throws IOException, CommandException
+    public void testVacantCageReport()
     {
         log("Quick Search - Advanced Housing Search - Vacant Cages Report");
         openMenu("Quick Search");
@@ -1661,7 +1661,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testLocationReport() throws IOException, CommandException
+    public void testLocationReport()
     {
         click(Locator.linkWithText("Housing Queries"));
         waitForElement(Locator.tagContainingText("div", "On Date"));
@@ -1705,7 +1705,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testEnclosureSearch() throws IOException, CommandException, URISyntaxException
+    public void testEnclosureSearch()
     {
         click(Locator.linkWithText("Housing Queries"));
         waitForElement(Locator.tagContainingText("div", "On Date"));
@@ -1794,7 +1794,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryProjectView() throws Exception
+    public void testAnimalHistoryProjectView()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -1835,7 +1835,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryDiarrheaCalendar() throws Exception
+    public void testAnimalHistoryDiarrheaCalendar()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectSingleAnimalSearch().searchFor("TEST6390238");
@@ -1881,7 +1881,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testPedigreeReports() throws Exception
+    public void testPedigreeReports()
     {
         AnimalHistoryPage<?> animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         String id = "TEST6390238";
@@ -1961,7 +1961,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryConceptionHistory() throws Exception
+    public void testAnimalHistoryConceptionHistory()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -1994,7 +1994,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryProjectAssignmentHistoryView() throws Exception
+    public void testAnimalHistoryProjectAssignmentHistoryView()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -2039,7 +2039,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryGeneralAndSnapshotReport() throws Exception
+    public void testAnimalHistoryGeneralAndSnapshotReport()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.clickCategoryTab("General");
@@ -2111,7 +2111,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     }
     @Test
-    public void testAnimalHistoryImmunizationView() throws Exception
+    public void testAnimalHistoryImmunizationView()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -2178,7 +2178,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryAssignmentHistoryView() throws Exception
+    public void testAnimalHistoryAssignmentHistoryView()
     {
 
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
@@ -2241,7 +2241,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalHistoryPairingHistoryView() throws Exception
+    public void testAnimalHistoryPairingHistoryView()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -2345,7 +2345,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalSearchPayorView() throws Exception
+    public void testAnimalSearchPayorView()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.selectEntireDatabaseSearch();
@@ -2384,7 +2384,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testAnimalSearch() throws Exception
+    public void testAnimalSearch()
     {
         SearchPanel searchPanel;
         DataRegionTable searchResults;
@@ -2517,7 +2517,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         beginAt(PROJECT_NAME+ "/"  + COREFACILITIES + "/" + PDLFOLDER + "/list-begin.view?");
     }
 
-    private void validateLookupFromTable(String table, String linkText, String expectedText) throws InterruptedException
+    private void validateLookupFromTable(String table, String linkText, String expectedText)
     {
         beginAtPdlTableView(table);
         clickAndWait(Locator.linkContainingText(linkText));
@@ -2568,37 +2568,37 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Override @Ignore
-    public void testWeightValidation() throws Exception
+    public void testWeightValidation()
     {
     }
 
     @Override @Ignore
-    public void testSecurityDataAdmin() throws Exception
+    public void testSecurityDataAdmin()
     {
     }
 
     @Override @Ignore
-    public void testSecurityRequester() throws Exception
+    public void testSecurityRequester()
     {
     }
 
     @Override @Ignore
-    public void testSecurityBasicSubmitter() throws Exception
+    public void testSecurityBasicSubmitter()
     {
     }
 
     @Override @Ignore
-    public void testSecurityFullSubmitter() throws Exception
+    public void testSecurityFullSubmitter()
     {
     }
 
     @Override @Ignore
-    public void testSecurityFullUpdater() throws Exception
+    public void testSecurityFullUpdater()
     {
     }
 
     @Override @Ignore
-    public void testSecurityRequestAdmin() throws Exception
+    public void testSecurityRequestAdmin()
     {
     }
 

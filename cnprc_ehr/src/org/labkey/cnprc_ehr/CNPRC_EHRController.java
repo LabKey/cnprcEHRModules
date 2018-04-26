@@ -58,7 +58,7 @@ public class CNPRC_EHRController extends SpringActionController
     public class ObservationCodeDetailAction extends SimpleRedirectAction<ObservationCodeForm>
     {
         @Override
-        public ActionURL getRedirectURL(ObservationCodeForm form) throws Exception
+        public ActionURL getRedirectURL(ObservationCodeForm form)
         {
             Container c = getViewContext().getContainer();
             String encodedContainerPath = PageFlowUtil.encode(c.getPath());
@@ -80,7 +80,7 @@ public class CNPRC_EHRController extends SpringActionController
         }
 
         @Override
-        public ModelAndView getView(Object o, BindException errors) throws Exception
+        public ModelAndView getView(Object o, BindException errors)
         {
             String pid = getViewContext().getRequest().getParameter("id");
             return new HtmlView("Participant Id: " + pid +
