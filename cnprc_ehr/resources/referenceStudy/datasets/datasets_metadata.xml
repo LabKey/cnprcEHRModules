@@ -856,6 +856,10 @@
                 <datatype>varchar</datatype>
                 <scale>1</scale>
             </column>
+            <column columnName="specialBreedingCode">
+                <datatype>varchar</datatype>
+                <scale>1</scale>
+            </column>
             <column columnName="methodOne">
                 <datatype>varchar</datatype>
                 <scale>2</scale>
@@ -2512,6 +2516,12 @@
             </column>
             <column columnName="housingType">
                 <datatype>integer</datatype>
+            </column>
+            <column columnName="movedBy">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="reviewedBy">
+                <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>

@@ -54,6 +54,10 @@
                         <columnTitle>Weekend Breeding</columnTitle>
                         <isHidden>true</isHidden>
                     </column>
+                    <column columnName="specialBreedingCode">
+                        <columnTitle>Special Breeding</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
                     <column columnName="methodTwo">
                         <columnTitle>Method Two</columnTitle>
                         <isHidden>true</isHidden>
