@@ -64,7 +64,6 @@ import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -2466,7 +2465,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testMorningHealthImport() throws IOException
     {
-        Assume.assumeTrue(_containerHelper.getAllModules().contains("premium"));
+        Assume.assumeTrue("File watcher requires permium module", _containerHelper.getAllModules().contains("premium"));
 
         beginAt("/project/" + getContainerPath() + "/begin.view");
 
