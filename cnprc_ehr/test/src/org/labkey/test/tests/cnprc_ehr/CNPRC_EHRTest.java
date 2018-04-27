@@ -1281,7 +1281,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST9118022"));
-        assertElementPresent(Locator.tagContainingText("nobr", "2015-09-30 00:00"));
+        assertElementPresent(Locator.tagContainingText("nobr", "2015-09-30"));
     }
 
     @Test
@@ -1401,11 +1401,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testBreedingObservationDataEntry()
+    public void testBreedingObservationDataEntry() throws IOException, CommandException
     {
-        String animalId = "TEST2";
+        String animalId = "TEST1";
         String sireID = "TEST1684145";
-        String breedingDate = "2018-03-23";
+        String breedingDate = "2011-05-26";
+
+        insertBreedingRegistrationFor(animalId, breedingDate,"S8", "TEST1112911");  // needed for validation
 
         log("Begin the test with entry data page - Breeding Observations");
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
@@ -1445,12 +1447,25 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
 
         assertEquals("Two rows should be displayed", results.getDataRowCount(), 2);
-        assertEquals("Wrong value in Animal ID", animalId, convertToString(results.getRowDataAsText(1, "Id")));
-        assertEquals("Wrong value in Sire ID", sireID, convertToString(results.getRowDataAsText(1,"sire")));
-        assertEquals("Wrong value in Breeding Date", breedingDate, convertToString(results.getRowDataAsText(1, "date")));
-        assertEquals("Wrong value in Observation Code", "X", convertToString(results.getRowDataAsText(1, "obsCode")));
-        assertEquals("Wrong value in Day of Cycle", "4", convertToString(results.getRowDataAsText(1, "cycleDay")));
+        assertEquals("Wrong value in Animal ID", animalId, convertToString(results.getRowDataAsText(0, "Id")));
+        assertEquals("Wrong value in Sire ID", sireID, convertToString(results.getRowDataAsText(0,"sire")));
+        assertEquals("Wrong value in Breeding Date", breedingDate, convertToString(results.getRowDataAsText(0, "date")));
+        assertEquals("Wrong value in Observation Code", "X", convertToString(results.getRowDataAsText(0, "obsCode")));
+        assertEquals("Wrong value in Day of Cycle", "4", convertToString(results.getRowDataAsText(0, "cycleDay")));
 
+    }
+
+    private void insertBreedingRegistrationFor(String id, String date, String book, String maleEnemyOne) throws IOException, CommandException
+    {
+        InsertRowsCommand insertBreedReg = new InsertRowsCommand("study", "breedingRoster");
+        Map<String,Object> rowMapBreedReg = new HashMap<>();
+        rowMapBreedReg.put("id", id);
+        rowMapBreedReg.put("date", date);
+        rowMapBreedReg.put("book", book);
+        rowMapBreedReg.put("maleEnemy1", maleEnemyOne);
+
+        insertBreedReg.addRow(rowMapBreedReg);
+        SaveRowsResponse respBreedReg =  insertBreedReg.execute(createDefaultConnection(true), getProjectName());
     }
 
     @Test
