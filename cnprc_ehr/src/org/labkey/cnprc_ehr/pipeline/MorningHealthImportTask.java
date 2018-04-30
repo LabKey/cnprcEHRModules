@@ -15,7 +15,9 @@ import org.labkey.api.pipeline.file.FileAnalysisJobSupport;
 import org.labkey.api.query.BatchValidationException;
 import org.labkey.api.query.QueryService;
 import org.labkey.api.query.QueryUpdateService;
+import org.labkey.api.reader.Readers;
 import org.labkey.api.util.FileType;
+import org.labkey.api.util.PageFlowUtil;
 import org.labkey.api.view.ActionURL;
 import org.labkey.api.view.HttpView;
 import org.labkey.api.view.ViewContext;
@@ -56,6 +58,8 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
 
         CNPRC_EHRUserSchema cnprc_ehrUserSchema = (CNPRC_EHRUserSchema)QueryService.get().getUserSchema(job.getUser(), job.getContainer(), CNPRC_EHRSchema.NAME);
         TableInfo mh_processingTable = cnprc_ehrUserSchema.getTable(CNPRC_EHRSchema.MH_PROCESSING);
+        if (mh_processingTable == null)
+            throw new IllegalStateException("mh_processing table not found");
         QueryUpdateService mh_ProcessingQus = mh_processingTable.getUpdateService();
         if (mh_ProcessingQus == null)
             throw new IllegalStateException(mh_processingTable.getName() + " query update service could not be acquired");
@@ -66,11 +70,12 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
             {
                 // trigger script gets unhappy without a view context
                 // don't really care what URL we use here, just needs something to avoid error in trigger script firing
-                ViewContext.pushMockViewContext(job.getUser(), job.getContainer(), new ActionURL("project", "begin.view", job.getContainer()));
+                String encodedContainerPath = PageFlowUtil.encode(job.getContainer().getPath());
+                ViewContext.pushMockViewContext(job.getUser(), job.getContainer(), new ActionURL("project" + encodedContainerPath + "/begin.view"));
             }
 
             try (DbScope.Transaction transaction = ExperimentService.get().ensureTransaction();
-                 LineNumberReader lnr = new LineNumberReader(new BufferedReader(new FileReader(dataFile))))
+                 LineNumberReader lnr = new LineNumberReader(Readers.getReader(dataFile)))
             {
                 if (mh_processingTable.getSqlDialect().isSqlServer())
                 {
