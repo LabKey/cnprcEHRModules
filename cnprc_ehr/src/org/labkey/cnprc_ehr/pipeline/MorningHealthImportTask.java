@@ -63,6 +63,8 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
             try (DbScope.Transaction transaction = ExperimentService.get().ensureTransaction();
                  LineNumberReader lnr = new LineNumberReader(Readers.getReader(dataFile)))
             {
+                List<Map<String, Object>> writtenRows;
+
                 if (mh_processingTable.getSqlDialect().isSqlServer())
                 {
                     String line;
@@ -87,7 +89,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                         row.put("container", job.getContainer().getId());
                         mh_processingRows.add(row);
                     }
-                    mh_ProcessingQus.insertRows(job.getUser(), job.getContainer(), mh_processingRows, errors, null, null);
+                    writtenRows = mh_ProcessingQus.insertRows(job.getUser(), job.getContainer(), mh_processingRows, errors, null, null);
                     if (errors.hasErrors())
                         throw errors;
                 }
@@ -96,6 +98,9 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                     throw new PipelineJobException("Unknown SQL Dialect: " + mh_processingTable.getSqlDialect().getProductName());
                 }
                 transaction.commit();
+
+                if (writtenRows != null)
+                    job.info("Wrote " + writtenRows.size() + " line(s) to " + mh_processingTable.getName());
             }
         }
         catch(Exception e)
