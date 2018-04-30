@@ -17,16 +17,10 @@ import org.labkey.api.query.QueryService;
 import org.labkey.api.query.QueryUpdateService;
 import org.labkey.api.reader.Readers;
 import org.labkey.api.util.FileType;
-import org.labkey.api.util.PageFlowUtil;
-import org.labkey.api.view.ActionURL;
-import org.labkey.api.view.HttpView;
-import org.labkey.api.view.ViewContext;
 import org.labkey.cnprc_ehr.CNPRC_EHRSchema;
 import org.labkey.cnprc_ehr.CNPRC_EHRUserSchema;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,14 +60,6 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
 
         try
         {
-            if (!HttpView.hasCurrentView())
-            {
-                // trigger script gets unhappy without a view context
-                // don't really care what URL we use here, just needs something to avoid error in trigger script firing
-                String encodedContainerPath = PageFlowUtil.encode(job.getContainer().getPath());
-                ViewContext.pushMockViewContext(job.getUser(), job.getContainer(), new ActionURL("project" + encodedContainerPath + "/begin.view"));
-            }
-
             try (DbScope.Transaction transaction = ExperimentService.get().ensureTransaction();
                  LineNumberReader lnr = new LineNumberReader(Readers.getReader(dataFile)))
             {
