@@ -17,6 +17,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
             queryName: 'NursingHighLowDates',
             columns: ['HIGH_DATE', 'LOW_DATE'],
             scope: this,
+            parameters: {'offspring': row.id, 'mother': row.motherId},
             filterArray: [
                 LABKEY.Filter.create('offspringId', row.id, LABKEY.Filter.Types.EQUAL),
                 LABKEY.Filter.create('motherId', row.motherId, LABKEY.Filter.Types.EQUAL)],

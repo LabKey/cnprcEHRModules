@@ -13,13 +13,17 @@
  * High date = sysdate for alive & here, on loan; last location date if dead or shipped
  * Low date = acquisition date or birth date
  */
+PARAMETERS (offspring VARCHAR, mother VARCHAR)
 SELECT
-n.Id AS offspringId,
-n.motherId AS motherId,
-greatest (n.Id.birth.date, n.motherId.birth.date,
-          n.Id.MostRecentArrival.Center_Arrival, n.motherId.MostRecentArrival.Center_Arrival) AS LOW_DATE,
-least (n.Id.lastHousing.date, n.motherId.lastHousing.date,
-        (CASE WHEN n.Id.Demographics.calculated_status = 'Alive' OR
-                   n.Id.Demographics.calculated_status = 'On Loan' THEN now() END)) AS HIGH_DATE
-FROM
-study.Nursing n
+d1.offspringId,
+d2.motherId,
+greatest (d1.offspringId.birth.date, d2.motherId.birth.date,
+          d1.offspringId.MostRecentArrival.Center_Arrival, d2.motherId.MostRecentArrival.Center_Arrival) AS LOW_DATE,
+least (d1.offspringId.lastHousing.date, d2.motherId.lastHousing.date,
+        (CASE WHEN d1.offspringId.Demographics.calculated_status = 'Alive' OR
+                   d1.offspringId.Demographics.calculated_status = 'On Loan' THEN now() END)) AS HIGH_DATE
+FROM  
+  (SELECT d.Id AS offspringId FROM study.demographics d WHERE d.Id = offspring) d1
+   FULL OUTER JOIN
+  (SELECT d.Id AS motherId FROM study.demographics d WHERE d.Id = mother) d2
+   ON d1.offspringId != d2.motherId
