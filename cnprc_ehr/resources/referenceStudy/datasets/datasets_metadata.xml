@@ -1208,8 +1208,7 @@
                 <datatype>double</datatype>
             </column>
             <column columnName="locationOverride">
-                <datatype>varchar</datatype>
-                <scale>1</scale>
+                <datatype>boolean</datatype>
             </column>
             <column columnName="weekendBreeding">
                 <datatype>varchar</datatype>

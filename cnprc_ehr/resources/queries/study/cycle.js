@@ -1,7 +1,7 @@
 require("ehr/triggers").initScript(this);
 
 function onInsert(helper, scriptErrors, row){
-    //generate objectId, since its the keyfield for our dataset.
+    //generate objectId, since its the keyfield for our dataset.
     row.objectid = row.objectid || LABKEY.Utils.generateUUID().toUpperCase();
 }
 
@@ -47,7 +47,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                     if(results && results.rows && results.rows.length >= 2) {
                         var animal1_room = results['rows'][0]['room']['value'];
                         var animal2_room = results['rows'][1]['room']['value'];
-                        if(animal1_room !== animal2_room){
+                        if(animal1_room !== animal2_room && !row.locationOverride){
                             EHR.Server.Utils.addError(scriptErrors, 'sire', 'Male is not in same room as female', 'ERROR');
                         }
                     }
@@ -120,46 +120,52 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
 
         }
 
-        var matingsRows = [];
+        //Insert into Matings only when Cycle form is finalized
+        if (row.QCStateLabel == 'Completed') {
+            var matingsRows = [];
 
-        var matingsRow = {
-            Id: row.Id,
-            male: row.sire,
-            cycleStartDate: row.date,
-            specialBreedingCode: row.specialBreedingCode,
-            locationOverride: row.locationOverride
-        };
+            var matingsRow = {
+                Id: row.Id,
+                male: row.sire,
+                cycleStartDate: row.date,
+                specialBreedingCode: row.specialBreedingCode, //Note: specialBreedingCode is hidden on Cycle data entry form, and so it will always be null. If values are expected, then user should be able to enter a value in this field.
+                locationOverride: row.locationOverride,
+                objectid : LABKEY.Utils.generateUUID().toUpperCase()
+            };
 
-        if (row.firstCycleDay) {
-            if (row.date)
-                matingsRows.push(getMatingsRow(matingsRow, row.firstCycleDay));
-            else
-                EHR.Server.Utils.addError(scriptErrors, 'date', 'First cycle day is present without Cycle Day 1 date', 'ERROR');
-        }
-        if (row.secondCycleDay) {
-            if (row.date)
-                matingsRows.push(getMatingsRow(matingsRow, row.secondCycleDay));
-            else
-                EHR.Server.Utils.addError(scriptErrors, 'date', 'Second cycle day is present without Cycle Day 1 date', 'ERROR');
-        }
-        if (row.thirdCycleDay) {
-            if (row.date)
-                matingsRows.push(getMatingsRow(matingsRow, row.thirdCycleDay));
-            else
-                EHR.Server.Utils.addError(scriptErrors, 'date', 'Third cycle day is present without Cycle Day 1 date', 'ERROR');
-        }
+            if (row.firstCycleDay) {
+                if (row.date)
+                    matingsRows.push(getMatingsRow(matingsRow, row.firstCycleDay));
+                else
+                    EHR.Server.Utils.addError(scriptErrors, 'date', 'First cycle day is present without Cycle Day 1 date', 'ERROR');
+            }
+            if (row.secondCycleDay) {
+                if (row.date)
+                    matingsRows.push(getMatingsRow(matingsRow, row.secondCycleDay));
+                else
+                    EHR.Server.Utils.addError(scriptErrors, 'date', 'Second cycle day is present without Cycle Day 1 date', 'ERROR');
+            }
+            if (row.thirdCycleDay) {
+                if (row.date)
+                    matingsRows.push(getMatingsRow(matingsRow, row.thirdCycleDay));
+                else
+                    EHR.Server.Utils.addError(scriptErrors, 'date', 'Third cycle day is present without Cycle Day 1 date', 'ERROR');
+            }
 
-        if (matingsRows.length > 0) {
-            LABKEY.Query.insertRows({
-                schemaName: 'study',
-                queryName: 'matings',
-                rows: matingsRows,
-                scope: this,
-                failure: function (error) {
-                    console.log('Insert rows error for study.matings in cycle.js');
-                    console.log(error);
-                }
-            });
+            console.log("inserting into matings");
+
+            if (matingsRows.length > 0) {
+                LABKEY.Query.insertRows({
+                    schemaName: 'study',
+                    queryName: 'matings',
+                    rows: matingsRows,
+                    scope: this,
+                    failure: function (error) {
+                        console.log('Insert rows error for study.matings in cycle.js');
+                        console.log(error);
+                    }
+                });
+            }
         }
     }
 }
