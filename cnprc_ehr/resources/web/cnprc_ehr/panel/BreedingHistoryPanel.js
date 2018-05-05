@@ -11,8 +11,8 @@ Ext4.define('CNPRC_EHR.panel.BreedingHistoryPanel', {
     alias: 'widget.cnprc-ehr-breedingHistory',
 
     initComponent: function() {
-        this.schemaName = 'study';
-        this.queryName = 'breedingHistory';
+        this.schemaName = 'cnprc_ehr';
+        this.queryName = 'BreedingHistory';
 
         this.callParent(arguments);
     }
