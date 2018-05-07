@@ -11,8 +11,8 @@ Ext4.define('CNPRC_EHR.panel.ReproductiveCalendar', {
     alias: 'widget.cnprc-ehr-reproductiveCalendar',
 
     initComponent: function() {
-        this.schemaName = 'study';
-        this.queryName = 'reproductiveCalendar';
+        this.schemaName = 'cnprc_ehr';
+        this.queryName = 'ReproductiveCalendar';
 
         this.callParent(arguments);
     }
