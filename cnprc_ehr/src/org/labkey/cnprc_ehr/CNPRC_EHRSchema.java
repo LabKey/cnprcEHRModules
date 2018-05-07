@@ -27,6 +27,7 @@ public class CNPRC_EHRSchema
     public static final String NAME = "cnprc_ehr";
     public static final String ASSIGNMENT_HISTORY_BLEND = "AssignmentHistoryBlend";
     public static final String BREEDING_HISTORY = "BreedingHistory";
+    public static final String REPRODUCTIVE_CALENDAR = "ReproductiveCalendar";
     public static final String MH_PROCESSING = "mh_processing";
 
     public static CNPRC_EHRSchema getInstance()

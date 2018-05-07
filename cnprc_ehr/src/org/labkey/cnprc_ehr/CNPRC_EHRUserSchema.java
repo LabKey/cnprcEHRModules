@@ -8,6 +8,7 @@ import org.labkey.api.query.SimpleUserSchema;
 import org.labkey.api.security.User;
 import org.labkey.cnprc_ehr.query.AssignmentHistoryBlendTable;
 import org.labkey.cnprc_ehr.query.BreedingHistoryTable;
+import org.labkey.cnprc_ehr.query.ReproductiveCalendarTable;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,6 +39,15 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
             public BreedingHistoryTable createTable(CNPRC_EHRUserSchema userSchema)
             {
                 return new BreedingHistoryTable(userSchema);
+            }
+        },
+
+        ReproductiveCalendar
+        {
+            @Override
+            public ReproductiveCalendarTable createTable(CNPRC_EHRUserSchema userSchema)
+            {
+                return new ReproductiveCalendarTable(userSchema);
             }
         };
 
@@ -74,6 +84,7 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
         names.addAll(super.getTableNames());
         names.add(CNPRC_EHRSchema.ASSIGNMENT_HISTORY_BLEND);
         names.add(CNPRC_EHRSchema.BREEDING_HISTORY);
+        names.add(CNPRC_EHRSchema.REPRODUCTIVE_CALENDAR);
         return names;
     }
 
@@ -84,6 +95,7 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
         names.addAll(super.getTableNames());
         names.add(CNPRC_EHRSchema.ASSIGNMENT_HISTORY_BLEND);
         names.add(CNPRC_EHRSchema.BREEDING_HISTORY);
+        names.add(CNPRC_EHRSchema.REPRODUCTIVE_CALENDAR);
         return names;
     }
 }
