@@ -33,6 +33,7 @@ import org.labkey.remoteapi.query.InsertRowsCommand;
 import org.labkey.remoteapi.query.SaveRowsResponse;
 import org.labkey.remoteapi.query.UpdateRowsCommand;
 import org.labkey.test.Locator;
+import org.labkey.test.Locators;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.SortDirection;
 import org.labkey.test.TestFileUtils;
@@ -753,7 +754,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         overviewPage.clickPopulationCompositionTab();
-        waitForText("Total");
+        waitForElements(Locator.tagWithClass("div", "ehr-populationpanel-table"), 1, WAIT_FOR_JAVASCRIPT * 3);
         assertTextPresentInThisOrder("Infant","Juvenile", "Adult","Geriatric");
         assertTextPresentInThisOrder("Total","0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs");
         Locator.XPathLocator linkLocator = Locator.linkContainingText("22");
@@ -769,7 +770,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         overviewPage.clickSpfColonyTab();
-        waitForText("Total");
+        waitForElements(Locator.tagWithClass("div", "ehr-populationpanel-table"), 6, WAIT_FOR_JAVASCRIPT * 3);
         assertTextPresentInThisOrder("Infant","Juvenile", "Adult","Geriatric");
         assertTextPresentInThisOrder("Total","0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs");
         Locator.XPathLocator linkLocator = Locator.linkWithText("8");
@@ -786,12 +787,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         overviewPage.clickHousingSummaryTab();
-        waitForText("Area Usage:");
+        waitForElement(Locators.webpartTitle.withText("Area Usage"));
         assertTextPresentInThisOrder(
-                "Area Usage:",
+                "Area Usage",
                 "Area","Total Cages","Empty Cages","MMU Count","CMO Count","MCY Count","Unknown","% Used",
-                "Housing Type Summary:",
-                "Pairing Summary:");
+                "Housing Type Summary",
+                "Pairing Summary");
         Locator.XPathLocator linkLocator = Locator.linkWithText("A:");
         click(linkLocator);
         switchToWindow(1);
@@ -807,7 +808,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         WebElement ccsColonyTab = overviewPage.clickCcsColonyTab();
-        waitForText("Category");
+        waitForElement(Locator.tagWithClass("div", "ehr-aggregationpanel-table"), WAIT_FOR_JAVASCRIPT);
         assertEquals("Wrong column headers", Arrays.asList("Category", "Total", "%")
                 , getTexts(Locator.css("tr:nth-of-type(1)> td").findElements(ccsColonyTab)));
         Locator.XPathLocator linkLocator = Locator.linkWithText("1");
@@ -822,7 +823,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         WebElement utilizationColonyTab = overviewPage.clickUtilizationColonyTab();
-        waitForText("Category");
+        waitForElement(Locator.tagWithClass("div", "ehr-aggregationpanel-table"), WAIT_FOR_JAVASCRIPT);
         assertEquals("Wrong column headers", Arrays.asList("Category", "Total", "%")
                 , getTexts(Locator.css("tr:nth-of-type(1)> td").findElements(utilizationColonyTab)));
         WebElement linkElement = Locator.tag("tr").withDescendant(Locator.tagWithText("div","Base Grant")).append(Locator.tagWithText("a","2")).findElement(utilizationColonyTab);
