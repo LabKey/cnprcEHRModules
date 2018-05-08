@@ -14,7 +14,13 @@
                     <column columnName="conception">
                         <columnTitle>Conception Date</columnTitle>
                     </column>
-                    <column columnName="femaleSpecies"/>
+                    <column columnName="conNum">
+                        <columnTitle>Conception ID</columnTitle>
+                        <url>cnprc_ehr-conceptionDetail.view?pageId=conceptionDetail#conceptionId:${conNum}</url>
+                    </column>
+                    <column columnName="femaleSpecies">
+                        <columnTitle>Female Species</columnTitle>
+                    </column>
                     <column columnName="offspringId">
                         <columnTitle>Offspring</columnTitle>
                         <fk>
@@ -64,7 +70,9 @@
                     <column columnName="PGComment">
                         <columnTitle>PG Comment</columnTitle>
                     </column>
-                    <column columnName="termComment"/>
+                    <column columnName="termComment">
+                        <columnTitle>Term Comment</columnTitle>
+                    </column>
                 </columns>
             </table>
         </tables>

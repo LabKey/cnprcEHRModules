@@ -48,7 +48,7 @@ import org.labkey.cnprc_ehr.dataentry.forms.BreedingObservationsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BreedingRegistrationFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.CensusFlagFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.ClinicalReportFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.ClinicalExamCasesFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.HousingFormType;
@@ -160,7 +160,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("ehrAdmin", this, "views/ehrAdmin.html");
         ehrService.registerActionOverride("enterData", this, "views/enterData.html");
         ehrService.registerActionOverride("populateInitialData", this, "views/populateData.html");
-        
+        ehrService.registerActionOverride("conceptionDetail", this, "views/conceptionDetail.html");
+
         //data entry
         ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ArrivalFormType.class, this));
@@ -173,7 +174,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(TreatmentsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalRoundsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BulkClinicalEntryFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalReportFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalExamCasesFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingRegistrationFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingObservationsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PregnancyDeterminationsFormType.class, this));

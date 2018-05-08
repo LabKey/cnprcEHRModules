@@ -38,13 +38,13 @@ import org.labkey.cnprc_ehr.dataentry.WeightFormSection;
 import java.util.Arrays;
 import java.util.List;
 
-public class ClinicalReportFormType extends TaskForm
+public class ClinicalExamCasesFormType extends TaskForm
 {
     @Queryable
     public static final String NAME = "Clinical Report";
     public static final String LABEL = "Exams/Cases";
 
-    public ClinicalReportFormType(DataEntryFormContext ctx, Module owner)
+    public ClinicalExamCasesFormType(DataEntryFormContext ctx, Module owner)
     {
         super(ctx, owner, NAME, LABEL, "Clinical", Arrays.<FormSection>asList(
                 new NonStoreFormSection("Instructions", "Instructions", "ehr-examinstructionspanel", Arrays.asList(ClientDependency.fromPath("ehr/panel/ExamInstructionsPanel.js"))),
@@ -52,7 +52,7 @@ public class ClinicalReportFormType extends TaskForm
                 new ExtendedAnimalDetailsFormSection(),
                 new SimpleFormPanelSection("study", "Clinical Remarks", "SOAP", false, EHRService.FORM_SECTION_LOCATION.Tabs),
                 new ClinicalObservationsFormSection(EHRService.FORM_SECTION_LOCATION.Tabs),
-                new SimpleGridPanel("study", "encounters", "Procedures", EHRService.FORM_SECTION_LOCATION.Tabs),
+                new SimpleGridPanel("study", "problem", "Problems", EHRService.FORM_SECTION_LOCATION.Tabs),
                 new WeightFormSection(EHRService.FORM_SECTION_LOCATION.Tabs),
                 new DrugAdministrationFormSection(EHRService.FORM_SECTION_LOCATION.Tabs),
                 new TreatmentOrdersFormSection(EHRService.FORM_SECTION_LOCATION.Tabs),

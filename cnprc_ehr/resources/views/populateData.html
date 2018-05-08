@@ -712,6 +712,13 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'admit_status',
         pk: 'value'
+    },
+    {
+        label: 'Attitude',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'attitude',
+        pk: 'value'
     }
  ];
 

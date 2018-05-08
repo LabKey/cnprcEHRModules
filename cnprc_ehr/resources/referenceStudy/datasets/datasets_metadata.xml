@@ -3445,13 +3445,11 @@
             <column columnName="hx">
                 <datatype>varchar</datatype>
             </column>
-            <column columnName="s">
+            <column columnName="so">
+                <description>Notes combining Subjective and Objective</description>
                 <datatype>varchar</datatype>
             </column>
             <column columnName="a">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="o">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="p">
