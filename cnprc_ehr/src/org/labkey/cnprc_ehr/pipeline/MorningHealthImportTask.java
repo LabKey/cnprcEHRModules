@@ -31,7 +31,6 @@ import java.util.Map;
 public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImportTask.Factory>
 {
     public static final String SOURCE_NAME = "Indoor_Morning_Health";
-    public static final String UNVALIDATED_STATUS = "U";
     private static final Logger LOG = Logger.getLogger(MorningHealthImportTask.class);
 
     private MorningHealthImportTask(MorningHealthImportTask.Factory factory, PipelineJob job)
@@ -80,7 +79,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                         row.put("rowPk", rowPk);
                         row.put("source", SOURCE_NAME);
                         row.put("fileLineNumber", lnr.getLineNumber());
-                        row.put("status", UNVALIDATED_STATUS);
+                        row.put("status", MorningHealthValidationTask.UNVALIDATED_STATUS);
                         row.put("voided", false);
                         row.put("data", line);
                         row.put("errors", "");
@@ -108,7 +107,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
             job.error("Morning health barcode data import failed: ", e);
         }
 
-        LOG.info("Morning Health barcode data import completed");
+        LOG.info("Completed Morning Health barcode data import");
 
         return new RecordedActionSet();
     }

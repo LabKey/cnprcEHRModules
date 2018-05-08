@@ -8,3 +8,4 @@ rowid	room	file_status	management_type	supervisor	weight_sheet_frequency	food_id
 906	AB5002	AC		John Brown	N	9657	N	Test Text 906	0		2016-10-11 00:00:00.000	edy	2016-10-11 00:00:00.000	edy		I
 907	AC5003	AC		Jane Jones	N	9658	N	Test Text 907	0		2016-10-11 00:00:00.000	edy	2016-10-11 00:00:00.000	edy		I
 908	AD5003	AC		Jim Smith	N	9647	N	Test Text 908	0		2016-10-11 00:00:00.000	edy	2016-10-11 00:00:00.000	edy		I
+909	AD5004	IN		Jim Brown	N	9649	N	Test Text 909	0		2018-05-07 00:00:00.000	edy	2018-05-07 00:00:00.000	edy		I

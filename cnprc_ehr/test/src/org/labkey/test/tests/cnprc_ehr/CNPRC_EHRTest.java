@@ -113,6 +113,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     protected static final String ROOM_AB5001 = "AB5001";
     protected static final String ROOM_AC5003 = "AC5003";
     protected static final String ROOM_AD5003 = "AD5003";
+    protected static final String ROOM_AD5004 = "AD5004";
     protected static final String ROOM_3168659 = "3168659";
 
     public static final String CNPRC_ANIMAL = "TEST3804589";
@@ -132,6 +133,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
     private static final File BILLING_ACCOUNT_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_BILLING_ACCOUNTS.tsv");
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
+    private static final File CNPRC_EHR_OBSERVATION_TYPES = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_OBSERVATION_TYPES.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
     private static final File EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_VIROLOGY_SAMPLE_TYPE.TSV");
     private static final File EHR_LOOKUP_TEST_VIRUS_MAPPING = TestFileUtils.getSampleData("cnprc/tables/EHR_LOOKUP_TEST_VIRUS_MAPPING.TSV");
@@ -308,6 +310,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
         storeCageAndRoomData();
+        storeObservationTypesData();
         createPDLLinkedSchema();
         storePDLData();
         createBillingLinkedSchema();
@@ -352,6 +355,18 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_AD5003 + "-23");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_AD5004);
+        deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5004 + "-52");
+        deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
+
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5004 + "-53");
         deleteIfNeeded("ehr_lookups", "cage", rowMap, "location");
 
         rowMap = new HashMap<>();
@@ -480,6 +495,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("area", "A");
         insertCmd.addRow(rowMap);
         rowMap = new HashMap<>();
+        rowMap.put("room", ROOM_AD5004);
+        rowMap.put("housingType", 1);
+        rowMap.put("housingCondition", 1);
+        rowMap.put("area", "A");
+        insertCmd.addRow(rowMap);
+        rowMap = new HashMap<>();
         rowMap.put("room", ROOM_3168659);
         rowMap.put("housingType", 1);
         rowMap.put("housingCondition", 1);
@@ -518,6 +539,16 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("location", ROOM_AD5003 + "-23");
         rowMap.put("room", ROOM_AD5003);
         rowMap.put("cage", "23");
+        insertCmd.addRow(rowMap);
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5004 + "-52");
+        rowMap.put("room", ROOM_AD5004);
+        rowMap.put("cage", "52");
+        insertCmd.addRow(rowMap);
+        rowMap = new HashMap<>();
+        rowMap.put("location", ROOM_AD5004 + "-53");
+        rowMap.put("room", ROOM_AD5004);
+        rowMap.put("cage", "53");
         insertCmd.addRow(rowMap);
         rowMap = new HashMap<>();
         rowMap.put("location", ROOM_3168659 + "-1");
@@ -1770,6 +1801,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         insertTsvData(connection, "cnprc_ehr", "room_enclosure", CNPRC_EHR_ROOM_ENCLOSURE, folder);
     }
 
+    private void storeObservationTypesData() throws IOException, CommandException
+    {
+        Connection connection = createDefaultConnection(true);
+        String folder = "/";
+        insertTsvData(connection, "cnprc_ehr", "observation_types", CNPRC_EHR_OBSERVATION_TYPES, folder);
+    }
+
     private void storeTestTypeMappingData() throws IOException, CommandException
     {
         Connection connection = createDefaultConnection(true);
@@ -2458,7 +2496,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static final String TRIGGER_NAME = "MorningHealthImportTestTrigger";
     public static final String MORNING_HEALTH_DATA_NAME = "mh_good_file";
     public static final String MORNING_HEALTH_DATA_FILENAME = MORNING_HEALTH_DATA_NAME + ".csv";  // NOTE: .csv file type is hardcoded in cnprc_ehrContext.xml
-    public static final String FILE_PATTERN = MORNING_HEALTH_DATA_NAME + "\\.csv";
+    public static final String FILE_PATTERN = "\\.csv";
     public static final File MORNING_HEALTH_DATA_ORIG = TestFileUtils.getSampleData("cnprc/" + MORNING_HEALTH_DATA_FILENAME);
     public static final File TEMP_DIR = FileUtil.getTempDirectory();
 
@@ -2503,9 +2541,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitAndClickAndWait(Locator.linkWithText("Edit Indoor Morning Health Data"));
         DataRegionTable results = new DataRegionTable("query", getDriver());
         results.setSort("fileLineNumber", SortDirection.ASC);
-        List<String> expected = Lists.newArrayList("806A6B8988D148D382DC21ED7367FE5E", "Indoor_Morning_Health", "4", "U", "false",
-                "806A6B8988D148D382DC21ED7367FE5E,DSTEST,200180418,061038,TEST4,AB5016-10,LEFTSDE,SHOULDR,TRAUMA,UNCHNGD,,,,,,,,", " ");
-        assertEquals("Expected values not found for mh_processing.", expected, results.getRowDataAsText(3).subList(0, expected.size()));
+        List<String> expected = Lists.newArrayList("73C7DE6B2CA84AEA82B1C24A274D3255", "Indoor_Morning_Health", "1", "U", "false",
+                "73C7DE6B2CA84AEA82B1C24A274D3255,DSTEST,20180429,060943,44444,AC5003-89,LIQDSTL,,,,,,,,,,,", " ");
+        assertEquals("Expected values not found for mh_processing.", expected, results.getRowDataAsText(0).subList(0, expected.size()));
     }
 
     @NotNull
