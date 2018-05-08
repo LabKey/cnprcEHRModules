@@ -787,7 +787,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         overviewPage.clickHousingSummaryTab();
-        waitForElement(Locators.webpartTitle.withText("Area Usage"));
+        waitForElement(Locators.panelWebpartTitle.withText("Area Usage"));
         assertTextPresentInThisOrder(
                 "Area Usage",
                 "Area","Total Cages","Empty Cages","MMU Count","CMO Count","MCY Count","Unknown","% Used",
