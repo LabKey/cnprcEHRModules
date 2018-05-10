@@ -829,7 +829,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         switchToWindow(1);
         waitForText("Room Utilization:");
         DataRegionTable results = new DataRegionTable("query", getDriver());
-        assertEquals("Wrong row count",3,results.getDataRowCount());
+        assertEquals("Wrong row count",4,results.getDataRowCount());
         List<String> expected = Arrays.asList("3168659","2","2","2","0","100.0","2","0","2","0","0");
         assertEquals("Wrong row text.", expected,results.getRowDataAsText(0));
     }
@@ -1339,7 +1339,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong Housing History results,",
                 Arrays.asList("TEST4564246", "2005-01-11", " ", "<6824778>", "4953547"),
-                historyTable.getRowDataAsText(7, "Id", "date", "enddate", "room", "cage"));
+                historyTable.getRowDataAsText(8, "Id", "date", "enddate", "room", "cage"));
     }
 
     @Test
@@ -1367,7 +1367,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> expected = Arrays.asList(
                 ROOM_AB5001
                 , "4"
-                , "1"
+                , "2"
                 , "1"
                 , "2"
                 , "4"
@@ -2488,7 +2488,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Create a new trigger.");
         clickAndWait(Locator.linkWithText("Manage EHR Study"));
         clickAndWait(Locator.linkWithText("Manage file watchers"));
-        clickAndWait(Locator.linkWithText("Create a trigger to Import Morning Health barcode data"));
+        clickAndWait(Locator.linkWithText("Import Morning Health barcode data"));
 
         PipelineTriggerWizard wizard = new PipelineTriggerWizard(getDriver());
         log("Verify that the task was automatically populated based on the link we clicked.");
