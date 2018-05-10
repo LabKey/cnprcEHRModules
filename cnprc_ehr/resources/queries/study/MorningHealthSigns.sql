@@ -16,10 +16,12 @@
 SELECT
   mho.Id,
   mho.date,
-  mho.location,
+  (mho.enclosure ||'-'|| mho.cage) AS location,
   GROUP_CONCAT (mho.observation, ',') AS observation
 FROM study.morningHealthObs mho
 GROUP BY
   mho.Id,
   mho.date,
-  mho.location
+  mho.location,
+  mho.enclosure,
+  mho.cage
