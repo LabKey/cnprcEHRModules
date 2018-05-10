@@ -75,3 +75,4 @@ stoolCondition	Stool Condition	Value	Title
 processing_status	Processing Status	value
 admit_status	Admit Status for MH Confirmation	value
 attitude	Attitude Score	value
+flags_behavior_codes	Behavior Flags	value

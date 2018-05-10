@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Behavior" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="behavior" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">
@@ -30,6 +30,21 @@
                     </column>
                     <column columnName="nervous">
                         <columnTitle>Nervous</columnTitle>
+                    </column>
+                    <column columnName="hiActivity">
+                        <columnTitle>HI Activitiy</columnTitle>
+                    </column>
+                    <column columnName="hiemotionality">
+                        <columnTitle>HI Emotionality</columnTitle>
+                    </column>
+                    <column columnName="hiaggression">
+                        <columnTitle>HI Aggression</columnTitle>
+                    </column>
+                    <column columnName="hidisplacement">
+                        <columnTitle>HI Displacement</columnTitle>
+                    </column>
+                    <column columnName="behavInhibition">
+                        <columnTitle>Behavior Inhibition</columnTitle>
                     </column>
                 </columns>
             </table>

@@ -24,6 +24,11 @@ VIGILANT AS vigilant,
 GENTLE AS gentle,
 CONFIDENT AS confident,
 NERVOUS AS nervous,
+HIACTIVITY AS hiActivity,
+HIEMOTIONALITY AS hiEmotionality,
+HIAGGRESSION AS hiAggression,
+HIDISPLACEMENT AS hiDisplacement,
+BEHAV_INHIBITION AS behavInhibition,
 OBJECTID as objectid,
 DATE_TIME
 FROM cnprcSrc.ZBIO_BEHAVIORAL_ASSESSMENT

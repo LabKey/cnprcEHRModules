@@ -33,6 +33,7 @@
         <dataset name="departure" id="1013" category="Colony Management" type="Standard"/>
         <dataset name="drug" id="1014" category="Clinical" type="Standard"/>
         <dataset name="flags" id="5019" category="Colony Management" type="Standard" showByDefault="false"/>
+        <dataset name="flagsBehavior" id="3004" category="Behavior" type="Standard" showByDefault="false"/>
         <dataset name="feeding" id="1078" category="Clinical" demographicData="true"/>
         <dataset name="colony_assignments" id="5020" category="Colony Management" type="Standard" showByDefault="false"/>
         <dataset name="fdb_samples" id="7003" category="Repository" type="Standard"/>
