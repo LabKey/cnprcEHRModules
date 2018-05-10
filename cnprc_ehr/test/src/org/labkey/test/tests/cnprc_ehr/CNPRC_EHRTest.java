@@ -1364,23 +1364,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        String[] expected = {
+        List<String> expected = Arrays.asList(
                 ROOM_AB5001
                 , "4"
                 , "1"
                 , "1"
                 , "2"
                 , "4"
-        };
+        );
         List<String> resultsRowDataAsText = results.getRowDataAsText(0);
-        String[] rowDataAsText = resultsRowDataAsText.toArray(new String[resultsRowDataAsText.size()]);
-        for (int i = 0; i < expected.length; i++)
-        {
-            assertEquals("Wrong value: ", expected[i], rowDataAsText[i]);
-        }
-
+        assertEquals("Wrong row data: ", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 1, results.getDataRowCount());
-
     }
 
     @Test
@@ -1477,13 +1471,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
 
+        List<String> expectedRowData = Arrays.asList(animalId, sireID, breedingDate, "X", "4");
+        List<String> actualRowData = results.getRowDataAsText(0, "Id", "sire", "date", "obsCode", "cycleDay");
+        assertEquals("Wrong row data", expectedRowData, actualRowData);
         assertEquals("Two rows should be displayed", results.getDataRowCount(), 2);
-        assertEquals("Wrong value in Animal ID", animalId, convertToString(results.getRowDataAsText(0, "Id")));
-        assertEquals("Wrong value in Sire ID", sireID, convertToString(results.getRowDataAsText(0,"sire")));
-        assertEquals("Wrong value in Breeding Date", breedingDate, convertToString(results.getRowDataAsText(0, "date")));
-        assertEquals("Wrong value in Observation Code", "X", convertToString(results.getRowDataAsText(0, "obsCode")));
-        assertEquals("Wrong value in Day of Cycle", "4", convertToString(results.getRowDataAsText(0, "cycleDay")));
-
     }
 
     private void insertBreedingRegistrationFor(String id, String date, String book, String maleEnemyOne) throws IOException, CommandException
@@ -1541,12 +1532,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
 
-        assertEquals("Just one row should be displayed",results.getDataRowCount(),1);
-
-        assertEquals("Wrong value in animal ID",animalId,convertToString(results.getColumnDataAsText("Id")));
-        assertEquals("Wrong value for Book",book,convertToString(results.getColumnDataAsText("book")));
-        assertEquals("Wrong value for Male Enemy1",maleEnemy1,convertToString(results.getColumnDataAsText("maleEnemy1")));
-
+        List<String> expectedRowData = Arrays.asList(animalId, book, maleEnemy1);
+        List<String> actualRowData = results.getRowDataAsText(0, "Id", "book", "maleEnemy1");
+        assertEquals("Wrong row data", expectedRowData, actualRowData);
+        assertEquals("Just one row should be displayed", 1, results.getDataRowCount());
     }
 
     @Test
@@ -1597,23 +1586,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
 
         results.setFilter("method","Equals",methodCode);
-        assertEquals("Just one row should be displayed",results.getDataRowCount(),1);
-
-        assertEquals("Wrong value in animal ID",animalId,convertToString(results.getColumnDataAsText("Id")));
-        assertEquals("Wrong value in Method codes",methodCode,convertToString(results.getColumnDataAsText("method")));
-        assertEquals("Wrong value in test result",testResult,convertToString(results.getColumnDataAsText("result")));
-        assertEquals("Wrong value in scheduled status","false",convertToString(results.getColumnDataAsText("scheduleStatus")));
-        assertEquals("Wrong value in cycle day",cycleDay1,convertToString(results.getColumnDataAsText("cycleDay1")));
+        List<String> expectedRowData = Arrays.asList(animalId, methodCode, testResult, "false", cycleDay1);
+        List<String> actualRowData = results.getRowDataAsText(0, "Id", "method", "result", "scheduleStatus", "cycleDay1");
+        assertEquals("Wrong row data", expectedRowData, actualRowData);
+        assertEquals("Just one row should be displayed", 1, results.getDataRowCount());
     }
-
-    private String convertToString(List<String> list)
-    {
-        String ret="";
-        for (String s : list)
-            ret += s;
-        return ret;
-    }
-
 
     private void insertWeights() throws IOException, CommandException
     {
