@@ -50,7 +50,7 @@ import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.CensusFlagFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalExamCasesFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.ImmunizationFormType;
+//import org.labkey.cnprc_ehr.dataentry.forms.ImmunizationFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.HousingFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.NursingFormType;
@@ -59,7 +59,7 @@ import org.labkey.cnprc_ehr.dataentry.forms.PregnancyDeterminationsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.SerumFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.WeightTbTattooFormType;
+//import org.labkey.cnprc_ehr.dataentry.forms.WeightTbTattooFormType;
 import org.labkey.cnprc_ehr.demographics.ActiveFlagsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.BCSDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.BreedingGroupDemographicsProvider;
@@ -185,8 +185,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(NursingFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(NewBreedingRequestFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(SerumFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(ImmunizationFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightTbTattooFormType.class, this));
+//        ehrService.registerFormType(new DefaultDataEntryFormFactory(ImmunizationFormType.class, this));
+//        ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightTbTattooFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PairingsFormType.class, this));
 
 
