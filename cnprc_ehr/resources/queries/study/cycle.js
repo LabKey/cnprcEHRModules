@@ -106,7 +106,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                         enemies.push(results['rows'][0]['maleEnemy4']['value']);
                         enemies.push(results['rows'][0]['maleEnemy5']['value']);
                         if(enemies.indexOf(row.sire) >= 0){
-                            EHR.Server.Utils.addError(scriptErrors, 'sire', 'Male is an enemy to this female', 'ERROR');
+                            EHR.Server.Utils.addError(scriptErrors, 'sire', 'Male ' + row.sire + ' is an enemy to this female', 'ERROR');
                         }
                     }
                     else {
