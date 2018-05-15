@@ -1491,6 +1491,58 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testNewBreedingRequest()
+    {
+        String animalId = "TEST1";
+        String male = "TEST2";
+        String m_use = "No";
+        String method = "Blood";
+        String day = "20.0";
+
+        log("Begin the test with entry data page - New Breeding Request");
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
+        enterData.waitAndClickAndWait(Locator.linkWithText("New Breeding Request"));
+        WebElement titleEl = waitForElement(Locator.xpath("//input[@name='title' and not(contains(@class, 'disabled'))]"), WAIT_FOR_JAVASCRIPT);
+        waitForFormElementToEqual(titleEl, "New Breeding Request");
+
+        log("Setting the task title");
+        setFormElement(Locator.name("title"), TASK_TITLE_NEW_BRD_REQ);
+        assertEquals(TASK_TITLE_NEW_BRD_REQ, getFormElement(Locator.name("title")));
+
+        log("Requesting breeding for the animal");
+        Ext4GridRef newBreedingRequest = _helper.getExt4GridForFormSection("Cycle");
+        _helper.addRecordToGrid(newBreedingRequest);
+        newBreedingRequest.setGridCell(1, "Id", animalId);
+        newBreedingRequest.setGridCell(1, "sire", male);
+        newBreedingRequest.setGridCell(1, "maleMultiUse", m_use);
+        newBreedingRequest.setGridCell(1, "methodOne", method);
+        newBreedingRequest.setGridCell(1, "gestDayOne", day);
+        clickButton("Save & Close");
+
+        log("Opening the pending task for completion");
+        enterData.clickMyTasksTab();
+        waitAndClick(Locator.linkContainingText(TASK_TITLE_NEW_BRD_REQ));
+        switchToWindow(1);
+        waitForText("Cycle");
+        clickButton("Submit Final", 0);
+        _extHelper.waitForExtDialog("Finalize Form");
+        click(Ext4Helper.Locators.ext4Button("Yes"));
+
+        log("Verifying the animal details from cycle report");
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(animalId);
+        animalHistoryPage.clickCategoryTab("Reproductive Management");
+        animalHistoryPage.clickReportTab("Cycle");
+
+        DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
+
+        List<String> expectedRowData = Arrays.asList(animalId, male, "false", method, day);
+        List<String> actualRowData = results.getRowDataAsText(0, "Id", "sire", "maleMultiUse", "methodOne", "gestDayOne");
+        assertEquals("Wrong row data", expectedRowData, actualRowData);
+        assertEquals("Just one row should be displayed", 1, results.getDataRowCount());
+    }
+
+    @Test
     public void testBreedingRegistrationDataEntry()
     {
         String animalId = "TEST2";
