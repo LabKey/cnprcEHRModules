@@ -12,10 +12,11 @@ EHR.model.DataModelManager.registerMetadata('Default', {
     allQueries: {
         projectCode: {
             xtype: 'ehr-projectcodeentryfield',
-            editorConfig: {},
             shownInGrid: true,
             useNull: true,
             lookup: {
+                schemaName: 'cnprc_ehr',
+                queryName: 'project',
                 columns: 'projectCode'
             }
         }
