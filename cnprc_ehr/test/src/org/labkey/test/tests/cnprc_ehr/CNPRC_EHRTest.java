@@ -1535,7 +1535,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Cycle");
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
-
+        results.setFilter("sire","Equals",male);
         List<String> expectedRowData = Arrays.asList(animalId, male, "false", method, day);
         List<String> actualRowData = results.getRowDataAsText(0, "Id", "sire", "maleMultiUse", "methodOne", "gestDayOne");
         assertEquals("Wrong row data", expectedRowData, actualRowData);
