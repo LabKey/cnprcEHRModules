@@ -19,4 +19,4 @@ SELECT
          (CASE WHEN n.Id.Demographics.calculated_status = 'Alive' OR
                     n.Id.Demographics.calculated_status = 'On Loan' THEN now() END)) AS HIGH_DATE
 FROM
-  study.Serum n
+  study.demographics n
