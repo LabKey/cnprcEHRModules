@@ -7,16 +7,27 @@
                 <updateUrl />
                 <deleteUrl />
                 <columns>
-                    <column columnName="Id"/>
-                    <column columnName="date"/>
+                    <column columnName="Id">
+                        <columnTitle>Id</columnTitle>
+                        <isHidden>false</isHidden>
+                    </column>
+                    <column columnName="date">
+                        <isHidden>true</isHidden>
+                        <columnTitle>Date</columnTitle>
+                        <nullable>false</nullable>
+                        <formatString>Date</formatString>
+                    </column>
                     <column columnName="code">
-                        <columnTitle>Vaccine</columnTitle>
-                        <fk>
-                            <fkDbSchema>ehr_lookups</fkDbSchema>
-                            <fkTable>vaccination_codes</fkTable>
-                            <fkColumnName>value</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true">Description</fkDisplayColumnName>
-                        </fk>
+                        <columnTitle>Vaccination Code</columnTitle>
+                        <datatype>varchar</datatype>
+                        <isHidden>false</isHidden>
+                    </column>
+                    <column columnName="performedby">
+                        <isHidden>true</isHidden>
+                        <nullable>true</nullable>
+                    </column>
+                    <column columnName="remark">
+                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>

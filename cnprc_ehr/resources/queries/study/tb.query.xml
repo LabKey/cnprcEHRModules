@@ -19,6 +19,7 @@
                         </fk>
                     </column>
                     <column columnName="testType">
+                        <columntitle>Test Type</columntitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>tb_test_type</fkTable>
@@ -27,13 +28,25 @@
                         </fk>
                     </column>
                     <column columnName="twentyFourHrsResult">
-                        <columnTitle>24 Hours Result</columnTitle>
+                        <columnTitle>24 Hours </columnTitle>
                     </column>
                     <column columnName="fortyEightHrsResult">
-                        <columnTitle>48 Hours Result</columnTitle>
+                        <columnTitle>48 Hours </columnTitle>
                     </column>
                     <column columnName="seventyTwoHrsResult">
-                        <columnTitle>72 Hours Result</columnTitle>
+                        <columnTitle>72 Hours </columnTitle>
+                    </column>
+                    <column columnName="test">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="user_name">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="entry_date_tm">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>

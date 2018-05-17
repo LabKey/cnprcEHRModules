@@ -17,15 +17,21 @@ package org.labkey.cnprc_ehr.dataentry;
 
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.view.template.ClientDependency;
+import org.labkey.api.ehr.dataentry.SimpleGridPanel;
+
 
 public class WeightFormSection extends SimpleGridPanel
 {
+    public WeightFormSection()
+    {
+        this(EHRService.FORM_SECTION_LOCATION.Body);
+    }
+
     public WeightFormSection(EHRService.FORM_SECTION_LOCATION location)
     {
         super("study", "Weight", "Weights", location);
         setClientStoreClass("EHR.data.WeightClientStore");
         addClientDependency(ClientDependency.fromPath("ehr/data/WeightClientStore.js"));
-
-        _showLocation = true;
     }
+
 }
