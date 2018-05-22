@@ -2,7 +2,13 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="mh_processing" tableDbType="TABLE" useColumnOrder="true">
+                <importUrl></importUrl>
+                <insertUrl>/query/insertQueryRow.view?schemaName=cnprc_ehr&amp;query.queryName=mh_processing</insertUrl>
+                <updateUrl>/ehr/dataEntryFormForQuery.view?schemaName=cnprc_ehr&amp;queryName=mh_processing&amp;rowId=${rowId}</updateUrl>
                 <columns>
+                    <column columnName="rowId">
+                        <hidden>true</hidden>
+                    </column>
                     <column columnName="rowPk">
                         <columnTitle>Row PK</columnTitle>
                     </column>
@@ -26,10 +32,8 @@
                     <column columnName="data">
                         <columnTitle>Data</columnTitle>
                     </column>
-                    <column columnName="errors">
-                        <columnTitle>Errors</columnTitle>
-                    </column>
                 </columns>
+                <pkColumnName>rowPk</pkColumnName>
             </table>
         </tables>
     </metadata>

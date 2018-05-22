@@ -33,9 +33,6 @@
                             <bean id="morningHealthImportTask" class="org.labkey.api.pipeline.TaskId">
                                 <constructor-arg><value type="java.lang.Class">org.labkey.cnprc_ehr.pipeline.MorningHealthImportTask</value></constructor-arg>
                             </bean>
-                            <bean id="morningHealthValidationTask" class="org.labkey.api.pipeline.TaskId">
-                                <constructor-arg><value type="java.lang.Class">org.labkey.cnprc_ehr.pipeline.MorningHealthValidationTask</value></constructor-arg>
-                            </bean>
                         </list>
                     </property>
                 </bean>

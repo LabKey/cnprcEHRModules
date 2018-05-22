@@ -50,8 +50,8 @@ import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.CensusFlagFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalExamCasesFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.HousingFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.NursingFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PairingsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PregnancyDeterminationsFormType;
@@ -93,7 +93,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
     @Override
     public double getVersion()
     {
-        return 18.14;
+        return 18.15;
     }
 
     @Override
@@ -187,9 +187,6 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(SerumFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightTbTattooFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PairingsFormType.class, this));
-
-
-
 
         //demographics
         ehrService.registerDemographicsProvider(new ActiveFlagsDemographicsProvider(this));

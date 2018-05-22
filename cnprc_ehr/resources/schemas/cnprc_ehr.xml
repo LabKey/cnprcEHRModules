@@ -842,7 +842,6 @@
             <column columnName="status"/>
             <column columnName="voided"/>
             <column columnName="data"/>
-            <column columnName="errors"/>
             <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>

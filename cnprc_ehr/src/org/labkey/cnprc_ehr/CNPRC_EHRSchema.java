@@ -18,6 +18,7 @@ package org.labkey.cnprc_ehr;
 
 import org.labkey.api.data.DbSchema;
 import org.labkey.api.data.DbSchemaType;
+import org.labkey.api.data.TableInfo;
 import org.labkey.api.data.dialect.SqlDialect;
 
 public class CNPRC_EHRSchema
@@ -53,5 +54,10 @@ public class CNPRC_EHRSchema
     public SqlDialect getSqlDialect()
     {
         return getSchema().getSqlDialect();
+    }
+
+    public TableInfo getTableInfoMhProcessing()
+    {
+        return getSchema().getTable(MH_PROCESSING);
     }
 }
