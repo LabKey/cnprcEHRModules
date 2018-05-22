@@ -836,6 +836,8 @@
     <table tableName="mh_processing" tableDbType="TABLE">
         <auditLogging>DETAILED</auditLogging>
         <columns>
+            <column columnName="rowId"/>
+            <column columnName="fileName"/>
             <column columnName="rowPk"/>
             <column columnName="source"/>
             <column columnName="fileLineNumber"/>
