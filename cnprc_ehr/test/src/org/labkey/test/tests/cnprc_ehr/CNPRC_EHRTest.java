@@ -2535,7 +2535,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testMorningHealthImport() throws IOException, CommandException
     {
-        Assume.assumeTrue("File watcher requires permium module", _containerHelper.getAllModules().contains("premium"));
+        Assume.assumeTrue("File watcher requires premium module", _containerHelper.getAllModules().contains("premium"));
 
         beginAt("/project/" + getContainerPath() + "/begin.view");
 
