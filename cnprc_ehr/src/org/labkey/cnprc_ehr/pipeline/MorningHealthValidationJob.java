@@ -95,8 +95,8 @@ public class MorningHealthValidationJob extends PipelineJob
     {
         observationTimeFormat = DateTimeFormatter.ofPattern(observationTimeFormatString).withLocale(Locale.US).withZone(ZoneId.of("UTC"));
     }
-    public static Set<String> _validRecordIds;
-    public static Set<String> _invalidRecordIds;
+    public static Set<String> _validRecordPks;
+    public static Set<String> _invalidRecordPks;
 
     @Override
     public URLHelper getStatusHref()
@@ -180,59 +180,58 @@ public class MorningHealthValidationJob extends PipelineJob
             validAnimalIds.put(animalId, new MorningHealthValidationJob.AnimalInfo(gender, currentLocation));
         });
 
-        _validRecordIds = new HashSet<>();
-        _invalidRecordIds = new HashSet<>();
+        _validRecordPks = new HashSet<>();
+        _invalidRecordPks = new HashSet<>();
 
         try
         {
             mhProcessingSelector.forEach(rs -> {
-                String rowId = rs.getString("rowId");
                 String data = rs.getString("data");
                 String rowPk = rs.getString("rowPk");
                 if (data == null)
                 {
-                    LOG.error("Primary key (object ID) '" + rowId + "' has no data");
-                    _invalidRecordIds.add(rowId);
+                    LOG.error("Primary key (rowPk) '" + rowPk + "' has no data");
+                    _invalidRecordPks.add(rowPk);
                 }
                 else
                 {
 
                     String[] fields = data.split(",", -1);
-                    String oid = fields[PRIMARY_KEY];
-                    if (oid.length() != 32)  // primary key is object ID and should not be anything other than 32 chars
+                    String dataRowPk = fields[PRIMARY_KEY];
+                    if (dataRowPk.length() != 32)  // primary key is object ID and should not be anything other than 32 chars
                     {
-                        LOG.error("Primary key (object ID) '" + oid + "' is not 32 characters in data");
-                        _invalidRecordIds.add(rowId);
+                        LOG.error("Primary key '" + dataRowPk + "' is not 32 characters in data");
+                        _invalidRecordPks.add(rowPk);
                     }
 
                     if (fields.length != (ENCLOSURE_SIGN + 1))  // calculated from last field
-                        logErrorWithRowIdAndPk("Wrong number of fields, found " + fields.length + ", expected " + (ENCLOSURE_SIGN + 1), rowId, rowPk);
+                        logErrorWithRowPk("Wrong number of fields, found " + fields.length + ", expected " + (ENCLOSURE_SIGN + 1), rowPk);
                     else
                     {
                         if (fields[TECHNICIAN].trim().isEmpty())
-                            logErrorWithRowIdAndPk("Technician is empty", rowId, rowPk);
+                            logErrorWithRowPk("Technician is empty", rowPk);
 
                         String observationDateString = fields[DATE];
                         if (observationDateString.isEmpty())
-                            logErrorWithRowIdAndPk("Observation date is empty", rowId, rowPk);
+                            logErrorWithRowPk("Observation date is empty", rowPk);
                         else
                         {
                             try
                             {
                                 LocalDate observationLocalDate = LocalDate.parse(observationDateString, observationDateFormat);
                                 if (observationLocalDate.isAfter(LocalDate.now()))
-                                    logErrorWithRowIdAndPk("Observation date '" + observationDateString + "' is greater than current time", rowId, rowPk);
+                                    logErrorWithRowPk("Observation date '" + observationDateString + "' is greater than current time", rowPk);
                             }
 
                             catch (DateTimeParseException pe)
                             {
-                                logErrorWithRowIdAndPk("Observation date '" + observationDateString + "' is not of format '" + observationDateFormatString + "'", rowId, rowPk);
+                                logErrorWithRowPk("Observation date '" + observationDateString + "' is not of format '" + observationDateFormatString + "'", rowPk);
                             }
                         }
 
                         String observationTimeString = fields[TIME].trim();
                         if (observationTimeString.isEmpty())
-                            logErrorWithRowIdAndPk("Observation time is empty", rowId, rowPk);
+                            logErrorWithRowPk("Observation time is empty", rowPk);
                         else
                         {
                             try
@@ -241,7 +240,7 @@ public class MorningHealthValidationJob extends PipelineJob
                             }
                             catch (DateTimeParseException pe)
                             {
-                                logErrorWithRowIdAndPk("Observation time '" + observationTimeString + "' is not of format '" + observationTimeFormatString + "'", rowId, rowPk);
+                                logErrorWithRowPk("Observation time '" + observationTimeString + "' is not of format '" + observationTimeFormatString + "'", rowPk);
                             }
                         }
 
@@ -252,12 +251,12 @@ public class MorningHealthValidationJob extends PipelineJob
                         {
                             animalOrLocationDetected = true;
                             if (animalIdString.length() > 5)
-                                logErrorWithRowIdAndPk("Animal ID '" + animalIdString + "' is longer than 5 characters", rowId, rowPk);
+                                logErrorWithRowPk("Animal ID '" + animalIdString + "' is longer than 5 characters", rowPk);
                             else
                             {
                                 animalInfo = validAnimalIds.get(animalIdString);
                                 if (animalInfo == null)
-                                    logErrorWithRowIdAndPk("Animal ID '" + animalIdString + "' was not found in the system", rowId, rowPk);
+                                    logErrorWithRowPk("Animal ID '" + animalIdString + "' was not found in the system", rowPk);
                             }
                         }
 
@@ -267,16 +266,16 @@ public class MorningHealthValidationJob extends PipelineJob
                             animalOrLocationDetected = true;
                             String locationStringNoHyphen = locationString.replace("-", "");  // needed because cage_location_history does not have hyphens
                             if (locationString.length() > 9)
-                                logErrorWithRowIdAndPk("Location '" + locationString + "' is longer than 9 characters", rowId, rowPk);
+                                logErrorWithRowPk("Location '" + locationString + "' is longer than 9 characters", rowPk);
                             else if (!validLocations.contains(locationStringNoHyphen))
-                                logErrorWithRowIdAndPk("Location '" + locationString + "' is not a valid location or is inactive", rowId, rowPk);
+                                logErrorWithRowPk("Location '" + locationString + "' is not a valid location or is inactive", rowPk);
                             else if (animalInfo != null)
                             {
                                 if (animalInfo._currentLocation.isEmpty())
-                                    logErrorWithRowIdAndPk("Animal ID '" + animalIdString + "' has no current location", rowId, rowPk);
+                                    logErrorWithRowPk("Animal ID '" + animalIdString + "' has no current location", rowPk);
                                 else if (!animalInfo._currentLocation.equals(locationStringNoHyphen))
                                 {
-                                    logErrorWithRowIdAndPk("Location '" + locationString + "' is not current location for animal ID '" + animalIdString + "'", rowId, rowPk);
+                                    logErrorWithRowPk("Location '" + locationString + "' is not current location for animal ID '" + animalIdString + "'", rowPk);
                                 }
                             }
                         }
@@ -289,66 +288,66 @@ public class MorningHealthValidationJob extends PipelineJob
                             if (!signString.isEmpty())
                                 signsDetected = true;
                             else if ((i == 0) && !animalIdString.isEmpty())
-                                logErrorWithRowIdAndPk("Animal ID is specified ('" + animalIdString + "'), so first observation cannot be empty", rowId, rowPk);
+                                logErrorWithRowPk("Animal ID is specified ('" + animalIdString + "'), so first observation cannot be empty", rowPk);
 
                             if (signString.length() > 16)
-                                logErrorWithRowIdAndPk("Observation '" + signString + "' is longer than 16 characters", rowId, rowPk);
+                                logErrorWithRowPk("Observation '" + signString + "' is longer than 16 characters", rowPk);
                             else if (!signString.isEmpty() && !validObservationTypes.contains(signString))
-                                logErrorWithRowIdAndPk("Observation '" + signString + "' is not a valid observation", rowId, rowPk);
+                                logErrorWithRowPk("Observation '" + signString + "' is not a valid observation", rowPk);
 
                             if (signString.equals("HEVYMEN") || signString.equals("NRMLMEN") || signString.equals("ABRTION"))
                             {
                                 if ((animalInfo != null) && !animalInfo._gender.equals("F"))
-                                    logErrorWithRowIdAndPk("Animal observation '" + signString + "' must be for a female animal (ID was '" + animalIdString + "')", rowId, rowPk);
+                                    logErrorWithRowPk("Animal observation '" + signString + "' must be for a female animal (ID was '" + animalIdString + "')", rowPk);
 
                             }
                         }
                         if (signsDetected && (animalInfo == null))
-                            logErrorWithRowIdAndPk("Animal observations found, but no valid animal ID specified (animal ID was '" + animalIdString + "')", rowId, rowPk);
+                            logErrorWithRowPk("Animal observations found, but no valid animal ID specified (animal ID was '" + animalIdString + "')", rowPk);
                         if (!signsDetected && !animalIdString.isEmpty())
-                            logErrorWithRowIdAndPk("Animal ID text found ('" + animalIdString + "'), but no animal observations specified", rowId, rowPk);
+                            logErrorWithRowPk("Animal ID text found ('" + animalIdString + "'), but no animal observations specified", rowPk);
 
                         String enclosureString = fields[ENCLOSURE].trim();
                         if (enclosureString.isEmpty() && locationString.isEmpty())
-                            logErrorWithRowIdAndPk("Either location or enclosure must be specified", rowId, rowPk);
+                            logErrorWithRowPk("Either location or enclosure must be specified", rowPk);
                         String enclosureSignString = fields[ENCLOSURE_SIGN].trim();
                         if (!enclosureString.isEmpty() && enclosureSignString.isEmpty())
-                            logErrorWithRowIdAndPk("Enclosure '" + enclosureString + "' was specified, but no enclosure sign was found", rowId, rowPk);
+                            logErrorWithRowPk("Enclosure '" + enclosureString + "' was specified, but no enclosure sign was found", rowPk);
                         if ((!enclosureString.isEmpty() || !enclosureSignString.isEmpty())  // enclosure field(s) are populated
                                 && (animalOrLocationDetected || signsDetected))  // and animal observation field(s) are also populated
                         {
-                            logErrorWithRowIdAndPk("Cannot have enclosure or enclosure sign populated if animal ID, location, or animal observation signs are populated", rowId, rowPk);
+                            logErrorWithRowPk("Cannot have enclosure or enclosure sign populated if animal ID, location, or animal observation signs are populated", rowPk);
                         }
                         if (enclosureSignString.length() > 16)
-                            logErrorWithRowIdAndPk("Room observation '" + enclosureSignString + "' is longer than 16 characters", rowId, rowPk);
+                            logErrorWithRowPk("Room observation '" + enclosureSignString + "' is longer than 16 characters", rowPk);
                         else if (enclosureSignString.equals("NOSIGNS") || enclosureSignString.equals("EMPTYRM"))
                         {
                             if (!validRooms.contains(enclosureString))
-                                logErrorWithRowIdAndPk("Enclosure '" + enclosureString + "' is not a valid room for room observation '" + enclosureSignString + "'", rowId, rowPk);
+                                logErrorWithRowPk("Enclosure '" + enclosureString + "' is not a valid room for room observation '" + enclosureSignString + "'", rowPk);
                         }
                         else if (!enclosureSignString.isEmpty())
                         {
-                            logErrorWithRowIdAndPk("Sign '" + enclosureSignString + "' is not a valid enclosure sign (must be 'NOSIGNS' or 'EMPTYRM')", rowId, rowPk);
+                            logErrorWithRowPk("Sign '" + enclosureSignString + "' is not a valid enclosure sign (must be 'NOSIGNS' or 'EMPTYRM')", rowPk);
                         }
                     }  // end else (checks for correct number of fields)
 
-                    if (!_invalidRecordIds.contains(rowId))
-                        _validRecordIds.add(rowId);
+                    if (!_invalidRecordPks.contains(rowPk))
+                        _validRecordPks.add(rowPk);
                 }  // end non-null data check
             });  // end forEach
 
             List<Map<String, Object>> mhRows = new ArrayList<>();
-            _invalidRecordIds.stream().forEach(invalidRecordId ->
+            _invalidRecordPks.stream().forEach(invalidRecordId ->
             {
                 Map<String, Object> row = new HashMap<>();
-                row.put("rowId", invalidRecordId);
+                row.put("rowPk", invalidRecordId);
                 row.put("status", INVALID_STATUS);
                 mhRows.add(row);
             });
-            _validRecordIds.stream().forEach(validRecordId ->
+            _validRecordPks.stream().forEach(validRecordId ->
             {
                 Map<String, Object> row = new HashMap<>();
-                row.put("rowId", validRecordId);
+                row.put("rowPk", validRecordId);
                 row.put("status", VALID_STATUS);
                 mhRows.add(row);
             });
@@ -376,9 +375,9 @@ public class MorningHealthValidationJob extends PipelineJob
         public String _currentLocation;
     }
 
-    private void logErrorWithRowIdAndPk(String errorText, String rowId, String rowPk)
+    private void logErrorWithRowPk(String errorText, String rowPk)
     {
-        LOG.error("Line Row Id = '" + rowId + "', Row PK = '" + rowPk + "': " + errorText);
-        _invalidRecordIds.add(rowId);
+        LOG.error("Line Row PK = '" + rowPk + "': " + errorText);
+        _invalidRecordPks.add(rowPk);
     }
 }

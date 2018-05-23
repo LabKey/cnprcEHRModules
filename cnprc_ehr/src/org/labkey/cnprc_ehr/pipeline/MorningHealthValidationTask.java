@@ -17,6 +17,8 @@ import java.util.List;
 
 public class MorningHealthValidationTask extends PipelineJob.Task<MorningHealthValidationTask.Factory>
 {
+    // Just a wrapper for MorningHealthValidationJob so it can be run by a FileWatcher pipeline trigger
+
     private static final Logger LOG = Logger.getLogger(MorningHealthValidationTask.class);
 
     private MorningHealthValidationTask(MorningHealthValidationTask.Factory factory, PipelineJob job)

@@ -2572,7 +2572,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitAndClickAndWait(Locator.linkWithText("Edit Indoor Morning Health Data"));
         DataRegionTable results = new DataRegionTable("query", getDriver());
         results.removeColumn("status");  // can't be sure if this will be "U" or "V" at time test runs
-        results.removeColumn("rowId");  // unpredictable since the rows could be inserted in any order
         results.setSort("fileLineNumber", SortDirection.ASC);
         List<String> expected = Lists.newArrayList("73C7DE6B2CA84AEA82B1C24A274D3255", "Indoor_Morning_Health", "1", "false",
                 "73C7DE6B2CA84AEA82B1C24A274D3255,DSTEST,20180429,060943,44444,AC5003-89,LIQDSTL,,,,,,,,,,,");

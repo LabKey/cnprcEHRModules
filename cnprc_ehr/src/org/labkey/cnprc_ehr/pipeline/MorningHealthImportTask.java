@@ -76,8 +76,8 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                         String rowPk = line.split(",", 2)[0];
                         Map<String, Object> row = new CaseInsensitiveHashMap<>();
 
-                        row.put("fileName", dataFile.getName());
                         row.put("rowPk", rowPk);
+                        row.put("fileName", dataFile.getName());
                         row.put("source", SOURCE_NAME);
                         row.put("fileLineNumber", lnr.getLineNumber());
                         row.put("status", MorningHealthValidationJob.UNVALIDATED_STATUS);
