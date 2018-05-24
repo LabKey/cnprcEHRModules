@@ -1525,10 +1525,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         enterData.clickMyTasksTab();
         waitAndClick(Locator.linkContainingText(TASK_TITLE_NEW_BRD_REQ));
         switchToWindow(1);
-        waitForText("Cycle");
-        clickButton("Submit Final", 0);
-        _extHelper.waitForExtDialog("Finalize Form");
-        click(Ext4Helper.Locators.ext4Button("Yes"));
+        {
+            waitForText("Cycle");
+            clickButton("Submit Final", 0);
+            _extHelper.waitForExtDialog("Finalize Form");
+            click(Ext4Helper.Locators.ext4Button("Yes"));
+        }
+        switchToMainWindow();
 
         log("Verifying the animal details from cycle report");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
