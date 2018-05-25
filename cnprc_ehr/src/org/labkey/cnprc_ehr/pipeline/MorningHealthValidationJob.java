@@ -281,12 +281,17 @@ public class MorningHealthValidationJob extends PipelineJob
                         }
 
                         boolean signsDetected = false;
+                        boolean unchngdSignFlag = false;
 
                         for (int i = 0; i < 10; i++)
                         {
                             String signString = fields[SIGNS_BASE + i].trim();
                             if (!signString.isEmpty())
+                            {
                                 signsDetected = true;
+                                if (unchngdSignFlag)
+                                    unchngdSignFlag = false;  // found another sign, so unset this flag, since there is no error
+                            }
                             else if ((i == 0) && !animalIdString.isEmpty())
                                 logErrorWithRowPk("Animal ID is specified ('" + animalIdString + "'), so first observation cannot be empty", rowPk);
 
@@ -301,7 +306,15 @@ public class MorningHealthValidationJob extends PipelineJob
                                     logErrorWithRowPk("Animal observation '" + signString + "' must be for a female animal (ID was '" + animalIdString + "')", rowPk);
 
                             }
+
+                            if (signString.equals("UNCHNGD") && (i == 0))  // only check as first sign
+                            {
+                                unchngdSignFlag = true;
+                            }
                         }
+                        if (unchngdSignFlag)
+                            logErrorWithRowPk("'UNCHNGD' found as first sign, but no valid observations were found after it", rowPk);
+
                         if (signsDetected && (animalInfo == null))
                             logErrorWithRowPk("Animal observations found, but no valid animal ID specified (animal ID was '" + animalIdString + "')", rowPk);
                         if (!signsDetected && !animalIdString.isEmpty())
