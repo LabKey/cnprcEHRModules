@@ -31,6 +31,7 @@ import org.labkey.api.query.DetailsURL;
 import org.labkey.api.query.ExprColumn;
 import org.labkey.api.query.QueryForeignKey;
 import org.labkey.api.query.UserSchema;
+import org.labkey.ldk.query.DefaultTableCustomizer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -494,6 +495,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
                     "&query.room~eq=${room}" +
                     "&query.cage~eq=${cage}" +
                     "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+            DefaultTableCustomizer.applyNaturalSort(ti, "cage");
         }
     }
 
@@ -527,6 +529,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
                     "&query.room~eq=${room}" +
                     "&query.cage~eq=${cage}" +
                     "&query.param." + onDateParamName + "=" + LocalDateTime.now().format(dateTimeFormatter)));
+            DefaultTableCustomizer.applyNaturalSort(ti, "cage");
         }
 
         final String colName2 = "birth";
