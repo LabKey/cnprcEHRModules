@@ -2216,7 +2216,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         List<String> expected = Arrays.asList(
                 "TEST3804589"
-                , "2015-04-21 00:00"
+                , "2015-04-21"
                 , "T"
         );
 
