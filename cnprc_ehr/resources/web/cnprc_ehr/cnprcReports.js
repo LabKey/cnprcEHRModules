@@ -390,3 +390,55 @@ EHR.reports.diarrheaCalendar = function (panel, tab, viewName) {
         });
     }
 };
+
+
+EHR.reports.reproductiveCalendar = function (panel, tab, viewName) {
+    var filterArray = panel.getFilterArray(tab);
+    var title = panel.getTitleSuffix();
+
+    tab.add({
+        xtype: 'ldk-querycmp',
+        style: 'margin-bottom:10px;',
+        queryConfig: panel.getQWPConfig({
+            schemaName: 'cnprc_ehr',
+            queryName: 'reproductiveCalendar',
+            viewName: viewName,
+            title: 'Reproductive Calendar' + title,
+            filters: filterArray.nonRemovable,
+            removeableFilters: filterArray.removable
+        })
+    });
+
+    //legends for Reproductive Calendar report
+    tab.add({
+        xtype: 'ldk-webpartpanel',
+        title: 'Legend',
+        items: [{
+            border: false,
+            html: '<table class="ehr-legend">' +
+            CNPRC.Utils.legendTitle('Female Only', true, false) +                                                       CNPRC.Utils.legendTitle('Male and Female', false, false) +
+            CNPRC.Utils.legendEntry('M', 'Genital bleeding observed and designated cycle onset', true, false) +         CNPRC.Utils.legendEntry('+', 'Breeding, sperm observed', false, false) +
+            CNPRC.Utils.legendEntry('m', 'Genital bleeding observed', true, false) +                                    CNPRC.Utils.legendEntry('-', 'Breeding, no sperm observed', false, false) +
+            CNPRC.Utils.legendEntry('H', 'Heavy Genital bleeding observed and designated cycle onset', true, false) +   CNPRC.Utils.legendEntry('F' ,'Breeding, Fought with mate', false, false) +
+            CNPRC.Utils.legendEntry('h', 'Heavy genital bleeding observed', true, false) +                              CNPRC.Utils.legendEntry('s' ,'Scheduled breeding', false, false) +
+            CNPRC.Utils.legendEntry('A', 'Artificial insemination', true, false) +                                      CNPRC.Utils.legendEntry('X','Completion of Breeding', false, false) +
+            CNPRC.Utils.legendEntry('E', 'Embryo transfer', true, false) +                                              CNPRC.Utils.legendEntry('','', false, false) +
+            CNPRC.Utils.legendEntry('B', 'Blood test for pregnancy, positive', true, false) +                           CNPRC.Utils.legendTitle('Male only', false, false) +
+            CNPRC.Utils.legendEntry('b', 'Blood test for pregnancy, negative', true, false) +                           CNPRC.Utils.legendEntry('J','Successful semen collection', false, false) +
+            CNPRC.Utils.legendEntry('P', 'Palpation, positive', true, false) +                                          CNPRC.Utils.legendEntry('j' ,'Unsuccessful semen collection', false, false) +
+            CNPRC.Utils.legendEntry('p', 'Palpation, negative', true, false) +                                          CNPRC.Utils.legendEntry('','', false, false) +
+            CNPRC.Utils.legendEntry('U', 'Ultrasound, positive', true, false) +                                         CNPRC.Utils.legendEntry('','', false, false) +
+            CNPRC.Utils.legendEntry('u', 'Ultrasound, negative', true, false) +                                         CNPRC.Utils.legendEntry('','', false, false) +
+            CNPRC.Utils.legendEntry('T', 'Ultrasound, tissue remaining', true, false) +                                 CNPRC.Utils.legendEntry('','', false, false) +
+            CNPRC.Utils.legendEntry('C', 'Conception', true, false) +                                                   CNPRC.Utils.legendEntry('' ,'', false, false) +
+            CNPRC.Utils.legendEntry('LV', 'Live vaginal termination', true, false) +                                    CNPRC.Utils.legendEntry('' ,'', false, false) +
+            CNPRC.Utils.legendEntry('LN', 'Live non-vaginal termination', true, false) +                                CNPRC.Utils.legendEntry('' ,'', false, false) +
+            CNPRC.Utils.legendEntry('DV', 'Dead vaginal termination', true, false) +                                    CNPRC.Utils.legendEntry('' ,'', false, false) +
+            CNPRC.Utils.legendEntry('DN', 'Dead non-vaginal termination', true, false) +                                CNPRC.Utils.legendEntry('' ,'', false, false) +
+            CNPRC.Utils.legendEntry('D', 'Dead, no delivery', true, false) +                                            CNPRC.Utils.legendEntry('' ,'', false, false) +
+            CNPRC.Utils.legendEntry('*', 'Scheduled pregnancy determination', true, false) +                            CNPRC.Utils.legendEntry('' ,'', false, false) +
+            CNPRC.Utils.legendEntry('##', 'Length of Menstual Cycle', true, false) +                                    CNPRC.Utils.legendEntry('' ,'', false, false) +
+            '</table>'
+        }]
+    });
+};

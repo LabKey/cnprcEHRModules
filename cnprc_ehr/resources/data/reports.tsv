@@ -141,3 +141,4 @@ Incomplete - Pending Data Entry	feeding	Colony Management	query	Feeding	true		st
 	serum	Repository	query	Serum Bank	true		study	serum			date	false	false		qcstate/publicdata	Serum Registry
 	pathology_inventory	Repository	query	Pathology Inventory	true		study	pathology_inventory			date	false	false		qcstate/publicdata	Pathology Specimen Inventory
 	fdb_samples	Repository	query	Freezer DB Samples	true		study	fdb_samples			date	false	false		qcstate/publicdata	Freezer sample data
+	reproductiveCalendar	Reproductive Management	js	Reproductive Calendar	true		cnprc_ehr	reproductiveCalendar				false	false		qcstate/publicdata	This is the Reproductive Calendar report
