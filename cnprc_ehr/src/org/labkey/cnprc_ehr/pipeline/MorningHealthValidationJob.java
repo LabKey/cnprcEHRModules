@@ -307,6 +307,7 @@ public class MorningHealthValidationJob extends PipelineJob
 
                             }
 
+                            // TODO: UNCHNGD added temporarily to CNPRC_EHR_OBSERVATION_TYPES, but needs to be added with proper data eventually (along with other signs)
                             if (signString.equals("UNCHNGD") && (i == 0))  // only check as first sign
                             {
                                 unchngdSignFlag = true;
