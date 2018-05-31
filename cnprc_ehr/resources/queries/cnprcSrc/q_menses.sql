@@ -28,7 +28,7 @@ NOT exists
     FROM cnprcSrc.mh_obs
     WHERE
        mho_an_id = mens.m_female_id AND
-       mho_full_date = mens.m_obs_date AND
+       mho_begin_date = mens.m_obs_date AND
        (
           (mho_obs_code_1 IN ('NRMLMEN','HEVYMEN')) OR
           (mho_obs_code_2 IN ('NRMLMEN','HEVYMEN')) OR
