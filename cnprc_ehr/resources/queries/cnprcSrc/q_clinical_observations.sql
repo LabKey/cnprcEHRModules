@@ -21,8 +21,27 @@ DI_OBS_DATE AS obsDate,
 DI_OBS_CODE AS code,
 OBJECTID as objectid,
 DATE_TIME
-FROM cnprcSrc.ZDIARRHEA
+FROM cnprcSrc.ZDIARRHEA diar
+WHERE
+  NOT EXISTS
+  (
+      SELECT 'x' FROM  cnprcSrc.mh_obs
+      WHERE
+        mho_an_id = diar.di_an_id AND
+        mho_begin_date = diar.di_obs_date AND
+        (
+            (mho_obs_code_1 in ('LIQDSTL')) OR
+            (mho_obs_code_2 in ('LIQDSTL')) OR
+            (mho_obs_code_3 in ('LIQDSTL')) OR
+            (mho_obs_code_4 in ('LIQDSTL')) OR
+            (mho_obs_code_5 in ('LIQDSTL')) OR
+            (mho_obs_code_6 in ('LIQDSTL')) OR
+            (mho_obs_code_7 in ('LIQDSTL'))
+        )
+  )
+
 UNION ALL
+
 SELECT
 PA_AN_ID AS Id,
 PA_OBS_DATE AS obsDate,
@@ -31,4 +50,21 @@ PA_OBS_DATE AS obsDate,
 PA_OBS_CODE AS code,
 OBJECTID as objectid,
 DATE_TIME
-FROM cnprcSrc.ZPOOR_APP
+FROM cnprcSrc.ZPOOR_APP porApp
+WHERE
+NOT EXISTS
+(
+     SELECT 'x' FROM  cnprcSrc.mh_obs
+     WHERE
+     mho_an_id = porApp.pa_an_id AND
+     mho_begin_date = porApp.pa_obs_date AND
+     (
+        (mho_obs_code_1 in ('POORAPP')) OR
+        (mho_obs_code_2 in ('POORAPP')) OR
+        (mho_obs_code_3 in ('POORAPP')) OR
+        (mho_obs_code_4 in ('POORAPP')) OR
+        (mho_obs_code_5 in ('POORAPP')) OR
+        (mho_obs_code_6 in ('POORAPP')) OR
+        (mho_obs_code_7 in ('POORAPP'))
+     )
+)
