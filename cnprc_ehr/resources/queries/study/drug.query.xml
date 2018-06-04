@@ -19,6 +19,12 @@
                     </column>
                     <column columnName="code">
                         <columnTitle>Vaccination Code</columnTitle>
+                        <fk>
+                            <fkDisplayColunmName>Vaccination Code</fkDisplayColunmName>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>vaccination_codes</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
                         <datatype>varchar</datatype>
                         <isHidden>false</isHidden>
                     </column>
