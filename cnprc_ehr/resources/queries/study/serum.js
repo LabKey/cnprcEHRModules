@@ -1,5 +1,11 @@
 require("ehr/triggers").initScript(this);
 
+function onInit(event, helper){
+    helper.setScriptOptions({
+        allowDatesInDistantPast: true
+    });
+}
+
 function onInsert(helper, scriptErrors, row){
     //generate objectId, since its the keyfield for our dataset.
     row.objectid = row.objectid || LABKEY.Utils.generateUUID().toUpperCase();
@@ -14,7 +20,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
             LABKEY.Query.selectRows({
                 requiredVersion: 9.1,
                 schemaName: 'study',
-                queryName: 'SerumHighLowDates',
+                queryName: 'AnimalHighLowDates',
                 columns: ['HIGH_DATE', 'LOW_DATE'],
                 scope: this,
                 filterArray: [
@@ -23,7 +29,6 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                     if (results && results.rows && results.rows.length >= 1) {
                         hi_date = new Date((results['rows'][0]['HIGH_DATE']['value'])).getTime();
                         lo_date = new Date((results['rows'][0]['LOW_DATE']['value'])).getTime();
-                        console.log(hi_date,lo_date)
                     }
                     else {
                         console.log('error retrieving results')
@@ -36,13 +41,12 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
         }
 
         if (row.date) {
-            // flagSuspiciousDate is active and will error on date inpute 60 days in past or year in future.. is that ok ?
             var date = (row.date).getTime();
             if (date > hi_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'enddate', 'Sample date is above the high Date for Animal', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'The Sample date is above the high Date for Animal, which is '+new Date(hi_date), 'ERROR');
             }
             else if (date < lo_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'enddate', 'Sample date is below the low Date for Animal', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'The Sample date is below the low Date for Animal, which is '+new Date(lo_date), 'ERROR');
             }
         }
 
