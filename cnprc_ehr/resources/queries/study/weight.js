@@ -1,5 +1,12 @@
 require("ehr/triggers").initScript(this);
 
+
+function onInit(event, helper){
+    helper.setScriptOptions({
+        allowDatesInDistantPast: true
+    });
+}
+
 function onInsert(helper, scriptErrors, row){
     //generate objectId, since its the keyfield for our dataset.
     row.objectid = row.objectid || LABKEY.Utils.generateUUID().toUpperCase();
@@ -14,19 +21,18 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                 requiredVersion: 9.1,
                 schemaName: 'study',
                 queryName: 'weight',
-                columns: ['weight']['date'],
+                columns: ['weight','date'],
                 scope: this,
                 filterArray: [
                     LABKEY.Filter.create('Id', row.id, LABKEY.Filter.Types.EQUAL)],
                 success: function (results) {
                     if (results && results.rows && results.rows.length >= 1) {
-                        previous_weight = results['rows'][0]['weight']['value']
-                        console.log(previous_weight);
+                        previous_weight = results['rows'][0]['weight']['value'];
                         if (previous_weight !== 0 && row.weight >= (previous_weight * 1.5)) {
-                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is more than 1.5 times the amount of last weight', 'ERROR');
+                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is more than 1.5 times the amount of last weight, which is ' + previous_weight + ' kg', 'ERROR');
                         }
                         else if (previous_weight !== 0 && row.weight <= (previous_weight * .5)) {
-                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is less than .5 times the amount of last weight', 'ERROR');
+                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is less than .5 times the amount of last weight, which is' + previous_weight + ' kg', 'ERROR');
                         }
 
                         var input_date = new Date(row.date).setHours(0, 0, 0, 0);
@@ -49,7 +55,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
             LABKEY.Query.selectRows({
                 requiredVersion: 9.1,
                 schemaName: 'study',
-                queryName: 'SerumHighLowDates',
+                queryName: 'AnimalHighLowDates',
                 columns: ['HIGH_DATE', 'LOW_DATE'],
                 scope: this,
                 filterArray: [
@@ -67,13 +73,12 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
         }
 
         if (row.date) {
-            // flagSuspiciousDate is active and will error on date inputed 60 days in past or year in future.. is that ok ?
             var date = (row.date).getTime();
             if (date > hi_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'enddate', 'Weight date is above the high Date for Animal', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'Weight date is above the high Date for Animal, which is '+new Date(hi_date), 'ERROR');
             }
             else if (date < lo_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'enddate', 'Weight date is below the low Date for Animal', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'Weight date is below the low Date for Animal, which is '+new Date(lo_date), 'ERROR');
             }
         }
 
