@@ -184,7 +184,7 @@ Ext4.define('EHR.form.field.ProjectCodeEntryField', {
 
         var id = boundRecord.get('Id');
         if (!id){
-            Ext4.Msg.alert('Error', 'No Animal Id Provided');
+            Ext4.Msg.alert('Error', 'No animal Id provided');
             return;
         }
 
