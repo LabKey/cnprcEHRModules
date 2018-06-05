@@ -6,9 +6,12 @@
                 <insertUrl>/query/insertQueryRow.view?schemaName=cnprc_ehr&amp;query.queryName=mh_processing</insertUrl>
                 <updateUrl>/ehr/dataEntryFormForQuery.view?schemaName=cnprc_ehr&amp;queryName=mh_processing&amp;rowPk=${rowPk}</updateUrl>
                 <columns>
+                    <column columnName="rowId">
+                        <columnTitle>Row ID</columnTitle>
+                        <hidden>true</hidden>
+                    </column>
                     <column columnName="rowPk">
                         <columnTitle>Row PK</columnTitle>
-                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="source">
                         <columnTitle>Source</columnTitle>
