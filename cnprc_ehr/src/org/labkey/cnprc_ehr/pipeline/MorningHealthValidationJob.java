@@ -186,11 +186,14 @@ public class MorningHealthValidationJob extends PipelineJob
         try
         {
             mhProcessingSelector.forEach(rs -> {
+                boolean isVoided = rs.getBoolean("voided");
                 String rowId = rs.getString("rowId");
-                String data = rs.getString("data");
                 String rowPk = rs.getString("rowPk");
+                String data = rs.getString("data");
                 MhProcessingRow mhProcessingRow = new MhProcessingRow(rowId, rowPk);
-                if (data == null)
+                if (isVoided)
+                    _invalidRows.add(mhProcessingRow);
+                else if (data == null)
                 {
                     LOG.error("Primary key (rowPk) '" + rowPk + "' has no data");
                     _invalidRows.add(mhProcessingRow);
