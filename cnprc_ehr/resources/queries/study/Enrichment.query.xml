@@ -6,9 +6,11 @@
                     <column columnName="Id"/>
                     <column columnName="date">
                         <columnTitle>Assign Date</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                     <column columnName="releaseDate">
                         <columnTitle>Release Date</columnTitle>
+                        <formatString>Date</formatString>
                     </column>
                     <column columnName="socialCode">
                         <columnTitle>Assign Type</columnTitle>
