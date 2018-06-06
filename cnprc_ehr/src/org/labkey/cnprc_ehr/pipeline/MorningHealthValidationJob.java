@@ -352,22 +352,8 @@ public class MorningHealthValidationJob extends PipelineJob
             });  // end forEach
 
             List<Map<String, Object>> mhRows = new ArrayList<>();
-            _invalidRows.stream().forEach(invalidRow ->
-            {
-                Map<String, Object> row = new HashMap<>();
-                row.put("rowId", invalidRow._rowId);
-                row.put("rowPk", invalidRow._rowPk);
-                row.put("status", INVALID_STATUS);
-                mhRows.add(row);
-            });
-            _validRows.stream().forEach(validRow ->
-            {
-                Map<String, Object> row = new HashMap<>();
-                row.put("rowId", validRow._rowId);
-                row.put("rowPk", validRow._rowPk);
-                row.put("status", VALID_STATUS);
-                mhRows.add(row);
-            });
+            addRows(mhRows, _invalidRows, INVALID_STATUS);
+            addRows(mhRows, _validRows, VALID_STATUS);
 
             if(!mhRows.isEmpty())
                 mhProcessingTable.getUpdateService().updateRows(getUser(), getContainer(), mhRows, null, null, null);
@@ -408,5 +394,17 @@ public class MorningHealthValidationJob extends PipelineJob
     {
         LOG.error("Line Row PK = '" + mhProcessingRow._rowPk + "': " + errorText);
         _invalidRows.add(mhProcessingRow);
+    }
+
+    private void addRows(List<Map<String, Object>> rowsToWrite, Set<MhProcessingRow> rowsToRead, String status)
+    {
+        for (MhProcessingRow readRow : rowsToRead)
+        {
+            Map<String, Object> writeRow = new HashMap<>();
+            writeRow.put("rowId", readRow._rowId);
+            writeRow.put("rowPk", readRow._rowPk);
+            writeRow.put("status", status);
+            rowsToWrite.add(writeRow);
+        }
     }
 }
