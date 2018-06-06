@@ -58,15 +58,19 @@ public class MhProcessingTable extends SimpleUserSchema.SimpleTable<CNPRC_EHRUse
                                   User user, @Nullable Map<String, Object> newRow,
                                   ValidationException errors, Map<String, Object> extraContext) throws ValidationException
         {
-            newRow.replace("status", MorningHealthValidationJob.UNVALIDATED_STATUS);  // only needed in user-inserted case
+            if (newRow != null)
+                newRow.replace("status", MorningHealthValidationJob.UNVALIDATED_STATUS);  // only needed in user-inserted case
         }
 
         public void beforeUpdate(TableInfo table, Container c,
                                   User user, @Nullable Map<String, Object> newRow, @Nullable Map<String, Object> oldRow,
                                   ValidationException errors, Map<String, Object> extraContext) throws ValidationException
         {
-            if(!oldRow.get("status").equals(MorningHealthValidationJob.UNVALIDATED_STATUS))
-                newRow.replace("status", MorningHealthValidationJob.UNVALIDATED_STATUS);  // if anything changes about new row, always force unvalidated status, which will force re-processing
+            if (newRow != null)
+            {
+                if ((oldRow == null) || !oldRow.get("status").equals(MorningHealthValidationJob.UNVALIDATED_STATUS))
+                    newRow.replace("status", MorningHealthValidationJob.UNVALIDATED_STATUS);  // if anything changes about new row, always force unvalidated status, which will force re-processing
+            }
         }
 
         @Override

@@ -1,0 +1,2 @@
+CREATE INDEX CNPRC_EHR_MH_PROCESSING_CONTAINER_INDEX ON cnprc_ehr.mh_processing (Container);
+GO

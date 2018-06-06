@@ -46,10 +46,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * User: jeckels
- * Date: Aug 30, 2011
- */
 public class MorningHealthValidationJob extends PipelineJob
 {
     public static final String UNVALIDATED_STATUS = "U";
