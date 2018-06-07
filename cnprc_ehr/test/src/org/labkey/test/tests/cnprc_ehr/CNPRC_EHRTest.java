@@ -2225,7 +2225,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong row count: ", 4, results.getDataRowCount());
         assertTextPresent("Legend", "Equine tetanus");
 
-        click(results.link(3, "Vaccine")); // click the 'x' link in the Vaccine column
+        results.link(3, "Vaccination Code").click();
         switchToWindow(1);
         assertTextPresent("Record Details","Experimental");
     }
