@@ -17,16 +17,16 @@
 SELECT
   t.Id,
   t.date,
-  t.observationCode AS observation,
+  t.observation,
   t.previousMens,
   timestampdiff('SQL_TSI_DAY', t.previousMens, t.date) as daysSinceLastMens
 FROM (
   SELECT
     menses1.Id,
     menses1.date as date,
-    menses1.observationCode,
-    (SELECT max(menses2.date) FROM study.menses menses2
+    menses1.observation,
+    (SELECT max(menses2.date) FROM study.mensesUnioned menses2
     WHERE menses2.Id = menses1.Id and menses2.date < menses1.date group by menses2.Id) as previousMens
-    FROM study.menses menses1
+    FROM study.mensesUnioned menses1
   ) t
 WHERE (timestampdiff('SQL_TSI_DAY', t.previousMens, t.date)) > 14
