@@ -55,6 +55,7 @@ import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.NursingFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PairingsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.EnrichmentFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.DeathsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PregnancyDeterminationsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.SerumFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
@@ -170,7 +171,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ArrivalFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BirthFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathFormType.class, this));
+//        ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(HousingFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(org.labkey.api.ehr.dataentry.forms.TreatmentsFormType.class, this));
@@ -189,6 +190,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightTbTattooFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PairingsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(EnrichmentFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathsFormType.class, this));
+
 
 
         //demographics

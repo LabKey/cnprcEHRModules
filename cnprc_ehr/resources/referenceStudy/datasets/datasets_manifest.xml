@@ -28,7 +28,7 @@
         <dataset name="semenAnalysis" id="2003" category="Reproductive Management" type="Standard"/>
         <dataset name="enrichment" id="3001" category="Colony Management" type="Standard"/>
         <dataset name="encounters" id="1024" category="Clinical" type="Standard"/>
-        <dataset name="deaths" id="1048" category="Pathology" demographicData="true" type="Standard"/>
+        <dataset name="deaths" id="1048" category="Colony Management" demographicData="true" type="Standard"/>
         <dataset name="demographics" id="1012" category="Colony Management" demographicData="true" type="Standard"/>
         <dataset name="departure" id="1013" category="Colony Management" type="Standard"/>
         <dataset name="drug" id="1014" category="Clinical" type="Standard"/>
