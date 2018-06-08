@@ -10,17 +10,16 @@ SELECT
     THEN
       max(d2.room)
   ELSE (max(d2.room) || MAX (d2.cage)) END AS Location,
-  max(d2.room.area)                               AS area,
-  max(d2.room)                                    AS room,
-  max(d2.cage)                                    AS cage,
-  max(d2.date)                                  AS date,
-  max(d2.enddate)                                  AS enddate,
-  max(d2.reloc_seq)                                AS reloc_seq
+  max(d2.room.area)   AS area,
+  max(d2.room)        AS room,
+  max(d2.cage)        AS cage,
+  max(d2.date)        AS date,
+  max(d2.enddate)     AS enddate,
+  max(d2.reloc_seq)   AS reloc_seq
 FROM study.housing d2
   JOIN (SELECT
           housing.id,
           max(housing.date)      AS date,
-          max(housing.enddate)   AS enddate,
           max(housing.reloc_seq) AS reloc_seq
         FROM study.housing
         GROUP BY id) h
