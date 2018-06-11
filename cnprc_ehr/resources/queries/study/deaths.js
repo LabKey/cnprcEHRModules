@@ -30,7 +30,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                 success: function (results) {
                     if(results && results.rows && results.rows.length >= 1) {
                         var death_date = results['rows'][0]['date']['value'];
-                        if(death_date){
+                        if(death_date && helper.isEHRDataEntry()){
                             EHR.Server.Utils.addError(scriptErrors, 'Id', 'Animal already has a death recorded on '+death_date, 'ERROR');
                         }
                     }
