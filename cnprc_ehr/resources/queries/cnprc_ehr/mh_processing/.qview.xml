@@ -1,0 +1,20 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="rowPk"/>
+        <column name="source"/>
+        <column name="fileLineNumber"/>
+        <column name="status"/>
+        <column name="voided"/>
+        <column name="data"/>
+        <column name="fileName/DataFileUrl"/>
+        <column name="fileName/fileSize">
+            <properties>
+                <property name="columnTitle" value="File Size"/>
+            </properties>
+        </column>
+        <column name="fileName/DownloadLink"/>
+    </columns>
+    <sorts>
+        <sort column="modified" descending="true" />
+    </sorts>
+</customView>

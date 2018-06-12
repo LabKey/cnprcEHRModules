@@ -8,7 +8,7 @@
                 <columns>
                     <column columnName="rowId">
                         <columnTitle>Row ID</columnTitle>
-                        <hidden>true</hidden>
+                        <isHidden>true</isHidden>
                     </column>
                     <column columnName="rowPk">
                         <columnTitle>Row PK</columnTitle>
@@ -32,6 +32,15 @@
                     </column>
                     <column columnName="data">
                         <columnTitle>Data</columnTitle>
+                    </column>
+                    <column columnName="fileName">
+                        <isHidden>true</isHidden>
+                        <columnTitle>File Name</columnTitle>
+                        <fk>
+                            <fkDbSchema>exp</fkDbSchema>
+                            <fkTable>data</fkTable>
+                            <fkColumnName>Name</fkColumnName>
+                        </fk>
                     </column>
                 </columns>
                 <pkColumnName>rowPk</pkColumnName>
