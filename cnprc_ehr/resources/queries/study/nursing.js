@@ -1,5 +1,11 @@
 require("ehr/triggers").initScript(this);
 
+function onInit(event, helper){
+    helper.setScriptOptions({
+        allowDatesInDistantPast: true
+    });
+}
+
 function onInsert(helper, scriptErrors, row){
     //generate objectId, since its the keyfield for our dataset.
     row.objectid = row.objectid || LABKEY.Utils.generateUUID().toUpperCase();
@@ -48,20 +54,20 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
         if (row.date) {
             var assignDate = new Date(row.date).getTime();
             if (assignDate > hi_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'date', 'Assign date is above the high Date for infant/mother', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'Assign date is above the high Date for infant/mother, which is ' + new Date(hi_date), 'ERROR');
             }
             else if (assignDate < lo_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'date', 'Assign date is below the low Date for infant/mother', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'Assign date is below the low Date for infant/mother, which is ' + new Date(lo_date), 'ERROR');
             }
         }
 
         if (row.releaseDate) {
             var releaseDate = (row.releaseDate).getTime();
             if (releaseDate > hi_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release date is above the high Date for infant/mother', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release date is above the high Date for infant/mother, which is ' + new Date(hi_date), 'ERROR');
             }
             else if (releaseDate < lo_date) {
-                EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release date is below the low Date for infant/mother', 'ERROR');
+                EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release date is below the low Date for infant/mother, which is ' + new Date(lo_date), 'ERROR');
             }
         }
     }

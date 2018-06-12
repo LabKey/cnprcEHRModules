@@ -19,7 +19,7 @@ d1.offspringId,
 d2.motherId,
 greatest (d1.offspringId.birth.date, d2.motherId.birth.date,
           d1.offspringId.MostRecentArrival.Center_Arrival, d2.motherId.MostRecentArrival.Center_Arrival) AS LOW_DATE,
-least (d1.offspringId.lastHousing.date, d2.motherId.lastHousing.date,
+least (d1.offspringId.lastHousing.enddate, d2.motherId.lastHousing.enddate,
         (CASE WHEN d1.offspringId.Demographics.calculated_status = 'Alive' OR
                    d1.offspringId.Demographics.calculated_status = 'On Loan' THEN now() END)) AS HIGH_DATE
 FROM  
