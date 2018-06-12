@@ -15,7 +15,7 @@
 SELECT
   n.Id AS Id,
   greatest (n.Id.birth.date, n.Id.MostRecentArrival.Center_Arrival) AS LOW_DATE,
-  least (n.Id.lastHousing.date,
+  least (n.Id.lastHousing.enddate,
          (CASE WHEN n.Id.Demographics.calculated_status = 'Alive' OR
                     n.Id.Demographics.calculated_status = 'On Loan' THEN now() END)) AS HIGH_DATE
 FROM
