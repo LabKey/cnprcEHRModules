@@ -61,60 +61,58 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
         if (mh_ProcessingQus == null)
             throw new IllegalStateException(mh_processingTable.getName() + " query update service could not be acquired");
 
-        try
+
+        try (DbScope.Transaction transaction = ExperimentService.get().ensureTransaction();
+             LineNumberReader lnr = new LineNumberReader(Readers.getReader(dataFile)))
         {
-            try (DbScope.Transaction transaction = ExperimentService.get().ensureTransaction();
-                 LineNumberReader lnr = new LineNumberReader(Readers.getReader(dataFile)))
+            List<Map<String, Object>> writtenRows;
+
+            if (mh_processingTable.getSqlDialect().isSqlServer())
             {
-                List<Map<String, Object>> writtenRows;
-
-                if (mh_processingTable.getSqlDialect().isSqlServer())
+                String line;
+                List<Map<String, Object>> mh_processingRows = new ArrayList<>();
+                BatchValidationException errors = new BatchValidationException();
+                while ((line = lnr.readLine()) != null )
                 {
-                    String line;
-                    List<Map<String, Object>> mh_processingRows = new ArrayList<>();
-                    BatchValidationException errors = new BatchValidationException();
-                    while ((line = lnr.readLine()) != null )
-                    {
-                        if (line.equals(""))
-                            continue;  // skip blank lines
-                        String[] cols = line.split(",");
-                        String rowPk = cols[0];
+                    if (line.equals(""))
+                        continue;  // skip blank lines
+                    String[] cols = line.split(",");
+                    String rowPk = cols[0];
 
-                        Map<String, Object> row = new CaseInsensitiveHashMap<>();
+                    Map<String, Object> row = new CaseInsensitiveHashMap<>();
 
-                        row.put("rowPk", rowPk);
-                        row.put("fileName", dataFile.getName());
-                        row.put("source", SOURCE_NAME);
-                        row.put("fileLineNumber", lnr.getLineNumber());
-                        row.put("status", MorningHealthValidationJob.UNVALIDATED_STATUS);
-                        row.put("voided", false);
-                        row.put("data", line);
-                        row.put("created", new Date());
-                        row.put("createdby", job.getUser().getUserId());
-                        row.put("container", job.getContainer().getId());
+                    row.put("rowPk", rowPk);
+                    row.put("fileName", dataFile.getName());
+                    row.put("source", SOURCE_NAME);
+                    row.put("fileLineNumber", lnr.getLineNumber());
+                    row.put("status", MorningHealthValidationJob.UNVALIDATED_STATUS);
+                    row.put("voided", false);
+                    row.put("data", line);
+                    row.put("created", new Date());
+                    row.put("createdby", job.getUser().getUserId());
+                    row.put("container", job.getContainer().getId());
 
-                        row.put("transferredToMhObs", false);
+                    row.put("transferredToMhObs", false);
 
-                        if(cols.length == MAX_NUM_COLS && StringUtils.isNoneBlank(cols[MorningHealthValidationJob.ENCLOSURE], cols[MorningHealthValidationJob.ENCLOSURE_SIGN]))
-                            row.put("observationType", ROOM_OBS);
-                        else if(StringUtils.isNotBlank(cols[MorningHealthValidationJob.ANIMAL_ID]))
-                            row.put("observationType", ANIMAL_OBS);
+                    if(cols.length == MAX_NUM_COLS && StringUtils.isNoneBlank(cols[MorningHealthValidationJob.ENCLOSURE], cols[MorningHealthValidationJob.ENCLOSURE_SIGN]))
+                        row.put("observationType", ROOM_OBS);
+                    else if(StringUtils.isNotBlank(cols[MorningHealthValidationJob.ANIMAL_ID]))
+                        row.put("observationType", ANIMAL_OBS);
 
-                        mh_processingRows.add(row);
-                    }
-                    writtenRows = mh_ProcessingQus.insertRows(job.getUser(), job.getContainer(), mh_processingRows, errors, null, null);
-                    if (errors.hasErrors())
-                        throw errors;
+                    mh_processingRows.add(row);
                 }
-                else
-                {
-                    throw new PipelineJobException("Unknown SQL Dialect: " + mh_processingTable.getSqlDialect().getProductName());
-                }
-                transaction.commit();
-
-                if (writtenRows != null)
-                    job.info("Wrote " + writtenRows.size() + " line(s) to " + mh_processingTable.getName());
+                writtenRows = mh_ProcessingQus.insertRows(job.getUser(), job.getContainer(), mh_processingRows, errors, null, null);
+                if (errors.hasErrors())
+                    throw errors;
             }
+            else
+            {
+                throw new PipelineJobException("Unknown SQL Dialect: " + mh_processingTable.getSqlDialect().getProductName());
+            }
+            transaction.commit();
+
+            if (writtenRows != null)
+                job.info("Wrote " + writtenRows.size() + " line(s) to " + mh_processingTable.getName());
         }
         catch(Exception e)
         {
