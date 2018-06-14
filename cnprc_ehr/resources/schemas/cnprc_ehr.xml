@@ -844,6 +844,8 @@
             <column columnName="status"/>
             <column columnName="voided"/>
             <column columnName="data"/>
+            <column columnName="observationType"/>
+            <column columnName="transferredToMhObs"/>
             <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>

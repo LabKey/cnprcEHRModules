@@ -67,15 +67,15 @@ public class MorningHealthValidationJob extends PipelineJob
     }
 
     // mh_processing file indices
-    private static final int PRIMARY_KEY =      0;
-    private static final int TECHNICIAN =       1;
-    private static final int DATE =             2;
-    private static final int TIME =             3;
-    private static final int ANIMAL_ID =        4;
-    private static final int LOCATION =         5;
-    private static final int SIGNS_BASE =       6;  // 6 through 15 are sign codes
-    private static final int ENCLOSURE =        16;
-    private static final int ENCLOSURE_SIGN =   17;
+    protected static final int PRIMARY_KEY =      0;
+    protected static final int TECHNICIAN =       1;
+    protected static final int DATE =             2;
+    protected static final int TIME =             3;
+    protected static final int ANIMAL_ID =        4;
+    protected static final int LOCATION =         5;
+    protected static final int SIGNS_BASE =       6;  // 6 through 15 are sign codes
+    protected static final int ENCLOSURE =        16;
+    protected static final int ENCLOSURE_SIGN =   17;
 
     public static DateTimeFormatter observationDateFormat;
     public static String observationDateFormatString = "yyyyMMdd";
@@ -139,9 +139,9 @@ public class MorningHealthValidationJob extends PipelineJob
         TableSelector observationTypesSelector = new TableSelector(observationTypesTable);
         Set<String> validObservationTypes = new HashSet<>();
         observationTypesSelector.forEach(rs -> {
-            String observationType = rs.getString("obsCode");
-            if (observationType != null)
-                validObservationTypes.add(observationType);
+            String obsCode = rs.getString("obsCode");
+            if (obsCode != null)
+                validObservationTypes.add(obsCode);
         });
 
         // room_enclosure

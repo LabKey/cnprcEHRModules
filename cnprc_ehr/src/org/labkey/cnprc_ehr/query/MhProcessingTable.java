@@ -29,6 +29,7 @@ import org.labkey.api.query.ValidationException;
 import org.labkey.api.security.User;
 import org.labkey.api.view.ViewBackgroundInfo;
 import org.labkey.cnprc_ehr.CNPRC_EHRUserSchema;
+import org.labkey.cnprc_ehr.pipeline.MorningHealthDataTransferJob;
 import org.labkey.cnprc_ehr.pipeline.MorningHealthValidationJob;
 
 import java.util.Collections;
@@ -78,9 +79,12 @@ public class MhProcessingTable extends SimpleUserSchema.SimpleTable<CNPRC_EHRUse
         {
             PipeRoot pr = PipelineService.get().getPipelineRootSetting(c);
             MorningHealthValidationJob job = new MorningHealthValidationJob(new ViewBackgroundInfo(c, user, null), pr);
+            MorningHealthDataTransferJob mhDataTransJob = new MorningHealthDataTransferJob(new ViewBackgroundInfo(c, user, null), pr);
+
             try
             {
                 PipelineService.get().queueJob(job);
+                PipelineService.get().queueJob(mhDataTransJob);
             }
             catch (PipelineValidationException e)
             {

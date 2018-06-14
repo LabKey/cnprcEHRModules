@@ -1,5 +1,6 @@
 package org.labkey.cnprc_ehr.pipeline;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.collections.CaseInsensitiveHashMap;
@@ -32,6 +33,9 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
 {
     public static final String SOURCE_NAME = "Indoor_Morning_Health";
     private static final Logger LOG = Logger.getLogger(MorningHealthImportTask.class);
+    private static final int MAX_NUM_COLS = 18;
+    protected static final String ANIMAL_OBS = "A";
+    protected static final String ROOM_OBS = "R";
 
     private MorningHealthImportTask(MorningHealthImportTask.Factory factory, PipelineJob job)
     {
@@ -73,7 +77,9 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                     {
                         if (line.equals(""))
                             continue;  // skip blank lines
-                        String rowPk = line.split(",", 2)[0];
+                        String[] cols = line.split(",");
+                        String rowPk = cols[0];
+
                         Map<String, Object> row = new CaseInsensitiveHashMap<>();
 
                         row.put("rowPk", rowPk);
@@ -86,6 +92,14 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                         row.put("created", new Date());
                         row.put("createdby", job.getUser().getUserId());
                         row.put("container", job.getContainer().getId());
+
+                        row.put("transferredToMhObs", false);
+
+                        if(cols.length == MAX_NUM_COLS && StringUtils.isNoneBlank(cols[MorningHealthValidationJob.ENCLOSURE], cols[MorningHealthValidationJob.ENCLOSURE_SIGN]))
+                            row.put("observationType", ROOM_OBS);
+                        else if(StringUtils.isNotBlank(cols[MorningHealthValidationJob.ANIMAL_ID]))
+                            row.put("observationType", ANIMAL_OBS);
+
                         mh_processingRows.add(row);
                     }
                     writtenRows = mh_ProcessingQus.insertRows(job.getUser(), job.getContainer(), mh_processingRows, errors, null, null);

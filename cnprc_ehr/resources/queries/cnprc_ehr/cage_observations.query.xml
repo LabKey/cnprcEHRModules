@@ -2,6 +2,7 @@
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
             <table tableName="cage_observations" tableDbType="TABLE" useColumnOrder="true">
+                <description>Morning Health Room/Cage Observations table</description>
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">
