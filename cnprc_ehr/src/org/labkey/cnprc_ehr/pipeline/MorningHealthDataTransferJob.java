@@ -174,7 +174,6 @@ public class MorningHealthDataTransferJob extends PipelineJob
                         mhObsRow.put("taskId", taskId);
                         mhObsRow.put("qcstate", inProgressQCStateRowId);
 
-                        LOG.info("Row to be inserted in study.morningHealthObs: " + mhObsRow.toString());
                         validMHRows.add(mhObsRow);
 
                         nonBlankSigns++;
@@ -266,15 +265,7 @@ public class MorningHealthDataTransferJob extends PipelineJob
         {
             return updateService.insertRows(getUser(), getContainer(), rowsToInsert, errors, null, null);
         }
-        catch (DuplicateKeyException e)
-        {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-        catch (QueryUpdateServiceException e)
-        {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-        catch (BatchValidationException e)
+        catch (DuplicateKeyException | QueryUpdateServiceException | BatchValidationException e)
         {
             throw new RuntimeException(e.getMessage(), e);
         }
@@ -302,15 +293,9 @@ public class MorningHealthDataTransferJob extends PipelineJob
         for (Map<String, Object> stringObjectMap : mhProcessingRowsToUpdate)
         {
             String rowPk = (String) stringObjectMap.get("rowPk");
-            if(pkMap.containsKey(rowPk))
-            {
-                stringObjectMap.put("rowId", pkMap.get(rowPk));
-                mhProcessingRowsToUpdateWithRowIds.add(stringObjectMap);
-                break;
-            }
+            stringObjectMap.put("rowId", pkMap.get(rowPk));
+            mhProcessingRowsToUpdateWithRowIds.add(stringObjectMap);
         }
-        if(mhProcessingRowsToUpdateWithRowIds.size() > 0)
-            LOG.info("cnprc_ehr.mh_processing will get updated with these rows :\n" + mhProcessingRowsToUpdateWithRowIds.toString());
 
         try
         {
@@ -318,21 +303,13 @@ public class MorningHealthDataTransferJob extends PipelineJob
             mhProcessingTable.getUpdateService().updateRows(getUser(), getContainer(), mhProcessingRowsToUpdateWithRowIds, null, null, null);
             LOG.info("Rows updated in cnprc_ehr.mh_processing successfully.");
         }
-        catch (InvalidKeyException e)
+        catch (InvalidKeyException | BatchValidationException | QueryUpdateServiceException e)
         {
-            e.printStackTrace();
-        }
-        catch (BatchValidationException e)
-        {
-            e.printStackTrace();
-        }
-        catch (QueryUpdateServiceException e)
-        {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
+            throw new RuntimeSQLException(e);
         }
     }
 
