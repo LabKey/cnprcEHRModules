@@ -18,6 +18,23 @@ CNPRC.Utils = (function(){
             return (beginRow ? "<tr>" : "") +
                     "<td colspan='2'>" + value + "</td>" +
                     (endRow ? "</tr>" : "");
+        },
+
+        getURL: function (view, divId)
+        {
+            return LABKEY.ActionURL.buildURL('cnprc_ehr', view, null, {divId : divId}) ;
+        },
+
+        legendTitleWithURL: function (value, beginRow, endRow, view, divId) {
+            return (beginRow ? "<tr>" : "") +
+                    "<td colspan='2'>" + '<a href="' + this.getURL(view, divId) + '">' + value + '</a>' + "</td>" +
+                    (endRow ? "</tr>" : "");
+        },
+
+        legendEntryWithURL: function (value, description, beginRow, endRow, view, divId) {
+            return (beginRow ? "<tr>" : "") +
+                    "<td class='ehr-legend-value'>" + '<a href="' + this.getURL(view, divId) + '">' + value + '</a>' + "</td><td>" + description + "</td>" +
+                    (endRow ? "</tr>" : "");
         }
     };
 })();

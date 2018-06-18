@@ -1,0 +1,18 @@
+<html>
+    <body>
+    <p><h2>Sample text - remove me!</h2></p>
+        <div id="description1" style="display:none">
+            <h3>BBA Description1 Header</h3>
+            <p>This is BBA Description 1</p>
+        </div>
+
+        <div id="description2" style="display:none">
+            <h3>BBA Description2 Header</h3>
+            <p>Hi this is BBA Description 2.</p>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var params = LABKEY.ActionURL.getParameters();
+    document.getElementById(params['divId']).style.display='block';
+</script>
