@@ -15,4 +15,4 @@ SELECT  weight.Id,
         weight.taskid
 FROM study.weight
 JOIN study.weightRelChange
-  ON weightRelChange.Id = weight.Id
+  ON weightRelChange.Id = weight.Id AND weightRelChange.date = weight.date
