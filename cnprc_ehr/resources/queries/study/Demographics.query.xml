@@ -33,7 +33,7 @@
                         </fk>
                     </column>
                     <column columnName="geographic_origin">
-                        <columnTitle>Geographic Origin</columnTitle>
+                        <columnTitle> Country</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>geographic_origins</fkTable>
@@ -50,7 +50,6 @@
                         <columnTitle>Death Date</columnTitle>
                     </column>
                     <column columnName="calculated_status">
-                        <shownInInsertView>false</shownInInsertView>
                         <columnTitle>Status</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
@@ -67,19 +66,11 @@
                     </column>
                     <column columnName="dam">
                         <columnTitle>Dam</columnTitle>
-                        <fk>
-                            <fkDbSchema>study</fkDbSchema>
-                            <fkTable>animal</fkTable>
-                            <fkColumnName>id</fkColumnName>
-                        </fk>
+                        <datatype>varchar</datatype>
                     </column>
                     <column columnName="sire">
                         <columnTitle>Sire</columnTitle>
-                        <fk>
-                            <fkDbSchema>study</fkDbSchema>
-                            <fkTable>animal</fkTable>
-                            <fkColumnName>id</fkColumnName>
-                        </fk>
+                        <datatype>varchar</datatype>
                     </column>
                     <column columnName="origin">
                         <columnTitle>Origin</columnTitle>
@@ -88,6 +79,7 @@
                             <fkTable>source</fkTable>
                             <fkColumnName>code</fkColumnName>
                         </fk>
+                        <isHidden>true</isHidden>
                     </column>
 
                     <!--NOTE: being deprecated-->
