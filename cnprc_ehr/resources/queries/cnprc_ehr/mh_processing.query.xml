@@ -34,12 +34,12 @@
                         <columnTitle>Data</columnTitle>
                     </column>
                     <column columnName="fileName">
-                        <isHidden>true</isHidden>
                         <columnTitle>File Name</columnTitle>
                         <fk>
                             <fkDbSchema>exp</fkDbSchema>
                             <fkTable>data</fkTable>
                             <fkColumnName>Name</fkColumnName>
+                            <fkDisplayColumnName useRawValue="true">DownloadLink</fkDisplayColumnName>
                         </fk>
                     </column>
                     <column columnName="transferredToMHobs">
