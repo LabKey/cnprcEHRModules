@@ -29,16 +29,16 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                     if (results && results.rows && results.rows.length >= 1) {
                         previous_weight = results['rows'][0]['weight']['value'];
                         if (previous_weight !== 0 && row.weight >= (previous_weight * 1.5)) {
-                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is more than 1.5 times the amount of last weight, which is ' + previous_weight + ' kg', 'ERROR');
+                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is more than 1.5 times the amount of last weight, which is this: ' + previous_weight + ' kg', 'INFO');
                         }
                         else if (previous_weight !== 0 && row.weight <= (previous_weight * .5)) {
-                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is less than .5 times the amount of last weight, which is' + previous_weight + ' kg', 'ERROR');
+                            EHR.Server.Utils.addError(scriptErrors, 'weight', ' Weight is less than .5 times the amount of last weight, which is this:' + previous_weight + ' kg', 'INFO');
                         }
 
                         var input_date = new Date(row.date).setHours(0, 0, 0, 0);
                         var previous_date = new Date(results['rows'][0]['date']['value']).setHours(0, 0, 0, 0);
                         if (input_date === previous_date) {
-                            EHR.Server.Utils.addError(scriptErrors, 'date', ' There is already a recorded weigh in on that Day', 'ERROR');
+                            EHR.Server.Utils.addError(scriptErrors, 'date', ' There is already a recorded weigh in on that Day', 'INFO');
                         }
                     }
                 },
