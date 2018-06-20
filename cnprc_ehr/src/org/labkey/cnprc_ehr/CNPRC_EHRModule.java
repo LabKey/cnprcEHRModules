@@ -232,7 +232,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
 
     @Override
     @NotNull
-    public Collection<String> getSummary(Container c, User user)
+    public Collection<String> getSummary(Container c)
     {
         return Collections.emptyList();
     }
