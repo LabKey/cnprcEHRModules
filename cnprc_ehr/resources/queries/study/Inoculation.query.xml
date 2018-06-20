@@ -10,7 +10,7 @@
                         <columnTitle>Inoculation Date</columnTitle>
                     </column>
                     <column columnName="projectCode">
-                        <columnTitle>Project Code</columnTitle>
+                        <columnTitle>Project </columnTitle>
                         <fk>
                             <fkDbSchema>cnprc_ehr</fkDbSchema>
                             <fkTable>project</fkTable>
@@ -34,6 +34,9 @@
                     </column>
                     <column columnName="remark">
                         <columnTitle>Comment</columnTitle>
+                    </column>
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
                     </column>
                 </columns>
             </table>

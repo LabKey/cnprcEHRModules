@@ -67,6 +67,8 @@
         </columns>
         <tableTitle>Serum</tableTitle>
     </table>
+
+
     <table tableName="pathology_inventory" tableDbType="TABLE">
         <description>Pathology specimen inventory</description>
         <columns>
@@ -2389,6 +2391,9 @@
             <column columnName="cause">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="manner">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="objectid">
                 <datatype>varchar</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
@@ -2401,9 +2406,6 @@
                 <datatype>varchar</datatype>
             </column>
             <column columnName="cageattime">
-                <datatype>varchar</datatype>
-            </column>
-            <column columnName="manner">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="dam">
@@ -2503,13 +2505,19 @@
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
             </column>
-            <column columnName="destination">
+            <column columnName="reloc_sale_price">
+                <datatype>float</datatype>
+            </column>
+            <column columnName="reloc_sale_type">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="reloctype">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="nextreloctype">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="destination">
                 <datatype>varchar</datatype>
             </column>
             <column columnName="objectid">

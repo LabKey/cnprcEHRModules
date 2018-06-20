@@ -10,13 +10,27 @@
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">
-                        <columnTitle>Date Out</columnTitle>
+                        <columnTitle>Departure Date</columnTitle>
+                    </column>
+                    <column columnName="nextRelocType">
+                        <columnTitle>Status</columnTitle>
+                            <fk>
+                                <fkDbSchema>ehr_lookups</fkDbSchema>
+                                <fkTable>calculated_status_codes</fkTable>
+                                <fkColumnName>code</fkColumnName>
+                            </fk>
                     </column>
                     <column columnName="relocType">
-                        <columnTitle>Relocation Type</columnTitle>
+                        <columnTitle>Loan/Sale?</columnTitle>
+                    </column>
+                    <column columnName="reloc_sale_price">
+                        <columnTitle>Sale Price</columnTitle>
+                    </column>
+                    <column columnName="reloc_sale_type">
+                        <columnTitle>Sale Type</columnTitle>
                     </column>
                     <column columnName="destination">
-                        <columnTitle>Relocated To</columnTitle>
+                        <columnTitle>Destination Location</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>source</fkTable>
@@ -24,11 +38,9 @@
                         </fk>
                     </column>
                     <column columnName="remark">
-                        <columnTitle>Sale Comment</columnTitle>
+                        <columnTitle>Remarks</columnTitle>
                     </column>
-                    <column columnName="nextRelocType">
-                        <columnTitle>Current Location/Status</columnTitle>
-                    </column>
+
                 </columns>
             </table>
         </tables>

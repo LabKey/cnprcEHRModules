@@ -55,10 +55,10 @@ import org.labkey.cnprc_ehr.dataentry.forms.NursingFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PairingsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.EnrichmentFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.DeathsFormType;
-//import org.labkey.cnprc_ehr.dataentry.forms.DepartureFormType;
-//import org.labkey.cnprc_ehr.dataentry.forms.InoculationFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.DepartureFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.InoculationFormType;
 //import org.labkey.cnprc_ehr.dataentry.forms.CageFormType;
-//import org.labkey.cnprc_ehr.dataentry.forms.DemographicsFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.DemographicsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PregnancyDeterminationsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.SerumFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
@@ -195,9 +195,9 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PairingsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(EnrichmentFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathsFormType.class, this));
-//        ehrService.registerFormType(new DefaultDataEntryFormFactory(DepartureFormType.class, this));
-//        ehrService.registerFormType(new DefaultDataEntryFormFactory(DemographicsFormType.class, this));
-//        ehrService.registerFormType(new DefaultDataEntryFormFactory(InoculationFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(DepartureFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(DemographicsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(InoculationFormType.class, this));
 //        ehrService.registerFormType(new DefaultDataEntryFormFactory(CageFormType.class, this));
 
         //demographics
