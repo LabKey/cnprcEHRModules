@@ -42,6 +42,15 @@
                             <fkColumnName>Name</fkColumnName>
                         </fk>
                     </column>
+                    <column columnName="transferredToMHobs">
+                        <shownInInsertView>false</shownInInsertView>
+                    </column>
+                    <column columnName="ObjectId">
+                        <shownInInsertView>false</shownInInsertView>
+                    </column>
+                    <column columnName="observationType">
+                        <shownInInsertView>false</shownInInsertView>
+                    </column>
                 </columns>
                 <pkColumnName>rowPk</pkColumnName>
             </table>
