@@ -12,6 +12,12 @@ EHR.model.DataModelManager.registerMetadata('Demographics', {
                 columnConfig: {
                     width: 250
                 }
+            },
+            sire: {
+                lookups: false
+            },
+            dam: {
+                lookups: false
             }
         }
     }

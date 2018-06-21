@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Demographics" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="demographics" tableDbType="TABLE" useColumnOrder="true">
                 <tableUrl />
                 <insertUrl />
                 <importUrl />
@@ -33,7 +33,7 @@
                         </fk>
                     </column>
                     <column columnName="geographic_origin">
-                        <columnTitle> Country</columnTitle>
+                        <columnTitle>Country</columnTitle>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>geographic_origins</fkTable>
@@ -67,10 +67,20 @@
                     <column columnName="dam">
                         <columnTitle>Dam</columnTitle>
                         <datatype>varchar</datatype>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="sire">
                         <columnTitle>Sire</columnTitle>
                         <datatype>varchar</datatype>
+                        <fk>
+                            <fkDbSchema>study</fkDbSchema>
+                            <fkTable>animal</fkTable>
+                            <fkColumnName>id</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="origin">
                         <columnTitle>Origin</columnTitle>

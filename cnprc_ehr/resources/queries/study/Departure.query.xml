@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="Departure" tableDbType="TABLE">
+            <table tableName="departure" tableDbType="TABLE">
                 <tableUrl />
                 <insertUrl />
                 <importUrl />
@@ -21,7 +21,7 @@
                             </fk>
                     </column>
                     <column columnName="relocType">
-                        <columnTitle>Loan/Sale?</columnTitle>
+                        <columnTitle>Loan or Sale?</columnTitle>
                     </column>
                     <column columnName="reloc_sale_price">
                         <columnTitle>Sale Price</columnTitle>
@@ -40,7 +40,9 @@
                     <column columnName="remark">
                         <columnTitle>Remarks</columnTitle>
                     </column>
-
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
+                    </column>
                 </columns>
             </table>
         </tables>
