@@ -18,7 +18,6 @@ EHR.DemographicsRecord = function(data){
             return data[prop];
         },
 
-
         getAgeInDays: function(){
             return data['Id/age/ageInDays'];
         },
@@ -291,6 +290,10 @@ EHR.DemographicsRecord = function(data){
 
         getBreedingRosterBook: function() {
             return data['book'];
+        },
+
+        getEightWeekHistory: function() {
+            return data['eightWeekHistory'];
         }
     }
 }

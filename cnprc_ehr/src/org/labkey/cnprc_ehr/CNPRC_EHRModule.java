@@ -50,6 +50,7 @@ import org.labkey.cnprc_ehr.dataentry.forms.CensusFlagFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalExamCasesFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.HousingFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.MorningHealthConfirmFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.NursingFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.PairingsFormType;
@@ -71,6 +72,7 @@ import org.labkey.cnprc_ehr.demographics.BreedingRosterDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.CNPRCDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ColonyDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ConceptionsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.EightWeekHistoryDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.HousingIntervalsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.LastHousingDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.LastPayorDemographicsProvider;
@@ -195,6 +197,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PairingsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(EnrichmentFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(MorningHealthConfirmFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DepartureFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DemographicsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(InoculationFormType.class, this));
@@ -216,6 +219,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new SerumDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new TBDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new BreedingRosterDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new EightWeekHistoryDemographicsProvider(this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
