@@ -6,15 +6,14 @@
         <column name="status"/>
         <column name="voided"/>
         <column name="data"/>
-        <column name="fileName/DataFileUrl"/>
-        <column name="fileName/fileSize">
+        <column name="observationType"/>
+        <column name="transferredToMhObs"/>
+        <column name="fileFk/DataFileUrl"/>
+        <column name="fileFk/fileSize">
             <properties>
                 <property name="columnTitle" value="File Size"/>
             </properties>
         </column>
-        <column name="fileName/DownloadLink"/>
+        <column name="fileFk/DownloadLink"/>
     </columns>
-    <sorts>
-        <sort column="modified" descending="true" />
-    </sorts>
 </customView>

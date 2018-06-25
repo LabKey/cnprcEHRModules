@@ -6,6 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import org.labkey.api.collections.CaseInsensitiveHashMap;
 import org.labkey.api.data.DbScope;
 import org.labkey.api.data.TableInfo;
+import org.labkey.api.exp.api.DataType;
+import org.labkey.api.exp.api.ExpData;
 import org.labkey.api.exp.api.ExperimentService;
 import org.labkey.api.pipeline.AbstractTaskFactory;
 import org.labkey.api.pipeline.AbstractTaskFactorySettings;
@@ -53,6 +55,19 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
         if (!dataFile.exists())
             throw new PipelineJobException("Unable to find file: " + dataFile.getPath());
 
+        ExpData expData = ExperimentService.get().getExpDataByURL(dataFile, job.getContainer());
+
+        //Explicitly create a row in exp.Data - since it is not always populated with the uploaded file info.
+        if(null == expData)
+        {
+            expData = ExperimentService.get().createData(job.getContainer(), new DataType("UploadedFile"));
+            expData.setName(dataFile.getName());
+            expData.setDataFileURI(dataFile.toURI());
+            expData.save(job.getUser());
+        }
+
+        int expDataRowId = expData.getRowId();
+
         CNPRC_EHRUserSchema cnprc_ehrUserSchema = (CNPRC_EHRUserSchema)QueryService.get().getUserSchema(job.getUser(), job.getContainer(), CNPRC_EHRSchema.NAME);
         TableInfo mh_processingTable = cnprc_ehrUserSchema.getTable(CNPRC_EHRSchema.MH_PROCESSING);
         if (mh_processingTable == null)
@@ -88,6 +103,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
                     row.put("status", MorningHealthValidationJob.UNVALIDATED_STATUS);
                     row.put("voided", false);
                     row.put("data", line);
+                    row.put("fileFk", expDataRowId);
                     row.put("created", new Date());
                     row.put("createdby", job.getUser().getUserId());
                     row.put("container", job.getContainer().getId());

@@ -21,6 +21,8 @@
                     </column>
                     <column columnName="status">
                         <columnTitle>Processing Status</columnTitle>
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>processing_status</fkTable>
@@ -35,21 +37,28 @@
                     </column>
                     <column columnName="fileName">
                         <columnTitle>File Name</columnTitle>
-                        <fk>
-                            <fkDbSchema>exp</fkDbSchema>
-                            <fkTable>data</fkTable>
-                            <fkColumnName>Name</fkColumnName>
-                            <fkDisplayColumnName useRawValue="true">DownloadLink</fkDisplayColumnName>
-                        </fk>
+                        <shownInInsertView>false</shownInInsertView>
                     </column>
                     <column columnName="transferredToMHobs">
                         <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
                     </column>
                     <column columnName="ObjectId">
                         <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
                     </column>
                     <column columnName="observationType">
                         <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="fileFk">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                        <fk>
+                            <fkDbSchema>exp</fkDbSchema>
+                            <fkTable>data</fkTable>
+                            <fkColumnName>rowId</fkColumnName>
+                        </fk>
                     </column>
                 </columns>
                 <pkColumnName>rowPk</pkColumnName>

@@ -846,6 +846,7 @@
             <column columnName="data"/>
             <column columnName="observationType"/>
             <column columnName="transferredToMhObs"/>
+            <column columnName="fileFk"/>
             <column columnName="objectid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
