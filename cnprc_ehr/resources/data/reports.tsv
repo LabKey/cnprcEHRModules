@@ -106,7 +106,6 @@ Incomplete - Pending Data Entry	diet	Colony Management	query	Diet	true		study	Di
 	matings	Reproductive Management	query	Matings	true		study	matings			date	false	false		qcstate/publicdata	This displays the records of matings
 	matingSuccessRates	Reproductive Management	query	Mating Success Rates	true		study	matingSuccessRates			date	false	false		qcstate/publicdata	This displays a summary of matings
 
-	reproSummary	Reproductive Management	js	Reproductive Summary	true		study	underDevelopment			date	false	false		qcstate/publicdata
 	menseCycleLength	Reproductive Management	query	Cycle Length	true		study	menseCycleLength			date	false	false		qcstate/publicdata
 	menses	Reproductive Management	query	Menses	true		study	menses			date	false	false		qcstate/publicdata
 	pregnancy	Reproductive Management	js	Conception History	true		study	pregnancyConfirmation			date	false	false		qcstate/publicdata	Conception Results
