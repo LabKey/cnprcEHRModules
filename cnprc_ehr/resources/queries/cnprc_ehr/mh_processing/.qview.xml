@@ -8,7 +8,6 @@
         <column name="data"/>
         <column name="observationType"/>
         <column name="transferredToMhObs"/>
-        <column name="fileFk/DataFileUrl"/>
         <column name="fileFk/fileSize">
             <properties>
                 <property name="columnTitle" value="File Size"/>
