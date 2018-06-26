@@ -1529,6 +1529,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
             clickButton("Submit Final", 0);
             _extHelper.waitForExtDialog("Finalize Form");
             click(Ext4Helper.Locators.ext4Button("Yes"));
+            waitForTextToDisappear("Saving Changes", 20000);
         }
         switchToMainWindow();
 
