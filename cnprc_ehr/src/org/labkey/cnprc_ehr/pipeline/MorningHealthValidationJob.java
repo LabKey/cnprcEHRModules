@@ -15,7 +15,6 @@
  */
 package org.labkey.cnprc_ehr.pipeline;
 
-import org.apache.log4j.Logger;
 import org.labkey.api.data.ColumnInfo;
 import org.labkey.api.data.CompareType;
 import org.labkey.api.data.Results;
@@ -33,6 +32,8 @@ import org.labkey.api.view.ViewBackgroundInfo;
 import org.labkey.cnprc_ehr.CNPRC_EHRSchema;
 import org.labkey.cnprc_ehr.CNPRC_EHRUserSchema;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -51,11 +52,12 @@ public class MorningHealthValidationJob extends PipelineJob
     public static final String UNVALIDATED_STATUS = "U";
     public static final String VALID_STATUS = "V";
     public static final String INVALID_STATUS = "I";
-    private static final Logger LOG = Logger.getLogger(MorningHealthValidationJob.class);
 
-    public MorningHealthValidationJob(ViewBackgroundInfo info, PipeRoot root)
+    public MorningHealthValidationJob(ViewBackgroundInfo info, PipeRoot root) throws IOException
     {
         super(null, info, root);
+        File logFile = File.createTempFile("morningHealthValidationJob", ".log", root.getLogDirectory());
+        setLogFile(logFile);
     }
 
     @Override
@@ -94,6 +96,8 @@ public class MorningHealthValidationJob extends PipelineJob
     public static Set<MhProcessingRow> _validRows;
     public static Set<MhProcessingRow> _invalidRows;
 
+    boolean _isError;
+
     @Override
     public URLHelper getStatusHref()
     {
@@ -103,13 +107,15 @@ public class MorningHealthValidationJob extends PipelineJob
     @Override
     public String getDescription()
     {
-        return "Validates entries in cnprc_ehr.mh_processing table and logs errors";
+        return "Morning Health validation: validate cnprc_ehr.mh_processing table";
     }
 
     @Override
     public void run()
     {
-        LOG.info("Starting Morning Health barcode data validation");
+        _isError = false;
+
+        getLogger().info("Starting Morning Health barcode data validation");
 
         // mh_processing
         CNPRC_EHRUserSchema cnprc_ehrUserSchema = (CNPRC_EHRUserSchema) QueryService.get().getUserSchema(getUser(), getContainer(), CNPRC_EHRSchema.NAME);
@@ -191,8 +197,9 @@ public class MorningHealthValidationJob extends PipelineJob
                     _invalidRows.add(mhProcessingRow);
                 else if (data == null)
                 {
-                    LOG.error("Primary key (rowPk) '" + rowPk + "' has no data");
+                    getLogger().error("Primary key (rowPk) '" + rowPk + "' has no data");
                     _invalidRows.add(mhProcessingRow);
+                    setError();
                 }
                 else
                 {
@@ -201,8 +208,9 @@ public class MorningHealthValidationJob extends PipelineJob
                     String dataRowPk = fields[PRIMARY_KEY];
                     if (dataRowPk.length() != 32)  // primary key is object ID and should not be anything other than 32 chars
                     {
-                        LOG.error("Primary key '" + dataRowPk + "' is not 32 characters in data");
+                        getLogger().error("Primary key '" + dataRowPk + "' is not 32 characters in data");
                         _invalidRows.add(mhProcessingRow);
+                        setError();
                     }
 
                     if (fields.length != (ENCLOSURE_SIGN + 1))  // calculated from last field
@@ -358,12 +366,25 @@ public class MorningHealthValidationJob extends PipelineJob
             if(!mhRows.isEmpty())
                 mhProcessingTable.getUpdateService().updateRows(getUser(), getContainer(), mhRows, null, null, null);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            LOG.error("Morning health barcode data import failed: ", e);
+            getLogger().error("Morning health barcode data validation failed: ", e);
+            setError();
         }
 
-        LOG.info("Completed Morning Health barcode data validation");
+        getLogger().info("Completed Morning Health barcode data validation");
+        if (!_isError)
+            setStatus(TaskStatus.complete);
+
+    }
+
+    private void setError()
+    {
+        if (!_isError)
+        {
+            _isError = true;
+            setStatus(TaskStatus.error);
+        }
     }
 
     private class AnimalInfo
@@ -392,8 +413,9 @@ public class MorningHealthValidationJob extends PipelineJob
 
     private void logErrorWithRowPk(String errorText, MhProcessingRow mhProcessingRow)
     {
-        LOG.error("Line Row PK = '" + mhProcessingRow._rowPk + "': " + errorText);
+        getLogger().error("Line Row PK = '" + mhProcessingRow._rowPk + "': " + errorText);
         _invalidRows.add(mhProcessingRow);
+        setError();
     }
 
     private void addRows(List<Map<String, Object>> rowsToWrite, Set<MhProcessingRow> rowsToRead, String status)

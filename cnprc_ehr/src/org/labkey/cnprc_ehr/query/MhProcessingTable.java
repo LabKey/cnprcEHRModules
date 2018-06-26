@@ -32,6 +32,7 @@ import org.labkey.cnprc_ehr.CNPRC_EHRUserSchema;
 import org.labkey.cnprc_ehr.pipeline.MorningHealthDataTransferJob;
 import org.labkey.cnprc_ehr.pipeline.MorningHealthValidationJob;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -78,15 +79,14 @@ public class MhProcessingTable extends SimpleUserSchema.SimpleTable<CNPRC_EHRUse
         public void complete(TableInfo table, Container c, User user, TableInfo.TriggerType event, BatchValidationException errors, Map<String, Object> extraContext)
         {
             PipeRoot pr = PipelineService.get().getPipelineRootSetting(c);
-            MorningHealthValidationJob job = new MorningHealthValidationJob(new ViewBackgroundInfo(c, user, null), pr);
-            MorningHealthDataTransferJob mhDataTransJob = new MorningHealthDataTransferJob(new ViewBackgroundInfo(c, user, null), pr);
-
             try
             {
+                MorningHealthValidationJob job = new MorningHealthValidationJob(new ViewBackgroundInfo(c, user, null), pr);
+                MorningHealthDataTransferJob mhDataTransJob = new MorningHealthDataTransferJob(new ViewBackgroundInfo(c, user, null), pr);
                 PipelineService.get().queueJob(job);
                 PipelineService.get().queueJob(mhDataTransJob);
             }
-            catch (PipelineValidationException e)
+            catch (PipelineValidationException | IOException e)
             {
                 LOG.error(e);
             }

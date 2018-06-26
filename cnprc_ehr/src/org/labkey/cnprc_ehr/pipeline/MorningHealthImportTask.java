@@ -1,7 +1,6 @@
 package org.labkey.cnprc_ehr.pipeline;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.collections.CaseInsensitiveHashMap;
 import org.labkey.api.data.DbScope;
@@ -34,7 +33,6 @@ import java.util.Map;
 public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImportTask.Factory>
 {
     public static final String SOURCE_NAME = "Indoor_Morning_Health";
-    private static final Logger LOG = Logger.getLogger(MorningHealthImportTask.class);
     private static final int MAX_NUM_COLS = 18;
     protected static final String ANIMAL_OBS = "A";
     protected static final String ROOM_OBS = "R";
@@ -48,8 +46,8 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
     @Override
     public RecordedActionSet run() throws PipelineJobException
     {
-        LOG.info("Starting Morning Health barcode data import");
         PipelineJob job = getJob();
+        job.info("Starting Morning Health barcode data import");
         FileAnalysisJobSupport support = job.getJobSupport(FileAnalysisJobSupport.class);
         File dataFile = support.getInputFiles().get(0);
         if (!dataFile.exists())
@@ -135,7 +133,7 @@ public class MorningHealthImportTask extends PipelineJob.Task<MorningHealthImpor
             job.error("Morning health barcode data import failed: ", e);
         }
 
-        LOG.info("Completed Morning Health barcode data import");
+        job.info("Completed Morning Health barcode data import");
 
         return new RecordedActionSet();
     }

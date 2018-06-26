@@ -12,6 +12,8 @@
                     </column>
                     <column columnName="rowPk">
                         <columnTitle>Row PK</columnTitle>
+                        <description>A unique key that comes from the scanner as a GUID. It is still required
+                                     for manually entered data because it is enforced at the database level.</description>
                     </column>
                     <column columnName="source">
                         <columnTitle>Source</columnTitle>
