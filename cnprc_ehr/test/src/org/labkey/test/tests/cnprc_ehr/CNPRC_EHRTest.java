@@ -2566,7 +2566,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         FileUtil.copyFile(MORNING_HEALTH_DATA_ORIG, destFile);
         beginAt(WebTestHelper.getBaseURL() + "/pipeline-status/" + getContainerPath() + "/begin.view");
-        waitForPipelineJobsToComplete(4,
+        waitForPipelineJobsToComplete(8,
                 "referenceStudy/" + MORNING_HEALTH_DATA_NAME + " (" + TRIGGER_NAME + ")",
                 false,
                 30 * 1000);
