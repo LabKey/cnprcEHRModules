@@ -17,12 +17,9 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                 EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release Date cannot be prior to Assign Date.', 'ERROR');
 
             }
-            console.log(assign_date,release_date);
-
         }
-        if (row.releaseDate === undefined) {
-            //Note: 'date' should match the column name in the dataset otherwise it won't recognize what col the error is for.
-            EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release Date is a required field.', 'ERROR');
-        }
+        // if (row.releaseDate === undefined) {
+        //     EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release Date is a required field.', 'ERROR');
+        // }
     }
 }
