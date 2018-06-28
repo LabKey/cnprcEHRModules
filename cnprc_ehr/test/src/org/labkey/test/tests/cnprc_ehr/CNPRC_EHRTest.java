@@ -1463,6 +1463,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickButton("Submit Final", 0);
         _extHelper.waitForExtDialog("Finalize Form");
         click(Ext4Helper.Locators.ext4Button("Yes"));
+        waitForTextToDisappear("Saving Changes", 20000);
 
         log("Verifying the animal from breeding report");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
@@ -1580,6 +1581,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickButton("Submit Final",0);
         _extHelper.waitForExtDialog("Finalize Form");
         click(Ext4Helper.Locators.ext4Button("Yes"));
+        waitForTextToDisappear("Saving Changes", 20000);
 
         log("Verifying the animal from breed registration report");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
@@ -1633,6 +1635,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         clickButton("Submit Final",0);
         _extHelper.waitForExtDialog("Finalize Form");
         click(Ext4Helper.Locators.ext4Button("Yes"));
+        waitForTextToDisappear("Saving Changes", 20000);
 
         log("Verifying the animal from Pregnancy Determinations report");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
@@ -2438,6 +2441,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Assignments and Groups");
         animalHistoryPage.clickReportTab("Per-diem Payor Assignment");
+        waitForText("AB123/YZ12");
         WebElement link = Locator.linkContainingText("AB123/YZ12").findElement(getDriver());
         scrollIntoView(link, true);
         link.click();
