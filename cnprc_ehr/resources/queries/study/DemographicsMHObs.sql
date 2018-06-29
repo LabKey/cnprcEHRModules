@@ -8,4 +8,4 @@ RIGHT JOIN
 ON mho2.id = mho1.Id and mho2.ObsDate = cast(mho1.date as date)
 GROUP BY
 mho1.Id,
-mho1.date
+cast(mho1.date as date)
