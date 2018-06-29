@@ -895,8 +895,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testAnimalHistoryReports()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-
-        animalHistoryPage.searchSingleAnimal(CNPRC_ANIMAL);
+        animalHistoryPage.searchSingleAnimal(CNPRC_ANIMAL, "0 - Conventional");
         _helper.verifyReportTabs(animalHistoryPage, CNPRC_REPORTS);
     }
 
@@ -1939,9 +1938,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testAnimalHistoryDiarrheaCalendar()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        animalHistoryPage.selectSingleAnimalSearch().searchFor("TEST6390238");
+        animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Daily Reports");
         animalHistoryPage.clickReportTab("Diarrhea Calendar");
+
+        String animalId = "TEST6390238";
+        animalHistoryPage.searchSingleAnimal(animalId);
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
@@ -1955,7 +1957,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238", "2012", "January", "1", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", ""
+                animalId, "2012", "January", "1", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", ""
         );
 
         //results.setAsync(true); // setting async governs whether setSort will wait for the menuitem to stale
@@ -1963,22 +1965,21 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> resultsRowDataAsText = results.getRowDataAsText(0);//.subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
-        animalHistoryPage.selectSingleAnimalSearch().searchFor("TEST3224553");
-        animalHistoryPage.clickCategoryTab("Daily Reports");
-        animalHistoryPage.clickReportTab("Diarrhea Calendar");
+        animalId = "TEST3224553";
+        animalHistoryPage.searchSingleAnimal(animalId);
 
         List<String> expectedForSecondAnimal = Arrays.asList(
-                "TEST3224553", "2010", "January", "1", "", "", "", "+", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "~", "", "", "", "", "", "", "", "", "", "", "", "Dc"
+                animalId, "2010", "January", "1", "", "", "", "+", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "~", "", "", "", "", "", "", "", "", "", "", "", "Dc"
         );
         results = animalHistoryPage.getActiveReportDataRegion();
         List<String> resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(0);
-        assertEquals("Wrong data for animal TEST3224553 - row 0", expectedForSecondAnimal, resultsRowDataAsTextForSecondAnimal);
+        assertEquals("Wrong data for animal " + animalId + " - row 0", expectedForSecondAnimal, resultsRowDataAsTextForSecondAnimal);
 
         List<String> expectedForSecondAnimal9 = Arrays.asList(
-                "TEST3224553", "2011", "January", "1", "", "", "", "", "", "~", "", "", "", "~", "", "", "", "", "", "", "", "", "D", "", "", "", "", "", "", "", "", "", "", "", "Dc"
+                animalId, "2011", "January", "1", "", "", "", "", "", "~", "", "", "", "~", "", "", "", "", "", "", "", "", "D", "", "", "", "", "", "", "", "", "", "", "", "Dc"
         );
         resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(9);
-        assertEquals("Wrong data for animal TEST3224553 - row 9", expectedForSecondAnimal9, resultsRowDataAsTextForSecondAnimal);
+        assertEquals("Wrong data for animal " + animalId + " - row 9", expectedForSecondAnimal9, resultsRowDataAsTextForSecondAnimal);
     }
 
     @Test
@@ -2282,13 +2283,16 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testAnimalHistoryAssignmentHistoryView()
     {
-
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        animalHistoryPage.searchSingleAnimal("44446");
+        animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Assignments and Groups");
         String reportTab = "Assignment History";
         animalHistoryPage.clickReportTab(reportTab);
-        waitForElement(Locator.linkContainingText(reportTab));
+
+        String animalId = "44446";
+        animalHistoryPage.searchSingleAnimal(animalId);
+        waitForElement(Locator.linkWithText(reportTab + " - " + animalId));
+
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
                 "Id"
@@ -2301,19 +2305,18 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , "groupCode"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
-
         assertEquals("Wrong row count: ", 1, results.getDataRowCount());
 
-        List<String> expected = Arrays.asList("44446", "2016-10-05", " ", "AB126/YZ18", "Pc5C2", " ", "X", "T");
+        List<String> expected = Arrays.asList(animalId, "2016-10-05", " ", "AB126/YZ18", "Pc5C2", " ", "X", "T");
         confirmRowText(results, expected, 0);
 
-        animalHistoryPage.searchSingleAnimal("44444");
-        waitForElement(Locator.linkContainingText(reportTab));
-        results = animalHistoryPage.getActiveReportDataRegion();
+        animalId = "44444";
+        animalHistoryPage.searchSingleAnimal(animalId);
+        waitForElement(Locator.linkWithText(reportTab + " - " + animalId));
 
+        results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList("44444", "2014-02-08", "2016-01-01", "AB125/YZ17", "Pc5C0", "Pc5C1, Pc5C2", "O", "M");
         confirmRowText(results, expected, 0);
-
         assertElementPresent(Locator.linkWithText("AB125/YZ17"));
 
         // TODO: 4/26/2017 Add tests for Primary and Secondary project look ups.
