@@ -70,7 +70,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                     name: 'bcsDate'  // TODO: not yet implemented
                 },{
                     fieldLabel: 'Observations',
-                    name: 'observations'  // TODO: not yet implemented
+                    name: 'observation'
                 },{
                     fieldLabel: '8-Week History',
                     name: 'eightWeekHistory'
@@ -110,7 +110,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         this.appendDemographicsResults(toSet, results, id);
         this.appendLocation(toSet, results);
         this.appendEightWeekHistory(toSet, results);
-
+        this.appendMorningHealthObservations(toSet, results);
     },
 
     appendDemographicsResults: function(toSet, row, id){
@@ -143,5 +143,14 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                 + diarrheaRowString + '<br/>'
                 + poorAppRowString + '<br/>'
                 + pairingRowString + '</pre>';
+    },
+
+    appendMorningHealthObservations: function(toSet, row) {
+        var mhObs = row.getMorningHealthObservations();
+        var observation = mhObs[0]['observation'];
+
+        if(observation)
+            toSet['observation'] = observation;
     }
+
 });

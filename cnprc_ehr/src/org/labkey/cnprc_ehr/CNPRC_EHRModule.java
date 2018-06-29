@@ -77,6 +77,7 @@ import org.labkey.cnprc_ehr.demographics.HousingIntervalsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.LastHousingDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.LastPayorDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.LastProjectsDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.ObservationsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.ParentsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.PathologyReportsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.SerumDemographicsProvider;
@@ -220,6 +221,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new TBDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new BreedingRosterDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new EightWeekHistoryDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ObservationsDemographicsProvider(this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {
