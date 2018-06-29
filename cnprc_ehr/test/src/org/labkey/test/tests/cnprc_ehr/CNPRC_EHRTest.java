@@ -1477,12 +1477,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         log("Verifying the animal from breeding report");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        animalHistoryPage.searchSingleAnimal(animalId);
+        animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Reproductive Management");
         animalHistoryPage.clickReportTab("Breeding");
+        animalHistoryPage.searchSingleAnimal(animalId);
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
-
         List<String> expectedRowData = Arrays.asList(animalId, sireID, breedingDate, "X", "4");
         List<String> actualRowData = results.getRowDataAsText(0, "Id", "sire", "date", "obsCode", "cycleDay");
         assertEquals("Wrong row data", expectedRowData, actualRowData);
@@ -1546,9 +1546,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         log("Verifying the animal details from cycle report");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        animalHistoryPage.searchSingleAnimal(animalId);
+        animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Reproductive Management");
         animalHistoryPage.clickReportTab("Cycle");
+        animalHistoryPage.searchSingleAnimal(animalId);
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         results.setFilter("sire", "Equals", male);
@@ -1649,12 +1650,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         log("Verifying the animal from Pregnancy Determinations report");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        animalHistoryPage.searchSingleAnimal(animalId);
+        animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Reproductive Management");
         animalHistoryPage.clickReportTab("Pregnancy Determinations");
+        animalHistoryPage.searchSingleAnimal(animalId);
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
-
         results.setFilter("method", "Equals", methodCode);
         List<String> expectedRowData = Arrays.asList(animalId, methodCode, testResult, "false", cycleDay1);
         List<String> actualRowData = results.getRowDataAsText(0, "Id", "method", "result", "scheduleStatus", "cycleDay1");
@@ -1986,10 +1987,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public void testPedigreeReports()
     {
         AnimalHistoryPage<?> animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
-        String id = "TEST6390238";
-        animalHistoryPage.searchSingleAnimal(id);
+        animalHistoryPage.selectEntireDatabaseSearch();
         animalHistoryPage.clickCategoryTab("Genetics");
         animalHistoryPage.clickReportTab("Pedigree Plot");
+
+        String id = "TEST6390238";
+        animalHistoryPage.searchSingleAnimal(id);
 
         waitForElement(Locator.tagContainingText("span", "Pedigree Plot - " + id), WAIT_FOR_JAVASCRIPT * 3);
         assertTextNotPresent("Error executing command");
