@@ -42,6 +42,7 @@ import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
 import org.labkey.test.components.BodyWebPart;
+import org.labkey.test.components.CustomizeView;
 import org.labkey.test.components.WebPartPanel;
 import org.labkey.test.components.ehr.panel.AnimalSearchPanel;
 import org.labkey.test.components.ext4.widgets.SearchPanel;
@@ -93,14 +94,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String PROJECT_NAME = "CNPRC";
     protected static final String UNIT_CODE = "uc101";
     private static final Integer PROJECT_ROW_ID = 123;
-    private static final String PROTOCOL_10_CHAR = "Prot10Char" ;
-    private static final String PROJECT_CODE_5_CHAR_0 = "Pc5C0" ;
-    private static final String PROJECT_CODE_5_CHAR_1 = "Pc5C1" ;
-    private static final String PROJECT_CODE_5_CHAR_2 = "Pc5C2" ;
+    private static final String PROTOCOL_10_CHAR = "Prot10Char";
+    private static final String PROJECT_CODE_5_CHAR_0 = "Pc5C0";
+    private static final String PROJECT_CODE_5_CHAR_1 = "Pc5C1";
+    private static final String PROJECT_CODE_5_CHAR_2 = "Pc5C2";
     private static final String PROTOCOL_ID_10_CHAR_1 = "Protocol01";
     private static final String PROTOCOL_ID_10_CHAR_2 = "Protocol02";
-    private static final String PROJECT_INVESTIGATOR_NAME_1 = "PI_NAME_1" ;
-    private static final String PROJECT_INVESTIGATOR_NAME_2 = "PI_NAME_2" ;
+    private static final String PROJECT_INVESTIGATOR_NAME_1 = "PI_NAME_1";
+    private static final String PROJECT_INVESTIGATOR_NAME_2 = "PI_NAME_2";
     protected static final String INVES_ID_1 = "1001";
     protected static final String INVES_ID_2 = "1002";
     public static final String SCHEMA_CNPRC_PDL = "cnprc_pdl";
@@ -292,7 +293,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @BeforeClass
     public static void setupProject() throws Exception
     {
-        CNPRC_EHRTest init = (CNPRC_EHRTest)getCurrentTest();
+        CNPRC_EHRTest init = (CNPRC_EHRTest) getCurrentTest();
         init.doSetup();
     }
 
@@ -309,7 +310,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         portalHelper.addWebPart("EHR Datasets");
 
         clickFolder(COMPLIANCE_AND_TRAINING_FOLDER);
-        setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" +  getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
+        setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" + getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
         storeCageAndRoomData();
         storeObservationTypesData();
         createPDLLinkedSchema();
@@ -322,7 +323,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     protected void deleteHardTableRecords() throws CommandException, IOException
     {
-        Map<String,Object> rowMap = new HashMap<>();
+        Map<String, Object> rowMap = new HashMap<>();
         rowMap.put("room", ROOM_AB5001);
         deleteIfNeeded("ehr_lookups", "rooms", rowMap, "room");
 
@@ -423,7 +424,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         //first cnprc_ehr.protocol
         InsertRowsCommand insertCmd = new InsertRowsCommand("cnprc_ehr", "protocol");
-        Map<String,Object> rowMap = new HashMap<>();
+        Map<String, Object> rowMap = new HashMap<>();
         rowMap.put("protocol", PROTOCOL_ID_10_CHAR_1);
         rowMap.put("piPersonId", INVES_ID_1);
         insertCmd.addRow(rowMap);
@@ -456,14 +457,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMap.put("pp_pk", 1);
         rowMap.put("protocol_number", PROTOCOL_ID_10_CHAR_1);
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_0);
-        rowMap.put("pp_assignment_date",  "2007-09-20");
+        rowMap.put("pp_assignment_date", "2007-09-20");
         rowMap.put("pp_release_date", "2016-12-12");
         insertCmd.addRow(rowMap);
         rowMap = new HashMap<>();
         rowMap.put("pp_pk", 2);
         rowMap.put("protocol_number", PROTOCOL_ID_10_CHAR_2);
         rowMap.put("projectCode", PROJECT_CODE_5_CHAR_1);
-        rowMap.put("pp_assignment_date",  "2007-12-12");
+        rowMap.put("pp_assignment_date", "2007-12-12");
         rowMap.put("pp_release_date", "2016-12-12");
         insertCmd.addRow(rowMap);
         insertCmd.execute(cn, getContainerPath());
@@ -603,7 +604,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Override
-    public String getFolderName() { return FOLDER_NAME; }
+    public String getFolderName()
+    {
+        return FOLDER_NAME;
+    }
 
     @Override
     public String getContainerPath()
@@ -611,9 +615,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         return PROJECT_NAME;
     }
 
-    public String getGeneticsPath() { return PROJECT_NAME + "/" + COREFACILITIES + "/" + GENETICSFOLDER; }
+    public String getGeneticsPath()
+    {
+        return PROJECT_NAME + "/" + COREFACILITIES + "/" + GENETICSFOLDER;
+    }
 
-    public String getComplianceAndTrainingPath() { return PROJECT_NAME + "/" + COREFACILITIES + "/" + COMPLIANCE_AND_TRAINING_FOLDER; }
+    public String getComplianceAndTrainingPath()
+    {
+        return PROJECT_NAME + "/" + COREFACILITIES + "/" + COMPLIANCE_AND_TRAINING_FOLDER;
+    }
 
     @Override
     protected void createProjectAndFolders(String type)
@@ -628,7 +638,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
-    public void testGenetics(){
+    public void testGenetics()
+    {
         goToProjectHome();
         clickFolder(GENETICSFOLDER);
         waitAndClickAndWait(LabModuleHelper.getNavPanelItem(GENETICS_PANEL_LABEL, "Browse All"));
@@ -637,7 +648,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Bad genetics data",
                 Arrays.asList("TEST1099252", "F", "TEST6390238", "TEST2312318", "PDA0123", "2003-02-14 00:00", "TEST1099252 qualifies as an offspring of TEST2312318 and TEST6390238."),
                 rowData);
-        results.assertPaginationText(1,100,222);
+        results.assertPaginationText(1, 100, 222);
     }
 
     @Override
@@ -701,83 +712,83 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         InsertRowsCommand insertCmd = new InsertRowsCommand("study", "morningHealthObs");
         ZonedDateTime now = ZonedDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Map<String,Object> rowMapMH = new HashMap<>();
-        rowMapMH.put("Id","TEST3");
-        rowMapMH.put("fileNum","1000001");
-        rowMapMH.put("sequence","15");
-        rowMapMH.put("recordType","D");
-        rowMapMH.put("recordStatus","P");
-        rowMapMH.put("obsCode1","POORAPP");
-        rowMapMH.put("obsCode2","DEHYDRT");
-        rowMapMH.put("remark","MORNING HEALTH REPORT-Updated");
+        Map<String, Object> rowMapMH = new HashMap<>();
+        rowMapMH.put("Id", "TEST3");
+        rowMapMH.put("fileNum", "1000001");
+        rowMapMH.put("sequence", "15");
+        rowMapMH.put("recordType", "D");
+        rowMapMH.put("recordStatus", "P");
+        rowMapMH.put("obsCode1", "POORAPP");
+        rowMapMH.put("obsCode2", "DEHYDRT");
+        rowMapMH.put("remark", "MORNING HEALTH REPORT-Updated");
         rowMapMH.put("date", dateTimeFormatter.format(now));
         insertCmd.addRow(rowMapMH);
         insertCmd.execute(createDefaultConnection(false), getContainerPath());
 
-        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
 
         log("Checking records for all cases");
-        HashSet<String> expectedAllCases = new HashSet<>(Arrays.asList("D","H","L","MH","O","P"));
+        HashSet<String> expectedAllCases = new HashSet<>(Arrays.asList("D", "H", "L", "MH", "O", "P"));
         enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
-        DataRegionTable allCasesTable = new DataRegionTable("query",getDriver());
+        DataRegionTable allCasesTable = new DataRegionTable("query", getDriver());
         Set<String> ac = new HashSet<>(allCasesTable.getColumnDataAsText("AdmitType"));
-        assertEquals("Missing admit type in list of all cases",expectedAllCases,ac);
-        assertEquals("Wrong number of rows found in all cases",6,ac.size());
+        assertEquals("Missing admit type in list of all cases", expectedAllCases, ac);
+        assertEquals("Wrong number of rows found in all cases", 6, ac.size());
 
         log("Checking records morning health");
-        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Morning Health"));
         HashSet<String> expectedMorningHealth = new HashSet<>(Arrays.asList("MH"));
-        DataRegionTable morningHealthTable = new DataRegionTable("query",getDriver());
+        DataRegionTable morningHealthTable = new DataRegionTable("query", getDriver());
         Set<String> mh = new HashSet<>(morningHealthTable.getColumnDataAsText("AdmitType"));
-        assertEquals("Wrong Admit Type for Morning Health",expectedMorningHealth,mh);
+        assertEquals("Wrong Admit Type for Morning Health", expectedMorningHealth, mh);
 
         log("Checking records for hospital");
-        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Hospital"));
-        DataRegionTable hospitalTable = new DataRegionTable("query",getDriver());
+        DataRegionTable hospitalTable = new DataRegionTable("query", getDriver());
         Set<String> h = new HashSet<>(hospitalTable.getColumnDataAsText("AdmitType"));
         HashSet<String> expectedHospital = new HashSet<>(Arrays.asList("H"));
-        assertEquals("Wrong Admit Type for Hospital",expectedHospital,h);
+        assertEquals("Wrong Admit Type for Hospital", expectedHospital, h);
 
         log("Checking records for outpatient");
-        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Outpatient"));
-        DataRegionTable outPatientTable = new DataRegionTable("query",getDriver());
+        DataRegionTable outPatientTable = new DataRegionTable("query", getDriver());
         Set<String> op = new HashSet<>(outPatientTable.getColumnDataAsText("AdmitType"));
         HashSet<String> expectedOutpatient = new HashSet<>(Arrays.asList("O"));
-        assertEquals("Wrong Admit Type for Outpatient",expectedOutpatient,op);
+        assertEquals("Wrong Admit Type for Outpatient", expectedOutpatient, op);
 
         log("Checking records for LTOP");
-        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("LTOP"));
-        DataRegionTable ltopTable = new DataRegionTable("query",getDriver());
+        DataRegionTable ltopTable = new DataRegionTable("query", getDriver());
         Set<String> ltop = new HashSet<>(ltopTable.getColumnDataAsText("AdmitType"));
         HashSet<String> expectedLTOP = new HashSet<>(Arrays.asList("L"));
-        assertEquals("Wrong Admit Type for Long Term Outpatient",expectedLTOP,ltop);
+        assertEquals("Wrong Admit Type for Long Term Outpatient", expectedLTOP, ltop);
 
         log("Checking records for post operation");
-        enterData = EnterDataPage.beginAt(this,getProjectName());
+        enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Post-Operation"));
-        DataRegionTable ppTable = new DataRegionTable("query",getDriver());
+        DataRegionTable ppTable = new DataRegionTable("query", getDriver());
         Set<String> pp = new HashSet<>(ppTable.getColumnDataAsText("AdmitType"));
         HashSet<String> expectedPostOperation = new HashSet<>(Arrays.asList("P"));
-        assertEquals("Wrong Admit Type for post operation",expectedPostOperation,pp);
+        assertEquals("Wrong Admit Type for post operation", expectedPostOperation, pp);
 
     }
 
     @Test
     public void testCnprcCaseMgmPP2Remarks()
     {
-        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         log("Checking records for all cases");
         enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
-        DataRegionTable allCasesTable = new DataRegionTable("query",getDriver());
-        allCasesTable.setFilter("Id","Equals","44444");
-        allCasesTable.setFilter("AdmitType","Equals","P");
-        assertTrue("Wrong value in plan",allCasesTable.getColumnDataAsText("p").contains("Value for p-1"));
-        assertTrue("Wrong value in p2(last entered)",allCasesTable.getColumnDataAsText("p2").contains("Value for p2-1"));
-        assertTrue("Wrong value in remarks",allCasesTable.getColumnDataAsText("remark").contains("Value for remarks-1"));
+        DataRegionTable allCasesTable = new DataRegionTable("query", getDriver());
+        allCasesTable.setFilter("Id", "Equals", "44444");
+        allCasesTable.setFilter("AdmitType", "Equals", "P");
+        assertTrue("Wrong value in plan", allCasesTable.getColumnDataAsText("p").contains("Value for p-1"));
+        assertTrue("Wrong value in p2(last entered)", allCasesTable.getColumnDataAsText("p2").contains("Value for p2-1"));
+        assertTrue("Wrong value in remarks", allCasesTable.getColumnDataAsText("remark").contains("Value for remarks-1"));
     }
 
 
@@ -787,14 +798,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         overviewPage.clickPopulationCompositionTab();
         waitForElements(Locator.tagWithClass("div", "ehr-populationpanel-table"), 1, WAIT_FOR_JAVASCRIPT * 3);
-        assertTextPresentInThisOrder("Infant","Juvenile", "Adult","Geriatric");
-        assertTextPresentInThisOrder("Total","0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs");
+        assertTextPresentInThisOrder("Infant", "Juvenile", "Adult", "Geriatric");
+        assertTextPresentInThisOrder("Total", "0 - 6 mos", "6 mos - 3.5 yrs", "3.5 - 15 yrs", "15+ yrs");
         Locator.XPathLocator linkLocator = Locator.linkContainingText("22");
         assertElementPresent(linkLocator);
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
-        assertEquals("Wrong row count",22,results.getDataRowCount());
-        assertTextPresent( "species = CMO","calculated_status = Alive");
+        assertEquals("Wrong row count", 22, results.getDataRowCount());
+        assertTextPresent("species = CMO", "calculated_status = Alive");
     }
 
     @Test
@@ -803,15 +814,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
         overviewPage.clickSpfColonyTab();
         waitForElements(Locator.tagWithClass("div", "ehr-populationpanel-table"), 6, WAIT_FOR_JAVASCRIPT * 3);
-        assertTextPresentInThisOrder("Infant","Juvenile", "Adult","Geriatric");
-        assertTextPresentInThisOrder("Total","0 - 6 mos","6 mos - 3.5 yrs","3.5 - 15 yrs","15+ yrs");
+        assertTextPresentInThisOrder("Infant", "Juvenile", "Adult", "Geriatric");
+        assertTextPresentInThisOrder("Total", "0 - 6 mos", "6 mos - 3.5 yrs", "3.5 - 15 yrs", "15+ yrs");
         Locator.XPathLocator linkLocator = Locator.linkWithText("8");
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
-        assertEquals("Wrong row count",8,results.getDataRowCount());
-        assertTextPresent( "spf = 0","species = CMO","calculated_status = Alive");
-        assertTextPresent("TEST2008446","TEST3804589","TEST3997535","TEST1",
-                "TEST4710248","TEST2","TEST7151371","TEST7407382");
+        assertEquals("Wrong row count", 8, results.getDataRowCount());
+        assertTextPresent("spf = 0", "species = CMO", "calculated_status = Alive");
+        assertTextPresent("TEST2008446", "TEST3804589", "TEST3997535", "TEST1",
+                "TEST4710248", "TEST2", "TEST7151371", "TEST7407382");
     }
 
     @Test
@@ -822,7 +833,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locators.panelWebpartTitle.withText("Area Usage"));
         assertTextPresentInThisOrder(
                 "Area Usage",
-                "Area","Total Cages","Empty Cages","MMU Count","CMO Count","MCY Count","Unknown","% Used",
+                "Area", "Total Cages", "Empty Cages", "MMU Count", "CMO Count", "MCY Count", "Unknown", "% Used",
                 "Housing Type Summary",
                 "Pairing Summary");
         Locator.XPathLocator linkLocator = Locator.linkWithText("A:");
@@ -830,9 +841,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         switchToWindow(1);
         waitForText("Room Utilization:");
         DataRegionTable results = new DataRegionTable("query", getDriver());
-        assertEquals("Wrong row count",4,results.getDataRowCount());
-        List<String> expected = Arrays.asList("3168659","2","2","2","0","100.0","2","0","2","0","0");
-        assertEquals("Wrong row text.", expected,results.getRowDataAsText(0));
+        assertEquals("Wrong row count", 4, results.getDataRowCount());
+        List<String> expected = Arrays.asList("3168659", "2", "2", "2", "0", "100.0", "2", "0", "2", "0", "0");
+        assertEquals("Wrong row text.", expected, results.getRowDataAsText(0));
     }
 
     @Test
@@ -846,8 +857,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         Locator.XPathLocator linkLocator = Locator.linkWithText("1");
         clickAndWait(linkLocator);
         DataRegionTable results = new DataRegionTable("query", getDriver());
-        assertEquals("Wrong row count",1,results.getDataRowCount());
-        assertTextPresent( "admitType.description = Diabetic", "TEST2008446");
+        assertEquals("Wrong row count", 1, results.getDataRowCount());
+        assertTextPresent("admitType.description = Diabetic", "TEST2008446");
     }
 
     @Test
@@ -858,12 +869,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.tagWithClass("div", "ehr-aggregationpanel-table"), WAIT_FOR_JAVASCRIPT);
         assertEquals("Wrong column headers", Arrays.asList("Category", "Total", "%")
                 , getTexts(Locator.css("tr:nth-of-type(1)> td").findElements(utilizationColonyTab)));
-        WebElement linkElement = Locator.tag("tr").withDescendant(Locator.tagWithText("div","Base Grant")).append(Locator.tagWithText("a","2")).findElement(utilizationColonyTab);
+        WebElement linkElement = Locator.tag("tr").withDescendant(Locator.tagWithText("div", "Base Grant")).append(Locator.tagWithText("a", "2")).findElement(utilizationColonyTab);
 
         clickAndWait(linkElement);
         DataRegionTable results = new DataRegionTable("query", getDriver());
-        assertEquals("Wrong row count",2,results.getDataRowCount());
-        assertTextPresent( "fundingCategory = 'Base Grant'", "TEST1684145", "TEST6390238");
+        assertEquals("Wrong row count", 2, results.getDataRowCount());
+        assertTextPresent("fundingCategory = 'Base Grant'", "TEST1684145", "TEST6390238");
     }
 
     @Test
@@ -998,7 +1009,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         setParticipantBirthDate("TEST1441142", calendar.getTime());//Will not be included because not Alive
         SearchPanel searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("Infant Report");
         DataRegionTable searchResults = searchPanel.submit();
 
@@ -1027,7 +1038,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("Cage Violation Report");
         DataRegionTable searchResults = searchPanel.submit();
 
@@ -1053,7 +1064,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("LTOP Report");
         DataRegionTable searchResults = searchPanel.submit();
 
@@ -1070,9 +1081,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong number of rows: ", 3, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST6390238"));
-        assertEquals("Wrong value for Primary Project: ", "Pc5C1", searchResults.getDataAsText(2,3));
-        assertEquals("Wrong value for Comment: ", "DERMATITIS AX &CHEST", searchResults.getDataAsText(2,6));
-        assertEquals("Wrong value for History: ", "TEST HISTORY REMARK", searchResults.getDataAsText(2,7));
+        assertEquals("Wrong value for Primary Project: ", "Pc5C1", searchResults.getDataAsText(2, 3));
+        assertEquals("Wrong value for Comment: ", "DERMATITIS AX &CHEST", searchResults.getDataAsText(2, 6));
+        assertEquals("Wrong value for History: ", "TEST HISTORY REMARK", searchResults.getDataAsText(2, 7));
     }
 
     @Test
@@ -1080,7 +1091,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("Hybrid Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
@@ -1101,8 +1112,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
         assertEquals("Wrong number of rows: ", 1, searchResults.getDataRowCount());
         assertElementPresent(Locator.linkWithText("TEST1112911"));
-        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0,10));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0,7));
+        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(0, 10));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(0, 7));
     }
 
     @Test
@@ -1110,7 +1121,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("NC Roundup Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
@@ -1129,17 +1140,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Id/NcRoundup/Measles",
                 "Id/NcRoundup/SerumBank",
                 "Id/NcRoundup/VGL",
-                "Id/NcRoundup/Dam"        );
+                "Id/NcRoundup/Dam");
 
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         assertElementPresent(Locator.linkWithText("TEST1112911"));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(3,5));
-        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(3,8));
-        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(3,9));
-        assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(3,13));
-        assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(3,12));
-        assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(3,14));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(3, 5));
+        assertEquals("Wrong value for HGL2 Flag: ", "HGL2", searchResults.getDataAsText(3, 8));
+        assertEquals("Wrong value for Flags: ", "CH12, HGL2", searchResults.getDataAsText(3, 9));
+        assertEquals("Wrong value for Measles: ", "X", searchResults.getDataAsText(3, 13));
+        assertEquals("Wrong value for Tetanus: ", "X", searchResults.getDataAsText(3, 12));
+        assertEquals("Wrong value for Serum Bank: ", "X", searchResults.getDataAsText(3, 14));
     }
 
     @Test
@@ -1147,7 +1158,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("Current Pregnancies Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
@@ -1177,32 +1188,32 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
 
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
-        assertEquals("Wrong row count",2,searchResults.getDataRowCount());
+        assertEquals("Wrong row count", 2, searchResults.getDataRowCount());
 
         assertElementPresent(Locator.linkWithText("TSTCP"));
         int startColumnIndex = 2;
         int rowIndex = searchResults.getRowIndex("Id", "TSTCP");
-        assertEquals("Wrong value for Location: ","AC500389" , searchResults.getDataAsText(rowIndex, startColumnIndex));
-        assertEquals("Wrong value for Cage Size: ","4" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Rate Class: ","N" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Id: ","TSTCP" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Species: ","MMU" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Location: ", "AC500389", searchResults.getDataAsText(rowIndex, startColumnIndex));
+        assertEquals("Wrong value for Cage Size: ", "4", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Rate Class: ", "N", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Id: ", "TSTCP", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Species: ", "MMU", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         ++startColumnIndex;
-        assertEquals("Wrong value for Weight: ","7.5" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Location Date: ","2013-02-19" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Weight: ", "7.5", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Location Date: ", "2013-02-19", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         ++startColumnIndex;
-        assertEquals("Wrong value for Colony Code: ","L" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Breeding Code: ","M" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Breeding Book: ","BP" , searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Secondary Projects: ", "Pc5C2, 1101324", searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Census Flag List: ", "CHU", searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Pregnancy: ", "PRG-1111", searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Term Comment: ", "TRM CMMNT", searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for PG Comment: ", "Not Completed", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Colony Code: ", "L", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Breeding Code: ", "M", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Breeding Book: ", "BP", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Secondary Projects: ", "Pc5C2, 1101324", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Census Flag List: ", "CHU", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Pregnancy: ", "PRG-1111", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Term Comment: ", "TRM CMMNT", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for PG Comment: ", "Not Completed", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         ++startColumnIndex;
-        assertEquals("Wrong value for Enst: ", " ", searchResults.getDataAsText(rowIndex,++startColumnIndex));
-        assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", searchResults.getDataAsText(rowIndex,++startColumnIndex));
+        assertEquals("Wrong value for Enst: ", " ", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Encl Supervisor: ", "Jane Jones", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
     }
 
     @Test
@@ -1210,7 +1221,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         SearchPanel searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("TB Overdue Report");
         DataRegionTable searchResults = searchPanel.submit();
         List<String> expectedColumns = Arrays.asList(
@@ -1228,9 +1239,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, searchResults.getColumnNames());
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2015,Calendar.APRIL,21);
+        calendar.set(2015, Calendar.APRIL, 21);
         Date lastTB = calendar.getTime();
-        String daysOverdue = String.valueOf((int) ((new Date().getTime() - lastTB.getTime())/(1000 *60*60*24)-180));
+        String daysOverdue = String.valueOf((int) ((new Date().getTime() - lastTB.getTime()) / (1000 * 60 * 60 * 24) - 180));
 
 
         assertElementPresent(Locator.linkWithText("TEST1684145"));
@@ -1238,13 +1249,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.linkWithText("TEST1112911"));
         assertElementPresent(Locator.linkWithText("2011-09-09 09:00"));
         assertElementPresent(Locator.linkWithText("2015-04-21"));
-        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(3,2));
-        assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(3,6));
+        assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(3, 2));
+        assertEquals("Wrong value for Days TB Overdue: ", daysOverdue, searchResults.getDataAsText(3, 6));
 
         insertWeightAndTBfor("TEST1684145");
         searchPanel = getSearchPanel();
 
-        searchPanel.findElement(Locator.tagWithAttributeContaining("input","value","Alive, at Center")).click();
+        searchPanel.findElement(Locator.tagWithAttributeContaining("input", "value", "Alive, at Center")).click();
         searchPanel.setView("TB Overdue Report");
         searchPanel.submit();
         assertElementNotPresent(Locator.linkWithText("TEST1684145"));
@@ -1253,44 +1264,44 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private void insertWeightAndTBfor(String id) throws IOException, CommandException
     {
         InsertRowsCommand insertCmdTB1 = new InsertRowsCommand("study", "tb");
-        Map<String,Object> rowMapTB_1 = new HashMap<>();
+        Map<String, Object> rowMapTB_1 = new HashMap<>();
         rowMapTB_1.put("id", id);
         rowMapTB_1.put("date", new Date());
-        rowMapTB_1.put("test"               ,"Test1");
-        rowMapTB_1.put("testType"           ,"type");
-        rowMapTB_1.put("site"               ,"site");
-        rowMapTB_1.put("twentyFourHrsResult","24");
-        rowMapTB_1.put("fortyEightHrsResult","48");
-        rowMapTB_1.put("seventyTwoHrsResult","72");
-        rowMapTB_1.put("QCStateLabel","In Progress");
+        rowMapTB_1.put("test", "Test1");
+        rowMapTB_1.put("testType", "type");
+        rowMapTB_1.put("site", "site");
+        rowMapTB_1.put("twentyFourHrsResult", "24");
+        rowMapTB_1.put("fortyEightHrsResult", "48");
+        rowMapTB_1.put("seventyTwoHrsResult", "72");
+        rowMapTB_1.put("QCStateLabel", "In Progress");
 
         insertCmdTB1.addRow(rowMapTB_1);
-        SaveRowsResponse respTB =  insertCmdTB1.execute(createDefaultConnection(true), getProjectName());
+        SaveRowsResponse respTB = insertCmdTB1.execute(createDefaultConnection(true), getProjectName());
 
         InsertRowsCommand insertCmdTB2 = new InsertRowsCommand("study", "tb");
-        Map<String,Object> rowMapTB_2 = new HashMap<>();
-        rowMapTB_2.put("id"                 , id        );
-        rowMapTB_2.put("date"               , new Date());
-        rowMapTB_2.put("test"               ,"Test2"    );
-        rowMapTB_2.put("testType"           ,"type2"    );
-        rowMapTB_2.put("site"               ,"site2"    );
-        rowMapTB_2.put("twentyFourHrsResult","24"       );
-        rowMapTB_2.put("fortyEightHrsResult","48"       );
-        rowMapTB_2.put("seventyTwoHrsResult","72"       );
-        rowMapTB_2.put("QCStateLabel","In Progress");
+        Map<String, Object> rowMapTB_2 = new HashMap<>();
+        rowMapTB_2.put("id", id);
+        rowMapTB_2.put("date", new Date());
+        rowMapTB_2.put("test", "Test2");
+        rowMapTB_2.put("testType", "type2");
+        rowMapTB_2.put("site", "site2");
+        rowMapTB_2.put("twentyFourHrsResult", "24");
+        rowMapTB_2.put("fortyEightHrsResult", "48");
+        rowMapTB_2.put("seventyTwoHrsResult", "72");
+        rowMapTB_2.put("QCStateLabel", "In Progress");
         insertCmdTB2.addRow(rowMapTB_2);
 
-        SaveRowsResponse respTB2 =  insertCmdTB2.execute(createDefaultConnection(true), getProjectName());
+        SaveRowsResponse respTB2 = insertCmdTB2.execute(createDefaultConnection(true), getProjectName());
 
         InsertRowsCommand insertCmdWeight = new InsertRowsCommand("study", "weight");
-        Map<String,Object> rowMapWeight = new HashMap<>();
+        Map<String, Object> rowMapWeight = new HashMap<>();
         rowMapWeight.put("id", id);
         rowMapWeight.put("date", new Date());
         rowMapWeight.put("weight", "2.9");
         rowMapWeight.put("weightTattooFlag", "X");
         rowMapWeight.put("bodyConditionScore", "3");
         insertCmdWeight.addRow(rowMapWeight);
-        SaveRowsResponse respWeight =  insertCmdWeight.execute(createDefaultConnection(false), getContainerPath());
+        SaveRowsResponse respWeight = insertCmdWeight.execute(createDefaultConnection(false), getContainerPath());
     }
 
     @Test
@@ -1335,7 +1346,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "enddate",
                 "reason",
                 "reloc_seq"
-                );
+        );
         assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
 
         assertEquals("Wrong Housing History results,",
@@ -1433,7 +1444,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         String sireID = "TEST1684145";
         String breedingDate = "2011-05-26";
 
-        insertBreedingRegistrationFor(animalId, breedingDate,"S8", "TEST1112911");  // needed for validation
+        insertBreedingRegistrationFor(animalId, breedingDate, "S8", "TEST1112911");  // needed for validation
 
         log("Begin the test with entry data page - Breeding Observations");
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
@@ -1482,14 +1493,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private void insertBreedingRegistrationFor(String id, String date, String book, String maleEnemyOne) throws IOException, CommandException
     {
         InsertRowsCommand insertBreedReg = new InsertRowsCommand("study", "breedingRoster");
-        Map<String,Object> rowMapBreedReg = new HashMap<>();
+        Map<String, Object> rowMapBreedReg = new HashMap<>();
         rowMapBreedReg.put("id", id);
         rowMapBreedReg.put("date", date);
         rowMapBreedReg.put("book", book);
         rowMapBreedReg.put("maleEnemy1", maleEnemyOne);
 
         insertBreedReg.addRow(rowMapBreedReg);
-        SaveRowsResponse respBreedReg =  insertBreedReg.execute(createDefaultConnection(true), getProjectName());
+        SaveRowsResponse respBreedReg = insertBreedReg.execute(createDefaultConnection(true), getProjectName());
     }
 
     @Test
@@ -1541,7 +1552,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Cycle");
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
-        results.setFilter("sire","Equals",male);
+        results.setFilter("sire", "Equals", male);
         List<String> expectedRowData = Arrays.asList(animalId, male, "false", method, day);
         List<String> actualRowData = results.getRowDataAsText(0, "Id", "sire", "maleMultiUse", "methodOne", "gestDayOne");
         assertEquals("Wrong row data", expectedRowData, actualRowData);
@@ -1556,7 +1567,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         String maleEnemy1 = "TEST1112911";
 
         log("Begin the test with entry data page - Breeding Registration");
-        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Breeding Registration"));
         WebElement titleEl = waitForElement(Locator.xpath("//input[@name='title' and not(contains(@class, 'disabled'))]"), WAIT_FOR_JAVASCRIPT);
         waitForFormElementToEqual(titleEl, "Breeding Registration");
@@ -1568,9 +1579,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Registering the animal");
         Ext4GridRef breedingRegistration = _helper.getExt4GridForFormSection("Breeding Registration");
         _helper.addRecordToGrid(breedingRegistration);
-        breedingRegistration.setGridCell(1, "Id",animalId );
-        breedingRegistration.setGridCell(1, "book",book );
-        breedingRegistration.setGridCell(1, "maleEnemy1",maleEnemy1 );
+        breedingRegistration.setGridCell(1, "Id", animalId);
+        breedingRegistration.setGridCell(1, "book", book);
+        breedingRegistration.setGridCell(1, "maleEnemy1", maleEnemy1);
         clickButton("Save & Close");
 
         log("Opening the pending task for completion");
@@ -1578,7 +1589,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitAndClick(Locator.linkContainingText(TASK_TITLE_BRD_REG));
         switchToWindow(1);
         waitForText("Breeding Registration");
-        clickButton("Submit Final",0);
+        clickButton("Submit Final", 0);
         _extHelper.waitForExtDialog("Finalize Form");
         click(Ext4Helper.Locators.ext4Button("Yes"));
         waitForTextToDisappear("Saving Changes", 20000);
@@ -1602,12 +1613,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         String animalId = "TEST2";
         String methodCode = "Ultrasound";
-        String cycleDay1 ="2018-03-20";
-        String testResult ="Positive";
+        String cycleDay1 = "2018-03-20";
+        String testResult = "Positive";
         boolean scheduleStatus = false;
 
         log("Begin the test with entry data page - Pregnancy Determinations");
-        EnterDataPage enterData = EnterDataPage.beginAt(this,getProjectName());
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Pregnancy Determinations"));
         WebElement titleEl = waitForElement(Locator.xpath("//input[@name='title' and not(contains(@class, 'disabled'))]"), WAIT_FOR_JAVASCRIPT);
         waitForFormElementToEqual(titleEl, "Pregnancy Determinations");
@@ -1619,11 +1630,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Entering data for animal:" + animalId);
         Ext4GridRef pregnancyDeterminations = _helper.getExt4GridForFormSection("Pregnancy Determinations");
         _helper.addRecordToGrid(pregnancyDeterminations);
-        pregnancyDeterminations.setGridCell(1, "Id",animalId );
-        pregnancyDeterminations.setGridCell(1,"method",methodCode);
-        pregnancyDeterminations.setGridCell(1,"cycleDay1",cycleDay1);
-        pregnancyDeterminations.setGridCell(1,"result",testResult);
-        pregnancyDeterminations.setGridCell(1,"scheduleStatus","No");
+        pregnancyDeterminations.setGridCell(1, "Id", animalId);
+        pregnancyDeterminations.setGridCell(1, "method", methodCode);
+        pregnancyDeterminations.setGridCell(1, "cycleDay1", cycleDay1);
+        pregnancyDeterminations.setGridCell(1, "result", testResult);
+        pregnancyDeterminations.setGridCell(1, "scheduleStatus", "No");
         sleep(5000); // Weirdly sleep is needed for the Save & Close to be enabled , waitForElement is not working.
         clickButton("Save & Close");
 
@@ -1632,7 +1643,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitAndClick(Locator.linkContainingText(TASK_TITLE_PRG_DET));
         switchToWindow(1);
         waitForText("Pregnancy Determinations");
-        clickButton("Submit Final",0);
+        clickButton("Submit Final", 0);
         _extHelper.waitForExtDialog("Finalize Form");
         click(Ext4Helper.Locators.ext4Button("Yes"));
         waitForTextToDisappear("Saving Changes", 20000);
@@ -1645,7 +1656,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
 
-        results.setFilter("method","Equals",methodCode);
+        results.setFilter("method", "Equals", methodCode);
         List<String> expectedRowData = Arrays.asList(animalId, methodCode, testResult, "false", cycleDay1);
         List<String> actualRowData = results.getRowDataAsText(0, "Id", "method", "result", "scheduleStatus", "cycleDay1");
         assertEquals("Wrong row data", expectedRowData, actualRowData);
@@ -1662,7 +1673,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         ZonedDateTime oneHundredSeventyDaysAgo = now.minusDays(170);
         ZonedDateTime twoHundredDaysAgo = now.minusDays(200);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Map<String,Object> rowMapWeights = new HashMap<>();
+        Map<String, Object> rowMapWeights = new HashMap<>();
         rowMapWeights.put("weight", "9.1");
         rowMapWeights.put("date", dateTimeFormatter.format(now));
         rowMapWeights.put("Id", "TEST3771679");
@@ -1898,30 +1909,30 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = new DataRegionTable("query", getDriver());
         List<String> expectedColumns = Arrays.asList(
                 "Id/birth/species"
-                ,"Id"
-                ,"Id/demographics/gender"
-                ,"Id/age/yearsAndMonthsAndDays"
-                ,"Id/MostRecentWeight/MostRecentWeight"
-                ,"Id/curLocation/location"
-                ,"Id/DemographicsActiveAssignment/primaryProjectDate"
-                ,"projectCode"
-                ,"assignmentStatus"
-                ,"Id/DemographicsActiveAssignment/primaryProject"
-                ,"Id/DemographicsActiveAssignment/secondaryProjects"
-                ,"Id/DemographicsActivePayor/payor_ids"
-                ,"Id/flagList/values"
-                ,"Id/DemographicsActiveColony/colonyCode"
-                ,"Id/DemographicsActiveBreedingGroup/groupCode"
-                ,"Id/DemographicsActivePregnancy/conNum"
-                ,"Id/DemographicsActivePregnancy/daysPregnant"
-                ,"Id/DemographicsActivePregnancy/conceptionDateStatus"
+                , "Id"
+                , "Id/demographics/gender"
+                , "Id/age/yearsAndMonthsAndDays"
+                , "Id/MostRecentWeight/MostRecentWeight"
+                , "Id/curLocation/location"
+                , "Id/DemographicsActiveAssignment/primaryProjectDate"
+                , "projectCode"
+                , "assignmentStatus"
+                , "Id/DemographicsActiveAssignment/primaryProject"
+                , "Id/DemographicsActiveAssignment/secondaryProjects"
+                , "Id/DemographicsActivePayor/payor_ids"
+                , "Id/flagList/values"
+                , "Id/DemographicsActiveColony/colonyCode"
+                , "Id/DemographicsActiveBreedingGroup/groupCode"
+                , "Id/DemographicsActivePregnancy/conNum"
+                , "Id/DemographicsActivePregnancy/daysPregnant"
+                , "Id/DemographicsActivePregnancy/conceptionDateStatus"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
-        int rowIndex = results.getRowIndex(1,"TEST1112911");
-        assertEquals("Wrong value for ID: ", "TEST1112911", results.getDataAsText(rowIndex,1));
-        assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(rowIndex,6));
-        assertEquals("Wrong value for Searched Project: ", PROJECT_CODE_5_CHAR_1, results.getDataAsText(rowIndex,7));
+        int rowIndex = results.getRowIndex(1, "TEST1112911");
+        assertEquals("Wrong value for ID: ", "TEST1112911", results.getDataAsText(rowIndex, 1));
+        assertEquals("Wrong value for Proj Assn Date: ", "2005-05-20", results.getDataAsText(rowIndex, 6));
+        assertEquals("Wrong value for Searched Project: ", PROJECT_CODE_5_CHAR_1, results.getDataAsText(rowIndex, 7));
     }
 
     @Test
@@ -1934,21 +1945,21 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                "Id","Year","MonthName","monthNum",
-                "1::inds","2::inds","3::inds","4::inds","5::inds","6::inds","7::inds",
-                "8::inds","9::inds","10::inds","11::inds","12::inds","13::inds","14::inds",
-                "15::inds","16::inds","17::inds","18::inds","19::inds","20::inds",
-                "21::inds","22::inds","23::inds","24::inds","25::inds","26::inds",
-                "27::inds","28::inds","29::inds","30::inds","31::inds"
+                "Id", "Year", "MonthName", "monthNum",
+                "1::inds", "2::inds", "3::inds", "4::inds", "5::inds", "6::inds", "7::inds",
+                "8::inds", "9::inds", "10::inds", "11::inds", "12::inds", "13::inds", "14::inds",
+                "15::inds", "16::inds", "17::inds", "18::inds", "19::inds", "20::inds",
+                "21::inds", "22::inds", "23::inds", "24::inds", "25::inds", "26::inds",
+                "27::inds", "28::inds", "29::inds", "30::inds", "31::inds"
         );
-        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST6390238","2012","January","1","","","Dc","","","Dc","","","Dc","","","Dc","","","","","","Dc","","","Dc","","","Dc","","","Dc","","","Dc",""
+                "TEST6390238", "2012", "January", "1", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", ""
         );
 
         //results.setAsync(true); // setting async governs whether setSort will wait for the menuitem to stale
-       // results.setSort("Id", SortDirection.ASC);
+        // results.setSort("Id", SortDirection.ASC);
         List<String> resultsRowDataAsText = results.getRowDataAsText(0);//.subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
@@ -1957,17 +1968,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Diarrhea Calendar");
 
         List<String> expectedForSecondAnimal = Arrays.asList(
-                "TEST3224553","2010","January","1","","","","+","","","","","","","","","","","","","","","~","","","","","","","","","","","","Dc"
+                "TEST3224553", "2010", "January", "1", "", "", "", "+", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "~", "", "", "", "", "", "", "", "", "", "", "", "Dc"
         );
         results = animalHistoryPage.getActiveReportDataRegion();
         List<String> resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(0);
-        assertEquals("Wrong data for animal TEST3224553 - row 0",expectedForSecondAnimal,resultsRowDataAsTextForSecondAnimal);
+        assertEquals("Wrong data for animal TEST3224553 - row 0", expectedForSecondAnimal, resultsRowDataAsTextForSecondAnimal);
 
         List<String> expectedForSecondAnimal9 = Arrays.asList(
-                "TEST3224553","2011","January","1","","","","","","~","","","","~","","","","","","","","","D","","","","","","","","","","","","Dc"
+                "TEST3224553", "2011", "January", "1", "", "", "", "", "", "~", "", "", "", "~", "", "", "", "", "", "", "", "", "D", "", "", "", "", "", "", "", "", "", "", "", "Dc"
         );
         resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(9);
-        assertEquals("Wrong data for animal TEST3224553 - row 9",expectedForSecondAnimal9,resultsRowDataAsTextForSecondAnimal);
+        assertEquals("Wrong data for animal TEST3224553 - row 9", expectedForSecondAnimal9, resultsRowDataAsTextForSecondAnimal);
     }
 
     @Test
@@ -1993,12 +2004,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                "Id","gender","Relationship","Offspring","birth","Sex","Flags","Location","calculated_status","LastKnownLocation","qcstate"
+                "Id", "gender", "Relationship", "Offspring", "birth", "Sex", "Flags", "Location", "calculated_status", "LastKnownLocation", "qcstate"
         );
-        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                id,"Male","Offspring","TEST2","2002-10-13","Female","AMC, BETA, CHU","58737393","Alive", "58737393"
+                id, "Male", "Offspring", "TEST2", "2002-10-13", "Female", "AMC, BETA, CHU", "58737393", "Alive", "58737393"
         );
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
         assertEquals("Wrong data", expected, resultsRowDataAsText);
@@ -2006,24 +2017,24 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickCategoryTab("Reproductive Management");
         animalHistoryPage.clickReportTab("Siblings");
 
-        expectedColumns= Arrays.asList(
-                "Id","Relationship","Sibling","Sex","Flags","Location","SiblingDam","SiblingSire","calculated_status","LastKnownLocation","qcstate"
+        expectedColumns = Arrays.asList(
+                "Id", "Relationship", "Sibling", "Sex", "Flags", "Location", "SiblingDam", "SiblingSire", "calculated_status", "LastKnownLocation", "qcstate"
         );
         waitForElement(new Locator.LinkLocator("Siblings - " + id));
         results = animalHistoryPage.getActiveReportDataRegion();
-        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
         assertTextPresent("No data to show");
-        assertEquals("Wrong row count",0,results.getDataRowCount());
+        assertEquals("Wrong row count", 0, results.getDataRowCount());
 
         id = "TEST3";
         animalHistoryPage.searchSingleAnimal(id);
         waitForElement(new Locator.LinkLocator("Siblings - " + id));
         results = animalHistoryPage.getActiveReportDataRegion();
         expected = Arrays.asList(
-                id,"Full Sib","TEST2","Female","AMC, BETA, CHU","58737393","TEST2312318","TEST6390238", "Alive", "58737393"
+                id, "Full Sib", "TEST2", "Female", "AMC, BETA, CHU", "58737393", "TEST2312318", "TEST6390238", "Alive", "58737393"
         );
         resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size() - 1);
-        assertEquals("Wrong row count",10,results.getDataRowCount());
+        assertEquals("Wrong row count", 10, results.getDataRowCount());
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
         animalHistoryPage.clickCategoryTab("Genetics");
@@ -2031,23 +2042,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForText("Kinship - " + id);
         waitForText("Coefficient");
         results = animalHistoryPage.getActiveReportDataRegion();
-        expectedColumns= Arrays.asList(
-                "Id","Id2","coefficient"
+        expectedColumns = Arrays.asList(
+                "Id", "Id2", "coefficient"
         );
-        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
         expected = Arrays.asList(
-                id,"TEST5158984","0.25"
+                id, "TEST5158984", "0.25"
         );
         resultsRowDataAsText = results.getRowDataAsText(0);
-        assertEquals("Wrong row count",12,results.getDataRowCount());
+        assertEquals("Wrong row count", 12, results.getDataRowCount());
         assertEquals("Wrong data", expected, resultsRowDataAsText);
 
         animalHistoryPage.clickReportTab("Inbreeding Coefficients");
         results = animalHistoryPage.getActiveReportDataRegion();
-        expectedColumns= Arrays.asList(
+        expectedColumns = Arrays.asList(
                 "Id", "date", "coefficient", "projectCode", "taskid", "requestid", "description", "remark", "history", "QCState"
         );
-        assertEquals("Wrong columns",expectedColumns,results.getColumnNames());
+        assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
     }
 
     @Test
@@ -2096,15 +2107,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         List<String> expectedColumns = Arrays.asList(
                 "Id"
-                ,"date"
-                ,"enddate"
-                ,"projectCode"
-                ,"assignmentStatus"
-                ,"pi_name"
-                ,"title"
-                ,"protocol"
-                ,"unitCode"
-                ,"timeOnProject"
+                , "date"
+                , "enddate"
+                , "projectCode"
+                , "assignmentStatus"
+                , "pi_name"
+                , "title"
+                , "protocol"
+                , "unitCode"
+                , "timeOnProject"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
@@ -2138,30 +2149,30 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Checking for acquired animal");
         animalHistoryPage.searchSingleAnimal("TEST1");
 
-        Map<String,String> expectedColumns = new HashMap<String,String>();
-        expectedColumns.put("Sex","Female");
-        expectedColumns.put("Generation","4");
-        expectedColumns.put("Birth","2000-03-28");
-        expectedColumns.put("Birth Con No","");
-        expectedColumns.put("Dam ID","8416939");
-        expectedColumns.put("Sire ID","5030167");
-        expectedColumns.put("Acquisition","2005-07-19 abl");
-        expectedColumns.put("Previous ID","PREVID");
-        expectedColumns.put("Death","");
-        expectedColumns.put("Departure","");
-        expectedColumns.put("Acquisition Age","05:03:22");
-        expectedColumns.put("Time at CNPRC","12:05:02");
-        expectedColumns.put("Age at Departure/Death","");
-        expectedColumns.put("Location","2004-02-19 58737392");
-        expectedColumns.put("Weight","2011-07-22  5.83 kg");
-        expectedColumns.put("Body Condition","2011-07-22  5.5");
-        expectedColumns.put("TB Test","2010-01-25");
-        expectedColumns.put("Serum Bank","2016-09-29");
-        expectedColumns.put("Harvest","");
-        expectedColumns.put("SPF Status","0 - Conventional");
-        expectedColumns.put("Colony","X");
-        expectedColumns.put("Breeding group","O");
-        expectedColumns.put("Perdiem","2015-05-01  AB125/YZ16");
+        Map<String, String> expectedColumns = new HashMap<String, String>();
+        expectedColumns.put("Sex", "Female");
+        expectedColumns.put("Generation", "4");
+        expectedColumns.put("Birth", "2000-03-28");
+        expectedColumns.put("Birth Con No", "");
+        expectedColumns.put("Dam ID", "8416939");
+        expectedColumns.put("Sire ID", "5030167");
+        expectedColumns.put("Acquisition", "2005-07-19 abl");
+        expectedColumns.put("Previous ID", "PREVID");
+        expectedColumns.put("Death", "");
+        expectedColumns.put("Departure", "");
+        expectedColumns.put("Acquisition Age", "05:03:22");
+        expectedColumns.put("Time at CNPRC", "12:05:02");
+        expectedColumns.put("Age at Departure/Death", "");
+        expectedColumns.put("Location", "2004-02-19 58737392");
+        expectedColumns.put("Weight", "2011-07-22  5.83 kg");
+        expectedColumns.put("Body Condition", "2011-07-22  5.5");
+        expectedColumns.put("TB Test", "2010-01-25");
+        expectedColumns.put("Serum Bank", "2016-09-29");
+        expectedColumns.put("Harvest", "");
+        expectedColumns.put("SPF Status", "0 - Conventional");
+        expectedColumns.put("Colony", "X");
+        expectedColumns.put("Breeding group", "O");
+        expectedColumns.put("Perdiem", "2015-05-01  AB125/YZ16");
 
         WebElement activeReportPanel = animalHistoryPage.getActiveReportPanel();
 
@@ -2169,7 +2180,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> values = getTexts(Locator.byClass("x4-field-label-cell").followingSibling("td").findElements(activeReportPanel));
         Iterator<String> ilabels = labels.iterator();
         Iterator<String> ivalues = values.iterator();
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String, String> map = new HashMap<String, String>();
         while (ilabels.hasNext() && ivalues.hasNext())
         {
             expectedColumns.containsKey(ilabels.next());
@@ -2184,22 +2195,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.searchSingleAnimal("TEST1");
         List<String> deadLabels = getTexts(Locator.byClass("x4-field-label-cell").findElements(activeReportPanel));
         List<String> deadValues = getTexts(Locator.byClass("x4-field-label-cell").followingSibling("td").findElements(activeReportPanel));
-        Map<String,String> expectedColumnsForDead = new HashMap<String,String>();
-        expectedColumnsForDead.put("Death","2011-06-06  M  Trauma");
-        expectedColumnsForDead.put("Time at CNPRC","01:10:03");
-        expectedColumnsForDead.put("Age at Departure/Death","01:10:03");
-        expectedColumnsForDead.put("Location","2014-02-19  DEAD from AC500389");
+        Map<String, String> expectedColumnsForDead = new HashMap<String, String>();
+        expectedColumnsForDead.put("Death", "2011-06-06  M  Trauma");
+        expectedColumnsForDead.put("Time at CNPRC", "01:10:03");
+        expectedColumnsForDead.put("Age at Departure/Death", "01:10:03");
+        expectedColumnsForDead.put("Location", "2014-02-19  DEAD from AC500389");
 
         Iterator<String> ideadLabels = deadLabels.iterator();
         Iterator<String> ideadValues = deadValues.iterator();
 
-        while(ideadLabels.hasNext() && ideadValues.hasNext())
+        while (ideadLabels.hasNext() && ideadValues.hasNext())
         {
             expectedColumnsForDead.containsValue(ideadValues.next());
             expectedColumnsForDead.containsKey(ideadLabels.next());
         }
 
     }
+
     @Test
     public void testAnimalHistoryImmunizationView()
     {
@@ -2211,9 +2223,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.linkContainingText(reportTab));
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                 "Id"
-                ,"date"
-                ,"code"
+                "Id"
+                , "date"
+                , "code"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
@@ -2230,7 +2242,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         results.link(3, "Vaccination Code").click();
         switchToWindow(1);
-        assertTextPresent("Record Details","Experimental");
+        assertTextPresent("Record Details", "Experimental");
     }
 
     @Test
@@ -2247,23 +2259,23 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
                 "Id"
-                ,"sampleDate"
-                ,"testDoneDate"
-                ,"virus"
-                ,"target"
-                ,"method"
-                ,"results"
-                ,"sampleType"        );
+                , "sampleDate"
+                , "testDoneDate"
+                , "virus"
+                , "target"
+                , "method"
+                , "results"
+                , "sampleType");
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                "TEST3804589","2016-06-01 13:29","2016-06-29 00:00","CMV","AB","EL","-","SER"
+                "TEST3804589", "2016-06-01 13:29", "2016-06-29 00:00", "CMV", "AB", "EL", "-", "SER"
         );
 
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, expectedColumns.size());
         assertEquals("Wrong data for row 1.", expected, resultsRowDataAsText);
         assertEquals("Wrong row count: ", 1, results.getDataRowCount());
-        assertTextPresent("Legend", "Virus","Positive");
+        assertTextPresent("Legend", "Virus", "Positive");
 
     }
 
@@ -2280,26 +2292,26 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
                 "Id"
-                ,"assigned"
-                ,"released"
-                ,"payorId"
-                ,"primaryProject"
-                ,"secondaryProjects"
-                ,"colonyCode"
-                ,"groupCode"
+                , "assigned"
+                , "released"
+                , "payorId"
+                , "primaryProject"
+                , "secondaryProjects"
+                , "colonyCode"
+                , "groupCode"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         assertEquals("Wrong row count: ", 1, results.getDataRowCount());
 
-        List<String> expected = Arrays.asList("44446","2016-10-05"," ","AB126/YZ18","Pc5C2"," ","X","T");
+        List<String> expected = Arrays.asList("44446", "2016-10-05", " ", "AB126/YZ18", "Pc5C2", " ", "X", "T");
         confirmRowText(results, expected, 0);
 
         animalHistoryPage.searchSingleAnimal("44444");
         waitForElement(Locator.linkContainingText(reportTab));
         results = animalHistoryPage.getActiveReportDataRegion();
 
-        expected = Arrays.asList("44444","2014-02-08","2016-01-01","AB125/YZ17","Pc5C0","Pc5C1, Pc5C2","O","M");
+        expected = Arrays.asList("44444", "2014-02-08", "2016-01-01", "AB125/YZ17", "Pc5C0", "Pc5C1, Pc5C2", "O", "M");
         confirmRowText(results, expected, 0);
 
         assertElementPresent(Locator.linkWithText("AB125/YZ17"));
@@ -2342,22 +2354,22 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                 "Id"
-                ,"pairedWithId"
-                ,"date"
-                ,"endDate"
-                ,"observation"
-                ,"remark"
-                ,"timePaired"
+                "Id"
+                , "pairedWithId"
+                , "date"
+                , "endDate"
+                , "observation"
+                , "remark"
+                , "timePaired"
         );
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
                 "TEST1112911"
-                ,"TEST1684145"
-                ,"2011-07-19 11:29"
-                ," "
-                ,"IP"
+                , "TEST1684145"
+                , "2011-07-19 11:29"
+                , " "
+                , "IP"
         );
 
         List<String> resultsRowDataAsText = results.getRowDataAsText(0).subList(0, 5);
@@ -2387,44 +2399,44 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumnNames = Arrays.asList(
                 "id"
-                ,"date"
-                ,"weight"
-                ,"TB"
-                ,"test1"
-                ,"test2"
-                ,"weightTattooFlag"
-                ,"bodyConditionScore"
-                ,"location"
-                ,"cage"
-                ,"conception"
-                ,"daysPregnant"
+                , "date"
+                , "weight"
+                , "TB"
+                , "test1"
+                , "test2"
+                , "weightTattooFlag"
+                , "bodyConditionScore"
+                , "location"
+                , "cage"
+                , "conception"
+                , "daysPregnant"
         );
         List<String> expectedColumnLabels = Arrays.asList(
                 "Animal ID"
-                ,"Date"
-                ,"Weight (kg)"
-                ,"TB"
-                ,"Test1"
-                ,"Test2"
-                ,"Tattoo"
-                ,"Body Condition"
-                ,"Location"
-                ,"Cage"
-                ,"Conception"
-                ,"Days Pregnant"
+                , "Date"
+                , "Weight (kg)"
+                , "TB"
+                , "Test1"
+                , "Test2"
+                , "Tattoo"
+                , "Body Condition"
+                , "Location"
+                , "Cage"
+                , "Conception"
+                , "Days Pregnant"
         );
 
         assertEquals("Wrong columns", expectedColumnNames, results.getColumnNames());
         assertEquals("Wrong column labels", expectedColumnLabels, results.getColumnLabels());
-        assertEquals("Wrong value for ID: ", animalId, results.getDataAsText(0,0));
-        assertEquals("Wrong value for Weight: ", "2.90", results.getDataAsText(0,2));
-        assertEquals("Wrong value for TB: ", "TB", results.getDataAsText(0,3));
-        assertEquals("Wrong value for Test1: ", "typesite244872", results.getDataAsText(0,4));
-        assertEquals("Wrong value for Test2: ", "type2site2244872", results.getDataAsText(0,5));
-        assertEquals("Wrong value for Tattoo: ", "X", results.getDataAsText(0,6));
-        assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0,7));
-        assertEquals("Wrong value for Room: ", "<6824778>", results.getDataAsText(0,8));
-        assertEquals("Wrong value for Cage: ", "4953547", results.getDataAsText(0,9));
+        assertEquals("Wrong value for ID: ", animalId, results.getDataAsText(0, 0));
+        assertEquals("Wrong value for Weight: ", "2.90", results.getDataAsText(0, 2));
+        assertEquals("Wrong value for TB: ", "TB", results.getDataAsText(0, 3));
+        assertEquals("Wrong value for Test1: ", "typesite244872", results.getDataAsText(0, 4));
+        assertEquals("Wrong value for Test2: ", "type2site2244872", results.getDataAsText(0, 5));
+        assertEquals("Wrong value for Tattoo: ", "X", results.getDataAsText(0, 6));
+        assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0, 7));
+        assertEquals("Wrong value for Room: ", "<6824778>", results.getDataAsText(0, 8));
+        assertEquals("Wrong value for Cage: ", "4953547", results.getDataAsText(0, 9));
 
         List<WebPartPanel> reportPanels = WebPartPanel.WebPart(getDriver()).findAll(animalHistoryPage.getActiveReportPanel());
         List<String> reportTitles = new ArrayList<>();
@@ -2469,8 +2481,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         );
         assertEquals("Wrong columns:\n", expectedColumns, results.getColumnNames());
 
-        assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0,1));
-        assertEquals("Wrong value for Gender: ", "F", results.getDataAsText(0,2));
+        assertEquals("Wrong value for ID: ", "TEST3804589", results.getDataAsText(0, 1));
+        assertEquals("Wrong value for Gender: ", "F", results.getDataAsText(0, 2));
         assertElementPresent(Locator.linkWithText(PROJECT_CODE_5_CHAR_1));
     }
 
@@ -2483,29 +2495,29 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         searchPanel = getSearchPanel();
         List<String> expectedLabels = Arrays.asList(
                 "Species code (3 char):"
-                ,"Sex:"
-                ,"Status:"
-                ,"Pairing Status:"
-                ,"Age (Years):"
-                ,"Age (Years):"
-                ,"Current Weight (kg):"
-                ,"Area:"
-                ,"Room:"
-                ,"Cage:"
-                ,"Current Project:"
-                ,"Past Projects:"
-                ,"Past Projects:"
-                ,"Payor Id:"
-                ,"Census Flags:"
-                ,"Census Flags:"
-                ,"Breeding Group:"
-                ,"Conception Num:"
-                ,"Colony Code:"
-                ,"SNOMED:"
-                ,"TB Date:"
-                ,"SPF Status:"
-                ,"Body Condition:"
-                ,"View:"
+                , "Sex:"
+                , "Status:"
+                , "Pairing Status:"
+                , "Age (Years):"
+                , "Age (Years):"
+                , "Current Weight (kg):"
+                , "Area:"
+                , "Room:"
+                , "Cage:"
+                , "Current Project:"
+                , "Past Projects:"
+                , "Past Projects:"
+                , "Payor Id:"
+                , "Census Flags:"
+                , "Census Flags:"
+                , "Breeding Group:"
+                , "Conception Num:"
+                , "Colony Code:"
+                , "SNOMED:"
+                , "TB Date:"
+                , "SPF Status:"
+                , "Body Condition:"
+                , "View:"
         );
 
         assertEquals("Wrong search criteria.", expectedLabels, searchPanel.getAllSearchCriteria());
@@ -2534,8 +2546,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static final String TRIGGER_NAME = "MorningHealthImportTestTrigger";
     public static final String MORNING_HEALTH_DATA_NAME = "mh_good_file";
     public static final String MORNING_HEALTH_DATA_FILENAME = MORNING_HEALTH_DATA_NAME + ".csv";  // NOTE: .csv file type is hardcoded in cnprc_ehrContext.xml
+    public static final String MORNING_HEALTH_BAD_DATA_NAME = "mh_bad_file2";
+    public static final String MORNING_HEALTH_BAD_DATA_FILENAME = MORNING_HEALTH_BAD_DATA_NAME + ".csv";
     public static final String FILE_PATTERN = "\\.csv";
     public static final File MORNING_HEALTH_DATA_ORIG = TestFileUtils.getSampleData("cnprc/" + MORNING_HEALTH_DATA_FILENAME);
+    public static final File MORNING_HEALTH_DATA_BAD_ORIG = TestFileUtils.getSampleData("cnprc/" + MORNING_HEALTH_BAD_DATA_FILENAME);
     public static final File TEMP_DIR = FileUtil.getTempDirectory();
 
     // copies first part from FileWatcherPipelineTriggerTest
@@ -2567,25 +2582,43 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         wizard.saveConfiguration();
 
         File destFile = new File(TEMP_DIR, MORNING_HEALTH_DATA_FILENAME);
+        File destFileBadFile = new File(TEMP_DIR, MORNING_HEALTH_BAD_DATA_FILENAME);
 
         FileUtil.copyFile(MORNING_HEALTH_DATA_ORIG, destFile);
+        FileUtil.copyFile(MORNING_HEALTH_DATA_BAD_ORIG, destFileBadFile);
         beginAt(WebTestHelper.getBaseURL() + "/pipeline-status/" + getContainerPath() + "/begin.view");
-        waitForPipelineJobsToComplete(8,
+        waitForPipelineJobsToComplete(11,
                 "referenceStudy/" + MORNING_HEALTH_DATA_NAME + " (" + TRIGGER_NAME + ")",
-                false,
+                true,
                 30 * 1000);
+        clickAndWait(Locator.linkWithText("ERROR"));
+        assertTextPresent("'UNCHNGD' found as first sign, but no valid observations were found after it");
 
         beginAt("/project/" + getContainerPath() + "/begin.view");
         waitAndClickAndWait(Locator.linkWithText("Edit Indoor Morning Health Data"));
         DataRegionTable results = new DataRegionTable("query", getDriver());
         results.removeColumn("status");  // can't be sure if this will be "U" or "V" at time test runs
+        CustomizeView cvHelper = results.getCustomizeView();
+        cvHelper.openCustomizeViewPanel();
+        cvHelper.showHiddenItems();
+        cvHelper.addColumn("fileName");
+        cvHelper.saveDefaultView();
+        results.setFilter("fileName", "Contains", "good");
         results.setSort("fileLineNumber", SortDirection.ASC);
         List<String> expected = Lists.newArrayList("73C7DE6B2CA84AEA82B1C24A274D3255", "Indoor_Morning_Health", "1", "false",
                 "73C7DE6B2CA84AEA82B1C24A274D3255,DSTEST,20180429,060943,44444,AC5003-89,LIQDSTL,,,,,,,,,,,");
 
         assertEquals("Expected values not found for mh_processing.", expected, results.getRowDataAsText(0).subList(0, expected.size()));
+        checkExpectedErrors(27);
 
         deleteAllRows(PROJECT_NAME, "pipeline", "TriggerConfigurations");
+
+        goToSchemaBrowser();
+        viewQueryData("study", "morningHealthObs");
+        DataRegionTable table = new DataRegionTable("query", this);
+        table.setFilter("Id", "Equals", "44444");
+        table.setFilter("observation", "Equals", "LIQDSTL");
+        assertEquals("Single recorded uploaded with this information.", 1, table.getDataRowCount());
     }
 
     @NotNull
@@ -2609,7 +2642,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     private void beginAtPdlListView()
     {
-        beginAt(PROJECT_NAME+ "/"  + COREFACILITIES + "/" + PDLFOLDER + "/list-begin.view?");
+        beginAt(PROJECT_NAME + "/" + COREFACILITIES + "/" + PDLFOLDER + "/list-begin.view?");
     }
 
     private void validateLookupFromTable(String table, String linkText, String expectedText)
@@ -2621,7 +2654,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     private void beginAtPdlTableView(String table)
     {
-        beginAt("/query/" + PROJECT_NAME+ "/"  + COREFACILITIES + "/" + PDLFOLDER + "/executeQuery.view?query.queryName=" + table + "&schemaName=cnprc_pdl");
+        beginAt("/query/" + PROJECT_NAME + "/" + COREFACILITIES + "/" + PDLFOLDER + "/executeQuery.view?query.queryName=" + table + "&schemaName=cnprc_pdl");
     }
 
     private void storePDLData() throws Exception
@@ -2630,7 +2663,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         String folder = "/" + COREFACILITIES + "/" + PDLFOLDER;
         insertTsvData(connection, SCHEMA_CNPRC_PDL, "samples", PDL_SAMPLE_TSV, folder);
         insertTsvData(connection, SCHEMA_CNPRC_PDL, "sub_tests", PDL_SUB_TEST_TSV, folder);
-        insertTsvData(connection, SCHEMA_CNPRC_PDL, "tests",PDL_TEST_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_PDL, "tests", PDL_TEST_TSV, folder);
         insertTsvData(connection, SCHEMA_CNPRC_PDL, "orders", PDL_ORDER_TSV, folder);
     }
 
@@ -2652,57 +2685,68 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void customActionsTest()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testQuickSearch()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testWeightValidation()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testSecurityDataAdmin()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testSecurityRequester()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testSecurityBasicSubmitter()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testSecurityFullSubmitter()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testSecurityFullUpdater()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testSecurityRequestAdmin()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testCustomButtons()
     {
     }
 
-    @Override @Ignore
+    @Override
+    @Ignore
     public void testCalculatedAgeColumns()
     {
     }
