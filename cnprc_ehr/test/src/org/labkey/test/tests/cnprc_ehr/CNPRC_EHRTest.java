@@ -268,7 +268,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Menses",
                 "Offspring",
                 "Pregnancy Determinations",
-                "Reproductive Summary",
+                "Reproductive Calendar",
                 "Semen Analysis",
                 "Siblings"));
         put("Respiratory Diseases", Arrays.asList(
@@ -587,7 +587,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     public BrowserType bestBrowser()
     {
-        return BrowserType.CHROME;
+        return BrowserType.FIREFOX;
     }
 
     @Override
