@@ -587,7 +587,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     public BrowserType bestBrowser()
     {
-        return BrowserType.FIREFOX;
+        return BrowserType.CHROME;
     }
 
     @Override
