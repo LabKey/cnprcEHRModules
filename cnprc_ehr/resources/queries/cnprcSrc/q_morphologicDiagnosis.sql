@@ -16,7 +16,7 @@
 SELECT 
 PR_AN_ID AS Id,
 PR_DATE,
-PR_PROJECT AS projectCode,
+PD_FK AS pathologyFK, --FK to study.Necropsy.prPk or study.Biopsy.prPk
 PD_SEQ AS seq1,
 SNO_TOPOGRAPHY_CODE AS tissue,
 PR_REPORT_TYPE AS reportType,

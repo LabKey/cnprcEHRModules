@@ -16,7 +16,7 @@
 
 SELECT biopsy.Id,
        biopsy.lsid,
-       biopsy.prmfk AS reportId,
+       biopsy.prmfk AS reportId, --TODO: after data entry, we will need to handle this differently - perhaps use ehr.tasks.rowid as reportId and change this line to do coalesce?! TBD
        biopsy.date AS datePerformed,
        biopsy.projectCode AS project,
        biopsy.performedBy AS investigator,
@@ -28,7 +28,7 @@ UNION ALL
 
 SELECT necropsy.Id,
        necropsy.lsid,
-       necropsy.prmfk AS reportId,
+       necropsy.prmfk AS reportId, --TODO: after data entry, we will need to handle this differently - perhaps use ehr.tasks.rowid as reportId and change this line to do coalesce?! TBD
        necropsy.date AS datePerformed,
        necropsy.projectCode as project,
        necropsy.performedBy AS investigator,

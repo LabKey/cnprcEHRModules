@@ -16,7 +16,7 @@
 SELECT
 PRM_AN_ID AS Id,
 PRM_WORK_PERFORMED_DATE,
-PRM_PROJECT AS projectCode,
+PNM_PRM_FK AS pathologyFK, --FK to study.Necropsy.prmFk or study.Biopsy.prmFk
 PRM_REPORT_COMPLETE AS enddate,
 PNM_NAME AS tissue,
 PNM_VALUE AS measurementValue,

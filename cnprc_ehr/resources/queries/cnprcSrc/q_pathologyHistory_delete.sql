@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 LabKey Corporation
+ * Copyright (c) 2018 LabKey Corporation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,7 @@
  * limitations under the License.
  */
 SELECT
-PR_AN_ID AS Id,
-PR_DATE,
-PR_PROJECT AS projectCode,
-POT_ORGAN AS organ,
-POT_FK AS pathologyFK, --FK to study.Necropsy.prPk or study.Biopsy.prPk
-PR_REPORT_TYPE AS reportType,
-POT_TEXT AS remark,
-ot.OBJECTID as objectid,
-CAST(CASE WHEN(ot.DATE_TIME > pr.DATE_TIME)
-  THEN
-    ot.DATE_TIME
-  ELSE pr.DATE_TIME
-END AS TIMESTAMP) AS date_time
-FROM
-cnprcSrc.ZPATH_ORGAN_TEXT ot
-LEFT JOIN
-cnprcSrc.ZPATH_REPORT pr
-ON
-ot.POT_FK = pr.PR_PK;
+  objectid,
+  date_time
+FROM cnprcSrc_aud.APATH_CLINICAL_HISTORY
+WHERE PCH_AUD_CODE = 'D'

@@ -385,8 +385,8 @@
                 <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
                 <nullable>false</nullable>
             </column>
-            <column columnName="projectCode">
-                <datatype>varchar</datatype>
+            <column columnName="pathologyFK">
+                <datatype>integer</datatype>
             </column>
             <column columnName="seq1">
                 <datatype>integer</datatype>
@@ -466,8 +466,8 @@
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
             </column>
-            <column columnName="projectCode">
-                <datatype>varchar</datatype>
+            <column columnName="pathologyFK">
+                <datatype>integer</datatype>
             </column>
         </columns>
         <tableTitle>Organ Measurements</tableTitle>
@@ -2682,8 +2682,8 @@
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
                 <isKeyField>true</isKeyField>
             </column>
-            <column columnName="projectCode">
-                <datatype>varchar</datatype>
+            <column columnName="pathologyFK">
+                <datatype>integer</datatype>
             </column>
         </columns>
         <tableTitle>Gross Findings</tableTitle>
@@ -3673,5 +3673,39 @@
             </column>
         </columns>
         <tableTitle>Pregnancy Confirmations</tableTitle>
+    </table>
+    <table tableName="pathologyHistory" tableDbType="TABLE" useColumnOrder="true">
+        <columns>
+            <column columnName="Id">
+                <datatype>varchar</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#ParticipantId</propertyURI>
+                <importAliases>
+                    <importAlias>ptid</importAlias>
+                </importAliases>
+            </column>
+            <column columnName="date">
+                <datatype>timestamp</datatype>
+                <propertyURI>http://cpas.labkey.com/Study#VisitDate</propertyURI>
+                <conceptURI>http://cpas.labkey.com/Study#VisitDate</conceptURI>
+            </column>
+            <column columnName="pathologyFK">
+                <datatype>integer</datatype>
+            </column>
+            <column columnName="clinician">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="diagnosis">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="modifyNecropsy">
+                <datatype>varchar</datatype>
+            </column>
+            <column columnName="objectid">
+                <datatype>entityid</datatype>
+                <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
+                <isKeyField>true</isKeyField>
+            </column>
+        </columns>
+        <tableTitle>Pathology History</tableTitle>
     </table>
 </tables>

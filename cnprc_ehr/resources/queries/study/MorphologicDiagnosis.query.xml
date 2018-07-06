@@ -13,15 +13,7 @@
                     <columnTitle>Report Date</columnTitle>
                     <formatString>Date</formatString>
                 </column>
-                <column columnName="projectCode">
-                    <columnTitle>Project Code</columnTitle>
-                    <fk>
-                        <fkDbSchema>cnprc_ehr</fkDbSchema>
-                        <fkTable>project</fkTable>
-                        <fkColumnName>projectCode</fkColumnName>
-                        <fkDisplayColumnName>projectCode</fkDisplayColumnName>
-                    </fk>
-                </column>
+                <column columnName="pathologyFK"/>
                 <column columnName="tissue">
                     <columnTitle>Organ/Tissue</columnTitle>
                     <fk>

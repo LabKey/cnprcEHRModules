@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 SELECT
-PRM_AN_ID AS Id,
-PRM_WORK_PERFORMED_DATE,
+PR_AN_ID AS Id,
+PR_DATE,
 PR_PK AS prPk,
 PR_PRM_FK AS prmFk,
 PRM_PROJECT AS projectCode,

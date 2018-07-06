@@ -78,5 +78,6 @@
         <dataset name="microbiology" id="5018" category="ClinPath" type="Standard"/>
         <dataset name="parasitologyResults" id="1052" category="ClinPath" type="Standard"/>
         <dataset name="clinremarks" id="1047" category="Clinical" type="Standard"/>
+        <dataset name="pathologyHistory" id="5040" category="Pathology" type="Standard"/>
     </datasets>
 </datasets>
