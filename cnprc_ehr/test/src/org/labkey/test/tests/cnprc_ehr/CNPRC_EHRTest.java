@@ -238,14 +238,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Urinalysis",
                 "Virology"));
         put("Pathology", Arrays.asList(
-                "Biopsies",
                 "Clinical History - Full",
-                "Gross Findings",
                 "Histology",
-                "Morphologic Diagnosis",
-                "Necropsies",
-                "SNOMED Codes - Grouped",
-                "Tissue Measurements"));
+                "SNOMED Codes - Grouped"));
         put("Physical Exam", Arrays.asList(
                 "Alopecia",
                 "Body Condition",
