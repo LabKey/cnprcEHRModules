@@ -173,6 +173,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("populateInitialData", this, "views/populateData.html");
         ehrService.registerActionOverride("conceptionDetail", this, "views/conceptionDetail.html");
         ehrService.registerActionOverride("bba_descriptions", this, "views/bba_descriptions.html");
+        ehrService.registerActionOverride("pathologyReport", this, "views/pathologyReport.html");
 
         //data entry
         ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));

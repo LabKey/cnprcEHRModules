@@ -142,11 +142,39 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                 ]
             }]
         };
-    }
+    },
 
-,
+    onLoad: function(ids, resultMap){
+        if (this.disableAnimalLoad){
+            return;
+        }
 
-    appendDataResults: function(toSet, results, id) {
+        if (this.isDestroyed){
+            return;
+        }
+
+        var toSet = {};
+
+        var id = ids[0];
+        var results = resultMap[id];
+        if (!results){
+            if (id){
+                toSet['animalId'] = LABKEY.Utils.encodeHtml(id);
+                toSet['calculated_status'] = '<span style="background-color:yellow">Unknown</span>';
+            }
+
+            return;
+        }
+
+        this.appendDataResults(toSet, results, id, this.appendForm);
+    },
+
+    appendForm: function(toSet) {
+        this.getForm().setValues(toSet);
+        this.afterLoad();
+    },
+
+    appendDataResults: function(toSet, results, id, callbackFn) {
         this.appendDemographicsResults(toSet, results, id);
         this.appendCnprcDemographicsResults(toSet, results);
         this.appendBirthResults(toSet, results.getBirthInfo(), results.getBirth());
@@ -168,7 +196,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         this.appendHousingIntervals(toSet, results);
         this.appendLastProjects(toSet, results.getLastProjects());
         this.appendCensusFlags(toSet, results.getCensusFlags());
-        this.appendPathologyReports(toSet, results.getPathologyReports());
+        this.appendPathologyReports(toSet, results.getPathologyReports(), callbackFn);
     },
 
     appendDemographicsResults: function(toSet, row, id){
@@ -480,17 +508,56 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         toSet['censusFlags'] = values.length ? '<table>' + values.join('') + '</table>' : null;
     },
 
-    appendPathologyReports: function(toSet, rows){
+    appendPathologyReports: function(toSet, rows, callbackFn) {
+
+        LABKEY.Query.getQueries({
+            schemaName: 'study',
+            includeUserQueries: false,
+            includeColumns: false,
+            scope: this,
+            success: function (result) {
+
+                var hasBiopsyAccess = false;
+                var hasNecropsyAccess = false;
+
+                Ext4.each(result.queries, function (q) {
+
+                    if (q.name == "biopsy") {
+                        hasBiopsyAccess = true;
+                    }
+                    if (q.name == "necropsy") {
+                        hasNecropsyAccess = true;
+                    }
+                }, this);
+
+                this.appendPathologyRows(toSet, rows, hasBiopsyAccess, hasNecropsyAccess);
+                callbackFn.call(this, toSet);
+
+            }
+        });
+    },
+
+    appendPathologyRows: function(toSet, rows, hasBiopsyAccess, hasNecropsyAccess) {
+
         var values = '';
         var headerColStyle = 'nowrap style="padding-left: 10px; font-weight: bold"';
         var colStyle = 'nowrap style="padding-left: 10px;"';
         values += '<table><tr><td nowrap style="font-weight: bold">Report ID</td><td ' + headerColStyle + '>Date Performed</td><td ' + headerColStyle + '>Project</td><td ' + headerColStyle + '>Investigator</td><td ' + headerColStyle + '>Date Completed</td></strong></tr>';
+
         if (rows){
             Ext4.each(rows, function(row){
-                var item = '';
 
-                if (row['reportId'])
-                    item += '<td nowrap>' + LABKEY.Utils.encodeHtml(row['reportId']) + '</td>';  // TODO: make this into a link like projectId above when Pathology Report Detailed View is implemented
+                var item = '';
+                if (row['reportId']) {
+
+                    if(hasBiopsyAccess && hasNecropsyAccess) {
+                        var url = "\"" + LABKEY.ActionURL.buildURL("cnprc_ehr", "pathologyReport") + "\"";
+                        item += '<td nowrap><a href=' + url + '>' + LABKEY.Utils.encodeHtml(row['reportId']) + '</a></td>';
+                    }
+                    else {
+                        item += '<td nowrap>' + LABKEY.Utils.encodeHtml(row['reportId']) + '</td>';
+                    }
+                }
                 else
                     item += '<td></td>';
                 if (row['datePerformed']) {

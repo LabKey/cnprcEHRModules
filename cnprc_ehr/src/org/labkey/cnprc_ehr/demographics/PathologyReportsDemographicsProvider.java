@@ -14,7 +14,7 @@ public class PathologyReportsDemographicsProvider extends AbstractListDemographi
 {
     public PathologyReportsDemographicsProvider(Module module)
     {
-        super(module, "study", "pathologyReports", "pathologyReports");
+        super(module, "cnprc_pathology_linked", "pathologyReports", "pathologyReports");
     }
 
     @Override
