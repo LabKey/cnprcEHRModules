@@ -21,6 +21,7 @@ SELECT biopsy.Id,
        biopsy.projectCode AS project,
        biopsy.performedBy AS investigator,
        biopsy.enddate AS dateCompleted,
+       'Biopsy' AS reportCategory,
        biopsy.QCState.publicdata AS publicdata  -- needed for some higher-up wrapping query somehow
 FROM study.biopsy
 
@@ -33,5 +34,6 @@ SELECT necropsy.Id,
        necropsy.projectCode as project,
        necropsy.performedBy AS investigator,
        necropsy.enddate AS dateCompleted,
+       'Necropsy' AS reportCategory,
        necropsy.QCState.publicdata AS publicdata  -- needed for some higher-up wrapping query somehow
 FROM study.necropsy

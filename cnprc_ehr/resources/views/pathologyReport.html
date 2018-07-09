@@ -1,8 +1,122 @@
-<html>
-<body>
-<!--below is a placeholder text - TODO: remove and add relevant stuff -->
-<h1>Pathology Report</h1>
-<h2>you have the permission! woohoo!</h2>
+<style type="text/css">
 
-</body>
-</html>
+    .right{
+        float: right;
+    }
+
+    .left{
+        float: left;
+    }
+
+    .center {
+        margin: auto;
+        width: 50%;
+        padding: 600px;  /*TODO: is there a better way to add padding w/o this arbitrary number  */
+    }
+
+</style>
+
+<div id="pathologyHeader"></div>
+<div id="pathologyAnimalSummary"></div>
+<script type="text/javascript">
+
+    +function($) {
+
+        var summaryPanel = Ext4.create('cnprc_ehr.panel.PathologyReportAnimalSummaryPanel', {
+            showFilterOptionsTitle: true,
+            renderTo: 'pathologyAnimalSummary',
+            subjectId: LABKEY.ActionURL.getParameter('subjectId')
+        });
+
+        function getTimestamp() {
+            var d = new Date();
+            return d.toLocaleString(); //TODO: does this work, or the date need to be formatted as July 09, 2018 for ex.
+        };
+
+        function getHeaderHtml(reportId, reportCategory) {
+            var rId = "Report Id: " + reportId + " ";
+            var rep = reportCategory + " Report ";
+            var ts = getTimestamp();
+
+            return ('<h4>' +
+            '<span class="left">' + rId + '</span>' +
+            '<span class="center">' + rep + '</span>' +
+            '<span class="right">' + ts + '</span>' +
+            '</h4>');
+
+        };
+
+        Ext4.onReady(function () {
+
+            /** Pathology Report section */
+            var reportCategory = LABKEY.ActionURL.getParameter('reportCategory');
+            var reportId = LABKEY.ActionURL.getParameter('reportId');
+
+            //Biopsy Report
+            if (reportCategory == "Biopsy") {
+
+                /** Header */
+                var pHeader = $("#pathologyHeader");
+                pHeader.html(getHeaderHtml(reportId, reportCategory));
+
+                /** Animal Summary Section */
+                summaryPanel.render;
+
+                /** Biopsy Section */
+                LABKEY.Query.selectRows({
+                    schemaName: 'study',
+                    queryName: 'pathologyHistory',
+                    columns: 'clinician, diagnosis, modifyNecropsy, pathologyFK, remark',
+                    filterArray: [LABKEY.Filter.create("pathologyFK", reportId)],
+                    successCallback: function(data) {
+
+                        //TODO:
+                        //Clinical History - text
+                        //Clinical Diagnosis - text
+                        //Modify Necropsy - text
+
+                    }
+                });
+
+                //TODO:
+                //Biopsy Observations - grid
+                //Biopsy Diagnosis - grid
+                //Biopsy Comments - text
+
+                //if image exists
+                /** Image Section */
+
+            }
+            //Necropsy Report
+            else if (reportCategory == 'Necropsy') {
+
+                /** Header */
+                var pHeader = $("#pathologyHeader");
+                pHeader.html(getHeaderHtml(reportId, reportCategory));
+
+                /** Animal Summary Section */
+                summaryPanel.render;
+
+                /** Necropsy Section */
+
+                //TODO:
+                //Gross Observations - Grid
+                //Gross Diagnosis - Grid
+                //Gross Comments - Text
+
+                //If Final report type exists
+                    //Final Observations - Grid
+                    //Final Diagnosis - Grid
+                    //Final Comments - Text
+
+                //if measurements exists
+                    //Measurements - Grid
+
+                //if image exists
+                    /** Image Section */
+
+            }
+        });
+    }(jQuery);
+
+</script>

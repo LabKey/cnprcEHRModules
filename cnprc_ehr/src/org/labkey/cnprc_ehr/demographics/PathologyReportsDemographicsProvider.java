@@ -34,6 +34,7 @@ public class PathologyReportsDemographicsProvider extends AbstractListDemographi
         keys.add(FieldKey.fromString("project"));
         keys.add(FieldKey.fromString("investigator"));
         keys.add(FieldKey.fromString("dateCompleted"));
+        keys.add(FieldKey.fromString("reportCategory"));
         keys.add(FieldKey.fromString("publicdata"));
 
         return keys;

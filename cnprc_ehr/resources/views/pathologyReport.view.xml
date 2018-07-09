@@ -1,5 +1,8 @@
 <view xmlns="http://labkey.org/data/xml/view">
     <dependencies>
         <dependency path="ehr.context" />
+        <dependency path="ehr/panel/AnimalDetailsPanel.js"/>
+        <dependency path="cnprc_ehr/panel/CNPRCAnimalDetailsPanel.js"/>
+        <dependency path="cnprc_ehr/panel/PathologyReportAnimalSummaryPanel.js"/>
     </dependencies>
 </view>
