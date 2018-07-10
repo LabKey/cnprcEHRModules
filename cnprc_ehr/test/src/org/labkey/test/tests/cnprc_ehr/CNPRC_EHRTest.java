@@ -104,6 +104,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String PROJECT_INVESTIGATOR_NAME_2 = "PI_NAME_2";
     protected static final String INVES_ID_1 = "1001";
     protected static final String INVES_ID_2 = "1002";
+    public static final String SCHEMA_STUDY = "study";
     public static final String SCHEMA_CNPRC_PDL = "cnprc_pdl";
     public static final String SCHEMA_CNPRC_BILLING = "cnprc_billing";
     protected final String ANIMAL_HISTORY_URL = "/ehr/" + PROJECT_NAME + "/animalHistory.view?";
@@ -308,6 +309,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" + getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
         storeCageAndRoomData();
         storeObservationTypesData();
+        createPathologyLinkedSchema();
         createPDLLinkedSchema();
         storePDLData();
         createBillingLinkedSchema();
@@ -2308,6 +2310,15 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     {
         List<String> resultsRowDataAsText = results.getRowDataAsText(row);
         assertEquals("Wrong data for row " + row, expected, resultsRowDataAsText);
+    }
+
+    private void createPathologyLinkedSchema()
+    {
+        _schemaHelper.setQueryLoadTimeout(60000);
+        String sourceFolder = "/" + FOLDER_NAME;
+        _schemaHelper.createLinkedSchema(getProjectName(), null,
+                "cnprc_pathology_linked", sourceFolder, null, SCHEMA_STUDY,
+                "pathologyReports", null);
     }
 
     private void createPDLLinkedSchema()
