@@ -407,6 +407,9 @@
             <column columnName="etiology">
                 <datatype>varchar</datatype>
             </column>
+            <column columnName="topography">
+                <datatype>varchar</datatype>
+            </column>
             <column columnName="morphology">
                 <datatype>varchar</datatype>
             </column>
