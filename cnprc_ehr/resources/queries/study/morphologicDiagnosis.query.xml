@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
 <metadata>
     <tables xmlns="http://labkey.org/data/xml">
-        <table tableName="MorphologicDiagnosis" tableDbType="TABLE">
+        <table tableName="morphologicDiagnosis" tableDbType="TABLE">
             <tableUrl>/query/detailsQueryRow.view?schemaName=study&amp;query.queryName=Morphologic Diagnosis&amp;lsid=${lsid}</tableUrl>
             <insertUrl />
             <importUrl />
@@ -15,13 +15,7 @@
                 </column>
                 <column columnName="pathologyFK"/>
                 <column columnName="tissue">
-                    <columnTitle>Organ/Tissue</columnTitle>
-                    <fk>
-                        <fkDbSchema>ehr_lookups</fkDbSchema>
-                        <fkTable>snomed</fkTable>
-                        <fkColumnName>code</fkColumnName>
-                        <fkDisplayColumnName>Meaning</fkDisplayColumnName>
-                    </fk>
+                    <columnTitle>Organ</columnTitle>
                 </column>
                 <column columnName="reportType">
                     <columnTitle>Report Type</columnTitle>
@@ -30,6 +24,15 @@
                         <fkTable>snomed_qualifiers</fkTable>
                         <fkColumnName>value</fkColumnName>
                         <fkDisplayColumnName>description</fkDisplayColumnName>
+                    </fk>
+                </column>
+                <column columnName="topography">
+                    <columnTitle>Topography</columnTitle>
+                    <fk>
+                        <fkDbSchema>ehr_lookups</fkDbSchema>
+                        <fkTable>snomed</fkTable>
+                        <fkColumnName>code</fkColumnName>
+                        <fkDisplayColumnName>Meaning</fkDisplayColumnName>
                     </fk>
                 </column>
                 <column columnName="morphology">
