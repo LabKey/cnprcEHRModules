@@ -7,7 +7,7 @@
                     <column columnName="date">
                         <columnTitle>Work Performed Date</columnTitle>
                     </column>
-                    <column columnName="prPk">
+                    <column columnName="prmFk"> <!-- this is also a report Id -->
                         <columnTitle>Biopsy Image</columnTitle>
                         <fk>
                             <fkDbSchema>cnprc_ehr</fkDbSchema>
