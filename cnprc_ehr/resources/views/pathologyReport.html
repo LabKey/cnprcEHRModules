@@ -41,13 +41,21 @@
         margin: 10px 10px;
     }
 
+    #pathologyBody h4 {
+        margin-top: 30px;
+    }
+
     h4.pathology {
         margin: 0px;
     }
 
-    #pathologyBody h4 {
-        margin-top: 30px;
+    span.pathology {
+        float: left;
+        margin-right: 20px;
+        font-size: 12px;
     }
+
+
 
 </style>
 <div id="pathologyAll">
@@ -214,17 +222,19 @@
                     containerPath: this.containerPath,
                     schemaName: 'study',
                     queryName: queryName,
-                    columns: 'prmFk/Id/Id',
+                    columns: 'prmFk/Id/Id, prmFk/Id/owner_name, prmFk/Id/subject_organ',
                     filterArray: filterArray,
                     scope: this,
                     failure: LDK.Utils.getErrorCallback(),
                     success: function (results) {
-                        var id, subfolder, tnPath, orPath, fullTnPath, fullOrPath, first = true;
+                        var id, subfolder, tnPath, orPath, fullTnPath, fullOrPath, first = true, organ, owner;
                         var pipelineRoot = LABKEY.ActionURL.getContextPath() + "/_webdav" + LABKEY.container.path + "/"
                                 + reportsFolder + "/@pipeline";
 
                         for (var i = 0; i < results.rows.length; i++) {
                             id = results.rows[i]['prmFk/Id/Id'];
+                            organ = results.rows[i]['prmFk/Id/subject_organ'];
+                            owner = results.rows[i]['prmFk/Id/owner_name'];
                             if (id) {
 
                                 subfolder = id.substr(2, 3);
@@ -239,8 +249,11 @@
                                     first = false;
                                 }
 
-                                images += "<span><div><a href=" + fullOrPath + "> <img src=" + fullTnPath + "></a></div>" +
-                                        "<div>" + id + "</div></span>";
+                                images += "<span class='pathology'><div><a href=" + fullOrPath + "> <img src=" + fullTnPath + "></a></div>" +
+                                        "<div>Image Id: " + id + "</div>" +
+                                        "<div>Owner: " + owner + "</div>" +
+                                        "<div>Organ: " + organ + "</div>" +
+                                        "</span>";
                             }
                         }
 
