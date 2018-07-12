@@ -29,12 +29,32 @@
         border: 0px;
     }
 
-</style>
+    #pathologyAnimalSummary {
+        margin-top: 30px;
+    }
 
+    #pathologyBody {
+        margin: 0px 20px;
+    }
+
+    #pathologyAll {
+        margin: 10px 10px;
+    }
+
+    h4.pathology {
+        margin: 0px;
+    }
+
+</style>
+<div id="pathologyAll">
 <div id="pathologyHeader"></div>
+<div id="pathologyBody">
 <div id="pathologyAnimalSummary"></div>
 <div id="pathologyReport"></div>
 <div id="imageSection"></div>
+</div>
+</div>
+
 <script type="text/javascript">
 
     +function($) {
@@ -44,6 +64,11 @@
         var report = '';
         var images = '';
 
+        var subjectId = LABKEY.ActionURL.getParameter('subjectId');
+        var reportCategory = LABKEY.ActionURL.getParameter('reportCategory');
+        var reportId = LABKEY.ActionURL.getParameter('reportId');
+        var reportType = LABKEY.ActionURL.getParameter('reportType');
+
         showPathologyReport(appendAnimalSummary, appendReport, appendImages);
 
         function appendHeader() {
@@ -52,7 +77,7 @@
 
         function appendAnimalSummary(animalSummaryData) {
 
-            animalSummary = "<table class='table' style=\"width:75%\">" +
+            animalSummary = "<h4>Summary</h4></h4><table class='table' style=\"width:75%\">" +
             "<tr>\n" +
                 "<td class='labelCell'>Animal Id:</td>" + "<td class='valueCell'>" + animalSummaryData['Id'] + "</td>\n" +
                 "<td class='labelCell'>Sex:</td>" + "<td class='valueCell'>" + animalSummaryData['sex'] + "</td>\n" +
@@ -92,10 +117,6 @@
 
         function showPathologyReport(animalSummCallbackFn, reportCallbackFn, imagesCallbackFn) {
 
-            var reportCategory = LABKEY.ActionURL.getParameter('reportCategory');
-            var reportId = LABKEY.ActionURL.getParameter('reportId');
-            var reportType = LABKEY.ActionURL.getParameter('reportType');
-
             var animalSummaryData = {};
 
             animalSummary = getAnimalSummary(animalSummCallbackFn, animalSummaryData);
@@ -119,7 +140,7 @@
                 images = getImages(imagesCallbackFn);
 
             }
-        };
+        }
 
         function getAnimalSummary(callbackFn, animalSummaryData) {
 
@@ -129,7 +150,7 @@
                 scope: this,
                 metadata: 'demographicsPathologySummary',
                 filterArray: [
-                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId') , LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('Id', subjectId, LABKEY.Filter.Types.EQUAL),
                 ],
                 success: function (result) {
 
@@ -153,7 +174,7 @@
                     callbackFn.call(this, animalSummaryData);
                 }
             });
-        };
+        }
 
         function getDemographicsInfo(callbackFn) {
 
@@ -164,37 +185,77 @@
 
                 }
             });
-        };
+        }
 
         function getBiopsyReport(callbackFn) {
 //TODO:
-        };
+        }
 
         function getNecropsyReport(callbackFn) {
 //TODO:
-        };
+        }
 
         function getImages(callbackFn) {
-//TODO:
-        };
+            var filterArray = [LABKEY.Filter.create('Id', subjectId, LABKEY.Filter.Types.EQUAL)];
+            filterArray.push(LABKEY.Filter.create('prmFk', reportId, LABKEY.Filter.Types.EQUAL));
+
+            var queryName = reportCategory === "Necropsy" ? "necropsy" : "biopsy";
+
+            LABKEY.Query.selectRows({
+                containerPath: this.containerPath,
+                schemaName: 'study',
+                queryName: queryName,
+                columns: 'prmFk/Id/Id',
+                filterArray: filterArray,
+                scope: this,
+                failure: function(response) {
+                    alert(response);
+                },
+                success: function(results) {
+                    var id, subfolder, tnPath, orPath, fullTnPath, fullOrPath, first = true;
+                    var pipelineRoot = LABKEY.ActionURL.getContextPath()+ "/_webdav" + LABKEY.container.path +"/Pathology Reports/@pipeline";
+                    for (var i=0; i < results.rows.length; i++) {
+                        id = results.rows[i]['prmFk/Id/Id'];
+                        if (id) {
+
+                            subfolder = id.substr(2, 3);
+                            tnPath = "/TN/" + subfolder + "/";
+                            orPath = "/OR/" + subfolder + "/";
+
+                            fullTnPath = "\"" + pipelineRoot + tnPath + id + ".jpg\"";
+                            fullOrPath = "\"" + pipelineRoot + orPath + id + ".jpg\"";
+
+                            if (first) {
+                                images = '<h4>Images</h4>';
+                                first = false;
+                            }
+
+                            images += "<a href=" + fullOrPath + "> <img src=" + fullTnPath + "></a>";
+                        }
+                    }
+
+                    callbackFn.call(this);
+                }
+            });
+        }
 
         function getTimestamp() {
             var d = new Date();
             return d.toLocaleString(); //TODO: does this work, or the date need to be formatted as July 09, 2018 for ex.
-        };
+        }
 
         function getHeaderHtml(reportId, reportCategory) {
             var rId = "Report Id: " + reportId + " ";
             var rep = reportCategory + " Report ";
             var ts = getTimestamp();
 
-            return ('<h4>' +
+            return ('<h4 class="pathology">' +
                     '<span class="left">' + rId + '</span>' +
                     '<span class="center">' + rep + '</span>' +
                     '<span class="right">' + ts + '</span>' +
                     '</h4>');
 
-        };
+        }
     }(jQuery);
 
 </script>

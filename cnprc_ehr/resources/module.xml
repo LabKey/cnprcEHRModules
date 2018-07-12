@@ -21,5 +21,12 @@
                 <permission>ADMIN</permission>
             </editPermissions>
         </propertyDescriptor>
+        <propertyDescriptor name="PathologyReportsFolder">
+            <canSetPerContainer>true</canSetPerContainer>
+            <description>Location of pathology report images.</description>
+            <editPermissions>
+                <permission>ADMIN</permission>
+            </editPermissions>
+        </propertyDescriptor>
     </properties>
 </module>
