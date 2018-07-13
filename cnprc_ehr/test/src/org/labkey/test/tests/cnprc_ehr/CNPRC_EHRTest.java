@@ -55,6 +55,7 @@ import org.labkey.test.tests.ehr.AbstractGenericEHRTest;
 import org.labkey.test.util.Crawler.ControllerActionId;
 import org.labkey.test.util.DataRegionTable;
 import org.labkey.test.util.Ext4Helper;
+import org.labkey.test.util.LogMethod;
 import org.labkey.test.util.Maps;
 import org.labkey.test.util.PasswordUtil;
 import org.labkey.test.util.PortalHelper;
@@ -309,12 +310,19 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         setModuleProperties(Arrays.asList(new ModulePropertyValue("EHR_ComplianceDB", "/" + getComplianceAndTrainingPath(), "EmployeeContainer", "/" + getComplianceAndTrainingPath())));
         storeCageAndRoomData();
         storeObservationTypesData();
-        createPathologyLinkedSchema();
         createPDLLinkedSchema();
         storePDLData();
         createBillingLinkedSchema();
         storeBillingData();
         initGenetics();
+    }
+
+    @Override
+    @LogMethod
+    protected void primeCaches()
+    {
+        createPathologyLinkedSchema();
+        super.primeCaches();
     }
 
     @Override
@@ -903,14 +911,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         storeImageData();
 
         //Necropsy
-        click(Locator.linkWithText("Browse All Datasets"));
-        waitForElement(Locator.linkContainingText("Browse All"));
-        pushLocation();
-        waitAndClickAndWait(LabModuleHelper.getNavPanelItem("Necropsies:", "Browse All"));
+        goToSchemaBrowser();
+        DataRegionTable table = viewQueryData("study", "necropsy");
         waitForElement(Locator.linkContainingText("TEST2950014"));
+        CustomizeView cv = table.getCustomizeView();
+        cv.openCustomizeViewPanel();
+        cv.addColumn("prmFk/Id");
+        cv.clickViewGrid();
+
+        waitForElement(Locator.linkContainingText("XY000001"));
         clickAndWait(Locator.linkContainingText("XY000001"));
         assertTextPresent("TEST2950014");
-        popLocation();
 
         //SNOMED
         /*TODO: Per support ticket 31631. Removed image link from SNOMED but may add it back in Milestone 5 so just
