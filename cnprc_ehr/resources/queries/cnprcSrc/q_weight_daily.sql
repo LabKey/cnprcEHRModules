@@ -22,7 +22,7 @@
 SELECT
 PR_AN_ID AS Id,
 PR_DATE AS weightDate,
-(PR_BODY_WEIGHT_GRAMS / 1000) AS Weight,
+PR_BODY_WEIGHT_GRAMS AS weightInGrams,
 NULL AS bodyConditionScore,
 NULL AS weightTattooFlag,
 OBJECTID AS objectid,

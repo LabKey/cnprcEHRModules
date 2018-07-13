@@ -13,6 +13,19 @@ function onInsert(helper, scriptErrors, row){
 }
 
 function onUpsert(helper, scriptErrors, row, oldRow) {
+
+    if(helper.isETL) {
+
+        /* Incoming Weights from ZPATH_REPORT.PR_BODY_WEIGHT_GRAMS are in grams; so in order to convert to kg, by dividing by 1000.0
+          and casting to decimal in weights ETL (q_weight_daily.sql) made no difference (casting to float or double is not supported); since
+          source column PR_BODY_WEIGHT_GRAMS is of type number w/o a scale, we interpret it as an integer (see OracleDialect, line 391 (if (Types.NUMERIC)...)),
+          and we convert incoming value to an integer; so for ex, converting 14680 grams to kg by dividing 1000.0 should be 14.680kg,
+          but, we were getting 14 instead - just an integer portion; so had to resort to below hack in this trigger.*/
+        if(row.weightInGrams) {
+            row.weight = row.weightInGrams / 1000.0;
+        }
+    }
+
     if (!helper.isETL()) {
 
         if (row.id && row.weight) {
