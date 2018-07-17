@@ -22,7 +22,7 @@
                     <column columnName="bodyConditionScore">
                         <columnTitle>Body Condition</columnTitle>
                     </column>
-                    <column columnName="location">
+                    <column columnName="enclosure">
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>rooms</fkTable>

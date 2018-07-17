@@ -21,7 +21,7 @@ max(test1) as test1,
 max(test2) as test2,
 max(weightTattooFlag) as weightTattooFlag,
 max(bodyConditionScore) as bodyConditionScore,
-max(roomAtTime) as location,
+max(roomAtTime) as enclosure,
 max(cageAtTime) as cage,
 max(conNum) as conception,
 max(daysPregnant) as daysPregnant
@@ -52,7 +52,3 @@ left join study.Housing h on COALESCE(weight.id, tb.id) = h.id
 left join study.pregnancyConfirmations pc on COALESCE(weight.id, tb.id) = pc.id and pc.conception <= COALESCE(weight.date,tb.date) AND COALESCE(weight.date,tb.date) < pc.termDate
 ) sub
 group by id, date
-
-
-
-
