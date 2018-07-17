@@ -1,28 +1,44 @@
 <style type="text/css">
 
-    .right{
+    .pathologyReportRight{
         float: right;
     }
 
-    .left{
+    .pathologyReportLeft{
         float: left;
         width: 40%;
     }
 
-    .center {
+    .pathologyReportCenter {
         margin: auto;
     }
 
-    .labelCell {
+    .summLabelCell {
         width: 10%
     }
 
-    .valueCell {
+    .summValueCell {
         width: 30%
+    }
+
+    .reportLabelCell {
+        width: 10%
+    }
+
+    .reportValueCell {
+        width: 50%
     }
 
     #pathologyAnimalSummary table {
         border: 1px solid lightgray;
+    }
+
+    #pathologyBiopsyReport table {
+        border: 1px solid lightgray;
+    }
+
+    #pathologyBiopsyReport td {
+        border: 0px;
     }
 
     #pathologyAnimalSummary td {
@@ -62,7 +78,8 @@
     <div id="pathologyHeader"></div>
     <div id="pathologyBody">
         <div id="pathologyAnimalSummary"></div>
-        <div id="pathologyReport"></div>
+        <div id="pathologyBiopsyReport"></div>
+        <div id="pathologyNecropsyReport"></div>
         <div id="imageSection"></div>
     </div>
 </div>
@@ -73,14 +90,15 @@
 
         var reportHeader = '';
         var animalSummary = '';
-        var report = '';
+        var biopsyReport = '';
+        var necropsyReport = '';
         var images = '';
 
         var subjectId = LABKEY.ActionURL.getParameter('subjectId');
         var reportId = LABKEY.ActionURL.getParameter('reportId');
         var reportCategory = LABKEY.ActionURL.getParameter('reportCategory');
 
-        showPathologyReport(appendAnimalSummary, appendReport, appendImages);
+        showPathologyReport(appendAnimalSummary, appendBiopsyReport, appendNecropsyReport, appendImages);
 
         function appendHeader() {
             $("#pathologyHeader").html(reportHeader);
@@ -90,56 +108,71 @@
 
             animalSummary = "<h4>Summary</h4><table class='table' style=\"width:75%\">" +
             "<tr>\n" +
-                "<td class='labelCell'>Animal Id:</td>" + "<td class='valueCell'>" + animalSummaryData['Id'] + "</td>\n" +
-                "<td class='labelCell'>Sex:</td>" + "<td class='valueCell'>" + animalSummaryData['sex'] + "</td>\n" +
-                "<td class='labelCell'>Death Date:</td class='valueCell'>" + "<td>" + new Date(animalSummaryData['deathDate']).toLocaleDateString() + "</td>\n" +
+                "<td class='summLabelCell'>Animal Id:</td>" + "<td class='summValueCell'>" + animalSummaryData['Id'] + "</td>\n" +
+                "<td class='summLabelCell'>Sex:</td>" + "<td class='summValueCell'>" + animalSummaryData['sex'] + "</td>\n" +
+                "<td class='summLabelCell'>Death Date:</td class='summValueCell'>" + "<td>" + new Date(animalSummaryData['deathDate']).toLocaleDateString() + "</td>\n" +
              "</tr>\n" +
             "<tr>\n" +
-                "<td class='labelCell'>Location:</td>" + "<td class='valueCell'>" + animalSummaryData['location'] + "</td>\n" +
-                "<td class='labelCell'>Age:</td>" + "<td class='valueCell'>" +  animalSummaryData['age'] + "</td>\n" +
-                "<td class='labelCell'>Death Type:</td>" + "<td class='valueCell'>" + animalSummaryData['deathType'] + "</td>\n" +
+                "<td class='summLabelCell'>Location:</td>" + "<td class='summValueCell'>" + animalSummaryData['location'] + "</td>\n" +
+                "<td class='summLabelCell'>Age:</td>" + "<td class='summValueCell'>" +  animalSummaryData['age'] + "</td>\n" +
+                "<td class='summLabelCell'>Death Type:</td>" + "<td class='summValueCell'>" + animalSummaryData['deathType'] + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
-                "<td class='labelCell'>Investigator:</td>" + "<td class='valueCell'>" + animalSummaryData['investigator'] + "</td>\n" +
-                "<td class='labelCell'>Project:</td>" + "<td class='valueCell'>" + animalSummaryData['project'] + "</td>\n" +
-                "<td class='labelCell'>Charge Id:</td>" + "<td class='valueCell'>" + animalSummaryData['chargeId'] + "</td>\n" +
+                "<td class='summLabelCell'>Investigator:</td>" + "<td class='summValueCell'>" + animalSummaryData['investigator'] + "</td>\n" +
+                "<td class='summLabelCell'>Project:</td>" + "<td class='summValueCell'>" + animalSummaryData['project'] + "</td>\n" +
+                "<td class='summLabelCell'>Charge Id:</td>" + "<td class='summValueCell'>" + animalSummaryData['chargeId'] + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
-                "<td class='labelCell'>Pathologist:</td>" + "<td class='valueCell'>" + animalSummaryData['pathologist'] + "</td>\n" +
-                "<td class='labelCell'>Clinician:</td>" + "<td class='valueCell'>" + animalSummaryData['clinician'] + "</td>\n" +
-                "<td class='labelCell'>Work Performed: </td>" + "<td class='valueCell'>" + new Date(animalSummaryData['datePerformed']).toLocaleDateString() + "</td>\n" +
+                "<td class='summLabelCell'>Pathologist:</td>" + "<td class='summValueCell'>" + animalSummaryData['pathologist'] + "</td>\n" +
+                "<td class='summLabelCell'>Clinician:</td>" + "<td class='summValueCell'>" + animalSummaryData['clinician'] + "</td>\n" +
+                "<td class='summLabelCell'>Work Performed: </td>" + "<td class='summValueCell'>" + new Date(animalSummaryData['datePerformed']).toLocaleDateString() + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
-                "<td class='labelCell'>Weight (grams): </td>" + "<td>" + animalSummaryData['weightInGrams'] + "</td>\n" +
-                "<td class='labelCell'>Pathology Condition:</td>" + "<td>" + animalSummaryData['pathologyCondition'] + "</td>\n" +
-                "<td class='labelCell'>Hydration:</td>" + "<td>" + animalSummaryData['hydration'] + "</td>\n" +
+                "<td class='summLabelCell'>Weight (grams): </td>" + "<td class='summValueCell'>" + animalSummaryData['weightInGrams'] + "</td>\n" +
+                "<td class='summLabelCell'>Pathology Condition:</td>" + "<td class='summValueCell'>" + animalSummaryData['pathologyCondition'] + "</td>\n" +
+                "<td class='summLabelCell'>Hydration:</td>" + "<td class='summValueCell'>" + animalSummaryData['hydration'] + "</td>\n" +
             "</tr>\n";
 
             $("#pathologyAnimalSummary").html(animalSummary);
         }
 
-        function appendReport() {
-            $("#pathologyReport").html(report);
+        function appendBiopsyReport(biopsyData) {
+            biopsyReport = "<h4></h4><table class='table' style=\"width:75%\">" +
+            "<tr><td class='reportLabelCell'>Clinincal History:</td>" + "<td class='reportValueCell'>" + biopsyData['clinicalHistory'] + "</td></tr>\n" +
+            "<tr><td class='reportLabelCell'>Clinincal Diagnosis:</td>" + "<td class='reportValueCell'>" + biopsyData['clinicalDiagnosis'] + "</td></tr>\n" +
+            "<tr><td class='reportLabelCell'>Modify Necropsy:</td>" + "<td class='reportValueCell'>" + biopsyData['modifyNecropsy'] + "</td></tr>";
+
+            //TODO: Add Biopsy Observations section
+
+            //TODO: Add Biopsy Diagnosis section
+
+            //TODO: Add Biopsy Comments section
+
+            $("#pathologyBiopsyReport").html(biopsyReport);
+        }
+
+        function appendNecropsyReport() {
+            $("#pathologyNecropsyReport").html(necropsyReport);
         }
 
         function appendImages() {
             $("#imageSection").html(images);
         }
 
-        function showPathologyReport(animalSummCallbackFn, reportCallbackFn, imagesCallbackFn) {
+        function showPathologyReport(animalSummCallbackFn, biopsyReportCallbackFn, necropsyReportCallbackFn, imagesCallbackFn) {
 
             var animalSummaryData = {};
 
-            animalSummary = getAnimalSummary(animalSummCallbackFn, animalSummaryData, reportCallbackFn, imagesCallbackFn);
+            animalSummary = getAnimalSummary(animalSummCallbackFn, animalSummaryData, biopsyReportCallbackFn, necropsyReportCallbackFn, imagesCallbackFn);
         }
 
-        function getAnimalSummary(callbackFn, animalSummaryData, reportCallbackFn, imagesCallbackFn) {
+        function getAnimalSummary(callbackFn, animalSummaryData, biopsyReportCallbackFn, necropsyReportCallbackFn, imagesCallbackFn) {
 
             LABKEY.Query.selectRows({
                 schemaName: "study",
                 queryName: "demographicsPathologyAnimalSummary",
                 scope: this,
-                metadata: 'demographicsPathologySummary',
+                failure: LDK.Utils.getErrorCallback(),
                 filterArray: [
                     LABKEY.Filter.create('Id', subjectId, LABKEY.Filter.Types.EQUAL),
                     LABKEY.Filter.create('reportId', reportId, LABKEY.Filter.Types.EQUAL)
@@ -155,10 +188,11 @@
                     animalSummaryData['deathType'] = row.deathType ? row.deathType : '';
                     animalSummaryData['weightInGrams'] = row.weightInGrams;
                     animalSummaryData['location'] = row.location;
-                    animalSummaryData['age'] = row.age; //TODO: fix: age is not getting displayed as yy:mm:dd
+                    animalSummaryData['age'] = row.age; //TODO: fix: age is not getting displayed in yr:month:day format
                     animalSummaryData['project'] = row.project;
                     animalSummaryData['investigator'] = row.investigator ? row.investigator : '';
                     animalSummaryData['datePerformed'] = row.datePerformed ? row.datePerformed : ''; //TODO: fix: values do not match webvitals
+//                    animalSummaryData['dateCompleted'] = row.dateCompleted ? row.dateCompleted : ''; //TODO: probably this is what's required instead of datePerformed
                     animalSummaryData['pathologist'] = row.pathologist ? row.pathologist : '';
                     animalSummaryData['chargeId'] = row.chargeId ? row.chargeId : '';
                     animalSummaryData['hydration'] = row.hydration ? row.hydration : '';
@@ -170,7 +204,8 @@
                         reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName']);
                         appendHeader();
 
-                        report = getBiopsyReport(reportCallbackFn);
+                        var biopsyData = {};
+                        getBiopsyReport(biopsyData, biopsyReportCallbackFn);
                         images = getImages(imagesCallbackFn);
 
                     }
@@ -179,7 +214,7 @@
                         reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName']);
                         appendHeader();
 
-                        report = getNecropsyReport(reportCallbackFn);
+                        getNecropsyReport(necropsyReportCallbackFn);
                         images = getImages(imagesCallbackFn);
                     }
 
@@ -199,8 +234,79 @@
             });
         }
 
-        function getBiopsyReport(callbackFn) {
-//TODO:
+        function getBiopsyReport(biopsyData, callbackFn) {
+
+            var multi = new LABKEY.MultiRequest();
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportBiopsyAndHistory",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                ],
+                success: function (result) {
+
+                    var row = result.rows[0];
+                    biopsyData['clinicalHistory'] = row.clinicalHistory;
+                    biopsyData['clinicalDiagnosis'] = row.clinicalDiagnosis;
+                    biopsyData['modifyNecropsy'] = row.modifyNecropsy;
+                    biopsyData['biopsyComments'] = row.biopsyComments;
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportBiopsyGF",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                ],
+                success: function (result) {
+
+                    var rows = result.rows;
+
+                    biopsyData['grossFindings'] = [];
+                    for (var i = 0; i < rows.length; i++) {
+                        biopsyData['grossFindings'][i] = {
+                            biopsyObsOrgan: rows[i].biopsyObsOrgan,
+                            biopsyObsOrganText: rows[i].biopsyObsOrganText
+                        };
+                    }
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportBiopsyMD",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                ],
+                sort: 'morphDiagSeq',
+                success: function (result) {
+
+                    var rows = result.rows;
+                    biopsyData['morphologicDiagnosis'] = [];
+                    for(var i = 0; i < rows.length; i++) {
+                        biopsyData['morphologicDiagnosis'][i] = {
+                            morphDiagSeq: rows[i].morphDiagSeq,
+                            morphDiagOrgan: rows[i].morphDiagOrgan,
+                            morphDiagText: rows[i].morphDiagText
+                        };
+                    }
+                }
+            });
+
+            multi.send(function(){
+                callbackFn.call(this, biopsyData);
+            }, this);
         }
 
         function getNecropsyReport(callbackFn) {
@@ -274,9 +380,9 @@
             var ts = getTimestamp();
 
             return ('<h4 class="pathology">' +
-                    '<span class="left">' + rId + '</span>' +
-                    '<span class="center">' + rep + '</span>' +
-                    '<span class="right">' + ts + '</span>' +
+                    '<span class="pathologyReportLeft">' + rId + '</span>' +
+                    '<span class="pathologyReportCenter">' + rep + '</span>' +
+                    '<span class="pathologyReportRight">' + ts + '</span>' +
                     '</h4>');
 
         }
