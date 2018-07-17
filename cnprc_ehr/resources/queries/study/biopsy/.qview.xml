@@ -5,7 +5,6 @@
         <column name="projectCode"/>
         <column name="hydrationLevel"/>
         <column name="bcs"/>
-        <column name="prPk/Id"/>
         <column name="remark"/>
         <column name="performedBy"/>
         <column name="accountId"/>
