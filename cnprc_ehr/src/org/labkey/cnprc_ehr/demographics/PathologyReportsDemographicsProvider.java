@@ -26,8 +26,7 @@ public class PathologyReportsDemographicsProvider extends AbstractListDemographi
     @Override
     protected Set<FieldKey> getFieldKeys()
     {
-        Set<FieldKey> keys = new HashSet<FieldKey>();
-        keys.add(FieldKey.fromString("lsid"));
+        Set<FieldKey> keys = new HashSet<>();
         keys.add(FieldKey.fromString("Id"));
         keys.add(FieldKey.fromString("reportId"));
         keys.add(FieldKey.fromString("datePerformed"));
@@ -35,7 +34,6 @@ public class PathologyReportsDemographicsProvider extends AbstractListDemographi
         keys.add(FieldKey.fromString("investigator"));
         keys.add(FieldKey.fromString("dateCompleted"));
         keys.add(FieldKey.fromString("reportCategory"));
-        keys.add(FieldKey.fromString("reportType"));
         keys.add(FieldKey.fromString("publicdata"));
 
         return keys;

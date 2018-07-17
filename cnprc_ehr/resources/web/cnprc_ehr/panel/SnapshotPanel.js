@@ -551,7 +551,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                 if (row['reportId']) {
 
                     if(hasBiopsyAccess && hasNecropsyAccess) {
-                        var url = "\"" + LABKEY.ActionURL.buildURL("cnprc_ehr", "pathologyReport", null, {subjectId: this.subjectId, reportId: row['reportId'], reportCategory: row['reportCategory'], reportType: row['reportType']}) + "\"";
+                        var url = "\"" + LABKEY.ActionURL.buildURL("cnprc_ehr", "pathologyReport", null, {subjectId: this.subjectId, reportId: row['reportId'], reportCategory: row['reportCategory']}) + "\"";
                         item += '<td nowrap><a href=' + url + '>' + LABKEY.Utils.encodeHtml(row['reportId']) + '</a></td>';
                     }
                     else {

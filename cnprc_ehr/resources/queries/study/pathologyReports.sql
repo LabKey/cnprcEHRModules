@@ -15,39 +15,23 @@
  */
 
 SELECT biopsy.Id,
-       biopsy.lsid,
        biopsy.prmfk AS reportId, --TODO: after data entry, we will need to handle this differently - perhaps use ehr.tasks.rowid as reportId and change this line to do coalesce?! TBD
        biopsy.date AS datePerformed,
        biopsy.projectCode AS project,
        biopsy.performedBy AS investigator,
        biopsy.enddate AS dateCompleted,
        'Biopsy' AS reportCategory,
-       biopsy.pathologist AS pathologist,
-       biopsy.accountId AS chargeId,
-       biopsy.hydrationLevel AS hydration,
-       biopsy.hydrationLevel AS pathologyCondition,
-       biopsy.reportType AS reportType,
-       ph.clinician AS clinician,
        biopsy.QCState.publicdata AS publicdata  -- needed for some higher-up wrapping query somehow
 FROM study.biopsy
-LEFT JOIN study.pathologyHistory ph ON ph.pathologyFK = biopsy.prmfk;
 
 UNION ALL
 
-SELECT necropsy.Id,
-       necropsy.lsid,
+SELECT DISTINCT necropsy.Id,  -- There can be at most two necropsy entries: gross and final, so DISTINCT shrinks it down to one
        necropsy.prmfk AS reportId, --TODO: after data entry, we will need to handle this differently - perhaps use ehr.tasks.rowid as reportId and change this line to do coalesce?! TBD
        necropsy.date AS datePerformed,
        necropsy.projectCode as project,
        necropsy.performedBy AS investigator,
        necropsy.enddate AS dateCompleted,
        'Necropsy' AS reportCategory,
-       necropsy.pathologist AS pathologist,
-       necropsy.accountId AS chargeId,
-       necropsy.hydrationLevel AS hydration,
-       necropsy.bcs AS pathologyCondition,
-       necropsy.reportType AS reportType,
-       ph.clinician AS clinician,
        necropsy.QCState.publicdata AS publicdata  -- needed for some higher-up wrapping query somehow
 FROM study.necropsy
-LEFT JOIN study.pathologyHistory ph ON ph.pathologyFK = necropsy.prmfk;

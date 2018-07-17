@@ -77,9 +77,8 @@
         var images = '';
 
         var subjectId = LABKEY.ActionURL.getParameter('subjectId');
-        var reportCategory = LABKEY.ActionURL.getParameter('reportCategory');
         var reportId = LABKEY.ActionURL.getParameter('reportId');
-        var reportType = LABKEY.ActionURL.getParameter('reportType');
+        var reportCategory = LABKEY.ActionURL.getParameter('reportCategory');
 
         showPathologyReport(appendAnimalSummary, appendReport, appendImages);
 
@@ -131,30 +130,10 @@
 
             var animalSummaryData = {};
 
-            animalSummary = getAnimalSummary(animalSummCallbackFn, animalSummaryData);
-
-            if (reportCategory == "Biopsy") {
-
-                reportHeader = getHeaderHtml(reportId, reportCategory);
-                appendHeader();
-
-                report = getBiopsyReport(reportCallbackFn);
-                images = getImages(imagesCallbackFn);
-
-            }
-            else if (reportCategory == 'Necropsy') {
-
-                var reportTitle = (reportType == 'NF') ? "Final Necropsy" : "Gross Necropsy";
-                reportHeader = getHeaderHtml(reportId, reportTitle);
-                appendHeader();
-
-                report = getNecropsyReport(reportCallbackFn);
-                images = getImages(imagesCallbackFn);
-
-            }
+            animalSummary = getAnimalSummary(animalSummCallbackFn, animalSummaryData, reportCallbackFn, imagesCallbackFn);
         }
 
-        function getAnimalSummary(callbackFn, animalSummaryData) {
+        function getAnimalSummary(callbackFn, animalSummaryData, reportCallbackFn, imagesCallbackFn) {
 
             LABKEY.Query.selectRows({
                 schemaName: "study",
@@ -163,12 +142,14 @@
                 metadata: 'demographicsPathologySummary',
                 filterArray: [
                     LABKEY.Filter.create('Id', subjectId, LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', reportId, LABKEY.Filter.Types.EQUAL)
                 ],
                 success: function (result) {
 
                     var row = result.rows[0];
 
                     animalSummaryData['Id'] = row.Id;
+                    animalSummaryData['reportName'] = row.reportName;
                     animalSummaryData['sex'] = row.gender;
                     animalSummaryData['deathDate'] = row.death ? row.death : '';
                     animalSummaryData['deathType'] = row.deathType ? row.deathType : '';
@@ -183,6 +164,25 @@
                     animalSummaryData['hydration'] = row.hydration ? row.hydration : '';
                     animalSummaryData['pathologyCondition'] = row.pathologyCondition ? row.pathologyCondition : '';
                     animalSummaryData['clinician'] = row.clinician ? row.clinician : '';
+
+                    if (animalSummaryData['reportName'] === "Biopsy") {
+
+                        reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName']);
+                        appendHeader();
+
+                        report = getBiopsyReport(reportCallbackFn);
+                        images = getImages(imagesCallbackFn);
+
+                    }
+                    else {  // necropsy
+
+                        reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName']);
+                        appendHeader();
+
+                        report = getNecropsyReport(reportCallbackFn);
+                        images = getImages(imagesCallbackFn);
+                    }
+
                     callbackFn.call(this, animalSummaryData);
                 }
             });
