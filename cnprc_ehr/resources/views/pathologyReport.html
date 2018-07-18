@@ -106,21 +106,44 @@
 
         function appendAnimalSummary(animalSummaryData) {
 
+            var idUrl = '';
+            if (animalSummaryData['Id']) {
+                if (animalSummaryData['Id'].indexOf("-") !== -1)  // conception ID
+                    idUrl = LABKEY.ActionURL.buildURL("cnprc_ehr", "conceptionDetail", null, {conceptionId: animalSummaryData['Id']});
+                else  // animal ID
+                    idUrl = LABKEY.ActionURL.buildURL("ehr", "participantView", null, {participantId: animalSummaryData['Id']});
+            }
+
+            var locationUrl = '';
+            if (animalSummaryData['location']) {
+                var locationSplit = animalSummaryData['location'].split("-");
+                if (locationSplit.length === 1) {
+                    locationUrl = LABKEY.ActionURL.buildURL("ehr", "cageDetails", null, {room: locationSplit[0]});
+                }
+                else if (locationSplit.length === 2) {
+                    locationUrl = LABKEY.ActionURL.buildURL("ehr", "cageDetails", null, {room: locationSplit[0], cage: locationSplit[1]});
+                }
+            }
+
+            var projectUrl = '';
+            if (animalSummaryData['project']) {
+                projectUrl = LABKEY.ActionURL.buildURL("cnprc_ehr", "projectDetails", null, {project: animalSummaryData['project']});
+            }
+
             animalSummary = "<h4>Summary</h4><table class='table' style=\"width:75%\">" +
             "<tr>\n" +
-                "<td class='summLabelCell'>Animal Id:</td>" + "<td class='summValueCell'>" + animalSummaryData['Id'] + "</td>\n" +  // TODO: needs to link Animal Summary / Conception Detail
+                "<td class='summLabelCell'>Animal Id:</td>" + "<td class='summValueCell'><a href='" + idUrl + "'>" + animalSummaryData['Id'] + "</a></td>\n" +
                 "<td class='summLabelCell'>Sex:</td>" + "<td class='summValueCell'>" + animalSummaryData['sex'] + "</td>\n" +
                 "<td class='summLabelCell'>Death Date:</td class='summValueCell'>" + "<td>" + animalSummaryData['deathDate'] + "</td>\n" +
              "</tr>\n" +
             "<tr>\n" +
-                "<td class='summLabelCell'>Location:</td>" + "<td class='summValueCell'>" + animalSummaryData['location'] + "</td>\n" +  // TODO: needs to link to all animals in location
+                "<td class='summLabelCell'>Location:</td>" + "<td class='summValueCell'><a href='" + locationUrl + "'>" + animalSummaryData['location'] + "</a></td>\n" +
                 "<td class='summLabelCell'>Age:</td>" + "<td class='summValueCell'>" +  animalSummaryData['age'] + "</td>\n" +
                 "<td class='summLabelCell'>Death Type:</td>" + "<td class='summValueCell'>" + animalSummaryData['deathType'] + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
                 "<td class='summLabelCell'>Investigator:</td>" + "<td class='summValueCell'>" + animalSummaryData['investigator'] + "</td>\n" +
-                "<td class='summLabelCell'>Project:</td>" + "<td class='summValueCell'><a href='cnprc_ehr-projectDetails.view?project=" +
-                    animalSummaryData['project'] + "'>" + animalSummaryData['project'] + "</a></td>\n" +
+                "<td class='summLabelCell'>Project:</td>" + "<td class='summValueCell'><a href='" + projectUrl + "'>" + animalSummaryData['project'] + "</a></td>\n" +
                 "<td class='summLabelCell'>Charge Id:</td>" + "<td class='summValueCell'>" + animalSummaryData['chargeId'] + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
