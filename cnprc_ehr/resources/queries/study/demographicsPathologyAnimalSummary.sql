@@ -8,13 +8,15 @@ SELECT
   (recWt.MostRecentWeight * 1000) AS weightInGrams, --TODO : may need to change - recent weight may not be the way to go (also this is not coalesced properly)
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
-  biopsy.projectCode as project,  -- TODO: set up FK or otherwise link in page
+  demogr.birth,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
+  demogr.death,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
+  biopsy.projectCode as project,
   ph.clinician,
   biopsy.bcs AS pathologyCondition,
   demogr.death AS deathDate,
   '' AS deathType,  -- TODO: check with CNPRC if this needs to be shown for biopsies
   biopsy.accountId AS chargeId,
-  biopsy.date AS workPerformed,
+  CAST(biopsy.date AS DATE) AS workPerformed,
   biopsy.hydrationLevel AS hydration
 
   FROM study.biopsy
@@ -36,13 +38,15 @@ SELECT
   (recWt.MostRecentWeight * 1000) AS weightInGrams, --TODO : may need to change - recent weight may not be the way to go (also this is not coalesced properly)
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
-  allNecData.projectCode as project,  -- TODO: set up FK or otherwise link in page
+  demogr.birth,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
+  demogr.death,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
+  allNecData.projectCode as project,
   ph.clinician,
   COALESCE (necFin.bcs, necGross.bcs) AS pathologyCondition,
   demogr.death AS deathDate,  -- TODO: need to check this for fetal deaths especially
   COALESCE (necFin.mannerOfDeath, necGross.mannerOfDeath) AS deathType,
   allNecData.accountId AS chargeId,
-  allNecData.date AS workPerformed,
+  CAST(allNecData.date AS DATE) AS workPerformed,
   COALESCE (necFin.hydrationLevel, necGross.hydrationLevel) AS hydration
 
   FROM

@@ -108,24 +108,25 @@
 
             animalSummary = "<h4>Summary</h4><table class='table' style=\"width:75%\">" +
             "<tr>\n" +
-                "<td class='summLabelCell'>Animal Id:</td>" + "<td class='summValueCell'>" + animalSummaryData['Id'] + "</td>\n" +
+                "<td class='summLabelCell'>Animal Id:</td>" + "<td class='summValueCell'>" + animalSummaryData['Id'] + "</td>\n" +  // TODO: needs to link Animal Summary / Conception Detail
                 "<td class='summLabelCell'>Sex:</td>" + "<td class='summValueCell'>" + animalSummaryData['sex'] + "</td>\n" +
-                "<td class='summLabelCell'>Death Date:</td class='summValueCell'>" + "<td>" + new Date(animalSummaryData['deathDate']).toLocaleDateString() + "</td>\n" +
+                "<td class='summLabelCell'>Death Date:</td class='summValueCell'>" + "<td>" + animalSummaryData['deathDate'] + "</td>\n" +
              "</tr>\n" +
             "<tr>\n" +
-                "<td class='summLabelCell'>Location:</td>" + "<td class='summValueCell'>" + animalSummaryData['location'] + "</td>\n" +
+                "<td class='summLabelCell'>Location:</td>" + "<td class='summValueCell'>" + animalSummaryData['location'] + "</td>\n" +  // TODO: needs to link to all animals in location
                 "<td class='summLabelCell'>Age:</td>" + "<td class='summValueCell'>" +  animalSummaryData['age'] + "</td>\n" +
                 "<td class='summLabelCell'>Death Type:</td>" + "<td class='summValueCell'>" + animalSummaryData['deathType'] + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
                 "<td class='summLabelCell'>Investigator:</td>" + "<td class='summValueCell'>" + animalSummaryData['investigator'] + "</td>\n" +
-                "<td class='summLabelCell'>Project:</td>" + "<td class='summValueCell'>" + animalSummaryData['project'] + "</td>\n" +
+                "<td class='summLabelCell'>Project:</td>" + "<td class='summValueCell'><a href='cnprc_ehr-projectDetails.view?project=" +
+                    animalSummaryData['project'] + "'>" + animalSummaryData['project'] + "</a></td>\n" +
                 "<td class='summLabelCell'>Charge Id:</td>" + "<td class='summValueCell'>" + animalSummaryData['chargeId'] + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
                 "<td class='summLabelCell'>Pathologist:</td>" + "<td class='summValueCell'>" + animalSummaryData['pathologist'] + "</td>\n" +
                 "<td class='summLabelCell'>Clinician:</td>" + "<td class='summValueCell'>" + animalSummaryData['clinician'] + "</td>\n" +
-                "<td class='summLabelCell'>Work Performed: </td>" + "<td class='summValueCell'>" + new Date(animalSummaryData['datePerformed']).toLocaleDateString() + "</td>\n" +
+                "<td class='summLabelCell'>Work Performed: </td>" + "<td class='summValueCell'>" + animalSummaryData['workPerformed'] + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
                 "<td class='summLabelCell'>Weight (grams): </td>" + "<td class='summValueCell'>" + animalSummaryData['weightInGrams'] + "</td>\n" +
@@ -177,27 +178,27 @@
                     LABKEY.Filter.create('Id', subjectId, LABKEY.Filter.Types.EQUAL),
                     LABKEY.Filter.create('reportId', reportId, LABKEY.Filter.Types.EQUAL)
                 ],
+                requiredVersion: '17.1',  // want formattedValue for dates
                 success: function (result) {
+                    var row = result.rows[0].data;
 
-                    var row = result.rows[0];
-
-                    animalSummaryData['Id'] = row.Id;
-                    animalSummaryData['reportName'] = row.reportName;
-                    animalSummaryData['sex'] = row.gender;
-                    animalSummaryData['deathDate'] = row.death ? row.death : '';
-                    animalSummaryData['deathType'] = row.deathType ? row.deathType : '';
-                    animalSummaryData['weightInGrams'] = row.weightInGrams;
-                    animalSummaryData['location'] = row.location;
-                    animalSummaryData['age'] = row.age; //TODO: fix: age is not getting displayed in yr:month:day format
-                    animalSummaryData['project'] = row.project;
-                    animalSummaryData['investigator'] = row.investigator ? row.investigator : '';
-                    animalSummaryData['datePerformed'] = row.datePerformed ? row.datePerformed : ''; //TODO: fix: values do not match webvitals
-//                    animalSummaryData['dateCompleted'] = row.dateCompleted ? row.dateCompleted : ''; //TODO: probably this is what's required instead of datePerformed
-                    animalSummaryData['pathologist'] = row.pathologist ? row.pathologist : '';
-                    animalSummaryData['chargeId'] = row.chargeId ? row.chargeId : '';
-                    animalSummaryData['hydration'] = row.hydration ? row.hydration : '';
-                    animalSummaryData['pathologyCondition'] = row.pathologyCondition ? row.pathologyCondition : '';
-                    animalSummaryData['clinician'] = row.clinician ? row.clinician : '';
+                    animalSummaryData['Id'] = row.Id.value;
+                    animalSummaryData['reportName'] = row.reportName.value;
+                    animalSummaryData['sex'] = row.sex.value;
+                    animalSummaryData['deathDate'] = row.deathDate.formattedValue ? row.deathDate.formattedValue : '';
+                    animalSummaryData['deathType'] = row.deathType.value ? row.deathType.value : '';
+                    animalSummaryData['weightInGrams'] = row.weightInGrams.value;
+                    animalSummaryData['location'] = row.location.value;
+                    animalSummaryData['age'] = row.age.displayValue;
+                    animalSummaryData['project'] = row.project.value;
+                    animalSummaryData['investigator'] = row.investigator.value ? row.investigator.value : '';
+                    animalSummaryData['workPerformed'] = row.workPerformed.formattedValue ? row.workPerformed.formattedValue : ''; //TODO: fix: values do not match webvitals
+//                    animalSummaryData['dateCompleted'] = row.dateCompleted.formattedValue ? row.dateCompleted.formattedValue : ''; //TODO: probably this is what's required instead of datePerformed
+                    animalSummaryData['pathologist'] = row.pathologist.value ? row.pathologist.value : '';
+                    animalSummaryData['chargeId'] = row.chargeId.value ? row.chargeId.value : '';
+                    animalSummaryData['hydration'] = row.hydration.value ? row.hydration.value : '';
+                    animalSummaryData['pathologyCondition'] = row.pathologyCondition.value ? row.pathologyCondition.value : '';
+                    animalSummaryData['clinician'] = row.clinician.value ? row.clinician.value : '';
 
                     if (animalSummaryData['reportName'] === "Biopsy") {
 
