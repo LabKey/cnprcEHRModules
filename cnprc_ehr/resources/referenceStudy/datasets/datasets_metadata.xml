@@ -2589,6 +2589,11 @@
                 <datatype>varchar</datatype>
             </column>
         </columns>
+        <indices>
+            <index type="non-unique">
+                <column>enddate</column>
+            </index>
+        </indices>
         <tableTitle>Housing</tableTitle>
     </table>
     <table tableName="inbreeding" tableDbType="TABLE">
