@@ -105,12 +105,12 @@
             if (animalSummaryData['Id']) {
                 if (animalSummaryData['Id'].indexOf("-") !== -1)  // conception ID
                     idLinkText = "<a href='"
-                            + LABKEY.ActionURL.buildURL("cnprc_ehr", "conceptionDetail", null, {conceptionId: animalSummaryData['Id']})
-                            + "'>" + animalSummaryData['Id'] + "</a>";
+                            + LABKEY.Utils.encodeHtml(LABKEY.ActionURL.buildURL("cnprc_ehr", "conceptionDetail", null, {conceptionId: animalSummaryData['Id']}))
+                            + "'>" + LABKEY.Utils.encodeHtml(animalSummaryData['Id']) + "</a>";
                 else  // animal ID
                     idLinkText = "<a href='"
-                            + LABKEY.ActionURL.buildURL("ehr", "participantView", null, {participantId: animalSummaryData['Id']})
-                            + "'>" + animalSummaryData['Id'] + "</a>";
+                            + LABKEY.Utils.encodeHtml(LABKEY.ActionURL.buildURL("ehr", "participantView", null, {participantId: animalSummaryData['Id']}))
+                            + "'>" + LABKEY.Utils.encodeHtml(animalSummaryData['Id']) + "</a>";
             }
 
             var locationLinkText = '';
@@ -118,65 +118,65 @@
                 var locationSplit = animalSummaryData['location'].split("-");
                 if (locationSplit.length === 1) {
                     locationLinkText = "<a href='"
-                            + LABKEY.ActionURL.buildURL("ehr", "cageDetails", null, {room: locationSplit[0]})
-                            + "'>" + animalSummaryData['location'] + "</a>";
+                            + LABKEY.Utils.encodeHtml(LABKEY.ActionURL.buildURL("ehr", "cageDetails", null, {room: locationSplit[0]}))
+                            + "'>" + LABKEY.Utils.encodeHtml(animalSummaryData['location'] + "</a>");
                 }
                 else if (locationSplit.length === 2) {
                     locationLinkText = "<a href='"
-                            + LABKEY.ActionURL.buildURL("ehr", "cageDetails", null, {room: locationSplit[0], cage: locationSplit[1]})
-                            + "'>" + animalSummaryData['location'] + "</a>";
+                            + LABKEY.Utils.encodeHtml(LABKEY.ActionURL.buildURL("ehr", "cageDetails", null, {room: locationSplit[0], cage: locationSplit[1]}))
+                            + "'>" + LABKEY.Utils.encodeHtml(animalSummaryData['location']) + "</a>";
                 }
             }
 
             var projectLinkText = '';
             if (animalSummaryData['project']) {
                 projectLinkText = "<a href='"
-                        + LABKEY.ActionURL.buildURL("cnprc_ehr", "projectDetails", null, {project: animalSummaryData['project']})
-                        + "'>" + animalSummaryData['project'] + "</a>";
+                        + LABKEY.Utils.encodeHtml(LABKEY.ActionURL.buildURL("cnprc_ehr", "projectDetails", null, {project: animalSummaryData['project']}))
+                        + "'>" + LABKEY.Utils.encodeHtml(animalSummaryData['project']) + "</a>";
             }
 
-            animalSummary = "<h4>Summary</h4><table class='table' style=\"width:75%\">" +
+            animalSummary = "<h4>Summary</h4><table class='table' style=\"width:100%; max-width: 1200px\">" +
             "<tr>\n" +
                 "<td class='summLabelCell'><strong>Animal Id:</strong></td>" + "<td class='summValueCell'>" + idLinkText + "</td>\n" +
-                "<td class='summLabelCell'><strong>Sex:</strong></td>" + "<td class='summValueCell'>" + (animalSummaryData['sex'] === 'null' ? animalSummaryData['sex'] : '')  + "</td>\n" +
-                "<td class='summLabelCell'><strong>Death Date:</strong></td class='summValueCell'>" + "<td>" + animalSummaryData['deathDate'] + "</td>\n" +
+                "<td class='summLabelCell'><strong>Sex:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml((animalSummaryData['sex'] === 'null' ? animalSummaryData['sex'] : ''))  + "</td>\n" +
+                "<td class='summLabelCell'><strong>Death Date:</strong></td class='summValueCell'>" + "<td>" + LABKEY.Utils.encodeHtml(animalSummaryData['deathDate']) + "</td>\n" +
              "</tr>\n" +
             "<tr>\n" +
                 "<td class='summLabelCell'><strong>Location:</strong></td>" + "<td class='summValueCell'>" + locationLinkText + "</td>\n" +
-                "<td class='summLabelCell'><strong>Age:</strong></td>" + "<td class='summValueCell'>" +  (animalSummaryData['age'] === 'null' ? animalSummaryData['age'] : '') + "</td>\n" +
-                "<td class='summLabelCell'><strong>Death Type:</strong></td>" + "<td class='summValueCell'>" + animalSummaryData['deathType'] + "</td>\n" +
+                "<td class='summLabelCell'><strong>Age:</strong></td>" + "<td class='summValueCell'>" +  LABKEY.Utils.encodeHtml((animalSummaryData['age'] === 'null' ? animalSummaryData['age'] : '')) + "</td>\n" +
+                "<td class='summLabelCell'><strong>Death Type:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['deathType']) + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
-                "<td class='summLabelCell'><strong>Investigator:</strong></td>" + "<td class='summValueCell'>" + animalSummaryData['investigator'] + "</td>\n" +
+                "<td class='summLabelCell'><strong>Investigator:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['investigator']) + "</td>\n" +
                 "<td class='summLabelCell'><strong>Project:</strong></td>" + "<td class='summValueCell'>" + projectLinkText + "</td>\n" +
-                "<td class='summLabelCell'><strong>Charge Id:</strong></td>" + "<td class='summValueCell'>" + animalSummaryData['chargeId'] + "</td>\n" +
+                "<td class='summLabelCell'><strong>Charge Id:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['chargeId']) + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
-                "<td class='summLabelCell'><strong>Pathologist:</strong></td>" + "<td class='summValueCell'>" + animalSummaryData['pathologist'] + "</td>\n" +
-                "<td class='summLabelCell'><strong>Clinician:</strong></td>" + "<td class='summValueCell'>" + animalSummaryData['clinician'] + "</td>\n" +
-                "<td class='summLabelCell'><strong>Work Performed: <strong></strong></td>" + "<td class='summValueCell'>" + animalSummaryData['workPerformed'] + "</td>\n" +
+                "<td class='summLabelCell'><strong>Pathologist:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['pathologist']) + "</td>\n" +
+                "<td class='summLabelCell'><strong>Clinician:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['clinician']) + "</td>\n" +
+                "<td class='summLabelCell'><strong>Work Performed: <strong></strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['workPerformed']) + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
-                "<td class='summLabelCell'><strong>Weight (grams): </strong></td>" + "<td class='summValueCell'>" + animalSummaryData['weightInGrams'] + "</td>\n" +
-                "<td class='summLabelCell'><strong>Pathology Condition:</strong></td>" + "<td class='summValueCell'>" + animalSummaryData['pathologyCondition'] + "</td>\n" +
-                "<td class='summLabelCell'><strong>Hydration:</strong></td>" + "<td class='summValueCell'>" + animalSummaryData['hydration'] + "</td>\n" +
+                "<td class='summLabelCell'><strong>Weight (grams): </strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['weightInGrams']) + "</td>\n" +
+                "<td class='summLabelCell'><strong>Pathology Condition:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['pathologyCondition']) + "</td>\n" +
+                "<td class='summLabelCell'><strong>Hydration:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['hydration']) + "</td>\n" +
             "</tr>\n";
 
             $("#pathologyAnimalSummary").html(animalSummary);
         }
 
         function appendBiopsyReport(biopsyData) {
-            biopsyReport = "<h4></h4><table class='table' style=\"width:75%\">" +
-            "<tr><td class='reportLabelCell'><strong>Clinincal History:</strong></td>" + "<td class='reportValueCell'>" + biopsyData['clinicalHistory'] + "</td></tr>\n" +
-            "<tr><td class='reportLabelCell'><strong>Clinincal Diagnosis:</strong></td>" + "<td class='reportValueCell'>" + biopsyData['clinicalDiagnosis'] + "</td></tr>\n" +
-            "<tr><td class='reportLabelCell'><strong>Modify Necropsy:</strong></td>" + "<td class='reportValueCell'>" + biopsyData['modifyNecropsy'] + "</td></tr>" +
+            biopsyReport = "<h4></h4><table class='table' style=\"width:100%; max-width: 1200px\">" +
+            "<tr><td class='reportLabelCell'><strong>Clinincal History:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['clinicalHistory']) + "</td></tr>\n" +
+            "<tr><td class='reportLabelCell'><strong>Clinincal Diagnosis:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['clinicalDiagnosis']) + "</td></tr>\n" +
+            "<tr><td class='reportLabelCell'><strong>Modify Necropsy:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['modifyNecropsy']) + "</td></tr>" +
             "<tr><td class='reportLabelCell'><strong>Biopsy Observations:</strong></td>" + "<td>" +
                     "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
                         "<thead><tr><td>Organ</td>" + "<td>Text</td><tr></thead>";
                             for (i = 0; i < biopsyData['grossFindings'].length; i++) {
                                 biopsyReport += "<tr>" +
-                                        "<td>"+ biopsyData['grossFindings'][i]['biopsyObsOrgan'] +"</td>" +
-                                        "<td>"+ biopsyData['grossFindings'][i]['biopsyObsOrganText'] +"</td>" +
+                                        "<td>"+ LABKEY.Utils.encodeHtml(biopsyData['grossFindings'][i]['biopsyObsOrgan']) +"</td>" +
+                                        "<td>"+ LABKEY.Utils.encodeHtml(biopsyData['grossFindings'][i]['biopsyObsOrganText']) +"</td>" +
                                         "</tr>";
                             }
                             biopsyReport +=
@@ -186,9 +186,9 @@
                          "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>"+"<td>Text</td>"+"</tr></thead>";
                             for (i = 0; i < biopsyData['morphologicDiagnosis'].length; i++) {
                                  biopsyReport += "<tr>" +
-                                         "<td class='text-center'>"+ biopsyData['morphologicDiagnosis'][i]['morphDiagSeq'] +"</td>" +
-                                         "<td >"+ biopsyData['morphologicDiagnosis'][i]['morphDiagOrgan'] +"</td>" +
-                                         "<td>"+ biopsyData['morphologicDiagnosis'][i]['morphDiagText'] +"</td>" +
+                                         "<td class='text-center'>"+ LABKEY.Utils.encodeHtml(biopsyData['morphologicDiagnosis'][i]['morphDiagSeq']) +"</td>" +
+                                         "<td >"+ LABKEY.Utils.encodeHtml(biopsyData['morphologicDiagnosis'][i]['morphDiagOrgan']) +"</td>" +
+                                         "<td>"+ LABKEY.Utils.encodeHtml(biopsyData['morphologicDiagnosis'][i]['morphDiagText']) +"</td>" +
                                          "</tr>";
                              }
                             biopsyReport +=
@@ -403,9 +403,9 @@
                                 }
 
                                 images += "<span class='pathology'><div><a href=" + fullOrPath + "> <img src=" + fullTnPath + "></a></div>" +
-                                        "<div>Image Id: " + id + "</div>" +
-                                        "<div>Owner: " + owner + "</div>" +
-                                        "<div>Organ: " + organ + "</div>" +
+                                        "<div>Image Id: " + LABKEY.Utils.encodeHtml(id) + "</div>" +
+                                        "<div>Owner: " + LABKEY.Utils.encodeHtml(owner) + "</div>" +
+                                        "<div>Organ: " + LABKEY.Utils.encodeHtml(organ) + "</div>" +
                                         "</span>";
                             }
                         }
@@ -427,9 +427,9 @@
             var ts = getTimestamp();
 
             return ('<h4 class="pathology">' +
-                    '<span class="pathologyReportLeft">' + rId + '</span>' +
-                    '<span class="pathologyReportCenter">' + rep + '</span>' +
-                    '<span class="pathologyReportRight">' + ts + '</span>' +
+                    '<span class="pathologyReportLeft">' + LABKEY.Utils.encodeHtml(rId) + '</span>' +
+                    '<span class="pathologyReportCenter">' + LABKEY.Utils.encodeHtml(rep) + '</span>' +
+                    '<span class="pathologyReportRight">' + LABKEY.Utils.encodeHtml(ts) + '</span>' +
                     '</h4>');
 
         }
