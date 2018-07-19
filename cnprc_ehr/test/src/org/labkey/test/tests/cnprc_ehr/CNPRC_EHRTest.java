@@ -639,14 +639,12 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, PDLFOLDER, "Collaboration", new String[]{"CNPRC_PDL"});
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, BILLINGFOLDER, "Custom", new String[]{"CNPRC_Billing"});
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, COMPLIANCE_AND_TRAINING_FOLDER, "Compliance and Training", new String[]{"CNPRC_ComplianceAndTraining"});
-        clickFolder(getProjectName());
     }
 
     @Test
     public void testGenetics()
     {
-        goToProjectHome();
-        clickFolder(GENETICSFOLDER);
+        navigateToFolder(getProjectName(), GENETICSFOLDER);
         waitAndClickAndWait(LabModuleHelper.getNavPanelItem(GENETICS_PANEL_LABEL, "Browse All"));
         DataRegionTable results = new DataRegionTable("Data", getDriver());
         final List<String> rowData = results.getRowDataAsText(results.getRowIndex("1"), "Subject", "Sex", "Sire", "Dam", "Lab Case", "Date Tested", "Notes");
