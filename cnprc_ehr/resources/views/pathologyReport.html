@@ -75,6 +75,7 @@
         <div id="pathologyAnimalSummary"></div>
         <div id="pathologyBiopsyReport"></div>
         <div id="pathologyNecropsyReport"></div>
+        <div id="pathologyMeasurements"></div>
         <div id="imageSection"></div>
     </div>
 </div>
@@ -92,6 +93,22 @@
         var subjectId = LABKEY.ActionURL.getParameter('subjectId');
         var reportId = LABKEY.ActionURL.getParameter('reportId');
         var reportCategory = LABKEY.ActionURL.getParameter('reportCategory');
+
+        var clinicalHistory = 'clinicalHistory';
+        var clinicalDiagnosis = 'clinicalDiagnosis';
+        var modifyNecropsy = 'modifyNecropsy';
+
+        var biopsyGrossFinding = 'biopsyGrossFinding';
+        var ngGrossFinding = 'ngGrossFinding';
+        var nfGrossFinding = 'nfGrossFinding';
+
+        var biopsyMorphDiag = 'biopsyMorphDiag';
+        var ngMorphDiag = 'ngMorphDiag';
+        var nfMorphDiag = 'nfMorphDiag';
+
+        var pathologyComments = 'pathologyComments';
+
+        var necropsyMeasurements = 'necrMeasurements';
 
         showPathologyReport(appendAnimalSummary, appendBiopsyReport, appendNecropsyReport, appendImages);
 
@@ -166,39 +183,80 @@
         }
 
         function appendBiopsyReport(biopsyData) {
-            biopsyReport = "<h4></h4><table class='table' style=\"width:100%; max-width: 1200px\">" +
-            "<tr><td class='reportLabelCell'><strong>Clinincal History:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['clinicalHistory']) + "</td></tr>\n" +
-            "<tr><td class='reportLabelCell'><strong>Clinincal Diagnosis:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['clinicalDiagnosis']) + "</td></tr>\n" +
-            "<tr><td class='reportLabelCell'><strong>Modify Necropsy:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['modifyNecropsy']) + "</td></tr>" +
-            "<tr><td class='reportLabelCell'><strong>Biopsy Observations:</strong></td>" + "<td>" +
-                    "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
+
+            biopsyReport = "<h4></h4><table class='table' style=\"width:100%; max-width: 1200px\">";
+
+            if (biopsyData[clinicalHistory])
+                biopsyReport += "<tr><td class='reportLabelCell'><strong>Clinical History:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['clinicalHistory']) + "</td></tr>\n";
+
+            if (biopsyData[clinicalDiagnosis])
+                biopsyReport += "<tr><td class='reportLabelCell'><strong>Clinical Diagnosis:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['clinicalDiagnosis']) + "</td></tr>\n";
+
+            if (biopsyData[modifyNecropsy])
+                biopsyReport += "<tr><td class='reportLabelCell'><strong>Modify Necropsy:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['modifyNecropsy']) + "</td></tr>";
+
+            if (biopsyData[biopsyGrossFinding].length > 0) {
+                biopsyReport += "<tr><td class='reportLabelCell'><strong>Biopsy Observations:</strong></td>" + "<td>" +
+                        "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
                         "<thead><tr><td>Organ</td>" + "<td>Text</td><tr></thead>";
-                            for (i = 0; i < biopsyData['grossFindings'].length; i++) {
-                                biopsyReport += "<tr>" +
-                                        "<td>"+ LABKEY.Utils.encodeHtml(biopsyData['grossFindings'][i]['biopsyObsOrgan']) +"</td>" +
-                                        "<td>"+ LABKEY.Utils.encodeHtml(biopsyData['grossFindings'][i]['biopsyObsOrganText']) +"</td>" +
-                                        "</tr>";
-                            }
-                            biopsyReport +=
-                     "</table></td></tr>" +
-             "<tr><td class='reportLabelCell'><strong>Biopsy Diagnosis:</strong></td>" + "<td>" +
-                    "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
-                         "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>"+"<td>Text</td>"+"</tr></thead>";
-                            for (i = 0; i < biopsyData['morphologicDiagnosis'].length; i++) {
-                                 biopsyReport += "<tr>" +
-                                         "<td class='text-center'>"+ LABKEY.Utils.encodeHtml(biopsyData['morphologicDiagnosis'][i]['morphDiagSeq']) +"</td>" +
-                                         "<td >"+ LABKEY.Utils.encodeHtml(biopsyData['morphologicDiagnosis'][i]['morphDiagOrgan']) +"</td>" +
-                                         "<td>"+ LABKEY.Utils.encodeHtml(biopsyData['morphologicDiagnosis'][i]['morphDiagText']) +"</td>" +
-                                         "</tr>";
-                             }
-                            biopsyReport +=
-                    "</table></td></tr>" +
-              "<tr><td class='reportLabelCell'><strong>Biopsy Comments:</strong></td>" + "<td class='reportValueCell'>" + biopsyData['biopsyComments'] + "</td></tr>\n" ;
+                for (let i = 0; i < biopsyData[biopsyGrossFinding].length; i++) {
+                    biopsyReport += "<tr>" +
+                            "<td>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyGrossFinding][i]['organ']) + "</td>" +
+                            "<td>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyGrossFinding][i]['organText']) + "</td>" +
+                            "</tr>";
+                }
+            }
+            if (biopsyData[biopsyMorphDiag].length > 0) {
+                biopsyReport +=
+                        "</table></td></tr>" +
+                        "<tr><td class='reportLabelCell'><strong>Biopsy Diagnosis:</strong></td>" + "<td>" +
+                        "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
+                        "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
+                for (let i = 0; i < biopsyData[biopsyMorphDiag].length; i++) {
+                    biopsyReport += "<tr>" +
+                            "<td class='text-center'>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagSeq']) + "</td>" +
+                            "<td >" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagOrgan']) + "</td>" +
+                            "<td>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagText']) + "</td>" +
+                            "</tr>";
+                }
+            }
+
+            if (biopsyData[pathologyComments]) {
+                biopsyReport +=
+                        "</table></td></tr>" +
+                        "<tr><td class='reportLabelCell'><strong>Biopsy Comments:</strong></td>" + "<td class='reportValueCell'>" + biopsyData['pathologyComments'] + "</td></tr>\n";
+            }
 
             $("#pathologyBiopsyReport").html(biopsyReport);
         }
 
-        function appendNecropsyReport() {
+        function appendNecropsyReport(necropsyGrossData, necropsyFinalData, reportName) {
+
+            var necropsyData = [];
+
+            if(reportName === 'Gross Necropsy') {
+                necropsyData = necropsyGrossData;
+            }
+            else {
+                necropsyData = necropsyFinalData;
+            }
+            necropsyReport = "<h4></h4><table class='table' style=\"width:100%; max-width: 1200px\">";
+
+            if (necropsyData[clinicalHistory])
+                necropsyReport += "<tr><td class='reportLabelCell'><strong>Clinical History:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(necropsyData['clinicalHistory']) + "</td></tr>\n";
+
+            if (necropsyData[clinicalDiagnosis])
+                necropsyReport += "<tr><td class='reportLabelCell'><strong>Clinical Diagnosis:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(necropsyData['clinicalDiagnosis']) + "</td></tr>\n";
+
+            if (necropsyData[modifyNecropsy])
+                necropsyReport += "<tr><td class='reportLabelCell'><strong>Modify Necropsy:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(necropsyData['modifyNecropsy']) + "</td></tr>";
+
+            //TODO: necropsy gross
+            //TODO: necropsy final
+
+            if (necropsyData[necropsyMeasurements].length > 0) {
+                //TODO: add measurements
+            }
             $("#pathologyNecropsyReport").html(necropsyReport);
         }
 
@@ -233,7 +291,7 @@
                     animalSummaryData['sex'] = row.sex.value;
                     animalSummaryData['deathDate'] = row.deathDate.formattedValue ? row.deathDate.formattedValue : '';
                     animalSummaryData['deathType'] = row.deathType.value ? row.deathType.value : '';
-                    animalSummaryData['weightInGrams'] = row.weightInGrams.value;
+                    animalSummaryData['weightInGrams'] = row.weightInGrams.value ? row.weightInGrams.value : '';
                     animalSummaryData['location'] = row.location.value;
                     animalSummaryData['age'] = row.age.displayValue;
                     animalSummaryData['project'] = row.project.value;
@@ -252,7 +310,7 @@
                         appendHeader();
 
                         var biopsyData = {};
-                        getBiopsyReport(biopsyData, biopsyReportCallbackFn);
+                        getBiopsyReport(biopsyData, animalSummaryData['reportName'], biopsyReportCallbackFn,);
                         images = getImages(imagesCallbackFn);
 
                     }
@@ -261,7 +319,9 @@
                         reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName']);
                         appendHeader();
 
-                        getNecropsyReport(necropsyReportCallbackFn);
+                        var necropsyGrossData = {}; //to store both Gross and Final Necropsy info
+                        var necropsyFinalData = {}; //to store both Gross and Final Necropsy info
+                        getNecropsyReport(necropsyGrossData, necropsyFinalData, animalSummaryData['reportName'], necropsyReportCallbackFn);
                         images = getImages(imagesCallbackFn);
                     }
 
@@ -270,37 +330,35 @@
             });
         }
 
-        function getDemographicsInfo(callbackFn) {
-
-            LABKEY.Query.selectRows({
-                schemaName: "study",
-                queryName: "demographics",
-                success: function (result) {
-
-                }
-            });
-        }
-
-        function getBiopsyReport(biopsyData, callbackFn) {
+        function getBiopsyReport(biopsyData, reportName, callbackFn) {
 
             var multi = new LABKEY.MultiRequest();
 
             multi.add(LABKEY.Query.selectRows, {
                 schemaName: "study",
-                queryName: "pathologyReportBiopsyAndHistory",
+                queryName: "pathologyReportBiopsyHistory",
                 scope: this,
                 failure: LDK.Utils.getErrorCallback(),
                 filterArray: [
                     LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
-                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL)
                 ],
                 success: function (result) {
+                    setPathologyHistory(biopsyData, result.rows[0]);
+                }
+            });
 
-                    var row = result.rows[0];
-                    biopsyData['clinicalHistory'] = row.clinicalHistory;
-                    biopsyData['clinicalDiagnosis'] = row.clinicalDiagnosis;
-                    biopsyData['modifyNecropsy'] = row.modifyNecropsy;
-                    biopsyData['biopsyComments'] = row.biopsyComments;
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportBiopsyComments",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setPathologyComments(biopsyData, result.rows[0]);
                 }
             });
 
@@ -311,19 +369,10 @@
                 failure: LDK.Utils.getErrorCallback(),
                 filterArray: [
                     LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
-                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL)
                 ],
                 success: function (result) {
-
-                    var rows = result.rows;
-
-                    biopsyData['grossFindings'] = [];
-                    for (var i = 0; i < rows.length; i++) {
-                        biopsyData['grossFindings'][i] = {
-                            biopsyObsOrgan: rows[i].biopsyObsOrgan,
-                            biopsyObsOrganText: rows[i].biopsyObsOrganText
-                        };
-                    }
+                    setGrossFindingsData(biopsyData, result.rows, true, false, false);
                 }
             });
 
@@ -334,20 +383,11 @@
                 failure: LDK.Utils.getErrorCallback(),
                 filterArray: [
                     LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
-                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL)
                 ],
                 sort: 'morphDiagSeq',
                 success: function (result) {
-
-                    var rows = result.rows;
-                    biopsyData['morphologicDiagnosis'] = [];
-                    for(var i = 0; i < rows.length; i++) {
-                        biopsyData['morphologicDiagnosis'][i] = {
-                            morphDiagSeq: rows[i].morphDiagSeq,
-                            morphDiagOrgan: rows[i].morphDiagOrgan,
-                            morphDiagText: rows[i].morphDiagText
-                        };
-                    }
+                    setMorphologicDiagnosisData(biopsyData, result.rows, true, false, false);
                 }
             });
 
@@ -356,8 +396,246 @@
             }, this);
         }
 
-        function getNecropsyReport(callbackFn) {
-//TODO:
+        function getNecropsyReport(necropsyGrossData, necropsyFinalData, reportName, callbackFn) {
+
+            var multi = new LABKEY.MultiRequest();
+
+            //get Gross Necropsy
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyHistory",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NG', LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setPathologyHistory(necropsyGrossData, result.rows[0]);
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyComments",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NG', LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setPathologyComments(necropsyGrossData, result.rows[0]);
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyGF",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NG', LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setGrossFindingsData(necropsyGrossData, result.rows, false, true, false);
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyMD",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NG', LABKEY.Filter.Types.EQUAL)
+                ],
+                sort: 'morphDiagSeq',
+                success: function (result) {
+                    setMorphologicDiagnosisData(necropsyGrossData, result.rows, false, true, false);
+                }
+            });
+
+            //get Final Necropsy
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyHistory",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NF', LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setPathologyHistory(necropsyFinalData, result.rows[0]);
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyComments",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NF', LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setPathologyComments(necropsyFinalData, result.rows[0]);
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyGF",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NF', LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setGrossFindingsData(necropsyFinalData, result.rows, false, false, true);
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyMD",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportType', 'NF', LABKEY.Filter.Types.EQUAL)
+                ],
+                sort: 'morphDiagSeq',
+                success: function (result) {
+                    setMorphologicDiagnosisData(necropsyFinalData, result.rows, false, false, true);
+                }
+            });
+
+            multi.add(LABKEY.Query.selectRows, {
+                schemaName: "study",
+                queryName: "pathologyReportNecropsyMeasurements",
+                scope: this,
+                failure: LDK.Utils.getErrorCallback(),
+                filterArray: [
+                    LABKEY.Filter.create('Id', LABKEY.ActionURL.getParameter('subjectId'), LABKEY.Filter.Types.EQUAL),
+                    LABKEY.Filter.create('reportId', LABKEY.ActionURL.getParameter('reportId'), LABKEY.Filter.Types.EQUAL)
+                ],
+                success: function (result) {
+                    setMeasurements(necropsyGrossData, necropsyFinalData, result.rows, reportName);
+                }
+            });
+
+            multi.send(function(){
+                callbackFn.call(this, necropsyGrossData, necropsyFinalData, reportName);
+            }, this);
+        }
+
+        function setPathologyHistory(pathologyArray, row) {
+
+            if(row) {
+                pathologyArray[clinicalHistory] = row.clinicalHistory ? row.clinicalHistory : null;
+                pathologyArray[clinicalDiagnosis] = row.clinicalDiagnosis ? row.clinicalDiagnosis : null;
+                pathologyArray[modifyNecropsy] = row.modifyNecropsy ? row.modifyNecropsy : null;
+            }
+        }
+
+        function setPathologyComments(pathologyArray, row) {
+
+            if(row) {
+                pathologyArray[pathologyComments] = row.pathologyComments ? row.pathologyComments : null;
+            }
+        }
+
+        function setGrossFindingsData(pathologyArray, rows, isBiopsy, isNecropsyGross, isNecropsyFinal) {
+
+            if(rows) {
+
+                let reportTypeGrossFinding ='';
+                if(isBiopsy)
+                    reportTypeGrossFinding = biopsyGrossFinding;
+                else if(isNecropsyGross)
+                    reportTypeGrossFinding = ngGrossFinding;
+                else if(isNecropsyFinal)
+                    reportTypeGrossFinding = nfGrossFinding;
+
+                pathologyArray[reportTypeGrossFinding] = [];
+
+                for (let i = 0; i < rows.length; i++) {
+                    pathologyArray[reportTypeGrossFinding][i] = {
+                        organ: rows[i].organ ? rows[i].organ : null,
+                        organText: rows[i].organText ? rows[i].organText : null
+                    };
+                }
+            }
+        }
+
+        function setMorphologicDiagnosisData(pathologyArray, rows, isBiopsy, isNecropsyGross, isNecropsyFinal) {
+
+            if(rows) {
+
+                var reportTypeMorphDiag ='';
+
+                if(isBiopsy)
+                    reportTypeMorphDiag = biopsyMorphDiag;
+                else if(isNecropsyGross)
+                    reportTypeMorphDiag = ngMorphDiag;
+                else if(isNecropsyFinal)
+                    reportTypeMorphDiag = nfMorphDiag;
+
+                pathologyArray[reportTypeMorphDiag] = [];
+
+                for (let i = 0; i < rows.length; i++) {
+
+                    let topographyNotes = rows[i].topographyNotes ? rows[i].topographyNotes : '';
+                    let morphologyNotes = rows[i].morphologyNotes ? rows[i].morphologyNotes : '';
+                    let remark = rows[i].remark ? rows[i].remark : '';
+                    let comments = rows[i].comments ? rows[i].comments : '';
+
+                    pathologyArray[reportTypeMorphDiag][i] = {
+                        morphDiagSeq: rows[i].morphDiagSeq ? rows[i].morphDiagSeq : null,
+                        morphDiagOrgan: rows[i].morphDiagOrgan ? rows[i].morphDiagOrgan : null,
+                        morphDiagText : (topographyNotes + " " + morphologyNotes + " " + remark + " " + comments).trim()
+                    };
+                }
+            }
+        }
+
+        function setMeasurements(necropsyGrossData, necropsyFinalData, rows, reportName) {
+
+            if(rows) {
+
+                var measurementData = [];
+
+                if(reportName === 'Gross Necropsy') {
+                    measurementData = necropsyGrossData;
+                }
+                else {
+                    measurementData = necropsyFinalData;
+                }
+                measurementData[necropsyMeasurements] = [];
+
+                for (var i = 0; i < rows.length; i++) {
+
+                    measurementData[necropsyMeasurements][i] = {
+                        organName: rows[i].organName ? rows[i].organName : null,
+                        organValue: rows[i].organValue ? rows[i].organValue : null,
+                        organValueUnit: rows[i].organValueUnit ? rows[i].organValueUnit : null
+                    };
+                }
+            }
         }
 
         function getImages(callbackFn) {
