@@ -8,8 +8,8 @@ SELECT
   (recWt.MostRecentWeight * 1000) AS weightInGrams, --TODO : may need to change - recent weight may not be the way to go (also this is not coalesced properly)
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
-  demogr.birth,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
-  demogr.death,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
+  demogr.birth,  -- needed for age to calculate correctly
+  demogr.death,  -- needed for age to calculate correctly
   biopsy.projectCode as project,
   ph.clinician,
   biopsy.bcs AS pathologyCondition,
@@ -38,8 +38,8 @@ SELECT
   (recWt.MostRecentWeight * 1000) AS weightInGrams, --TODO : may need to change - recent weight may not be the way to go (also this is not coalesced properly)
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
-  demogr.birth,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
-  demogr.death,  -- FIXME: needed for age to calculate correctly, but we shouldn't need to do this
+  demogr.birth,  -- needed for age to calculate correctly
+  demogr.death,  -- needed for age to calculate correctly
   allNecData.projectCode as project,
   ph.clinician,
   COALESCE (necFin.bcs, necGross.bcs) AS pathologyCondition,
