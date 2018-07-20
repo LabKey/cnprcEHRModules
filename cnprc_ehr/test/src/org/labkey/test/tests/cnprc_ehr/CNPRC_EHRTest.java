@@ -115,6 +115,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String PDLFOLDER = "PDL";
     private static final String BILLINGFOLDER = "Billing";
     private static final String COMPLIANCE_AND_TRAINING_FOLDER = "Compliance And Training";
+    private static final String PATHOLOGY_REPORTS_FOLDER = "Pathology Reports";
     protected static final String ROOM_AB5001 = "AB5001";
     protected static final String ROOM_AC5003 = "AC5003";
     protected static final String ROOM_AD5003 = "AD5003";
@@ -315,6 +316,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         createBillingLinkedSchema();
         storeBillingData();
         initGenetics();
+        storeImageData();
     }
 
     @Override
@@ -639,6 +641,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, PDLFOLDER, "Collaboration", new String[]{"CNPRC_PDL"});
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, BILLINGFOLDER, "Custom", new String[]{"CNPRC_Billing"});
         _containerHelper.createSubfolder(getProjectName(), COREFACILITIES, COMPLIANCE_AND_TRAINING_FOLDER, "Compliance and Training", new String[]{"CNPRC_ComplianceAndTraining"});
+        _containerHelper.createSubfolder(getProjectName(), getProjectName(), PATHOLOGY_REPORTS_FOLDER, "Collaboration",null);
     }
 
     @Test
@@ -906,8 +909,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testPathologyAndSNOMEDImageLinks() throws Exception
     {
-        storeImageData();
-
         //Necropsy
         goToSchemaBrowser();
         DataRegionTable table = viewQueryData("study", "necropsy");
@@ -2685,6 +2686,40 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<Map<String, Object>> tsv = loadTsv(tsvFile);
         command.setRows(tsv);
         command.execute(connection, getProjectName() + folder);
+    }
+
+    @Test
+    public void testPathologyReportsImages()
+    {
+        String animalId = "TEST3";
+        String reportId1 = "12350";
+
+        log("setting pipeline root for Pathology Reports folder");
+        navigateToFolder(getProjectName(), PATHOLOGY_REPORTS_FOLDER);
+
+        File path = new File(TestFileUtils.getLabKeyRoot(), "/sampledata/cnprc_ehr");
+        setPipelineRoot(path.getPath());
+
+        log("setting PathologyReportsFolder module property");
+        clickFolder("CNPRC");
+        setModuleProperties(Arrays.asList(new ModulePropertyValue("CNPRC_EHR",getContainerPath(),"PathologyReportsFolder","Pathology Reports")));
+
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(animalId);
+
+        waitAndClickAndWait(Locator.linkWithText(reportId1));
+
+        waitForText("XY000301", "XY000302", "PATHOLOGY", "LIVER");
+        assertTextPresent("Image Id:", "XY000301" ,"XY000302");
+        assertTextPresent("Owner:", "PATHOLOGY");
+        assertTextPresent("Organ:", "LIVER");
+
+        assertElementPresent(Locator.linkWithImage("/TN/000/XY000301.jpg"));
+        assertElementPresent(Locator.linkWithImage("/TN/000/XY000302.jpg"));
+
+        clickAndWait(Locator.linkWithHref("/OR/000/XY000301.jpg"));
+        assertElementPresent(Locator.xpath("//img[contains(@src, '/OR/000/XY000301.jpg')]"));
+
     }
 
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
