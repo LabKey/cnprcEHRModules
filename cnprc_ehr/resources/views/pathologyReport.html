@@ -31,6 +31,8 @@
 
     #pathologyBiopsyReport table,
     #pathologyBiopsyReport .biopsyDetailsTable td,
+    #pathologyNecropsyReport table,
+    #pathologyNecropsyReport .necropsyDetailsTable td,
     #pathologyAnimalSummary table
     {
         border: 1px solid lightgray;
@@ -251,11 +253,82 @@
             if (necropsyData[modifyNecropsy])
                 necropsyReport += "<tr><td class='reportLabelCell'><strong>Modify Necropsy:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(necropsyData['modifyNecropsy']) + "</td></tr>";
 
-            //TODO: necropsy gross
-            //TODO: necropsy final
+            if(necropsyGrossData) {
+                if (necropsyGrossData[ngGrossFinding].length > 0) {
+                    necropsyReport += "<tr><td class='reportLabelCell'><strong>Gross Observations:</strong></td>" + "<td>" +
+                            "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
+                            "<thead><tr><td>Organ</td>" + "<td>Text</td></tr></thead>";
+                    for (let i = 0; i < necropsyGrossData[ngGrossFinding].length; i++) {
+                        necropsyReport += "<tr>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngGrossFinding][i]['organ']) + "</td>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngGrossFinding][i]['organText']) + "</td>" +
+                                "</tr>";
+                    }
+                    necropsyReport += "</table></td></tr>";
+                }
+                if (necropsyGrossData[ngMorphDiag].length > 0) {
+                    necropsyReport += "<tr><td class='reportLabelCell'><strong>Gross Diagnosis:</strong></td>" + "<td>" +
+                            "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
+                            "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
+                    for (let i = 0; i < necropsyGrossData[ngMorphDiag].length; i++) {
+                        necropsyReport += "<tr>" +
+                                "<td class='text-center'>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngMorphDiag][i]['morphDiagSeq']) + "</td>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngMorphDiag][i]['morphDiagOrgan']) + "</td>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngMorphDiag][i]['morphDiagText']) + "</td>" +
+                                "</tr>";
+                    }
+                    necropsyReport += "</table></td></tr>";
+                }
+                if (necropsyGrossData[pathologyComments]) {
+                    necropsyReport += "<tr><td class='reportLabelCell'><strong>Gross Comments:</strong></td>" +
+                                        "<td class='reportValueCell'>" + necropsyGrossData['pathologyComments'] + "</td></tr>\n";
+                }
+            }
 
-            if (necropsyData[necropsyMeasurements].length > 0) {
-                //TODO: add measurements
+            if(necropsyFinalData) {
+                if (necropsyFinalData[nfGrossFinding].length > 0) {
+                    necropsyReport += "<tr><td class='reportLabelCell'><strong>Final Observations:</strong></td>" + "<td>" +
+                            "<table class='necropsyDetailsTable table-striped table-hover table-condensed' style=\"width:100%\">" +
+                            "<thead><tr><td>Organ</td>" + "<td>Text</td></tr></thead>";
+                    for (let i = 0; i < necropsyFinalData[nfGrossFinding].length; i++) {
+                        necropsyReport += "<tr>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfGrossFinding][i]['organ']) + "</td>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfGrossFinding][i]['organText']) + "</td>" +
+                                "</tr>";
+                    }
+                    necropsyReport += "</table></td></tr>";
+                }
+                if (necropsyFinalData[nfMorphDiag].length > 0) {
+                    necropsyReport += "<tr><td class='reportLabelCell'><strong>Final Diagnosis:</strong></td>" + "<td>" +
+                            "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
+                            "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
+                    for (let i = 0; i < necropsyFinalData[nfMorphDiag].length; i++) {
+                        necropsyReport += "<tr>" +
+                                "<td class='text-center'>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfMorphDiag][i]['morphDiagSeq']) + "</td>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfMorphDiag][i]['morphDiagOrgan']) + "</td>" +
+                                "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfMorphDiag][i]['morphDiagText']) + "</td>" +
+                                "</tr>";
+                    }
+                    necropsyReport += "</table></td></tr>";
+                }
+                if (necropsyFinalData[pathologyComments]) {
+                    necropsyReport += "<tr><td class='reportLabelCell'><strong>Final Comments:</strong></td>" +
+                            "<td class='reportValueCell'>" + necropsyFinalData['pathologyComments'] + "</td></tr></table>\n";
+                }
+            }
+
+            if (necropsyData['necrMeasurements'].length > 0) {
+                necropsyReport += "<h4><strong>Measurements:</strong></h4>"+
+                        "<table class='table table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%; max-width: 1200px\">" +
+                        "<thead><tr><td>Name</td>" + "<td class='text-right'>Value</td>" +  "<td>Unit</td></tr></thead>";
+                for (let i = 0; i < necropsyData['necrMeasurements'].length; i++) {
+                    necropsyReport += "<tr>" +
+                            "<td>" + LABKEY.Utils.encodeHtml(necropsyData['necrMeasurements'][i]['organName']) + "</td>" +
+                            "<td class='text-right'>" + LABKEY.Utils.encodeHtml(necropsyData['necrMeasurements'][i]['organValue']) + "</td>" +
+                            "<td>" + LABKEY.Utils.encodeHtml(necropsyData['necrMeasurements'][i]['organValueUnit']) + "</td>" +
+                            "</tr>";
+                }
+                necropsyReport += "</table>";
             }
             $("#pathologyNecropsyReport").html(necropsyReport);
         }
