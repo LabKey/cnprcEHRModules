@@ -201,7 +201,7 @@
                 biopsyReport += "<tr><td class='reportLabelCell'><strong>Biopsy Observations:</strong></td>" + "<td>" +
                         "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
                         "<thead><tr><td>Organ</td>" + "<td>Text</td><tr></thead>";
-                for (let i = 0; i < biopsyData[biopsyGrossFinding].length; i++) {
+                for (var i = 0; i < biopsyData[biopsyGrossFinding].length; i++) {
                     biopsyReport += "<tr>" +
                             "<td>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyGrossFinding][i]['organ']) + "</td>" +
                             "<td>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyGrossFinding][i]['organText']) + "</td>" +
@@ -214,7 +214,7 @@
                         "<tr><td class='reportLabelCell'><strong>Biopsy Diagnosis:</strong></td>" + "<td>" +
                         "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
                         "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
-                for (let i = 0; i < biopsyData[biopsyMorphDiag].length; i++) {
+                for (var i = 0; i < biopsyData[biopsyMorphDiag].length; i++) {
                     biopsyReport += "<tr>" +
                             "<td class='text-center'>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagSeq']) + "</td>" +
                             "<td >" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagOrgan']) + "</td>" +
@@ -258,7 +258,7 @@
                     necropsyReport += "<tr><td class='reportLabelCell'><strong>Gross Observations:</strong></td>" + "<td>" +
                             "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
                             "<thead><tr><td>Organ</td>" + "<td>Text</td></tr></thead>";
-                    for (let i = 0; i < necropsyGrossData[ngGrossFinding].length; i++) {
+                    for (var i = 0; i < necropsyGrossData[ngGrossFinding].length; i++) {
                         necropsyReport += "<tr>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngGrossFinding][i]['organ']) + "</td>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngGrossFinding][i]['organText']) + "</td>" +
@@ -270,7 +270,7 @@
                     necropsyReport += "<tr><td class='reportLabelCell'><strong>Gross Diagnosis:</strong></td>" + "<td>" +
                             "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
                             "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
-                    for (let i = 0; i < necropsyGrossData[ngMorphDiag].length; i++) {
+                    for (var i = 0; i < necropsyGrossData[ngMorphDiag].length; i++) {
                         necropsyReport += "<tr>" +
                                 "<td class='text-center'>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngMorphDiag][i]['morphDiagSeq']) + "</td>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngMorphDiag][i]['morphDiagOrgan']) + "</td>" +
@@ -290,7 +290,7 @@
                     necropsyReport += "<tr><td class='reportLabelCell'><strong>Final Observations:</strong></td>" + "<td>" +
                             "<table class='necropsyDetailsTable table-striped table-hover table-condensed' style=\"width:100%\">" +
                             "<thead><tr><td>Organ</td>" + "<td>Text</td></tr></thead>";
-                    for (let i = 0; i < necropsyFinalData[nfGrossFinding].length; i++) {
+                    for (var i = 0; i < necropsyFinalData[nfGrossFinding].length; i++) {
                         necropsyReport += "<tr>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfGrossFinding][i]['organ']) + "</td>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfGrossFinding][i]['organText']) + "</td>" +
@@ -302,7 +302,7 @@
                     necropsyReport += "<tr><td class='reportLabelCell'><strong>Final Diagnosis:</strong></td>" + "<td>" +
                             "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
                             "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
-                    for (let i = 0; i < necropsyFinalData[nfMorphDiag].length; i++) {
+                    for (var i = 0; i < necropsyFinalData[nfMorphDiag].length; i++) {
                         necropsyReport += "<tr>" +
                                 "<td class='text-center'>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfMorphDiag][i]['morphDiagSeq']) + "</td>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfMorphDiag][i]['morphDiagOrgan']) + "</td>" +
@@ -321,7 +321,7 @@
                 necropsyReport += "<h4><strong>Measurements:</strong></h4>"+
                         "<table class='table table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%; max-width: 1200px\">" +
                         "<thead><tr><td>Name</td>" + "<td class='text-right'>Value</td>" +  "<td>Unit</td></tr></thead>";
-                for (let i = 0; i < necropsyData['necrMeasurements'].length; i++) {
+                for (var i = 0; i < necropsyData['necrMeasurements'].length; i++) {
                     necropsyReport += "<tr>" +
                             "<td>" + LABKEY.Utils.encodeHtml(necropsyData['necrMeasurements'][i]['organName']) + "</td>" +
                             "<td class='text-right'>" + LABKEY.Utils.encodeHtml(necropsyData['necrMeasurements'][i]['organValue']) + "</td>" +
@@ -383,7 +383,7 @@
                         appendHeader();
 
                         var biopsyData = {};
-                        getBiopsyReport(biopsyData, animalSummaryData['reportName'], biopsyReportCallbackFn,);
+                        getBiopsyReport(biopsyData, animalSummaryData['reportName'], biopsyReportCallbackFn);
                         images = getImages(imagesCallbackFn);
 
                     }
@@ -636,7 +636,7 @@
 
             if(rows) {
 
-                let reportTypeGrossFinding ='';
+                var reportTypeGrossFinding ='';
                 if(isBiopsy)
                     reportTypeGrossFinding = biopsyGrossFinding;
                 else if(isNecropsyGross)
@@ -646,7 +646,7 @@
 
                 pathologyArray[reportTypeGrossFinding] = [];
 
-                for (let i = 0; i < rows.length; i++) {
+                for (var i = 0; i < rows.length; i++) {
                     pathologyArray[reportTypeGrossFinding][i] = {
                         organ: rows[i].organ ? rows[i].organ : null,
                         organText: rows[i].organText ? rows[i].organText : null
@@ -670,12 +670,12 @@
 
                 pathologyArray[reportTypeMorphDiag] = [];
 
-                for (let i = 0; i < rows.length; i++) {
+                for (var i = 0; i < rows.length; i++) {
 
-                    let topographyNotes = rows[i].topographyNotes ? rows[i].topographyNotes : '';
-                    let morphologyNotes = rows[i].morphologyNotes ? rows[i].morphologyNotes : '';
-                    let remark = rows[i].remark ? rows[i].remark : '';
-                    let comments = rows[i].comments ? rows[i].comments : '';
+                    var topographyNotes = rows[i].topographyNotes ? rows[i].topographyNotes : '';
+                    var morphologyNotes = rows[i].morphologyNotes ? rows[i].morphologyNotes : '';
+                    var remark = rows[i].remark ? rows[i].remark : '';
+                    var comments = rows[i].comments ? rows[i].comments : '';
 
                     pathologyArray[reportTypeMorphDiag][i] = {
                         morphDiagSeq: rows[i].morphDiagSeq ? rows[i].morphDiagSeq : null,
