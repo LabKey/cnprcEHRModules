@@ -2701,7 +2701,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         setPipelineRoot(path.getPath());
 
         log("setting PathologyReportsFolder module property");
-        clickFolder("CNPRC");
+        goToProjectHome();
         setModuleProperties(Arrays.asList(new ModulePropertyValue("CNPRC_EHR",getContainerPath(),"PathologyReportsFolder","Pathology Reports")));
 
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
@@ -2710,13 +2710,17 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitAndClickAndWait(Locator.linkWithText(reportId1));
 
         waitForText("XY000301", "XY000302", "PATHOLOGY", "LIVER");
+
+        log("verifying image related text on the page");
         assertTextPresent("Image Id:", "XY000301" ,"XY000302");
         assertTextPresent("Owner:", "PATHOLOGY");
         assertTextPresent("Organ:", "LIVER");
 
+        log("clicking on the image");
         assertElementPresent(Locator.linkWithImage("/TN/000/XY000301.jpg"));
         assertElementPresent(Locator.linkWithImage("/TN/000/XY000302.jpg"));
 
+        log("verifying full size image");
         clickAndWait(Locator.linkWithHref("/OR/000/XY000301.jpg"));
         assertElementPresent(Locator.xpath("//img[contains(@src, '/OR/000/XY000301.jpg')]"));
 
