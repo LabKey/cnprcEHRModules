@@ -76,22 +76,73 @@ EHR.reports.CNPRCSnapshot = function(panel, tab, showActionsBtn){
 
 };
 
-EHR.reports.renderWeightData = function(panel, tab, subject){
+EHR.reports.weightGraph = function(panel, tab){
+    if (tab.filters.subjects){
+        renderSubjects(tab.filters.subjects, tab);
+    }
+    else
+    {
+        panel.resolveSubjectsFromHousing(tab, renderSubjects, this);
+    }
+
+    function renderSubjects(subjects, tab){
+        if (!subjects.length){
+            tab.add({
+                html: 'No animals were found.',
+                border: false
+            });
+
+            return;
+        }
+
+        var toAdd = [];
+        if (subjects.length < 10) {
+            for (var i=0;i<subjects.length;i++){
+                var subject = subjects[i];
+                toAdd.push(EHR.reports.renderRawWeights(panel, tab, subject));
+            }
+        }
+        else {
+            toAdd.push({
+                html: 'Because more than 10 subjects were selected, the condensed report is being shown.  Note that you can click the animal ID to open this same report in a different tab, showing that animal in more detail.',
+                style: 'padding-bottom: 20px;',
+                border: false
+            });
+
+            var filterArray = panel.getFilterArray(tab);
+            var title = panel.getTitleSuffix();
+            toAdd.push({
+                xtype: 'ldk-querypanel',
+                style: 'margin-bottom:20px;',
+                queryConfig: {
+                    title: 'Overview' + title,
+                    schemaName: 'study',
+                    queryName: 'weight',
+                    filterArray: filterArray.removable.concat(filterArray.nonRemovable)
+                }
+            });
+        }
+
+        if (toAdd.length)
+            tab.add(toAdd)
+    }
+};
+
+EHR.reports.renderRawWeights = function(panel, tab, subject){
     return {
         xtype: 'ldk-webpartpanel',
         title: 'Weights - ' + subject,
         style: 'margin-bottom: 20px;',
         border: false,
         items: [{
-            xtype: 'cnprc_ehr-weightsummarypanel',
-            style: 'padding-bottom: 20px;',
-            subjectId: subject
-        },{
-            xtype: 'cnprc_ehr-weightgraphpanel',
-            itemId: 'tabArea',
-            showRawData: true,
-            border: false,
-            subjectId: subject
+            xtype: 'ldk-querycmp',
+            style: 'margin-bottom:10px;',
+            queryConfig: panel.getQWPConfig({
+                schemaName: 'study',
+                queryName: 'weight',
+                title: 'Weights: ' + subject,
+                filterArray: [LABKEY.Filter.create('Id', subject, LABKEY.Filter.Types.EQUAL)]
+            })
         }]
     }
 };
@@ -232,22 +283,6 @@ EHR.reports.weightTbBcs = function (panel, tab, viewName) {
 
     if ( Ext4.isDefined(subjects) && subjects.length < 11 ) {
         subjects.forEach(function(subj){
-            tab.add({
-                xtype: 'ldk-webpartpanel',
-                title: 'Weight Overview: ' + subj,
-                items: [{
-                    xtype: 'cnprc_ehr-weightsummarypanel',
-                    style: 'padding-bottom: 20px;',
-                    subjectId: subj
-                },{
-                    xtype: 'cnprc_ehr-weightgraphpanel',
-                    itemId: 'tabArea',
-                    showRawData: false,
-                    border: false,
-                    subjectId: subj
-                }]
-            });
-
             tab.add({
                 xtype: 'ldk-querycmp',
                 style: 'margin-bottom:10px;',
