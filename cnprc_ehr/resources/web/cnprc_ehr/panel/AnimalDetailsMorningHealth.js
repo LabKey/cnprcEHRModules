@@ -32,10 +32,10 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                     name: 'animalId'
                 },{
                     fieldLabel: 'Location',
-                    name: 'homeLocation'  // TODO: not yet implemented
+                    name: 'mhhomeLocation'
                 },{
                     fieldLabel: 'Current Location',
-                    name: 'location'
+                    name: 'mhlocation'
                 },{
                     fieldLabel: 'Project Code',
                     name: 'projectCode'  // TODO: not yet implemented
@@ -111,6 +111,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         this.appendLocation(toSet, results);
         this.appendEightWeekHistory(toSet, results);
         this.appendMorningHealthObservations(toSet, results);
+        this.appendMorningHealthLocation(toSet, results);
     },
 
     appendDemographicsResults: function(toSet, row, id){
@@ -140,17 +141,30 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         }
 
         toSet['eightWeekHistory'] = '<pre>+------+------+------+------+------+------+------+------+<br/>'
-                + diarrheaRowString + '<br/>'
-                + poorAppRowString + '<br/>'
-                + pairingRowString + '</pre>';
+                + LABKEY.Utils.encodeHtml(diarrheaRowString) + '<br/>'
+                + LABKEY.Utils.encodeHtml(poorAppRowString) + '<br/>'
+                + LABKEY.Utils.encodeHtml(pairingRowString) + '</pre>';
     },
 
     appendMorningHealthObservations: function(toSet, row) {
         var mhObs = row.getMorningHealthObservations();
-        var observation = mhObs[0]['observation'];
 
-        if(observation)
-            toSet['observation'] = observation;
+        if(mhObs) {
+            var observation = mhObs[0]['observation'];
+            toSet['observation'] = LABKEY.Utils.encodeHtml(observation);
+        }
+    },
+
+    appendMorningHealthLocation: function (toSet, row) {
+        var locations = row.getMorningHealthLocation();
+
+        if (locations) {
+            var mhCurrLoc = locations[0]['mhcurrlocation'];
+            var mhLoc = locations[0]['mhlocation'];
+
+            toSet['mhlocation'] = LABKEY.Utils.encodeHtml(mhCurrLoc);
+            toSet['mhhomeLocation'] = LABKEY.Utils.encodeHtml(mhLoc);
+        }
     }
 
 });

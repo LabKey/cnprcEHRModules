@@ -298,6 +298,10 @@ EHR.DemographicsRecord = function(data){
 
         getMorningHealthObservations: function() {
             return data['observation'];
+        },
+
+        getMorningHealthLocation : function () {
+            return data['mhlocation'];
         }
     }
 }
