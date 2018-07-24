@@ -41,7 +41,7 @@
 
         var necropsyMeasurements = 'necrMeasurements';
 
-        showPathologyReport(appendAnimalSummary, appendBiopsyReport, appendNecropsyReport, appendImages);
+        showPathologyReport();
 
         function appendHeader() {
             $("#pathologyHeader").html(reportHeader);
@@ -143,7 +143,7 @@
                         "<tr><td class='reportLabelCell'><strong>Biopsy Diagnosis:</strong></td>" + "<td>" +
                         "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
                         "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
-                for (var i = 0; i < biopsyData[biopsyMorphDiag].length; i++) {
+                for (i = 0; i < biopsyData[biopsyMorphDiag].length; i++) {
                     biopsyReport += "<tr>" +
                             "<td class='text-center'>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagSeq']) + "</td>" +
                             "<td >" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagOrgan']) + "</td>" +
@@ -199,7 +199,7 @@
                     necropsyReport += "<tr><td class='reportLabelCell'><strong>Gross Diagnosis:</strong></td>" + "<td>" +
                             "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
                             "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
-                    for (var i = 0; i < necropsyGrossData[ngMorphDiag].length; i++) {
+                    for (i = 0; i < necropsyGrossData[ngMorphDiag].length; i++) {
                         necropsyReport += "<tr>" +
                                 "<td class='text-center'>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngMorphDiag][i]['morphDiagSeq']) + "</td>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyGrossData[ngMorphDiag][i]['morphDiagOrgan']) + "</td>" +
@@ -219,7 +219,7 @@
                     necropsyReport += "<tr><td class='reportLabelCell'><strong>Final Observations:</strong></td>" + "<td>" +
                             "<table class='necropsyDetailsTable table-striped table-hover table-condensed' style=\"width:100%\">" +
                             "<thead><tr><td>Organ</td>" + "<td>Text</td></tr></thead>";
-                    for (var i = 0; i < necropsyFinalData[nfGrossFinding].length; i++) {
+                    for (i = 0; i < necropsyFinalData[nfGrossFinding].length; i++) {
                         necropsyReport += "<tr>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfGrossFinding][i]['organ']) + "</td>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfGrossFinding][i]['organText']) + "</td>" +
@@ -231,7 +231,7 @@
                     necropsyReport += "<tr><td class='reportLabelCell'><strong>Final Diagnosis:</strong></td>" + "<td>" +
                             "<table class='table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%\">" +
                             "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
-                    for (var i = 0; i < necropsyFinalData[nfMorphDiag].length; i++) {
+                    for (i = 0; i < necropsyFinalData[nfMorphDiag].length; i++) {
                         necropsyReport += "<tr>" +
                                 "<td class='text-center'>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfMorphDiag][i]['morphDiagSeq']) + "</td>" +
                                 "<td>" + LABKEY.Utils.encodeHtml(necropsyFinalData[nfMorphDiag][i]['morphDiagOrgan']) + "</td>" +
@@ -250,7 +250,7 @@
                 necropsyReport += "<h4><strong>Measurements:</strong></h4>"+
                         "<table class='table table-striped table-hover table-condensed necropsyDetailsTable' style=\"width:100%; max-width: 1200px\">" +
                         "<thead><tr><td>Name</td>" + "<td class='text-right'>Value</td>" +  "<td>Unit</td></tr></thead>";
-                for (var i = 0; i < necropsyData['necrMeasurements'].length; i++) {
+                for (i = 0; i < necropsyData['necrMeasurements'].length; i++) {
                     necropsyReport += "<tr>" +
                             "<td>" + LABKEY.Utils.encodeHtml(necropsyData['necrMeasurements'][i]['organName']) + "</td>" +
                             "<td class='text-right'>" + LABKEY.Utils.encodeHtml(necropsyData['necrMeasurements'][i]['organValue']) + "</td>" +
@@ -266,14 +266,14 @@
             $("#imageSection").html(images);
         }
 
-        function showPathologyReport(animalSummCallbackFn, biopsyReportCallbackFn, necropsyReportCallbackFn, imagesCallbackFn) {
+        function showPathologyReport() {
 
             var animalSummaryData = {};
 
-            animalSummary = getAnimalSummary(animalSummCallbackFn, animalSummaryData, biopsyReportCallbackFn, necropsyReportCallbackFn, imagesCallbackFn);
+            animalSummary = getAnimalSummary(animalSummaryData);
         }
 
-        function getAnimalSummary(callbackFn, animalSummaryData, biopsyReportCallbackFn, necropsyReportCallbackFn, imagesCallbackFn) {
+        function getAnimalSummary(animalSummaryData) {
 
             LABKEY.Query.selectRows({
                 schemaName: "study",
@@ -312,8 +312,8 @@
                         appendHeader();
 
                         var biopsyData = {};
-                        getBiopsyReport(biopsyData, animalSummaryData['reportName'], biopsyReportCallbackFn);
-                        images = getImages(imagesCallbackFn);
+                        getBiopsyReport(biopsyData, animalSummaryData['reportName']);
+                        images = getImages();
 
                     }
                     else {  // necropsy
@@ -323,16 +323,15 @@
 
                         var necropsyGrossData = {}; //to store both Gross and Final Necropsy info
                         var necropsyFinalData = {}; //to store both Gross and Final Necropsy info
-                        getNecropsyReport(necropsyGrossData, necropsyFinalData, animalSummaryData['reportName'], necropsyReportCallbackFn);
-                        images = getImages(imagesCallbackFn);
+                        getNecropsyReport(necropsyGrossData, necropsyFinalData, animalSummaryData['reportName']);
+                        images = getImages();
                     }
-
-                    callbackFn.call(this, animalSummaryData);
+                    appendAnimalSummary(animalSummaryData);
                 }
             });
         }
 
-        function getBiopsyReport(biopsyData, reportName, callbackFn) {
+        function getBiopsyReport(biopsyData) {
 
             var multi = new LABKEY.MultiRequest();
 
@@ -394,11 +393,11 @@
             });
 
             multi.send(function(){
-                callbackFn.call(this, biopsyData);
+                appendBiopsyReport(biopsyData);
             }, this);
         }
 
-        function getNecropsyReport(necropsyGrossData, necropsyFinalData, reportName, callbackFn) {
+        function getNecropsyReport(necropsyGrossData, necropsyFinalData, reportName) {
 
             var multi = new LABKEY.MultiRequest();
 
@@ -541,7 +540,7 @@
             });
 
             multi.send(function(){
-                callbackFn.call(this, necropsyGrossData, necropsyFinalData, reportName);
+                appendNecropsyReport(necropsyGrossData, necropsyFinalData, reportName);
             }, this);
         }
 
@@ -640,7 +639,7 @@
             }
         }
 
-        function getImages(callbackFn) {
+        function getImages() {
             var filterArray = [LABKEY.Filter.create('Id', subjectId, LABKEY.Filter.Types.EQUAL)];
             filterArray.push(LABKEY.Filter.create('prmFk', reportId, LABKEY.Filter.Types.EQUAL));
 
@@ -690,7 +689,7 @@
                             }
                         }
 
-                        callbackFn.call(this);
+                        appendImages();
                     }
                 });
             }
