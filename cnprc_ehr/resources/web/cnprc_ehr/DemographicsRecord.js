@@ -302,6 +302,10 @@ EHR.DemographicsRecord = function(data){
 
         getMorningHealthLocation : function () {
             return data['mhlocation'];
+        },
+
+        getPregnancyConfirmationInfo: function(){
+            return data['pregnancyConfirmationInfo'];
         }
     }
 }

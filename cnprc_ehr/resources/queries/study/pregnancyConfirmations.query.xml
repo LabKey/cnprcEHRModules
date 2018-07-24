@@ -16,7 +16,7 @@
                     </column>
                     <column columnName="conNum">
                         <columnTitle>Conception ID</columnTitle>
-                        <url>cnprc_ehr-conceptionDetail.view?pageId=conceptionDetail#conceptionId:${conNum}</url>
+                        <url>cnprc_ehr-conceptionDetail.view?pageId=conceptionDetail&amp;conceptionId=${conNum}&amp;subjectId=${Id}</url>
                     </column>
                     <column columnName="femaleSpecies">
                         <columnTitle>Female Species</columnTitle>
