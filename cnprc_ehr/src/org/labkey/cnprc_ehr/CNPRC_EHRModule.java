@@ -83,6 +83,7 @@ import org.labkey.cnprc_ehr.demographics.ParentsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.PathologyReportsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.SerumDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.TBDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.PregnancyConfirmationDemographicsProvider;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
 import java.util.Collection;
