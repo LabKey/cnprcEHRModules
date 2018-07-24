@@ -65,6 +65,7 @@ import org.labkey.test.util.SqlserverOnlyTest;
 import org.labkey.test.util.ext4cmp.Ext4GridRef;
 import org.labkey.test.util.external.labModules.LabModuleHelper;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
 import java.io.IOException;
@@ -1470,7 +1471,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         breedingObservation.setGridCell(1, "date", breedingDate);
         breedingObservation.setGridCell(1, "obsCode", "X");
         breedingObservation.setGridCell(1, "cycleDay", "4");
-        sleep(500);
+        shortWait().until(ExpectedConditions.elementToBeClickable(Locator.buttonContainingText("Save & CLose")));
         clickButton("Save & Close");
 
         log("Opening the pending task for completion");
