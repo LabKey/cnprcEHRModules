@@ -21,54 +21,51 @@ SELECT
   pregnancyConfirmations.conception,
   pregnancyConfirmations.BRType,
   pregnancyConfirmations.colonyCode,
-  pregnancyConfirmations.PRCode + ' - ' +
-  (	select
-       title
-     from
-       cnprc_ehr.project
-     where
-       projectCode = pregnancyConfirmations.PRCode
-  ) + ' (' +
-  (	select
-       pi_name
-     from
-       cnprc_ehr.project
-     where
-       projectCode = pregnancyConfirmations.PRCode
-  ) + ')' as PRCode,
+  (pregnancyConfirmations.PRCode + ' - ' + pregnancyConfirmations.PRCode.Title + ' (' +
+   pregnancyConfirmations.PRCode.pi_name + ')')                                 AS PRCode,
   pregnancyConfirmations.pgComment,
   pregnancyConfirmations.termDate,
   pregnancyConfirmations.termComment,
   concat(
-      cast(timestampdiff('SQL_TSI_DAY',pregnancyConfirmations.conception,coalesce(pregnancyConfirmations.termDate,curdate())) AS VARCHAR),
+      cast(timestampdiff('SQL_TSI_DAY', pregnancyConfirmations.conception,
+                         coalesce(pregnancyConfirmations.termDate, curdate())) AS VARCHAR),
       pregnancyConfirmations.conceptionDateStatus
-  ) as gestDays,
+  )                                                                             AS gestDays,
   pregnancyConfirmations.offspringId,
   pregnancyConfirmations.offspringSex,
   pregnancyConfirmations.birthPlace,
-  (	select	weight.weight
-     from 	weight
-     where 	(	(weight.Id = pregnancyConfirmations.offspringId)
-               or
-               (weight.Id = pregnancyConfirmations.conNum)
-            )
-            and		weight.date = pregnancyConfirmations.termDate
-  ) as birthWeight,
+  wt.weight                                                                     AS birthWeight,
   pregnancyConfirmations.pgType,
-  (	case	pregnancyConfirmations.birthViability
-     when	'L'	then	'Live'
-     when	'D'	then	'Dead'
-     end
-  ) as birthViability,
-  (	case	pregnancyConfirmations.deliveryMode
-     when	'V'		then	'Vaginal'
-     when	'NX'	then	'Non-Vaginal Experimental'
-     when	'VX'	then	'Vaginal Experimental'
-     when	'N'		then	'Non-Vaginal'
-     end
-  ) as deliveryMode,
-  pregnancyConfirmations.deathType + ' - ' + pregnancyConfirmations.termComment as deathComment,
+  (CASE pregnancyConfirmations.birthViability
+   WHEN 'L'
+     THEN 'Live'
+   WHEN 'D'
+     THEN 'Dead'
+   END
+  )                                                                             AS birthViability,
+  (CASE pregnancyConfirmations.deliveryMode
+   WHEN 'V'
+     THEN 'Vaginal'
+   WHEN 'NX'
+     THEN 'Non-Vaginal Experimental'
+   WHEN 'VX'
+     THEN 'Vaginal Experimental'
+   WHEN 'N'
+     THEN 'Non-Vaginal'
+   END
+  )                                                                             AS deliveryMode,
+  pregnancyConfirmations.deathType + ' - ' + pregnancyConfirmations.termComment AS deathComment,
   pregnancyConfirmations.pathologist,
   pregnancyConfirmations.necropsyPerformed
 FROM
   study.pregnancyConfirmations
+  LEFT JOIN
+  (SELECT
+     Id,
+     date,
+     avg(weight) AS weight
+   FROM study.weight
+   GROUP BY Id, date) wt
+    ON (wt.Id = pregnancyConfirmations.offspringId
+        OR wt.Id = pregnancyConfirmations.conNum)
+       AND wt.date = pregnancyConfirmations.termDate

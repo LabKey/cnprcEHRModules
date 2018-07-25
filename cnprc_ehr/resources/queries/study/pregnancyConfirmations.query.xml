@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="pregnancyConfirmations" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="pregnancyConfirmations" tableDbType="NOT_IN_DB" useColumnOrder="true">
                 <columns>
                     <column columnName="Id">
                         <columnTitle>Female Id</columnTitle>
@@ -34,6 +34,14 @@
                     </column>
                     <column columnName="BRType">
                         <columnTitle>Breeding Type</columnTitle>
+                    </column>
+                    <column columnName="PRCode">
+                        <columnTitle>PRCode</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>project</fkTable>
+                            <fkColumnName>projectCode</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="offspringSpecies"/>
                     <column columnName="sire">
