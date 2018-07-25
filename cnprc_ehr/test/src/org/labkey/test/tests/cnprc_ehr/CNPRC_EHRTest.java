@@ -2448,7 +2448,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         List<String> reportTitles = new ArrayList<>();
         reportPanels.forEach(p -> reportTitles.add(p.getTitle()));
         assertEquals("Wrong order for report segments",
-                Arrays.asList("Weight Overview: " + animalId, "Weight, TB and Body Condition: " + animalId),
+                Arrays.asList("Weight, TB and Body Condition: " + animalId),
                 reportTitles);
     }
 
