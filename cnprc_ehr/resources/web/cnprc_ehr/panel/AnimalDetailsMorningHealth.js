@@ -137,6 +137,8 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         if (eightWeekHistoryRows && eightWeekHistoryRows.length > 1) {
             eightWeekHistoryRows.forEach(function(row) {
                 diarrheaRowString += row.diarrheaInd;
+                poorAppRowString += row.poorAppInd;
+                pairingRowString += row.pairingInd;
             }, this);
         }
 
