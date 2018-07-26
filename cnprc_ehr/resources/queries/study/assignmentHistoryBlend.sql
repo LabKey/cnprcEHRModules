@@ -62,7 +62,7 @@ SELECT
         ON aUnion.id = sec.Id AND aUnion.date >= sec.date AND aUnion.date < coalesce(sec.enddate, curdate())
     ) sub
 
-    -- This join will add the following
+    -- This will join the following dates so the Min can be found in aggregate
     LEFT JOIN (
       SELECT aUnion2.id, aUnion2.date FROM study.assignmentUnion aUnion2
 
