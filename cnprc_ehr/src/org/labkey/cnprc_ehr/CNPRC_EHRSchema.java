@@ -26,7 +26,6 @@ public class CNPRC_EHRSchema
     private static final CNPRC_EHRSchema _instance = new CNPRC_EHRSchema();
 
     public static final String NAME = "cnprc_ehr";
-    public static final String ASSIGNMENT_HISTORY_BLEND = "AssignmentHistoryBlend";
     public static final String BREEDING_HISTORY = "BreedingHistory";
     public static final String CAGE_LOCATION_HISTORY = "cage_location_history";
     public static final String MH_PROCESSING = "mh_processing";

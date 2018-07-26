@@ -82,7 +82,6 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
     {
         Set<String> names = new LinkedHashSet<>();
         names.addAll(super.getTableNames());
-        names.add(CNPRC_EHRSchema.ASSIGNMENT_HISTORY_BLEND);
         names.add(CNPRC_EHRSchema.BREEDING_HISTORY);
         names.add(CNPRC_EHRSchema.MH_PROCESSING);
         names.add(CNPRC_EHRSchema.REPRODUCTIVE_CALENDAR);
@@ -94,7 +93,6 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
     {
         Set<String> names = new LinkedHashSet<>();
         names.addAll(super.getTableNames());
-        names.add(CNPRC_EHRSchema.ASSIGNMENT_HISTORY_BLEND);
         names.add(CNPRC_EHRSchema.BREEDING_HISTORY);
         names.add(CNPRC_EHRSchema.MH_PROCESSING);
         names.add(CNPRC_EHRSchema.REPRODUCTIVE_CALENDAR);
