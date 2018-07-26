@@ -6,7 +6,6 @@ import org.labkey.api.data.DbSchema;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.query.SimpleUserSchema;
 import org.labkey.api.security.User;
-import org.labkey.cnprc_ehr.query.AssignmentHistoryBlendTable;
 import org.labkey.cnprc_ehr.query.BreedingHistoryTable;
 import org.labkey.cnprc_ehr.query.MhProcessingTable;
 import org.labkey.cnprc_ehr.query.ReproductiveCalendarTable;
@@ -23,15 +22,6 @@ public class CNPRC_EHRUserSchema extends SimpleUserSchema
 
     public enum CNPRCQueries
     {
-        AssignmentHistoryBlend
-        {
-            @Override
-            public AssignmentHistoryBlendTable createTable(CNPRC_EHRUserSchema userSchema)
-            {
-                return new AssignmentHistoryBlendTable(userSchema);
-            }
-        },
-
         BreedingHistory
         {
             @Override
