@@ -300,8 +300,12 @@ EHR.DemographicsRecord = function(data){
             return data['observation'];
         },
 
-        getMorningHealthLocation : function () {
-            return data['mhlocation'];
+        getMorningHealthCurrentLocation : function () {
+            return data['currentLocation'];
+        },
+
+        getMorningHealthHomeLocation : function () {
+            return data['homeLocation'];
         },
 
         getPregnancyConfirmationInfo: function(){

@@ -32,10 +32,10 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                     name: 'animalId'
                 },{
                     fieldLabel: 'Location',
-                    name: 'mhhomeLocation'
+                    name: 'homeLocation'
                 },{
                     fieldLabel: 'Current Location',
-                    name: 'mhlocation'
+                    name: 'currentLocation'
                 },{
                     fieldLabel: 'Project Code',
                     name: 'projectCode'
@@ -108,7 +108,8 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
     appendDataResults: function(toSet, results, id) {
         // TODO: get all correct items for this panel
         this.appendDemographicsResults(toSet, results, id);
-        this.appendMorningHealthLocation(toSet, results);
+        this.appendMorningHealthHomeLocation(toSet, results);
+        this.appendMorningHealthCurrentLocation(toSet, results);
         this.appendLocation(toSet, results);
         this.appendProjectCode(toSet, results);
         this.appendActivePregnancy(toSet, results);
@@ -132,15 +133,18 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
             toSet['gender'] = LABKEY.Utils.encodeHtml(row.getGender());
     },
 
-    appendMorningHealthLocation: function (toSet, row) {
-        var locations = row.getMorningHealthLocation();
+    appendMorningHealthHomeLocation: function (toSet, results) {
+        if(results) {
+            toSet['homeLocation'] = LABKEY.Utils.encodeHtml(results.getMorningHealthHomeLocation());
+        }
+    },
 
-        if (locations) {
-            var mhCurrLoc = locations[0]['mhcurrlocation'];
-            var mhLoc = locations[0]['mhlocation'];
-
-            toSet['mhlocation'] = LABKEY.Utils.encodeHtml(mhCurrLoc);
-            toSet['mhhomeLocation'] = LABKEY.Utils.encodeHtml(mhLoc);
+    appendMorningHealthCurrentLocation: function (toSet, results) {
+        if(results) {
+            if(results.getMorningHealthCurrentLocation() == '')
+                toSet['currentLocation'] = 'XXXXXX';
+            else
+                toSet['currentLocation'] = LABKEY.Utils.encodeHtml(results.getMorningHealthCurrentLocation());
         }
     },
 
