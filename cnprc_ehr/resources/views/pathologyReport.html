@@ -86,12 +86,12 @@
             animalSummary = "<h4>Summary</h4><table class='table' style=\"width:100%; max-width: 1200px\">" +
             "<tr>\n" +
                 "<td class='summLabelCell'><strong>Animal Id:</strong></td>" + "<td class='summValueCell'>" + idLinkText + "</td>\n" +
-                "<td class='summLabelCell'><strong>Sex:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml((animalSummaryData['sex'] === 'null' ? animalSummaryData['sex'] : ''))  + "</td>\n" +
+                "<td class='summLabelCell'><strong>Sex:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml((animalSummaryData['sex'] !== null ? animalSummaryData['sex'] : ''))  + "</td>\n" +
                 "<td class='summLabelCell'><strong>Death Date:</strong></td class='summValueCell'>" + "<td>" + LABKEY.Utils.encodeHtml(animalSummaryData['deathDate']) + "</td>\n" +
              "</tr>\n" +
             "<tr>\n" +
                 "<td class='summLabelCell'><strong>Location:</strong></td>" + "<td class='summValueCell'>" + locationLinkText + "</td>\n" +
-                "<td class='summLabelCell'><strong>Age:</strong></td>" + "<td class='summValueCell'>" +  LABKEY.Utils.encodeHtml((animalSummaryData['age'] === 'null' ? animalSummaryData['age'] : '')) + "</td>\n" +
+                "<td class='summLabelCell'><strong>Age:</strong></td>" + "<td class='summValueCell'>" +  LABKEY.Utils.encodeHtml((animalSummaryData['age'] !== undefined ? animalSummaryData['age'] : '')) + "</td>\n" +
                 "<td class='summLabelCell'><strong>Death Type:</strong></td>" + "<td class='summValueCell'>" + LABKEY.Utils.encodeHtml(animalSummaryData['deathType']) + "</td>\n" +
             "</tr>\n" +
             "<tr>\n" +
