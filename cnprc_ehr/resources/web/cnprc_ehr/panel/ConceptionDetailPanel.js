@@ -11,11 +11,10 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
     extend: 'CNPRC_EHR.panel.SnapshotPanel',
     alias: 'widget.cnprc_ehr-conceptionDetailPanel',
 
-    initComponent: function(){
-            this.subjectId = LABKEY.ActionURL.getParameter('subjectId');
-            this.callParent();
-        },
-
+    initComponent: function () {
+        this.subjectId = LABKEY.ActionURL.getParameter('subjectId');
+        this.callParent();
+    },
 
     getBaseItems: function () {
         return {
@@ -129,10 +128,10 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
                         name: 'necropsyPerformed'
                     }
                     ]
-                },{
+                }, {
                     items: [{
                         html: '<hr><h5><strong>Pathology Report(s)</strong></h5>'
-                    },{
+                    }, {
                         xtype: 'displayfield',
                         fieldLabel: '',
                         name: 'pathologyReports'
@@ -143,12 +142,12 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
         };
     },
 
-    appendDataResults: function(toSet, results, id, callbackFn) {
+    appendDataResults: function (toSet, results, id, callbackFn) {
         this.appendPregnancyConfirmationResults(toSet, results.getPregnancyConfirmationInfo());
         this.appendPathologyReports(toSet, results.getPathologyReports(), callbackFn);
     },
 
-    appendPregnancyConfirmationResults: function(toSet, pregnancyConfirmationResults){
+    appendPregnancyConfirmationResults: function (toSet, pregnancyConfirmationResults) {
 
         this.conceptionId = LABKEY.ActionURL.getParameter('conceptionId');
 
@@ -188,7 +187,7 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
             }
         }
     },
-    appendPathologyReports: function(toSet, rows, callbackFn) {
+    appendPathologyReports: function (toSet, rows, callbackFn) {
 
         LABKEY.Query.getQueries({
             schemaName: 'study',
@@ -215,7 +214,7 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
             }
         });
     },
-    appendPathologyRows: function(toSet, rows, hasBiopsyAccess, hasNecropsyAccess) {
+    appendPathologyRows: function (toSet, rows, hasBiopsyAccess, hasNecropsyAccess) {
 
         LABKEY.Query.selectRows({
             schemaName: 'study',
@@ -234,16 +233,20 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
                 var colStyle = 'nowrap style="padding-left: 10px;"';
                 values += '<table><tr><td nowrap style="font-weight: bold">Report ID</td><td ' + headerColStyle + '>Date Performed</td><td ' + headerColStyle + '>Project</td><td ' + headerColStyle + '>Investigator</td><td ' + headerColStyle + '>Date Completed</td></strong></tr>';
 
-                if (rows){
-                    Ext4.each(rows, function(resultRow){
+                if (rows) {
+                    Ext4.each(rows, function (resultRow) {
 
                         var item = '';
                         var row = resultRow.data;
                         if (row['reportId']) {
 
 
-                            if(hasBiopsyAccess && hasNecropsyAccess) {
-                                var url = "\"" + LABKEY.ActionURL.buildURL("cnprc_ehr", "pathologyReport", null, {subjectId: row['Id'].value, reportId: row['reportId'].value, reportCategory: row['reportCategory'].value}) + "\"";
+                            if (hasBiopsyAccess && hasNecropsyAccess) {
+                                var url = "\"" + LABKEY.ActionURL.buildURL("cnprc_ehr", "pathologyReport", null, {
+                                    subjectId: row['Id'].value,
+                                    reportId: row['reportId'].value,
+                                    reportCategory: row['reportCategory'].value
+                                }) + "\"";
                                 item += '<td nowrap><a href=' + url + '>' + LABKEY.Utils.encodeHtml(row['reportId'].value) + '</a></td>';
                             }
                             else {
@@ -252,21 +255,27 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
                         }
                         else
                             item += '<td></td>';
-                        if (row['datePerformed']) {
+
+                        if (row['datePerformed'] && row['datePerformed'].value) {
                             var datePerformed = LDK.ConvertUtils.parseDate(row['datePerformed'].value);
                             item += '<td ' + colStyle + '>' + datePerformed.format(LABKEY.extDefaultDateFormat) + '</td>';
                         }
                         else
                             item += '<td></td>';
-                        if (row['project'])
-                            item += '<td ' + colStyle +'><a href="cnprc_ehr-projectDetails.view?project=' + LABKEY.Utils.encodeHtml(row['project'].value) + '">' + LABKEY.Utils.encodeHtml(row['project'].value) + '</a></td>';
+
+                        if (row['project'] && row['project'].value) {
+                            item += '<td ' + colStyle + '><a href="cnprc_ehr-projectDetails.view?project=' + LABKEY.Utils.encodeHtml(row['project'].value) + '">' + LABKEY.Utils.encodeHtml(row['project'].value) + '</a></td>';
+                        }
                         else
                             item += '<td></td>';
-                        if (row['investigator'])
-                            item += '<td ' + colStyle +'>' + LABKEY.Utils.encodeHtml(row['investigator'].value) + '</td>';
+
+                        if (row['investigator'] && row['investigator'].value) {
+                            item += '<td ' + colStyle + '>' + LABKEY.Utils.encodeHtml(row['investigator'].value) + '</td>';
+                        }
                         else
                             item += '<td></td>';
-                        if (row['dateCompleted']) {
+
+                        if (row['dateCompleted'] && row['dateCompleted'].value) {
                             var dateCompleted = LDK.ConvertUtils.parseDate(row['dateCompleted'].value);
                             item += '<td ' + colStyle + '>' + dateCompleted.format(LABKEY.extDefaultDateFormat) + '</td>';
                         }
@@ -284,6 +293,5 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
                 this.appendForm(toSet);
             }
         });
-
     }
 });
