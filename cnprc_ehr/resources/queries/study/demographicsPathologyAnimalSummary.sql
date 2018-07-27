@@ -9,11 +9,10 @@ SELECT
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
   demogr.birth,  -- needed for age to calculate correctly
-  demogr.death,  -- needed for age to calculate correctly
   biopsy.projectCode as project,
   ph.clinician,
   biopsy.bcs AS pathologyCondition,
-  demogr.death AS deathDate,
+  demogr.death,  -- needed for age to calculate correctly
   '' AS deathType,  -- TODO: check with CNPRC if this needs to be shown for biopsies
   biopsy.accountId AS chargeId,
   CAST(biopsy.date AS DATE) AS workPerformed,
@@ -39,11 +38,10 @@ SELECT
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
   demogr.birth,  -- needed for age to calculate correctly
-  demogr.death,  -- needed for age to calculate correctly
   allNecData.projectCode as project,
   ph.clinician,
   COALESCE (necFin.bcs, necGross.bcs) AS pathologyCondition,
-  demogr.death AS deathDate,  -- TODO: need to check this for fetal deaths especially
+  demogr.death,  -- TODO: need to check this for fetal deaths especially, also needed for age to calculate correctly
   COALESCE (necFin.mannerOfDeath, necGross.mannerOfDeath) AS deathType,
   allNecData.accountId AS chargeId,
   CAST(allNecData.date AS DATE) AS workPerformed,
