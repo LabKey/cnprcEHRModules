@@ -58,9 +58,10 @@ public class EightWeekHistoryDemographicsProvider extends AbstractListDemographi
     @Override
     public boolean requiresRecalc(String schema, String query)
     {
-        // TODO: revisit this after implementing all three subqueries
         return (("study".equalsIgnoreCase(schema) && "morningHealthObs".equalsIgnoreCase(query)) ||
-                ("study".equalsIgnoreCase(schema) && "clinical_observations".equalsIgnoreCase(query)));
+                ("study".equalsIgnoreCase(schema) && "clinical_observations".equalsIgnoreCase(query)) ||
+                ("study".equalsIgnoreCase(schema) && "pairings".equalsIgnoreCase(query)) ||
+                ("study".equalsIgnoreCase(schema) && "housing".equalsIgnoreCase(query)));
     }
 
     @Override

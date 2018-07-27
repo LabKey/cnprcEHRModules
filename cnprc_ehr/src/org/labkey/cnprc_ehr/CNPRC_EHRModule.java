@@ -84,6 +84,7 @@ import org.labkey.cnprc_ehr.demographics.PathologyReportsDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.SerumDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.TBDemographicsProvider;
 import org.labkey.cnprc_ehr.demographics.PregnancyConfirmationDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.ActivePregnancyDemographicsProvider;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
 import java.util.Collection;
@@ -228,6 +229,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new ObservationsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new MHLocationDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new PregnancyConfirmationDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ActivePregnancyDemographicsProvider(this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {

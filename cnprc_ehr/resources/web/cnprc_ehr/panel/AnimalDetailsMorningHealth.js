@@ -38,16 +38,16 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                     name: 'mhlocation'
                 },{
                     fieldLabel: 'Project Code',
-                    name: 'projectCode'  // TODO: not yet implemented
+                    name: 'projectCode'
                 },{
                     fieldLabel: 'Gender',
                     name: 'gender'
                 },{
                     fieldLabel: 'Pregnancy Flag',
-                    name: 'pregnancyFlag'  // TODO: not yet implemented
+                    name: 'pregnancyFlag'
                 },{
                     fieldLabel: 'Days Pregnant',
-                    name: 'daysPregnant'  // TODO: not yet implemented
+                    name: 'daysPregnant'
                 }]
             },{
                 xtype: 'container',
@@ -58,16 +58,16 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                 },
                 items: [{
                     fieldLabel: 'Weight',
-                    name: 'weight' // TODO: not yet implemented
+                    name: 'weight'
                 },{
                     fieldLabel: 'Weight Date',
-                    name: 'weightsDate'  // TODO: not yet implemented
+                    name: 'weightDate'
                 },{
                     fieldLabel: 'BCS',
-                    name: 'bcs'  // TODO: not yet implemented
+                    name: 'bcs'
                 },{
                     fieldLabel: 'BCS Date',
-                    name: 'bcsDate'  // TODO: not yet implemented
+                    name: 'bcsDate'
                 },{
                     fieldLabel: 'Observations',
                     name: 'observation'
@@ -108,13 +108,17 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
     appendDataResults: function(toSet, results, id) {
         // TODO: get all correct items for this panel
         this.appendDemographicsResults(toSet, results, id);
-        this.appendLocation(toSet, results);
-        this.appendEightWeekHistory(toSet, results);
-        this.appendMorningHealthObservations(toSet, results);
         this.appendMorningHealthLocation(toSet, results);
+        this.appendLocation(toSet, results);
+        this.appendProjectCode(toSet, results);
+        this.appendActivePregnancy(toSet, results);
+        this.appendWeight(toSet, results);
+        this.appendBcs(toSet, results);
+        this.appendMorningHealthObservations(toSet, results);
+        this.appendEightWeekHistory(toSet, results);
     },
 
-    appendDemographicsResults: function(toSet, row, id){
+    appendDemographicsResults: function(toSet, row, id) {
         if (!row){
             console.log('Id for demographics not found');
             return;
@@ -126,6 +130,58 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         }
         if (row.getGender())
             toSet['gender'] = LABKEY.Utils.encodeHtml(row.getGender());
+    },
+
+    appendMorningHealthLocation: function (toSet, row) {
+        var locations = row.getMorningHealthLocation();
+
+        if (locations) {
+            var mhCurrLoc = locations[0]['mhcurrlocation'];
+            var mhLoc = locations[0]['mhlocation'];
+
+            toSet['mhlocation'] = LABKEY.Utils.encodeHtml(mhCurrLoc);
+            toSet['mhhomeLocation'] = LABKEY.Utils.encodeHtml(mhLoc);
+        }
+    },
+
+    appendProjectCode: function(toSet, row) {
+        if (row.getLastPayorId()) {
+           toSet['projectCode'] = LABKEY.Utils.encodeHtml(row.getLastPayorId());  // TODO: I think this may be incorrect
+        }
+    },
+
+    appendActivePregnancy: function(toSet, results) {
+        var daysPregnant = results.getActivePregnancyDaysPregnant();
+        toSet['pregnancyFlag'] = '';
+        toSet['daysPregnant'] = '';
+
+        if (daysPregnant) {
+            toSet['pregnancyFlag'] = 'P';
+            toSet['daysPregnant'] = LABKEY.Utils.encodeHtml(daysPregnant);
+        }
+    },
+
+    appendWeight: function(toSet, results) {
+        toSet['weight'] = results.getMostRecentWeight();
+        var weightDate = results.getMostRecentWeightDate();
+        weightDate = weightDate ? weightDate.format(LABKEY.extDefaultDateFormat) : '';
+        toSet['weightDate'] = weightDate;
+    },
+
+    appendBcs: function(toSet, results) {
+        toSet['bcs'] = results.getMostRecentBCS();
+        var bcsDate = LDK.ConvertUtils.parseDate(results.getMostRecentBCSDate());
+        bcsDate = bcsDate ? bcsDate.format(LABKEY.extDefaultDateFormat) : '';
+        toSet['bcsDate'] = bcsDate;
+    },
+
+    appendMorningHealthObservations: function(toSet, row) {
+        var mhObs = row.getMorningHealthObservations();
+
+        if(mhObs) {
+            var observation = mhObs[0]['observation'];
+            toSet['observation'] = LABKEY.Utils.encodeHtml(observation);
+        }
     },
 
     appendEightWeekHistory: function(toSet, results) {
@@ -146,27 +202,5 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                 + LABKEY.Utils.encodeHtml(diarrheaRowString) + '<br/>'
                 + LABKEY.Utils.encodeHtml(poorAppRowString) + '<br/>'
                 + LABKEY.Utils.encodeHtml(pairingRowString) + '</pre>';
-    },
-
-    appendMorningHealthObservations: function(toSet, row) {
-        var mhObs = row.getMorningHealthObservations();
-
-        if(mhObs) {
-            var observation = mhObs[0]['observation'];
-            toSet['observation'] = LABKEY.Utils.encodeHtml(observation);
-        }
-    },
-
-    appendMorningHealthLocation: function (toSet, row) {
-        var locations = row.getMorningHealthLocation();
-
-        if (locations) {
-            var mhCurrLoc = locations[0]['mhcurrlocation'];
-            var mhLoc = locations[0]['mhlocation'];
-
-            toSet['mhlocation'] = LABKEY.Utils.encodeHtml(mhCurrLoc);
-            toSet['mhhomeLocation'] = LABKEY.Utils.encodeHtml(mhLoc);
-        }
     }
-
 });
