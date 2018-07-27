@@ -166,7 +166,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
             return;
         }
 
-        this.appendDataResults(toSet, results, id, this.appendForm);
+        this.appendDataResults(toSet, results, id);
     },
 
     appendForm: function(toSet) {
@@ -174,7 +174,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         this.afterLoad();
     },
 
-    appendDataResults: function(toSet, results, id, callbackFn) {
+    appendDataResults: function(toSet, results, id) {
         this.appendDemographicsResults(toSet, results, id);
         this.appendCnprcDemographicsResults(toSet, results);
         this.appendBirthResults(toSet, results.getBirthInfo(), results.getBirth());
@@ -196,7 +196,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         this.appendHousingIntervals(toSet, results);
         this.appendLastProjects(toSet, results.getLastProjects());
         this.appendCensusFlags(toSet, results.getCensusFlags());
-        this.appendPathologyReports(toSet, results.getPathologyReports(), callbackFn);
+        this.appendPathologyReports(toSet, results.getPathologyReports());
     },
 
     appendDemographicsResults: function(toSet, row, id){
@@ -508,7 +508,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         toSet['censusFlags'] = values.length ? '<table>' + values.join('') + '</table>' : null;
     },
 
-    appendPathologyReports: function(toSet, rows, callbackFn) {
+    appendPathologyReports: function(toSet, rows) {
 
         LABKEY.Query.getQueries({
             schemaName: 'study',
@@ -531,8 +531,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
                 }, this);
 
                 this.appendPathologyRows(toSet, rows, hasBiopsyAccess, hasNecropsyAccess);
-                callbackFn.call(this, toSet);
-
+                this.appendForm(toSet); //callback fn - append only after all needed values are set in toSet
             }
         });
     },

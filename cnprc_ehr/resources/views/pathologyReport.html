@@ -67,7 +67,7 @@
                 if (locationSplit.length === 1) {
                     locationLinkText = "<a href='"
                             + LABKEY.Utils.encodeHtml(LABKEY.ActionURL.buildURL("ehr", "cageDetails", null, {room: locationSplit[0]}))
-                            + "'>" + LABKEY.Utils.encodeHtml(animalSummaryData['location'] + "</a>");
+                            + "'>" + LABKEY.Utils.encodeHtml(animalSummaryData['location']) + "</a>";
                 }
                 else if (locationSplit.length === 2) {
                     locationLinkText = "<a href='"
@@ -697,7 +697,7 @@
 
         function getTimestamp() {
             var d = new Date();
-            return d.toLocaleString(); //TODO: does this work, or the date need to be formatted as July 09, 2018 for ex.
+            return d.toLocaleString();
         }
 
         function getHeaderHtml(reportId, reportCategory) {

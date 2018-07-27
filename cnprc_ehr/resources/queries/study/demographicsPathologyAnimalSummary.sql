@@ -5,7 +5,7 @@ SELECT
   (CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END) location,
   biopsy.performedBy AS investigator,
   biopsy.pathologist,
-  (recWt.MostRecentWeight * 1000) AS weightInGrams, --TODO : may need to change - recent weight may not be the way to go (also this is not coalesced properly)
+  (recWt.MostRecentWeight * 1000) AS weightInGrams,
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
   demogr.birth,  -- needed for age to calculate correctly
@@ -31,18 +31,18 @@ SELECT
   allNecData.Id,
   allNecData.prmFk AS reportId,
   CASE WHEN necFin.reportType IS NOT NULL THEN 'Final Necropsy' ELSE 'Gross Necropsy' END AS reportName,
-  CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END AS location,
+  COALESCE((CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END), pregConf.birthPlace) AS location,
   allNecData.performedBy AS investigator,
   COALESCE (necFin.pathologist, necGross.pathologist) AS pathologist,
-  (recWt.MostRecentWeight * 1000) AS weightInGrams, --TODO : may need to change - recent weight may not be the way to go (also this is not coalesced properly)
-  demogr.gender AS sex,
+  (recWt.MostRecentWeight * 1000) AS weightInGrams,
+  COALESCE (demogr.gender, pregConf.gender) AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
   demogr.birth,  -- needed for age to calculate correctly
   allNecData.projectCode as project,
   ph.clinician,
   COALESCE (necFin.bcs, necGross.bcs) AS pathologyCondition,
-  demogr.death,  -- TODO: need to check this for fetal deaths especially, also needed for age to calculate correctly
-  COALESCE (necFin.mannerOfDeath, necGross.mannerOfDeath) AS deathType,
+  COALESCE(demogr.death, pregConf.termDate) AS death,
+  COALESCE (allNecData.mannerOfDeath, pregConf.deathType) AS deathType,
   allNecData.accountId AS chargeId,
   CAST(allNecData.date AS DATE) AS workPerformed,
   COALESCE (necFin.hydrationLevel, necGross.hydrationLevel) AS hydration
@@ -58,3 +58,4 @@ SELECT
   LEFT JOIN study.deaths ON deaths.Id = allNecData.Id
   LEFT JOIN study.demographicsMostRecentWeight recWt ON recWt.Id = allNecData.Id
   LEFT JOIN study.demographicsLastHousing lastHouse ON lastHouse.Id = allNecData.Id
+  LEFT JOIN study.pregnancyConfirmation pregConf ON pregConf.conNum = allNecData.Id
