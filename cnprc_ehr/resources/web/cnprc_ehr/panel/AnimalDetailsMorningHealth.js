@@ -145,8 +145,8 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
     },
 
     appendProjectCode: function(toSet, row) {
-        if (row.getLastPayorId()) {
-           toSet['projectCode'] = LABKEY.Utils.encodeHtml(row.getLastPayorId());  // TODO: I think this may be incorrect
+        if (row.getPrimaryProject()) {
+           toSet['projectCode'] = LABKEY.Utils.encodeHtml(row.getPrimaryProject());
         }
     },
 

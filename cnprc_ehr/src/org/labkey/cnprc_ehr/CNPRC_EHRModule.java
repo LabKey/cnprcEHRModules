@@ -65,26 +65,7 @@ import org.labkey.cnprc_ehr.dataentry.forms.SerumFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.WeightTbTattooFormType;
-import org.labkey.cnprc_ehr.demographics.ActiveFlagsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.BCSDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.BreedingGroupDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.BreedingRosterDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.CNPRCDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.ColonyDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.ConceptionsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.EightWeekHistoryDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.HousingIntervalsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.LastHousingDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.LastPayorDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.LastProjectsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.MHLocationDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.ObservationsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.ParentsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.PathologyReportsDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.SerumDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.TBDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.PregnancyConfirmationDemographicsProvider;
-import org.labkey.cnprc_ehr.demographics.ActivePregnancyDemographicsProvider;
+import org.labkey.cnprc_ehr.demographics.*;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
 import java.util.Collection;
@@ -230,6 +211,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new MHLocationDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new PregnancyConfirmationDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ActivePregnancyDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ActiveAssignmentDemographicsProvider(this));
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {

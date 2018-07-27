@@ -314,6 +314,14 @@ EHR.DemographicsRecord = function(data){
 
         getActivePregnancyDaysPregnant: function(){
             return data['daysPregnant'];
+        },
+
+        getPrimaryProject: function() {
+            return data['primaryProject'];
+        },
+
+        getPrimaryProjectDate: function(){
+            return data['primaryProjectDate'];
         }
     }
 }
