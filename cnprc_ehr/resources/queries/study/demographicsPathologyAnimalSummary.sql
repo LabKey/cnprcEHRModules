@@ -5,7 +5,7 @@ SELECT
   (CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END) location,
   biopsy.performedBy AS investigator,
   biopsy.pathologist,
-  (recWt.MostRecentWeight * 1000) AS weightInGrams,
+  (wt.weight * 1000) AS weightInGrams,
   demogr.gender AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
   demogr.birth,  -- needed for age to calculate correctly
@@ -22,7 +22,7 @@ SELECT
   LEFT JOIN study.pathologyHistory ph ON ph.pathologyFK = biopsy.prmFk
   LEFT JOIN study.demographics demogr ON demogr.Id = biopsy.Id
   LEFT JOIN study.deaths ON deaths.Id = biopsy.Id
-  LEFT JOIN study.demographicsMostRecentWeight recWt ON recWt.Id = biopsy.Id
+  LEFT JOIN (SELECT Id, date, avg(weight) AS weight FROM study.weight GROUP BY Id, date) wt ON wt.Id = biopsy.Id AND wt.date = biopsy.date -- weight taken on work performed date
   LEFT JOIN study.demographicsLastHousing lastHouse ON lastHouse.Id = biopsy.Id
 
 UNION ALL
@@ -34,7 +34,7 @@ SELECT
   COALESCE((CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END), pregConf.birthPlace) AS location,
   allNecData.performedBy AS investigator,
   COALESCE (necFin.pathologist, necGross.pathologist) AS pathologist,
-  (recWt.MostRecentWeight * 1000) AS weightInGrams,
+  (wt.weight * 1000) AS weightInGrams,
   COALESCE (demogr.gender, pregConf.gender) AS sex,
   demogr.Id.age.yearsAndMonthsAndDays AS age,
   demogr.birth,  -- needed for age to calculate correctly
@@ -56,6 +56,6 @@ SELECT
   LEFT JOIN study.pathologyHistory ph ON ph.pathologyFK = allNecData.prmFk
   LEFT JOIN study.demographics demogr ON demogr.Id = allNecData.Id
   LEFT JOIN study.deaths ON deaths.Id = allNecData.Id
-  LEFT JOIN study.demographicsMostRecentWeight recWt ON recWt.Id = allNecData.Id
+  LEFT JOIN (SELECT Id, date, avg(weight) AS weight FROM study.weight GROUP BY Id, date) wt ON wt.Id = allNecData.Id AND wt.date = allNecData.date -- weight taken on work performed date; in necropsy's case it is essentially the mostRecentWeight, but adding this to be consistent with Biposy above
   LEFT JOIN study.demographicsLastHousing lastHouse ON lastHouse.Id = allNecData.Id
   LEFT JOIN study.pregnancyConfirmation pregConf ON pregConf.conNum = allNecData.Id
