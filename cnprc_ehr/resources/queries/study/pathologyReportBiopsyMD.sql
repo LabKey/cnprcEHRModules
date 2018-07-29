@@ -15,5 +15,5 @@ SELECT
   morphDiag.comments AS comments
 
 FROM study.biopsy biop
-  LEFT JOIN study.morphologicDiagnosis morphDiag
+  INNER JOIN study.morphologicDiagnosis morphDiag
     ON morphDiag.pathologyFK = biop.prPk AND biop.Id = morphDiag.Id

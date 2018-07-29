@@ -9,5 +9,5 @@ SELECT
   grossFind.remark AS organText --biopsy observation col 2
 
 FROM study.biopsy biop
-LEFT JOIN study.grossFindings grossFind
+INNER JOIN study.grossFindings grossFind
     ON grossFind.pathologyFK = biop.prPk AND biop.Id = grossFind.Id

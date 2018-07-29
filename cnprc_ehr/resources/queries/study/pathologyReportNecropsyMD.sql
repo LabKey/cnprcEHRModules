@@ -16,7 +16,7 @@ SELECT
   morphDiag.comments AS comments
 
 FROM study.necropsy necr
-  LEFT JOIN study.morphologicDiagnosis morphDiag
+  INNER JOIN study.morphologicDiagnosis morphDiag
     ON morphDiag.pathologyFK = necr.prPk AND necr.Id = morphDiag.Id
 WHERE necr.reportType = 'NG'
 
@@ -37,6 +37,6 @@ SELECT
   morphDiag.comments AS comments
 
 FROM study.necropsy necr
-  LEFT JOIN study.morphologicDiagnosis morphDiag
+  INNER JOIN study.morphologicDiagnosis morphDiag
     ON morphDiag.pathologyFK = necr.prPk AND necr.Id = morphDiag.Id
 WHERE necr.reportType = 'NF'

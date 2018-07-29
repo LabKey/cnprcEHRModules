@@ -2,6 +2,7 @@ SELECT
   biopsy.Id,
   biopsy.prmFk AS reportId,
   'Biopsy' AS reportName,
+  biopsy.enddate AS enddate,
   (CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END) location,
   biopsy.performedBy AS investigator,
   biopsy.pathologist,
@@ -31,6 +32,7 @@ SELECT
   allNecData.Id,
   allNecData.prmFk AS reportId,
   CASE WHEN necFin.reportType IS NOT NULL THEN 'Final Necropsy' ELSE 'Gross Necropsy' END AS reportName,
+  allNecData.enddate AS enddate,
   COALESCE((CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END), pregConf.birthPlace) AS location,
   allNecData.performedBy AS investigator,
   COALESCE (necFin.pathologist, necGross.pathologist) AS pathologist,
@@ -49,7 +51,7 @@ SELECT
 
   FROM
     -- There can be at most two necropsy entries: gross and final, so DISTINCT shrinks it down to one
-    (SELECT DISTINCT nec2.prmFk, nec2.Id, nec2.performedBy, nec2.projectCode, nec2.mannerOfDeath, nec2.accountId, nec2.date
+    (SELECT DISTINCT nec2.prmFk, nec2.Id, nec2.performedBy, nec2.projectCode, nec2.mannerOfDeath, nec2.accountId, nec2.date, nec2.enddate
      FROM study.necropsy nec2) allNecData
   LEFT JOIN study.necropsy necFin ON necFin.prmFk = allNecData.prmFk AND necFin.reportType = 'NF'
   LEFT JOIN study.necropsy necGross ON necGross.prmFk = allNecData.prmFk AND necGross.reportType = 'NG'

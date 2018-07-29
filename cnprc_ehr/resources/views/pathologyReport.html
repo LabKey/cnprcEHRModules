@@ -290,6 +290,7 @@
 
                     animalSummaryData['Id'] = row.Id.value;
                     animalSummaryData['reportName'] = row.reportName.value;
+                    animalSummaryData['enddate'] = row.enddate.value ? row.enddate.value : null;
                     animalSummaryData['sex'] = row.sex.value;
                     animalSummaryData['death'] = row.death.formattedValue ? row.death.formattedValue : '';
                     animalSummaryData['deathType'] = row.deathType.value ? row.deathType.value : '';
@@ -308,7 +309,7 @@
 
                     if (animalSummaryData['reportName'] === "Biopsy") {
 
-                        reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName']);
+                        reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName'], animalSummaryData['enddate']);
                         appendHeader();
 
                         var biopsyData = {};
@@ -318,7 +319,7 @@
                     }
                     else {  // necropsy
 
-                        reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName']);
+                        reportHeader = getHeaderHtml(reportId, animalSummaryData['reportName'], animalSummaryData['enddate']);
                         appendHeader();
 
                         var necropsyGrossData = {}; //to store both Gross and Final Necropsy info
@@ -700,9 +701,9 @@
             return d.toLocaleString();
         }
 
-        function getHeaderHtml(reportId, reportCategory) {
+        function getHeaderHtml(reportId, reportCategory, enddate) {
             var rId = "Report Id: " + reportId + " ";
-            var rep = reportCategory + " Report ";
+            var rep = reportCategory + " Report " + (enddate == null ? "(Unfinished)" : ""); //if enddate is null, it is an unfinished report
             var ts = getTimestamp();
 
             return ('<h4 class="pathology">' +

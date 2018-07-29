@@ -10,7 +10,7 @@ SELECT
   grossFind.remark AS organText --necropsy gross observation col 2
 
 FROM study.necropsy necr
-  LEFT JOIN study.grossFindings grossFind
+  INNER JOIN study.grossFindings grossFind
     ON grossFind.pathologyFK = necr.prPk AND necr.Id = grossFind.Id
 WHERE necr.reportType = 'NG'
 
@@ -25,6 +25,6 @@ SELECT
   grossFind.remark AS organText --necropsy final observation col 2
 
 FROM study.necropsy necr
-  LEFT JOIN study.grossFindings grossFind
+  INNER JOIN study.grossFindings grossFind
     ON grossFind.pathologyFK = necr.prPk AND necr.Id = grossFind.Id
 WHERE necr.reportType = 'NF'
