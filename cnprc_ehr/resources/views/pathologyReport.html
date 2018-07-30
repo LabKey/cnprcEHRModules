@@ -136,10 +136,10 @@
                             "<td>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyGrossFinding][i]['organText']) + "</td>" +
                             "</tr>";
                 }
+                biopsyReport += "</table></td></tr>";
             }
             if (biopsyData[biopsyMorphDiag].length > 0) {
                 biopsyReport +=
-                        "</table></td></tr>" +
                         "<tr><td class='reportLabelCell'><strong>Biopsy Diagnosis:</strong></td>" + "<td>" +
                         "<table class='table-striped table-hover table-condensed biopsyDetailsTable' style=\"width:100%\">" +
                         "<thead><tr><td class='text-center'>Seq</td>" + "<td>Organ</td>" + "<td>Text</td>" + "</tr></thead>";
@@ -150,12 +150,12 @@
                             "<td>" + LABKEY.Utils.encodeHtml(biopsyData[biopsyMorphDiag][i]['morphDiagText']) + "</td>" +
                             "</tr>";
                 }
+                biopsyReport += "</table></td></tr>";
             }
 
             if (biopsyData[pathologyComments]) {
-                biopsyReport +=
-                        "</table></td></tr>" +
-                        "<tr><td class='reportLabelCell'><strong>Biopsy Comments:</strong></td>" + "<td class='reportValueCell'>" + biopsyData['pathologyComments'] + "</td></tr>\n";
+                biopsyReport += "<tr><td class='reportLabelCell'><strong>Biopsy Comments:</strong></td>" +
+                        "<td class='reportValueCell'>" + biopsyData['pathologyComments'] + "</td></tr>\n";
             }
 
             $("#pathologyBiopsyReport").html(biopsyReport);
