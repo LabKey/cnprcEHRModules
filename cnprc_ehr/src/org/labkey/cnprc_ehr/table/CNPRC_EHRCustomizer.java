@@ -18,8 +18,6 @@ package org.labkey.cnprc_ehr.table;
 
 import org.labkey.api.data.AbstractTableInfo;
 import org.labkey.api.data.ColumnInfo;
-import org.labkey.api.data.DisplayColumn;
-import org.labkey.api.data.DisplayColumnFactory;
 import org.labkey.api.data.JdbcType;
 import org.labkey.api.data.SQLFragment;
 import org.labkey.api.data.TableInfo;
@@ -43,6 +41,7 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
     public void customize(TableInfo tableInfo)
     {
         doTableSpecificCustomizations((AbstractTableInfo) tableInfo);
+        doColumnCustomizations((AbstractTableInfo) tableInfo);
     }
 
     public void doTableSpecificCustomizations(AbstractTableInfo ti)
@@ -75,7 +74,27 @@ public class CNPRC_EHRCustomizer extends AbstractTableCustomizer
         }
         else if (matches(ti, "ehr", "tasks") || matches(ti, "ehr", "my_tasks"))
         {
-            customizeTasks((AbstractTableInfo) ti);
+            customizeTasks(ti);
+        }
+    }
+
+    private void doColumnCustomizations(AbstractTableInfo table)
+    {
+        UserSchema schema = table.getUserSchema();
+
+        if (schema != null && (schema.getName().equals("ehr_lookups") ||
+                (schema.getName().equals("ehr") && table.getName().equals("reports"))))
+        {
+            for (ColumnInfo col : table.getColumns())
+            {
+                if (col.getName().equals("rowid"))
+                {
+                    col.setUserEditable(true);
+                    col.setShownInInsertView(true);
+                    col.setShownInUpdateView(true);
+                    col.setAutoIncrement(false);
+                }
+            }
         }
     }
 
