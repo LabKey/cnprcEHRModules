@@ -27,10 +27,6 @@
     width: 50%
 }
 
-#pathologyBiopsyReport table,
-#pathologyBiopsyReport .biopsyDetailsTable td,
-#pathologyNecropsyReport table,
-#pathologyNecropsyReport .necropsyDetailsTable td,
 #pathologyAnimalSummary table
 {
     border: 1px solid lightgray;
