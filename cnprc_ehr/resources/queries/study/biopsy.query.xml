@@ -7,13 +7,12 @@
                     <column columnName="date">
                         <columnTitle>Work Performed Date</columnTitle>
                     </column>
-                    <column columnName="prmFk"> <!-- this is also a report Id -->
-                        <columnTitle>Biopsy Image</columnTitle>
-                        <fk>
-                            <fkDbSchema>cnprc_ehr</fkDbSchema>
-                            <fkTable>image_pathology</fkTable>
-                            <fkColumnName>prm_pk</fkColumnName>
-                        </fk>
+                    <column columnName="prmFk">
+                        <columnTitle>Report Id</columnTitle>
+                        <description>FK to cnprc_ehr.image_pathology.prm_pk, and to study.organ_measurements.pathologyFk</description>
+                    </column>
+                    <column columnName="prPk">
+                        <description>FK to study.grossFindings.pathologyFk and study.morphologicDiagnosis.pathologyFk</description>
                     </column>
                     <column columnName="performedBy">
                         <columnTitle>Investigator</columnTitle>

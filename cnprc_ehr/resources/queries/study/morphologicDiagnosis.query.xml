@@ -13,7 +13,9 @@
                     <columnTitle>Report Date</columnTitle>
                     <formatString>Date</formatString>
                 </column>
-                <column columnName="pathologyFK"/>
+                <column columnName="pathologyFK">
+                    <description>FK to study.necropsy.prPk and study.biopsy.prPk</description>
+                </column>
                 <column columnName="tissue">
                     <columnTitle>Organ</columnTitle>
                 </column>

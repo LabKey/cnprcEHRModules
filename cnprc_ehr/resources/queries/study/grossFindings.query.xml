@@ -19,7 +19,9 @@
                             <fkDisplayColumnName>Description</fkDisplayColumnName>
                         </fk>
                     </column>
-                    <column columnName="pathologyFK"/>
+                    <column columnName="pathologyFK">
+                        <description>FK to study.necropsy.prPk and study.biopsy.prPk</description>
+                    </column>
                     <column columnName="remark">
                         <columnTitle>Organ Text</columnTitle>
                     </column>

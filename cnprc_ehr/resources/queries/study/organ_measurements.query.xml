@@ -1,7 +1,7 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="OrganMeasurements" tableDbType="TABLE" useColumnOrder="true">
+            <table tableName="organ_measurements" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
                     <column columnName="Id"/>
                     <column columnName="date">
@@ -19,7 +19,9 @@
                     <column columnName="unit">
                         <columnTitle>Unit</columnTitle>
                     </column>
-                    <column columnName="pathologyFK"/>
+                    <column columnName="pathologyFK">
+                        <description>FK to study.necropsy.prmFk and study.biopsy.prmFk</description>
+                    </column>
                 </columns>
             </table>
         </tables>
