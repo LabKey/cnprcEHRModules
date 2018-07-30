@@ -7,4 +7,11 @@ SELECT
   organMeasure.unit AS organValueUnit
 
 FROM study.necropsy nec
-  INNER JOIN study.organ_measurements organMeasure ON organMeasure.pathologyFK = nec.prmFk
+  INNER JOIN study.organ_measurements organMeasure ON organMeasure.Id = nec.Id AND organMeasure.pathologyFK = nec.prmFk
+
+GROUP BY
+nec.Id,
+nec.prmFk,
+organMeasure.tissue,
+organMeasure.measurementValue,
+organMeasure.unit

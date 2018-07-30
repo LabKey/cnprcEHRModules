@@ -604,15 +604,15 @@
 
                 for (var i = 0; i < rows.length; i++) {
 
-                    var topographyNotes = rows[i].topographyNotes ? rows[i].topographyNotes : '';
-                    var morphologyNotes = rows[i].morphologyNotes ? rows[i].morphologyNotes : '';
-                    var remark = rows[i].remark ? rows[i].remark : '';
-                    var comments = rows[i].comments ? rows[i].comments : '';
+                    var topographyNotes = rows[i].topographyNotes ? (rows[i].topographyNotes + "; ") : '';
+                    var morphologyNotes = rows[i].morphologyNotes ? (rows[i].morphologyNotes + "; "): '';
+                    var remark = rows[i].remark ? (rows[i].remark + "; ") : '';
+                    var comments = rows[i].comments ? (rows[i].comments + "; ") : '';
 
                     pathologyArray[reportTypeMorphDiag][i] = {
                         morphDiagSeq: rows[i].morphDiagSeq ? rows[i].morphDiagSeq : null,
                         morphDiagOrgan: rows[i].morphDiagOrgan ? rows[i].morphDiagOrgan : null,
-                        morphDiagText : (topographyNotes + " " + morphologyNotes + " " + remark + " " + comments).trim()
+                        morphDiagText : (topographyNotes + morphologyNotes + remark + comments).trim()
                     };
                 }
             }
