@@ -31,7 +31,7 @@
                 }, this);
 
                 Ext4.create('LDK.panel.NavPanel', {
-                    renderTo: 'dataAdmin-col2',
+                    renderTo: 'dataAdmin-col1',
                     renderer: linkItemRenderer,
                     width: 300,
                     sections: [{
@@ -42,29 +42,17 @@
             }
         });
 
-        LABKEY.Query.getQueries({
-            containerPath: LABKEY.getModuleProperty('ehr', 'EHRStudyContainer'),
-            schemaName: 'cnprc_ehr',
-            includeUserQueries: false,
-            includeColumns: false,
-            success: function(results) {
-                var items = [];
-                Ext4.each(results.queries, function (q) {
-                    items.push({queryName: q.name, schemaName: 'cnprc_ehr', title: q.title});
-                }, this);
-
-                Ext4.create('LDK.panel.NavPanel', {
-                    renderTo: 'dataAdmin-col1',
-                    renderer: linkItemRenderer,
-                    width: 300,
-                    sections: [{
-                        header: 'CNPRC Schema Tables',
-                        items: items
-                    }]
-                });
-            }
-        });
-
+            Ext4.create('LDK.panel.NavPanel', {
+                renderTo: 'dataAdmin-col2',
+                renderer: linkItemRenderer,
+                width: 300,
+                sections: [{
+                    header: 'EHR Reports',
+                    items: [
+                        {queryName: 'reports', schemaName: 'ehr', title: 'Reports'}
+                    ]
+                }]
+            });
         }
 
         function linkItemRenderer(item){
