@@ -16,18 +16,17 @@
     Ext4.onReady(function (){
         function init() {
 
-        LABKEY.Query.selectRows({
+        LABKEY.Query.getQueries({
             containerPath: LABKEY.getModuleProperty('ehr', 'EHRStudyContainer'),
             schemaName: "ehr_lookups",
-            queryName: "lookup_sets",
-            columns: 'setname,label',
-            sort: 'label',
+            includeUserQueries: false,
+            includeColumns: false,
             scope: this,
             failure: LDK.Utils.getErrorCallback(),
             success: function(results) {
                 var items = [];
-                Ext4.each(results.rows, function (r) {
-                    items.push({queryName: r.setname, schemaName: 'ehr_lookups', title: r.label});
+                Ext4.each(results.queries, function (r) {
+                    items.push({queryName: r.name, schemaName: 'ehr_lookups', title: r.title});
                 }, this);
 
                 Ext4.create('LDK.panel.NavPanel', {
