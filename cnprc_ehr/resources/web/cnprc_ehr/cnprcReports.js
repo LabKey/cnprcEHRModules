@@ -477,3 +477,96 @@ EHR.reports.reproductiveCalendar = function (panel, tab, viewName) {
         }]
     });
 };
+
+EHR.reports.behavior = function (panel, tab, viewName) {
+    var filterArray = panel.getFilterArray(tab);
+    var title = panel.getTitleSuffix();
+
+    tab.add({
+        xtype: 'ldk-querycmp',
+        style: 'margin-bottom:10px;',
+        queryConfig: panel.getQWPConfig({
+            schemaName: 'study',
+            queryName: 'bbaBehavior',
+            viewName: viewName,
+            title: 'Behavior' + title,
+            filters: filterArray.nonRemovable,
+            removeableFilters: filterArray.removable
+        })
+    });
+
+    //legends for Behavior report
+    tab.add({
+        xtype: 'ldk-webpartpanel',
+        title: 'Legend',
+        items: [{
+            border: false,
+            html: '<table class="ehr-legend">' +
+            CNPRC.Utils.legendTitleWithURL('Introduction to BBA Project', true, true, 'bba_descriptions','introduction') +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('General Protocol', true, true, 'bba_descriptions','generalProtocol') +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('Weight at testing', true, false, 'bba_descriptions','weight') +                         CNPRC.Utils.legendTitleWithURL('Rearing Condition', false, false, 'bba_descriptions','rearingCondition') +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('Behavioral Responsiveness', true, false, 'bba_descriptions','behavResponsiveness') +    CNPRC.Utils.legendTitleWithURL('Temperament Ratings', false, false, 'bba_descriptions','temperamentRatings')  +  CNPRC.Utils.legendTitleWithURL('Human Intruder', false, false, 'bba_descriptions','humanIntruder')  +       CNPRC.Utils.legendEntryWithURL('( Z-scores )','', false, true, 'bba_descriptions','zscores') +
+            CNPRC.Utils.legendEntry('Day One Activity','', true, false) +                                                               CNPRC.Utils.legendEntry('Vigilant','', false, false) +                                                               CNPRC.Utils.legendEntry('Activity','', false, true) +
+            CNPRC.Utils.legendEntry('Day One Emotionality','', true, false) +                                                           CNPRC.Utils.legendEntry('Gentle','', false, false) +                                                                 CNPRC.Utils.legendEntry('Emotionality','', false, true) +
+            CNPRC.Utils.legendEntry('Day Two Activity','', true, false) +                                                               CNPRC.Utils.legendEntry('Confident','', false, false) +                                                              CNPRC.Utils.legendEntry('Aggression','', false, true) +
+            CNPRC.Utils.legendEntry('Day Two Emotionality','', true, false) +                                                           CNPRC.Utils.legendEntry('Nervous','', false, false) +                                                                CNPRC.Utils.legendEntry('Displacement','', false, true) +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('Behavioral Inhibition Index', true, false, 'bba_descriptions','behavioralInhibition')  +   CNPRC.Utils.legendTitleWithURL('Other Information about the BBA Project', false, true, 'bba_descriptions','otherInfo') +
+            '</table>'
+        }]
+    });
+};
+
+EHR.reports.labworkResults = function (panel, tab, viewName) {
+    var filterArray = panel.getFilterArray(tab);
+    var title = panel.getTitleSuffix();
+
+    tab.add({
+        xtype: 'ldk-querycmp',
+        style: 'margin-bottom:10px;',
+        queryConfig: panel.getQWPConfig({
+            schemaName: 'study',
+            queryName: 'bbaLabResults',
+            viewName: viewName,
+            title: 'Lab Results' + title,
+            filters: filterArray.nonRemovable,
+            removeableFilters: filterArray.removable
+        })
+    });
+
+    //legends for BBA Labwork report
+    tab.add({
+        xtype: 'ldk-webpartpanel',
+        title: 'Legend',
+        items: [{
+            border: false,
+            html: '<table class="ehr-legend">' +
+            CNPRC.Utils.legendTitleWithURL('Introduction to BBA Project', true, true, 'bba_descriptions','introduction') +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('General Protocol', true, true, 'bba_descriptions','generalProtocol') +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('Weight at testing', true, false, 'bba_descriptions','weight') +                                  CNPRC.Utils.legendTitleWithURL('SPF Status', false, true, 'bba_descriptions','spfStatus') +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('Plasma Cortisol', true, false, 'bba_descriptions','plasmaCortisol') +                            CNPRC.Utils.legendEntryWithURL('( Z-scores )','', false, true, 'bba_descriptions','zscores') +
+            CNPRC.Utils.legendEntry('Sample 1','', true, true) +
+            CNPRC.Utils.legendEntry('Sample 2','', true, true) +
+            CNPRC.Utils.legendEntry('Sample 3','', true, true) +
+            CNPRC.Utils.legendEntry('Sample 4','', true, true) +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('Hematology and Flow Cytometry', true, false, 'bba_descriptions','hematologyFlowCytometry')  +       CNPRC.Utils.legendTitle('Genotype', false, true) +
+            CNPRC.Utils.legendEntry('WBC','Total White Cell Count (x10^3 / ml)', true, false) +                                                 CNPRC.Utils.legendEntryWithURL('SERT Code', 'Serotonin transporter promoter ', false, true, 'bba_descriptions','sert') +
+            CNPRC.Utils.legendEntry('Lympho','Total Lymphocyte count (/ml)', true, false) +                                                     CNPRC.Utils.legendEntryWithURL('MAOA Code', 'Monoamine oxidase A promoter', false, true, 'bba_descriptions','maoa') +
+            CNPRC.Utils.legendEntry('CD4','CD4+ cell numbers (/ml)', true, true) +
+            CNPRC.Utils.legendEntry('CD8','CD8+ cell numbers (/ml)', true, true) +
+            CNPRC.Utils.legendEntry('Hemoglobin','(gm/dl)', true, true) +
+            CNPRC.Utils.legendEntry('Hemotocrit','(%)', true, true) +
+            CNPRC.Utils.legendEntry('MCV','(fl)', true, true) +
+            CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
+            CNPRC.Utils.legendTitleWithURL('Other Information about the BBA Project', true, false, 'bba_descriptions','otherInfo') +
+            '</table>'
+        }]
+    });
+};
