@@ -830,54 +830,48 @@ Ext4.onReady(function(){
                 xtype: 'button',
                 text: 'Populate All',
                 scope: this,
-                handler: function(){
+                handler: function () {
                     document.getElementById('msgbox').innerHTML = '';
-                    Ext4.each(this.tables, function(table){
-                        if (!table.doSkip) {
-
-                            var msg = 'This will modify all the manually edited records';
-                            if (table.populateFn == 'populateFromFile') {
-                                Ext4.Msg.confirm('Confirm Populate', msg, function(btn){
-                                    if (btn == 'yes'){
-                                        document.getElementById('msgbox').innerHTML += '<div>Populating ' + table.queryName + '...</div>';
+                    var msg = 'This will modify all the manually edited records';
+                    Ext4.Msg.confirm('', msg, function (btn) {
+                        if (btn == 'yes') {
+                            Ext4.each(this.tables, function (table) {
+                                if (!table.doSkip) {
+                                    document.getElementById('msgbox').innerHTML += '<div>Populating ' + table.queryName + '...</div>';
+                                    if (table.populateFn == 'populateFromFile') {
                                         this.populateFromFile.call(this, table.schemaName, table.queryName);
-                                    }
-                                }, this);
-                            } else {
-                                Ext4.Msg.confirm('Confirm Populate', msg, function(btn){
-                                    if (btn == 'yes') {
-                                        document.getElementById('msgbox').innerHTML += '<div>Populating ' + table.queryName + '...</div>';
+                                    } else {
                                         this[table.populateFn]();
                                     }
-                                },this);
-                            }
-                        } else {
-                            document.getElementById('msgbox').innerHTML += '<div>Skipping ' + table.label + '</div>';
-                            console.log('skipping: ' + table.label)
+                                } else {
+                                    document.getElementById('msgbox').innerHTML += '<div>Skipping ' + table.label + '</div>';
+                                    console.log('skipping: ' + table.label)
+                                }
+                            }, this);
                         }
                     }, this);
                 }
             });
+
             tableItems.push({
                 xtype: 'button',
                 text: 'Delete All',
                 scope: this,
-                handler: function(){
+                handler: function () {
                     this.pendingDeletes = 0;
                     var msg = 'This will delete all the manually added records';
                     document.getElementById('msgbox').innerHTML = '';
-                    Ext4.each(this.tables, function(table){
-                        if (!table.doSkip) {
-
-                            Ext4.Msg.confirm('Confirm Delete', msg, function(btn) {
-                                if(btn == 'yes'){
+                    Ext4.Msg.confirm('', msg, function (btn) {
+                        if (btn == 'yes') {
+                            Ext4.each(this.tables, function (table) {
+                                if (!table.doSkip) {
                                     document.getElementById('msgbox').innerHTML += '<div>Deleting ' + table.label + '...</div>';
                                     this.deleteHandler(table);
+                                } else {
+                                    document.getElementById('msgbox').innerHTML += '<div>Skipping ' + table.label + '</div>';
+                                    console.log('skipping: ' + table.label);
                                 }
                             }, this);
-                        } else {
-                            document.getElementById('msgbox').innerHTML += '<div>Skipping ' + table.label + '</div>';
-                            console.log('skipping: ' + table.label);
                         }
                     }, this);
                 }
