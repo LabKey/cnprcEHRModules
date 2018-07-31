@@ -1645,7 +1645,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         pregnancyDeterminations.setGridCell(1, "result", testResult);
         pregnancyDeterminations.setGridCell(1, "scheduleStatus", "No");
         sleep(5000); // Weirdly sleep is needed for the Save & Close to be enabled , waitForElement is not working.
-        clickButton("Save & Close");
+        clickButton("Save & Close",0);
 
         log("Opening the pending task for completion");
         enterData.clickMyTasksTab();
@@ -2208,6 +2208,97 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testPathologyReportsBiopsyAndNecropsy()
+    {
+        String aliveAnimal = "TEST1";
+        String deadAnimal = "TEST3";
+        String conceptionId = "PRG-1112";
+
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.clickCategoryTab("General");
+        animalHistoryPage.clickReportTab("Snapshot");
+
+        log("Verifying the for Alive animal");
+        animalHistoryPage.searchSingleAnimal(aliveAnimal);
+
+        WebElement activeReportPanel = animalHistoryPage.getActiveReportPanel();
+        clickAndWait(Locator.linkWithText("1232").findElement(activeReportPanel), WAIT_FOR_PAGE);
+
+        waitForElement(Locator.tagContainingText("h4", "Details"));
+        assertElementPresent(Locator.tagWithClass("span", "pathologyReportCenter").withText("Biopsy Report"));
+
+        log("Extracting the list of labels");
+        List<String> expectedLabelValues = Arrays.asList("Clinical History:", "Clinical Diagnosis:", "Modify Necropsy:", "Biopsy Observations:", "Biopsy Diagnosis:", "Biopsy Comments:");
+        List<String> actualLabelValues = getTexts(Locator.byClass("reportLabelCell").findElements(getDriver()));
+
+        log("Extracting the list of values");
+        List<String> expectedValues = Arrays.asList("No significant history", "Open", "None", "no eng lis h ha ble");
+        List<String> actualValues = getTexts(Locator.byClass("reportValueCell").findElements(getDriver()));
+
+        log("Verifying the report for alive animal");
+        assertEquals("Labels are different under Details section", expectedLabelValues, actualLabelValues);
+        assertEquals("Values are not valid information", expectedValues, actualValues);
+        assertTextPresent("SKIN", "Some pathology reports also contain additional data such as images, molecular studies, references, Internet links, and addendum information");
+        assertTextPresent("LIVER", "All of which help the care team formulate the best possible treatment plan for the patient.");
+        assertTextPresent("Topography Notes for alive animal; Morphology Notes for alive animal; Remarks for alive animal; Comments for alive animal;");
+
+        log("Dead animal :" + deadAnimal);
+        animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(deadAnimal);
+        animalHistoryPage.clickCategoryTab("General");
+        animalHistoryPage.clickReportTab("Snapshot");
+        activeReportPanel = animalHistoryPage.getActiveReportPanel();
+        clickAndWait(Locator.linkWithText("12350").findElement(activeReportPanel), WAIT_FOR_PAGE);
+
+        waitForElement(Locator.tagContainingText("h4", "Details"));
+        assertElementPresent(Locator.tagWithClass("span", "pathologyReportCenter").withText("Final Necropsy Report"));
+
+        log("Extracting the list of labels");
+        expectedLabelValues = Arrays.asList("Clinical History:", "Clinical Diagnosis:", "Modify Necropsy:", "Gross Observations:", "Gross Diagnosis:", "Gross Comments:", "Final Observations:", "Final Diagnosis:", "Final Comments:", "Measurements:");
+        actualLabelValues = getTexts(Locator.byClass("reportLabelCell").findElements(getDriver()));
+
+        log("Extracting the list of values");
+        expectedValues = Arrays.asList("No significant history", "Open", "None", "Remarks from necropsy no eng lis h ha ble", "Remarks from necropsy no eng lis h ha ble");
+        actualValues = getTexts(Locator.byClass("reportValueCell").findElements(getDriver()));
+
+        log("Verifying the report for dead animal");
+        assertEquals("Labels are different under Details section", expectedLabelValues, actualLabelValues);
+        assertEquals("Values are not valid information", expectedValues, actualValues);
+        assertTextPresent("Some pathology reports also contain additional data such as images, molecular studies, references, Internet links, and addendum information");
+        assertTextPresent("Topography Notes for dead animal; Morphology Notes for dead animal; Remarks for dead animal; Comments for dead animal;");
+        assertTextPresent("All of which help the care team formulate the best possible treatment plan for the patient.");
+        assertTextPresent("Brain", "200.1", "g");
+        assertTextPresent("Lungs", "53", "g");
+
+        log("Conception :" + conceptionId);
+        animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(conceptionId);
+        animalHistoryPage.clickCategoryTab("General");
+        animalHistoryPage.clickReportTab("Snapshot");
+        activeReportPanel = animalHistoryPage.getActiveReportPanel();
+        clickAndWait(Locator.linkWithText("1234").findElement(activeReportPanel), WAIT_FOR_PAGE);
+
+        waitForElement(Locator.tagContainingText("h4", "Details"));
+        assertElementPresent(Locator.tagWithClass("span", "pathologyReportCenter").withText("Final Necropsy Report"));
+
+        log("Extracting the list of labels");
+        expectedLabelValues = Arrays.asList("Clinical History:", "Clinical Diagnosis:", "Modify Necropsy:", "Final Observations:", "Final Diagnosis:", "Final Comments:", "Measurements:");
+        actualLabelValues = getTexts(Locator.byClass("reportLabelCell").findElements(getDriver()));
+
+        log("Extracting the list of values");
+        expectedValues = Arrays.asList("No significant history", "Open", "None", "Remarks from necropsy conception no eng lis h ha ble");
+        actualValues = getTexts(Locator.byClass("reportValueCell").findElements(getDriver()));
+
+        log("Verifying the report for dead animal");
+        assertEquals("Labels are different under Details section", expectedLabelValues, actualLabelValues);
+        assertEquals("Values are not valid information", expectedValues, actualValues);
+        assertTextPresent("Topography Notes for conception; Morphology Notes for conception; Remarks for conception; Comments for conception;");
+        assertTextPresent("LIVER", "All of which help the care team formulate the best possible treatment plan for the patient.");
+        assertTextPresent("Brain", "25.1", "g");
+
+    }
+
+    @Test
     public void testAnimalHistoryImmunizationView()
     {
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
@@ -2253,7 +2344,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.linkContainingText(reportTab));
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                "Id"
+                "id"
                 , "sampleDate"
                 , "testDoneDate"
                 , "virus"
