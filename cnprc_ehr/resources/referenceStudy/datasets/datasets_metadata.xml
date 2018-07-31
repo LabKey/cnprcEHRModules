@@ -2818,9 +2818,11 @@
         </column>
         <column columnName="test">
             <datatype>varchar</datatype>
+            <scale>5</scale>
         </column>
         <column columnName="testType">
             <datatype>varchar</datatype>
+            <scale>1</scale>
         </column>
         <column columnName="site">
             <datatype>varchar</datatype>
@@ -2831,15 +2833,19 @@
                 <fkTable>tb_site</fkTable>
                 <fkColumnName>value</fkColumnName>
             </fk>
+            <scale>1</scale>
         </column>
         <column columnName="twentyFourHrsResult">
             <datatype>varchar</datatype>
+            <scale>1</scale>
         </column>
         <column columnName="fortyEightHrsResult">
             <datatype>varchar</datatype>
+            <scale>1</scale>
         </column>
         <column columnName="seventyTwoHrsResult">
             <datatype>varchar</datatype>
+            <scale>1</scale>
         </column>
         <column columnName="objectid">
             <datatype>entityid</datatype>
