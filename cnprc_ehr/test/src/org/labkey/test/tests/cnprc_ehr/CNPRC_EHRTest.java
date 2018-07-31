@@ -1276,11 +1276,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMapTB_1.put("id", id);
         rowMapTB_1.put("date", new Date());
         rowMapTB_1.put("test", "Test1");
-        rowMapTB_1.put("testType", "type");
-        rowMapTB_1.put("site", "site");
-        rowMapTB_1.put("twentyFourHrsResult", "24");
-        rowMapTB_1.put("fortyEightHrsResult", "48");
-        rowMapTB_1.put("seventyTwoHrsResult", "72");
+        rowMapTB_1.put("testType", "1");
+        rowMapTB_1.put("site", "s");
+        rowMapTB_1.put("twentyFourHrsResult", "2");
+        rowMapTB_1.put("fortyEightHrsResult", "4");
+        rowMapTB_1.put("seventyTwoHrsResult", "7");
         rowMapTB_1.put("QCStateLabel", "In Progress");
 
         insertCmdTB1.addRow(rowMapTB_1);
@@ -1291,11 +1291,11 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         rowMapTB_2.put("id", id);
         rowMapTB_2.put("date", new Date());
         rowMapTB_2.put("test", "Test2");
-        rowMapTB_2.put("testType", "type2");
-        rowMapTB_2.put("site", "site2");
-        rowMapTB_2.put("twentyFourHrsResult", "24");
-        rowMapTB_2.put("fortyEightHrsResult", "48");
-        rowMapTB_2.put("seventyTwoHrsResult", "72");
+        rowMapTB_2.put("testType", "2");
+        rowMapTB_2.put("site", "s");
+        rowMapTB_2.put("twentyFourHrsResult", "2");
+        rowMapTB_2.put("fortyEightHrsResult", "4");
+        rowMapTB_2.put("seventyTwoHrsResult", "7");
         rowMapTB_2.put("QCStateLabel", "In Progress");
         insertCmdTB2.addRow(rowMapTB_2);
 
@@ -2528,8 +2528,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for ID: ", animalId, results.getDataAsText(0, 0));
         assertEquals("Wrong value for Weight: ", "2.90", results.getDataAsText(0, 2));
         assertEquals("Wrong value for TB: ", "TB", results.getDataAsText(0, 3));
-        assertEquals("Wrong value for Test1: ", "typesite244872", results.getDataAsText(0, 4));
-        assertEquals("Wrong value for Test2: ", "type2site2244872", results.getDataAsText(0, 5));
+        assertEquals("Wrong value for Test1: ", "1s247", results.getDataAsText(0, 4));
+        assertEquals("Wrong value for Test2: ", "2s247", results.getDataAsText(0, 5));
         assertEquals("Wrong value for Tattoo: ", "X", results.getDataAsText(0, 6));
         assertEquals("Wrong value for BCS: ", "3.0", results.getDataAsText(0, 7));
         assertEquals("Wrong value for Room: ", "<6824778>", results.getDataAsText(0, 8));
