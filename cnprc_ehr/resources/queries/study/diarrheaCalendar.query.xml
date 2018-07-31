@@ -5,6 +5,7 @@
                 <tableTitle>Diarrhea Calendar</tableTitle>
                 <columns>
                     <column columnName="Id">
+                        <isHidden>true</isHidden>
                         <fk>
                             <fkColumnName>Id</fkColumnName>
                             <fkTable>Animal</fkTable>
@@ -15,6 +16,7 @@
                         <columnTitle>Year</columnTitle>
                     </column>
                     <column columnName="monthNum">
+                        <isHidden>true</isHidden>
                         <columnTitle>Month Number</columnTitle>
                     </column>
                     <column columnName="MonthName">
