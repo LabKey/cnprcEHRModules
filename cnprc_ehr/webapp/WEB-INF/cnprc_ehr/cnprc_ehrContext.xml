@@ -9,9 +9,6 @@
                 <bean class="org.labkey.cnprc_ehr.pipeline.MorningHealthImportTask$Factory">
                     <property name="location" value="webserver" />
                 </bean>
-                <bean class="org.labkey.cnprc_ehr.pipeline.MorningHealthValidationTask$Factory">
-                    <property name="location" value="webserver" />
-                </bean>
             </list>
         </property>
         <property name="pipelines">
