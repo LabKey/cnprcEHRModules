@@ -13,6 +13,7 @@ FROM
       'P'                                    AS ind
     FROM study.morningHealthObs mho
     WHERE mho.observation LIKE '%ANORXIA%'
+       OR mho.observation LIKE '%POORAPP%'
 
     UNION
 
@@ -24,11 +25,5 @@ FROM
       'P'                                        AS ind
     FROM study.clinical_observations clinObs
     WHERE clinObs.category = 'App'
-          AND clinObs.observation = 'P'
-
-    -- UNION ALL
-
-    -- Poor appetite from morning health confirmations
-
-    -- TODO?
+      AND clinObs.observation = 'P'
 ) all_rows

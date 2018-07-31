@@ -25,10 +25,4 @@ FROM
     FROM study.clinical_observations clinObs
     WHERE clinObs.category = 'Stool'
           AND clinObs.observation = 'L'
-
-    -- UNION ALL
-
-    -- Diarrhea from morning health confirmations
-
-    -- TODO
 ) all_rows
