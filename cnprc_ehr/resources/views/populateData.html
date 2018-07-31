@@ -791,11 +791,20 @@ Ext4.onReady(function(){
                     text: 'Populate ' + table.label,
                     scope: this,
                     handler: function(){
-                        document.getElementById('msgbox').innerHTML = '<div>Populating ' + table.queryName + '...</div>';
+                        var msg = 'This will modify the manually edited records';
                         if (table.populateFn == 'populateFromFile') {
-                          this.populateFromFile.call(this, table.schemaName, table.queryName);
+                            Ext4.Msg.confirm('Confirm Populate', msg, function(btn){
+                                if (btn == 'yes'){
+                                    document.getElementById('msgbox').innerHTML = '<div>Populating ' + table.queryName + '...</div>';
+                                    this.populateFromFile.call(this, table.schemaName, table.queryName);
+                                }
+                            }, this);
                         } else {
-                          this[table.populateFn].call(this);
+                            Ext4.Msg.confirm('Confirm Populate', msg, function(btn){
+                                if (btn == 'yes'){
+                                    this[table.populateFn].call(this);
+                                }
+                            }, this);
                         }
                     }
                 });
@@ -804,9 +813,15 @@ Ext4.onReady(function(){
                     xtype: 'button',
                     text: 'Delete Data From ' + table.label,
                     scope: this,
-                    handler: function(){
-                        document.getElementById('msgbox').innerHTML = '<div>Deleting ' + table.label + '...</div>';
-                        this.deleteHandler(table);
+                    handler: function () {
+                        var msg = 'This will delete the manually added records';
+
+                        Ext4.Msg.confirm('Confirm Delete', msg, function (btn) {
+                            if (btn == 'yes') {
+                                document.getElementById('msgbox').innerHTML = '<div>Deleting ' + table.label + '...</div>';
+                                this.deleteHandler(table);
+                            }
+                        }, this);
                     }
                 });
             }, this);
@@ -819,11 +834,22 @@ Ext4.onReady(function(){
                     document.getElementById('msgbox').innerHTML = '';
                     Ext4.each(this.tables, function(table){
                         if (!table.doSkip) {
-                            document.getElementById('msgbox').innerHTML += '<div>Populating ' + table.queryName + '...</div>';
+
+                            var msg = 'This will modify all the manually edited records';
                             if (table.populateFn == 'populateFromFile') {
-                              this.populateFromFile.call(this, table.schemaName, table.queryName);
+                                Ext4.Msg.confirm('Confirm Populate', msg, function(btn){
+                                    if (btn == 'yes'){
+                                        document.getElementById('msgbox').innerHTML += '<div>Populating ' + table.queryName + '...</div>';
+                                        this.populateFromFile.call(this, table.schemaName, table.queryName);
+                                    }
+                                }, this);
                             } else {
-                              this[table.populateFn]();
+                                Ext4.Msg.confirm('Confirm Populate', msg, function(btn){
+                                    if (btn == 'yes') {
+                                        document.getElementById('msgbox').innerHTML += '<div>Populating ' + table.queryName + '...</div>';
+                                        this[table.populateFn]();
+                                    }
+                                },this);
                             }
                         } else {
                             document.getElementById('msgbox').innerHTML += '<div>Skipping ' + table.label + '</div>';
@@ -838,11 +864,17 @@ Ext4.onReady(function(){
                 scope: this,
                 handler: function(){
                     this.pendingDeletes = 0;
+                    var msg = 'This will delete all the manually added records';
                     document.getElementById('msgbox').innerHTML = '';
                     Ext4.each(this.tables, function(table){
                         if (!table.doSkip) {
-                            document.getElementById('msgbox').innerHTML += '<div>Deleting ' + table.label + '...</div>';
-                            this.deleteHandler(table);
+
+                            Ext4.Msg.confirm('Confirm Delete', msg, function(btn) {
+                                if(btn == 'yes'){
+                                    document.getElementById('msgbox').innerHTML += '<div>Deleting ' + table.label + '...</div>';
+                                    this.deleteHandler(table);
+                                }
+                            }, this);
                         } else {
                             document.getElementById('msgbox').innerHTML += '<div>Skipping ' + table.label + '</div>';
                             console.log('skipping: ' + table.label);
