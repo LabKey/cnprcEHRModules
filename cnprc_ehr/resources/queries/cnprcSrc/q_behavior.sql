@@ -14,22 +14,24 @@
  * limitations under the License.
  */
 SELECT
-ANIMID AS Id,
-TEST_DAT,
-DAY1ACTIVITY AS dayOneActivity,
-DAY1EMOTIONALITY AS dayOneEmotionality,
-DAY2ACTIVITY AS dayTwoActivity,
-DAY2EMOTIONALITY AS dayTwoEmotionality,
-VIGILANT AS vigilant,
-GENTLE AS gentle,
-CONFIDENT AS confident,
-NERVOUS AS nervous,
-HIACTIVITY AS hiActivity,
-HIEMOTIONALITY AS hiEmotionality,
-HIAGGRESSION AS hiAggression,
-HIDISPLACEMENT AS hiDisplacement,
-BEHAV_INHIBITION AS behavInhibition,
-OBJECTID as objectid,
-DATE_TIME
+  ANIMID           AS Id,
+  TEST_DAT,
+  DAY1ACTIVITY     AS dayOneActivity,
+  DAY1EMOTIONALITY AS dayOneEmotionality,
+  DAY2ACTIVITY     AS dayTwoActivity,
+  DAY2EMOTIONALITY AS dayTwoEmotionality,
+  VIGILANT         AS vigilant,
+  GENTLE           AS gentle,
+  CONFIDENT        AS confident,
+  NERVOUS          AS nervous,
+  HIACTIVITY       AS hiActivity,
+  HIEMOTIONALITY   AS hiEmotionality,
+  HIAGGRESSION     AS hiAggression,
+  HIDISPLACEMENT   AS hiDisplacement,
+  BEHAV_INHIBITION AS behavInhibition,
+  BIGREAR          AS bigRear,
+  REARING          AS rearing,
+  OBJECTID         AS objectid,
+  DATE_TIME
 FROM cnprcSrc.ZBIO_BEHAVIORAL_ASSESSMENT
 WHERE TEST_DAT IS NOT NULL AND TEST_DAT > to_date('01-01-1900', 'DD-MM-YYYY');

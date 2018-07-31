@@ -683,6 +683,13 @@
             <column columnName="behavInhibition">
                 <datatype>double</datatype>
             </column>
+            <column columnName="bigRear">
+                <datatype>double</datatype>
+            </column>
+            <column columnName="rearing">
+                <datatype>varchar</datatype>
+                <scale>2</scale>
+            </column>
             <column columnName="objectid">
                 <datatype>entityid</datatype>
                 <propertyURI>urn:ehr.labkey.org/#ObjectId</propertyURI>
@@ -2150,9 +2157,6 @@
             <column columnName="daysOld">
                 <datatype>double</datatype>
             </column>
-            <column columnName="bigRear">
-                <datatype>double</datatype>
-            </column>
             <column columnName="spf">
                 <datatype>varchar</datatype>
                 <scale>1</scale>
@@ -2204,10 +2208,6 @@
             </column>
             <column columnName="plasma_protein">
                 <datatype>double</datatype>
-            </column>
-            <column columnName="rearing">
-                <datatype>varchar</datatype>
-                <scale>2</scale>
             </column>
             <column columnName="sertcode">
                 <datatype>varchar</datatype>

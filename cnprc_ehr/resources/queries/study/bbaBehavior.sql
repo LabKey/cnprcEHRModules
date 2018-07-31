@@ -17,8 +17,13 @@
 
 SELECT
   behavior.Id,
-  ( select gender from study.demographics where Id = behavior.Id) as gender,
+  (SELECT gender
+   FROM study.demographics
+   WHERE Id = behavior.Id)                                                                            AS gender,
   behavior.date,
+  cast(timestampdiff('SQL_TSI_DAY', (SELECT demographics.birth
+                                     FROM demographics
+                                     WHERE demographics.Id = behavior.Id), behavior.date) AS VARCHAR) AS ageAtTest,
   weight,
   behavior.dayOneActivity,
   behavior.dayOneEmotionality,
@@ -33,6 +38,8 @@ SELECT
   behavior.hiaggression,
   behavior.hidisplacement,
   behavior.behavInhibition,
+  behavior.bigRear,
+  behavior.rearing,
   behavior.taskid,
   behavior.requestid,
   behavior.performedby,

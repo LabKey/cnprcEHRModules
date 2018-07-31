@@ -19,6 +19,9 @@ SELECT
   labworkResults.Id,
   ( select gender from study.demographics where Id = labworkResults.Id) as gender,
   labworkResults.date,
+  cast(timestampdiff('SQL_TSI_DAY', (SELECT demographics.birth
+                                     FROM demographics
+                                     WHERE demographics.Id = labworkResults.Id), labworkResults.date) AS VARCHAR) AS ageAtTest,
   weight,
   labworkResults.projectCode,
   labworkResults.daysOld,

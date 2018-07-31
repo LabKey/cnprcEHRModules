@@ -506,15 +506,15 @@ EHR.reports.behavior = function (panel, tab, viewName) {
             CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
             CNPRC.Utils.legendTitleWithURL('General Protocol', true, true, 'bba_descriptions','generalProtocol') +
             CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
-            CNPRC.Utils.legendTitleWithURL('Weight at testing', true, false, 'bba_descriptions','weight') +                         CNPRC.Utils.legendTitleWithURL('Rearing Condition', false, false, 'bba_descriptions','rearingCondition') +
+            CNPRC.Utils.legendTitleWithURL('Weight at testing', true, false, 'bba_descriptions','weight') +                             CNPRC.Utils.legendTitleWithURL('Rearing Condition', false, false, 'bba_descriptions','rearingCondition') +
             CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
-            CNPRC.Utils.legendTitleWithURL('Behavioral Responsiveness', true, false, 'bba_descriptions','behavResponsiveness') +    CNPRC.Utils.legendTitleWithURL('Temperament Ratings', false, false, 'bba_descriptions','temperamentRatings')  +  CNPRC.Utils.legendTitleWithURL('Human Intruder', false, false, 'bba_descriptions','humanIntruder')  +       CNPRC.Utils.legendEntryWithURL('( Z-scores )','', false, true, 'bba_descriptions','zscores') +
-            CNPRC.Utils.legendEntry('Day One Activity','', true, false) +                                                               CNPRC.Utils.legendEntry('Vigilant','', false, false) +                                                               CNPRC.Utils.legendEntry('Activity','', false, true) +
-            CNPRC.Utils.legendEntry('Day One Emotionality','', true, false) +                                                           CNPRC.Utils.legendEntry('Gentle','', false, false) +                                                                 CNPRC.Utils.legendEntry('Emotionality','', false, true) +
-            CNPRC.Utils.legendEntry('Day Two Activity','', true, false) +                                                               CNPRC.Utils.legendEntry('Confident','', false, false) +                                                              CNPRC.Utils.legendEntry('Aggression','', false, true) +
-            CNPRC.Utils.legendEntry('Day Two Emotionality','', true, false) +                                                           CNPRC.Utils.legendEntry('Nervous','', false, false) +                                                                CNPRC.Utils.legendEntry('Displacement','', false, true) +
+            CNPRC.Utils.legendTitleWithURL('Behavioral Responsiveness', true, false, 'bba_descriptions','behavResponsiveness') +        CNPRC.Utils.legendTitleWithURL('Temperament Ratings', false, false, 'bba_descriptions','temperamentRatings')  +         CNPRC.Utils.legendTitleWithURL('Human Intruder', false, false, 'bba_descriptions','humanIntruder')  +       CNPRC.Utils.legendEntryWithURL('( Z-scores )','', false, true, 'bba_descriptions','zscores') +
+            CNPRC.Utils.legendEntry('Day One Activity','', true, false) +                                                               CNPRC.Utils.legendEntry('Vigilant','', false, false) +                                                                  CNPRC.Utils.legendEntry('Activity','', false, true) +
+            CNPRC.Utils.legendEntry('Day One Emotionality','', true, false) +                                                           CNPRC.Utils.legendEntry('Gentle','', false, false) +                                                                    CNPRC.Utils.legendEntry('Emotionality','', false, true) +
+            CNPRC.Utils.legendEntry('Day Two Activity','', true, false) +                                                               CNPRC.Utils.legendEntry('Confident','', false, false) +                                                                 CNPRC.Utils.legendEntry('Aggression','', false, true) +
+            CNPRC.Utils.legendEntry('Day Two Emotionality','', true, false) +                                                           CNPRC.Utils.legendEntry('Nervous','', false, false) +                                                                   CNPRC.Utils.legendEntry('Displacement','', false, true) +
             CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
-            CNPRC.Utils.legendTitleWithURL('Behavioral Inhibition Index', true, false, 'bba_descriptions','behavioralInhibition')  +   CNPRC.Utils.legendTitleWithURL('Other Information about the BBA Project', false, true, 'bba_descriptions','otherInfo') +
+            CNPRC.Utils.legendTitleWithURL('Behavioral Inhibition Index', true, false, 'bba_descriptions','behavioralInhibition')  +    CNPRC.Utils.legendTitleWithURL('Other Information about the BBA Project', false, true, 'bba_descriptions','otherInfo') +
             '</table>'
         }]
     });
@@ -548,9 +548,9 @@ EHR.reports.labworkResults = function (panel, tab, viewName) {
             CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
             CNPRC.Utils.legendTitleWithURL('General Protocol', true, true, 'bba_descriptions','generalProtocol') +
             CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
-            CNPRC.Utils.legendTitleWithURL('Weight at testing', true, false, 'bba_descriptions','weight') +                                  CNPRC.Utils.legendTitleWithURL('SPF Status', false, true, 'bba_descriptions','spfStatus') +
+            CNPRC.Utils.legendTitleWithURL('Weight at testing', true, false, 'bba_descriptions','weight') +                                     CNPRC.Utils.legendTitleWithURL('SPF Status', false, true, 'bba_descriptions','spfStatus') +
             CNPRC.Utils.legendEntry(' ', '<br/> ', true, true) +
-            CNPRC.Utils.legendTitleWithURL('Plasma Cortisol', true, false, 'bba_descriptions','plasmaCortisol') +                            CNPRC.Utils.legendEntryWithURL('( Z-scores )','', false, true, 'bba_descriptions','zscores') +
+            CNPRC.Utils.legendTitleWithURL('Plasma Cortisol', true, false, 'bba_descriptions','plasmaCortisol') +                               CNPRC.Utils.legendEntryWithURL('( Z-scores )','', false, true, 'bba_descriptions','zscores') +
             CNPRC.Utils.legendEntry('Sample 1','', true, true) +
             CNPRC.Utils.legendEntry('Sample 2','', true, true) +
             CNPRC.Utils.legendEntry('Sample 3','', true, true) +
