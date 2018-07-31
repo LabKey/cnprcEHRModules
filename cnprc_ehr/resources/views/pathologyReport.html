@@ -115,7 +115,7 @@
 
         function appendBiopsyReport(biopsyData) {
 
-            biopsyReport = "<h4>Details</h4><table class='table' style=\"width:100%; max-width: 1200px\">";
+            biopsyReport = "<h4>Details</h4><table class='table detail-table' style=\"width:100%; max-width: 1200px\">";
 
             if (biopsyData[clinicalHistory])
                 biopsyReport += "<tr><td class='reportLabelCell'><strong>Clinical History:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(biopsyData['clinicalHistory']) + "</td></tr>\n";
@@ -171,7 +171,7 @@
             else {
                 necropsyData = necropsyFinalData;
             }
-            necropsyReport = "<h4>Details</h4><table class='table' style=\"width:100%; max-width: 1200px\">";
+            necropsyReport = "<h4>Details</h4><table class='table detail-table' style=\"width:100%; max-width: 1200px\">";
 
             if (necropsyData[clinicalHistory])
                 necropsyReport += "<tr><td class='reportLabelCell'><strong>Clinical History:</strong></td>" + "<td class='reportValueCell'>" + LABKEY.Utils.encodeHtml(necropsyData['clinicalHistory']) + "</td></tr>\n";

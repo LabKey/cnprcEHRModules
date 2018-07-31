@@ -27,6 +27,7 @@
     width: 50%
 }
 
+table.detail-table,
 #pathologyAnimalSummary table
 {
     border: 1px solid lightgray;
