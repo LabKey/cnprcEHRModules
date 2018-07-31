@@ -1,30 +1,35 @@
-SELECT id,
-       group_concat(mhcurrlocation, '') AS currentLocation ,
-       group_concat( mhlocation,'') AS homeLocation,
-       qcstate
+SELECT
+      id,
+      mhcurrlocation as currentLocation,
+      mhlocation as homelocation,
+      qcstate
 FROM
-  (SELECT       d.id,
-                h.room,
-                h.cage,
-                h.enddate,
-                h.qcstate,
-   CASE WHEN    (h.room LIKE 'HO%'
-                 AND h.enddate IS NULL)
-        THEN    COALESCE(h.room + h.cage, h.room)
-        ELSE    ''
-        END AS  mhcurrlocation,
-   CASE WHEN    h.enddate IS NOT NULL
-        THEN    COALESCE(h.room + h.cage, h.room)
-        END AS  mhlocation
-   FROM         study.demographics d
-   LEFT JOIN    study.housing h ON (d.participantid = h.participantid)
-   WHERE        d.calculated_status = 'Alive'
-   AND          ((h.enddate IS NULL
-                  AND h.room LIKE 'HO%')
-                OR
-                h.enddate IN (SELECT  MAX(enddate)
-                              FROM    study.housing
-                              WHERE   id = h.id))
-   AND	        h.qcstate.publicdata = TRUE
-  ) iq
-GROUP BY id, qcstate
+      (SELECT
+           d.id,
+           houseCurr.room AS currRoom,
+           houseCurr.cage AS currCage,
+           housePrev.room AS prevRoom,
+           housePrev.cage AS prevCage,
+           houseCurr.qcstate,
+       CASE
+           WHEN     houseCurr.room LIKE 'HO%'
+           THEN     COALESCE(houseCurr.room + '-' + houseCurr.cage, houseCurr.room)
+           ELSE     ''
+           END AS   mhcurrlocation,                                                   -- this is current location of animal if animal is in hospital
+       CASE
+           WHEN     houseCurr.room NOT LIKE 'HO%'
+           THEN	    COALESCE(houseCurr.room + '-' + houseCurr.cage, houseCurr.room)
+           ELSE	    COALESCE(housePrev.room + '-' + housePrev.cage, housePrev.room)
+         END AS     mhlocation                                                        -- this is home/previous location of animal
+       FROM         study.demographics d
+       LEFT JOIN    study.housing houseCurr ON (d.participantid = houseCurr.participantid)
+       LEFT JOIN	  study.housing housePrev ON (d.participantid = housePrev.participantid)
+       WHERE        d.calculated_status = 'Alive'
+       AND          houseCurr.enddate IS NULL
+       AND			    housePrev.enddate IN (SELECT 	MAX(h3.enddate)
+                                          FROM    study.housing h3
+                                          WHERE   h3.id = housePrev.id
+                                          AND		  h3.room not like 'HO%')             -- calculating max enddate when this animal was not in hospital
+       AND			    housePrev.room NOT LIKE 'HO%'                                     -- trimming out max enddate condition when enddate is same for animal in hospital and prev location
+       AND          houseCurr.qcstate.publicdata = TRUE
+      ) iq
