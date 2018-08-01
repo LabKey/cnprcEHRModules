@@ -1953,7 +1953,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                "Id", "Year", "MonthName", "monthNum",
+                "Year", "MonthName",
                 "1::inds", "2::inds", "3::inds", "4::inds", "5::inds", "6::inds", "7::inds",
                 "8::inds", "9::inds", "10::inds", "11::inds", "12::inds", "13::inds", "14::inds",
                 "15::inds", "16::inds", "17::inds", "18::inds", "19::inds", "20::inds",
@@ -1963,7 +1963,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong columns", expectedColumns, results.getColumnNames());
 
         List<String> expected = Arrays.asList(
-                animalId, "2012", "January", "1", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", ""
+                "2012", "January", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", "", "", "Dc", ""
         );
 
         //results.setAsync(true); // setting async governs whether setSort will wait for the menuitem to stale
@@ -1975,14 +1975,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.searchSingleAnimal(animalId);
 
         List<String> expectedForSecondAnimal = Arrays.asList(
-                animalId, "2010", "January", "1", "", "", "", "+", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "~", "", "", "", "", "", "", "", "", "", "", "", "Dc"
+                "2010", "January", "", "", "", "+", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "~", "", "", "", "", "", "", "", "", "", "", "", "Dc"
         );
         results = animalHistoryPage.getActiveReportDataRegion();
         List<String> resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(0);
         assertEquals("Wrong data for animal " + animalId + " - row 0", expectedForSecondAnimal, resultsRowDataAsTextForSecondAnimal);
 
         List<String> expectedForSecondAnimal9 = Arrays.asList(
-                animalId, "2011", "January", "1", "", "", "", "", "", "~", "", "", "", "~", "", "", "", "", "", "", "", "", "D", "", "", "", "", "", "", "", "", "", "", "", "Dc"
+                "2011", "January", "", "", "", "", "", "~", "", "", "", "~", "", "", "", "", "", "", "", "", "D", "", "", "", "", "", "", "", "", "", "", "", "Dc"
         );
         resultsRowDataAsTextForSecondAnimal = results.getRowDataAsText(9);
         assertEquals("Wrong data for animal " + animalId + " - row 9", expectedForSecondAnimal9, resultsRowDataAsTextForSecondAnimal);
