@@ -833,7 +833,7 @@ Ext4.onReady(function(){
                 handler: function () {
                     document.getElementById('msgbox').innerHTML = '';
                     var msg = 'This will modify all the manually edited records';
-                    Ext4.Msg.confirm('', msg, function (btn) {
+                    Ext4.Msg.confirm('Confirm Populate', msg, function (btn) {
                         if (btn == 'yes') {
                             Ext4.each(this.tables, function (table) {
                                 if (!table.doSkip) {
@@ -861,7 +861,7 @@ Ext4.onReady(function(){
                     this.pendingDeletes = 0;
                     var msg = 'This will delete all the manually added records';
                     document.getElementById('msgbox').innerHTML = '';
-                    Ext4.Msg.confirm('', msg, function (btn) {
+                    Ext4.Msg.confirm('Confirm Delete', msg, function (btn) {
                         if (btn == 'yes') {
                             Ext4.each(this.tables, function (table) {
                                 if (!table.doSkip) {
