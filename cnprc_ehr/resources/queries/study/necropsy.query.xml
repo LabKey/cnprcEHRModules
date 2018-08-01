@@ -10,6 +10,11 @@
                     <column columnName="prmFk">
                         <columnTitle>Report Id</columnTitle>
                         <description>FK to cnprc_ehr.image_pathology.prm_pk and study.organ_measurements.pathologyFk</description>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>image_pathology</fkTable>
+                            <fkColumnName>prm_pk</fkColumnName>
+                        </fk>
                     </column>
                     <column columnName="prPk">
                         <description>FK to study.grossFindings.pathologyFk and study.morphologicDiagnosis.pathologyFk</description>
