@@ -4,7 +4,7 @@
             <table tableName="mh_processing" tableDbType="TABLE" useColumnOrder="true">
                 <importUrl></importUrl>
                 <insertUrl>/query/insertQueryRow.view?schemaName=cnprc_ehr&amp;query.queryName=mh_processing</insertUrl>
-                <updateUrl>/ehr/dataEntryFormForQuery.view?schemaName=cnprc_ehr&amp;queryName=mh_processing&amp;rowPk=${rowPk}</updateUrl>
+                <updateUrl>/ehr/dataEntryFormForQuery.view?schemaName=cnprc_ehr&amp;queryName=mh_processing&amp;rowId=${rowId}</updateUrl>
                 <columns>
                     <column columnName="rowId">
                         <columnTitle>Row ID</columnTitle>
