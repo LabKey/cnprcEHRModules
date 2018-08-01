@@ -106,7 +106,6 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
     },
 
     appendDataResults: function(toSet, results, id) {
-        // TODO: get all correct items for this panel
         this.appendDemographicsResults(toSet, results, id);
         this.appendMorningHealthHomeLocation(toSet, results);
         this.appendMorningHealthCurrentLocation(toSet, results);

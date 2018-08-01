@@ -22,11 +22,6 @@ import org.labkey.api.query.FieldKey;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: bimber
- * Date: 7/14/13
- * Time: 10:29 AM
- */
 public class ActiveAssignmentDemographicsProvider extends AbstractDemographicsProvider
 {
     public ActiveAssignmentDemographicsProvider(Module owner)

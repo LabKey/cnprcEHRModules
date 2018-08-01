@@ -23,11 +23,6 @@ import org.labkey.api.query.FieldKey;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: bimber
- * Date: 7/9/13
- * Time: 9:42 PM
- */
 public class EightWeekHistoryDemographicsProvider extends AbstractListDemographicsProvider
 {
     public EightWeekHistoryDemographicsProvider(Module module)
