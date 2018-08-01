@@ -66,7 +66,6 @@ import org.labkey.test.util.SqlserverOnlyTest;
 import org.labkey.test.util.ext4cmp.Ext4GridRef;
 import org.labkey.test.util.external.labModules.LabModuleHelper;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
 import java.io.IOException;
@@ -1486,7 +1485,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         breedingObservation.setGridCell(1, "date", breedingDate);
         breedingObservation.setGridCell(1, "obsCode", "X");
         breedingObservation.setGridCell(1, "cycleDay", "4");
-        shortWait().until(ExpectedConditions.elementToBeClickable(Locator.buttonContainingText("Save & CLose")));
+        sleep(500);
         clickButton("Save & Close");
 
         log("Opening the pending task for completion");
@@ -1661,7 +1660,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         pregnancyDeterminations.setGridCell(1, "scheduleStatus", "No");
         sleep(5000); // Weirdly sleep is needed for the Save & Close to be enabled , waitForElement is not working.
         clickButton("Save & Close",0);
-
+        waitForElement(Locator.linkWithText("My Tasks"));
         log("Opening the pending task for completion");
         enterData.clickMyTasksTab();
         waitAndClick(Locator.linkContainingText(TASK_TITLE_PRG_DET));
