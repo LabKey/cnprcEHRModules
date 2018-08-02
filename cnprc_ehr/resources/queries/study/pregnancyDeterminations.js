@@ -56,7 +56,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
                         console.log('in group ', group)
                     }
                     else {
-                        EHR.Server.Utils.addError(scriptErrors, 'Id', 'Animal is not assigned in bredding group T, A or Q. In Group : ' + group, 'ERROR');
+                        EHR.Server.Utils.addError(scriptErrors, 'Id', 'Animal is not assigned in breeding group T, A or Q. In Group : ' + group, 'ERROR');
                     }
                 }
             },
