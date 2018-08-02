@@ -134,16 +134,21 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
 
     appendMorningHealthHomeLocation: function (toSet, results) {
         if(results) {
-            toSet['homeLocation'] = LABKEY.Utils.encodeHtml(results.getMorningHealthHomeLocation());
+            var homeLoc = results.getMorningHealthHomeLocation();
+            if (homeLoc)
+                toSet['homeLocation'] = LABKEY.Utils.encodeHtml(homeLoc);
         }
     },
 
     appendMorningHealthCurrentLocation: function (toSet, results) {
         if(results) {
-            if(results.getMorningHealthCurrentLocation() == '')
-                toSet['currentLocation'] = 'XXXXXX';
-            else
-                toSet['currentLocation'] = LABKEY.Utils.encodeHtml(results.getMorningHealthCurrentLocation());
+            var currLoc = results.getMorningHealthCurrentLocation();
+            if (currLoc !== undefined) {
+                if (currLoc == '')
+                    toSet['currentLocation'] = 'XXXXXX';
+                else
+                    toSet['currentLocation'] = LABKEY.Utils.encodeHtml(currLoc);
+            }
         }
     },
 
