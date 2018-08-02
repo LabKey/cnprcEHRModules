@@ -2,6 +2,7 @@ SELECT
   biopsy.Id,
   biopsy.prmFk AS reportId,
   'Biopsy' AS reportName,
+  biopsy.reportType AS reportType,
   biopsy.enddate AS enddate,
   (CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END) location,
   biopsy.performedBy AS investigator,
@@ -14,7 +15,7 @@ SELECT
   ph.clinician,
   biopsy.bcs AS pathologyCondition,
   demogr.death,  -- needed for age to calculate correctly
-  '' AS deathType,  -- TODO: check with CNPRC if this needs to be shown for biopsies
+  '' AS deathType,
   biopsy.accountId AS chargeId,
   CAST(biopsy.date AS DATE) AS workPerformed,
   biopsy.hydrationLevel AS hydration
@@ -32,6 +33,7 @@ SELECT
   allNecData.Id,
   allNecData.prmFk AS reportId,
   CASE WHEN necFin.reportType IS NOT NULL THEN 'Final Necropsy' ELSE 'Gross Necropsy' END AS reportName,
+  necFin.reportType AS reportType,
   allNecData.enddate AS enddate,
   COALESCE((CASE WHEN lastHouse.cage IS NULL THEN lastHouse.Room ELSE (lastHouse.Room ||'-'|| lastHouse.cage) END), pregConf.birthPlace) AS location,
   allNecData.performedBy AS investigator,

@@ -294,6 +294,7 @@
 
                     animalSummaryData['Id'] = row.Id.value;
                     animalSummaryData['reportName'] = row.reportName.value;
+                    animalSummaryData['reportType'] = row.reportType.value;
                     animalSummaryData['enddate'] = row.enddate.value ? row.enddate.value : null;
                     animalSummaryData['sex'] = row.sex.value;
                     animalSummaryData['death'] = row.death.formattedValue ? row.death.formattedValue : '';
@@ -317,7 +318,7 @@
 
                         var biopsyData = {};
                         getBiopsyReport(biopsyData, animalSummaryData['reportName']);
-                        images = getImages();
+                        images = getImages(animalSummaryData['reportType']);
 
                     }
                     else {  // necropsy
@@ -328,7 +329,7 @@
                         var necropsyGrossData = {}; //to store both Gross and Final Necropsy info
                         var necropsyFinalData = {}; //to store both Gross and Final Necropsy info
                         getNecropsyReport(necropsyGrossData, necropsyFinalData, animalSummaryData['reportName']);
-                        images = getImages();
+                        images = getImages(animalSummaryData['reportType']);
                     }
                     appendAnimalSummary(animalSummaryData);
                 }
@@ -643,9 +644,10 @@
             }
         }
 
-        function getImages() {
+        function getImages(reportType) {
             var filterArray = [LABKEY.Filter.create('Id', subjectId, LABKEY.Filter.Types.EQUAL)];
             filterArray.push(LABKEY.Filter.create('prmFk', reportId, LABKEY.Filter.Types.EQUAL));
+            filterArray.push(LABKEY.Filter.create('reportType', reportType, LABKEY.Filter.Types.EQUAL));
 
             var queryName = reportCategory === "Necropsy" ? "necropsy" : "biopsy";
 
