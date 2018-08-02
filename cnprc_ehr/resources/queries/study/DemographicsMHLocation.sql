@@ -25,11 +25,11 @@ FROM
        LEFT JOIN    study.housing houseCurr ON (d.participantid = houseCurr.participantid)
        LEFT JOIN	  study.housing housePrev ON (d.participantid = housePrev.participantid)
        WHERE        d.calculated_status = 'Alive'
-       AND          houseCurr.enddate IS NULL
-       AND			    housePrev.enddate IN (SELECT 	MAX(h3.enddate)
+       AND          (houseCurr.enddate IS NULL
+       OR			      housePrev.enddate IN (SELECT 	MAX(h3.enddate)
                                           FROM    study.housing h3
                                           WHERE   h3.id = housePrev.id
-                                          AND		  h3.room not like 'HO%')             -- calculating max enddate when this animal was not in hospital
+                                          AND		  h3.room not like 'HO%'))             -- calculating max enddate when this animal was not in hospital
        AND			    housePrev.room NOT LIKE 'HO%'                                     -- trimming out max enddate condition when enddate is same for animal in hospital and prev location
        AND          houseCurr.qcstate.publicdata = TRUE
       ) iq
