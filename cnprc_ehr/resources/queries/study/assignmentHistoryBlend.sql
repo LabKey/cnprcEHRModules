@@ -1,17 +1,17 @@
 
 
 SELECT
-  sub.id,
+  sub.Id,
   sub.date as assigned,
-  coalesce(MIN(sub2.date), release_date) AS released,
-  payorId,
-  primaryProject,
-  secondaryProjects,
-  colonyCode,
-  groupCode
+  COALESCE(MIN(sub2.date), sub.release_date) AS released,
+  sub.payorId,
+  sub.primaryProject,
+  sub.secondaryProjects,
+  sub.colonyCode,
+  sub.groupCode
   FROM (
     SELECT
-      aUnion.id,
+      aUnion.Id,
       aUnion.date,
       (CASE
         WHEN
@@ -24,14 +24,14 @@ SELECT
           colony.enddate
         END)
       AS release_date,
-      (SELECT max(payor_id)
+      (SELECT MAX(payor_id)
         FROM study.payor_assignments pyrassmnt
-        WHERE pyrassmnt.Id = aUnion.id AND pyrassmnt.date <= aUnion.date AND
+        WHERE pyrassmnt.Id = aUnion.Id AND pyrassmnt.date <= aUnion.date AND
         (pyrassmnt.enddate > aUnion.date OR pyrassmnt.enddate IS NULL)
         GROUP BY pyrassmnt.Id) payorId,
-      (SELECT max(projectCode)
+      (SELECT MAX(projectCode)
         FROM study.assignment assmnt
-        WHERE assmnt.Id = aUnion.id AND assmnt.date <= aUnion.date AND (assmnt.enddate > aUnion.date OR assmnt.enddate IS NULL) AND
+        WHERE assmnt.Id = aUnion.Id AND assmnt.date <= aUnion.date AND (assmnt.enddate > aUnion.date OR assmnt.enddate IS NULL) AND
           assmnt.assignmentStatus = 'P'
         GROUP BY assmnt.Id) primaryProject,
       (SELECT GROUP_CONCAT(projectCode, ',')
@@ -39,52 +39,52 @@ SELECT
         WHERE assmnt.Id = aUnion.id AND assmnt.date <= aUnion.date AND (assmnt.enddate > aUnion.date OR assmnt.enddate IS NULL) AND
           assmnt.assignmentStatus = 'S'
         GROUP BY assmnt.Id) secondaryProjects,
-      (SELECT max(colonyCode)
+      (SELECT MAX(colonyCode)
         FROM study.colony_assignments colassmnt
-        WHERE colassmnt.Id = aUnion.id AND colassmnt.date <= aUnion.date AND (colassmnt.enddate > aUnion.date OR colassmnt.enddate IS NULL)
+        WHERE colassmnt.Id = aUnion.Id AND colassmnt.date <= aUnion.date AND (colassmnt.enddate > aUnion.date OR colassmnt.enddate IS NULL)
         GROUP BY colassmnt.Id) colonyCode,
-      (SELECT max(groupCode)
+      (SELECT MAX(groupCode)
         FROM study.breedingGroupAssignments bgassmnt
-        WHERE bgassmnt.Id = aUnion.id AND bgassmnt.date <= aUnion.date AND (bgassmnt.enddate > aUnion.date OR bgassmnt.enddate IS NULL)
+        WHERE bgassmnt.Id = aUnion.Id AND bgassmnt.date <= aUnion.date AND (bgassmnt.enddate > aUnion.date OR bgassmnt.enddate IS NULL)
         GROUP BY bgassmnt.Id) groupCode,
-      coalesce(sec.enddate, curdate()) AS sec_release_date
+      COALESCE(sec.enddate, curdate()) AS sec_release_date
       FROM study.assignmentUnion aUnion
 
       INNER JOIN study.payor_assignments payor
-        ON aUnion.id = payor.Id AND aUnion.date >= payor.date AND aUnion.date < coalesce(payor.enddate, curdate())
+        ON aUnion.Id = payor.Id AND aUnion.date >= payor.date AND aUnion.date < COALESCE(payor.enddate, curdate())
       INNER JOIN study.assignment prim
-        ON aUnion.id = prim.Id AND aUnion.date >= prim.date AND aUnion.date < coalesce(prim.enddate, curdate()) AND prim.assignmentStatus = 'P'
+        ON aUnion.Id = prim.Id AND aUnion.date >= prim.date AND aUnion.date < COALESCE(prim.enddate, curdate()) AND prim.assignmentStatus = 'P'
       INNER JOIN study.breedingGroupAssignments brgroup
-        ON aUnion.id = brgroup.Id AND aUnion.date >= brgroup.date AND aUnion.date < coalesce(brgroup.enddate, curdate())
+        ON aUnion.Id = brgroup.Id AND aUnion.date >= brgroup.date AND aUnion.date < COALESCE(brgroup.enddate, curdate())
       INNER JOIN study.colony_assignments colony
-        ON aUnion.id = colony.Id AND aUnion.date >= colony.date AND aUnion.date < coalesce(colony.enddate, curdate())
-      LEFT OUTER JOIN (SELECT * FROM study.assignment where assignmentStatus='S') sec
-        ON aUnion.id = sec.Id AND aUnion.date >= sec.date AND aUnion.date < coalesce(sec.enddate, curdate())
+        ON aUnion.Id = colony.Id AND aUnion.date >= colony.date AND aUnion.date < COALESCE(colony.enddate, curdate())
+      LEFT OUTER JOIN (SELECT a1.Id, a1.date, a1.enddate FROM study.assignment a1 where assignmentStatus='S') sec
+        ON aUnion.Id = sec.Id AND aUnion.date >= sec.date AND aUnion.date < COALESCE(sec.enddate, curdate())
     ) sub
 
     -- This will join the following dates so the Min can be found in aggregate
     LEFT JOIN (
-      SELECT aUnion2.id, aUnion2.date FROM study.assignmentUnion aUnion2
+      SELECT aUnion2.Id, aUnion2.date FROM study.assignmentUnion aUnion2
 
       INNER JOIN study.payor_assignments payor2
-        ON aUnion2.id = payor2.Id AND aUnion2.date >= payor2.date AND aUnion2.date < coalesce(payor2.enddate, curdate())
+        ON aUnion2.Id = payor2.Id AND aUnion2.date >= payor2.date AND aUnion2.date < COALESCE(payor2.enddate, curdate())
       INNER JOIN study.assignment prim2
-        ON aUnion2.id = prim2.Id AND aUnion2.date >= prim2.date AND aUnion2.date < coalesce(prim2.enddate, curdate()) AND prim2.assignmentStatus = 'P'
+        ON aUnion2.Id = prim2.Id AND aUnion2.date >= prim2.date AND aUnion2.date < COALESCE(prim2.enddate, curdate()) AND prim2.assignmentStatus = 'P'
       INNER JOIN study.breedingGroupAssignments brgroup2
-        ON aUnion2.id = brgroup2.Id AND aUnion2.date >= brgroup2.date AND aUnion2.date < coalesce(brgroup2.enddate, curdate())
+        ON aUnion2.Id = brgroup2.Id AND aUnion2.date >= brgroup2.date AND aUnion2.date < COALESCE(brgroup2.enddate, curdate())
       INNER JOIN study.colony_assignments colony2
-        ON aUnion2.id = colony2.Id AND aUnion2.date >= colony2.date AND aUnion2.date < coalesce(colony2.enddate, curdate())
-      LEFT OUTER JOIN (SELECT * FROM study.assignment where assignmentStatus='S') sec2
-        ON aUnion2.id = sec2.Id AND aUnion2.date >= sec2.date AND aUnion2.date < coalesce(sec2.enddate, curdate())
+        ON aUnion2.Id = colony2.Id AND aUnion2.date >= colony2.date AND aUnion2.date < COALESCE(colony2.enddate, curdate())
+      LEFT OUTER JOIN (SELECT a2.Id, a2.date, a2.enddate FROM study.assignment a2 where assignmentStatus='S') sec2
+        ON aUnion2.Id = sec2.Id AND aUnion2.date >= sec2.date AND aUnion2.date < COALESCE(sec2.enddate, curdate())
 
-    ) sub2 ON sub2.id = sub.id AND sub2.date > sub.date
+    ) sub2 ON sub2.Id = sub.Id AND sub2.date > sub.date
 
     GROUP BY
-      sub.id,
+      sub.Id,
       sub.date,
-      release_date,
-      payorId,
-      primaryProject,
-      secondaryProjects,
-      colonyCode,
-      groupCode
+      sub.release_date,
+      sub.payorId,
+      sub.primaryProject,
+      sub.secondaryProjects,
+      sub.colonyCode,
+      sub.groupCode
