@@ -2357,7 +2357,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.linkContainingText(reportTab));
         DataRegionTable results = animalHistoryPage.getActiveReportDataRegion();
         List<String> expectedColumns = Arrays.asList(
-                "id"
+                "Id"
                 , "sampleDate"
                 , "testDoneDate"
                 , "virus"
