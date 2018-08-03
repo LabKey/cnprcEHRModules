@@ -29,6 +29,7 @@ import org.labkey.api.ehr.history.DefaultDeathsDataSource;
 import org.labkey.api.ehr.history.DefaultDepartureDataSource;
 import org.labkey.api.ehr.history.DefaultTreatmentEndDataSource;
 import org.labkey.api.ldk.ExtendedSimpleModule;
+import org.labkey.api.ldk.LDKService;
 import org.labkey.api.module.AdminLinkManager;
 import org.labkey.api.module.Module;
 import org.labkey.api.module.ModuleContext;
@@ -42,6 +43,7 @@ import org.labkey.api.view.ActionURL;
 import org.labkey.api.view.NavTree;
 import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
+import org.labkey.api.ehr.buttons.BulkEditButton;
 import org.labkey.cnprc_ehr.dataentry.forms.AssignmentFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BreedingObservationsFormType;
 import org.labkey.cnprc_ehr.dataentry.forms.BreedingRegistrationFormType;
@@ -212,6 +214,8 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new PregnancyConfirmationDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ActivePregnancyDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ActiveAssignmentDemographicsProvider(this));
+
+        ehrService.registerMoreActionsButton(new BulkEditButton(this),"ehr_lookups", LDKService.ALL_TABLES);
 
         AdminLinkManager.getInstance().addListener(new AdminLinkManager.Listener()
         {

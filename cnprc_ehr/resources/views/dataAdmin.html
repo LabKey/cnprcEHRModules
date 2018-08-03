@@ -55,7 +55,7 @@
         }
 
         function linkItemRenderer(item){
-            var href = LABKEY.ActionURL.buildURL('ehr', 'updateTable', LABKEY.getModuleProperty('ehr', 'EHRStudyContainer'), {
+            var href = LABKEY.ActionURL.buildURL('ldk', 'updateQuery', LABKEY.getModuleProperty('ehr', 'EHRStudyContainer'), {
                 schemaName: item.schemaName,
                 'query.queryName': item.queryName
             });
