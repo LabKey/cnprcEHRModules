@@ -1,9 +1,9 @@
 -- Biopsy Morphologic Diagonsis labeled as 'Biopsy Diagnosis' in Pathology Report;
 -- expected one to multiple rows per reportId
 
-SELECT
+SELECT DISTINCT
   biop.Id              AS animalId,
-  biop.prmFk           AS reportId,
+  (CASE WHEN biop.prmFk.prm_pk IS NULL THEN biop.prmFk ELSE biop.prmFk.prm_pk END)  AS reportId,
   biop.prPk            AS pathologyFK,
   morphDiag.seq1       AS morphDiagSeq, --biopsy diagnosis col 1
   morphDiag.tissue     AS morphDiagOrgan, --biopsy diagnosis col 2

@@ -1,9 +1,9 @@
 -- Necropsy Morphologic Diagonsis labeled as 'Gross Diagnosis' and 'Final Diagnosis' in Pathology Report;
 -- expected one to multiple rows per reportId and reportType
 
-SELECT
+SELECT DISTINCT
   necr.Id              AS animalId,
-  necr.prmFk           AS reportId,
+  (CASE WHEN necr.prmFk.prm_pk IS NULL THEN necr.prmFk ELSE necr.prmFk.prm_pk END)  AS reportId,
   necr.prPk            AS pathologyFK,
   necr.reportType      AS reportType,
   morphDiag.seq1       AS morphDiagSeq, --Necropsy Gross Diagnosis col 1
@@ -22,9 +22,9 @@ WHERE necr.reportType = 'NG'
 
 UNION ALL
 
-SELECT
+SELECT DISTINCT
   necr.Id              AS animalId,
-  necr.prmFk           AS reportId,
+  (CASE WHEN necr.prmFk.prm_pk IS NULL THEN necr.prmFk ELSE necr.prmFk.prm_pk END)  AS reportId,
   necr.prPk            AS pathologyFK,
   necr.reportType      AS reportType,
   morphDiag.seq1       AS morphDiagSeq, --Necropsy Final Diagnosis col 1

@@ -3,7 +3,7 @@
 
 SELECT
   necr.Id AS animalId,
-  necr.prmFk AS reportId,
+  (CASE WHEN necr.prmFk.prm_pk IS NULL THEN necr.prmFk ELSE necr.prmFk.prm_pk END)  AS reportId,
   necr.prPk AS pathologyFK,
   necr.reportType AS reportType,
   grossFind.organ AS organ, --necropsy gross observation col 1
@@ -16,9 +16,9 @@ WHERE necr.reportType = 'NG'
 
 UNION ALL
 
-SELECT
+SELECT DISTINCT
   necr.Id AS animalId,
-  necr.prmFk AS reportId,
+  (CASE WHEN necr.prmFk.prm_pk IS NULL THEN necr.prmFk ELSE necr.prmFk.prm_pk END)  AS reportId,
   necr.prPk AS pathologyFK,
   necr.reportType AS reportType,
   grossFind.organ AS organ, --necropsy final observation col 1
