@@ -2413,7 +2413,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         waitForElement(Locator.linkWithText(reportTab + " - " + animalId));
 
         results = animalHistoryPage.getActiveReportDataRegion();
-        expected = Arrays.asList("44444", "2014-02-08", "2016-01-01", "AB125/YZ17", "Pc5C0", "Pc5C1,Pc5C2", "O", "M");
+        expected = Arrays.asList("44444", "2014-02-08", "2016-01-01", "AB125/YZ17", "Pc5C0", "Pc5C1, Pc5C2", "O", "M");
         confirmRowText(results, expected, 0);
         assertElementPresent(Locator.linkWithText("AB125/YZ17"));
 
