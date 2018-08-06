@@ -2831,6 +2831,62 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     }
 
+    private void checkGuiEditPermissions() {
+        log("impersonating role as Reader");
+        impersonateRole("Editor");
+        waitAndClickAndWait(Locator.linkWithText("cage"));
+        DataRegionTable cageTable = new DataRegionTable("query",getDriver());
+        assert(!cageTable.hasHeaderMenu("More Actions"));
+        assert(!cageTable.hasHeaderMenu("Import bulk data"));
+        stopImpersonating();
+        goToProjectHome();
+        impersonateRole("EHR Data Admin");
+        waitAndClickAndWait(Locator.linkWithText("Reference Tables"));
+        waitAndClickAndWait(Locator.linkWithText("cage"));
+        DataRegionTable cageTable1 = new DataRegionTable("query",getDriver());
+        assert(cageTable1.hasHeaderMenu("More Actions"));
+        assert(cageTable1.hasHeaderMenu("Import bulk data"));
+        stopImpersonating();
+    }
+
+    @Test
+    public void testGuiEditLookups()
+    {
+        String bulkEditText = "edit through Bulk Edit";
+        String editLinkText = "edit through Edit Link";
+
+        log("starting test for GUI Edit Lookups");
+        goToProjectHome();
+
+        log("clicking reference tables link");
+        waitAndClickAndWait(Locator.linkWithText("Reference Tables"));
+
+        log("checking permissions for GUI edit lookups");
+        checkGuiEditPermissions();
+        goToProjectHome();
+        waitAndClickAndWait(Locator.linkWithText("Reference Tables"));
+
+        log("editing cage table through bulk edit");
+        waitAndClickAndWait(Locator.linkWithText("cage"));
+        DataRegionTable cageTable = new DataRegionTable("query",getDriver());
+        cageTable.checkCheckbox(0);
+        cageTable.checkCheckbox(1);
+        cageTable.clickHeaderMenu("More Actions", false, "Bulk Edit");
+        setFormElement(Locator.name("quf_status"),bulkEditText);
+        clickButton("Submit",defaultWaitForPage);
+        assertEquals("Unexpected status value in cage table.",bulkEditText,cageTable.getDataAsText(0,"Status"));
+
+        log("editing cage table through edit link on row");
+        cageTable.clickEditRow(0);
+        setFormElement(Locator.name("status"),editLinkText);
+        clickButton("Submit",0);
+        waitForElement(Ext4Helper.Locators.window("Success"));
+        assertTextPresent("Your upload was successful!");
+        clickButton("OK");
+        assertEquals("Unexpected status value in cage table.",editLinkText, cageTable.getDataAsText(0,"Status"));
+
+    }
+
     //TODO: Blocked tests from AbstractGenericEHRTest. Remove once more features are added.
 
     @Override
