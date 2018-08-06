@@ -1658,8 +1658,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         pregnancyDeterminations.setGridCell(1, "cycleDay1", cycleDay1);
         pregnancyDeterminations.setGridCell(1, "result", testResult);
         pregnancyDeterminations.setGridCell(1, "scheduleStatus", "No");
-        sleep(5000); // Weirdly sleep is needed for the Save & Close to be enabled , waitForElement is not working.
-        clickButton("Save & Close",0);
+        sleep(10000); // Weirdly sleep is needed for the Save & Close to be enabled , waitForElement is not working.
+        clickButton("Save & Close");
         waitForElement(Locator.linkWithText("My Tasks"));
         log("Opening the pending task for completion");
         enterData.clickMyTasksTab();
