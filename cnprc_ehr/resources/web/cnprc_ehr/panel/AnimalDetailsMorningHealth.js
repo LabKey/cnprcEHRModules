@@ -209,7 +209,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                 var daysPregnantRows = activePregnancyResult.rows;
                 toSet['pregnancyFlag'] = '';
                 toSet['daysPregnant'] = '';
-                if (daysPregnantRows && daysPregnantRows.length > 0) {
+                if (daysPregnantRows && (daysPregnantRows.length > 0)) {
                     var daysPregnant = daysPregnantRows[0].daysPregnant;
                     if (daysPregnant) {
                         toSet['pregnancyFlag'] = 'P';
@@ -262,7 +262,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                 var poorAppRowString = '';
                 var pairingRowString = '';
 
-                if (eightWeekHistoryRows && eightWeekHistoryRows.length > 0) {
+                if (eightWeekHistoryRows && (eightWeekHistoryRows.length > 0)) {
                     eightWeekHistoryRows.forEach(function(row) {
                         diarrheaRowString += row.diarrheaInd;
                         poorAppRowString += row.poorAppInd;

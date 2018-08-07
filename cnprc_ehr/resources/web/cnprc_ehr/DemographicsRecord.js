@@ -304,10 +304,6 @@ EHR.DemographicsRecord = function(data){
             return data['homeLocation'];
         },
 
-        getPregnancyConfirmationInfo: function(){
-            return data['pregnancyConfirmationInfo'];
-        },
-
         getPrimaryProject: function() {
             return data['primaryProject'];
         },

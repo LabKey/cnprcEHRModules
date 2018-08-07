@@ -23,7 +23,6 @@ SELECT
   pregnancyConfirmations.colonyCode,
   (pregnancyConfirmations.PRCode + ' - ' + pregnancyConfirmations.PRCode.Title + ' (' +
    pregnancyConfirmations.PRCode.pi_name + ')')                                 AS PRCode,
-  pregnancyConfirmations.pgComment,
   pregnancyConfirmations.termDate,
   pregnancyConfirmations.termComment,
   concat(

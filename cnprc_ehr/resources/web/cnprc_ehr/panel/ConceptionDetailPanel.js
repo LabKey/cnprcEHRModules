@@ -7,12 +7,14 @@
  */
 
 Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
-
     extend: 'CNPRC_EHR.panel.SnapshotPanel',
     alias: 'widget.cnprc_ehr-conceptionDetailPanel',
 
     initComponent: function () {
         this.subjectId = LABKEY.ActionURL.getParameter('subjectId');
+        this.conceptionId = LABKEY.ActionURL.getParameter('conceptionId');
+        this.pathologyReportsDone = false;
+        this.pregnancyConfirmationInfoDone = false;
         this.callParent();
     },
 
@@ -92,7 +94,7 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
                         labelSeparator: ''
                     },
                     items: [{
-                        fieldLabel: ''
+                        fieldLabel: ''  // FIXME: due to dynamic layout, these columns may not align
                     }, {
                         fieldLabel: ''
                     }, {
@@ -142,155 +144,107 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
         };
     },
 
-    appendDataResults: function (toSet, results, id, callbackFn) {
-        this.appendPregnancyConfirmationResults(toSet, results.getPregnancyConfirmationInfo());
-        this.appendPathologyReports(toSet, results.getPathologyReports(), callbackFn);
-    },
-
-    appendPregnancyConfirmationResults: function (toSet, pregnancyConfirmationResults) {
-
-        this.conceptionId = LABKEY.ActionURL.getParameter('conceptionId');
-
-        if (pregnancyConfirmationResults && pregnancyConfirmationResults.length) {
-
-            for (var i = 0; pregnancyConfirmationResults.length; i++) {
-
-                var row = pregnancyConfirmationResults[i];
-
-                if (row['conNum'] == this.conceptionId) {
-                    toSet['conNum'] = row.conNum;
-                    toSet['Id'] = this.subjectId;
-                    toSet['conception'] = row.conception;
-                    toSet['sire'] = row.sire;
-                    toSet['BRType'] = row.BRType;
-                    toSet['colonyCode'] = row.colonyCode;
-                    toSet['PRCode'] = row.PRCode;
-                    toSet['PRTitle'] = row.PRTitle;
-                    toSet['PRInvestigator'] = row.PRInvestigator;
-                    toSet['pgComment'] = row.pgComment;
-                    toSet['termDate'] = row.termDate;
-                    toSet['termComment'] = row.termComment;
-                    toSet['gestDays'] = row.gestDays;
-                    toSet['offspringId'] = row.offspringId;
-                    toSet['offspringSex'] = row.offspringSex;
-                    toSet['birthPlace'] = row.birthPlace;
-                    toSet['birthWeight'] = row.birthWeight;
-                    toSet['pgType'] = row.pgType;
-                    toSet['birthViability'] = row.birthViability;
-                    toSet['deliveryMode'] = row.deliveryMode;
-                    toSet['deathComment'] = row.deathComment;
-                    toSet['pathologist'] = row.pathologist
-                    toSet['necropsyPerformed'] = row.necropsyPerformed;
-
-                    break;
-                }
-            }
+    checkIfComplete: function(toSet) {
+        if (this.pathologyReportsDone && this.pregnancyConfirmationInfoDone) {
+            this.appendForm(toSet);
         }
     },
-    appendPathologyReports: function (toSet, rows, callbackFn) {
 
-        LABKEY.Query.getQueries({
-            schemaName: 'study',
-            includeUserQueries: false,
-            includeColumns: false,
-            scope: this,
-            success: function (result) {
-
-                var hasBiopsyAccess = false;
-                var hasNecropsyAccess = false;
-
-                Ext4.each(result.queries, function (q) {
-
-                    if (q.name == "biopsy") {
-                        hasBiopsyAccess = true;
-                    }
-                    if (q.name == "necropsy") {
-                        hasNecropsyAccess = true;
-                    }
-                }, this);
-
-                this.appendPathologyRows(toSet, rows, hasBiopsyAccess, hasNecropsyAccess);
-
-            }
-        });
+    appendDataResults: function (toSet, results, id) {
+        this.appendPregnancyConfirmationResults(toSet);
+        this.appendPathologyReports(toSet, this.finishPathologyReports.bind(this));
     },
-    appendPathologyRows: function (toSet, rows, hasBiopsyAccess, hasNecropsyAccess) {
+
+    appendPathologyReports: function(toSet, callbackFn) {
 
         LABKEY.Query.selectRows({
             schemaName: 'study',
             queryName: 'pathologyReports',
-            columns: 'Id,reportId,datePerformed,project,investigator,dateCompleted,reportCategory',
             scope: this,
             failure: LDK.Utils.getErrorCallback(),
             filterArray: [
-                LABKEY.Filter.create('Id', this.conceptionId, LABKEY.Filter.Types.EQUAL)
+                LABKEY.Filter.create('Id', this.conceptionId)
             ],
-            requiredVersion: '17.1',  // want formattedValue for dates
-            success: function (result) {
-                rows = result.rows;
-                var values = '';
-                var headerColStyle = 'nowrap style="padding-left: 10px; font-weight: bold"';
-                var colStyle = 'nowrap style="padding-left: 10px;"';
-                values += '<table><tr><td nowrap style="font-weight: bold">Report ID</td><td ' + headerColStyle + '>Date Performed</td><td ' + headerColStyle + '>Project</td><td ' + headerColStyle + '>Investigator</td><td ' + headerColStyle + '>Date Completed</td></strong></tr>';
+            success: function (pathologyReportsResult) {
+                LABKEY.Query.getQueries({
+                    schemaName: 'study',
+                    includeUserQueries: false,
+                    includeColumns: false,
+                    scope: this,
+                    failure: LDK.Utils.getErrorCallback(),
+                    success: function (result) {
+                        var hasBiopsyAccess = false;
+                        var hasNecropsyAccess = false;
 
-                if (rows) {
-                    Ext4.each(rows, function (resultRow) {
+                        Ext4.each(result.queries, function (q) {
 
-                        var item = '';
-                        var row = resultRow.data;
-                        if (row['reportId']) {
-
-
-                            if (hasBiopsyAccess && hasNecropsyAccess) {
-                                var url = "\"" + LABKEY.ActionURL.buildURL("cnprc_ehr", "pathologyReport", null, {
-                                    subjectId: row['Id'].value,
-                                    reportId: row['reportId'].value,
-                                    reportCategory: row['reportCategory'].value
-                                }) + "\"";
-                                item += '<td nowrap><a href=' + url + '>' + LABKEY.Utils.encodeHtml(row['reportId'].value) + '</a></td>';
+                            if (q.name === "biopsy") {
+                                hasBiopsyAccess = true;
                             }
-                            else {
-                                item += '<td nowrap>' + LABKEY.Utils.encodeHtml(row['reportId'].value) + '</td>';
+                            if (q.name === "necropsy") {
+                                hasNecropsyAccess = true;
                             }
+                        }, this);
+
+                        this.appendPathologyRows(toSet, pathologyReportsResult.rows, hasBiopsyAccess, hasNecropsyAccess, callbackFn);
+                    }
+                });
+            }
+        });
+    },
+
+    finishPathologyReports: function (toSet) {
+        this.pathologyReportsDone = true;
+        this.checkIfComplete(toSet);
+    },
+
+    appendPregnancyConfirmationResults: function (toSet) {
+        LABKEY.Query.selectRows({
+            schemaName: 'study',
+            queryName: 'conceptionDetailInfo',
+            columns: 'Id,sire,conNum,conception,BRType,colonyCode,PRCode,termDate,termComment,gestDays,' +
+            'offspringId,offspringSex,birthPlace,birthWeight,pgType,birthViability,deliveryMode,deathComment,' +
+            'pathologist,necropsyPerformed',
+            scope: this,
+            failure: LDK.Utils.getErrorCallback(),
+            filterArray: [
+                LABKEY.Filter.create('Id', this.subjectId, LABKEY.Filter.Types.EQUAL)
+            ],
+            success: function (pregnancyConfirmationResult) {
+                var pregnancyConfirmationRows = pregnancyConfirmationResult.rows;
+
+                if (pregnancyConfirmationRows && (pregnancyConfirmationRows.length > 0)) {
+                    for (var i = 0; pregnancyConfirmationRows.length; i++) {
+                        var row = pregnancyConfirmationRows[i];
+
+                        if (row['conNum'] === this.conceptionId) {
+                            toSet['Id'] = this.subjectId;
+                            toSet['sire'] = row.sire;
+                            toSet['conNum'] = row.conNum;
+                            toSet['conception'] = row.conception;
+                            toSet['BRType'] = row.BRType;
+                            toSet['colonyCode'] = row.colonyCode;
+                            toSet['PRCode'] = row.PRCode;
+                            toSet['termDate'] = row.termDate;
+                            toSet['termComment'] = row.termComment;
+                            toSet['gestDays'] = row.gestDays;
+                            toSet['offspringId'] = row.offspringId;
+                            toSet['offspringSex'] = row.offspringSex;
+                            toSet['birthPlace'] = row.birthPlace;
+                            toSet['birthWeight'] = row.birthWeight;
+                            toSet['pgType'] = row.pgType;
+                            toSet['birthViability'] = row.birthViability;
+                            toSet['deliveryMode'] = row.deliveryMode;
+                            toSet['deathComment'] = row.deathComment;
+                            toSet['pathologist'] = row.pathologist;
+                            toSet['necropsyPerformed'] = row.necropsyPerformed;
+
+                            break;
                         }
-                        else
-                            item += '<td></td>';
-
-                        if (row['datePerformed'] && row['datePerformed'].value) {
-                            var datePerformed = LDK.ConvertUtils.parseDate(row['datePerformed'].value);
-                            item += '<td ' + colStyle + '>' + datePerformed.format(LABKEY.extDefaultDateFormat) + '</td>';
-                        }
-                        else
-                            item += '<td></td>';
-
-                        if (row['project'] && row['project'].value) {
-                            item += '<td ' + colStyle + '><a href="cnprc_ehr-projectDetails.view?project=' + LABKEY.Utils.encodeHtml(row['project'].value) + '">' + LABKEY.Utils.encodeHtml(row['project'].value) + '</a></td>';
-                        }
-                        else
-                            item += '<td></td>';
-
-                        if (row['investigator'] && row['investigator'].value) {
-                            item += '<td ' + colStyle + '>' + LABKEY.Utils.encodeHtml(row['investigator'].value) + '</td>';
-                        }
-                        else
-                            item += '<td></td>';
-
-                        if (row['dateCompleted'] && row['dateCompleted'].value) {
-                            var dateCompleted = LDK.ConvertUtils.parseDate(row['dateCompleted'].value);
-                            item += '<td ' + colStyle + '>' + dateCompleted.format(LABKEY.extDefaultDateFormat) + '</td>';
-                        }
-                        else
-                            item += '<td></td>';
-
-                        item = '<tr>' + item + '</tr>';
-                        values += item;
-                    }, this);
-
-                    values += '</table>';
+                    }
                 }
-
-                toSet['pathologyReports'] = values;
-                this.appendForm(toSet);
+                this.pregnancyConfirmationInfoDone = true;
+                this.checkIfComplete(toSet);
             }
         });
     }

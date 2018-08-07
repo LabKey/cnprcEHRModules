@@ -196,7 +196,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         this.appendHousingIntervals(toSet, results);
         this.appendLastProjects(toSet, results.getLastProjects());
         this.appendCensusFlags(toSet, results.getCensusFlags());
-        this.appendPathologyReports(toSet, results.getPathologyReports());
+        this.appendPathologyReports(toSet, results.getPathologyReports(), this.appendForm.bind(this));
     },
 
     appendDemographicsResults: function(toSet, row, id){
@@ -508,7 +508,7 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         toSet['censusFlags'] = values.length ? '<table>' + values.join('') + '</table>' : null;
     },
 
-    appendPathologyReports: function(toSet, rows) {
+    appendPathologyReports: function(toSet, rows, callbackFn) {
 
         LABKEY.Query.getQueries({
             schemaName: 'study',
@@ -522,21 +522,20 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
 
                 Ext4.each(result.queries, function (q) {
 
-                    if (q.name == "biopsy") {
+                    if (q.name === "biopsy") {
                         hasBiopsyAccess = true;
                     }
-                    if (q.name == "necropsy") {
+                    if (q.name === "necropsy") {
                         hasNecropsyAccess = true;
                     }
                 }, this);
 
-                this.appendPathologyRows(toSet, rows, hasBiopsyAccess, hasNecropsyAccess);
-                this.appendForm(toSet); //callback fn - append only after all needed values are set in toSet
+                this.appendPathologyRows(toSet, rows, hasBiopsyAccess, hasNecropsyAccess, callbackFn);
             }
         });
     },
 
-    appendPathologyRows: function(toSet, rows, hasBiopsyAccess, hasNecropsyAccess) {
+    appendPathologyRows: function(toSet, rows, hasBiopsyAccess, hasNecropsyAccess, callbackFn) {
 
         var values = '';
         var headerColStyle = 'nowrap style="padding-left: 10px; font-weight: bold"';
@@ -588,5 +587,6 @@ Ext4.define('CNPRC_EHR.panel.SnapshotPanel', {
         }
 
         toSet['pathologyReports'] = values;
+        callbackFn(toSet);
     }
 });
