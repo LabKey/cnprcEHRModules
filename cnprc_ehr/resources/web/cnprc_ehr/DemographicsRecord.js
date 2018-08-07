@@ -308,14 +308,6 @@ EHR.DemographicsRecord = function(data){
             return data['pregnancyConfirmationInfo'];
         },
 
-        getActivePregnancyConNum: function(){
-            return data['conNum'];
-        },
-
-        getActivePregnancyDaysPregnant: function(){
-            return data['daysPregnant'];
-        },
-
         getPrimaryProject: function() {
             return data['primaryProject'];
         },

@@ -14,6 +14,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
 
     onLoad: function(ids, resultMap){
         this.eightWeekHistoryDone = false;
+        this.daysPregnantDone = false;
         this.serverSideLoadsDone = false;
 
         if (this.disableAnimalLoad){
@@ -39,7 +40,11 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
 
         this.appendDataResults(toSet, results, id);
         this.serverSideLoadsDone = true;
-        if (this.eightWeekHistoryDone) {
+        this.checkIfComplete(toSet);
+    },
+
+    checkIfComplete: function(toSet) {
+        if (this.serverSideLoadsDone && this.eightWeekHistoryDone && this.daysPregnantDone) {
             this.getForm().setValues(toSet);
             this.afterLoad();
         }
@@ -144,11 +149,11 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         this.appendMorningHealthCurrentLocation(toSet, results);
         this.appendLocation(toSet, results);
         this.appendProjectCode(toSet, results);
-        this.appendActivePregnancy(toSet, results);
+        this.appendActivePregnancy(toSet);
         this.appendWeight(toSet, results);
         this.appendBcs(toSet, results);
         this.appendMorningHealthObservations(toSet, results);
-        this.appendEightWeekHistory(toSet, results);
+        this.appendEightWeekHistory(toSet);
     },
 
     appendDemographicsResults: function(toSet, row, id) {
@@ -191,15 +196,31 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         }
     },
 
-    appendActivePregnancy: function(toSet, results) {
-        var daysPregnant = results.getActivePregnancyDaysPregnant();
-        toSet['pregnancyFlag'] = '';
-        toSet['daysPregnant'] = '';
+    appendActivePregnancy: function(toSet) {
+        LABKEY.Query.selectRows({
+            schemaName: "study",
+            queryName: "DemographicsActivePregnancy",
+            scope: this,
+            failure: LDK.Utils.getErrorCallback(),
+            filterArray: [
+                LABKEY.Filter.create('Id', toSet['animalId'], LABKEY.Filter.Types.EQUAL)
+            ],
+            success: function (activePregnancyResult) {
+                var daysPregnantRows = activePregnancyResult.rows;
+                toSet['pregnancyFlag'] = '';
+                toSet['daysPregnant'] = '';
+                if (daysPregnantRows && daysPregnantRows.length > 0) {
+                    var daysPregnant = daysPregnantRows[0].daysPregnant;
+                    if (daysPregnant) {
+                        toSet['pregnancyFlag'] = 'P';
+                        toSet['daysPregnant'] = LABKEY.Utils.encodeHtml(daysPregnant);
+                    }
+                }
 
-        if (daysPregnant) {
-            toSet['pregnancyFlag'] = 'P';
-            toSet['daysPregnant'] = LABKEY.Utils.encodeHtml(daysPregnant);
-        }
+                this.daysPregnantDone = true;
+                this.checkIfComplete(toSet);
+            }
+        });
     },
 
     appendWeight: function(toSet, results) {
@@ -225,7 +246,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         }
     },
 
-    appendEightWeekHistory: function(toSet, results) {
+    appendEightWeekHistory: function(toSet) {
         LABKEY.Query.selectRows({
             schemaName: "study",
             queryName: "eightWeekHistory",
@@ -255,10 +276,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                         + LABKEY.Utils.encodeHtml(pairingRowString) + '</pre>';
 
                 this.eightWeekHistoryDone = true;
-                if (this.serverSideLoadsDone) {
-                    this.getForm().setValues(toSet);
-                    this.afterLoad();
-                }
+                this.checkIfComplete(toSet);
             }
         });
     }
