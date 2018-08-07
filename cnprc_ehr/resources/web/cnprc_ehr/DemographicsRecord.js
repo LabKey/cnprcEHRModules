@@ -292,10 +292,6 @@ EHR.DemographicsRecord = function(data){
             return data['book'];
         },
 
-        getEightWeekHistory: function() {
-            return data['eightWeekHistory'];
-        },
-
         getMorningHealthObservations: function() {
             return data['observation'];
         },

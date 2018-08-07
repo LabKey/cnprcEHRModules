@@ -12,6 +12,39 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
 
     minHeight: 150,
 
+    onLoad: function(ids, resultMap){
+        this.eightWeekHistoryDone = false;
+        this.serverSideLoadsDone = false;
+
+        if (this.disableAnimalLoad){
+            return;
+        }
+
+        if (this.isDestroyed){
+            return;
+        }
+
+        var toSet = {};
+
+        var id = ids[0];
+        var results = resultMap[id];
+        if (!results){
+            if (id){
+                toSet['animalId'] = LABKEY.Utils.encodeHtml(id);
+                toSet['calculated_status'] = '<span style="background-color:yellow">Unknown</span>';
+            }
+
+            return;
+        }
+
+        this.appendDataResults(toSet, results, id);
+        this.serverSideLoadsDone = true;
+        if (this.eightWeekHistoryDone) {
+            this.getForm().setValues(toSet);
+            this.afterLoad();
+        }
+    },
+
     getItems: function(){
         return [{
             itemId: 'columnSection',
@@ -193,22 +226,40 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
     },
 
     appendEightWeekHistory: function(toSet, results) {
-        var eightWeekHistoryRows = results.getEightWeekHistory();
-        var diarrheaRowString = '';
-        var poorAppRowString = '';
-        var pairingRowString = '';
+        LABKEY.Query.selectRows({
+            schemaName: "study",
+            queryName: "eightWeekHistory",
+            scope: this,
+            failure: LDK.Utils.getErrorCallback(),
+            filterArray: [
+                LABKEY.Filter.create('Id', toSet['animalId'], LABKEY.Filter.Types.EQUAL)
+            ],
+            sort: 'date',
+            success: function (eightWeekHistoryResult) {
+                var eightWeekHistoryRows = eightWeekHistoryResult.rows;
+                var diarrheaRowString = '';
+                var poorAppRowString = '';
+                var pairingRowString = '';
 
-        if (eightWeekHistoryRows && eightWeekHistoryRows.length > 1) {
-            eightWeekHistoryRows.forEach(function(row) {
-                diarrheaRowString += row.diarrheaInd;
-                poorAppRowString += row.poorAppInd;
-                pairingRowString += row.pairingInd;
-            }, this);
-        }
+                if (eightWeekHistoryRows && eightWeekHistoryRows.length > 0) {
+                    eightWeekHistoryRows.forEach(function(row) {
+                        diarrheaRowString += row.diarrheaInd;
+                        poorAppRowString += row.poorAppInd;
+                        pairingRowString += row.pairingInd;
+                    }, this);
+                }
 
-        toSet['eightWeekHistory'] = '<pre>+------+------+------+------+------+------+------+------+<br/>'
-                + LABKEY.Utils.encodeHtml(diarrheaRowString) + '<br/>'
-                + LABKEY.Utils.encodeHtml(poorAppRowString) + '<br/>'
-                + LABKEY.Utils.encodeHtml(pairingRowString) + '</pre>';
+                toSet['eightWeekHistory'] = '<pre>+------+------+------+------+------+------+------+------+<br/>'
+                        + LABKEY.Utils.encodeHtml(diarrheaRowString) + '<br/>'
+                        + LABKEY.Utils.encodeHtml(poorAppRowString) + '<br/>'
+                        + LABKEY.Utils.encodeHtml(pairingRowString) + '</pre>';
+
+                this.eightWeekHistoryDone = true;
+                if (this.serverSideLoadsDone) {
+                    this.getForm().setValues(toSet);
+                    this.afterLoad();
+                }
+            }
+        });
     }
 });

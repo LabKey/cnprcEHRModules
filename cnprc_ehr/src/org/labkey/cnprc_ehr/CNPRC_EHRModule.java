@@ -208,7 +208,6 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new SerumDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new TBDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new BreedingRosterDemographicsProvider(this));
-        ehrService.registerDemographicsProvider(new EightWeekHistoryDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ObservationsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new MHLocationDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new PregnancyConfirmationDemographicsProvider(this));
