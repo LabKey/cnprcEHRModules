@@ -85,7 +85,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -1485,9 +1484,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         breedingObservation.setGridCell(1, "date", breedingDate);
         breedingObservation.setGridCell(1, "obsCode", "X");
         breedingObservation.setGridCell(1, "cycleDay", "4");
-        sleep(500);
+        sleep(1000);
         clickButton("Save & Close");
-
         log("Opening the pending task for completion");
         enterData.clickMyTasksTab();
         waitAndClick(Locator.linkContainingText(TASK_TITLE_BRD_OBS));
