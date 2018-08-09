@@ -89,7 +89,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @Category({CustomModules.class, EHR.class})
-@BaseWebDriverTest.ClassTimeout(minutes = 60)
+@BaseWebDriverTest.ClassTimeout(minutes = 80)
 public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOnlyTest
 {
     private static final String PROJECT_NAME = "CNPRC";
