@@ -141,10 +141,15 @@ public class MorningHealthDataTransferJob extends PipelineJob
                 //get location
                 String loc = dataToCols[MorningHealthValidationJob.LOCATION];
                 String[] vals = loc.split("-");
-                String locWithoutDash = vals[0] + vals[1];
-                String area = vals[0].substring(0, 2);
                 String enclosure = vals[0];
-                String cage = vals[1];
+                String cage;
+                if(vals.length <= 1)
+                    cage = "";
+                else
+                    cage = vals[1];
+
+                String locWithoutDash = enclosure + cage;
+                String area = enclosure.substring(0, 2);
 
                 //get animal signs
                 int signIndexBegin = MorningHealthValidationJob.SIGNS_BASE;
