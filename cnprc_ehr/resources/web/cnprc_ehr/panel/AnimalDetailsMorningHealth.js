@@ -12,6 +12,13 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
 
     minHeight: 150,
 
+    initComponent: function(){
+        this.callParent(arguments);
+        var subjectId = LABKEY.ActionURL.getParameter('Id');
+        this.taskId = LABKEY.ActionURL.getParameter('taskid');
+        this.loadAnimal(subjectId);
+    },
+
     onLoad: function(ids, resultMap){
         this.eightWeekHistoryDone = false;
         this.daysPregnantDone = false;
@@ -32,7 +39,6 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
         if (!results){
             if (id){
                 toSet['animalId'] = LABKEY.Utils.encodeHtml(id);
-                toSet['calculated_status'] = '<span style="background-color:yellow">Unknown</span>';
             }
 
             return;
@@ -108,7 +114,7 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
                     name: 'bcsDate'
                 },{
                     fieldLabel: 'Observations',
-                    name: 'observation'
+                    name: 'observations'
                 },{
                     fieldLabel: '8-Week History',
                     name: 'eightWeekHistory'
@@ -238,11 +244,19 @@ Ext4.define('cnprc_ehr.panel.AnimalDetailsMorningHealth', {
     },
 
     appendMorningHealthObservations: function(toSet, row) {
-        var mhObs = row.getMorningHealthObservations();
+        var mhObsRows = row.getMorningHealthObservations();
 
-        if(mhObs) {
-            var observation = mhObs[0]['observation'];
-            toSet['observation'] = LABKEY.Utils.encodeHtml(observation);
+        if (mhObsRows && (mhObsRows.length > 0)) {
+            for (var i = 0; i < mhObsRows.length; i++) {
+                var taskId = mhObsRows[i]['taskid'];
+
+                if (taskId === this.taskId) {
+                    var observations = mhObsRows[i]['allObservations'];
+                    toSet['observations'] = LABKEY.Utils.encodeHtml(observations);
+
+                    break;
+                }
+            }
         }
     },
 

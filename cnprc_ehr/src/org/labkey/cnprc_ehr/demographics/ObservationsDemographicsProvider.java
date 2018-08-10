@@ -10,9 +10,11 @@ import java.util.Set;
 
 public class ObservationsDemographicsProvider extends AbstractListDemographicsProvider
 {
+    // NOTE: only contains not yet confirmed/unconfirmed morning health observations
+
     public ObservationsDemographicsProvider (Module module)
     {
-        super(module, "study", "DemographicsMHObs", "observation");
+        super(module, "study", "DemographicsMHObs", "observationInfo");
         _supportsQCState = false;
     }
 
@@ -28,7 +30,8 @@ public class ObservationsDemographicsProvider extends AbstractListDemographicsPr
         Set<FieldKey> keys = new HashSet<>();
         keys.add(FieldKey.fromString("Id"));
         keys.add(FieldKey.fromString("ObsDate"));
-        keys.add(FieldKey.fromString("observation"));
+        keys.add(FieldKey.fromString("allObservations"));
+        keys.add(FieldKey.fromString("taskid"));
 
         return keys;
     }
@@ -36,7 +39,10 @@ public class ObservationsDemographicsProvider extends AbstractListDemographicsPr
     @Override
     public Sort getSort()
     {
-        return new Sort("ObsDate");
+        // generally we probably care about newer records more
+        Sort sort = new Sort();
+        sort.appendSortColumn(FieldKey.fromString("ObsDate"), Sort.SortDirection.DESC, false);
+        return sort;
     }
 
     @Override

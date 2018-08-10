@@ -1,13 +1,15 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
-        <column name="Location" />
-        <column name="id" />
+        <column name="confirmLink" />
+        <column name="location" />
+        <column name="Id" />
         <column name="admitType" />
         <column name="problem" />
-        <column name="AdmitDate" />
-        <column name="DaysAdmitted" />
-        <column name="MHObs" />
-        <column name="ProjectCode" />
+        <column name="admitDate" />
+        <column name="daysAdmitted" />
+        <column name="observation" />
+        <column name="allObservations" />
+        <column name="projectCode" />
         <column name="p" />
         <column name="p2" />
         <column name="remark" />

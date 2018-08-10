@@ -293,7 +293,7 @@ EHR.DemographicsRecord = function(data){
         },
 
         getMorningHealthObservations: function() {
-            return data['observation'];
+            return data['observationInfo'];
         },
 
         getMorningHealthCurrentLocation : function () {

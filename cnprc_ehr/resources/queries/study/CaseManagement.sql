@@ -15,65 +15,80 @@
  */
 SELECT
   casesAndMorningHealthObs.Id,
-  casesAndMorningHealthObs.Location,
-  casesAndMorningHealthObs.AdmitType,
-  casesAndMorningHealthObs.Problem,
-  casesAndMorningHealthObs.AdmitDate,
-  casesAndMorningHealthObs.DaysAdmitted,
-  casesAndMorningHealthObs.MHObs,
-  casesAndMorningHealthObs.ProjectCode,
-  casesAndMorningHealthObs.Area,
-  casesAndMorningHealthObs.Room,
+  casesAndMorningHealthObs.location,
+  casesAndMorningHealthObs.admitType,
+  casesAndMorningHealthObs.problem,
+  casesAndMorningHealthObs.admitDate,
+  casesAndMorningHealthObs.daysAdmitted,
+  casesAndMorningHealthObs.observation,
+  casesAndMorningHealthObs.allObservations,
+  casesAndMorningHealthObs.projectCode,
+  casesAndMorningHealthObs.area,
+  casesAndMorningHealthObs.room,
   cr.p,
   cr.p2,
   cr.remark,
-  NULL AS AssignedVet,
-  NULL AS NextFollowUp,
+  NULL AS assignedVet,
+  NULL AS nextFollowUp,
   casesAndMorningHealthObs.history,
-  casesAndMorningHealthObs.confirm AS confirm,
+  casesAndMorningHealthObs.confirm,
+  casesAndMorningHealthObs.confirmLink,
+  casesAndMorningHealthObs.taskid,
   (CASE WHEN meds.medCount > 0 THEN meds.medNames ELSE NULL END) as meds
 
 FROM
   (
     SELECT
       cases.Id,
-      cases.Id.curLocation.location                        AS Location,
-      cases.admitType                                      AS AdmitType,
-      cases.problem                                        AS Problem,
-      cases.date                                           AS AdmitDate,
-      cases.duration                                       AS DaysAdmitted,
-      ''                                                   AS MHObs,
-      cases.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
-      cases.Id.curLocation.Area,
-      cases.Id.curLocation.Room,
+      cases.Id.curLocation.location,
+      cases.admitType,
+      cases.problem,
+      cases.date                                           AS admitDate,
+      cases.duration                                       AS daysAdmitted,
+      ''                                                   AS observation,
+      ''                                                   AS allObservations,
+      cases.Id.demographicsActiveAssignment.primaryProject AS projectCode,
+      cases.Id.curLocation.area,
+      cases.Id.curLocation.room,
       cases.Id.Demographics.history,
-      '' AS confirm
+      '' AS confirm,
+      '' AS confirmLink,
+      '' AS taskid
     FROM
       study.cases
     WHERE cases.endDate IS NULL
     UNION ALL
     SELECT
       mho.Id,
-      mho.location                                       AS Location,
-      'MH'                                               AS AdmitType,
-      ''                                                 AS Problem,
-      NULL                                               AS AdmitDate,
-      mho.duration                                       AS DaysAdmitted,
-      mhs.observation                                    AS MHObs,
-      mho.Id.demographicsActiveAssignment.primaryProject AS ProjectCode,
-      mho.Id.curLocation.Area,
-      mho.Id.curLocation.Room,
+      mho.location,
+      'MH'                                               AS admitType,
+      ''                                                 AS problem,
+      NULL                                               AS admitDate,
+      mho.duration                                       AS daysAdmitted,
+      mho.observation,
+      (  SELECT group_concat(mho2.observation)
+           FROM study.morningHealthObs mho2
+          WHERE mho2.taskid = mho.taskid
+       GROUP BY mho2.taskid)                             AS allObservations,
+      mho.Id.demographicsActiveAssignment.primaryProject AS projectCode,
+      mho.Id.curLocation.area,
+      mho.Id.curLocation.room,
       mho.Id.Demographics.history,
-      mho.confirmation AS confirm
+      mho.confirmation AS confirm,
+      CASE
+          WHEN mho.confirmation IS NULL THEN 'Confirm Here'
+          ELSE ''
+      END AS confirmLink,
+      mho.taskid AS taskid
+
     FROM study.morningHealthObs mho
-      JOIN study.morningHealthSigns mhs ON mhs.id = mho.id AND mhs.date = mho.date
     WHERE
           mho.endDate IS NULL AND
           mho.confirmation IS NULL AND
           (
-              mhs.observation LIKE '%POORAPP%' OR
-              mhs.observation LIKE '%LIQDSTL%' OR
-              mhs.observation LIKE '%DEHYDRT%'
+              mho.observation = 'POORAPP' OR
+              mho.observation = 'LIQDSTL' OR
+              mho.observation = 'DEHYDRT'
           )
   ) casesAndMorningHealthObs
 

@@ -11,8 +11,9 @@
                     <column columnName="p">
                         <columnTitle>Plan</columnTitle>
                     </column>
-                    <column columnName="confirm">
-                        <url>/cnprc_ehr/confirmObservation.view?id=${Id}</url>
+                    <column columnName="confirmLink">
+                        <columnTitle>Confirm Link</columnTitle>
+                        <url>ehr-dataEntryForm.view?formType=Confirm%20Morning%20Health&amp;Id=${Id}&amp;taskid=${taskid}</url>
                     </column>
                     <column columnName="meds">
                         <columnTitle>Current Meds</columnTitle>

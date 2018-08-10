@@ -214,7 +214,7 @@ Ext4.define('CNPRC_EHR.panel.ConceptionDetailPanel', {
                 var pregnancyConfirmationRows = pregnancyConfirmationResult.rows;
 
                 if (pregnancyConfirmationRows && (pregnancyConfirmationRows.length > 0)) {
-                    for (var i = 0; pregnancyConfirmationRows.length; i++) {
+                    for (var i = 0; i < pregnancyConfirmationRows.length; i++) {
                         var row = pregnancyConfirmationRows[i];
 
                         if (row['conNum'] === this.conceptionId) {
