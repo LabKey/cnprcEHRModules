@@ -1,4 +1,4 @@
--- NOTE: only contains not yet confirmed/unconfirmed morning health observations
+-- NOTE: only contains not yet confirmed/unconfirmed morning health observations, grouped by task ID
 
 SELECT
 mho.Id,
