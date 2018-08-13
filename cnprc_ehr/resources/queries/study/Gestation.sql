@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 SELECT pregnancyConfirmations.Id,
-concat(
-    cast(pregnancyConfirmations.gestationDays as varchar),
+CONCAT(
+    CAST(pregnancyConfirmations.gestationDays AS VARCHAR),
     pregnancyConfirmations.conceptionDateStatus
 ) Gestation
 FROM pregnancyConfirmations
-where pregnancyConfirmations.offSpringId is null
+WHERE pregnancyConfirmations.termDate IS NULL

@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-SELECT pregConf.*,offspring.id.demographics.calculated_status,
-(case when offspring.id.demographics.calculated_status = 'Dead' then
-  ('Dead from ' || offspring.id.lastHousing.location)
- else offspring.id.curLocation.location end) as offspringLocation,
- COALESCE (offspring.id.lastHousing.enddate, offspring.id.curLocation.date)  as offspringLocationDate,
- birthViability || deliveryMode as deliveryType,
- timestampdiff('SQL_TSI_DAY',  pregConf.conception, COALESCE (termDate,now())) AS gestationDays,
- offspring.id.demographics.gender as offspringSex
+SELECT pregConf.*, offspring.Id.demographics.calculated_status,
+(CASE WHEN offspring.Id.demographics.calculated_status = 'Dead' THEN
+  ('Dead from ' || offspring.Id.lastHousing.location)
+ ELSE offspring.Id.curLocation.location END) AS offspringLocation,
+ COALESCE (offspring.Id.lastHousing.enddate, offspring.Id.curLocation.date) AS offspringLocationDate,
+ birthViability || deliveryMode AS deliveryType,
+ (CASE WHEN pregConf.termDate IS NULL AND pregConf.pgFlag IS NULL
+       THEN timestampdiff('SQL_TSI_DAY', pregConf.conception,
+            COALESCE(pregConf.termDate, NOW()))
+       ELSE NULL END) AS gestationDays,
+ offspring.Id.demographics.gender AS offspringSex
 FROM study.pregnancyConfirmation pregConf
 LEFT JOIN study.Demographics offspring
-  ON pregConf.offspringid = offspring.id
+  ON pregConf.offspringid = offspring.Id
 WHERE
-pgFlag IS NULL -- "check CON_INVALID_PG_FLAG for NULL to exclude them" as per high-level data mapping spreadsheet
+pregConf.pgFlag IS NULL -- "check CON_INVALID_PG_FLAG for NULL to exclude them" as per high-level data mapping spreadsheet
 AND
 pregConf.Id IS NOT NULL;
