@@ -86,9 +86,9 @@ FROM
           mho.endDate IS NULL AND
           mho.confirmation IS NULL AND
           (
-              mho.observation = 'POORAPP' OR
-              mho.observation = 'LIQDSTL' OR
-              mho.observation = 'DEHYDRT'
+              mho.observation <> 'EMPTYRM' OR
+              mho.observation <> 'NOSIGNS' OR
+              mho.observation <> 'NOTNCAG'
           )
   ) casesAndMorningHealthObs
 
