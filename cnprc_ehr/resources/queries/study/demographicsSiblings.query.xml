@@ -36,7 +36,6 @@
                         </fk>
                     </column>
                 </columns>
-                <titleColumn>Relationship</titleColumn>
             </table>
         </tables>
     </metadata>

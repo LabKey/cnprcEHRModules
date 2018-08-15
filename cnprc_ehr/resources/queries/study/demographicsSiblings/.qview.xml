@@ -1,0 +1,35 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="id"/>
+        <column name="Relationship"/>
+        <column name="Sibling"/>
+        <column name="Sex"/>
+        <column name="Sibling/flagList/values">
+            <properties>
+                <property name="columnTitle" value="Flags"/>
+            </properties>
+        </column>
+        <column name="Sibling/curLocation/location">
+            <properties>
+                <property name="columnTitle" value="Location"/>
+            </properties>
+        </column>
+        <column name="Sibling/parents/dam">
+            <properties>
+                <property name="columnTitle" value="Sibling Dam"/>
+            </properties>
+        </column>
+        <column name="Sibling/parents/sire">
+            <properties>
+                <property name="columnTitle" value="Sibling Sire"/>
+            </properties>
+        </column>
+        <column name="calculated_status"/>
+        <column name="Sibling/lastHousing/location">
+            <properties>
+                <property name="columnTitle" value="Last Known Location"/>
+            </properties>
+        </column>
+        <column name="qcstate"/>
+    </columns>
+</customView>
