@@ -88,7 +88,7 @@ public class MhProcessingTable extends SimpleUserSchema.SimpleTable<CNPRC_EHRUse
             }
             catch (PipelineValidationException | IOException e)
             {
-                LOG.error(e);
+                LOG.error("Error in MhProcessingTable trigger: " + e);
             }
         }
     }

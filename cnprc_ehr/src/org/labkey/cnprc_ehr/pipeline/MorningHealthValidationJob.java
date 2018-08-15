@@ -280,7 +280,7 @@ public class MorningHealthValidationJob extends PipelineJob
                                 logErrorWithRowPk("Location '" + locationString + "' is not a valid location or is inactive", mhProcessingRow);
                             else if (animalInfo != null)
                             {
-                                if (animalInfo._currentLocation.isEmpty())
+                                if ((animalInfo._currentLocation == null) || animalInfo._currentLocation.isEmpty())
                                     logErrorWithRowPk("Animal ID '" + animalIdString + "' has no current location", mhProcessingRow);
                                 else if (!animalInfo._currentLocation.equals(locationStringNoHyphen))
                                 {
