@@ -21,20 +21,6 @@
                             <fkColumnName>Id</fkColumnName>
                         </fk>
                     </column>
-                    <column columnName="SiblingDam">
-                        <fk>
-                            <fkDbSchema>study</fkDbSchema>
-                            <fkTable>animal</fkTable>
-                            <fkColumnName>Id</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="SiblingSire">
-                        <fk>
-                            <fkDbSchema>study</fkDbSchema>
-                            <fkTable>animal</fkTable>
-                            <fkColumnName>Id</fkColumnName>
-                        </fk>
-                    </column>
                 </columns>
             </table>
         </tables>
