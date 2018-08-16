@@ -22,8 +22,8 @@ import org.labkey.api.ehr.security.EHRClinicalEntryPermission;
 import org.labkey.api.module.Module;
 import org.labkey.api.query.Queryable;
 import org.labkey.cnprc_ehr.dataentry.AnimalDetailsMorningHealthFormSection;
-import org.labkey.cnprc_ehr.dataentry.ClinicalObservationsMorningHealthFormSection;
-import org.labkey.cnprc_ehr.dataentry.ConfirmSignsMorningHealthFormSection;
+import org.labkey.cnprc_ehr.dataentry.ClinicalObservationsFormSection;
+import org.labkey.cnprc_ehr.dataentry.ConfirmSignsFormSection;
 
 import java.util.Arrays;
 
@@ -37,8 +37,8 @@ public class MorningHealthConfirmFormType extends TaskForm
         super(ctx, owner, NAME, NAME, "Morning Health", Arrays.asList(
             new TaskFormSection(),
             new AnimalDetailsMorningHealthFormSection(),
-            new ClinicalObservationsMorningHealthFormSection(),
-            new ConfirmSignsMorningHealthFormSection()
+            new ClinicalObservationsFormSection(),
+            new ConfirmSignsFormSection()
         ));
     }
 

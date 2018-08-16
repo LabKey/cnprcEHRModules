@@ -387,113 +387,12 @@ Ext4.onReady(function(){
 
             //the general ones
             var templateRows = [{
-                template: ['DVM PE With Vitals', 'Section', 'Clinical Observations', '', ''],
+                template: ['MH Confirm Clin Obs', 'Section', 'Clinical Observations', '', ''],
                 records: [
-                    ['Clinical Observations', '{"category":"Temp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Pulse","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Resp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"MM","area":"N/A","observation":"Pink/moist"}'],
-                    ['Clinical Observations', '{"category":"CRT","area":"N/A","observation":"1-2"}'],
-                    ['Clinical Observations', '{"category":"Turgor","area":"N/A","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"BCS","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Score","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Type","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Regrowth","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Oral","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Integ","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Abdomen","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Thorax","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"EENT","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"MS","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"PLN","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"U/G","observation":"Normal"}']
-                ]
-            },{
-                template: ['Tech PE With Vitals', 'Section', 'Clinical Observations', '', ''],
-                records: [
-                    ['Clinical Observations', '{"category":"Temp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Pulse","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Resp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"MM","area":"N/A","observation":"Pink/moist"}'],
-                    ['Clinical Observations', '{"category":"CRT","area":"N/A","observation":"1-2"}'],
-                    ['Clinical Observations', '{"category":"Turgor","area":"N/A","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"BCS","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Oral","observation":"Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Integ","observation":"Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Abdomen","observation":"Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Thorax","observation":"Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"EENT","observation":"Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"MS","observation":"Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"PLN","observation":"Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"U/G","observation":"Not Evaluated"}']
-                ]
-            },{
-                template: ['DVM PE Without Vitals', 'Section', 'Clinical Observations', '', ''],
-                records: [
-                    ['Clinical Observations', '{"category":"Observations","area":"Oral","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Integ","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Abdomen","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"Thorax","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"EENT","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"MS","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"PLN","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"Observations","area":"U/G","observation":"Normal"}']
-                ]
-            },{
-                template: ['Vitals', 'Section', 'Clinical Observations', '', ''],
-                records: [
-                    ['Clinical Observations', '{"category":"Temp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Pulse","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Resp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"MM","area":"N/A","observation":"Pink/moist"}'],
-                    ['Clinical Observations', '{"category":"CRT","area":"N/A","observation":"1-2"}'],
-                    ['Clinical Observations', '{"category":"Turgor","area":"N/A","observation":"Normal"}']
-                ]
-            },{
-                template: ['Processing Vitals', 'Section', 'Clinical Observations', '', ''],
-                records: [
-                    ['Clinical Observations', '{"category":"Temp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Pulse","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Resp","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"MM","area":"N/A","observation":"Pink/moist"}'],
-                    ['Clinical Observations', '{"category":"CRT","area":"N/A","observation":"1-2"}'],
-                    ['Clinical Observations', '{"category":"Turgor","area":"N/A","observation":"Normal"}'],
-                    ['Clinical Observations', '{"category":"BCS","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Score","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Type","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Regrowth","area":"N/A", "observation": "Not Evaluated"}']
-                ]
-            },{
-                template: ['Limited Visual Exam', 'Section', 'Clinical Observations', '', ''],
-                records: [
-                    ['Clinical Observations', '{"category":"App","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Hyd","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Stool","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Today","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Plan","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"This Month","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Long Term Plan","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Other","area":"N/A"}']
-                ]
-            },{
-                template: ['Surgical Rounds', 'Section', 'Clinical Observations', '', ''],
-                records: [
-                    ['Clinical Observations', '{"category":"App","area":"N/A","observation":""}'],
-                    ['Clinical Observations', '{"category":"Hyd","area":"N/A","observation":""}'],
-                    ['Clinical Observations', '{"category":"Stool","area":"N/A","observation":""}'],
-                    ['Clinical Observations', '{"category":"Today","area":"N/A","observation":""}'],
-                    ['Clinical Observations', '{"category":"Plan","area":"N/A","observation":""}'],
-                    ['Clinical Observations', '{"category":"Other","area":"N/A","observation":""}']
-                ]
-            },{
-                template: ['BSU Observations', 'Section', 'Clinical Observations', '', ''],
-                records: [
-                    ['Clinical Observations', '{"category":"Alopecia Score","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Type","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"Alopecia Regrowth","area":"N/A", "observation": "Not Evaluated"}'],
-                    ['Clinical Observations', '{"category":"SIB Score","area":"N/A"}'],
-                    ['Clinical Observations', '{"category":"Fecal Smear","area":"N/A","observation":""}'],
-                    ['Clinical Observations', '{"category":"Behaviors","area":"N/A","observation":""}']
+                    ['Clinical Observations', '{"category":"App"}'],
+                    ['Clinical Observations', '{"category":"Hyd"}'],
+                    ['Clinical Observations', '{"category":"Stool"}'],
+                    ['Clinical Observations', '{"category":"Attitude"}']
                 ]
             },{
                 template: ['CBC and Chem', 'Section', 'blood', '', ''],

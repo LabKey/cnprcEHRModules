@@ -41,6 +41,7 @@ public class ClinicalObservationsFormSection extends SimpleFormSection
         addClientDependency(ClientDependency.fromPath("ehr/plugin/ClinicalObservationsCellEditing.js"));
         addClientDependency(ClientDependency.fromPath("ehr/data/ClinicalObservationsClientStore.js"));
         addClientDependency(ClientDependency.fromPath("ehr/grid/ClinicalObservationGridPanel.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/ClinicalObservationsPanel.js"));
 
         setClientStoreClass("EHR.data.ClinicalObservationsClientStore");
 
