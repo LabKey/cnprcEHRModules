@@ -2025,7 +2025,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         animalHistoryPage.clickReportTab("Siblings");
 
         expectedColumns = Arrays.asList(
-                "Id", "Relationship", "Sibling", "Sex", "Flags", "Location", "SiblingDam", "SiblingSire", "calculated_status", "LastKnownLocation", "qcstate"
+                "Id", "Relationship", "Sibling", "Sex", "Sibling/flagList/values", "Sibling/curLocation/location", "Sibling/parents/dam", "Sibling/parents/sire", "calculated_status", "Sibling/lastHousing/location", "qcstate"
         );
         waitForElement(new Locator.LinkLocator("Siblings - " + id));
         results = animalHistoryPage.getActiveReportDataRegion();
