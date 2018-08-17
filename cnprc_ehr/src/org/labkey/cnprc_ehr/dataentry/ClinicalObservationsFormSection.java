@@ -37,7 +37,7 @@ public class ClinicalObservationsFormSection extends SimpleFormSection
 
     public ClinicalObservationsFormSection(EHRService.FORM_SECTION_LOCATION location, boolean allowAdd)
     {
-        super("study", "Clinical Observations", "Observations", "ehr-clinicalobservationgridpanel", location);
+        super("study", "clinical_observations", "Clinical Observations", "cnprc_ehr-clinicalobservationspanel", location);
         addClientDependency(ClientDependency.fromPath("ehr/plugin/ClinicalObservationsCellEditing.js"));
         addClientDependency(ClientDependency.fromPath("ehr/data/ClinicalObservationsClientStore.js"));
         addClientDependency(ClientDependency.fromPath("ehr/grid/ClinicalObservationGridPanel.js"));
