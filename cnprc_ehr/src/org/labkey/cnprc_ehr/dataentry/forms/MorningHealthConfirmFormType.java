@@ -34,7 +34,7 @@ public class MorningHealthConfirmFormType extends TaskForm
 
     public MorningHealthConfirmFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, NAME, "Morning Health", Arrays.asList(
+        super(ctx, owner, NAME, NAME, null, Arrays.asList(
             new TaskFormSection(),
             new AnimalDetailsMorningHealthFormSection(),
             new ClinicalObservationsFormSection(),
@@ -49,5 +49,11 @@ public class MorningHealthConfirmFormType extends TaskForm
             return false;
 
         return super.canInsert();
+    }
+
+    @Override
+    public boolean isVisible()
+    {
+        return false;
     }
 }
