@@ -156,7 +156,7 @@ public class MorningHealthDataTransferJob extends PipelineJob
                 int totalSigns = 10;
                 String obsCodeString = "OBS_CODE_";
                 int signNum = 1;
-                String taskId = GUID.makeGUID();
+                String taskId = GUID.makeGUID().toUpperCase();
                 int nonBlankSigns = 0;
 
                 //for each sign, add a row -- upto 10 signs = upto 10 rows

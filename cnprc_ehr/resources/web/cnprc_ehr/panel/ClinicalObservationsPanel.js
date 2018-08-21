@@ -11,10 +11,12 @@ Ext4.define('cnprc_ehr.panel.ClinicalObservationsPanel', {
         this.callParent(arguments);
 
         var subjectId = LABKEY.ActionURL.getParameter('Id');
-        this.store.add({Id: subjectId, category: 'App'});
-        this.store.add({Id: subjectId, category: 'Attitude'});
-        this.store.add({Id: subjectId, category: 'Hyd'});
-        this.store.add({Id: subjectId, category: 'Stool'});
+        if(this.store.data.length === 0) {
+            this.store.add({Id: subjectId, category: 'App'});
+            this.store.add({Id: subjectId, category: 'Attitude'});
+            this.store.add({Id: subjectId, category: 'Hyd'});
+            this.store.add({Id: subjectId, category: 'Stool'});
+        }
 
         // Originally this code loaded the templates from the database, but it seemed silly to do two server queries
         // on the client for a small array of items that weren't likely to change. I've preserved this working code

@@ -707,6 +707,13 @@ Ext4.onReady(function(){
         pk: 'value'
     },
     {
+        label: 'Confirmation value for MH Confirmation',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'confirmation',
+        pk: 'value'
+    },
+    {
         label: 'Admit Status for MH Confirmation',
         populateFn: 'populateFromFile',
         schemaName: 'ehr_lookups',

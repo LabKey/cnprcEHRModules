@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class ObservationsDemographicsProvider extends AbstractListDemographicsProvider
 {
-    // NOTE: only contains not yet confirmed/unconfirmed morning health observations, grouped by task ID
+    // NOTE: only contains not yet confirmed morning health observations, grouped by task ID
 
     public ObservationsDemographicsProvider (Module module)
     {
