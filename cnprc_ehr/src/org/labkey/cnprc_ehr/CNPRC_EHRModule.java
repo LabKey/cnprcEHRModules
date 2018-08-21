@@ -188,7 +188,6 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DepartureFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(InoculationFormType.class, this));
 //        ehrService.registerFormType(new DefaultDataEntryFormFactory(CageFormType.class, this));
-        // test
 
         //demographics
         ehrService.registerDemographicsProvider(new ActiveFlagsDemographicsProvider(this));
