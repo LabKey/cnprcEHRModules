@@ -17,7 +17,7 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
         if (!row.admitStatus)
             EHR.Server.Utils.addError(scriptErrors, 'admitStatus', 'An admit status must be specified', 'WARN');
 
-        if ((row.QCStateLabel === 'Completed') && (oldRow.QCStateLabel === 'In Progress')) {
+        if ((row.QCStateLabel === 'Completed') && (!oldRow || oldRow.QCStateLabel === 'In Progress')) {
             var casesRows = [];
 
             if (row.confirmation && (row.confirmation === 'confirmed') && row.admitStatus && (row.admitStatus !== 'X')) {  // 'X' is 'Do Not Admit'
