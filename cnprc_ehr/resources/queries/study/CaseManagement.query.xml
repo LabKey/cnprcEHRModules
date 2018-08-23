@@ -37,7 +37,6 @@
                             <fkTable>tasks</fkTable>
                             <fkColumnName>taskid</fkColumnName>
                         </fk>
-                        <url>/ehr/executeQuery.view?schemaName=ehr&amp;query.queryName=tasks</url>
                     </column>
                 </columns>
             </table>

@@ -16,6 +16,7 @@
 package org.labkey.cnprc_ehr.dataentry.forms;
 
 import org.labkey.api.ehr.dataentry.DataEntryFormContext;
+import org.labkey.api.ehr.dataentry.FormSection;
 import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
 import org.labkey.api.ehr.security.EHRClinicalEntryPermission;
@@ -40,6 +41,10 @@ public class MorningHealthConfirmFormType extends TaskForm
             new ClinicalObservationsFormSection(),
             new ConfirmSignsFormSection()
         ));
+
+        for(FormSection section: this.getFormSections()) {
+            section.addConfigSource("Task");
+        }
     }
 
     @Override

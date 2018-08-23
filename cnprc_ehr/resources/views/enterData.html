@@ -11,9 +11,10 @@
                 xtype: 'ldk-linkbutton',
                 text: label,
                 linkCls: 'labkey-text-link',
+                padding: 2,
                 href: LABKEY.ActionURL.buildURL('query', 'executeQuery', null, {
                     schemaName: 'study',
-                    'query.queryName': 'Casemanagement', 'query.AdmitType~eq': filter
+                    'query.queryName': 'CaseManagement', 'query.AdmitType~eq': filter
                 })
             };
         }
@@ -27,8 +28,8 @@
                                 return item;
                             },
                             items: [{
-                                layout: 'hbox',
-                                bodyStyle: 'padding: 2px;background-color: transparent;',
+                                layout: 'vbox',
+                                bodyStyle: 'background-color: transparent;',
                                 defaults: {
                                     border: false
                                 },
@@ -37,9 +38,10 @@
                                         xtype: 'ldk-linkbutton',
                                         text: 'All Cases',
                                         linkCls: 'labkey-text-link',
+                                        padding: 2,
                                         href: LABKEY.ActionURL.buildURL('query', 'executeQuery', null, {
                                             schemaName: 'study',
-                                            'query.queryName': 'Casemanagement'
+                                            'query.queryName': 'CaseManagement'
                                         })
                                     }
                                     , getFilteredCasesLink('Morning Health', 'MH')

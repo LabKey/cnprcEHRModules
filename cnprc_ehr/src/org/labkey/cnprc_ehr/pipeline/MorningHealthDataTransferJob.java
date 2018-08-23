@@ -193,7 +193,7 @@ public class MorningHealthDataTransferJob extends PipelineJob
                     tasksRow.put("title", "MH Confirm Task");
                     tasksRow.put("category", "Task");
                     tasksRow.put("qcstate", inProgressQCStateRowId);
-                    //TODO: Add taskType once MHConfirm Form Type is created.
+                    tasksRow.put("formType", "Confirm Morning Health");
 
                     LOG.info("Row to be inserted in ehr.tasks: " + tasksRow.toString());
                     tasksRows.add(tasksRow);
