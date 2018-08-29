@@ -726,6 +726,62 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testConfirmMorningHealth() throws IOException, CommandException
+    {
+        log("Inserting a record in mh processing");
+        InsertRowsCommand insertCmd = new InsertRowsCommand("cnprc_ehr", "mh_processing");
+        ZonedDateTime now = ZonedDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        Map<String, Object> rowMapMH = new HashMap<>();
+        String data = "73C7DE6B2CA84AEA82B1C24A274D3287,DSTEST," + dateTimeFormatter.format(now) + ",060943,TEST1,58737392,LIQDSTL,,,,,,,,,,,";
+        rowMapMH.put("rowPk", "73C7DE6B2CA84AEA82B1C24A274D3287");
+        rowMapMH.put("data", data);
+        rowMapMH.put("source", "Inserted Row");
+        rowMapMH.put("voided", false);
+        insertCmd.addRow(rowMapMH);
+        insertCmd.execute(createDefaultConnection(false), getContainerPath());
+
+        goToProjectHome();
+        clickAndWait(Locator.linkWithText("Edit Indoor Morning Health Data"));
+        DataRegionTable mhTable = new DataRegionTable("query", getDriver());
+        mhTable.clearAllFilters();
+        mhTable.setFilter("source", "Equals", "Inserted Row");
+        waitFor(() -> mhTable.findCell(0, "transferredToMHobs").getText().equalsIgnoreCase("true"),
+                "Record not transferred in time", 60000);
+
+        log("Selecting the row to verify");
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
+        enterData.waitAndClickAndWait(Locator.linkWithText("Morning Health"));
+        DataRegionTable morningHealthTable = new DataRegionTable("query", getDriver());
+        morningHealthTable.setFilter("Id", "Equals", "TEST1");
+        clickAndWait(Locator.linkWithText("Confirm Here"));
+
+        log("Adding the clinical observation signs");
+        Ext4GridRef clinicalObservation = _helper.getExt4GridForFormSection("Clinical Observations");
+        clinicalObservation.setGridCell(1, "observation", "Good");
+        clinicalObservation.setGridCell(2, "observation", "BAR");
+        clinicalObservation.setGridCell(3, "observation", "Poor");
+        clinicalObservation.setGridCell(4, "observation", "Normal");
+
+        log("Confirming the signs");
+        Ext4GridRef confirmSigns = _helper.getExt4GridForFormSection("Confirm Signs");
+        confirmSigns.setGridCell(1, "confirmation", "Confirmed");
+        confirmSigns.setGridCell(1, "admitStatus", "Long Term Outpatient");
+        clickButton("Submit Final", 0);
+        _extHelper.waitForExtDialog("Finalize Form");
+        click(Ext4Helper.Locators.ext4Button("Yes"));
+        waitForTextToDisappear("Saving Changes", 20000);
+
+        log("Verifying if case is created");
+        enterData = EnterDataPage.beginAt(this, getProjectName());
+        enterData.waitAndClickAndWait(Locator.linkWithText("LTOP"));
+        DataRegionTable ltopTable = new DataRegionTable("query", getDriver());
+        ltopTable.setFilter("Id", "Equals", "TEST1");
+        assertEquals("Case is not created", 1, ltopTable.getDataRowCount());
+
+    }
+
+    @Test
     public void testCnprcCaseManagement() throws IOException, CommandException
     {
         log("Inserting the record with todays date");
