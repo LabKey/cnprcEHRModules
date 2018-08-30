@@ -779,6 +779,13 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         ltopTable.setFilter("Id", "Equals", "TEST1");
         assertEquals("Case is not created", 1, ltopTable.getDataRowCount());
 
+        log("Verifying the clinical observation");
+        goToSchemaBrowser();
+        viewQueryData("study", "clinical_observations");
+        DataRegionTable table = new DataRegionTable("query", this);
+        table.setFilter("Id", "Equals", "TEST1");
+        assertEquals("Verifying the clinical observations",4,table.getDataRowCount());
+
     }
 
     @Test
