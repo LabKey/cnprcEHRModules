@@ -731,9 +731,9 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Inserting a record in mh processing");
         InsertRowsCommand insertCmd = new InsertRowsCommand("cnprc_ehr", "mh_processing");
         ZonedDateTime now = ZonedDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd,HHmmss");
         Map<String, Object> rowMapMH = new HashMap<>();
-        String data = "73C7DE6B2CA84AEA82B1C24A274D3287,DSTEST," + dateTimeFormatter.format(now) + ",060943,TEST1,58737392,LIQDSTL,,,,,,,,,,,";
+        String data = "73C7DE6B2CA84AEA82B1C24A274D3287,DSTEST," + dateTimeFormatter.format(now) + ",TEST1,58737392,LIQDSTL,,,,,,,,,,,";
         rowMapMH.put("rowPk", "73C7DE6B2CA84AEA82B1C24A274D3287");
         rowMapMH.put("data", data);
         rowMapMH.put("source", "Inserted Row");
