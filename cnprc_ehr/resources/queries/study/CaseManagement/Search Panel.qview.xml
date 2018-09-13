@@ -1,0 +1,10 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="area" />
+        <column name="room" />
+        <column name="admitType" />
+        <column name="Id" />
+        <column name="assignedVet" />
+        <column name="nextFollowUp" />
+    </columns>
+</customView>
