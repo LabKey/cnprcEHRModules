@@ -12,10 +12,11 @@
                 text: label,
                 linkCls: 'labkey-text-link',
                 padding: 2,
-                href: LABKEY.ActionURL.buildURL('query', 'executeQuery', null, {
-                    schemaName: 'study',
-                    'query.queryName': 'CaseManagement', 'query.AdmitType~eq': filter
-                })
+                href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view',
+                    LABKEY.ActionURL.getContainer(), {
+                        'results_qwp.admitType~eq': filter
+                    }
+                )
             };
         }
 
@@ -39,10 +40,8 @@
                                         text: 'All Cases',
                                         linkCls: 'labkey-text-link',
                                         padding: 2,
-                                        href: LABKEY.ActionURL.buildURL('query', 'executeQuery', null, {
-                                            schemaName: 'study',
-                                            'query.queryName': 'CaseManagement'
-                                        })
+                                        href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view',
+                                                LABKEY.ActionURL.getContainer())
                                     }
                                     , getFilteredCasesLink('Morning Health', 'MH')
                                     , getFilteredCasesLink('Hospital', 'H')
