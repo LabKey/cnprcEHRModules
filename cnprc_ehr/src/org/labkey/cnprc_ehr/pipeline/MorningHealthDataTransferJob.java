@@ -58,10 +58,20 @@ public class MorningHealthDataTransferJob extends PipelineJob
     private DateTimeFormatter obsDateTimeFormat =
             DateTimeFormatter.ofPattern(expectedDateTimePattern).withLocale(Locale.US).withZone(ZoneId.of("UTC"));
 
+    // For serialization
+    protected MorningHealthDataTransferJob() {}
+    
     public MorningHealthDataTransferJob(ViewBackgroundInfo info, PipeRoot root)
     {
         super(null, info, root);
     }
+
+    @Override
+    public boolean hasJacksonSerialization()
+    {
+        return true;
+    }
+
     @Override
     public URLHelper getStatusHref()
     {

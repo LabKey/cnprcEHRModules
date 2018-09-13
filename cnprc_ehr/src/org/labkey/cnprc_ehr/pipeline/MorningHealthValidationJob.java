@@ -53,11 +53,20 @@ public class MorningHealthValidationJob extends PipelineJob
     public static final String VALID_STATUS = "V";
     public static final String INVALID_STATUS = "I";
 
+    // For serialization
+    protected MorningHealthValidationJob() {}
+
     public MorningHealthValidationJob(ViewBackgroundInfo info, PipeRoot root) throws IOException
     {
         super(null, info, root);
         File logFile = File.createTempFile("morningHealthValidationJob", ".log", root.getLogDirectory());
         setLogFile(logFile);
+    }
+
+    @Override
+    public boolean hasJacksonSerialization()
+    {
+        return true;
     }
 
     @Override
