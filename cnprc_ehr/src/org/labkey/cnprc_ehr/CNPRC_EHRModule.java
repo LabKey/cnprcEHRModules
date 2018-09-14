@@ -126,14 +126,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/DemographicsRecord.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/SnapshotPanel.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcOverrides.js"), this);
-        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/WeightSummaryPanel.js"), this);
-        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/WeightGraphPanel.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"), this);
-
-        ehrService.registerClientDependency(ClientDependency.fromPath("ldk/grid/Panel.js"), this);
-        ehrService.registerClientDependency(ClientDependency.fromPath("ehr/grid/Panel.js"), this);
-        ehrService.registerClientDependency(ClientDependency.fromPath("ehr/grid/RoundsRemarksGridPanel.js"), this);
-        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/grid/CNPRC_RoundsRemarksGridPanel.js"), this);
 
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10%/20% Weight Drop", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightPctDrop"), "Commonly Used Queries");
@@ -157,9 +150,6 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("dataAdmin", this, "views/dataAdmin.html");
         ehrService.registerActionOverride("enterData", this, "views/enterData.html");
         ehrService.registerActionOverride("populateInitialData", this, "views/populateData.html");
-        ehrService.registerActionOverride("conceptionDetail", this, "views/conceptionDetail.html");
-        ehrService.registerActionOverride("bba_descriptions", this, "views/bba_descriptions.html");
-        ehrService.registerActionOverride("pathologyReport", this, "views/pathologyReport.html");
 
         //data entry
         ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));
