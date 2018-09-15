@@ -752,7 +752,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Selecting the row to verify");
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Morning Health"));
-        DataRegionTable morningHealthTable = new DataRegionTable("query", getDriver());
+        DataRegionTable morningHealthTable = new DataRegionTable("results_qwp", getDriver());
         morningHealthTable.setFilter("Id", "Equals", "TEST1");
         clickAndWait(Locator.linkWithText("Confirm Here"));
 
@@ -813,7 +813,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Checking records for all cases");
         HashSet<String> expectedAllCases = new HashSet<>(Arrays.asList("D", "H", "L", "MH", "O", "P"));
         enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
-        DataRegionTable allCasesTable = new DataRegionTable("query", getDriver());
+        DataRegionTable allCasesTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> ac = new HashSet<>(allCasesTable.getColumnDataAsText("admitType"));
         assertEquals("Missing admit type in list of all cases", expectedAllCases, ac);
         assertEquals("Wrong number of rows found in all cases", 6, ac.size());
@@ -822,14 +822,14 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Morning Health"));
         HashSet<String> expectedMorningHealth = new HashSet<>(Arrays.asList("MH"));
-        DataRegionTable morningHealthTable = new DataRegionTable("query", getDriver());
+        DataRegionTable morningHealthTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> mh = new HashSet<>(morningHealthTable.getColumnDataAsText("admitType"));
         assertEquals("Wrong Admit Type for Morning Health", expectedMorningHealth, mh);
 
         log("Checking records for hospital");
         enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Hospital"));
-        DataRegionTable hospitalTable = new DataRegionTable("query", getDriver());
+        DataRegionTable hospitalTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> h = new HashSet<>(hospitalTable.getColumnDataAsText("admitType"));
         HashSet<String> expectedHospital = new HashSet<>(Arrays.asList("H"));
         assertEquals("Wrong Admit Type for Hospital", expectedHospital, h);
@@ -837,7 +837,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Checking records for outpatient");
         enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Outpatient"));
-        DataRegionTable outPatientTable = new DataRegionTable("query", getDriver());
+        DataRegionTable outPatientTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> op = new HashSet<>(outPatientTable.getColumnDataAsText("admitType"));
         HashSet<String> expectedOutpatient = new HashSet<>(Arrays.asList("O"));
         assertEquals("Wrong Admit Type for Outpatient", expectedOutpatient, op);
@@ -845,7 +845,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Checking records for LTOP");
         enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("LTOP"));
-        DataRegionTable ltopTable = new DataRegionTable("query", getDriver());
+        DataRegionTable ltopTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> ltop = new HashSet<>(ltopTable.getColumnDataAsText("admitType"));
         HashSet<String> expectedLTOP = new HashSet<>(Arrays.asList("L"));
         assertEquals("Wrong Admit Type for Long Term Outpatient", expectedLTOP, ltop);
@@ -853,7 +853,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Checking records for post operation");
         enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Post-Operation"));
-        DataRegionTable ppTable = new DataRegionTable("query", getDriver());
+        DataRegionTable ppTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> pp = new HashSet<>(ppTable.getColumnDataAsText("admitType"));
         HashSet<String> expectedPostOperation = new HashSet<>(Arrays.asList("P"));
         assertEquals("Wrong Admit Type for post operation", expectedPostOperation, pp);
@@ -866,7 +866,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         log("Checking records for all cases");
         enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
-        DataRegionTable allCasesTable = new DataRegionTable("query", getDriver());
+        DataRegionTable allCasesTable = new DataRegionTable("results_qwp", getDriver());
         allCasesTable.setFilter("Id", "Equals", "44444");
         allCasesTable.setFilter("admitType", "Equals", "P");
         assertTrue("Wrong value in plan", allCasesTable.getColumnDataAsText("p").contains("Value for p-1"));
