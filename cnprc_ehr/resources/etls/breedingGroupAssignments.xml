@@ -23,6 +23,6 @@
                            targetKeyColumnName="objectid"/>
     </incrementalFilter>
     <schedule>
-        <poll interval="60m"/>
+        <cron expression="0 0 * ? * *"/> <!-- Every hour -->
     </schedule>
 </etl>

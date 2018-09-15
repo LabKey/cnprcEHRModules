@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <etl xmlns="http://labkey.org/etl/xml">
     <name>Morning Health File</name>
-    <description>Morning Health File Info - Historical </description>
+    <description>Morning Health File Info - Historical</description>
     <transforms>
         <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
             <description>Copy to target</description>
@@ -9,4 +9,8 @@
             <destination schemaName="cnprc_ehr" queryName="mh_file" bulkLoad="true" targetOption="truncate"/>
         </transform>
     </transforms>
+    <schedule>
+        <!-- run at 1 am everyday -->
+        <cron expression="0 0 1 * * ? *"/> <!--seconds, minutes, hours, day-of-month, month, day-of-week, year(optional) -->
+    </schedule>
 </etl>

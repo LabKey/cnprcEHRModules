@@ -17,6 +17,6 @@
         <deletedRowsSource schemaName="cnprcSrc_aud" queryName="q_project_protocol_delete" timestampColumnName="date_time" deletedSourceKeyColumnName="objectid" targetKeyColumnName="objectid"/>
     </incrementalFilter>
     <schedule>
-        <poll interval="60m" />
+        <cron expression="0 45 * ? * *"/> <!-- Every hour at 45 mins, ex. 8:45, 9:45, etc. -->
     </schedule>
 </etl>

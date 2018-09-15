@@ -9,4 +9,8 @@
             <destination schemaName="cnprc_ehr" queryName="rd_master" bulkLoad="true" targetOption="truncate"/>
         </transform>
     </transforms>
+    <schedule>
+        <!-- run at 1 am everyday -->
+        <cron expression="0 0 1 * * ? *"/> <!--seconds, minutes, hours, day-of-month, month, day-of-week, year(optional) -->
+    </schedule>
 </etl>
