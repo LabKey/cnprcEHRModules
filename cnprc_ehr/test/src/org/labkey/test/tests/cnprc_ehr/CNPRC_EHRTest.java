@@ -868,10 +868,21 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         log("Checking records for all cases");
         enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
+        SearchPanel searchPanel = new SearchPanel("Search Criteria", getDriver());
+        List<String> expectedLabels = Arrays.asList(
+                "Area:"
+                , "Enclosure:"
+                , "Admit Type:"
+                , "Id:"
+                , "Assigned Vet:"
+                , "Next Follow Up:"
+        );
+        assertEquals("Wrong search criteria.", expectedLabels, searchPanel.getAllSearchCriteria());
+        searchPanel.selectValues("Admit Type", false, "Post Operation");
+        searchPanel.submit();
         DataRegionTable allCasesTable = new DataRegionTable("results_qwp", getDriver());
         allCasesTable.setAsync(true);
         allCasesTable.setFilter("Id", "Equals", "44444");
-        allCasesTable.setFilter("admitType", "Equals", "Post Operation");
         assertTrue("Wrong value in plan", allCasesTable.getColumnDataAsText("p").contains("Value for p-1"));
         assertTrue("Wrong value in p2(last entered)", allCasesTable.getColumnDataAsText("p2").contains("Value for p2-1"));
         assertTrue("Wrong value in remarks", allCasesTable.getColumnDataAsText("remark").contains("Value for remarks-1"));
