@@ -871,7 +871,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable allCasesTable = new DataRegionTable("results_qwp", getDriver());
         allCasesTable.setAsync(true);
         allCasesTable.setFilter("Id", "Equals", "44444");
-        allCasesTable.setFilter("admitType", "Equals", "P");
+        allCasesTable.setFilter("admitType", "Equals", "Post Operation");
         assertTrue("Wrong value in plan", allCasesTable.getColumnDataAsText("p").contains("Value for p-1"));
         assertTrue("Wrong value in p2(last entered)", allCasesTable.getColumnDataAsText("p2").contains("Value for p2-1"));
         assertTrue("Wrong value in remarks", allCasesTable.getColumnDataAsText("remark").contains("Value for remarks-1"));

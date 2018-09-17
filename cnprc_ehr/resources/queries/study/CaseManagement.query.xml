@@ -11,6 +11,15 @@
                     <column columnName="p">
                         <columnTitle>Plan</columnTitle>
                     </column>
+                    <column columnName="admitType">
+                        <columnTitle>Admit Type</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>admit_status</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                    </column>
                     <column columnName="confirmLink">
                         <columnTitle>Confirm Link</columnTitle>
                         <url>ehr-dataEntryForm.view?formType=Confirm%20Morning%20Health&amp;Id=${Id}&amp;taskid=${taskid}</url>
