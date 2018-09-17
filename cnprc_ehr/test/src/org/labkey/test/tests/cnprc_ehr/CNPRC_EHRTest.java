@@ -753,6 +753,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Morning Health"));
         DataRegionTable morningHealthTable = new DataRegionTable("results_qwp", getDriver());
+        morningHealthTable.setAsync(true);
         morningHealthTable.setFilter("Id", "Equals", "TEST1");
         clickAndWait(Locator.linkWithText("Confirm Here"));
 
@@ -775,7 +776,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Verifying if case is created");
         enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("LTOP"));
-        DataRegionTable ltopTable = new DataRegionTable("query", getDriver());
+        DataRegionTable ltopTable = new DataRegionTable("results_qwp", getDriver());
+        ltopTable.setAsync(true);
         ltopTable.setFilter("Id", "Equals", "TEST1");
         assertEquals("Case is not created", 1, ltopTable.getDataRowCount());
 
@@ -867,6 +869,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Checking records for all cases");
         enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
         DataRegionTable allCasesTable = new DataRegionTable("results_qwp", getDriver());
+        allCasesTable.setAsync(true);
         allCasesTable.setFilter("Id", "Equals", "44444");
         allCasesTable.setFilter("admitType", "Equals", "P");
         assertTrue("Wrong value in plan", allCasesTable.getColumnDataAsText("p").contains("Value for p-1"));
