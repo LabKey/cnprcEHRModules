@@ -813,7 +813,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
 
         log("Checking records for all cases");
-        HashSet<String> expectedAllCases = new HashSet<>(Arrays.asList("D", "H", "L", "MH", "O", "P"));
+        HashSet<String> expectedAllCases = new HashSet<>(Arrays.asList("Diabetic", "Hospital", "Long Term Outpatient",
+                "Morning Health", "Outpatient", "Post Operation"));
         enterData.waitAndClickAndWait(Locator.linkWithText("All Cases"));
         DataRegionTable allCasesTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> ac = new HashSet<>(allCasesTable.getColumnDataAsText("admitType"));
@@ -823,7 +824,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Checking records morning health");
         enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Morning Health"));
-        HashSet<String> expectedMorningHealth = new HashSet<>(Arrays.asList("MH"));
+        HashSet<String> expectedMorningHealth = new HashSet<>(Arrays.asList("Morning Health"));
         DataRegionTable morningHealthTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> mh = new HashSet<>(morningHealthTable.getColumnDataAsText("admitType"));
         assertEquals("Wrong Admit Type for Morning Health", expectedMorningHealth, mh);
@@ -833,7 +834,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         enterData.waitAndClickAndWait(Locator.linkWithText("Hospital"));
         DataRegionTable hospitalTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> h = new HashSet<>(hospitalTable.getColumnDataAsText("admitType"));
-        HashSet<String> expectedHospital = new HashSet<>(Arrays.asList("H"));
+        HashSet<String> expectedHospital = new HashSet<>(Arrays.asList("Hospital"));
         assertEquals("Wrong Admit Type for Hospital", expectedHospital, h);
 
         log("Checking records for outpatient");
@@ -841,7 +842,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         enterData.waitAndClickAndWait(Locator.linkWithText("Outpatient"));
         DataRegionTable outPatientTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> op = new HashSet<>(outPatientTable.getColumnDataAsText("admitType"));
-        HashSet<String> expectedOutpatient = new HashSet<>(Arrays.asList("O"));
+        HashSet<String> expectedOutpatient = new HashSet<>(Arrays.asList("Outpatient"));
         assertEquals("Wrong Admit Type for Outpatient", expectedOutpatient, op);
 
         log("Checking records for LTOP");
@@ -849,7 +850,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         enterData.waitAndClickAndWait(Locator.linkWithText("LTOP"));
         DataRegionTable ltopTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> ltop = new HashSet<>(ltopTable.getColumnDataAsText("admitType"));
-        HashSet<String> expectedLTOP = new HashSet<>(Arrays.asList("L"));
+        HashSet<String> expectedLTOP = new HashSet<>(Arrays.asList("Long Term Outpatient"));
         assertEquals("Wrong Admit Type for Long Term Outpatient", expectedLTOP, ltop);
 
         log("Checking records for post operation");
@@ -857,7 +858,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         enterData.waitAndClickAndWait(Locator.linkWithText("Post-Operation"));
         DataRegionTable ppTable = new DataRegionTable("results_qwp", getDriver());
         Set<String> pp = new HashSet<>(ppTable.getColumnDataAsText("admitType"));
-        HashSet<String> expectedPostOperation = new HashSet<>(Arrays.asList("P"));
+        HashSet<String> expectedPostOperation = new HashSet<>(Arrays.asList("Post Operation"));
         assertEquals("Wrong Admit Type for post operation", expectedPostOperation, pp);
 
     }

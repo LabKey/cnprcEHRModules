@@ -12,8 +12,7 @@
                 text: label,
                 linkCls: 'labkey-text-link',
                 padding: 2,
-                href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view',
-                    LABKEY.ActionURL.getContainer(), {
+                href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view', null, {
                         'results_qwp.admitType~eq': filter
                     }
                 )
@@ -40,8 +39,7 @@
                                         text: 'All Cases',
                                         linkCls: 'labkey-text-link',
                                         padding: 2,
-                                        href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view',
-                                                LABKEY.ActionURL.getContainer())
+                                        href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view')
                                     }
                                     , getFilteredCasesLink('Morning Health', 'MH')
                                     , getFilteredCasesLink('Hospital', 'H')
