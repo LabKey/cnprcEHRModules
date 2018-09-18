@@ -6,14 +6,14 @@
         if (!ctx)
             return;
 
-        function getFilteredCasesLink(label,filter) {
+        function getFilteredCasesLink(label, filter) {
             return {
                 xtype: 'ldk-linkbutton',
                 text: label,
                 linkCls: 'labkey-text-link',
                 padding: 2,
                 href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view', null, {
-                        'results_qwp.admitType~eq': filter
+                        'results_qwp.admitType/description~eq': filter || label
                     }
                 )
             };
@@ -41,11 +41,11 @@
                                         padding: 2,
                                         href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view')
                                     }
-                                    , getFilteredCasesLink('Morning Health', 'MH')
-                                    , getFilteredCasesLink('Hospital', 'H')
-                                    , getFilteredCasesLink('Outpatient', 'O')
-                                    , getFilteredCasesLink('LTOP', 'L')
-                                    , getFilteredCasesLink('Post-Operation', 'P')
+                                    , getFilteredCasesLink('Morning Health')
+                                    , getFilteredCasesLink('Hospital')
+                                    , getFilteredCasesLink('Outpatient')
+                                    , getFilteredCasesLink('LTOP', 'Long Term Outpatient')
+                                    , getFilteredCasesLink('Post-Operation', 'Post Operation')
                                 ]
                             }]
                         }]
