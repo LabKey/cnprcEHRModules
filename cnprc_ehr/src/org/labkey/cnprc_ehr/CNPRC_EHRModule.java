@@ -44,28 +44,8 @@ import org.labkey.api.view.NavTree;
 import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
 import org.labkey.api.ehr.buttons.BulkEditButton;
-import org.labkey.cnprc_ehr.dataentry.forms.AssignmentFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.BreedingObservationsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.BreedingRegistrationFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.BulkClinicalEntryFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.CensusFlagFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.ClinicalExamCasesFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.ClinicalRoundsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.HousingFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.MorningHealthConfirmFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.NewBreedingRequestFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.NursingFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.PairingsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.EnrichmentFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.DeathsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.DepartureFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.InoculationFormType;
+import org.labkey.cnprc_ehr.dataentry.forms.*;
 //import org.labkey.cnprc_ehr.dataentry.forms.CageFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.PregnancyDeterminationsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.SerumFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.TreatmentsFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.WeightFormType;
-import org.labkey.cnprc_ehr.dataentry.forms.WeightTbTattooFormType;
 import org.labkey.cnprc_ehr.demographics.*;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
@@ -178,6 +158,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(MorningHealthConfirmFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DepartureFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(InoculationFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(ProjectActivationFormType.class, this));
 //        ehrService.registerFormType(new DefaultDataEntryFormFactory(CageFormType.class, this));
 
         //demographics
