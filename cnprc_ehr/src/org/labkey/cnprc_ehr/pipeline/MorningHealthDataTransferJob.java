@@ -53,9 +53,9 @@ import java.util.Map;
  */
 public class MorningHealthDataTransferJob extends PipelineJob
 {
-    private Logger LOG = Logger.getLogger(MorningHealthDataTransferJob.class);
-    private String expectedDateTimePattern = MorningHealthValidationJob.observationDateFormatString + " " + MorningHealthValidationJob.observationTimeFormatString;
-    private DateTimeFormatter obsDateTimeFormat =
+    private static final Logger LOG = Logger.getLogger(MorningHealthDataTransferJob.class);
+    private static final String expectedDateTimePattern = MorningHealthValidationJob.observationDateFormatString + " " + MorningHealthValidationJob.observationTimeFormatString;
+    private static final DateTimeFormatter obsDateTimeFormat =
             DateTimeFormatter.ofPattern(expectedDateTimePattern).withLocale(Locale.US).withZone(ZoneId.of("UTC"));
 
     // For serialization
