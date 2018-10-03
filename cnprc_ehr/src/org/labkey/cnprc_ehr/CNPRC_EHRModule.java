@@ -21,7 +21,6 @@ import org.labkey.api.data.Container;
 import org.labkey.api.data.DbSchema;
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
-import org.labkey.api.ehr.dataentry.forms.ArrivalFormType;
 import org.labkey.api.ehr.dataentry.forms.BirthFormType;
 import org.labkey.api.ehr.dataentry.forms.DCMNotesFormType;
 import org.labkey.api.ehr.history.DefaultBirthDataSource;
@@ -45,7 +44,6 @@ import org.labkey.api.view.WebPartFactory;
 import org.labkey.api.view.template.ClientDependency;
 import org.labkey.api.ehr.buttons.BulkEditButton;
 import org.labkey.cnprc_ehr.dataentry.forms.*;
-//import org.labkey.cnprc_ehr.dataentry.forms.CageFormType;
 import org.labkey.cnprc_ehr.demographics.*;
 import org.labkey.cnprc_ehr.table.CNPRC_EHRCustomizer;
 
@@ -131,40 +129,48 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerActionOverride("enterData", this, "views/enterData.html");
         ehrService.registerActionOverride("populateInitialData", this, "views/populateData.html");
 
-        //data entry
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));
+        // --- Data entry ---
+        // Clinical
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(BulkClinicalEntryFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalRoundsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalExamCasesFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(InoculationFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(TreatmentsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightTbTattooFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightFormType.class, this));
+
+        // Colony Management
         ehrService.registerFormType(new DefaultDataEntryFormFactory(ArrivalFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BirthFormType.class, this));
-//        ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(HousingFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(org.labkey.api.ehr.dataentry.forms.TreatmentsFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(TreatmentsFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalRoundsFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(BulkClinicalEntryFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(ClinicalExamCasesFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingRegistrationFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingObservationsFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(PregnancyDeterminationsFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(CensusFlagFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(NursingFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(NewBreedingRequestFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(SerumFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(WeightTbTattooFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(PairingsFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(EnrichmentFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(DCMNotesFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DeathsFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(MorningHealthConfirmFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(DepartureFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(InoculationFormType.class, this));
-        ehrService.registerFormType(new DefaultDataEntryFormFactory(ProjectActivationFormType.class, this));
-//        ehrService.registerFormType(new DefaultDataEntryFormFactory(CageFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(EnrichmentFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(HousingFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(NursingFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(PairingsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(AssignmentFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(SerumFormType.class, this));
 
-        //demographics
+        // Reproductive Management
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingObservationsFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingRegistrationFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(NewBreedingRequestFormType.class, this));
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(PregnancyDeterminationsFormType.class, this));
+
+        // Case Management
+        // No form types registered
+
+        // hidden
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(MorningHealthConfirmFormType.class, this));
+
+        // --- Demographics ---
+        ehrService.registerDemographicsProvider(new ActiveAssignmentDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ActiveFlagsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new BCSDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new BreedingGroupDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new BreedingRosterDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new CNPRCDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ColonyDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ConceptionsDemographicsProvider(this));
@@ -172,14 +178,12 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerDemographicsProvider(new LastHousingDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new LastPayorDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new LastProjectsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new ObservationsDemographicsProvider(this));
+        ehrService.registerDemographicsProvider(new MHLocationDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new ParentsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new PathologyReportsDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new SerumDemographicsProvider(this));
         ehrService.registerDemographicsProvider(new TBDemographicsProvider(this));
-        ehrService.registerDemographicsProvider(new BreedingRosterDemographicsProvider(this));
-        ehrService.registerDemographicsProvider(new ObservationsDemographicsProvider(this));
-        ehrService.registerDemographicsProvider(new MHLocationDemographicsProvider(this));
-        ehrService.registerDemographicsProvider(new ActiveAssignmentDemographicsProvider(this));
 
         ehrService.registerMoreActionsButton(new BulkEditButton(this),"ehr_lookups", LDKService.ALL_TABLES);
 

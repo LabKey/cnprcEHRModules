@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2010-2017 LabKey Corporation
+ *
+ * Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+require("ehr/triggers").initScript(this);
+
+function onInit(event, helper){
+    helper.setScriptOptions({
+        allowAnyId: true,
+        requiresStatusRecalc: true
+    });
+}
+
+function onUpsert(helper, scriptErrors, row, oldRow){
+    // validation
+}
+
+// from EHR's arrival.js
+// TODO: verify that the records created here in various tables are correct
+EHR.Server.TriggerManager.registerHandlerForQuery(EHR.Server.TriggerManager.Events.ON_BECOME_PUBLIC, 'study', 'Arrival', function(scriptErrors, helper, row, oldRow) {
+    helper.registerArrival(row.Id, row.date);
+
+    //if not already present, we insert into demographics
+    if (!helper.isETL() && !helper.isGeneratedByServer()){
+        var birthErrors = helper.getJavaHelper().onAnimalArrival(row.id, row, helper.getExtraBirthFieldMappings());
+        if (birthErrors){
+            EHR.Server.Utils.addError(scriptErrors, 'birth', birthErrors, 'ERROR');
+        }
+
+        //if room provided, we insert into housing
+        if (row.initialRoom){
+            helper.getJavaHelper().createHousingRecord(row.Id, row.date, null, row.initialRoom, (row.initialCage || null), (row.initialCond || null));
+        }
+    }
+});
