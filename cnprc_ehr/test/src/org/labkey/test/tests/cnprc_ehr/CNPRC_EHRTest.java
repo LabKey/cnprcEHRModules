@@ -874,7 +874,6 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "Area:"
                 , "Enclosure:"
                 , "Admit Type:"
-                , "Id:"
                 , "Assigned Vet:"
                 , "Next Follow Up:"
         );
