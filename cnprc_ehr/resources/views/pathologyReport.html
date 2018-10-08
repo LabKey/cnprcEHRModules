@@ -665,7 +665,7 @@
                     scope: this,
                     failure: LDK.Utils.getErrorCallback(),
                     success: function (results) {
-                        var id, subfolder, tnPath, orPath, fullTnPath, fullOrPath, first = true, organ, owner;
+                        var id, subfolder, tnPath, lgPath, fullTnPath, fullLgPath, first = true, organ, owner;
                         var pipelineRoot = LABKEY.ActionURL.getContextPath() + "/_webdav" + LABKEY.container.path + "/"
                                 + reportsFolder + "/@pipeline";
 
@@ -677,17 +677,17 @@
 
                                 subfolder = id.substr(2, 3);
                                 tnPath = "/TN/" + subfolder + "/";
-                                orPath = "/OR/" + subfolder + "/";
+                                lgPath = "/LG/" + subfolder + "/";
 
                                 fullTnPath = "\"" + pipelineRoot + tnPath + id + ".jpg\"";
-                                fullOrPath = "\"" + pipelineRoot + orPath + id + ".jpg\"";
+                                fullLgPath = "\"" + pipelineRoot + lgPath + id + ".jpg\"";
 
                                 if (first) {
                                     images = '<h4>Images</h4>';
                                     first = false;
                                 }
 
-                                images += "<span class='pathology'><div><a href=" + fullOrPath + "> <img src=" + fullTnPath + "></a></div>" +
+                                images += "<span class='pathology'><div><a href=" + fullLgPath + "> <img src=" + fullTnPath + "></a></div>" +
                                         "<div>Image Id: " + LABKEY.Utils.encodeHtml(id) + "</div>" +
                                         "<div>Owner: " + LABKEY.Utils.encodeHtml(owner) + "</div>" +
                                         "<div>Organ: " + LABKEY.Utils.encodeHtml(organ) + "</div>" +

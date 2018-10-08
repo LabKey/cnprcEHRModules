@@ -2901,8 +2901,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertElementPresent(Locator.linkWithImage("/TN/000/XY000302.jpg"));
 
         log("verifying full size image");
-        clickAndWait(Locator.linkWithHref("/OR/000/XY000301.jpg"));
-        assertElementPresent(Locator.xpath("//img[contains(@src, '/OR/000/XY000301.jpg')]"));
+        clickAndWait(Locator.linkWithHref("/LG/000/XY000301.jpg"));
+        assertElementPresent(Locator.xpath("//img[contains(@src, '/LG/000/XY000301.jpg')]"));
 
     }
 
