@@ -65,11 +65,11 @@
                     </column>
                     <column columnName="birthPlace">
                         <columnTitle>Birth Place</columnTitle>
-                        <!--<fk>
+                        <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
                             <fkTable>source</fkTable>
                             <fkColumnName>code</fkColumnName>
-                        </fk>-->
+                        </fk>
                     </column>
                     <column columnName="geographic_origin">
                         <columnTitle>Geographic Origin</columnTitle>
