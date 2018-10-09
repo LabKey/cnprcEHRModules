@@ -14,7 +14,34 @@ function onInit(event, helper){
 }
 
 function onUpsert(helper, scriptErrors, row, oldRow){
-    // validation
+    if (!helper.isETL()) {
+
+        row.date = EHR.Server.Utils.datetimeToString(row.date);  // strip off time from datetime in case of insert (to prevent negative ages)
+
+        // check quarantine location
+        LABKEY.Query.selectRows({
+            schemaName: 'cnprc_ehr',
+            queryName: 'cage_location_history',
+            columns: ['location'],  // not using location, just testing existence
+            scope: this,
+            filterArray: [
+                LABKEY.Filter.create('file_status', 'AC'),
+                LABKEY.Filter.create('to_date', null, LABKEY.Filter.Types.ISBLANK),
+                LABKEY.Filter.create('location', row.initialRoom + row.initialCage)
+            ],
+            success: function (results) {
+                if (!results || !(results.rows) || (results.rows.length < 1)) {
+                    EHR.Server.Utils.addError(scriptErrors, 'initialCage', 'Active room ' + row.initialRoom + ' and cage ' + row.initialCage + ' combo not found in cage_location_history table', 'WARN');
+                }
+            },
+            failure: function (error) {
+                console.log('Select rows error for cnprc_ehr.cage_location_history in arrival.js');
+                console.log(error);
+            }
+        });
+
+        // TODO: Implement: Acquisition Date is not in future, Dam and Sire ID (and gender) validation, and Domestic Institution validation
+    }
 }
 
 // from EHR's arrival.js

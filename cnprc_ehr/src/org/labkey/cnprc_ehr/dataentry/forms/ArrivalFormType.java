@@ -1,10 +1,11 @@
 package org.labkey.cnprc_ehr.dataentry.forms;
 
 import org.labkey.api.ehr.dataentry.DataEntryFormContext;
+import org.labkey.api.ehr.dataentry.FormSection;
 import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
 import org.labkey.api.module.Module;
-import org.labkey.cnprc_ehr.dataentry.AnimalDetailsFormSection;
+import org.labkey.api.view.template.ClientDependency;
 import org.labkey.cnprc_ehr.dataentry.ArrivalFormSection;
 import org.labkey.cnprc_ehr.dataentry.ImmunizationFormSection;
 import org.labkey.cnprc_ehr.dataentry.TbFormSection;
@@ -19,8 +20,6 @@ public class ArrivalFormType extends TaskForm
     public ArrivalFormType(DataEntryFormContext ctx, Module owner)
     {
         super(ctx, owner, NAME, LABEL, "Colony Management", Arrays.asList(
-
-                new AnimalDetailsFormSection(),
                 new TaskFormSection(),
                 new ArrivalFormSection()
                 //new PayorAssignmentsFormSection(),
@@ -28,5 +27,12 @@ public class ArrivalFormType extends TaskForm
                 //new AssignmentFormSection(),
                 //new EnrichmentFormSection()
         ));
+
+        for (FormSection s : this.getFormSections())
+        {
+            s.addConfigSource("Arrival");
+        }
+
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Arrival.js"));
     }
 }

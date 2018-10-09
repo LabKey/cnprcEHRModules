@@ -8,5 +8,4 @@ public class ArrivalFormSection extends SimpleFormSection
     {
         super("study", "arrival", "Arrival", "ehr-gridpanel");
     }
-
 }
