@@ -16,8 +16,6 @@ function onInit(event, helper){
 function onUpsert(helper, scriptErrors, row, oldRow){
     if (!helper.isETL()) {
 
-        row.date = EHR.Server.Utils.datetimeToString(row.date);  // strip off time from datetime in case of insert (to prevent negative ages)
-
         // check quarantine location
         LABKEY.Query.selectRows({
             schemaName: 'cnprc_ehr',
@@ -40,12 +38,45 @@ function onUpsert(helper, scriptErrors, row, oldRow){
             }
         });
 
-        // TODO: Implement: Acquisition Date is not in future, Dam and Sire ID (and gender) validation, and Domestic Institution validation
+        // check acquisition date
+        if (row.date) {
+            var acquisitionDate = new Date(row.date);
+            var now = new Date();
+            if (acquisitionDate > now)
+                EHR.Server.Utils.addError(scriptErrors, 'date', 'Acquisition date is in future', 'ERROR');
+        }
+
+        // check dam and sire
+        if (row.dam) {
+            EHR.Server.Utils.findDemographics({
+                participant: row.dam,
+                helper: helper,
+                scope: this,
+                callback: function (data) {
+                    if (data && (data.calculated_status !== 'Alive'))
+                        EHR.Server.Utils.addError(scriptErrors, 'dam', 'Status of Female ' + row.dam + ' is: ' + data.calculated_status, 'INFO');
+                    if (data && data['gender/origGender'] && (data['gender/origGender'] !== 'F'))
+                        EHR.Server.Utils.addError(scriptErrors, 'dam', 'Dam ' + row.dam + ' is not female gender', 'ERROR');
+                }
+            });
+        }
+        if (row.sire) {
+            EHR.Server.Utils.findDemographics({
+                participant: row.sire,
+                helper: helper,
+                scope: this,
+                callback: function (data) {
+                    if (data && (data.calculated_status !== 'Alive'))
+                        EHR.Server.Utils.addError(scriptErrors, 'sire', 'Status of Male ' + row.sire + ' is: ' + data.calculated_status, 'INFO');
+                    if (data && data['gender/origGender'] && (data['gender/origGender'] !== 'M'))
+                        EHR.Server.Utils.addError(scriptErrors, 'sire', 'Sire ' + row.sire + ' is not male gender', 'ERROR');
+                }
+            });
+        }
     }
 }
 
 // from EHR's arrival.js
-// TODO: verify that the records created here in various tables are correct
 EHR.Server.TriggerManager.registerHandlerForQuery(EHR.Server.TriggerManager.Events.ON_BECOME_PUBLIC, 'study', 'Arrival', function(scriptErrors, helper, row, oldRow) {
     helper.registerArrival(row.Id, row.date);
 

@@ -15,6 +15,21 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                     ]
                 }
             },
+            date: {
+                columnConfig: {
+                    width: 130
+                }
+            },
+            estimated: {
+                columnConfig: {
+                    width: 130
+                }
+            },
+            birthPlace: {
+                columnConfig: {
+                    width: 200
+                }
+            },
             initialCage: {
                 nullable: false
             },
@@ -26,7 +41,10 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                 nullable: true
             },
             acquisitionType: {
-                nullable: false
+                nullable: false,
+                columnConfig: {
+                    width: 130
+                }
             },
             rearingType: {
                 hidden: true

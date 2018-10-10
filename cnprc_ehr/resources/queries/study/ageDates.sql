@@ -6,16 +6,16 @@
 SELECT
   demo.id,
   demo.birth,
-  COALESCE(demo.id.MostRecentArrival.EarliestArrival, demo.birth) AS earliestArrivalOrBirthDate,
-  COALESCE(demo.id.MostRecentArrival.MostRecentArrival, demo.birth) AS latestArrivalOrBirthDate,
+  CAST(COALESCE(demo.id.MostRecentArrival.EarliestArrival, demo.birth) AS DATE) AS earliestArrivalOrBirthDate,
+  CAST(COALESCE(demo.id.MostRecentArrival.MostRecentArrival, demo.birth) AS DATE) AS latestArrivalOrBirthDate,
   CASE
   WHEN demo.calculated_status = 'Alive' THEN CAST(now() AS DATE)
-  WHEN demo.calculated_status = 'Dead' THEN deaths.date
-  WHEN (demo.calculated_status = 'Shipped') OR (demo.calculated_status = 'Escaped') THEN demo.Id.MostRecentDeparture.MostRecentDeparture
+  WHEN demo.calculated_status = 'Dead' THEN CAST(deaths.date AS DATE)
+  WHEN (demo.calculated_status = 'Shipped') OR (demo.calculated_status = 'Escaped') THEN CAST(demo.Id.MostRecentDeparture.MostRecentDeparture AS DATE)
   ELSE NULL END AS timeAtCnprcEndDate,
   CASE
-  WHEN demo.Id.MostRecentDeparture.MostRecentDeparture IS NOT NULL THEN demo.Id.MostRecentDeparture.MostRecentDeparture
-  WHEN demo.calculated_status = 'Dead' THEN demo.Id.lastHousing.enddate
+  WHEN demo.Id.MostRecentDeparture.MostRecentDeparture IS NOT NULL THEN CAST(demo.Id.MostRecentDeparture.MostRecentDeparture AS DATE)
+  WHEN demo.calculated_status = 'Dead' THEN CAST(demo.Id.lastHousing.enddate AS DATE)
   ELSE NULL END AS departureOrLastHousingDate
 FROM study.demographics demo
 LEFT JOIN study.deaths
