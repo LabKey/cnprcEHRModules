@@ -74,12 +74,15 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
         {
             super.processRow(rs, cols, map);
 
-
             // similar hack to CNPRCDemographicsProvider, but we're not using the columns anywhere else, so this is the only implementation of these age calculations
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             FieldKey fk = FieldKey.fromString("ageToday");
-            Date departureOrLastHousingDate = (Date) map.get("departureOrLastHousingDate");
+            String departureOrLastHousingDateString = (String) map.get("departureOrLastHousingDate");
+            Date departureOrLastHousingDate = null;
             Date todayDate = null;
-            if (departureOrLastHousingDate == null)  // animal has not departed or died
+            if (departureOrLastHousingDateString != null)
+                departureOrLastHousingDate = dateFormat.parse(departureOrLastHousingDateString);
+            else  // animal has not departed or died
             {
                 Calendar today = Calendar.getInstance();
                 today.clear(Calendar.HOUR); today.clear(Calendar.MINUTE); today.clear(Calendar.SECOND);  // truncate to day
@@ -87,7 +90,6 @@ public class HousingIntervalsDemographicsProvider extends AbstractDemographicsPr
             }
             // if animal has departed or died, will leave todayDate as null so Age Today will not be populated
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String earliestArrivalOrBirthDateString = (String)map.get("earliestArrivalOrBirthDate");
             String latestArrivalOrBirthDateString = (String)map.get("latestArrivalOrBirthDate");
             String timeAtCnprcEndDateString = (String) map.get("timeAtCnprcEndDate");
