@@ -67,12 +67,6 @@ public class MorningHealthDataTransferJob extends PipelineJob
     }
 
     @Override
-    public boolean hasJacksonSerialization()
-    {
-        return true;
-    }
-
-    @Override
     public URLHelper getStatusHref()
     {
         return null;

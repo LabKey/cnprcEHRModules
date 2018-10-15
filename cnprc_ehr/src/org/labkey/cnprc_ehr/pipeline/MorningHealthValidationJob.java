@@ -64,12 +64,6 @@ public class MorningHealthValidationJob extends PipelineJob
     }
 
     @Override
-    public boolean hasJacksonSerialization()
-    {
-        return true;
-    }
-
-    @Override
     public boolean equals(Object obj)
     {
         // NOTE: not really needed in this job since it's very unlikely that the same user/container will have more than one of these jobs running at once
