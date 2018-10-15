@@ -16,27 +16,53 @@ function onInit(event, helper){
 function onUpsert(helper, scriptErrors, row, oldRow){
     if (!helper.isETL()) {
 
-        // check quarantine location
-        LABKEY.Query.selectRows({
-            schemaName: 'cnprc_ehr',
-            queryName: 'cage_location_history',
-            columns: ['location'],  // not using location, just testing existence
-            scope: this,
-            filterArray: [
-                LABKEY.Filter.create('file_status', 'AC'),
-                LABKEY.Filter.create('to_date', null, LABKEY.Filter.Types.ISBLANK),
-                LABKEY.Filter.create('location', row.initialRoom + row.initialCage)
-            ],
-            success: function (results) {
-                if (!results || !(results.rows) || (results.rows.length < 1)) {
-                    EHR.Server.Utils.addError(scriptErrors, 'initialCage', 'Active room ' + row.initialRoom + ' and cage ' + row.initialCage + ' combo not found in cage_location_history table', 'WARN');
+        // check if animal has open housing record
+
+        if (row.Id) {
+            LABKEY.Query.selectRows({
+                schemaName: 'study',
+                queryName: 'housing',
+                columns: ['Id'],
+                scope: this,
+                filterArray: [
+                    LABKEY.Filter.create('Id', row.Id),
+                    LABKEY.Filter.create('enddate', null, LABKEY.Filter.Types.ISBLANK)
+                ],
+                success: function (results) {
+                    if (results && (results.rows) && (results.rows.length > 0)) {
+                        EHR.Server.Utils.addError(scriptErrors, 'Id', 'Animal ID ' + row.Id + ' has an open housing record. It must be closed before this arrival can be submitted', 'WARN');
+                    }
+                },
+                failure: function (error) {
+                    console.log('Select rows error for cnprc_ehr.cage_location_history in arrival.js');
+                    console.log(error);
                 }
-            },
-            failure: function (error) {
-                console.log('Select rows error for cnprc_ehr.cage_location_history in arrival.js');
-                console.log(error);
-            }
-        });
+            });
+        }
+
+        // check quarantine location
+        if (row.initialRoom && row.initialCage) {
+            LABKEY.Query.selectRows({
+                schemaName: 'cnprc_ehr',
+                queryName: 'cage_location_history',
+                columns: ['location'],  // not using location, just testing existence
+                scope: this,
+                filterArray: [
+                    LABKEY.Filter.create('file_status', 'AC'),
+                    LABKEY.Filter.create('to_date', null, LABKEY.Filter.Types.ISBLANK),
+                    LABKEY.Filter.create('location', row.initialRoom + row.initialCage)
+                ],
+                success: function (results) {
+                    if (!results || !(results.rows) || (results.rows.length < 1)) {
+                        EHR.Server.Utils.addError(scriptErrors, 'initialCage', 'Active room ' + row.initialRoom + ' and cage ' + row.initialCage + ' combo not found in cage_location_history table', 'WARN');
+                    }
+                },
+                failure: function (error) {
+                    console.log('Select rows error for cnprc_ehr.cage_location_history in arrival.js');
+                    console.log(error);
+                }
+            });
+        }
 
         // check acquisition date
         if (row.date) {
@@ -76,13 +102,14 @@ function onUpsert(helper, scriptErrors, row, oldRow){
     }
 }
 
-// from EHR's arrival.js
+// mostly from EHR's arrival.js
 EHR.Server.TriggerManager.registerHandlerForQuery(EHR.Server.TriggerManager.Events.ON_BECOME_PUBLIC, 'study', 'Arrival', function(scriptErrors, helper, row, oldRow) {
     helper.registerArrival(row.Id, row.date);
 
     //if not already present, we insert into demographics
     if (!helper.isETL() && !helper.isGeneratedByServer()){
-        var birthErrors = helper.getJavaHelper().onAnimalArrival(row.id, row, helper.getExtraBirthFieldMappings());
+        row.genNum = '0';  // all arrivals in CNPRC are currently acquisitions from other centers, so their genNum is 0
+        var birthErrors = helper.getJavaHelper().onAnimalArrival(row.id, row, helper.getExtraBirthFieldMappings(), helper.getExtraDemographicsFieldMappings());
         if (birthErrors){
             EHR.Server.Utils.addError(scriptErrors, 'birth', birthErrors, 'ERROR');
         }

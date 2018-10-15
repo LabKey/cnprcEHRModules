@@ -20,4 +20,12 @@ exports.init = function (EHR) {
             });
         }
     });
+
+    EHR.Server.TriggerManager.registerHandlerForQuery(EHR.Server.TriggerManager.Events.INIT, 'study', 'arrival', function(event, helper) {
+        helper.setScriptOptions({
+            extraDemographicsFieldMappings: {
+                genNum: 'genNum'
+            }
+        });
+    });
 };
