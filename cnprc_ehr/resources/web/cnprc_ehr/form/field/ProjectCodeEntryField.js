@@ -7,7 +7,7 @@
  * This field is used to display EHR projects.  It contains a custom template for the combo list which displays both the project and protocol.
  * It also listens for participantchange events and will display only the set of allowable projects for the selected animal.
  *
- * @cfg includeDefaultProjects defaults to true
+ * @cfg includeDefaultProjects, showOnlyOpenProjects default to true
  */
 Ext4.define('EHR.form.field.ProjectCodeEntryField', {
     extend: 'Ext.form.field.ComboBox',
@@ -20,6 +20,7 @@ Ext4.define('EHR.form.field.ProjectCodeEntryField', {
     disabled: false,
     matchFieldWidth: false,
     includeDefaultProjects: true,
+    showOnlyOpenProjects: true,
     schemaName:'cnprc_ehr',
 
     initComponent: function(){
@@ -217,7 +218,9 @@ Ext4.define('EHR.form.field.ProjectCodeEntryField', {
                     "1 as sort_order, " +
                     "CASE WHEN (a.projectCode = p.projectCode) THEN 1 ELSE 0 END as isAssigned " +
                     " FROM cnprc_ehr.project p JOIN study.assignment a ON (a.projectCode = p.projectCode) " +
-                    " WHERE a.id='"+id+"' AND (a.projectCode = p.projectCode) "; //TODO: restore this OR p.enddate IS NULL OR p.enddate >= curdate()
+                    " WHERE a.id='"+id+"' AND (a.projectCode = p.projectCode) ";
+            if (this.showOnlyOpenProjects)
+                sql += "AND p.enddate IS NULL ";
 
             //NOTE: if the date is in the future, we assume active projects
             if (date){
@@ -242,6 +245,9 @@ Ext4.define('EHR.form.field.ProjectCodeEntryField', {
                     "3 as sort_order, " +
                     "0 as isAssigned " +
                     "FROM cnprc_ehr.project p ";
+            if (this.showOnlyOpenProjects)
+                sql += "WHERE p.enddate IS NULL ";
+
             // "WHERE p.alwaysavailable = true"; //TODO: restore this: and p.enddateCoalesced >= curdate()
         }
 

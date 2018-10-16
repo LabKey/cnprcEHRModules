@@ -42,17 +42,17 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                 }
             },
             initialCage: {
-                nullable: false
+                allowBlank: false
             },
             gender: {
-                nullable: false
+                allowBlank: false
             },
             birth: {
                 allowBlank: true,
                 nullable: true
             },
             acquisitionType: {
-                nullable: false,
+                allowBlank: false,
                 columnConfig: {
                     width: 130
                 }
@@ -93,7 +93,8 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                     filterArray: [
                         LABKEY.Filter.create('file_status', 'AC')
                     ]
-                }
+                },
+                allowBlank: false
             },
             performedby: {
                 hidden: true
@@ -119,7 +120,8 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                     filterArray: [
                         LABKEY.Filter.create('date_disabled', null, LABKEY.Filter.Types.ISBLANK)
                     ]
-                }
+                },
+                allowBlank: false
             },
             projectCode: {
                 hidden: true
@@ -144,11 +146,8 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                 }
             },
             projectCode: {
-                lookup: {
-                    filterArray: [
-                        LABKEY.Filter.create('enddate', null, LABKEY.Filter.Types.ISBLANK)  // TODO: fix this, doesn't work
-                    ]
-                }
+                // NB: Lookup filtering won't work here, please see ProjectCodeEntryField.js (especially showOnlyOpenProjects)
+                allowBlank: false
             },
             enddate: {
                 hidden: true
@@ -174,6 +173,12 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                 columnConfig: {
                     width: 130
                 }
+            },
+            socialCode: {
+                allowBlank: false
+            },
+            observation: {
+                allowBlank: false
             }
         }
     }

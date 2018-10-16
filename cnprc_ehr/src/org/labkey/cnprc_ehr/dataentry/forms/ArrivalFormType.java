@@ -38,6 +38,10 @@ public class ArrivalFormType extends TaskForm
             s.addConfigSource("Arrival");
         }
 
+        setJavascriptClass("CNPRC_EHR.panel.ArrivalPanel");
+
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Arrival.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/MultipleRequiredPartsPanel.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/ArrivalPanel.js"));
     }
 }
