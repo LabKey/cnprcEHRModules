@@ -146,7 +146,7 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
             projectCode: {
                 lookup: {
                     filterArray: [
-                        LABKEY.Filter.create('enddate', null, LABKEY.Filter.Types.BLANK)  // TODO: fix this, doesn't work
+                        LABKEY.Filter.create('enddate', null, LABKEY.Filter.Types.ISBLANK)  // TODO: fix this, doesn't work
                     ]
                 }
             },
