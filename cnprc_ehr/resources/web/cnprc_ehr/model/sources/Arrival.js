@@ -7,7 +7,13 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
     allQueries: {
     },
     byQuery: {
+        // Arrival section
         'study.Arrival': {
+            Id: {
+                columnConfig: {
+                    width: 75
+                }
+            },
             species: {
                 lookup: {
                     filterArray: [
@@ -28,6 +34,11 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
             birthPlace: {
                 columnConfig: {
                     width: 200
+                }
+            },
+            initialRoom: {
+                columnConfig: {
+                    width: 130
                 }
             },
             initialCage: {
@@ -63,6 +74,106 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
             },
             remark: {
                 hidden: true
+            }
+        },
+        // Per Diem Payor section
+        'study.payor_assignments': {
+            Id: {
+                columnConfig: {
+                    width: 75
+                }
+            },
+            date: {
+                columnConfig: {
+                    width: 130
+                }
+            },
+            payor_id: {
+                lookup: {
+                    filterArray: [
+                        LABKEY.Filter.create('file_status', 'AC')
+                    ]
+                }
+            },
+            performedby: {
+                hidden: true
+            },
+            remark: {
+                hidden: true
+            }
+        },
+        // Colony Codes section
+        'study.colony_assignments': {
+            Id: {
+                columnConfig: {
+                    width: 75
+                }
+            },
+            date: {
+                columnConfig: {
+                    width: 175
+                }
+            },
+            colonyCode: {
+                lookup: {
+                    filterArray: [
+                        LABKEY.Filter.create('date_disabled', null, LABKEY.Filter.Types.ISBLANK)
+                    ]
+                }
+            },
+            projectCode: {
+                hidden: true
+            },
+            performedby: {
+                hidden: true
+            },
+            remark: {
+                hidden: true
+            }
+        },
+        // Project Codes section
+        'study.Assignment': {
+            Id: {
+                columnConfig: {
+                    width: 75
+                }
+            },
+            date: {
+                columnConfig: {
+                    width: 130
+                }
+            },
+            projectCode: {
+                lookup: {
+                    filterArray: [
+                        LABKEY.Filter.create('enddate', null, LABKEY.Filter.Types.BLANK)  // TODO: fix this, doesn't work
+                    ]
+                }
+            },
+            enddate: {
+                hidden: true
+            },
+            assignmentStatus: {
+                hidden: true
+            },
+            performedby: {
+                hidden: true
+            },
+            remark: {
+                hidden: true
+            }
+        },
+        // Enrichment section
+        'study.Enrichment': {
+            Id: {
+                columnConfig: {
+                    width: 75
+                }
+            },
+            date: {
+                columnConfig: {
+                    width: 130
+                }
             }
         }
     }

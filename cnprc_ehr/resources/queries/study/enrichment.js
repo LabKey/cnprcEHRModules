@@ -1,5 +1,11 @@
 require("ehr/triggers").initScript(this);
 
+function onInit(event, helper){
+    helper.setScriptOptions({
+        allowAnyId: true
+    });
+}
+
 function onInsert(helper, scriptErrors, row){
     //generate objectId, since its the keyfield for our dataset.
     row.objectid = row.objectid || LABKEY.Utils.generateUUID().toUpperCase();
@@ -7,7 +13,6 @@ function onInsert(helper, scriptErrors, row){
 function onUpsert(helper, scriptErrors, row, oldRow) {
 
     if (!helper.isETL()) {
-
         if(row.date && row.releaseDate){
             // EHR.Server.Validation.verifyDate(row.date, scriptErrors, helper,'date');
             var assign_date = new Date(row.date).getTime();
@@ -18,8 +23,5 @@ function onUpsert(helper, scriptErrors, row, oldRow) {
 
             }
         }
-        // if (row.releaseDate === undefined) {
-        //     EHR.Server.Utils.addError(scriptErrors, 'releaseDate', 'Release Date is a required field.', 'ERROR');
-        // }
     }
 }

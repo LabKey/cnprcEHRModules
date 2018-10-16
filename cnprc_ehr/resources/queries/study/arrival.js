@@ -17,7 +17,6 @@ function onUpsert(helper, scriptErrors, row, oldRow){
     if (!helper.isETL()) {
 
         // check if animal has open housing record
-
         if (row.Id) {
             LABKEY.Query.selectRows({
                 schemaName: 'study',
