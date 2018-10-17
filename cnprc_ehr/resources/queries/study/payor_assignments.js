@@ -5,3 +5,10 @@ function onInit(event, helper){
         allowAnyId: true
     });
 }
+
+function onUpsert(helper, scriptErrors, row, oldRow) {
+    if (!helper.isETL()) {
+        helper.checkForDuplicateDataEntryItem('Id', 'Animal ID', row.Id, scriptErrors);
+        helper.checkForDuplicateDataEntryItem('payor_id', 'Payor ID', row.payor_id, scriptErrors);
+    }
+}

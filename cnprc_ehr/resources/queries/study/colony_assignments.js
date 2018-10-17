@@ -6,3 +6,9 @@ function onInit(event, helper){
     });
 }
 
+function onUpsert(helper, scriptErrors, row, oldRow) {
+    if (!helper.isETL()) {
+        helper.checkForDuplicateDataEntryItem('colonyCode', 'Colony code', row.colonyCode, scriptErrors);
+    }
+}
+

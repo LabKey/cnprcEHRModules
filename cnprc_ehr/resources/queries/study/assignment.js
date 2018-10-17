@@ -5,3 +5,9 @@ function onInit(event, helper){
         allowAnyId: true
     });
 }
+
+function onUpsert(helper, scriptErrors, row, oldRow) {
+    if (!helper.isETL()) {
+        helper.checkForDuplicateDataEntryItem('projectCode', 'Project code', row.projectCode, scriptErrors);
+    }
+}
