@@ -944,6 +944,54 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     }
 
     @Test
+    public void testArrivalsDataEntry()
+    {
+        String animalId = "A3";
+        log("Clicking the Arrival link");
+        EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
+        enterData.waitAndClickAndWait(Locator.linkWithText("Arrival"));
+        WebElement titleEl = waitForElement(Locator.xpath("//input[@name='title' and not(contains(@class, 'disabled'))]"), WAIT_FOR_JAVASCRIPT);
+        waitForFormElementToEqual(titleEl, "Arrival");
+
+        log("Setting the task title");
+        setFormElement(Locator.name("title"), "Arrival Data Entry");
+        assertEquals("Arrival Data Entry", getFormElement(Locator.name("title")));
+
+        log("Entering the information");
+        Ext4GridRef arrival = _helper.getExt4GridForFormSection("Arrival");
+        _helper.addRecordToGrid(arrival);
+        arrival.setGridCell(1, "Id", animalId);
+        arrival.setGridCell(1, "species", "MRA");
+        arrival.setGridCell(1, "initialRoom", "AC5003");
+        arrival.setGridCell(1, "initialCage", "89");
+        arrival.setGridCell(1, "gender", "Female");
+        arrival.setGridCell(1, "dam", "TEST1");
+        arrival.setGridCell(1, "sire", "TEST6390238");
+        arrival.setGridCell(1, "geographic_origin", "U.S. OF AMERICA");
+        arrival.setGridCell(1, "source", "ARIZONA STATE UNIVERSITY");
+        arrival.setGridCell(1, "acquisitionType", "Acquired");
+
+        log("Submitting the form");
+        clickButton("Submit Final", 0);
+        _extHelper.waitForExtDialog("Finalize Form");
+        click(Ext4Helper.Locators.ext4Button("Yes"));
+        waitForTextToDisappear("Saving Changes", 20000);
+
+        log("Verifying the animal entered in animal details page");
+        AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
+        animalHistoryPage.searchSingleAnimal(animalId);
+        assertTextPresent("Overview: A3");
+        assertTextPresent("Acquisition", "2018-10-17");
+        assertTextPresent("Sex", "Female");
+
+        goToSchemaBrowser();
+        DataRegionTable schemeTable = viewQueryData("study", "arrival");
+        schemeTable.setFilter("Id", "Equals", animalId);
+        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, schemeTable.getDataRowCount());
+
+    }
+
+    @Test
     public void testCnprcColonyOverview_CCS()
     {
         ColonyOverviewPage overviewPage = ColonyOverviewPage.beginAt(this, getProjectName());
