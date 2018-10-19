@@ -947,7 +947,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testArrivalsDataEntry()
     {
-        String animalId = "A1";
+        String animalId = "10001";
         log("Clicking the Arrival link");
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Arrival"));
@@ -1015,32 +1015,33 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         goToSchemaBrowser();
         DataRegionTable arrivalTable = viewQueryData("study", "arrival");
         arrivalTable.setFilter("Id", "Equals", animalId);
-        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, arrivalTable.getDataRowCount());
+        assertEquals("Arrival data for the new animal entered: " + animalId + " is incorrect", 1, arrivalTable.getDataRowCount());
 
         goToSchemaBrowser();
         DataRegionTable housingTable = viewQueryData("study","housing");
         housingTable.setFilter("Id", "Equals", animalId);
-        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, housingTable.getDataRowCount());
+        assertEquals("Housing data for the new animal entered: " + animalId + " is incorrect", 1, housingTable.getDataRowCount());
 
         goToSchemaBrowser();
         DataRegionTable payorAssignment = viewQueryData("study","payor_assignments");
         payorAssignment.setFilter("Id", "Equals", animalId);
-        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, payorAssignment.getDataRowCount());
+        assertEquals("Payor assignment data for the new animal entered: " + animalId + " is incorrect", 1, payorAssignment.getDataRowCount());
 
         goToSchemaBrowser();
         DataRegionTable colonyAssignmnet = viewQueryData("study","colony_assignments");
         colonyAssignmnet.setFilter("Id", "Equals", animalId);
-        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, colonyAssignmnet.getDataRowCount());
+        assertEquals("Colony assignment data for the new animal entered: " + animalId + " is incorrect", 1, colonyAssignmnet.getDataRowCount());
 
         goToSchemaBrowser();
         DataRegionTable assignmentTable = viewQueryData("study","assignment");
         assignmentTable.setFilter("Id", "Equals", animalId);
-        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, assignmentTable.getDataRowCount());
+        assertEquals("Project assignment data for the new animal entered: " + animalId + " is incorrect", 1, assignmentTable.getDataRowCount());
 
         goToSchemaBrowser();
         DataRegionTable enrichmentTable = viewQueryData("study","enrichment");
         enrichmentTable.setFilter("Id", "Equals", animalId);
-        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, enrichmentTable.getDataRowCount());
+        assertEquals("Enrichment data for the new animal entered: " + animalId + " is incorrect", 1, enrichmentTable.getDataRowCount());
+        assertEquals("Social Code is not set properly","SH",enrichmentTable.getDataAsText(0,"socialCode"));
 
     }
 
