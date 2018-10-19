@@ -138,6 +138,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
     private static final File BILLING_ACCOUNT_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_BILLING_ACCOUNTS.tsv");
+    private static final File BILLING_PROJECT_CHARGE_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_BILLING_PROJECT_CHARGE.tsv");
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_OBSERVATION_TYPES = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_OBSERVATION_TYPES.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
@@ -946,7 +947,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Test
     public void testArrivalsDataEntry()
     {
-        String animalId = "A3";
+        String animalId = "A1";
         log("Clicking the Arrival link");
         EnterDataPage enterData = EnterDataPage.beginAt(this, getProjectName());
         enterData.waitAndClickAndWait(Locator.linkWithText("Arrival"));
@@ -957,7 +958,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         setFormElement(Locator.name("title"), "Arrival Data Entry");
         assertEquals("Arrival Data Entry", getFormElement(Locator.name("title")));
 
-        log("Entering the information");
+        log("Entering the information for arrival");
         Ext4GridRef arrival = _helper.getExt4GridForFormSection("Arrival");
         _helper.addRecordToGrid(arrival);
         arrival.setGridCell(1, "Id", animalId);
@@ -971,6 +972,31 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         arrival.setGridCell(1, "source", "ARIZONA STATE UNIVERSITY");
         arrival.setGridCell(1, "acquisitionType", "Acquired");
 
+        log("Entering the information for per diem payor");
+        Ext4GridRef perDiemPayor = _helper.getExt4GridForFormSection("Per Diem Payor");
+        _helper.addRecordToGrid(perDiemPayor);
+        perDiemPayor.setGridCell(1, "Id", animalId);
+        perDiemPayor.setGridCell(1, "payor_id", "ABA01");
+
+        log("Entering the information for colony code");
+        Ext4GridRef colonyCodes = _helper.getExt4GridForFormSection("Colony Codes");
+        _helper.addRecordToGrid(colonyCodes);
+        colonyCodes.setGridCell(1, "Id", animalId);
+        colonyCodes.setGridCell(1, "colonyCode", "S");
+
+        log("Entering the information for project codes");
+        Ext4GridRef projectCodes = _helper.getExt4GridForFormSection("Project Codes");
+        _helper.addRecordToGrid(projectCodes);
+        projectCodes.setGridCell(1, "Id", animalId);
+        projectCodes.setGridCell(1, "projectCode", "Pc5C2");
+
+        log("Entering the information for enrichment");
+        Ext4GridRef enrichment = _helper.getExt4GridForFormSection("Environment / Enrichment");
+        _helper.addRecordToGrid(enrichment);
+        enrichment.setGridCell(1, "Id", animalId);
+        enrichment.setGridCell(1, "socialCode", "SH");
+        enrichment.setGridCell(1, "observation", "SMARTANIMAL");
+
         log("Submitting the form");
         clickButton("Submit Final", 0);
         _extHelper.waitForExtDialog("Finalize Form");
@@ -980,14 +1006,41 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         log("Verifying the animal entered in animal details page");
         AnimalHistoryPage animalHistoryPage = CNPRCAnimalHistoryPage.beginAt(this);
         animalHistoryPage.searchSingleAnimal(animalId);
-        assertTextPresent("Overview: A3");
-        assertTextPresent("Acquisition", "2018-10-17");
+        assertTextPresent("Overview: " + animalId);
         assertTextPresent("Sex", "Female");
+        assertTextPresent("Colony","S");
+        assertTextPresent("Perdiem","ABA01");
+        assertTextPresent("Pc5C2");
 
         goToSchemaBrowser();
-        DataRegionTable schemeTable = viewQueryData("study", "arrival");
-        schemeTable.setFilter("Id", "Equals", animalId);
-        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, schemeTable.getDataRowCount());
+        DataRegionTable arrivalTable = viewQueryData("study", "arrival");
+        arrivalTable.setFilter("Id", "Equals", animalId);
+        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, arrivalTable.getDataRowCount());
+
+        goToSchemaBrowser();
+        DataRegionTable housingTable = viewQueryData("study","housing");
+        housingTable.setFilter("Id", "Equals", animalId);
+        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, housingTable.getDataRowCount());
+
+        goToSchemaBrowser();
+        DataRegionTable payorAssignment = viewQueryData("study","payor_assignments");
+        payorAssignment.setFilter("Id", "Equals", animalId);
+        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, payorAssignment.getDataRowCount());
+
+        goToSchemaBrowser();
+        DataRegionTable colonyAssignmnet = viewQueryData("study","colony_assignments");
+        colonyAssignmnet.setFilter("Id", "Equals", animalId);
+        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, colonyAssignmnet.getDataRowCount());
+
+        goToSchemaBrowser();
+        DataRegionTable assignmentTable = viewQueryData("study","assignment");
+        assignmentTable.setFilter("Id", "Equals", animalId);
+        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, assignmentTable.getDataRowCount());
+
+        goToSchemaBrowser();
+        DataRegionTable enrichmentTable = viewQueryData("study","enrichment");
+        enrichmentTable.setFilter("Id", "Equals", animalId);
+        assertEquals("New arrival is accepted for the animal entered " + animalId, 1, enrichmentTable.getDataRowCount());
 
     }
 
@@ -2905,6 +2958,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         Connection connection = createDefaultConnection(true);
         String folder = "/" + COREFACILITIES + "/" + BILLINGFOLDER;
         insertTsvData(connection, SCHEMA_CNPRC_BILLING, "account", BILLING_ACCOUNT_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_BILLING, "project_charge",BILLING_PROJECT_CHARGE_TSV, folder);
     }
 
     private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile, @Nullable String folder)
