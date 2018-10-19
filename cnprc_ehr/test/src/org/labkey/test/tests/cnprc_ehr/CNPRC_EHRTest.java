@@ -962,7 +962,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         Ext4GridRef arrival = _helper.getExt4GridForFormSection("Arrival");
         _helper.addRecordToGrid(arrival);
         arrival.setGridCell(1, "Id", animalId);
-        arrival.setGridCell(1, "species", "MRA");
+        arrival.setGridCell(1, "species", "MMU");
         arrival.setGridCell(1, "initialRoom", "AC5003");
         arrival.setGridCell(1, "initialCage", "89");
         arrival.setGridCell(1, "gender", "Female");
@@ -1551,7 +1551,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         assertEquals("Wrong Housing History results,",
                 Arrays.asList("TEST4564246", "2005-01-11", " ", "<6824778>", "4953547"),
-                historyTable.getRowDataAsText(9, "Id", "date", "enddate", "room", "cage"));
+                historyTable.getRowDataAsText(10, "Id", "date", "enddate", "room", "cage"));
     }
 
     @Test
