@@ -149,10 +149,13 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
                 // NB: Lookup filtering won't work here, please see ProjectCodeEntryField.js (especially showOnlyOpenProjects)
                 allowBlank: false
             },
-            enddate: {
-                hidden: true
-            },
             assignmentStatus: {
+                columnConfig: {
+                    width: 140
+                },
+                allowBlank: false
+            },
+            enddate: {
                 hidden: true
             },
             performedby: {
