@@ -1406,7 +1406,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         assertEquals("Wrong value for Breeding Code: ", "M", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         assertEquals("Wrong value for Breeding Book: ", "BP", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         assertEquals("Wrong value for Primary Project: ", PROJECT_CODE_5_CHAR_1, searchResults.getDataAsText(rowIndex, ++startColumnIndex));
-        assertEquals("Wrong value for Secondary Projects: ", "Pc5C2, 1101324", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
+        assertEquals("Wrong value for Secondary Projects: ", "1101324, Pc5C2", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         assertEquals("Wrong value for Census Flag List: ", "CHU", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         assertEquals("Wrong value for Pregnancy: ", "PRG-1111", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
         assertEquals("Wrong value for Term Comment: ", "TRM CMMNT", searchResults.getDataAsText(rowIndex, ++startColumnIndex));
