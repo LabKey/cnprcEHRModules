@@ -989,6 +989,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         _helper.addRecordToGrid(projectCodes);
         projectCodes.setGridCell(1, "Id", animalId);
         projectCodes.setGridCell(1, "projectCode", "Pc5C2");
+        projectCodes.setGridCell(1, "assignmentStatus", "Primary");
 
         log("Entering the information for enrichment");
         Ext4GridRef enrichment = _helper.getExt4GridForFormSection("Environment / Enrichment");
@@ -2310,7 +2311,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 , "2008-09-20"
                 , "2016-01-01"
                 , PROJECT_CODE_5_CHAR_1
-                , "S"
+                , "Secondary"
                 , PROJECT_INVESTIGATOR_NAME_1
                 , " "
                 , PROTOCOL_ID_10_CHAR_2
