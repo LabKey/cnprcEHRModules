@@ -1548,10 +1548,10 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
                 "reloc_seq"
         );
         assertEquals("Wrong columns", expectedColumns, historyTable.getColumnNames());
-
+        historyTable.setFilter("Id","Equals","TEST4564246");
         assertEquals("Wrong Housing History results,",
                 Arrays.asList("TEST4564246", "2005-01-11", " ", "<6824778>", "4953547"),
-                historyTable.getRowDataAsText(10, "Id", "date", "enddate", "room", "cage"));
+                historyTable.getRowDataAsText(0, "Id", "date", "enddate", "room", "cage"));
     }
 
     @Test
