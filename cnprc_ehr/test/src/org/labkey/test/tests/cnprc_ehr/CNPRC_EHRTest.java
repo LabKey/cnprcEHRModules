@@ -38,6 +38,7 @@ import org.labkey.test.Locators;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.SortDirection;
 import org.labkey.test.TestFileUtils;
+import org.labkey.test.WebDriverWrapper;
 import org.labkey.test.WebTestHelper;
 import org.labkey.test.categories.CustomModules;
 import org.labkey.test.categories.EHR;
@@ -2840,6 +2841,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     public static final File MORNING_HEALTH_DATA_ORIG = TestFileUtils.getSampleData("cnprc/" + MORNING_HEALTH_DATA_FILENAME);
     public static final File MORNING_HEALTH_DATA_BAD_ORIG = TestFileUtils.getSampleData("cnprc/" + MORNING_HEALTH_BAD_DATA_FILENAME);
     public static final File TEMP_DIR = FileUtil.getTempDirectory();
+    public static final int NUMBER_OF_MORNING_HEALTH_ROWS = 29;  // based on mh_good_file and mh_bad_file2
 
     // copies first part from FileWatcherPipelineTriggerTest
     @Test
@@ -2874,29 +2876,36 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
         FileUtil.copyFile(MORNING_HEALTH_DATA_ORIG, destFile);
         FileUtil.copyFile(MORNING_HEALTH_DATA_BAD_ORIG, destFileBadFile);
+
+        beginAt("/project/" + getContainerPath() + "/begin.view");
+        waitAndClickAndWait(Locator.linkWithText("Edit Indoor Morning Health Data"));
+        DataRegionTable mhResults1 = new DataRegionTable("query", getDriver());
+        mhResults1.setFilter("status", "Equals One Of (example usage: a;b;c)", "V;I");
+
+        WebDriverWrapper.waitFor(() -> {
+            refresh();
+            sleep(10000);
+            return mhResults1.getDataRowCount() == NUMBER_OF_MORNING_HEALTH_ROWS;
+        }, "Morning Health validation did not complete properly, row count was " + mhResults1.getDataRowCount(), 60 * 1000);
+
         beginAt(WebTestHelper.getBaseURL() + "/pipeline-status/" + getContainerPath() + "/begin.view");
-        waitForPipelineJobsToComplete(11,
-                "referenceStudy/" + MORNING_HEALTH_DATA_NAME + " (" + TRIGGER_NAME + ")",
-                true,
-                30 * 1000);
         clickAndWait(Locator.linkWithText("ERROR"));
         assertTextPresent("'UNCHNGD' found as first sign, but no valid observations were found after it");
 
         beginAt("/project/" + getContainerPath() + "/begin.view");
         waitAndClickAndWait(Locator.linkWithText("Edit Indoor Morning Health Data"));
-        DataRegionTable results = new DataRegionTable("query", getDriver());
-        results.removeColumn("status");  // can't be sure if this will be "U" or "V" at time test runs
-        CustomizeView cvHelper = results.getCustomizeView();
+        DataRegionTable mhResults2 = new DataRegionTable("query", getDriver());
+        CustomizeView cvHelper = mhResults2.getCustomizeView();
         cvHelper.openCustomizeViewPanel();
         cvHelper.showHiddenItems();
         cvHelper.addColumn("fileName");
         cvHelper.saveDefaultView();
-        results.setFilter("fileName", "Contains", "good");
-        results.setSort("fileLineNumber", SortDirection.ASC);
-        List<String> expected = Lists.newArrayList("73C7DE6B2CA84AEA82B1C24A274D3255", "Indoor_Morning_Health", "1", "false",
+        mhResults2.setFilter("fileName", "Contains", "good");
+        mhResults2.setSort("fileLineNumber", SortDirection.ASC);
+        List<String> expected = Lists.newArrayList("73C7DE6B2CA84AEA82B1C24A274D3255", "Indoor_Morning_Health", "1", "V", "false",
                 "73C7DE6B2CA84AEA82B1C24A274D3255,DSTEST,20180429,060943,44444,AC5003-89,LIQDSTL,,,,,,,,,,,");
 
-        assertEquals("Expected values not found for mh_processing.", expected, results.getRowDataAsText(0).subList(0, expected.size()));
+        assertEquals("Expected values not found for mh_processing.", expected, mhResults2.getRowDataAsText(0).subList(0, expected.size()));
         checkExpectedErrors(27);
 
         deleteAllRows(PROJECT_NAME, "pipeline", "TriggerConfigurations");
@@ -2906,7 +2915,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         DataRegionTable table = new DataRegionTable("query", this);
         table.setFilter("Id", "Equals", "44444");
         table.setFilter("observation", "Equals", "LIQDSTL");
-        assertEquals("Single recorded uploaded with this information.", 1, table.getDataRowCount());
+        assertEquals("Morning health record not found in morning health observations table", 1, table.getDataRowCount());
     }
 
     @NotNull
