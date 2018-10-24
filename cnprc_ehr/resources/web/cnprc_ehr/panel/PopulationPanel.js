@@ -44,9 +44,8 @@ Ext4.define('CNPRC_EHR.panel.PopulationPanel', {
             var valueArray = this.valueMap[colName];
             for (var i=0;i<repeats;i++){
                 Ext4.each(valueArray, function(header){
-                    LDK.Assert.assertNotEmpty('Population panel has a blank header value for the column: ' + colName + '.  This probably indicates bad data.', header);
                     if (!header)
-                        header = 'Unknown ' + colName;
+                        header = 'Unknown Age';  // CNPRC animals may not always have a birth date (and therefore age) yet
                     rows.push({
                         html: header,
                         style: (colspan>1?styleHeader:style),
