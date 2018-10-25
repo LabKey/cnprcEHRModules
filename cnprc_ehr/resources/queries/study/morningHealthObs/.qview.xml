@@ -19,6 +19,6 @@
         <column name="admitStatus" />
     </columns>
     <sorts>
-        <sort column="date" descending="true"/>
+        <sort column="sequence" descending="false"/>
     </sorts>
 </customView>

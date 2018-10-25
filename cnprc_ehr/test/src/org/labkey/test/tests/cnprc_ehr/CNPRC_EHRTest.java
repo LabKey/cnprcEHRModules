@@ -2900,6 +2900,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         cvHelper.showHiddenItems();
         cvHelper.addColumn("fileName");
         cvHelper.saveDefaultView();
+        mhResults2.removeColumn("rowId");  // no need to check this and will break on repeated tests
         mhResults2.setFilter("fileName", "Contains", "good");
         mhResults2.setSort("fileLineNumber", SortDirection.ASC);
         List<String> expected = Lists.newArrayList("73C7DE6B2CA84AEA82B1C24A274D3255", "Indoor_Morning_Health", "1", "V", "false",

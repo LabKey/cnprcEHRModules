@@ -120,6 +120,7 @@ public class MorningHealthDataTransferJob extends PipelineJob
             LOG.info("Begin data conversion from cnprc_ehr.mh_processing for " + numRows + " rows.");
             mhProcessingSelector.forEach((ResultSet rs) -> {
                 Results results = new ResultsImpl(rs, mhProcessingTable.getColumns());
+                int rowId = results.getInt("rowId");
                 String commaDelmitedData = results.getString("data");
                 String[] dataToCols = commaDelmitedData.split(",");
 
@@ -172,6 +173,7 @@ public class MorningHealthDataTransferJob extends PipelineJob
                         String objectId = results.getString("objectid") + "-" + obsCodeString + (signNum++);
                         Map<String, Object> mhObsRow = new CaseInsensitiveHashMap<>();
                         mhObsRow.put("Id", animalId);
+                        mhObsRow.put("sequence", rowId);
                         mhObsRow.put("date", obsDateTime);
                         mhObsRow.put("location", locWithoutDash);
                         mhObsRow.put("area", area);

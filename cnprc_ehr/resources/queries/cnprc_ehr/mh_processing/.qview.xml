@@ -1,5 +1,6 @@
 <customView xmlns="http://labkey.org/data/xml/queryCustomView">
     <columns>
+        <column name="rowId"/>
         <column name="rowPk"/>
         <column name="source"/>
         <column name="fileLineNumber"/>
@@ -15,4 +16,7 @@
         </column>
         <column name="fileFk/DownloadLink"/>
     </columns>
+    <sorts>
+        <sort column="rowId" descending="false"/>
+    </sorts>
 </customView>
