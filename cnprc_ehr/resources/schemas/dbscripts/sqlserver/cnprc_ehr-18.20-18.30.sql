@@ -1,0 +1,2 @@
+CREATE INDEX CNPRC_EHR_CAGE_LOCATION_HISTORY_LOCATION_INDEX ON cnprc_ehr.cage_location_history (location);
+GO
