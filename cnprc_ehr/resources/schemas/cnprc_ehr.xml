@@ -811,6 +811,7 @@
             <column columnName="is_tissue_avail"/>
             <column columnName="pi_person_fk"/>
             <column columnName="objectid"/>
+            <column columnName="taskid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>
@@ -848,6 +849,22 @@
             <column columnName="transferredToMhObs"/>
             <column columnName="fileFk"/>
             <column columnName="objectid"/>
+            <column columnName="Created"/>
+            <column columnName="CreatedBy"/>
+            <column columnName="Modified"/>
+            <column columnName="ModifiedBy"/>
+            <column columnName="Container"/>
+        </columns>
+    </table>
+    <table tableName="project_charge" tableDbType="TABLE">
+        <columns>
+            <column columnName="payor_id"/>
+            <column columnName="pr_code"/>
+            <column columnName="charge_id"/>
+            <column columnName="fund_type"/>
+            <column columnName="file_status"/>
+            <column columnName="objectid"/>
+            <column columnName="taskid"/>
             <column columnName="Created"/>
             <column columnName="CreatedBy"/>
             <column columnName="Modified"/>

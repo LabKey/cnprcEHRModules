@@ -19,6 +19,7 @@ package org.labkey.cnprc_ehr;
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.data.Container;
 import org.labkey.api.data.DbSchema;
+import org.labkey.api.data.DbSchemaType;
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
 import org.labkey.api.ehr.dataentry.forms.BirthFormType;
@@ -64,7 +65,7 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
     @Override
     public double getVersion()
     {
-        return 18.30;
+        return 18.31;
     }
 
     @Override
@@ -158,6 +159,9 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerFormType(new DefaultDataEntryFormFactory(BreedingRegistrationFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(NewBreedingRequestFormType.class, this));
         ehrService.registerFormType(new DefaultDataEntryFormFactory(PregnancyDeterminationsFormType.class, this));
+
+        // Other data entry forms that does not involve animal id
+        ehrService.registerFormType(new DefaultDataEntryFormFactory(ProjectActivationFormType.class, this));
 
         // Case Management
         // No form types registered

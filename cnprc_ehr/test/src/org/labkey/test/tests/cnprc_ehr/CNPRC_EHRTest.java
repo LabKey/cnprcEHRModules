@@ -106,6 +106,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final String PROJECT_INVESTIGATOR_NAME_2 = "PI_NAME_2";
     protected static final String INVES_ID_1 = "1001";
     protected static final String INVES_ID_2 = "1002";
+    public static final String SCHEMA_CNPRC_EHR = "cnprc_ehr";
     public static final String SCHEMA_STUDY = "study";
     public static final String SCHEMA_CNPRC_PDL = "cnprc_pdl";
     public static final String SCHEMA_CNPRC_BILLING = "cnprc_billing";
@@ -2970,7 +2971,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
         Connection connection = createDefaultConnection(true);
         String folder = "/" + COREFACILITIES + "/" + BILLINGFOLDER;
         insertTsvData(connection, SCHEMA_CNPRC_BILLING, "account", BILLING_ACCOUNT_TSV, folder);
-        insertTsvData(connection, SCHEMA_CNPRC_BILLING, "project_charge",BILLING_PROJECT_CHARGE_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_EHR, "project_charge",BILLING_PROJECT_CHARGE_TSV, folder);
     }
 
     private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile, @Nullable String folder)
