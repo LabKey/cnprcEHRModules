@@ -140,7 +140,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private static final File PDL_SUB_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_SUB_TESTS.tsv");
     private static final File PDL_TEST_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_PDL_TESTS.tsv");
     private static final File BILLING_ACCOUNT_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_BILLING_ACCOUNTS.tsv");
-    private static final File BILLING_PROJECT_CHARGE_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_BILLING_PROJECT_CHARGE.tsv");
+    private static final File BILLING_PROJECT_CHARGE_TSV = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_PROJECT_CHARGE.tsv");
     private static final File CNPRC_EHR_CAGE_LOCATION_HISTORY = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_CAGE_LOCATION_HISTORY.tsv");
     private static final File CNPRC_EHR_OBSERVATION_TYPES = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_OBSERVATION_TYPES.tsv");
     private static final File CNPRC_EHR_ROOM_ENCLOSURE = TestFileUtils.getSampleData("cnprc/tables/CNPRC_EHR_ROOM_ENCLOSURE.tsv");
@@ -2969,9 +2969,8 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     private void storeBillingData() throws Exception
     {
         Connection connection = createDefaultConnection(true);
-        String folder = "/" + COREFACILITIES + "/" + BILLINGFOLDER;
-        insertTsvData(connection, SCHEMA_CNPRC_BILLING, "account", BILLING_ACCOUNT_TSV, folder);
-        insertTsvData(connection, SCHEMA_CNPRC_EHR, "project_charge",BILLING_PROJECT_CHARGE_TSV, folder);
+        insertTsvData(connection, SCHEMA_CNPRC_BILLING, "account", BILLING_ACCOUNT_TSV, "/" + COREFACILITIES + "/" + BILLINGFOLDER);
+        insertTsvData(connection, SCHEMA_CNPRC_EHR, "project_charge", BILLING_PROJECT_CHARGE_TSV, "/");
     }
 
     private void insertTsvData(Connection connection, String schemaName, String queryName, File tsvFile, @Nullable String folder)
