@@ -7,7 +7,7 @@
                         <isHidden>true</isHidden>
                         <isKeyField>false</isKeyField>
                     </column>
-                    <column columnName="objectid">
+                    <column columnName="objectid"> <!-- It is not that obvious for non-dataset ehr data entry, but this field is required to be a key field otherwise only one row will get saved (even though users can enter multiple rows in a data entry form)-->
                         <isHidden>true</isHidden>
                         <isKeyField>true</isKeyField>
                     </column>
