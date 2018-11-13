@@ -1,0 +1,24 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="project_charge" tableDbType="TABLE">
+                <columns>
+                    <column columnName="rowid">
+                        <isHidden>true</isHidden>
+                        <isKeyField>false</isKeyField>
+                    </column>
+                    <column columnName="objectid">
+                        <isHidden>true</isHidden>
+                        <isKeyField>true</isKeyField>
+                    </column>
+                    <column columnName="created">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="modified">
+                        <isHidden>true</isHidden>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>
