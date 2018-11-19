@@ -1,0 +1,5 @@
+
+*.log
+.labkey
+kinship
+cnprc_ehr/resources/referenceStudy/kinship.txt
