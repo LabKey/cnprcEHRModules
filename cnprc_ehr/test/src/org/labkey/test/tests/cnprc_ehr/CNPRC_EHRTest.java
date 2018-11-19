@@ -605,7 +605,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     protected String getModuleDirectory()
     {
-        return "cnprc_ehr";
+        return "cnprcEHRModules/cnprc_ehr";
     }
 
     @Override
@@ -677,7 +677,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     protected void importStudy()
     {
-        File path = new File(TestFileUtils.getLabKeyRoot(), getModulePath() + "/resources/referenceStudy");
+        File path = new File(TestFileUtils.getLabKeyRoot(), getExternalModulePath() + "/resources/referenceStudy");
         setPipelineRoot(path.getPath());
 
         beginAt(WebTestHelper.getBaseURL() + "/pipeline-status/" + getContainerPath() + "/begin.view");
@@ -703,7 +703,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
     @Override
     protected void populateInitialData()
     {
-        beginAt(WebTestHelper.getBaseURL() + "/" + getModuleDirectory() + "/" + getContainerPath() + "/populateData.view");
+        beginAt(WebTestHelper.getBaseURL() + "/CNPRC_EHR/" + getContainerPath() + "/populateData.view");
 
         repopulate("Lookup Sets");
         repopulate("All");
@@ -2609,7 +2609,7 @@ public class CNPRC_EHRTest extends AbstractGenericEHRTest implements SqlserverOn
 
     private void createPathologyLinkedSchema()
     {
-        _schemaHelper.setQueryLoadTimeout(60000);
+        _schemaHelper.setQueryLoadTimeout(120000);
         String sourceFolder = "/" + FOLDER_NAME;
         _schemaHelper.createLinkedSchema(getProjectName(), null,
                 "cnprc_pathology_linked", sourceFolder, null, SCHEMA_STUDY,
