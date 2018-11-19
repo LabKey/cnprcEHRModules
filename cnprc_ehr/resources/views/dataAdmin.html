@@ -1,0 +1,74 @@
+
+<table>
+    <tr>
+        <td style="vertical-align: top;"><div id="dataAdmin-col1"></div></td>
+        <td style="vertical-align: top;"><div id="dataAdmin-col2"></div></td>
+    </tr>
+</table>
+
+<style type="text/css">
+    .x4-panel-body {
+        background: transparent;
+    }
+</style>
+
+<script type="text/javascript">
+    Ext4.onReady(function (){
+        function init() {
+
+        LABKEY.Query.getQueries({
+            containerPath: LABKEY.getModuleProperty('ehr', 'EHRStudyContainer'),
+            schemaName: "ehr_lookups",
+            includeUserQueries: false,
+            includeColumns: false,
+            scope: this,
+            failure: LDK.Utils.getErrorCallback(),
+            success: function(results) {
+                var items = [];
+                Ext4.each(results.queries, function (r) {
+                    items.push({queryName: r.name, schemaName: 'ehr_lookups', title: r.title});
+                }, this);
+
+                Ext4.create('LDK.panel.NavPanel', {
+                    renderTo: 'dataAdmin-col1',
+                    renderer: linkItemRenderer,
+                    width: 300,
+                    sections: [{
+                        header: 'Lookup Tables',
+                        items: items
+                    }]
+                });
+            }
+        });
+
+            Ext4.create('LDK.panel.NavPanel', {
+                renderTo: 'dataAdmin-col2',
+                renderer: linkItemRenderer,
+                width: 300,
+                sections: [{
+                    header: 'EHR Reports',
+                    items: [
+                        {queryName: 'reports', schemaName: 'ehr', title: 'Reports'}
+                    ]
+                }]
+            });
+        }
+
+        function linkItemRenderer(item){
+            var href = LABKEY.ActionURL.buildURL('ldk', 'updateQuery', LABKEY.getModuleProperty('ehr', 'EHRStudyContainer'), {
+                schemaName: item.schemaName,
+                'query.queryName': item.queryName
+            });
+
+            return {
+                html: '<a href="' + href + '">'+item.title+'</a>',
+                style: 'padding-left:5px;padding-bottom:8px'
+            };
+        }
+
+        EHR.Security.init({
+            success: init,
+            scope: this
+        });
+    });
+</script>

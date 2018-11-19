@@ -1,0 +1,42 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="drug" tableDbType="TABLE" useColumnOrder="true">
+                <insertUrl />
+                <importUrl />
+                <updateUrl />
+                <deleteUrl />
+                <columns>
+                    <column columnName="Id">
+                        <columnTitle>Id</columnTitle>
+                        <isHidden>false</isHidden>
+                    </column>
+                    <column columnName="date">
+                        <isHidden>true</isHidden>
+                        <columnTitle>Date</columnTitle>
+                        <nullable>false</nullable>
+                        <formatString>Date</formatString>
+                    </column>
+                    <column columnName="code">
+                        <columnTitle>Vaccination Code</columnTitle>
+                        <fk>
+                            <fkDisplayColunmName>Vaccination Code</fkDisplayColunmName>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>vaccination_codes</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                        <datatype>varchar</datatype>
+                        <isHidden>false</isHidden>
+                    </column>
+                    <column columnName="performedby">
+                        <isHidden>true</isHidden>
+                        <nullable>true</nullable>
+                    </column>
+                    <column columnName="remark">
+                        <isHidden>true</isHidden>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

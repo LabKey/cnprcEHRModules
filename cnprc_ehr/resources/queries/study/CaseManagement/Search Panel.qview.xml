@@ -1,0 +1,9 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView" hidden="true">
+    <columns>
+        <column name="area" />
+        <column name="room" />
+        <column name="admitType" />
+        <column name="assignedVet" />
+        <column name="nextFollowUp" />
+    </columns>
+</customView>

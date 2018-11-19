@@ -1,0 +1,117 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="MorningHealth" tableDbType="TABLE" useColumnOrder="true">
+                <auditLogging>DETAILED</auditLogging>
+                <insertUrl/>
+                <importUrl/>
+                <updateUrl/>
+                <columns>
+                    <column columnName="Id"/>
+                    <column columnName="date">
+                        <columnTitle>Begin Date</columnTitle>
+                        <formatString>Date</formatString>
+                    </column>
+                    <column columnName="observation">
+                        <columnTitle>Observation Code</columnTitle>
+                    </column>
+                    <column columnName="confirmation">
+                        <columnTitle>Confirmation</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>confirmation</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>description</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="admitStatus">
+                        <columnTitle>Admit Status</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>admit_status</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>description</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="fulldate">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="fileNum">
+                        <columnTitle>File Num</columnTitle>
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>mh_file</fkTable>
+                            <fkColumnName>fileNo</fkColumnName>
+                        </fk>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="sequence">
+                        <columnTitle>Record Seq</columnTitle>
+                    </column>
+                    <column columnName="recordType">
+                        <columnTitle>Record Type</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="recordStatus">
+                        <columnTitle>Record Status</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="rawId">
+                        <columnTitle>Raw Id</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="raw_location">
+                        <columnTitle>Raw Location</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="location">
+                        <columnTitle>Location</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="area">
+                        <columnTitle>Area</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>areas</fkTable>
+                            <fkColumnName>area</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="enclosure">
+                        <columnTitle>Enclosure</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>rooms</fkTable>
+                            <fkColumnName>room</fkColumnName>
+                        </fk>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="cage">
+                        <columnTitle>Cage</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="technician">
+                        <columnTitle>Technician</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="attendant">
+                        <columnTitle>Attendant</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="remark">
+                        <datatype>varchar</datatype>
+                        <propertyURI>urn:ehr.labkey.org/#Remark</propertyURI>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="projectCode">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

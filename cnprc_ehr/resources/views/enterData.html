@@ -1,0 +1,55 @@
+<script type="text/javascript">
+
+    Ext4.onReady(function () {
+        var webpart = <%=webpartContext%>;
+        var ctx = EHR.Utils.getEHRContext(webpart.wrapperDivId);
+        if (!ctx)
+            return;
+
+        function getFilteredCasesLink(label, filter) {
+            return {
+                xtype: 'ldk-linkbutton',
+                text: label,
+                linkCls: 'labkey-text-link',
+                padding: 2,
+                href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view', null, {
+                        'results_qwp.admitType/description~eq': filter || label
+                    }
+                )
+            };
+        }
+
+        Ext4.create('EHR.panel.EnterDataPanel', {
+            additionalEnterNewSections:
+                    [
+                        {
+                            header: 'Case Management',
+                            renderer: function (item) {
+                                return item;
+                            },
+                            items: [{
+                                layout: 'vbox',
+                                bodyStyle: 'background-color: transparent;',
+                                defaults: {
+                                    border: false
+                                },
+                                items: [
+                                    {
+                                        xtype: 'ldk-linkbutton',
+                                        text: 'All Cases',
+                                        linkCls: 'labkey-text-link',
+                                        padding: 2,
+                                        href: LABKEY.ActionURL.buildURL('cnprc_ehr', 'caseManagementSearch.view')
+                                    }
+                                    , getFilteredCasesLink('Morning Health')
+                                    , getFilteredCasesLink('Hospital')
+                                    , getFilteredCasesLink('Outpatient')
+                                    , getFilteredCasesLink('LTOP', 'Long Term Outpatient')
+                                    , getFilteredCasesLink('Post-Operation', 'Post Operation')
+                                ]
+                            }]
+                        }]
+        }).render(webpart.wrapperDivId);
+    });
+
+</script>

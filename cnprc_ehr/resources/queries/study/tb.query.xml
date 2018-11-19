@@ -1,0 +1,55 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="tb" tableDbType="TABLE" useColumnOrder="true">
+                <columns>
+                    <column columnName="Id"/>
+                    <column columnName="date"/>
+                    <column columnName="projectCode">
+                        <columnTitle>Project</columnTitle>
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="site">
+                        <columnTitle>Site</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>tb_site</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="testType">
+                        <columntitle>Test Type</columntitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>tb_test_type</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                            <fkDisplayColumnName>Description</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="twentyFourHrsResult">
+                        <columnTitle>24 Hours </columnTitle>
+                    </column>
+                    <column columnName="fortyEightHrsResult">
+                        <columnTitle>48 Hours </columnTitle>
+                    </column>
+                    <column columnName="seventyTwoHrsResult">
+                        <columnTitle>72 Hours </columnTitle>
+                    </column>
+                    <column columnName="test">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="user_name">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="entry_date_tm">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>

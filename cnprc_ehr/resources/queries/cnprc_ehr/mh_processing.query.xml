@@ -1,0 +1,69 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="mh_processing" tableDbType="TABLE" useColumnOrder="true">
+                <importUrl></importUrl>
+                <insertUrl>/query/insertQueryRow.view?schemaName=cnprc_ehr&amp;query.queryName=mh_processing</insertUrl>
+                <updateUrl>/ehr/dataEntryFormForQuery.view?schemaName=cnprc_ehr&amp;queryName=mh_processing&amp;rowId=${rowId}</updateUrl>
+                <columns>
+                    <column columnName="rowId">
+                        <columnTitle>Row ID</columnTitle>
+                    </column>
+                    <column columnName="rowPk">
+                        <columnTitle>Row PK</columnTitle>
+                        <description>A unique key that comes from the scanner as a GUID. It is still required
+                                     for manually entered data because it is enforced at the database level.</description>
+                    </column>
+                    <column columnName="source">
+                        <columnTitle>Source</columnTitle>
+                    </column>
+                    <column columnName="fileLineNumber">
+                        <columnTitle>File Line Number</columnTitle>
+                    </column>
+                    <column columnName="status">
+                        <columnTitle>Processing Status</columnTitle>
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>processing_status</fkTable>
+                            <fkColumnName>value</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="voided">
+                        <columnTitle>Voided</columnTitle>
+                    </column>
+                    <column columnName="data">
+                        <columnTitle>Data</columnTitle>
+                    </column>
+                    <column columnName="fileName">
+                        <columnTitle>File Name</columnTitle>
+                        <shownInInsertView>false</shownInInsertView>
+                    </column>
+                    <column columnName="transferredToMHobs">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="ObjectId">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="observationType">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="fileFk">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                        <fk>
+                            <fkDbSchema>exp</fkDbSchema>
+                            <fkTable>data</fkTable>
+                            <fkColumnName>rowId</fkColumnName>
+                        </fk>
+                    </column>
+                </columns>
+                <pkColumnName>rowPk</pkColumnName>
+            </table>
+        </tables>
+    </metadata>
+</query>

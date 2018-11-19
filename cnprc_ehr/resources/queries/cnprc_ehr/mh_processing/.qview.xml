@@ -1,0 +1,22 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="rowId"/>
+        <column name="rowPk"/>
+        <column name="source"/>
+        <column name="fileLineNumber"/>
+        <column name="status"/>
+        <column name="voided"/>
+        <column name="data"/>
+        <column name="observationType"/>
+        <column name="transferredToMhObs"/>
+        <column name="fileFk/fileSize">
+            <properties>
+                <property name="columnTitle" value="File Size"/>
+            </properties>
+        </column>
+        <column name="fileFk/DownloadLink"/>
+    </columns>
+    <sorts>
+        <sort column="rowId" descending="false"/>
+    </sorts>
+</customView>

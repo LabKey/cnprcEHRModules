@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etl xmlns="http://labkey.org/etl/xml">
+    <name>Flags - Behavior</name>
+    <description>Behavior Flags</description>
+    <transforms>
+        <transform id="step1" type="org.labkey.di.pipeline.TransformTask">
+            <description>Copy to target</description>
+            <source schemaName="cnprcSrc" queryName="q_flags_behavior"/>
+            <destination schemaName="study" queryName="flagsBehavior" bulkLoad="true" targetOption="truncate">
+                <columnTransforms>
+                    <column source="ztf_date" target="date"/>
+                </columnTransforms>
+                <alternateKeys>
+                    <column name="objectid"/>
+                </alternateKeys>
+            </destination>
+        </transform>
+    </transforms>
+    <!--<incrementalFilter className="ModifiedSinceFilterStrategy" timestampColumnName="date_time">-->
+        <!--<deletedRowsSource schemaName="cnprcSrc" queryName="q_flagsBehavior_delete" timestampColumnName="date_time"-->
+                           <!--deletedSourceKeyColumnName="objectid" targetKeyColumnName="objectid"/>-->
+    <!--</incrementalFilter>-->
+    <schedule>
+        <!-- run at 1:15 am everyday -->
+        <cron expression="0 15 1 * * ? *"/> <!--seconds, minutes, hours, day-of-month, month, day-of-week, year(optional) -->
+    </schedule>
+</etl>

@@ -1,0 +1,32 @@
+<module xmlns="http://labkey.org/moduleProperties/xml/">
+    <properties>
+        <propertyDescriptor name="JasperServerURL">
+            <canSetPerContainer>true</canSetPerContainer>
+            <description>The baseURL to the server used to load Jasper reports.  It is expected to be something like: 'http://myServer.edu/jasperserver'</description>
+            <editPermissions>
+                <permission>ADMIN</permission>
+            </editPermissions>
+        </propertyDescriptor>
+        <propertyDescriptor name="JasperServerUsername">
+            <canSetPerContainer>true</canSetPerContainer>
+            <description>The username for the Jasper user that will be running the report. Note that this is expected to be a public account, so this information is not hidden from users who can access this LabKey Server folder</description>
+            <editPermissions>
+                <permission>ADMIN</permission>
+            </editPermissions>
+        </propertyDescriptor>
+        <propertyDescriptor name="JasperServerPassword">
+            <canSetPerContainer>true</canSetPerContainer>
+            <description>The password for the Jasper user that will be running the report. Note that this is expected to be a public account, so this information is not hidden from users who can access this LabKey Server folder</description>
+            <editPermissions>
+                <permission>ADMIN</permission>
+            </editPermissions>
+        </propertyDescriptor>
+        <propertyDescriptor name="PathologyReportsFolder">
+            <canSetPerContainer>true</canSetPerContainer>
+            <description>Location of pathology report images.</description>
+            <editPermissions>
+                <permission>ADMIN</permission>
+            </editPermissions>
+        </propertyDescriptor>
+    </properties>
+</module>

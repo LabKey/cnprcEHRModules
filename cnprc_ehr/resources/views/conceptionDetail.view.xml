@@ -1,0 +1,9 @@
+<view xmlns="http://labkey.org/data/xml/view">
+    <dependencies>
+        <dependency path="ehr.context" />
+        <dependency path="Ext4ClientApi"/>
+        <dependency path="ehr/panel/SnapshotPanel.js"/>
+        <dependency path="cnprc_ehr/panel/SnapshotPanel.js"/>
+        <dependency path="cnprc_ehr/panel/ConceptionDetailPanel.js"/>
+    </dependencies>
+</view>

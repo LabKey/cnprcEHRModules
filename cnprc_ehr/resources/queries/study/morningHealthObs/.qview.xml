@@ -1,0 +1,24 @@
+<customView xmlns="http://labkey.org/data/xml/queryCustomView">
+    <columns>
+        <column name="fileNum" />
+        <column name="sequence" />
+        <column name="recordType" />
+        <column name="recordStatus" />
+        <column name="remark" />
+        <column name="Id" />
+        <column name="date" />
+        <column name="fullDate" />
+        <column name="location" />
+        <column name="area" />
+        <column name="enclosure" />
+        <column name="cage" />
+        <column name="observation" />
+        <column name="technician" />
+        <column name="attendant" />
+        <column name="confirmation" />
+        <column name="admitStatus" />
+    </columns>
+    <sorts>
+        <sort column="sequence" descending="false"/>
+    </sorts>
+</customView>

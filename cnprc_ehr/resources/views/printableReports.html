@@ -1,0 +1,238 @@
+<script type="text/javascript">
+
+    Ext4.onReady(function(){
+
+        var webpart = <%=webpartContext%>;
+
+        Ext4.define('CNPRC.panel.PrintableReportsPanel', {
+            itemId: 'sheetPanel',
+            extend: 'Ext.panel.Panel',
+            apiKey: null,
+            jasperBaseUrl: LABKEY.getModuleProperty('CNPRC_EHR', 'JasperServerURL'),
+            jasperUsername: LABKEY.getModuleProperty('CNPRC_EHR', 'JasperServerUsername'),
+            jasperPassword: LABKEY.getModuleProperty('CNPRC_EHR', 'JasperServerPassword'),
+
+            initComponent: function(){
+                Ext4.apply(this, {
+                    border: false,
+                    defaults: {
+                        border: false
+                    },
+                    items: this.getItems()
+
+                });
+
+                LABKEY.Ajax.request({
+                    url: LABKEY.ActionURL.buildURL('security', 'createApiKey'),
+                    method: 'POST',
+                    params: {type: 'session'},
+                    scope: this,
+                    success: function (ctx) {
+                        this.apikey = JSON.parse(ctx.response).apikey;
+                    },
+                    failure: function(response, opts) {
+                        LABKEY.Utils.displayAjaxErrorResponse(response, opts);
+                    }
+                });
+
+
+                this.callParent();
+            },
+
+            createAllReportItems: function () {
+                var result = [];
+                result = result.concat(this.createReportItems('Weight Report', 'reports/Weights'));
+                result = result.concat(this.createSpacerItems());
+                result = result.concat(this.createReportItems('Another Option for the same Weight Report', 'reports/Weights'));
+                return result;
+            },
+
+            getItems: function(){
+                var items = [{
+                    html: 'This page provides reports to be printed by room or area.  After picking the location(s) using the drop downs below, ' +
+                    'hit the \Run Report\' buttons below to print any of the reports<br><br><b>NOTE:' +
+                    ' For most reports, leave rooms/areas blank to print all.</b>',
+                    style: 'padding-bottom: 20px;'
+                },{
+                    xtype: 'ehr-areafield',
+                    itemId: 'areaField',
+                    addAllSelector: true,
+                    editable: true,
+                    fieldLabel: 'Area(s)',
+                    width: 400,
+                    pairedWithRoomField: true,
+                    getRoomField: function(){
+                        return this.up('panel').down('#roomField');
+                    }
+                },{
+                    xtype: 'ehr-roomfield',
+                    itemId: 'roomField',
+                    width: 400,
+                    fieldLabel: 'Room(s)',
+                    multiSelect: true,
+                    listeners: {
+                        change: function(field){
+                            var areaField = field.up('panel').down('#areaField');
+                            areaField.reset();
+                        }
+                    }
+                },{
+                    html: '',
+                    style: 'margin-bottom: 10px;'
+                },{
+                    html: '<hr>'
+                },{
+                    html: '<b>Available Printouts:</b>',
+                    style: 'padding-bottom: 20px;'
+                },{
+                    html: 'This page is designed to provide a printable version of these reports.',
+                    width: 800,
+                    style: 'padding-bottom: 20px;'
+                }];
+
+                reportItems = this.createAllReportItems();
+
+                items.push({
+                    layout: {
+                        type: 'table',
+                        columns: 4,
+                        tdAttrs: {
+                            valign: 'top'
+                        }
+                    },
+                    defaults: {
+                        border: false
+                    },
+                    items: reportItems
+                });
+
+                this.checkForMissingModuleProp(this.jasperBaseUrl, 'JasperServerURL', items);
+                this.checkForMissingModuleProp(this.jasperPassword, 'JasperServerPassword', items);
+                this.checkForMissingModuleProp(this.jasperUsername, 'JasperServerUsername', items);
+
+                return items;
+            },
+
+            getReportUrl: function(reportPath, outputType, params) {
+                // Build a URL to call Jasper's REST API as described at https://community.jaspersoft.com/documentation/jasperreports-server-web-services-guide/v56/introduction
+                var result = this.jasperBaseUrl +
+                    '/rest_v2/reports/' +
+                    reportPath +
+                    '.' +
+                    (outputType ? outputType : 'pdf') +
+                    '?apikey=' +
+                    encodeURIComponent(this.apikey) +
+                    '&j_username=' +
+                    encodeURIComponent(this.jasperUsername) +
+                    '&j_password=' +
+                    encodeURIComponent(this.jasperPassword);
+                var extraParams = LABKEY.ActionURL.queryString(params);
+                if (extraParams && extraParams.length > 0) {
+                    result += '&extraParams=' + encodeURIComponent('&' + extraParams);
+                }
+                return result;
+            },
+
+            checkForMissingModuleProp: function(propValue, propName, items) {
+                if (!propValue) {
+                    items.splice(0, 0, {
+                        html: '<strong>' + Ext4.util.Format.htmlEncode(propName) + ' is not set in Module Properties for this folder. An administrator needs to configure it.</strong>',
+                        width: 800,
+                        style: 'padding-bottom: 20px;'
+                    })
+                }
+            },
+
+            createSpacerItems: function() {
+                return [{
+                        html: ''
+                    },{
+                        html: '<hr>',
+                                style: 'padding-top: 10px;',
+                                colspan: 4
+                    }];
+            },
+
+            /**
+             * @param reportTitle name to show for the report in the list on this page
+             * @param jasperReportPath the path, including the report name, that the report was published to within Jasper
+             */
+            createReportItems: function(reportTitle, jasperReportPath) {
+                return [{
+                    html: '<i>' + Ext4.util.Format.htmlEncode(reportTitle) + '</i>'
+                },{
+                    style: 'padding-left: 10px;',
+                            html: ''
+                },{
+                    xtype: 'button',
+                            style: 'margin-left: 5px;',
+                            text: 'Run Report',
+                            border: true,
+                            getUrlString: function(outputType){
+                        var panel = this.up('#sheetPanel');
+                        var params = panel.getParams(true, true);
+
+                        return panel.getReportUrl(jasperReportPath, outputType, params);
+                    },
+                    menu: [{
+                        text: 'HTML',
+                        handler: function(menu){
+                            var btn = menu.up('button');
+                            var url = btn.getUrlString('html');
+                            if (!url)
+                                return;
+
+                            window.open(url);
+                        }
+                    },{
+                        text: 'PDF',
+                        handler: function(menu){
+                            var btn = menu.up('button');
+                            var url = btn.getUrlString('pdf');
+                            if (!url)
+                                return;
+
+                            window.open(url);
+                        }
+                    }]
+                }];
+            },
+
+            getParams: function(supressErrors, skipRoomsIfAllSelected){
+                var params = {};
+
+                var areas = this.down('#areaField').getValue() || [];
+                areas = Ext4.isArray(areas) ? areas : [areas];
+
+                if (areas.length) {
+                    var areaFilter = LABKEY.Filter.create('housingAtTime/RoomAtTime/area', areas.join(';'), LABKEY.Filter.Types.IN);
+                    params[areaFilter.getURLParameterName()] = areaFilter.getURLParameterValue();
+                }
+
+                var roomField = this.down('#roomField');
+                var rooms = roomField.getValue() || [];
+                rooms = Ext4.isArray(rooms) ? rooms: [rooms];
+
+                if (!rooms.length && !supressErrors){
+                    Ext4.Msg.alert('Error', 'Must select an area or room');
+                    return;
+                }
+
+                //NOTE: we now include both area + rooms if supplied.  we reply on the combos to be smart about turning
+                //off area if the user picked a set of rooms that differs from the definition
+                //if all rooms are selected, treat this the same as if no rooms are selected
+                if (rooms.length && (!skipRoomsIfAllSelected || rooms.length < roomField.store.getCount())){
+                    var roomFilter = LABKEY.Filter.create('housingAtTime/RoomAtTime/room', rooms.join(';'), LABKEY.Filter.Types.IN);
+                    params[roomFilter.getURLParameterName()] = roomFilter.getURLParameterValue();
+                }
+
+                return params;
+            }
+        });
+
+        Ext4.create('CNPRC.panel.PrintableReportsPanel', {
+
+        }).render(webpart.wrapperDivId);
+    });
+
+</script>

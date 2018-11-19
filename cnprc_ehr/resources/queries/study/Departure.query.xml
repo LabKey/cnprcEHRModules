@@ -1,0 +1,50 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="departure" tableDbType="TABLE">
+                <tableUrl />
+                <insertUrl />
+                <importUrl />
+                <updateUrl />
+                <deleteUrl />
+                <columns>
+                    <column columnName="Id"/>
+                    <column columnName="date">
+                        <columnTitle>Departure Date</columnTitle>
+                    </column>
+                    <column columnName="nextRelocType">
+                        <isHidden>true</isHidden>
+                    </column>
+                    <column columnName="relocType">
+                        <columnTitle>Departure Status</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>calculated_status_codes</fkTable>
+                            <fkDisplayColumn>code</fkDisplayColumn>
+                        </fk>
+                    </column>
+                    <column columnName="reloc_sale_price">
+                        <columnTitle>Sale Price</columnTitle>
+                    </column>
+                    <column columnName="reloc_sale_type">
+                        <columnTitle>Sale Type</columnTitle>
+                    </column>
+                    <column columnName="destination">
+                        <columnTitle>Destination Location</columnTitle>
+                        <fk>
+                            <fkDbSchema>ehr_lookups</fkDbSchema>
+                            <fkTable>source</fkTable>
+                            <fkColumnName>code</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="remark">
+                        <columnTitle>Remarks</columnTitle>
+                    </column>
+                    <column columnName="performedBy">
+                        <isHidden>true</isHidden>
+                    </column>
+                </columns>
+            </table>
+        </tables>
+    </metadata>
+</query>
