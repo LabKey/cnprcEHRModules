@@ -11,7 +11,8 @@ This repository contains all the modules required for the UC Davis California Na
 
 <a name="setUp"></a>
 ## Developer Set Up
-1. Clone this repository into the externalModules directory of your LabKey project.  
+1. Clone this repository into the externalModules directory of your LabKey project. From externalModules root, execute:
+    * git clone https://github.com/LabKey/cnprcEHRModules.git
 1. Ensure that your settings.gradle file includes externalModules/cnprcEHRModules. You should have a line similar to below:
     * BuildUtils.includeModules(this.settings, rootDir, BuildUtils.EHR_EXTERNAL_MODULE_DIRS, excludedExternalModules)
 1. Build the module with either gradle command 
