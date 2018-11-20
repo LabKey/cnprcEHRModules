@@ -3,10 +3,10 @@ This repository contains all the modules required for the UC Davis California Na
 
 <a name="modules"></a>
 ## Modules
-1. cnprc_ehr: The main EHR module for managing primate care
-2. cnprc_genetics: Tracks primate genetic data
-3. cnprc_pdl: Serology/Virology data from the pathology detection laboratory
-4. cnprc_complianceAndTraining: Coordinates employee compliance training
+1. cnprc_ehr: The main EHR module for managing primate care.
+2. cnprc_genetics: Tracks primate genetic data.
+3. cnprc_pdl: Serology/Virology data from the pathology detection laboratory.
+4. cnprc_complianceAndTraining: Coordinates employee compliance training.
 5. cnprc_billing: Automates the billing process by collecting clinical, research and operational activities as billable items and generating invoices.  
 
 <a name="setUp"></a>
