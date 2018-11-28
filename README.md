@@ -15,6 +15,9 @@ This repository contains all the modules required for the UC Davis California Na
     * git clone https://github.com/LabKey/cnprcEHRModules.git
 1. Ensure that your settings.gradle file includes externalModules/cnprcEHRModules. You should have a line similar to below:
     * BuildUtils.includeModules(this.settings, rootDir, BuildUtils.EHR_EXTERNAL_MODULE_DIRS, excludedExternalModules)
-1. Build the module with either gradle command 
-    * gradlew deployapp 
-    * gradlew :externalModules:cnprcEHRModules deployModule
+1. Build the module with below gradle command:
+   * First time transitioning from svn to git, use:
+      * gradlew cleanbuild deployapp 
+   * For subsequent builds, use either one of the commands below:
+      * gradlew deployap
+      * gradlew :externalModules:cnprcEHRModules deployModule
