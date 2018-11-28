@@ -1,0 +1,58 @@
+<query xmlns="http://labkey.org/data/xml/query">
+    <metadata>
+        <tables xmlns="http://labkey.org/data/xml">
+            <table tableName="investigators" tableDbType="TABLE" useColumnOrder="true">
+                <insertUrl>/query/insertQueryRow.view?schemaName=ehr&amp;query.queryName=investigators</insertUrl>
+                <updateUrl>/ehr/dataEntryFormForQuery.view?schemaName=ehr&amp;queryName=investigators&amp;rowId=${rowId}</updateUrl>
+                <columns>
+                    <column columnName="rowId">
+                        <columnTitle>Row ID</columnTitle>
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="dateCreated">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="dateDisabled">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="userid">
+                        <fk>
+                            <fkDbSchema>core</fkDbSchema>
+                            <fkTable>users</fkTable>
+                            <fkColumnName>email</fkColumnName>
+                            <fkDisplayColumnName>displayName</fkDisplayColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="lsid">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="created">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="createdBy">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="modified">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="modifiedBy">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                    <column columnName="container">
+                        <shownInInsertView>false</shownInInsertView>
+                        <shownInUpdateView>false</shownInUpdateView>
+                    </column>
+                </columns>
+                <pkColumnName>rowPk</pkColumnName>
+            </table>
+        </tables>
+    </metadata>
+</query>
