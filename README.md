@@ -19,5 +19,5 @@ This repository contains all the modules required for the UC Davis California Na
    * First time transitioning from svn to git, use:
       * gradlew cleanbuild deployapp 
    * For subsequent builds, use either one of the commands below:
-      * gradlew deployap
+      * gradlew deployapp
       * gradlew :externalModules:cnprcEHRModules deployModule
