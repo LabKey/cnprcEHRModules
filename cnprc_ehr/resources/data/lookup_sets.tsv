@@ -77,3 +77,4 @@ confirmation	Confirmation value for MH Confirmation
 admit_status	Admit Status for MH Confirmation	value
 attitude	Attitude Score	value
 flags_behavior_codes	Behavior Flags	value
+project_file_status	Project File Status	value

@@ -733,6 +733,13 @@ Ext4.onReady(function(){
         schemaName: 'ehr_lookups',
         queryName: 'flags_behavior_codes',
         pk: 'value'
+    },
+    {
+        label: 'Project File Status',
+        populateFn: 'populateFromFile',
+        schemaName: 'ehr_lookups',
+        queryName: 'project_file_status',
+        pk: 'value'
     }
  ];
 
