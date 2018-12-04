@@ -1,10 +1,22 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="project" tableDbType="TABLE">
+            <table tableName="project" tableDbType="TABLE" useColumnOrder="true">
                 <tableUrl>/CNPRC_EHR/projectDetails.view?project=${projectCode}</tableUrl>
                 <columns>
                     <column columnName="projectCode"/>
+                    <column columnName="title"/>
+                    <column columnName="pi_name"/>
+                    <column columnName="unitCode">
+                        <fk>
+                            <fkDbSchema>cnprc_ehr</fkDbSchema>
+                            <fkTable>center_unit</fkTable>
+                            <fkColumnName>center_unit_code</fkColumnName>
+                        </fk>
+                    </column>
+                    <column columnName="startdate"/>
+                    <column columnName="enddate"/>
+                    <column columnName="protocol_end_date"/>
                     <column columnName="protocol">
                         <columnTitle>AUCAAC Protocol</columnTitle>
                         <fk>
@@ -13,6 +25,11 @@
                             <fkColumnName>protocol</fkColumnName>
                         </fk>
                     </column>
+                    <column columnName="visual_signs_auto_rpt_flag"/>
+                    <column columnName="tb_exempt_flag"/>
+                    <column columnName="is_prpt_recognized"/>
+                    <column columnName="tracking_status"/>
+                    <column columnName="project_tracking_id"/>
                     <column columnName="projectType">
                         <fk>
                             <fkDbSchema>ehr_lookups</fkDbSchema>
@@ -21,14 +38,6 @@
                             <fkDisplayColumnName useRawValue="true"/>
                         </fk>
                     </column>
-                    <column columnName="unitCode">
-                        <fk>
-                            <fkDbSchema>cnprc_ehr</fkDbSchema>
-                            <fkTable>center_unit</fkTable>
-                            <fkColumnName>center_unit_code</fkColumnName>
-                        </fk>
-                    </column>
-                    <column columnName="project_tracking_id"/>
                     <column columnName="pp_id"/>
                     <column columnName="an_requested_per_year"/>
                     <column columnName="an_used_assigned"/>
@@ -42,22 +51,13 @@
                     <column columnName="oi_department"/>
                     <column columnName="oi_name"/>
                     <column columnName="pi_department"/>
-                    <column columnName="pi_name"/>
                     <column columnName="attributes"/>
-                    <column columnName="startdate"/>
                     <column columnName="comments"/>
-                    <column columnName="enddate"/>
-                    <column columnName="tb_exempt_flag"/>
-                    <column columnName="title"/>
-                    <column columnName="tracking_status"/>
                     <column columnName="proposed_end_date"/>
                     <column columnName="proposed_start_date"/>
-                    <column columnName="protocol_end_date"/>
                     <column columnName="protocol_response_date"/>
                     <column columnName="sp_requested"/>
                     <column columnName="total_animals"/>
-                    <column columnName="visual_signs_auto_rpt_flag"/>
-                    <column columnName="is_prpt_recognized"/>
                     <column columnName="pi_affiliation"/>
                     <column columnName="oi_affiliation"/>
                     <column columnName="is_tissue_avail"/>

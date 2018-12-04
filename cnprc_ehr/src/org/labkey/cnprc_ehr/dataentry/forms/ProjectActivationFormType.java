@@ -33,9 +33,9 @@ public class ProjectActivationFormType extends TaskForm
         public ProjectActivationFormType(DataEntryFormContext ctx, Module owner)
         {
             super(ctx, owner, NAME, NAME, "Other", Arrays.asList(
+                    new TaskFormSection(),
                     new ProjectActivationFormSection(),
-                    new ProjectChargeFormSection(),
-                    new TaskFormSection()
+                    new ProjectChargeFormSection()
             ));
 
             for (FormSection s : this.getFormSections())

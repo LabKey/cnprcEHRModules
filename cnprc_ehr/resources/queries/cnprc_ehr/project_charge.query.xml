@@ -1,8 +1,10 @@
 <query xmlns="http://labkey.org/data/xml/query">
     <metadata>
         <tables xmlns="http://labkey.org/data/xml">
-            <table tableName="project_charge" tableDbType="TABLE">
+            <table tableName="project_charge" tableDbType="TABLE" useColumnOrder="true">
                 <columns>
+                    <column columnName="charge_id"/>
+                    <column columnName="fileStatus"/>
                     <column columnName="rowid">
                         <isHidden>true</isHidden>
                         <isKeyField>false</isKeyField>
