@@ -15,12 +15,14 @@
  */
 package org.labkey.cnprc_ehr.dataentry;
 
-import org.labkey.api.ehr.dataentry.SimpleFormPanelSection;
+import org.labkey.api.ehr.dataentry.ParentFormPanelSection;
 
-public class ProjectActivationFormSection extends SimpleFormPanelSection
+public class CnprcParentFormPanelSection extends ParentFormPanelSection
 {
-    public ProjectActivationFormSection()
+    // Nothing useful in this class yet, but should remain parallel with other uses
+
+    public CnprcParentFormPanelSection(String schemaName, String queryName, String label)
     {
-        super("cnprc_ehr", "project", "Enter New Project", false);
+        super(schemaName, queryName, label);
     }
 }

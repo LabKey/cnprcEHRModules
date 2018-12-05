@@ -21,28 +21,28 @@ import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
 import org.labkey.api.module.Module;
 import org.labkey.api.view.template.ClientDependency;
-import org.labkey.cnprc_ehr.dataentry.ProjectActivationFormSection;
-import org.labkey.cnprc_ehr.dataentry.ProjectChargeFormSection;
+import org.labkey.cnprc_ehr.dataentry.CnprcChildFormSection;
+import org.labkey.cnprc_ehr.dataentry.CnprcParentFormPanelSection;
 
 import java.util.Arrays;
 
 public class ProjectActivationFormType extends TaskForm
 {
-        public static final String NAME = "Project Activation";
+    public static final String NAME = "Project Activation";
 
-        public ProjectActivationFormType(DataEntryFormContext ctx, Module owner)
+    public ProjectActivationFormType(DataEntryFormContext ctx, Module owner)
+    {
+        super(ctx, owner, NAME, NAME, "Other", Arrays.asList(
+                new TaskFormSection(),
+                new CnprcParentFormPanelSection("cnprc_ehr", "project", "Enter New Project"),
+                new CnprcChildFormSection("cnprc_ehr", "project_charge", "Charge ID Associations", "project", "ehr-gridpanel")
+        ));
+
+        for (FormSection s : this.getFormSections())
         {
-            super(ctx, owner, NAME, NAME, "Other", Arrays.asList(
-                    new TaskFormSection(),
-                    new ProjectActivationFormSection(),
-                    new ProjectChargeFormSection()
-            ));
-
-            for (FormSection s : this.getFormSections())
-            {
-                s.addConfigSource("Project");
-            }
-            addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Project.js"));
+            s.addConfigSource("Project");
         }
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Project.js"));
+    }
 }
 
