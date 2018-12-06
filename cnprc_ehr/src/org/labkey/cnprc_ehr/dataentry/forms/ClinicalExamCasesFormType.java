@@ -23,6 +23,7 @@ import org.labkey.api.ehr.dataentry.FormSection;
 import org.labkey.api.ehr.dataentry.NonStoreFormSection;
 import org.labkey.api.ehr.dataentry.SimpleFormPanelSection;
 import org.labkey.api.ehr.dataentry.SimpleFormSection;
+import org.labkey.api.ehr.dataentry.SimpleGridPanel;
 import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
 import org.labkey.api.ehr.dataentry.DrugAdministrationFormSection;
@@ -32,7 +33,6 @@ import org.labkey.api.module.Module;
 import org.labkey.api.query.Queryable;
 import org.labkey.api.view.template.ClientDependency;
 import org.labkey.cnprc_ehr.dataentry.ClinicalObservationsFormSection;
-import org.labkey.cnprc_ehr.dataentry.SimpleGridPanel;
 import org.labkey.cnprc_ehr.dataentry.WeightFormSection;
 
 import java.util.Arrays;
@@ -69,8 +69,13 @@ public class ClinicalExamCasesFormType extends TaskForm
             s.addConfigSource("ClinicalDefaults");
             s.addConfigSource("ClinicalReport");
 
-            if (!s.getName().equals("Clinical Remarks"))
+            if (s.getName().equals("Clinical Remarks"))
+                s.addConfigSource("ClinicalRemarks");
+            else
                 s.addConfigSource("ClinicalReportChild");
+
+            if (s.getName().equals("problem"))
+                s.addConfigSource("Problems");
 
             if (s instanceof SimpleFormSection && !s.getName().equals("tasks"))
                 s.setTemplateMode(AbstractFormSection.TEMPLATE_MODE.NO_ID);
@@ -79,7 +84,10 @@ public class ClinicalExamCasesFormType extends TaskForm
             {
                 ((AbstractFormSection)s).setAllowBulkAdd(false);
             }
-            s.addConfigSource("TreatmentOrder");
+            if (s.getName().equals("Treatment Orders"))
+                s.addConfigSource("TreatmentOrder");
+            if (s.getName().equals("blood"))
+                s.addConfigSource("Blood");
         }
 
         setStoreCollectionClass("EHR.data.ClinicalReportStoreCollection");
@@ -88,6 +96,9 @@ public class ClinicalExamCasesFormType extends TaskForm
         addClientDependency(ClientDependency.fromPath("ehr/model/sources/ClinicalReport.js"));
         addClientDependency(ClientDependency.fromPath("ehr/panel/ExamDataEntryPanel.js"));
         addClientDependency(ClientDependency.fromPath("ehr/model/sources/ClinicalReportChild.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Blood.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/ClinicalRemarks.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Problems.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/TreatmentOrder.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeField.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"));

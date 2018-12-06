@@ -13,21 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.labkey.cnprc_ehr.dataentry;
+package org.labkey.cnprc_ehr.dataentry.forms;
 
-import org.labkey.api.ehr.EHRService;
+import org.labkey.api.ehr.dataentry.AnimalDetailsFormSection;
+import org.labkey.api.ehr.dataentry.DataEntryFormContext;
+import org.labkey.api.ehr.dataentry.FormSection;
 import org.labkey.api.ehr.dataentry.SimpleFormSection;
+import org.labkey.api.ehr.dataentry.TaskForm;
+import org.labkey.api.ehr.dataentry.TaskFormSection;
+import org.labkey.api.module.Module;
 import org.labkey.api.view.template.ClientDependency;
 
-/**
- * Created by Binal on 9/5/2017.
- */
-public class SimpleGridPanel extends SimpleFormSection
+import java.util.Arrays;
+
+public class DCMNotesFormType extends org.labkey.api.ehr.dataentry.forms.DCMNotesFormType
 {
-    public SimpleGridPanel(String schemaName, String queryName, String label, EHRService.FORM_SECTION_LOCATION location)
+    public static final String NAME = "notes";
+
+    public DCMNotesFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(schemaName, queryName, label, "ehr-gridpanel", location);
+        super(ctx, owner);
+
+        for (FormSection s : this.getFormSections())
+        {
+            s.addConfigSource("DCMNotes");
+        }
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/DCMNotes.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeField.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"));
     }
 }
+

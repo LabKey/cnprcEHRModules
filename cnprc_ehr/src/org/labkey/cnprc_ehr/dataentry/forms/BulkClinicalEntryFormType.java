@@ -17,6 +17,7 @@ package org.labkey.cnprc_ehr.dataentry.forms;
 
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ehr.dataentry.DataEntryFormContext;
+import org.labkey.api.ehr.dataentry.FormSection;
 import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
 import org.labkey.api.ehr.dataentry.DrugAdministrationFormSection;
@@ -24,9 +25,10 @@ import org.labkey.api.ehr.dataentry.forms.TreatmentOrdersFormSection;
 import org.labkey.api.ehr.dataentry.forms.WeightFormSection;
 import org.labkey.api.ehr.security.EHRClinicalEntryPermission;
 import org.labkey.api.module.Module;
+import org.labkey.api.view.template.ClientDependency;
 import org.labkey.cnprc_ehr.dataentry.AnimalDetailsFormSection;
 import org.labkey.cnprc_ehr.dataentry.ClinicalObservationsFormSection;
-import org.labkey.cnprc_ehr.dataentry.SimpleGridPanel;
+import org.labkey.cnprc_ehr.dataentry.ClinicalRemarksFormSection;
 
 import java.util.Arrays;
 
@@ -43,12 +45,24 @@ public class BulkClinicalEntryFormType  extends TaskForm
 
                 new TaskFormSection(),
                 new AnimalDetailsFormSection(),
-                new SimpleGridPanel("study", "Clinical Remarks", "SOAPs", EHRService.FORM_SECTION_LOCATION.Body),
+                new ClinicalRemarksFormSection(),
                 new ClinicalObservationsFormSection(EHRService.FORM_SECTION_LOCATION.Body),
                 new DrugAdministrationFormSection(),
                 new TreatmentOrdersFormSection(),
                 new WeightFormSection()
         ));
+
+        for (FormSection s : this.getFormSections())
+        {
+            if (!s.getName().equals("Treatment Orders"))
+            {
+                s.addConfigSource("TreatmentOrder");
+            }
+        }
+
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/TreatmentOrder.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeField.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"));
     }
 
     @Override

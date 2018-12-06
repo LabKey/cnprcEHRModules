@@ -10,16 +10,6 @@
  */
 EHR.model.DataModelManager.registerMetadata('Default', {
     allQueries: {
-        projectCode: {
-            xtype: 'ehr-projectcodeentryfield',
-            shownInGrid: true,
-            useNull: true,
-            lookup: {
-                schemaName: 'cnprc_ehr',
-                queryName: 'project',
-                columns: 'projectCode'
-            }
-        }
     },
     byQuery: {
         'study.clinremarks': {

@@ -43,9 +43,9 @@ public class AssignmentFormType  extends TaskForm
 
         for (FormSection s : this.getFormSections())
         {
-            s.addConfigSource("ProjectAnimalConditions");  // FIXME: this only exists in onprc_ehr
+            s.addConfigSource("ProjectAssignment");
         }
-
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/ProjectAssignment.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeField.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"));
     }

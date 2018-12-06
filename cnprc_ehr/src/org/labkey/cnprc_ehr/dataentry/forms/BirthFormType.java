@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 LabKey Corporation
+ * Copyright (c) 2017-2018 LabKey Corporation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,35 +15,43 @@
  */
 package org.labkey.cnprc_ehr.dataentry.forms;
 
+import org.labkey.api.ehr.dataentry.AnimalDetailsFormSection;
 import org.labkey.api.ehr.dataentry.DataEntryFormContext;
 import org.labkey.api.ehr.dataentry.FormSection;
-import org.labkey.api.ehr.dataentry.TaskForm;
 import org.labkey.api.ehr.dataentry.TaskFormSection;
+import org.labkey.api.ehr.dataentry.forms.BirthInstructionsFormSection;
+import org.labkey.api.ehr.dataentry.forms.LockAnimalsFormSection;
+import org.labkey.api.ehr.dataentry.forms.NewAnimalFormSection;
 import org.labkey.api.module.Module;
 import org.labkey.api.view.template.ClientDependency;
-import org.labkey.cnprc_ehr.dataentry.AnimalDetailsFormSection;
-import org.labkey.cnprc_ehr.dataentry.InoculationFormSection;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class InoculationFormType extends TaskForm
+public class BirthFormType extends org.labkey.api.ehr.dataentry.forms.BirthFormType
 {
-    public static final String NAME = "Inoculation";
-    public static final String LABEL = "Inoculation";
-
-    public InoculationFormType(DataEntryFormContext ctx, Module owner)
+    public BirthFormType(DataEntryFormContext ctx, Module owner)
     {
-        super(ctx, owner, NAME, LABEL, "Clinical", Arrays.asList(
-                new AnimalDetailsFormSection(),
+        this(ctx, owner, Arrays.asList(
+                new LockAnimalsFormSection(),
+                new BirthInstructionsFormSection(),
                 new TaskFormSection(),
-                new InoculationFormSection()
+                new AnimalDetailsFormSection(),
+                new NewAnimalFormSection("study", "birth", "Births", false)
         ));
-        for (FormSection s : getFormSections())
+    }
+
+    public BirthFormType(DataEntryFormContext ctx, Module owner, List<FormSection> sections)
+    {
+        super(ctx, owner, sections);
+
+        for (FormSection s : this.getFormSections())
         {
-            s.addConfigSource("Inoculation");
+            s.addConfigSource("Birth");
         }
-        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Inoculation.js"));
+        addClientDependency(ClientDependency.fromPath("cnprc_ehr/model/sources/Birth.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeField.js"));
         addClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"));
     }
 }
+

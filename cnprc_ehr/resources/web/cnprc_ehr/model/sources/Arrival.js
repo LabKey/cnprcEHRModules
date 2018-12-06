@@ -147,6 +147,14 @@ EHR.model.DataModelManager.registerMetadata('Arrival', {
             },
             projectCode: {
                 // NB: Lookup filtering won't work here, please see ProjectCodeEntryField.js (especially showOnlyOpenProjects)
+                xtype: 'ehr-projectcodeentryfield',
+                shownInGrid: true,
+                useNull: true,
+                lookup: {
+                    schemaName: 'cnprc_ehr',
+                    queryName: 'project',
+                    columns: 'projectCode'
+                },
                 allowBlank: false
             },
             assignmentStatus: {

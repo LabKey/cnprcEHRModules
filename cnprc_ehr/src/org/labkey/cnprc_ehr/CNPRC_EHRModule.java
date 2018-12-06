@@ -19,11 +19,8 @@ package org.labkey.cnprc_ehr;
 import org.jetbrains.annotations.NotNull;
 import org.labkey.api.data.Container;
 import org.labkey.api.data.DbSchema;
-import org.labkey.api.data.DbSchemaType;
 import org.labkey.api.ehr.EHRService;
 import org.labkey.api.ehr.dataentry.DefaultDataEntryFormFactory;
-import org.labkey.api.ehr.dataentry.forms.BirthFormType;
-import org.labkey.api.ehr.dataentry.forms.DCMNotesFormType;
 import org.labkey.api.ehr.history.DefaultBirthDataSource;
 import org.labkey.api.ehr.history.DefaultDeathsDataSource;
 import org.labkey.api.ehr.history.DefaultDepartureDataSource;
@@ -105,7 +102,6 @@ public class CNPRC_EHRModule extends ExtendedSimpleModule
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/DemographicsRecord.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/panel/SnapshotPanel.js"), this);
         ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/cnprcOverrides.js"), this);
-        ehrService.registerClientDependency(ClientDependency.fromPath("cnprc_ehr/form/field/ProjectCodeEntryField.js"), this);
 
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.housing, "Vacant Cage Summary", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=vacantCageSummary"), "Commonly Used Queries");
         ehrService.registerReportLink(EHRService.REPORT_LINK_TYPE.animalSearch, "10%/20% Weight Drop", this, DetailsURL.fromString("/query/executeQuery.view?schemaName=study&query.queryName=weightPctDrop"), "Commonly Used Queries");
