@@ -10,7 +10,7 @@ EHR.model.DataModelManager.registerMetadata('Birth', {
     allQueries: {
     },
     byQuery: {
-        'study.birth': {
+        'study.Birth': {
                 projectCode: {
                     xtype: 'ehr-projectcodeentryfield',
                     shownInGrid: true,

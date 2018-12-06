@@ -4,15 +4,14 @@
  * Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
  */
 /**
- * Overrides the metadata for study.clinremarks 'p2' field applied in Default.js
- * Also adds projectCode formatting using ProjectCodeEntryField
+ * Adds projectCode formatting using ProjectCodeEntryField
  */
-EHR.model.DataModelManager.registerMetadata('ClinicalRemarks', {
+EHR.model.DataModelManager.registerMetadata('Inoculation', {
     allQueries: {
     },
     byQuery: {
-        'study.clinremarks': {
-            projectCode: {  // FIXME: this doesn't work at the moment, just says "Loading..."
+        'study.inoculation': {
+                projectCode: {
                     xtype: 'ehr-projectcodeentryfield',
                     shownInGrid: true,
                     useNull: true,
@@ -21,14 +20,8 @@ EHR.model.DataModelManager.registerMetadata('ClinicalRemarks', {
                         queryName: 'project',
                         columns: 'projectCode'
                     }
-                },
-            p2: {
-                formEditorConfig: {
-                    xtype: 'textarea'
-                },
-                height: 75
+                }
             }
         }
-    }
     }
 );
