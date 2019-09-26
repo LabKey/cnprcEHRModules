@@ -2,15 +2,15 @@ import org.labkey.gradle.util.BuildUtils
 
 repositories
         {
-            flatDir dirs: project(":externalModules:labModules:LDK").file("lib")
+            flatDir dirs: project(":server:modules:LabDevKitModules:LDK").file("lib")
         }
 dependencies
         {
             BuildUtils.addLabKeyDependency(project: project, config: "compile", depProjectPath: ":server:customModules:ehr", depProjectConfig: "apiCompile")
-            BuildUtils.addLabKeyDependency(project: project, config: "compile", depProjectPath: ":externalModules:labModules:LDK")
+            BuildUtils.addLabKeyDependency(project: project, config: "compile", depProjectPath: ":server:modules:LabDevKitModules:LDK")
         }
 
-tasks.module.dependsOn(project(":externalModules:labModules:LDK").tasks.module)
+tasks.module.dependsOn(project(":server:modules:LabDevKitModules:LDK").tasks.module)
 
 task('metadataStudyArchive', type: Zip, group: "Data", description: "Assemble study archive with dataset metadata") {
     archiveName 'cnprc_study_metadata.zip'
